@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
@@ -6,6 +6,7 @@
     'category': 'Human Resources',
     'sequence': 38,
     'summary': 'Manage your employee payroll records',
+    'author': "Odoo Community Association (OCA), Odoo SA",
     'description': "",
     'depends': [
         'hr_contract',
