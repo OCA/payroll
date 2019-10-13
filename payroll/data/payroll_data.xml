@@ -67,7 +67,6 @@
             <field name="register_id" ref="contrib_register_employees"/>
         </record>
 
-
         <!-- Salary Structure -->
 
          <record id="structure_base" model="hr.payroll.structure">
@@ -88,7 +87,6 @@
             <field name="name">Payroll Rate</field>
             <field name="digits">4</field>
         </record>
-
 
     </data>
 </odoo>
