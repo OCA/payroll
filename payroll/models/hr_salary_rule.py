@@ -1,11 +1,8 @@
-# -*- coding:utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
-
-from odoo.addons import decimal_precision as dp
 
 
 class HrPayrollStructure(models.Model):
@@ -185,9 +182,9 @@ class HrSalaryRule(models.Model):
     ], string='Amount Type', index=True, required=True, default='fix',
         help="The computation method for the rule amount.")
     amount_fix = fields.Float(
-        string='Fixed Amount', digits=dp.get_precision('Payroll'))
+        string='Fixed Amount', digits='Payroll')
     amount_percentage = fields.Float(
-        string='Percentage (%)', digits=dp.get_precision('Payroll Rate'),
+        string='Percentage (%)', digits='Payroll Rate',
         help='For example, enter 50.0 to apply a percentage of 50%')
     amount_python_compute = fields.Text(
         string='Python Code',

@@ -1,4 +1,3 @@
-# -*- coding:utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
@@ -26,7 +25,6 @@
         'views/payroll_report.xml',
         'data/payroll_data.xml',
         'wizard/payroll_contribution_register_report_views.xml',
-        'views/res_config_settings_views.xml',
         'views/report_contributionregister_templates.xml',
         'views/report_payslip_templates.xml',
         'views/report_payslipdetails_templates.xml',

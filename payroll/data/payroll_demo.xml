@@ -131,7 +131,7 @@
             <field name="name">Roger Scott</field>
             <field name="work_location">Building 1, Second Floor</field>
             <field name="work_phone">+3282823500</field>
-            <field name="image" type="base64" file="payroll/static/img/hr_employee_payroll-image.jpg"/>
+            <field name="image_1920" type="base64" file="payroll/static/img/hr_employee_payroll-image.jpg"/>
         </record>
 
         <!-- Employee Contract -->

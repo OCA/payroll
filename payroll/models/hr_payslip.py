@@ -1,4 +1,3 @@
-# -*- coding:utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import babel
@@ -7,7 +6,6 @@ from dateutil.relativedelta import relativedelta
 from pytz import timezone
 
 from odoo import api, fields, models, tools, _
-from odoo.addons import decimal_precision as dp
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -614,13 +612,13 @@ class HrPayslipLine(models.Model):
     contract_id = fields.Many2one(
         'hr.contract', string='Contract', required=True, index=True)
     rate = fields.Float(
-        string='Rate (%)', digits=dp.get_precision('Payroll Rate'),
+        string='Rate (%)', digits='Payroll Rate',
         default=100.0)
-    amount = fields.Float(digits=dp.get_precision('Payroll'))
-    quantity = fields.Float(digits=dp.get_precision('Payroll'), default=1.0)
+    amount = fields.Float(digits='Payroll')
+    quantity = fields.Float(digits='Payroll', default=1.0)
     total = fields.Float(
         compute='_compute_total', string='Total',
-        digits=dp.get_precision('Payroll'), store=True)
+        digits='Payroll', store=True)
 
     @api.depends('quantity', 'amount', 'rate')
     def _compute_total(self):

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-         <report 
-            id="action_contribution_register" 
-            model="hr.contribution.register" 
+         <report
+            id="action_contribution_register"
+            model="hr.contribution.register"
             string="PaySlip Lines By Conribution Register"
             report_type="qweb-pdf"
-            name="payroll.report_contributionregister" 
+            name="payroll.report_contributionregister"
             file="payroll.report_contributionregister"
             menu="False"
         />
-        <report 
-            id="action_report_payslip" 
-            model="hr.payslip" 
+        <report
+            id="action_report_payslip"
+            model="hr.payslip"
             string="Payslip"
             report_type="qweb-pdf"
-            name="payroll.report_payslip" 
+            name="payroll.report_payslip"
             file="payroll.report_payslip"
             print_report_name="'Payslip - %s' % (object.employee_id.name)"
         />
@@ -24,7 +24,7 @@
             model="hr.payslip"
             string="PaySlip Details"
             report_type="qweb-pdf"
-            name="payroll.report_payslipdetails" 
+            name="payroll.report_payslipdetails"
             file="payroll.report_payslipdetails"
             print_report_name="'Payslip Details - %s' % (object.employee_id.name)"
         />
