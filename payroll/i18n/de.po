@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * payroll
-# 
+#
 # Translators:
 # Johannes Croe <jcr@odoo.com>, 2018
 # Rudolf Schnapka <rs@techno-flex.de>, 2018
 # Martin Trigaux, 2019
 # Chris Egal <sodaswed@web.de>, 2019
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"

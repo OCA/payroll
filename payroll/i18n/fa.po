@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * payroll
-# 
+#
 # Translators:
 # سید محمد آذربرا <mohammadazarbara98@gmail.com>, 2018
 # Martin Trigaux, 2018
@@ -9,7 +9,7 @@
 # arya sadeghy <aryasadeghy@gmail.com>, 2018
 # Sahar Daraye <sahar.daraye.1369@gmail.com>, 2018
 # Hamed Mohammadi <hamed@dehongi.com>, 2018
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
