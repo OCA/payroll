@@ -11,15 +11,9 @@ class TestPayslipBase(TransactionCase):
         super(TestPayslipBase, self).setUp()
 
         # Some salary rules references
-        self.hra_rule_id = self.ref(
-            "payroll.hr_salary_rule_houserentallowance1"
-        )
-        self.conv_rule_id = self.ref(
-            "payroll.hr_salary_rule_convanceallowance1"
-        )
-        self.prof_tax_rule_id = self.ref(
-            "payroll.hr_salary_rule_professionaltax1"
-        )
+        self.hra_rule_id = self.ref("payroll.hr_salary_rule_houserentallowance1")
+        self.conv_rule_id = self.ref("payroll.hr_salary_rule_convanceallowance1")
+        self.prof_tax_rule_id = self.ref("payroll.hr_salary_rule_professionaltax1")
         self.pf_rule_id = self.ref("payroll.hr_salary_rule_providentfund1")
         self.mv_rule_id = self.ref("payroll.hr_salary_rule_meal_voucher")
         self.comm_rule_id = self.ref("payroll.hr_salary_rule_sales_commission")
@@ -56,7 +50,7 @@ class TestPayslipBase(TransactionCase):
         self.env["hr.contract"].create(
             {
                 "date_end": Date.to_string(
-                    (datetime.datetime.now() + datetime.timedelta(days=365))
+                    datetime.datetime.now() + datetime.timedelta(days=365)
                 ),
                 "date_start": Date.today(),
                 "name": "Contract for Richard",

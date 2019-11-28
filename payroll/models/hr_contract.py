@@ -12,9 +12,7 @@ class HrContract(models.Model):
     _inherit = "hr.contract"
     _description = "Employee Contract"
 
-    struct_id = fields.Many2one(
-        "hr.payroll.structure", string="Salary Structure"
-    )
+    struct_id = fields.Many2one("hr.payroll.structure", string="Salary Structure")
     schedule_pay = fields.Selection(
         [
             ("monthly", "Monthly"),
@@ -41,10 +39,7 @@ class HrContract(models.Model):
                  so on) and without duplicata
         """
         structures = self.mapped("struct_id")
-        if not structures:
-            return []
-        # YTI TODO return browse records
-        return list(set(structures._get_parent_structure().ids))
+        return structures._get_parent_structure()
 
     def get_attribute(self, code, attribute):
         return self.env["hr.contract.advantage.template"].search(
@@ -71,11 +66,9 @@ class HrContractAdvandageTemplate(models.Model):
     name = fields.Char("Name", required=True)
     code = fields.Char("Code", required=True)
     lower_bound = fields.Float(
-        "Lower Bound",
-        help="Lower bound authorized by the employer for this advantage",
+        "Lower Bound", help="Lower bound authorized by the employer for this advantage"
     )
     upper_bound = fields.Float(
-        "Upper Bound",
-        help="Upper bound authorized by the employer for this advantage",
+        "Upper Bound", help="Upper bound authorized by the employer for this advantage"
     )
     default_value = fields.Float("Default value for this advantage")

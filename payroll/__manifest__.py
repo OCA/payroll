@@ -27,4 +27,5 @@
         "views/report_payslipdetails_templates.xml",
     ],
     "demo": ["data/payroll_demo.xml"],
+    "external_dependencies": {"python": ["dateutil"]},
 }

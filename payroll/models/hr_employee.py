@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class HrEmployee(models.Model):
@@ -16,6 +16,7 @@ class HrEmployee(models.Model):
         groups="payroll.group_payroll_user",
     )
 
+    @api.depends("slip_ids")
     def _compute_payslip_count(self):
         for employee in self:
             employee.payslip_count = len(employee.slip_ids)

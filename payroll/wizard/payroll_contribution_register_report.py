@@ -1,6 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import datetime
+
 from dateutil import relativedelta
 
 from odoo import fields, models
@@ -11,16 +12,13 @@ class PayslipLinesContributionRegister(models.TransientModel):
     _description = "Payslip Lines by Contribution Registers"
 
     date_from = fields.Date(
-        string="Date From",
-        required=True,
-        default=datetime.now().strftime("%Y-%m-01"),
+        string="Date From", required=True, default=datetime.now().strftime("%Y-%m-01")
     )
     date_to = fields.Date(
         string="Date To",
         required=True,
         default=str(
-            datetime.now()
-            + relativedelta.relativedelta(months=+1, day=1, days=-1)
+            datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1)
         )[:10],
     )
 
@@ -31,6 +29,6 @@ class PayslipLinesContributionRegister(models.TransientModel):
             "model": "hr.contribution.register",
             "form": self.read()[0],
         }
-        return self.env.ref(
-            "payroll.action_contribution_register"
-        ).report_action([], data=datas)
+        return self.env.ref("payroll.action_contribution_register").report_action(
+            [], data=datas
+        )

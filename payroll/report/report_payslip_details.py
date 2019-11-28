@@ -103,9 +103,7 @@ class PayslipDetailsReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         payslips = self.env["hr.payslip"].browse(docids)
         contribution_register = self.get_lines_by_contribution_register(
-            payslips.mapped("line_ids").filtered(
-                lambda r: r.appears_on_payslip
-            )
+            payslips.mapped("line_ids").filtered(lambda r: r.appears_on_payslip)
         )
         return {
             "doc_ids": docids,

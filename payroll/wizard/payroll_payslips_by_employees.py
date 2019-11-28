@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models, _
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -9,11 +9,7 @@ class HrPayslipEmployees(models.TransientModel):
     _description = "Generate payslips for all selected employees"
 
     employee_ids = fields.Many2many(
-        "hr.employee",
-        "hr_employee_group_rel",
-        "payslip_id",
-        "employee_id",
-        "Employees",
+        "hr.employee", "hr_employee_group_rel", "payslip_id", "employee_id", "Employees"
     )
 
     def compute_sheet(self):
@@ -29,9 +25,7 @@ class HrPayslipEmployees(models.TransientModel):
         from_date = run_data.get("date_start")
         to_date = run_data.get("date_end")
         if not data["employee_ids"]:
-            raise UserError(
-                _("You must select employee(s) to generate payslip(s).")
-            )
+            raise UserError(_("You must select employee(s) to generate payslip(s)."))
         for employee in self.env["hr.employee"].browse(data["employee_ids"]):
             slip_data = self.env["hr.payslip"].onchange_employee_id(
                 from_date, to_date, employee.id, contract_id=False
@@ -46,8 +40,7 @@ class HrPayslipEmployees(models.TransientModel):
                     (0, 0, x) for x in slip_data["value"].get("input_line_ids")
                 ],
                 "worked_days_line_ids": [
-                    (0, 0, x)
-                    for x in slip_data["value"].get("worked_days_line_ids")
+                    (0, 0, x) for x in slip_data["value"].get("worked_days_line_ids")
                 ],
                 "date_from": from_date,
                 "date_to": to_date,

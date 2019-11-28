@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
@@ -47,9 +47,7 @@ class HrPayrollStructure(models.Model):
     @api.constrains("parent_id")
     def _check_parent_id(self):
         if not self._check_recursion():
-            raise ValidationError(
-                _("You cannot create a recursive salary structure.")
-            )
+            raise ValidationError(_("You cannot create a recursive salary structure."))
 
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
@@ -132,10 +130,7 @@ class HrSalaryRule(models.Model):
         " of other rules. In that case, it is case sensitive.",
     )
     sequence = fields.Integer(
-        required=True,
-        index=True,
-        default=5,
-        help="Use to arrange calculation sequence",
+        required=True, index=True, default=5, help="Use to arrange calculation sequence"
     )
     quantity = fields.Char(
         default="1.0",
@@ -164,11 +159,7 @@ class HrSalaryRule(models.Model):
         "res.company", string="Company", default=lambda self: self.env.company
     )
     condition_select = fields.Selection(
-        [
-            ("none", "Always True"),
-            ("range", "Range"),
-            ("python", "Python Expression"),
-        ],
+        [("none", "Always True"), ("range", "Range"), ("python", "Python Expression")],
         string="Condition Based on",
         default="none",
         required=True,
@@ -206,12 +197,10 @@ class HrSalaryRule(models.Model):
         "specify condition like basic > 1000.",
     )
     condition_range_min = fields.Float(
-        string="Minimum Range",
-        help="The minimum amount, applied for this rule.",
+        string="Minimum Range", help="The minimum amount, applied for this rule."
     )
     condition_range_max = fields.Float(
-        string="Maximum Range",
-        help="The maximum amount, applied for this rule.",
+        string="Maximum Range", help="The maximum amount, applied for this rule."
     )
     amount_select = fields.Selection(
         [
@@ -253,34 +242,24 @@ class HrSalaryRule(models.Model):
                     result = contract.wage * 0.10""",
     )
     amount_percentage_base = fields.Char(
-        string="Percentage based on",
-        help="result will be affected to a variable",
+        string="Percentage based on", help="result will be affected to a variable"
     )
     child_ids = fields.One2many(
-        "hr.salary.rule",
-        "parent_rule_id",
-        string="Child Salary Rule",
-        copy=True,
+        "hr.salary.rule", "parent_rule_id", string="Child Salary Rule", copy=True
     )
     register_id = fields.Many2one(
         "hr.contribution.register",
         string="Contribution Register",
-        help="Eventual third party involved in the salary payment of the "
-        "employees.",
+        help="Eventual third party involved in the salary payment of the " "employees.",
     )
-    input_ids = fields.One2many(
-        "hr.rule.input", "input_id", string="Inputs", copy=True
-    )
+    input_ids = fields.One2many("hr.rule.input", "input_id", string="Inputs", copy=True)
     note = fields.Text(string="Description")
 
     @api.constrains("parent_rule_id")
     def _check_parent_rule_id(self):
         if not self._check_recursion(parent="parent_rule_id"):
             raise ValidationError(
-                _(
-                    "Error! You cannot create recursive hierarchy of Salary "
-                    "Rules."
-                )
+                _("Error! You cannot create recursive hierarchy of Salary " "Rules.")
             )
 
     def _recursive_search_of_rules(self):
@@ -333,19 +312,12 @@ class HrSalaryRule(models.Model):
         else:
             try:
                 safe_eval(
-                    self.amount_python_compute,
-                    localdict,
-                    mode="exec",
-                    nocopy=True,
+                    self.amount_python_compute, localdict, mode="exec", nocopy=True
                 )
                 return (
                     float(localdict["result"]),
-                    "result_qty" in localdict
-                    and localdict["result_qty"]
-                    or 1.0,
-                    "result_rate" in localdict
-                    and localdict["result_rate"]
-                    or 100.0,
+                    "result_qty" in localdict and localdict["result_qty"] or 1.0,
+                    "result_rate" in localdict and localdict["result_rate"] or 100.0,
                 )
             except Exception:
                 raise UserError(
@@ -378,16 +350,11 @@ class HrSalaryRule(models.Model):
                 )
         else:  # python code
             try:
-                safe_eval(
-                    self.condition_python, localdict, mode="exec", nocopy=True
-                )
+                safe_eval(self.condition_python, localdict, mode="exec", nocopy=True)
                 return "result" in localdict and localdict["result"] or False
             except Exception:
                 raise UserError(
-                    _(
-                        "Wrong python condition defined for salary rule %s "
-                        "(%s)."
-                    )
+                    _("Wrong python condition defined for salary rule %s " "(%s).")
                     % (self.name, self.code)
                 )
 
