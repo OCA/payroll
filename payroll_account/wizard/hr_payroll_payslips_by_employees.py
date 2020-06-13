@@ -1,12 +1,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, models
+from odoo import models
 
 
 class HrPayslipEmployees(models.TransientModel):
     _inherit = "hr.payslip.employees"
 
-    @api.multi
     def compute_sheet(self):
         journal_id = False
         if self.env.context.get("active_id"):

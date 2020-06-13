@@ -2,7 +2,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare, float_is_zero
 
 
 class HrPayslipLine(models.Model):
@@ -72,14 +71,12 @@ class HrPayslip(models.Model):
             or self.journal_id
         )
 
-    @api.multi
     def action_payslip_cancel(self):
         moves = self.mapped("move_id")
         moves.filtered(lambda x: x.state == "posted").button_cancel()
         moves.unlink()
         return super(HrPayslip, self).action_payslip_cancel()
 
-    @api.multi
     def action_payslip_done(self):
         res = super(HrPayslip, self).action_payslip_done()
 
@@ -105,6 +102,7 @@ class HrPayslip(models.Model):
                     continue
                 debit_account_id = line.salary_rule_id.account_debit.id
                 credit_account_id = line.salary_rule_id.account_credit.id
+                salary_rule_analytic = line.salary_rule_id.analytic_account_id.id
 
                 if debit_account_id:
                     debit_line = (
@@ -118,7 +116,7 @@ class HrPayslip(models.Model):
                             "date": date,
                             "debit": amount > 0.0 and amount or 0.0,
                             "credit": amount < 0.0 and -amount or 0.0,
-                            "analytic_account_id": line.salary_rule_id.analytic_account_id.id
+                            "analytic_account_id": salary_rule_analytic
                             or slip.contract_id.analytic_account_id.id,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                         },
@@ -138,7 +136,7 @@ class HrPayslip(models.Model):
                             "date": date,
                             "debit": amount < 0.0 and -amount or 0.0,
                             "credit": amount > 0.0 and amount or 0.0,
-                            "analytic_account_id": line.salary_rule_id.analytic_account_id.id
+                            "analytic_account_id": salary_rule_analytic
                             or slip.contract_id.analytic_account_id.id,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                         },
@@ -151,7 +149,8 @@ class HrPayslip(models.Model):
                 if not acc_id:
                     raise UserError(
                         _(
-                            'The Expense Journal "%s" has not properly configured the Credit Account!'
+                            'The Expense Journal "%s" has not properly'
+                            "configured the Credit Account!"
                         )
                         % (slip.journal_id.name)
                     )
@@ -175,7 +174,8 @@ class HrPayslip(models.Model):
                 if not acc_id:
                     raise UserError(
                         _(
-                            'The Expense Journal "%s" has not properly configured the Debit Account!'
+                            'The Expense Journal "%s" has not properly'
+                            "configured the Debit Account!"
                         )
                         % (slip.journal_id.name)
                     )

@@ -2,16 +2,12 @@
 {
     "name": "Payroll Accounting",
     "category": "Human Resources",
-    "description": """
-Generic Payroll system Integrated with Accounting.
-==================================================
-
-    * Expense Encoding
-    * Payment Encoding
-    * Company Contribution Management
-    """,
-    "depends": ["hr_payroll", "account"],
+    "version": "13.0.1.0.0",
+    "author": "Odoo Community Association (OCA), Odoo SA",
+    "license": "LGPL-3",
+    "website": "https://github.com/OCA/payroll",
+    "summary": "Manage your payroll to accounting",
+    "depends": ["payroll", "account"],
     "data": ["views/hr_payroll_account_views.xml"],
     "demo": ["data/hr_payroll_account_demo.xml"],
-    "test": ["../account/test/account_minimal_test.xml"],
 }
