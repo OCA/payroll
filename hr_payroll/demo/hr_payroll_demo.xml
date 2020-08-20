@@ -51,12 +51,12 @@
         <field name="register_id" ref="hr_provident_fund_register" />
         <field name="name">Provident Fund</field>
     </record>
-    <record id="hr_salary_rule_ca_gravie" model="hr.salary.rule">
+    <record id="hr_salary_rule_ca_demo" model="hr.salary.rule">
         <field name="amount_select">fix</field>
         <field eval="600.0" name="amount_fix" />
-        <field name="code">CAGG</field>
+        <field name="code">CAMD</field>
         <field name="category_id" ref="hr_payroll.ALW" />
-        <field name="name">Conveyance Allowance For Gravie</field>
+        <field name="name">Conveyance Allowance For Marc Demo</field>
         <field name="sequence" eval="15" />
     </record>
     <record id="hr_salary_rule_meal_voucher" model="hr.salary.rule">
@@ -104,10 +104,10 @@
         <field name="parent_id" ref="structure_base" />
     </record>
     <record id="structure_002" model="hr.payroll.structure">
-        <field name="code">MEGG</field>
-        <field name="name">Marketing Executive for Gilles Gravie</field>
+        <field name="code">MEMD</field>
+        <field name="name">Marketing Executive for Marc Demo</field>
         <field
-            eval="[(6, 0, [ref('hr_salary_rule_ca_gravie'), ref('hr_salary_rule_meal_voucher')])]"
+            eval="[(6, 0, [ref('hr_salary_rule_ca_demo'), ref('hr_salary_rule_meal_voucher')])]"
             name="rule_ids"
         />
         <field name="company_id" ref="base.main_company" />
@@ -115,14 +115,13 @@
     </record>
     <!-- Employee -->
     <record id="hr_employee_payroll" model="hr.employee">
-        <field eval="0" name="manager" />
         <field name="company_id" ref="base.main_company" />
         <field eval="1" name="active" />
         <field name="name">Roger Scott</field>
         <field name="work_location">Building 1, Second Floor</field>
         <field name="work_phone">+3282823500</field>
         <field
-            name="image"
+            name="image_1920"
             type="base64"
             file="hr_payroll/static/img/hr_employee_payroll-image.jpg"
         />
@@ -130,7 +129,6 @@
     <!-- Employee Contract -->
     <record id="hr_contract_firstcontract1" model="hr.contract">
         <field name="name">Marketing Executive Contract</field>
-        <field name="type_id" ref="hr_contract.hr_contract_type_emp" />
         <field name="date_start" eval="time.strftime('%Y-%m')+'-1'" />
         <field name="date_end" eval="time.strftime('%Y')+'-12-31'" />
         <field name="struct_id" ref="hr_payroll.structure_001" />
@@ -138,14 +136,13 @@
         <field name="notes">Default contract for marketing executives</field>
         <field eval="4000.0" name="wage" />
     </record>
-    <record id="hr_contract_gilles_gravie" model="hr.contract">
-        <field name="name">Contract For Gilles Gravie</field>
-        <field name="type_id" ref="hr_contract.hr_contract_type_emp" />
+    <record id="hr_contract_marc_demo" model="hr.contract">
+        <field name="name">Contract For Marc Demo</field>
         <field name="date_start" eval="time.strftime('%Y-%m')+'-1'" />
         <field name="date_end" eval="time.strftime('%Y')+'-12-31'" />
         <field name="struct_id" ref="hr_payroll.structure_002" />
         <field name="employee_id" ref="hr.employee_qdp" />
-        <field name="notes">This is Gilles Gravie's contract</field>
+        <field name="notes">This is Marc Demo's contract</field>
         <field eval="5000.0" name="wage" />
     </record>
 </odoo>

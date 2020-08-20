@@ -1,10 +1,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-import os
+from odoo.tools import test_reports
 
-from odoo.tools import config, test_reports
-
-from odoo.addons.hr_payroll.tests.common import TestPayslipBase
+from .common import TestPayslipBase
 
 
 class TestPayslipFlow(TestPayslipBase):
@@ -30,8 +28,8 @@ class TestPayslipFlow(TestPayslipBase):
             "active_model": "ir.ui.menu",
             "department_id": False,
             "section_id": False,
-            "active_ids": [self.ref("hr_payroll.menu_department_tree")],
-            "active_id": self.ref("hr_payroll.menu_department_tree"),
+            "active_ids": [self.ref("hr_payroll.hr_payslip_menu")],
+            "active_id": self.ref("hr_payroll.hr_payslip_menu"),
         }
         # I click on 'Compute Sheet' button on payslip
         richard_payslip.with_context(context).compute_sheet()

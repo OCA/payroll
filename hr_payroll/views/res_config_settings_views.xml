@@ -4,8 +4,10 @@
         <field name="name">Payroll</field>
         <field name="res_model">ir.module.module</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="context">{}</field>
-        <field name="domain">[('name', '=like', 'l10n_%_hr_payroll')]</field>
+        <field
+            name="context"
+            eval="{'search_default_category_id': ref('base.module_category_localization'), 'search_default_name': 'Payroll'}"
+        />
         <field name="search_view_id" ref="base.view_module_filter" />
     </record>
     <record id="res_config_settings_view_form" model="ir.ui.view">
@@ -78,7 +80,7 @@
             </xpath>
         </field>
     </record>
-    <record id="action_hr_payroll_configuration" model="ir.actions.act_window">
+    <record id="hr_payroll_configuration_action" model="ir.actions.act_window">
         <field name="name">Settings</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.config.settings</field>
@@ -89,9 +91,9 @@
     <menuitem
         id="menu_hr_payroll_global_settings"
         name="Settings"
-        parent="menu_hr_payroll_configuration"
+        parent="hr_payroll_menu_configuration"
         sequence="0"
-        action="action_hr_payroll_configuration"
+        action="hr_payroll_configuration_action"
         groups="base.group_system"
     />
 </odoo>

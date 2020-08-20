@@ -53,7 +53,6 @@ class TestPayslipBase(TransactionCase):
                 "date_start": Date.today(),
                 "name": "Contract for Richard",
                 "wage": 5000.0,
-                "type_id": self.ref("hr_contract.hr_contract_type_emp"),
                 "employee_id": self.richard_emp.id,
                 "struct_id": self.developer_pay_structure.id,
             }

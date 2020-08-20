@@ -1,10 +1,8 @@
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 from datetime import datetime
 
 from dateutil import relativedelta
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class PayslipLinesContributionRegister(models.TransientModel):
@@ -22,7 +20,6 @@ class PayslipLinesContributionRegister(models.TransientModel):
         )[:10],
     )
 
-    @api.multi
     def print_report(self):
         active_ids = self.env.context.get("active_ids", [])
         datas = {

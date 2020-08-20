@@ -1,6 +1,4 @@
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -12,7 +10,6 @@ class HrPayslipEmployees(models.TransientModel):
         "hr.employee", "hr_employee_group_rel", "payslip_id", "employee_id", "Employees"
     )
 
-    @api.multi
     def compute_sheet(self):
         payslips = self.env["hr.payslip"]
         [data] = self.read()
@@ -28,7 +25,7 @@ class HrPayslipEmployees(models.TransientModel):
         if not data["employee_ids"]:
             raise UserError(_("You must select employee(s) to generate payslip(s)."))
         for employee in self.env["hr.employee"].browse(data["employee_ids"]):
-            slip_data = self.env["hr.payslip"].onchange_employee_id(
+            slip_data = self.env["hr.payslip"].get_payslip_vals(
                 from_date, to_date, employee.id, contract_id=False
             )
             res = {

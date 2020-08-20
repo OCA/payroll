@@ -111,7 +111,7 @@ class PayslipDetailsReport(models.AbstractModel):
                     lambda r: r.appears_on_payslip
                 )
             ),
-            "get_lines_by_contribution_register": self.get_lines_by_contribution_register(
+            "get_lines_by_contribution_register": self.get_lines_by_contribution_register(  # noqa: disable=B950
                 payslips.mapped("line_ids").filtered(lambda r: r.appears_on_payslip)
             ),
         }
