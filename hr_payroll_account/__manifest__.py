@@ -1,9 +1,8 @@
-#-*- coding:utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Payroll Accounting',
-    'category': 'Human Resources',
-    'description': """
+    "name": "Payroll Accounting",
+    "category": "Human Resources",
+    "description": """
 Generic Payroll system Integrated with Accounting.
 ==================================================
 
@@ -11,8 +10,8 @@ Generic Payroll system Integrated with Accounting.
     * Payment Encoding
     * Company Contribution Management
     """,
-    'depends': ['hr_payroll', 'account'],
-    'data': ['views/hr_payroll_account_views.xml'],
-    'demo': ['data/hr_payroll_account_demo.xml'],
-    'test': ['../account/test/account_minimal_test.xml'],
+    "depends": ["hr_payroll", "account"],
+    "data": ["views/hr_payroll_account_views.xml"],
+    "demo": ["data/hr_payroll_account_demo.xml"],
+    "test": ["../account/test/account_minimal_test.xml"],
 }
