@@ -1,11 +1,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-import time
 from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
 from odoo import fields, tools
+from odoo.exceptions import UserError
 from odoo.modules.module import get_module_resource
 from odoo.tests import common
 
@@ -28,7 +28,7 @@ class TestHrPayrollAccount(common.TransactionCase):
 
         self._load("account", "test", "account_minimal_test.xml")
 
-        self.payslip_action_id = self.ref("hr_payroll.menu_department_tree")
+        self.payslip_action_id = self.ref("hr_payroll.hr_payslip_menu")
 
         self.res_partner_bank = self.env["res.partner.bank"].create(
             {
@@ -51,6 +51,26 @@ class TestHrPayrollAccount(common.TransactionCase):
                 "marital": "single",
                 "name": "John",
                 "bank_account_id": self.res_partner_bank.bank_id.id,
+            }
+        )
+
+        self.hr_salary_rule_houserentallowance1 = self.ref(
+            "hr_payroll.hr_salary_rule_houserentallowance1"
+        )
+        self.account_debit = self.env["account.account"].create(
+            {
+                "name": "Debit Account",
+                "code": "334411",
+                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
+                "reconcile": True,
+            }
+        )
+        self.account_credit = self.env["account.account"].create(
+            {
+                "name": "Credit Account",
+                "code": "114433",
+                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
+                "reconcile": True,
             }
         )
 
@@ -84,7 +104,6 @@ class TestHrPayrollAccount(common.TransactionCase):
                 "date_start": fields.Date.today(),
                 "name": "Contract for John",
                 "wage": 5000.0,
-                "type_id": self.ref("hr_contract.hr_contract_type_emp"),
                 "employee_id": self.hr_employee_john.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
                 "journal_id": self.ref("hr_payroll_account.expenses_journal"),
@@ -98,14 +117,22 @@ class TestHrPayrollAccount(common.TransactionCase):
             }
         )
 
+    def _update_account_in_rule(self, debit, credit):
+        rule_houserentallowance1 = self.env["hr.salary.rule"].browse(
+            self.hr_salary_rule_houserentallowance1
+        )
+        rule_houserentallowance1.write(
+            {"account_debit": debit, "account_credit": credit}
+        )
+
     def test_00_hr_payslip(self):
         """ checking the process of payslip. """
 
-        date_from = time.strftime("%Y-%m-01")
-        date_to = str(
-            datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1)
-        )[:10]
-        res = self.hr_payslip.onchange_employee_id(
+        date_from = datetime.now()
+        date_to = datetime.now() + relativedelta.relativedelta(
+            months=+1, day=1, days=-1
+        )
+        res = self.hr_payslip.get_payslip_vals(
             date_from, date_to, self.hr_employee_john.id
         )
         vals = {
@@ -148,6 +175,10 @@ class TestHrPayrollAccount(common.TransactionCase):
         self.hr_payslip.action_payslip_draft()
 
         # Confirm Payslip
+        with self.assertRaises(UserError):
+            self.hr_payslip.action_payslip_done()
+
+        self._update_account_in_rule(self.account_debit, self.account_credit)
         self.hr_payslip.action_payslip_done()
 
         # I verify that the Accounting Entries are created.

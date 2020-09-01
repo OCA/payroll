@@ -71,14 +71,12 @@ class HrPayslip(models.Model):
             or self.journal_id
         )
 
-    @api.multi
     def action_payslip_cancel(self):
         moves = self.mapped("move_id")
         moves.filtered(lambda x: x.state == "posted").button_cancel()
         moves.unlink()
         return super(HrPayslip, self).action_payslip_cancel()
 
-    @api.multi
     def action_payslip_done(self):
         res = super(HrPayslip, self).action_payslip_done()
 
