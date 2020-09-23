@@ -7,7 +7,7 @@
     "license": "LGPL-3",
     "summary": "Manage your payroll to accounting",
     "author": "Odoo SA, Odoo Community Association (OCA)",
-    "depends": ["hr_payroll", "account"],
+    "depends": ["payroll", "account"],
     "data": ["views/hr_payroll_account_views.xml"],
-    "demo": ["data/hr_payroll_account_demo.xml"],
+    "demo": ["demo/hr_payroll_account_demo.xml"],
 }

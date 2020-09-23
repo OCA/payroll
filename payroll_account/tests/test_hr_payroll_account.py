@@ -14,7 +14,7 @@ class TestHrPayrollAccount(common.TransactionCase):
     def _load(self, module, *args):
         tools.convert_file(
             self.cr,
-            "hr_payroll_account",
+            "payroll_account",
             get_module_resource(module, *args),
             {},
             "init",
@@ -28,7 +28,7 @@ class TestHrPayrollAccount(common.TransactionCase):
 
         self._load("account", "test", "account_minimal_test.xml")
 
-        self.payslip_action_id = self.ref("hr_payroll.hr_payslip_menu")
+        self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
         self.res_partner_bank = self.env["res.partner.bank"].create(
             {
@@ -55,7 +55,7 @@ class TestHrPayrollAccount(common.TransactionCase):
         )
 
         self.hr_salary_rule_houserentallowance1 = self.ref(
-            "hr_payroll.hr_salary_rule_houserentallowance1"
+            "payroll.hr_salary_rule_houserentallowance1"
         )
         self.account_debit = self.env["account.account"].create(
             {
@@ -79,18 +79,18 @@ class TestHrPayrollAccount(common.TransactionCase):
                 "name": "Salary Structure for Software Developer",
                 "code": "SD",
                 "company_id": self.ref("base.main_company"),
-                "parent_id": self.ref("hr_payroll.structure_base"),
+                "parent_id": self.ref("payroll.structure_base"),
                 "rule_ids": [
                     (
                         6,
                         0,
                         [
-                            self.ref("hr_payroll.hr_salary_rule_houserentallowance1"),
-                            self.ref("hr_payroll.hr_salary_rule_convanceallowance1"),
-                            self.ref("hr_payroll.hr_salary_rule_professionaltax1"),
-                            self.ref("hr_payroll.hr_salary_rule_providentfund1"),
-                            self.ref("hr_payroll.hr_salary_rule_meal_voucher"),
-                            self.ref("hr_payroll.hr_salary_rule_sales_commission"),
+                            self.ref("payroll.hr_salary_rule_houserentallowance1"),
+                            self.ref("payroll.hr_salary_rule_convanceallowance1"),
+                            self.ref("payroll.hr_salary_rule_professionaltax1"),
+                            self.ref("payroll.hr_salary_rule_providentfund1"),
+                            self.ref("payroll.hr_salary_rule_meal_voucher"),
+                            self.ref("payroll.hr_salary_rule_sales_commission"),
                         ],
                     )
                 ],
@@ -106,14 +106,14 @@ class TestHrPayrollAccount(common.TransactionCase):
                 "wage": 5000.0,
                 "employee_id": self.hr_employee_john.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
-                "journal_id": self.ref("hr_payroll_account.expenses_journal"),
+                "journal_id": self.ref("payroll_account.expenses_journal"),
             }
         )
 
         self.hr_payslip = self.env["hr.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
-                "journal_id": self.ref("hr_payroll_account.expenses_journal"),
+                "journal_id": self.ref("payroll_account.expenses_journal"),
             }
         )
 
