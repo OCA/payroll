@@ -8,7 +8,7 @@ setuptools.setup(
     description="Meta package for oca-payroll Odoo addons",
     version=version,
     install_requires=[
-        'odoo13-addon-hr_payroll',
+        'odoo13-addon-payroll',
     ],
     classifiers=[
         'Programming Language :: Python',
