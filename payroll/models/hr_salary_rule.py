@@ -220,8 +220,8 @@ class HrSalaryRule(models.Model):
             try:
                 result = safe_eval(self.condition_range, localdict)
                 return (
-                        self.condition_range_min <= result <= self.condition_range_max
-                        or False
+                    self.condition_range_min <= result <= self.condition_range_max
+                    or False
                 )
             except Exception:
                 raise UserError(

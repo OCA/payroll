@@ -36,12 +36,12 @@ class HrPayslipLine(models.Model):
             if "employee_id" not in values or "contract_id" not in values:
                 payslip = self.env["hr.payslip"].browse(values.get("slip_id"))
                 values["employee_id"] = (
-                        values.get("employee_id") or payslip.employee_id.id
+                    values.get("employee_id") or payslip.employee_id.id
                 )
                 values["contract_id"] = (
-                        values.get("contract_id")
-                        or payslip.contract_id
-                        and payslip.contract_id.id
+                    values.get("contract_id")
+                    or payslip.contract_id
+                    and payslip.contract_id.id
                 )
                 if not values["contract_id"]:
                     raise UserError(

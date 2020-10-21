@@ -240,10 +240,10 @@ class HrPayslip(models.Model):
 
     def copy(self, default=None):
         rec = super().copy(default)
-        for l in self.input_line_ids:
-            l.copy({"payslip_id": rec.id})
-        for l in self.line_ids:
-            l.copy({"slip_id": rec.id, "input_ids": []})
+        for line in self.input_line_ids:
+            line.copy({"payslip_id": rec.id})
+        for line in self.line_ids:
+            line.copy({"slip_id": rec.id, "input_ids": []})
         return rec
 
     def action_payslip_draft(self):
@@ -274,7 +274,7 @@ class HrPayslip(models.Model):
         formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("payroll.hr_payslip_view_tree", False)
         return {
-            "name": ("Refund Payslip"),
+            "name": _("Refund Payslip"),
             "view_mode": "tree, form",
             "view_id": False,
             "res_model": "hr.payslip",
@@ -322,10 +322,10 @@ class HrPayslip(models.Model):
             ("date_end", ">=", date_to),
         ]
         clause_final = (
-                [("employee_id", "=", employee.id), ("state", "=", "open"), "|", "|"]
-                + clause_1
-                + clause_2
-                + clause_3
+            [("employee_id", "=", employee.id), ("state", "=", "open"), "|", "|"]
+            + clause_1
+            + clause_2
+            + clause_3
         )
         return self.env["hr.contract"].search(clause_final).ids
 
@@ -359,7 +359,7 @@ class HrPayslip(models.Model):
         res = []
         # fill only if the contract as a working schedule linked
         for contract in contracts.filtered(
-                lambda contract: contract.resource_calendar_id
+            lambda contract: contract.resource_calendar_id
         ):
             day_from = datetime.combine(date_from, time.min)
             day_to = datetime.combine(date_to, time.max)
@@ -504,7 +504,7 @@ class HrPayslip(models.Model):
                     amount, qty, rate = rule._compute_rule(localdict)
                     # check if there is already a rule computed with that code
                     previous_amount = (
-                            rule.code in localdict and localdict[rule.code] or 0.0
+                        rule.code in localdict and localdict[rule.code] or 0.0
                     )
                     # set/overwrite the amount computed for this rule in the
                     # localdict
@@ -547,7 +547,7 @@ class HrPayslip(models.Model):
         return list(result_dict.values())
 
     def get_payslip_vals(
-            self, date_from, date_to, employee_id=False, contract_id=False
+        self, date_from, date_to, employee_id=False, contract_id=False
     ):
         # defaults
         res = {
