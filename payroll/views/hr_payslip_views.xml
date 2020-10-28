@@ -8,19 +8,30 @@
                 decoration-info="state in ('confirm','hr_check','accont_check')"
                 decoration-muted="state == 'cancel'"
                 string="Payslips"
+                multi_edit="1"
+                sample="1"
             >
-                <field name="number" />
-                <field name="employee_id" />
+                <field name="number" readonly="1" decoration-bf="1" />
+                <field name="employee_id" readonly="1" />
                 <field name="name" />
-                <field name="date_from" />
-                <field name="date_to" />
-                <field name="state" />
+                <field name="date_from" optional="show" decoration-bf="1" />
+                <field name="date_to" optional="show" decoration-bf="1" />
+                <field name="activity_ids" widget="list_activity" optional="show" />
+                <field
+                    name="state"
+                    decoration-success="state == 'done'"
+                    decoration-info="state == 'draft' or state == 'verify'"
+                    decoration-danger="state == 'cancel'"
+                    widget="badge"
+                    optional="show"
+                />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
                     options="{'no_create': True}"
                 />
                 <field name="payslip_run_id" invisible="1" />
+                <field name="message_needaction" invisible="1" />
             </tree>
         </field>
     </record>
@@ -268,6 +279,11 @@
                         </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
             </form>
         </field>
     </record>

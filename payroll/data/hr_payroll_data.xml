@@ -36,7 +36,9 @@
             <field name="category_id" ref="payroll.BASIC" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = contract.wage</field>
+            <field name="amount_python_compute">
+result = contract.wage
+            </field>
         </record>
         <record id="hr_rule_taxable" model="hr.salary.rule">
             <field name="name">Gross</field>
@@ -46,7 +48,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                result = categories.BASIC + categories.ALW
+result = categories.BASIC + categories.ALW
             </field>
         </record>
         <record id="hr_rule_net" model="hr.salary.rule">
@@ -57,7 +59,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                result = categories.BASIC + categories.ALW + categories.DED
+result = categories.BASIC + categories.ALW + categories.DED
             </field>
             <field name="register_id" ref="contrib_register_employees" />
         </record>

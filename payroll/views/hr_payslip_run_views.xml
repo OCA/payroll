@@ -28,12 +28,26 @@
         <field name="name">hr.payslip.run.tree</field>
         <field name="model">hr.payslip.run</field>
         <field name="arch" type="xml">
-            <tree string="Payslips Batches">
+            <tree
+                decoration-info="state in ('confirm','hr_check','accont_check')"
+                decoration-muted="state == 'cancel'"
+                string="Payslips Batches"
+                multi_edit="1"
+                sample="1"
+            >
                 <field name="name" />
-                <field name="date_start" />
-                <field name="date_end" />
+                <field name="date_start" decoration-bf="1" />
+                <field name="date_end" decoration-bf="1" />
+                <field name="activity_ids" widget="list_activity" optional="show" />
                 <field name="credit_note" />
-                <field name="state" />
+                <field
+                    name="state"
+                    decoration-success="state == 'close'"
+                    decoration-info="state == 'draft'"
+                    widget="badge"
+                    optional="show"
+                />
+                <field name="message_needaction" invisible="1" />
             </tree>
         </field>
     </record>
