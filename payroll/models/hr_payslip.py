@@ -42,7 +42,7 @@ class InputLine(BrowsableObject):
 
 class WorkedDays(BrowsableObject):
     """a class that will be used into the python code, mainly for
-     usability purposes"""
+    usability purposes"""
 
     def _sum(self, code, from_date, to_date=None):
         if to_date is None:
@@ -98,10 +98,10 @@ class HrPayslip(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="Defines the rules that have to be applied to this payslip, "
-             "accordingly to the contract chosen. If you let empty the field "
-             "contract, this field isn't mandatory anymore and thus the rules "
-             "applied will be all the rules set on the structure of all contracts "
-             "of the employee valid for the chosen period",
+        "accordingly to the contract chosen. If you let empty the field "
+        "contract, this field isn't mandatory anymore and thus the rules "
+        "applied will be all the rules set on the structure of all contracts "
+        "of the employee valid for the chosen period",
     )
     name = fields.Char(
         string="Payslip Name", readonly=True, states={"draft": [("readonly", False)]}
@@ -571,14 +571,14 @@ class HrPayslip(models.Model):
         res["value"].update(
             {
                 "name": _("Salary Slip of %s for %s")
-                        % (
-                            employee.name,
-                            tools.ustr(
-                                babel.dates.format_date(
-                                    date=ttyme, format="MMMM-y", locale=locale
-                                )
-                            ),
-                        ),
+                % (
+                    employee.name,
+                    tools.ustr(
+                        babel.dates.format_date(
+                            date=ttyme, format="MMMM-y", locale=locale
+                        )
+                    ),
+                ),
                 "company_id": employee.company_id.id,
             }
         )

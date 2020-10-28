@@ -16,8 +16,10 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">payroll.report_payslip</field>
         <field name="report_file">payroll.report_payslip</field>
-        <field name="print_report_name">'Payslip - %s' % (object.employee_id.name)</field>
-        <field name="binding_model_id" ref="model_hr_payslip"/>
+        <field name="print_report_name">
+            'Payslip - %s' % (object.employee_id.name)
+        </field>
+        <field name="binding_model_id" ref="model_hr_payslip" />
         <field name="binding_type">report</field>
     </record>
 
@@ -27,8 +29,10 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">payroll.report_payslipdetails</field>
         <field name="report_file">payroll.report_payslipdetails</field>
-        <field name="print_report_name">'Payslip Details - %s' % (object.employee_id.name)</field>
-        <field name="binding_model_id" ref="model_hr_payslip"/>
+        <field name="print_report_name">
+            'Payslip Details - %s' % (object.employee_id.name)
+        </field>
+        <field name="binding_model_id" ref="model_hr_payslip" />
         <field name="binding_type">report</field>
     </record>
 

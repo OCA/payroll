@@ -40,7 +40,7 @@ class HrPayslipRun(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         default=lambda self: fields.Date.today().replace(day=1)
-                             + relativedelta(months=+1, day=1, days=-1),
+        + relativedelta(months=+1, day=1, days=-1),
     )
     credit_note = fields.Boolean(
         string="Credit Note",

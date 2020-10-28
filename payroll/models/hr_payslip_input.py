@@ -18,8 +18,8 @@ class HrPayslipInput(models.Model):
     )
     amount = fields.Float(
         help="It is used in computation. For e.g. A rule for sales having "
-             "1% commission of basic salary for per product can defined in "
-             "expression like result = inputs.SALEURO.amount * contract.wage*0.01."
+        "1% commission of basic salary for per product can defined in "
+        "expression like result = inputs.SALEURO.amount * contract.wage*0.01."
     )
     contract_id = fields.Many2one(
         "hr.contract",

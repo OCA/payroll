@@ -14,14 +14,16 @@ class HrSalaryRuleCategory(models.Model):
         "hr.salary.rule.category",
         string="Parent",
         help="Linking a salary category to its parent is used only for the "
-             "reporting purpose.",
+        "reporting purpose.",
     )
     children_ids = fields.One2many(
         "hr.salary.rule.category", "parent_id", string="Children"
     )
     note = fields.Text(string="Description")
     company_id = fields.Many2one(
-        "res.company", string="Company", default=lambda self: self.env.company,
+        "res.company",
+        string="Company",
+        default=lambda self: self.env.company,
     )
 
     @api.constrains("parent_id")
