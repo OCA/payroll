@@ -204,11 +204,10 @@
         parent="payroll_menu_configuration"
         sequence="12"
     />
-    <act_window
-        name="All Children Rules"
-        domain="[('parent_rule_id', '=', active_id)]"
-        res_model="hr.salary.rule"
-        view_id="hr_salary_rule_view_tree_children"
-        id="act_children_salary_rules"
-    />
+    <record id="act_children_salary_rules" model="ir.actions.act_window">
+        <field name="name">All Children Rules</field>
+        <field name="res_model">hr.salary.rule</field>
+        <field name="domain">[('parent_rule_id', '=', active_id)]</field>
+        <field name="view_id" ref="hr_salary_rule_view_tree_children" />
+    </record>
 </odoo>
