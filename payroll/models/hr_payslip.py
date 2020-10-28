@@ -42,7 +42,7 @@ class InputLine(BrowsableObject):
 
 class WorkedDays(BrowsableObject):
     """a class that will be used into the python code, mainly for
-    usability purposes"""
+     usability purposes"""
 
     def _sum(self, code, from_date, to_date=None):
         if to_date is None:
@@ -70,7 +70,7 @@ class WorkedDays(BrowsableObject):
 
 class Payslips(BrowsableObject):
     """a class that will be used into the python code, mainly for
-    usability purposes"""
+     usability purposes"""
 
     def sum(self, code, from_date, to_date=None):
         if to_date is None:
@@ -98,10 +98,10 @@ class HrPayslip(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="Defines the rules that have to be applied to this payslip, "
-        "accordingly to the contract chosen. If you let empty the field "
-        "contract, this field isn't mandatory anymore and thus the rules "
-        "applied will be all the rules set on the structure of all contracts "
-        "of the employee valid for the chosen period",
+             "accordingly to the contract chosen. If you let empty the field "
+             "contract, this field isn't mandatory anymore and thus the rules "
+             "applied will be all the rules set on the structure of all contracts "
+             "of the employee valid for the chosen period",
     )
     name = fields.Char(
         string="Payslip Name", readonly=True, states={"draft": [("readonly", False)]}
@@ -240,10 +240,10 @@ class HrPayslip(models.Model):
 
     def copy(self, default=None):
         rec = super().copy(default)
-        for l in self.input_line_ids:
-            l.copy({"payslip_id": rec.id})
-        for l in self.line_ids:
-            l.copy({"slip_id": rec.id, "input_ids": []})
+        for line in self.input_line_ids:
+            line.copy({"payslip_id": rec.id})
+        for line in self.line_ids:
+            line.copy({"slip_id": rec.id, "input_ids": []})
         return rec
 
     def action_payslip_draft(self):
@@ -274,7 +274,7 @@ class HrPayslip(models.Model):
         formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("payroll.hr_payslip_view_tree", False)
         return {
-            "name": ("Refund Payslip"),
+            "name": _("Refund Payslip"),
             "view_mode": "tree, form",
             "view_id": False,
             "res_model": "hr.payslip",
@@ -352,7 +352,7 @@ class HrPayslip(models.Model):
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
         """
-        @param contract: Browse record of contracts
+        @param contracts: Browse record of contracts
         @return: returns a list of dict containing the input that should be
         applied for the given contract between date_from and date_to
         """
@@ -571,14 +571,14 @@ class HrPayslip(models.Model):
         res["value"].update(
             {
                 "name": _("Salary Slip of %s for %s")
-                % (
-                    employee.name,
-                    tools.ustr(
-                        babel.dates.format_date(
-                            date=ttyme, format="MMMM-y", locale=locale
-                        )
-                    ),
-                ),
+                        % (
+                            employee.name,
+                            tools.ustr(
+                                babel.dates.format_date(
+                                    date=ttyme, format="MMMM-y", locale=locale
+                                )
+                            ),
+                        ),
                 "company_id": employee.company_id.id,
             }
         )

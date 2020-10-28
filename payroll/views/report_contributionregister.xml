@@ -9,15 +9,15 @@
                         <div class="row mt32 mb32">
                             <div class="col-3">
                                 <strong>Register Name:</strong>
-                                <p t-field="o.name" />
+                                <p t-field="o.name"/>
                             </div>
                             <div class="col-3">
                                 <strong>Date From:</strong>
-                                <p t-esc="data['form']['date_from']" />
+                                <p t-esc="data['form']['date_from']"/>
                             </div>
                             <div class="col-3">
                                 <strong>Date To:</strong>
-                                <p t-esc="data['form']['date_to']" />
+                                <p t-esc="data['form']['date_to']"/>
                             </div>
                         </div>
                         <table class="table table-sm">
@@ -34,27 +34,27 @@
                             <tbody>
                                 <tr t-foreach="lines_data.get(o.id, [])" t-as="line">
                                     <td>
-                                        <span t-esc="line.slip_id.name" />
+                                        <span t-esc="line.slip_id.name"/>
                                     </td>
                                     <td>
-                                        <span t-esc="line.code" />
+                                        <span t-esc="line.code"/>
                                     </td>
                                     <td>
-                                        <span t-esc="line.name" />
+                                        <span t-esc="line.name"/>
                                     </td>
                                     <td>
-                                        <span t-esc="line.quantity" />
+                                        <span t-esc="line.quantity"/>
                                     </td>
                                     <td class="text-right">
                                         <span
-                                            t-esc="line.amount"
-                                            t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                                t-esc="line.amount"
+                                                t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                         />
                                     </td>
                                     <td class="text-right">
                                         <span
-                                            t-esc="line.total"
-                                            t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                                t-esc="line.total"
+                                                t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                         />
                                     </td>
                                 </tr>
@@ -69,8 +69,8 @@
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                t-esc="lines_total.get(o.id)"
-                                                t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                                    t-esc="lines_total.get(o.id)"
+                                                    t-esc-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                             />
                                         </td>
                                     </tr>

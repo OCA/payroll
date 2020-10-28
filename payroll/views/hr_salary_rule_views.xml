@@ -5,11 +5,11 @@
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <tree string="Salary Rules">
-                <field name="name" />
-                <field name="code" />
-                <field name="category_id" />
-                <field name="sequence" invisible="1" />
-                <field name="register_id" />
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <field name="sequence" invisible="1"/>
+                <field name="register_id"/>
             </tree>
         </field>
     </record>
@@ -24,20 +24,19 @@
                             <div class="row">
                                 <div class="col-8">
                                     <strong>
-                                        <field name="name" />
+                                        <field name="name"/>
                                     </strong>
                                 </div>
                                 <div class="col-4">
                                     <span class="float-right">
-                                        <field name="category_id" />
+                                        <field name="category_id"/>
                                     </span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <span>
-                                        Code:
-                                        <field name="code" />
+                                    <span>Code:
+                                        <field name="code"/>
                                     </span>
                                 </div>
                             </div>
@@ -51,16 +50,16 @@
         <field name="name">hr.salary.rule.tree</field>
         <field name="model">hr.salary.rule</field>
         <field name="field_parent">child_ids</field>
-        <field eval="20" name="priority" />
+        <field eval="20" name="priority"/>
         <field name="arch" type="xml">
             <tree string="Salary Rules">
-                <field name="name" />
-                <field name="code" />
-                <field name="category_id" invisible="True" />
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id" invisible="True"/>
                 <field
-                    name="company_id"
-                    groups="base.group_multi_company"
-                    options="{'no_create': True}"
+                        name="company_id"
+                        groups="base.group_multi_company"
+                        options="{'no_create': True}"
                 />
             </tree>
         </field>
@@ -70,100 +69,100 @@
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <form string="Salary Rules">
-                <label for="name" class="oe_edit_only" />
+                <label for="name" class="oe_edit_only"/>
                 <h1>
-                    <field name="name" />
+                    <field name="name"/>
                 </h1>
-                <label for="category_id" class="oe_edit_only" />
+                <label for="category_id" class="oe_edit_only"/>
                 <h2>
-                    <field name="category_id" />
+                    <field name="category_id"/>
                 </h2>
                 <group col="4">
-                    <field name="code" />
-                    <field name="sequence" />
-                    <field name="active" />
-                    <field name="appears_on_payslip" />
+                    <field name="code"/>
+                    <field name="sequence"/>
+                    <field name="active"/>
+                    <field name="appears_on_payslip"/>
                     <field
-                        name="company_id"
-                        options="{'no_create': True}"
-                        groups="base.group_multi_company"
+                            name="company_id"
+                            options="{'no_create': True}"
+                            groups="base.group_multi_company"
                     />
                 </group>
                 <notebook colspan="6">
                     <page string="General">
                         <group col="4">
-                            <separator colspan="4" string="Conditions" />
-                            <field name="condition_select" />
-                            <newline />
+                            <separator colspan="4" string="Conditions"/>
+                            <field name="condition_select"/>
+                            <newline/>
                             <field
-                                name="condition_python"
-                                attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
-                                colspan="4"
+                                    name="condition_python"
+                                    attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
+                                    colspan="4"
                             />
-                            <newline />
+                            <newline/>
                             <field
-                                name="condition_range"
-                                attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                    name="condition_range"
+                                    attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
                             />
-                            <newline />
+                            <newline/>
                             <field
-                                name="condition_range_min"
-                                colspan="2"
-                                attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                    name="condition_range_min"
+                                    colspan="2"
+                                    attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
                             />
-                            <newline />
+                            <newline/>
                             <field
-                                name="condition_range_max"
-                                colspan="2"
-                                attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                    name="condition_range_max"
+                                    colspan="2"
+                                    attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
                             />
-                            <newline />
-                            <separator colspan="4" string="Computation" />
-                            <field name="amount_select" />
-                            <newline />
+                            <newline/>
+                            <separator colspan="4" string="Computation"/>
+                            <field name="amount_select"/>
+                            <newline/>
                             <field
-                                name="amount_percentage_base"
-                                attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"
+                                    name="amount_percentage_base"
+                                    attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"
                             />
-                            <newline />
+                            <newline/>
                             <field
-                                name="quantity"
-                                attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"
+                                    name="quantity"
+                                    attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"
                             />
-                            <newline />
+                            <newline/>
                             <field
-                                name="amount_fix"
-                                attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"
+                                    name="amount_fix"
+                                    attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"
                             />
-                            <newline />
+                            <newline/>
                             <field
-                                colspan="4"
-                                name="amount_python_compute"
-                                attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
+                                    colspan="4"
+                                    name="amount_python_compute"
+                                    attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
                             />
                             <field
-                                name="amount_percentage"
-                                attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"
+                                    name="amount_percentage"
+                                    attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"
                             />
-                            <separator colspan="4" string="Company Contribution" />
-                            <field name="register_id" />
+                            <separator colspan="4" string="Company Contribution"/>
+                            <field name="register_id"/>
                         </group>
                     </page>
                     <page name="rules" string="Child Rules">
-                        <field name="parent_rule_id" />
-                        <separator string="Children Definition" />
-                        <field name="child_ids" />
+                        <field name="parent_rule_id"/>
+                        <separator string="Children Definition"/>
+                        <field name="child_ids"/>
                     </page>
                     <page string="Inputs">
                         <field name="input_ids" mode="tree">
                             <tree string="Input Data" editable="bottom">
-                                <field name="name" />
-                                <field name="code" />
+                                <field name="name"/>
+                                <field name="code"/>
                             </tree>
                         </field>
                     </page>
                     <page string="Description">
-                        <field name="note" />
+                        <field name="note"/>
                     </page>
                 </notebook>
             </form>
@@ -175,17 +174,17 @@
         <field name="arch" type="xml">
             <search string="Search Salary Rule">
                 <field
-                    name="name"
-                    string="Salary Rules"
-                    filter_domain="['|',('name','ilike',self),('code','ilike',self)]"
+                        name="name"
+                        string="Salary Rules"
+                        filter_domain="['|',('name','ilike',self),('code','ilike',self)]"
                 />
-                <field name="category_id" />
-                <field name="condition_range_min" />
+                <field name="category_id"/>
+                <field name="condition_range_min"/>
                 <group col="8" colspan="4" expand="0" string="Group By">
                     <filter
-                        string="Category"
-                        name="head"
-                        context="{'group_by':'category_id'}"
+                            string="Category"
+                            name="head"
+                            context="{'group_by':'category_id'}"
                     />
                 </group>
             </search>
@@ -196,19 +195,18 @@
         <field name="res_model">hr.salary.rule</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="domain">[('parent_rule_id','=',False)]</field>
-        <field name="search_view_id" ref="hr_salary_rule_view_search" />
+        <field name="search_view_id" ref="hr_salary_rule_view_search"/>
     </record>
     <menuitem
-        id="menu_action_hr_salary_rule_form"
-        action="action_salary_rule_form"
-        parent="payroll_menu_configuration"
-        sequence="12"
+            id="menu_action_hr_salary_rule_form"
+            action="action_salary_rule_form"
+            parent="payroll_menu_configuration"
+            sequence="12"
     />
-    <act_window
-        name="All Children Rules"
-        domain="[('parent_rule_id', '=', active_id)]"
-        res_model="hr.salary.rule"
-        view_id="hr_salary_rule_view_tree_children"
-        id="act_children_salary_rules"
-    />
+    <record id="act_children_salary_rules" model="ir.actions.act_window">
+        <field name="name">All Children Rules</field>
+        <field name="res_model">hr.salary.rule</field>
+        <field name="domain">[('parent_rule_id', '=', active_id)]</field>
+        <field name="view_id" ref="hr_salary_rule_view_tree_children"/>
+    </record>
 </odoo>

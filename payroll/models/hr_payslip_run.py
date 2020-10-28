@@ -40,14 +40,14 @@ class HrPayslipRun(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         default=lambda self: fields.Date.today().replace(day=1)
-        + relativedelta(months=+1, day=1, days=-1),
+                             + relativedelta(months=+1, day=1, days=-1),
     )
     credit_note = fields.Boolean(
         string="Credit Note",
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="If its checked, indicates that all payslips generated from here "
-        "are refund payslips.",
+             "are refund payslips.",
     )
 
     def draft_payslip_run(self):

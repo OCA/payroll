@@ -2,16 +2,16 @@
 <odoo>
     <!-- Root Menus -->
     <menuitem
-        id="payroll_menu_root"
-        name="Payroll"
-        sequence="45"
-        web_icon="payroll,static/description/icon.png"
+            id="payroll_menu_root"
+            name="Payroll"
+            sequence="45"
+            web_icon="payroll,static/description/icon.png"
     />
     <menuitem
-        id="payroll_menu_configuration"
-        name="Configuration"
-        parent="payroll_menu_root"
-        sequence="100"
-        groups="payroll.group_payroll_manager"
+            id="payroll_menu_configuration"
+            name="Configuration"
+            parent="payroll_menu_root"
+            sequence="100"
+            groups="payroll.group_payroll_manager"
     />
 </odoo>
