@@ -7,7 +7,9 @@ from odoo import fields, models
 
 class HrPayslipRun(models.Model):
     _name = "hr.payslip.run"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Payslip Batches"
+    _order = "name desc, id desc"
 
     name = fields.Char(
         required=True, readonly=True, states={"draft": [("readonly", False)]}
@@ -25,6 +27,7 @@ class HrPayslipRun(models.Model):
         index=True,
         readonly=True,
         copy=False,
+        tracking=1,
         default="draft",
     )
     date_start = fields.Date(

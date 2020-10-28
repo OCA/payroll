@@ -29,7 +29,8 @@
                                 <td colspan="3">
                                     <div
                                         t-field="o.employee_id.address_home_id"
-                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
+                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"],
+"no_marker": True, "phone_icons": True}'
                                     />
                                 </td>
                             </tr>
@@ -103,13 +104,15 @@
                                     <td>
                                         <span
                                             t-esc="line.amount"
-                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                            t-options='{"widget": "monetary", "display_currency":
+o.company_id.currency_id}'
                                         />
                                     </td>
                                     <td>
                                         <span
                                             t-esc="line.total"
-                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                            t-options='{"widget": "monetary", "display_currency":
+o.company_id.currency_id}'
                                         />
                                     </td>
                                 </tr>
