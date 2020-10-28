@@ -58,9 +58,9 @@
                                 </div>
                                 <div class="col-12">
                                     <span>
-                                        <field name="date_start" /> - <field
-                                            name="date_end"
-                                        />
+                                        <field name="date_start" />
+                                        -
+                                        <field name="date_end" />
                                     </span>
                                     <span
                                         class="float-right"
@@ -112,11 +112,10 @@
                     <group col="4">
                         <label for="date_start" string="Period" />
                         <div>
-                           <field name="date_start" class="oe_inline" /> - <field
-                                name="date_end"
-                                class="oe_inline"
-                            />
-                     </div>
+                            <field name="date_start" class="oe_inline" />
+                            -
+                            <field name="date_end" class="oe_inline" />
+                        </div>
                         <field name="credit_note" />
                     </group>
                     <separator string="Payslips" />

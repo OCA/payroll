@@ -21,7 +21,9 @@ class HrSalaryRuleCategory(models.Model):
     )
     note = fields.Text(string="Description")
     company_id = fields.Many2one(
-        "res.company", string="Company", default=lambda self: self.env.company,
+        "res.company",
+        string="Company",
+        default=lambda self: self.env.company,
     )
 
     @api.constrains("parent_id")
