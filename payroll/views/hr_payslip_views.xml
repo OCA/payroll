@@ -47,9 +47,7 @@
                                     <span>
                                         <field name="date_from" />
                                         -
-                                        <field
-                                            name="date_to"
-                                        />
+                                        <field name="date_to" />
                                     </span>
                                 </div>
                                 <div class="col-12">
@@ -135,10 +133,7 @@
                         <div>
                             <field name="date_from" class="oe_inline" />
                             -
-                            <field
-                                name="date_to"
-                                class="oe_inline"
-                            />
+                            <field name="date_to" class="oe_inline" />
                         </div>
                         <field
                             name="contract_id"
