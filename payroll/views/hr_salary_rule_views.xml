@@ -35,7 +35,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <span>Code:
+                                    <span>
+                                        Code:
                                         <field name="code" />
                                     </span>
                                 </div>

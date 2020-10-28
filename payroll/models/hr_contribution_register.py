@@ -15,9 +15,6 @@ class HrContributionRegister(models.Model):
     partner_id = fields.Many2one("res.partner", string="Partner")
     name = fields.Char(required=True)
     register_line_ids = fields.One2many(
-        "hr.payslip.line",
-        "register_id",
-        string="Register Line",
-        readonly=True
+        "hr.payslip.line", "register_id", string="Register Line", readonly=True
     )
     note = fields.Text(string="Description")

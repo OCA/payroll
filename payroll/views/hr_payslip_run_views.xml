@@ -60,9 +60,7 @@
                                     <span>
                                         <field name="date_start" />
                                         -
-                                        <field
-                                            name="date_end"
-                                        />
+                                        <field name="date_end" />
                                     </span>
                                     <span
                                         class="float-right"
@@ -116,10 +114,7 @@
                         <div>
                             <field name="date_start" class="oe_inline" />
                             -
-                            <field
-                                name="date_end"
-                                class="oe_inline"
-                            />
+                            <field name="date_end" class="oe_inline" />
                         </div>
                         <field name="credit_note" />
                     </group>

@@ -70,7 +70,7 @@ class WorkedDays(BrowsableObject):
 
 class Payslips(BrowsableObject):
     """a class that will be used into the python code, mainly for
-     usability purposes"""
+    usability purposes"""
 
     def sum(self, code, from_date, to_date=None):
         if to_date is None:

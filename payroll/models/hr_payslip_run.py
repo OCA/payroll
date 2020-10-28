@@ -47,7 +47,7 @@ class HrPayslipRun(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="If its checked, indicates that all payslips generated from here "
-             "are refund payslips.",
+        "are refund payslips.",
     )
 
     def draft_payslip_run(self):

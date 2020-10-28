@@ -9,7 +9,6 @@
         <field name="print_report_name">PaySlip Lines By Contribution Register</field>
         <field name="binding_type">action</field>
     </record>
-
     <record id="action_report_payslip" model="ir.actions.report">
         <field name="name">Payslip</field>
         <field name="model">hr.payslip</field>
@@ -22,7 +21,6 @@
         <field name="binding_model_id" ref="model_hr_payslip" />
         <field name="binding_type">report</field>
     </record>
-
     <record id="payslip_details_report" model="ir.actions.report">
         <field name="name">PaySlip Details</field>
         <field name="model">hr.payslip</field>
@@ -35,5 +33,4 @@
         <field name="binding_model_id" ref="model_hr_payslip" />
         <field name="binding_type">report</field>
     </record>
-
 </odoo>

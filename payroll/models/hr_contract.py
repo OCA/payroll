@@ -54,8 +54,8 @@ class HrContract(models.Model):
             if active:
                 value = (
                     self.env["hr.contract.advantage.template"]
-                        .search([("code", "=", code)], limit=1)
-                        .default_value
+                    .search([("code", "=", code)], limit=1)
+                    .default_value
                 )
                 contract[code] = value
             else:
