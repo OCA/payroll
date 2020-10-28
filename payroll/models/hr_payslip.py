@@ -90,7 +90,9 @@ class Payslips(BrowsableObject):
 
 class HrPayslip(models.Model):
     _name = "hr.payslip"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Pay Slip"
+    _order = "number desc, id desc"
 
     struct_id = fields.Many2one(
         "hr.payroll.structure",
@@ -125,6 +127,7 @@ class HrPayslip(models.Model):
         required=True,
         default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
         states={"draft": [("readonly", False)]},
+        tracking=1,
     )
     date_to = fields.Date(
         string="Date To",
@@ -134,6 +137,7 @@ class HrPayslip(models.Model):
             (datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()
         ),
         states={"draft": [("readonly", False)]},
+        tracking=1,
     )
     # this is chaos: 4 states are defined, 3 are used ('verify' isn't) and 5
     # exist ('confirm' seems to have existed)
@@ -149,6 +153,7 @@ class HrPayslip(models.Model):
         readonly=True,
         copy=False,
         default="draft",
+        tracking=1,
         help="""* When the payslip is created the status is \'Draft\'
         \n* If the payslip is under verification, the status is \'Waiting\'.
         \n* If the payslip is confirmed then status is set to \'Done\'.
@@ -240,10 +245,10 @@ class HrPayslip(models.Model):
 
     def copy(self, default=None):
         rec = super().copy(default)
-        for l in self.input_line_ids:
-            l.copy({"payslip_id": rec.id})
-        for l in self.line_ids:
-            l.copy({"slip_id": rec.id, "input_ids": []})
+        for line in self.input_line_ids:
+            line.copy({"payslip_id": rec.id})
+        for line in self.line_ids:
+            line.copy({"slip_id": rec.id, "input_ids": []})
         return rec
 
     def action_payslip_draft(self):
@@ -274,7 +279,7 @@ class HrPayslip(models.Model):
         formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("payroll.hr_payslip_view_tree", False)
         return {
-            "name": ("Refund Payslip"),
+            "name": _("Refund Payslip"),
             "view_mode": "tree, form",
             "view_id": False,
             "res_model": "hr.payslip",
@@ -298,37 +303,6 @@ class HrPayslip(models.Model):
             )
         return super(HrPayslip, self).unlink()
 
-    # TODO move this function into hr_contract module, on hr.employee object
-    @api.model
-    def get_contract(self, employee, date_from, date_to):
-        """
-        @param employee: recordset of employee
-        @param date_from: date field
-        @param date_to: date field
-        @return: returns the ids of all the contracts for the given employee
-        that need to be considered for the given dates
-        """
-        # a contract is valid if it ends between the given dates
-        clause_1 = ["&", ("date_end", "<=", date_to), ("date_end", ">=", date_from)]
-        # OR if it starts between the given dates
-        clause_2 = ["&", ("date_start", "<=", date_to), ("date_start", ">=", date_from)]
-        # OR if it starts before the date_from and finish after the date_end
-        # (or never finish)
-        clause_3 = [
-            "&",
-            ("date_start", "<=", date_from),
-            "|",
-            ("date_end", "=", False),
-            ("date_end", ">=", date_to),
-        ]
-        clause_final = (
-            [("employee_id", "=", employee.id), ("state", "=", "open"), "|", "|"]
-            + clause_1
-            + clause_2
-            + clause_3
-        )
-        return self.env["hr.contract"].search(clause_final).ids
-
     def compute_sheet(self):
         for payslip in self:
             number = payslip.number or self.env["ir.sequence"].next_by_code(
@@ -339,8 +313,11 @@ class HrPayslip(models.Model):
             # set the list of contract for which the rules have to be applied
             # if we don't give the contract, then the rules to apply should be
             # for all current contracts of the employee
-            contract_ids = payslip.contract_id.ids or self.get_contract(
-                payslip.employee_id, payslip.date_from, payslip.date_to
+            contract_ids = (
+                payslip.contract_id.ids
+                or payslip.employee_id._get_contracts(
+                    date_from=payslip.date_from, date_to=payslip.date_to
+                ).ids
             )
             lines = [
                 (0, 0, line)
@@ -352,7 +329,7 @@ class HrPayslip(models.Model):
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
         """
-        @param contract: Browse record of contracts
+        @param contracts: Browse record of contracts
         @return: returns a list of dict containing the input that should be
         applied for the given contract between date_from and date_to
         """
@@ -585,7 +562,7 @@ class HrPayslip(models.Model):
 
         if not self.env.context.get("contract"):
             # fill with the first contract of the employee
-            contract_ids = self.get_contract(employee, date_from, date_to)
+            contract_ids = employee.contract_id.ids
         else:
             if contract_id:
                 # set the list of contract for which the input have to be filled
@@ -593,7 +570,9 @@ class HrPayslip(models.Model):
             else:
                 # if we don't give the contract, then the input to fill should
                 # be for all current contracts of the employee
-                contract_ids = self.get_contract(employee, date_from, date_to)
+                contract_ids = employee._get_contracts(
+                    date_from=date_from, date_to=date_to
+                ).ids
 
         if not contract_ids:
             return res
@@ -637,7 +616,9 @@ class HrPayslip(models.Model):
         self.company_id = employee.company_id
 
         if not self.env.context.get("contract") or not self.contract_id:
-            contract_ids = self.get_contract(employee, date_from, date_to)
+            contract_ids = employee._get_contracts(
+                date_from=date_from, date_to=date_to
+            ).ids
             if not contract_ids:
                 return
             self.contract_id = self.env["hr.contract"].browse(contract_ids[0])

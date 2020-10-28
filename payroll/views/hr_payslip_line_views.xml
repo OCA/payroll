@@ -90,17 +90,26 @@
             </search>
         </field>
     </record>
-    <act_window
-        name="Payslip Lines"
-        domain="[('register_id', '=', active_id)]"
-        context="{'default_register_id': active_id, 'search_default_register_id': 1}"
-        res_model="hr.payslip.line"
-        id="hr_payslip_line_action"
-    />
-    <act_window
-        name="Payslip Computation Details"
-        context="{'default_slip_id': active_id,'search_default_slip_id': active_id}"
-        res_model="hr.payslip.line"
+    <record id="hr_payslip_line_action" model="ir.actions.act_window">
+        <field name="name">Payslip Lines</field>
+        <field name="res_model">hr.payslip.line</field>
+        <field name="domain">[('register_id', '=', active_id)]</field>
+        <field name="context">
+            {'default_register_id': active_id, 'search_default_register_id': 1}
+        </field>
+        <field name="binding_model_id" ref="model_hr_payslip" />
+    </record>
+    <record
         id="hr_payslip_line_action_computation_details"
-    />
+        model="ir.actions.act_window"
+    >
+        <field name="name">Payslip Computation Details</field>
+        <field name="res_model">hr.payslip.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">
+            {'default_slip_id': active_id,'search_default_slip_id': active_id}
+        </field>
+        <field name="binding_model_id" ref="model_hr_payslip" />
+    </record>
 </odoo>

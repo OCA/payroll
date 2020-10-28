@@ -12,3 +12,5 @@ access_hr_rule_input_officer,hr.rule.input.office,model_hr_rule_input,payroll.gr
 access_hr_salary_rule_user,hr.salary.rule.user,model_hr_salary_rule,payroll.group_payroll_user,1,1,1,1
 access_hr_contract_advantage_template,hr.contract.advantage.template.user,model_hr_contract_advantage_template,payroll.group_payroll_user,1,1,1,1
 access_hr_contract_advantage_template_hr_user,hr.contract.advantage.template.hr.user,model_hr_contract_advantage_template,hr.group_hr_user,1,0,0,0
+access_hr_payslip_batch_employees_transient,hr.payslip.employees.batch,model_hr_payslip_employees,hr.group_hr_user,1,1,1,0
+access_hr_payslip_lines_contribution_register_transient,payslip.lines.contribution.register,model_payslip_lines_contribution_register,hr.group_hr_user,1,1,1,0
