@@ -98,7 +98,8 @@
         <field name="code">ME</field>
         <field name="name">Marketing Executive</field>
         <field
-            eval="[(6, 0, [ref('hr_salary_rule_houserentallowance1'), ref('hr_salary_rule_convanceallowance1'),ref('hr_salary_rule_professionaltax1'),ref('hr_salary_rule_providentfund1')])]"
+            eval="[(6, 0, [ref('hr_salary_rule_houserentallowance1'),
+ref('hr_salary_rule_convanceallowance1'),ref('hr_salary_rule_professionaltax1'),ref('hr_salary_rule_providentfund1')])]"
             name="rule_ids"
         />
         <field name="company_id" ref="base.main_company" />
