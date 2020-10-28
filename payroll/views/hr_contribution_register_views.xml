@@ -74,14 +74,12 @@
         <field name="res_model">hr.contribution.register</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-            Add a new contribution register
-          </p>
+            <p class="o_view_nocontent_smiling_face">Add a new contribution register</p>
             <p>
-            A contribution register is a third party involved in the salary
+                A contribution register is a third party involved in the salary
             payment of the employees. It can be the social security, the
             state or anyone that collect or inject money on payslips.
-          </p>
+            </p>
         </field>
     </record>
     <menuitem

@@ -49,7 +49,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <span>Code: <field name="code" /></span>
+                                    <span>
+                                        Code:
+                                        <field name="code" />
+                                    </span>
                                 </div>
                             </div>
                         </div>

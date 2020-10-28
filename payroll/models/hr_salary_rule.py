@@ -43,7 +43,9 @@ class HrSalaryRule(models.Model):
         "hr.salary.rule", string="Parent Salary Rule", index=True
     )
     company_id = fields.Many2one(
-        "res.company", string="Company", default=lambda self: self.env.company,
+        "res.company",
+        string="Company",
+        default=lambda self: self.env.company,
     )
     condition_select = fields.Selection(
         [("none", "Always True"), ("range", "Range"), ("python", "Python Expression")],

@@ -22,7 +22,10 @@ class HrPayslipLine(models.Model):
     amount = fields.Float(digits="Payroll")
     quantity = fields.Float(digits="Payroll", default=1.0)
     total = fields.Float(
-        compute="_compute_total", string="Total", digits="Payroll", store=True,
+        compute="_compute_total",
+        string="Total",
+        digits="Payroll",
+        store=True,
     )
 
     @api.depends("quantity", "amount", "rate")
