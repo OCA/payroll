@@ -77,8 +77,8 @@
             <p class="o_view_nocontent_smiling_face">Add a new contribution register</p>
             <p>
                 A contribution register is a third party involved in the salary
-            payment of the employees. It can be the social security, the
-            state or anyone that collect or inject money on payslips.
+                payment of the employees. It can be the social security, the
+                state or anyone that collect or inject money on payslips.
             </p>
         </field>
     </record>
