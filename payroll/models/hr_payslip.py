@@ -90,7 +90,9 @@ class Payslips(BrowsableObject):
 
 class HrPayslip(models.Model):
     _name = "hr.payslip"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Pay Slip"
+    _order = "number desc, id desc"
 
     struct_id = fields.Many2one(
         "hr.payroll.structure",
@@ -125,6 +127,7 @@ class HrPayslip(models.Model):
         required=True,
         default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
         states={"draft": [("readonly", False)]},
+        tracking=1,
     )
     date_to = fields.Date(
         string="Date To",
@@ -134,6 +137,7 @@ class HrPayslip(models.Model):
             (datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()
         ),
         states={"draft": [("readonly", False)]},
+        tracking=1,
     )
     # this is chaos: 4 states are defined, 3 are used ('verify' isn't) and 5
     # exist ('confirm' seems to have existed)
@@ -149,6 +153,7 @@ class HrPayslip(models.Model):
         readonly=True,
         copy=False,
         default="draft",
+        tracking=1,
         help="""* When the payslip is created the status is \'Draft\'
         \n* If the payslip is under verification, the status is \'Waiting\'.
         \n* If the payslip is confirmed then status is set to \'Done\'.
