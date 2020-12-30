@@ -12,6 +12,17 @@ class TestPayslipFlow(TestPayslipBase):
         richard_payslip = self.env["hr.payslip"].create(
             {"name": "Payslip of Richard", "employee_id": self.richard_emp.id}
         )
+        richard_payslip.onchange_employee()
+
+        # Verify that the contract has been populated
+        self.assertEqual(
+            richard_payslip.contract_id, self.richard_contract, "Contract not set"
+        )
+
+        # Verify that worked days have been added to the payslip
+        self.assertTrue(
+            bool(richard_payslip.worked_days_line_ids), "Worked days not populated"
+        )
 
         payslip_input = self.env["hr.payslip.input"].search(
             [("payslip_id", "=", richard_payslip.id)]

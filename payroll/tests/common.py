@@ -47,7 +47,7 @@ class TestPayslipBase(TransactionCase):
         )
 
         # I create a contract for "Richard"
-        self.env["hr.contract"].create(
+        self.richard_contract = self.env["hr.contract"].create(
             {
                 "date_end": Date.to_string(datetime.now() + timedelta(days=365)),
                 "date_start": Date.today(),
@@ -55,5 +55,6 @@ class TestPayslipBase(TransactionCase):
                 "wage": 5000.0,
                 "employee_id": self.richard_emp.id,
                 "struct_id": self.developer_pay_structure.id,
+                "state": "open",
             }
         )
