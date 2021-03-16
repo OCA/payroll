@@ -17,7 +17,7 @@ class HrPayrollStructure(models.Model):
 
     @api.model
     def _get_parent(self):
-        return self.env.ref("hr_payroll.structure_base", False)
+        return self.env.ref("payroll.structure_base", False)
 
     name = fields.Char(required=True)
     code = fields.Char(string="Reference", required=True)
