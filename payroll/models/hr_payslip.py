@@ -90,9 +90,9 @@ class Payslips(BrowsableObject):
 
 class HrPayslip(models.Model):
     _name = "hr.payslip"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Pay Slip"
-    _order = "number desc, id desc"
+    _order = 'number desc, id desc'
 
     struct_id = fields.Many2one(
         "hr.payroll.structure",
@@ -303,37 +303,6 @@ class HrPayslip(models.Model):
             )
         return super(HrPayslip, self).unlink()
 
-    # TODO move this function into hr_contract module, on hr.employee object
-    @api.model
-    def get_contract(self, employee, date_from, date_to):
-        """
-        @param employee: recordset of employee
-        @param date_from: date field
-        @param date_to: date field
-        @return: returns the ids of all the contracts for the given employee
-        that need to be considered for the given dates
-        """
-        # a contract is valid if it ends between the given dates
-        clause_1 = ["&", ("date_end", "<=", date_to), ("date_end", ">=", date_from)]
-        # OR if it starts between the given dates
-        clause_2 = ["&", ("date_start", "<=", date_to), ("date_start", ">=", date_from)]
-        # OR if it starts before the date_from and finish after the date_end
-        # (or never finish)
-        clause_3 = [
-            "&",
-            ("date_start", "<=", date_from),
-            "|",
-            ("date_end", "=", False),
-            ("date_end", ">=", date_to),
-        ]
-        clause_final = (
-            [("employee_id", "=", employee.id), ("state", "=", "open"), "|", "|"]
-            + clause_1
-            + clause_2
-            + clause_3
-        )
-        return self.env["hr.contract"].search(clause_final).ids
-
     def compute_sheet(self):
         for payslip in self:
             number = payslip.number or self.env["ir.sequence"].next_by_code(
@@ -344,8 +313,11 @@ class HrPayslip(models.Model):
             # set the list of contract for which the rules have to be applied
             # if we don't give the contract, then the rules to apply should be
             # for all current contracts of the employee
-            contract_ids = payslip.contract_id.ids or self.get_contract(
-                payslip.employee_id, payslip.date_from, payslip.date_to
+            contract_ids = (
+                payslip.contract_id.ids
+                or payslip.employee_id._get_contracts(
+                    date_from=payslip.date_from, date_to=payslip.date_to
+                ).ids
             )
             lines = [
                 (0, 0, line)
@@ -590,7 +562,7 @@ class HrPayslip(models.Model):
 
         if not self.env.context.get("contract"):
             # fill with the first contract of the employee
-            contract_ids = self.get_contract(employee, date_from, date_to)
+            contract_ids = employee.contract_id.ids
         else:
             if contract_id:
                 # set the list of contract for which the input have to be filled
@@ -598,7 +570,9 @@ class HrPayslip(models.Model):
             else:
                 # if we don't give the contract, then the input to fill should
                 # be for all current contracts of the employee
-                contract_ids = self.get_contract(employee, date_from, date_to)
+                contract_ids = employee._get_contracts(
+                    date_from=date_from, date_to=date_to
+                ).ids
 
         if not contract_ids:
             return res
@@ -642,7 +616,9 @@ class HrPayslip(models.Model):
         self.company_id = employee.company_id
 
         if not self.env.context.get("contract") or not self.contract_id:
-            contract_ids = self.get_contract(employee, date_from, date_to)
+            contract_ids = employee._get_contracts(
+                date_from=date_from, date_to=date_to
+            ).ids
             if not contract_ids:
                 return
             self.contract_id = self.env["hr.contract"].browse(contract_ids[0])
