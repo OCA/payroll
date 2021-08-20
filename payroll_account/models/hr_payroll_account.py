@@ -104,6 +104,13 @@ class HrPayslip(models.Model):
                 credit_account_id = line.salary_rule_id.account_credit.id
                 analytic_salary_id = line.salary_rule_id.analytic_account_id.id
 
+                tax_ids = []
+                if line.salary_rule_id.tax_line_ids:
+                    tax_ids = [
+                        (4, salary_rule_id.account_tax_id.id, 0)
+                        for salary_rule_id in line.salary_rule_id.tax_line_ids
+                    ]
+
                 if debit_account_id:
                     debit_line = (
                         0,
@@ -119,6 +126,7 @@ class HrPayslip(models.Model):
                             "analytic_account_id": analytic_salary_id
                             or slip.contract_id.analytic_account_id.id,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
+                            "tax_ids": tax_ids,
                         },
                     )
                     line_ids.append(debit_line)
@@ -139,6 +147,7 @@ class HrPayslip(models.Model):
                             "analytic_account_id": analytic_salary_id
                             or slip.contract_id.analytic_account_id.id,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
+                            "tax_ids": tax_ids,
                         },
                     )
                     line_ids.append(credit_line)
@@ -213,6 +222,9 @@ class HrSalaryRule(models.Model):
     account_credit = fields.Many2one(
         "account.account", "Credit Account", domain=[("deprecated", "=", False)]
     )
+
+    tax_base_id = fields.Many2one("hr.salary.rule", "Base")
+    tax_line_ids = fields.One2many("hr.salary.rule", "tax_base_id", string="Tax lines")
 
 
 class HrContract(models.Model):

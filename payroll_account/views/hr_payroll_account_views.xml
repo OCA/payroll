@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="hr_payslip_view_form" model="ir.ui.view">
         <field name="name">hr.payslip.inherit.form</field>
@@ -23,11 +23,9 @@
                     <group colspan="4">
                         <field name="account_debit" />
                         <field name="account_credit" />
-                        <field
-                            name="analytic_account_id"
-                            groups="analytic.group_analytic_accounting"
-                        />
+                        <field name="analytic_account_id" groups="analytic.group_analytic_accounting" />
                         <field name="account_tax_id" />
+                        <field name="tax_base_id" attrs="{'required': [('account_tax_id', '!=', False)]}" />
                     </group>
                 </page>
             </xpath>
@@ -41,10 +39,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='duration_group']" position="after">
                 <group string="Accounting">
-                    <field
-                        name="analytic_account_id"
-                        groups="analytic.group_analytic_accounting"
-                    />
+                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting" />
                     <field name="journal_id" />
                 </group>
             </xpath>
