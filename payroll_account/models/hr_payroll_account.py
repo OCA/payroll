@@ -97,7 +97,6 @@ class HrPayslip(models.Model):
                 "date": date,
             }
 
-
             for line in slip.line_ids:
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
@@ -110,29 +109,55 @@ class HrPayslip(models.Model):
                 tax_ids = False
                 tag_ids = False
                 if line.salary_rule_id.tax_line_ids:
-                    account_tax_ids = [salary_rule_id.account_tax_id.id for salary_rule_id in line.salary_rule_id.tax_line_ids]
-                    tax_ids = [
-                        (4, account_tax_id, 0)
-                        for account_tax_id in account_tax_ids
+                    account_tax_ids = [
+                        salary_rule_id.account_tax_id.id
+                        for salary_rule_id in line.salary_rule_id.tax_line_ids
                     ]
-                    tag_ids = self.env["account.tax.repartition.line"].search([
-                        ("invoice_tax_id", "in", account_tax_ids),
-                        ("repartition_type", "=", "base"),
-                    ]).tag_ids
-                
+                    tax_ids = [
+                        (4, account_tax_id, 0) for account_tax_id in account_tax_ids
+                    ]
+                    tag_ids = (
+                        self.env["account.tax.repartition.line"]
+                        .search(
+                            [
+                                ("invoice_tax_id", "in", account_tax_ids),
+                                ("repartition_type", "=", "base"),
+                            ]
+                        )
+                        .tag_ids
+                    )
 
                 tax_repartition_line_id = False
                 if line.salary_rule_id.account_tax_id:
-                    tax_repartition_line_id = self.env["account.tax.repartition.line"].search([
-                        ("invoice_tax_id", "=", line.salary_rule_id.account_tax_id.id),
-                        ("account_id", "=", account_id)
-                    ]).id
-                    tag_ids = self.env["account.tax.repartition.line"].search([
-                        ("invoice_tax_id", "=", line.salary_rule_id.account_tax_id.id),
-                        ("repartition_type", "=", "tax"),
-                        ("account_id", "=", account_id)
-                    ]).tag_ids
-
+                    tax_repartition_line_id = (
+                        self.env["account.tax.repartition.line"]
+                        .search(
+                            [
+                                (
+                                    "invoice_tax_id",
+                                    "=",
+                                    line.salary_rule_id.account_tax_id.id,
+                                ),
+                                ("account_id", "=", account_id),
+                            ]
+                        )
+                        .id
+                    )
+                    tag_ids = (
+                        self.env["account.tax.repartition.line"]
+                        .search(
+                            [
+                                (
+                                    "invoice_tax_id",
+                                    "=",
+                                    line.salary_rule_id.account_tax_id.id,
+                                ),
+                                ("repartition_type", "=", "tax"),
+                                ("account_id", "=", account_id),
+                            ]
+                        )
+                        .tag_ids
+                    )
 
                 if debit_account_id:
                     debit_line = (
@@ -140,7 +165,8 @@ class HrPayslip(models.Model):
                         0,
                         {
                             "name": line.name,
-                            "partner_id": line._get_partner_id(credit_account=False) or slip.employee_id.address_home_id.id,
+                            "partner_id": line._get_partner_id(credit_account=False)
+                            or slip.employee_id.address_home_id.id,
                             "account_id": debit_account_id,
                             "journal_id": slip.journal_id.id,
                             "date": date,
@@ -151,7 +177,7 @@ class HrPayslip(models.Model):
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                             "tax_ids": tax_ids,
                             "tax_repartition_line_id": tax_repartition_line_id,
-                            "tag_ids": tag_ids
+                            "tag_ids": tag_ids,
                         },
                     )
 
@@ -165,7 +191,8 @@ class HrPayslip(models.Model):
                         0,
                         {
                             "name": line.name,
-                            "partner_id": line._get_partner_id(credit_account=True) or slip.employee_id.address_home_id.id,
+                            "partner_id": line._get_partner_id(credit_account=True)
+                            or slip.employee_id.address_home_id.id,
                             "account_id": credit_account_id,
                             "journal_id": slip.journal_id.id,
                             "date": date,
@@ -176,7 +203,7 @@ class HrPayslip(models.Model):
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                             "tax_ids": tax_ids,
                             "tax_repartition_line_id": tax_repartition_line_id,
-                            "tag_ids": tag_ids
+                            "tag_ids": tag_ids,
                         },
                     )
                     line_ids.append(credit_line)
@@ -236,6 +263,7 @@ class HrPayslip(models.Model):
             move = self.env["account.move"].create(move_dict)
             slip.write({"move_id": move.id, "date": date})
             move.post()
+        return res
 
 
 class HrSalaryRule(models.Model):
