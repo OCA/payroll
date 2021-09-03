@@ -9,6 +9,7 @@
     "summary": "Manage your employee payroll records",
     "license": "LGPL-3",
     "author": "Odoo SA, Odoo Community Association (OCA)",
+    "maintainers": "nimarosa"
     "depends": ["hr_contract", "hr_holidays"],
     "data": [
         "security/hr_payroll_security.xml",
