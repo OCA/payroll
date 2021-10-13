@@ -1,7 +1,6 @@
 [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/281/14.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-payroll-281)
 [![Build Status](https://travis-ci.com/OCA/payroll.svg?branch=14.0)](https://travis-ci.com/OCA/payroll)
 [![codecov](https://codecov.io/gh/OCA/payroll/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/payroll)
-[![Translation Status](https://translation.odoo-community.org/widgets/payroll-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/payroll-14-0/?utm_source=widget)
 
 <!-- /!\ do not modify above this line -->
 
