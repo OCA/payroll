@@ -1,0 +1,207 @@
+---Models in module 'payroll'---
+obsolete model report.hr_payroll.report_contributionregister (renamed to report.payroll.report_contributionregister) [abstract]
+obsolete model report.hr_payroll.report_payslipdetails (renamed to report.payroll.report_payslipdetails) [abstract]
+new model report.payroll.report_contributionregister (renamed from report.hr_payroll.report_contributionregister) [abstract]
+new model report.payroll.report_payslipdetails (renamed from report.hr_payroll.report_payslipdetails) [abstract]
+---Fields in module 'payroll'---
+---XML records in module 'payroll'---
+NEW decimal.precision: payroll.decimal_payroll [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW decimal.precision: payroll.decimal_payroll_rate [renamed from hr_payroll module] (noupdate) (noupdate switched)
+DEL decimal.precision: hr_payroll.decimal_payroll [renamed to payroll module]
+DEL decimal.precision: hr_payroll.decimal_payroll_rate [renamed to payroll module]
+NEW hr.contribution.register: payroll.contrib_register_employees [renamed from hr_payroll module] (noupdate) (noupdate switched)
+DEL hr.contribution.register: hr_payroll.contrib_register_employees [renamed to payroll module]
+NEW hr.payroll.structure: payroll.structure_base [renamed from hr_payroll module] (noupdate) (noupdate switched)
+DEL hr.payroll.structure: hr_payroll.structure_base [renamed to payroll module]
+NEW hr.salary.rule: payroll.hr_rule_basic [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule: payroll.hr_rule_net [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule: payroll.hr_rule_taxable [renamed from hr_payroll module] (noupdate) (noupdate switched)
+DEL hr.salary.rule: hr_payroll.hr_rule_basic [renamed to payroll module]
+DEL hr.salary.rule: hr_payroll.hr_rule_net [renamed to payroll module]
+DEL hr.salary.rule: hr_payroll.hr_rule_taxable [renamed to payroll module]
+NEW hr.salary.rule.category: payroll.ALW [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule.category: payroll.BASIC [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule.category: payroll.COMP [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule.category: payroll.DED [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule.category: payroll.GROSS [renamed from hr_payroll module] (noupdate) (noupdate switched)
+NEW hr.salary.rule.category: payroll.NET [renamed from hr_payroll module] (noupdate) (noupdate switched)
+DEL hr.salary.rule.category: hr_payroll.ALW [renamed to payroll module]
+DEL hr.salary.rule.category: hr_payroll.BASIC [renamed to payroll module]
+DEL hr.salary.rule.category: hr_payroll.COMP [renamed to payroll module]
+DEL hr.salary.rule.category: hr_payroll.DED [renamed to payroll module]
+DEL hr.salary.rule.category: hr_payroll.GROSS [renamed to payroll module]
+DEL hr.salary.rule.category: hr_payroll.NET [renamed to payroll module]
+NEW ir.actions.act_window: payroll.act_children_salary_rules [renamed from hr_payroll module]
+NEW ir.actions.act_window: payroll.action_hr_payslip_by_employees [renamed from hr_payroll module]
+NEW ir.actions.act_window: payroll.action_payslip_lines_contribution_register [renamed from hr_payroll module]
+NEW ir.actions.act_window: payroll.action_salary_rule_form [renamed from hr_payroll module]
+NEW ir.actions.act_window: payroll.hr_contract_advantage_template_action [renamed from hr_payroll module]
+NEW ir.actions.act_window: payroll.hr_contribution_register_action
+NEW ir.actions.act_window: payroll.hr_payroll_structure_action
+NEW ir.actions.act_window: payroll.hr_payslip_action
+NEW ir.actions.act_window: payroll.hr_payslip_action_employee
+NEW ir.actions.act_window: payroll.hr_payslip_line_action
+NEW ir.actions.act_window: payroll.hr_payslip_line_action_computation_details
+NEW ir.actions.act_window: payroll.hr_payslip_run_action
+NEW ir.actions.act_window: payroll.hr_salary_rule_category_action
+NEW ir.actions.act_window: payroll.open_payroll_modules [renamed from hr_payroll module] (deleted domain)
+NEW ir.actions.act_window: payroll.payroll_configuration_action
+DEL ir.actions.act_window: hr_payroll.act_children_salary_rules [renamed to payroll module]
+DEL ir.actions.act_window: hr_payroll.act_contribution_reg_payslip_lines
+DEL ir.actions.act_window: hr_payroll.act_hr_employee_payslip_list
+DEL ir.actions.act_window: hr_payroll.act_payslip_lines
+DEL ir.actions.act_window: hr_payroll.action_contribution_register_form
+DEL ir.actions.act_window: hr_payroll.action_hr_payroll_configuration
+DEL ir.actions.act_window: hr_payroll.action_hr_payslip_by_employees [renamed to payroll module]
+DEL ir.actions.act_window: hr_payroll.action_hr_payslip_run_tree
+DEL ir.actions.act_window: hr_payroll.action_hr_salary_rule_category
+DEL ir.actions.act_window: hr_payroll.action_payslip_lines_contribution_register [renamed to payroll module]
+DEL ir.actions.act_window: hr_payroll.action_salary_rule_form [renamed to payroll module]
+DEL ir.actions.act_window: hr_payroll.action_view_hr_payroll_structure_list_form
+DEL ir.actions.act_window: hr_payroll.action_view_hr_payslip_form
+DEL ir.actions.act_window: hr_payroll.hr_contract_advantage_template_action [renamed to payroll module]
+DEL ir.actions.act_window: hr_payroll.open_payroll_modules [renamed to payroll module]
+NEW ir.actions.report: payroll.action_contribution_register [renamed from hr_payroll module]
+NEW ir.actions.report: payroll.action_report_payslip [renamed from hr_payroll module]
+NEW ir.actions.report: payroll.payslip_details_report [renamed from hr_payroll module]
+DEL ir.actions.report: hr_payroll.action_contribution_register [renamed to payroll module]
+DEL ir.actions.report: hr_payroll.action_report_payslip [renamed to payroll module]
+DEL ir.actions.report: hr_payroll.payslip_details_report [renamed to payroll module]
+NEW ir.model.access: payroll.access_hr_contract_advantage_template [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_contract_advantage_template_hr_user [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_contribution_register [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payroll_structure [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payroll_structure_hr_user [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payslip [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payslip_input_user [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payslip_line [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payslip_run [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_payslip_worked_days_officer [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_rule_input_officer [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_salary_rule_category [renamed from hr_payroll module]
+NEW ir.model.access: payroll.access_hr_salary_rule_user [renamed from hr_payroll module]
+DEL ir.model.access: hr_payroll.access_hr_contract_advantage_template [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_contract_advantage_template_hr_user [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_contribution_register [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payroll_structure [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payroll_structure_hr_user [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payslip [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payslip_input_user [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payslip_line [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payslip_run [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_payslip_worked_days_officer [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_rule_input_officer [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_salary_rule_category [renamed to payroll module]
+DEL ir.model.access: hr_payroll.access_hr_salary_rule_user [renamed to payroll module]
+NEW ir.module.category: payroll.module_category_payroll (noupdate)
+NEW ir.rule: payroll.hr_contribution_register_rule_company (noupdate)
+NEW ir.rule: payroll.hr_payroll_rule_officer [renamed from hr_payroll module] (noupdate)
+NEW ir.rule: payroll.hr_payroll_structure_rule_company (noupdate)
+NEW ir.rule: payroll.hr_payslip_rule_company (noupdate)
+NEW ir.rule: payroll.hr_payslip_rule_manager [renamed from hr_payroll module] (noupdate)
+NEW ir.rule: payroll.hr_salary_category_rule_company (noupdate)
+NEW ir.rule: payroll.hr_salary_rule_company (noupdate)
+DEL ir.rule: hr_payroll.hr_payroll_rule_officer [renamed to payroll module] (noupdate)
+DEL ir.rule: hr_payroll.hr_payslip_rule_manager [renamed to payroll module] (noupdate)
+NEW ir.sequence: payroll.seq_salary_slip [renamed from hr_payroll module] (noupdate)
+DEL ir.sequence: hr_payroll.seq_salary_slip [renamed to payroll module] (noupdate)
+NEW ir.ui.menu: payroll.hr_contract_advantage_template_menu_action [renamed from hr_payroll module]
+NEW ir.ui.menu: payroll.hr_contribution_register_menu
+NEW ir.ui.menu: payroll.hr_payroll_structure_menu
+NEW ir.ui.menu: payroll.hr_payslip_menu
+NEW ir.ui.menu: payroll.hr_payslip_run_menu
+NEW ir.ui.menu: payroll.menu_action_hr_salary_rule_form [renamed from hr_payroll module]
+NEW ir.ui.menu: payroll.menu_hr_salary_rule_category [renamed from hr_payroll module]
+NEW ir.ui.menu: payroll.menu_payroll_global_settings
+NEW ir.ui.menu: payroll.payroll_menu_configuration
+NEW ir.ui.menu: payroll.payroll_menu_root
+DEL ir.ui.menu: hr_payroll.hr_contract_advantage_template_menu_action [renamed to payroll module]
+DEL ir.ui.menu: hr_payroll.menu_action_hr_contribution_register_form
+DEL ir.ui.menu: hr_payroll.menu_action_hr_salary_rule_form [renamed to payroll module]
+DEL ir.ui.menu: hr_payroll.menu_department_tree
+DEL ir.ui.menu: hr_payroll.menu_hr_payroll_configuration
+DEL ir.ui.menu: hr_payroll.menu_hr_payroll_global_settings
+DEL ir.ui.menu: hr_payroll.menu_hr_payroll_root
+DEL ir.ui.menu: hr_payroll.menu_hr_payroll_structure_view
+DEL ir.ui.menu: hr_payroll.menu_hr_payslip_run
+DEL ir.ui.menu: hr_payroll.menu_hr_salary_rule_category [renamed to payroll module]
+NEW ir.ui.view: payroll.hr_contract_advantage_template_view_form
+NEW ir.ui.view: payroll.hr_contract_advantage_template_view_tree
+NEW ir.ui.view: payroll.hr_contract_view_form
+NEW ir.ui.view: payroll.hr_contribution_register_view_form
+NEW ir.ui.view: payroll.hr_contribution_register_view_kanban
+NEW ir.ui.view: payroll.hr_contribution_register_view_search
+NEW ir.ui.view: payroll.hr_contribution_register_view_tree
+NEW ir.ui.view: payroll.hr_employee_view_form
+NEW ir.ui.view: payroll.hr_payroll_structure_view_form
+NEW ir.ui.view: payroll.hr_payroll_structure_view_kanban
+NEW ir.ui.view: payroll.hr_payroll_structure_view_search
+NEW ir.ui.view: payroll.hr_payroll_structure_view_tree
+NEW ir.ui.view: payroll.hr_payroll_structure_view_tree_children
+NEW ir.ui.view: payroll.hr_payslip_line_view_form
+NEW ir.ui.view: payroll.hr_payslip_line_view_search
+NEW ir.ui.view: payroll.hr_payslip_line_view_tree
+NEW ir.ui.view: payroll.hr_payslip_run_view_form
+NEW ir.ui.view: payroll.hr_payslip_run_view_kanban
+NEW ir.ui.view: payroll.hr_payslip_run_view_search
+NEW ir.ui.view: payroll.hr_payslip_run_view_tree
+NEW ir.ui.view: payroll.hr_payslip_view_form
+NEW ir.ui.view: payroll.hr_payslip_view_kanban
+NEW ir.ui.view: payroll.hr_payslip_view_search
+NEW ir.ui.view: payroll.hr_payslip_view_tree
+NEW ir.ui.view: payroll.hr_salary_rule_category_view_form
+NEW ir.ui.view: payroll.hr_salary_rule_category_view_search
+NEW ir.ui.view: payroll.hr_salary_rule_category_view_tree
+NEW ir.ui.view: payroll.hr_salary_rule_view_form
+NEW ir.ui.view: payroll.hr_salary_rule_view_kanban
+NEW ir.ui.view: payroll.hr_salary_rule_view_search
+NEW ir.ui.view: payroll.hr_salary_rule_view_tree
+NEW ir.ui.view: payroll.hr_salary_rule_view_tree_children
+NEW ir.ui.view: payroll.report_contributionregister
+NEW ir.ui.view: payroll.report_payslip
+NEW ir.ui.view: payroll.report_payslipdetails
+NEW ir.ui.view: payroll.res_config_settings_view_form
+NEW ir.ui.view: payroll.view_hr_payslip_by_employees
+NEW ir.ui.view: payroll.view_payslip_lines_contribution_register
+DEL ir.ui.view: hr_payroll.hr_contract_advantage_template_view_form
+DEL ir.ui.view: hr_payroll.hr_contract_advantage_template_view_tree
+DEL ir.ui.view: hr_payroll.hr_contract_form_inherit
+DEL ir.ui.view: hr_payroll.hr_contribution_register_filter
+DEL ir.ui.view: hr_payroll.hr_contribution_register_form
+DEL ir.ui.view: hr_payroll.hr_contribution_register_tree
+DEL ir.ui.view: hr_payroll.hr_contribution_register_view_kanban
+DEL ir.ui.view: hr_payroll.hr_payroll_structure_view_kanban
+DEL ir.ui.view: hr_payroll.hr_payslip_run_filter
+DEL ir.ui.view: hr_payroll.hr_payslip_run_form
+DEL ir.ui.view: hr_payroll.hr_payslip_run_tree
+DEL ir.ui.view: hr_payroll.hr_payslip_run_view_kanban
+DEL ir.ui.view: hr_payroll.hr_payslip_view_kanban
+DEL ir.ui.view: hr_payroll.hr_salary_rule_category_form
+DEL ir.ui.view: hr_payroll.hr_salary_rule_category_tree
+DEL ir.ui.view: hr_payroll.hr_salary_rule_form
+DEL ir.ui.view: hr_payroll.hr_salary_rule_list
+DEL ir.ui.view: hr_payroll.hr_salary_rule_tree
+DEL ir.ui.view: hr_payroll.hr_salary_rule_view_kanban
+DEL ir.ui.view: hr_payroll.payroll_hr_employee_view_form
+DEL ir.ui.view: hr_payroll.report_contributionregister
+DEL ir.ui.view: hr_payroll.report_payslip
+DEL ir.ui.view: hr_payroll.report_payslipdetails
+DEL ir.ui.view: hr_payroll.res_config_settings_view_form
+DEL ir.ui.view: hr_payroll.view_hr_employee_grade_form
+DEL ir.ui.view: hr_payroll.view_hr_payroll_structure_filter
+DEL ir.ui.view: hr_payroll.view_hr_payroll_structure_list_view
+DEL ir.ui.view: hr_payroll.view_hr_payroll_structure_tree
+DEL ir.ui.view: hr_payroll.view_hr_payslip_by_employees
+DEL ir.ui.view: hr_payroll.view_hr_payslip_filter
+DEL ir.ui.view: hr_payroll.view_hr_payslip_form
+DEL ir.ui.view: hr_payroll.view_hr_payslip_line_filter
+DEL ir.ui.view: hr_payroll.view_hr_payslip_line_form
+DEL ir.ui.view: hr_payroll.view_hr_payslip_line_tree
+DEL ir.ui.view: hr_payroll.view_hr_payslip_tree
+DEL ir.ui.view: hr_payroll.view_hr_rule_filter
+DEL ir.ui.view: hr_payroll.view_hr_salary_rule_category_filter
+DEL ir.ui.view: hr_payroll.view_payslip_lines_contribution_register
+NEW res.groups: payroll.group_payroll_manager (noupdate)
+NEW res.groups: payroll.group_payroll_user (noupdate)
+DEL res.groups: hr_payroll.group_hr_payroll_manager (noupdate)
+DEL res.groups: hr_payroll.group_hr_payroll_user (noupdate)
