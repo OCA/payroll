@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record id="base.default_user" model="res.users">
+        <field name="groups_id" eval="[(4,ref('payroll.group_payroll_manager'))]" />
+    </record>
+    <record id="hr_payroll_rule_officer" model="ir.rule">
+        <field name="groups" eval="[(4, ref('payroll.group_payroll_user'))]" />
+    </record>
+    <record id="hr_payslip_rule_manager" model="ir.rule">
+        <field name="groups" eval="[(4, ref('payroll.group_payroll_manager'))]" />
+    </record>
+    <record id="hr_rule_basic" model="hr.salary.rule">
+        <field name="category_id" ref="payroll.BASIC" />
+    </record>
+    <record id="hr_rule_net" model="hr.salary.rule">
+        <field name="category_id" ref="payroll.NET" />
+    </record>
+    <record id="hr_rule_taxable" model="hr.salary.rule">
+        <field name="category_id" ref="payroll.GROSS" />
+    </record>
+</odoo>

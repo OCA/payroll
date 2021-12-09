@@ -1,0 +1,15 @@
+---Models in module 'payroll_account'---
+---Fields in module 'payroll_account'---
+---XML records in module 'payroll_account'---
+NEW ir.ui.view: payroll_account.hr_contract_view_form
+NEW ir.ui.view: payroll_account.hr_payslip_run_view_form
+NEW ir.ui.view: payroll_account.hr_payslip_run_view_search
+NEW ir.ui.view: payroll_account.hr_payslip_run_view_tree
+NEW ir.ui.view: payroll_account.hr_payslip_view_form
+NEW ir.ui.view: payroll_account.hr_salary_rule_view_form
+DEL ir.ui.view: hr_payroll_account.hr_contract_form_inherit
+DEL ir.ui.view: hr_payroll_account.hr_payslip_run_form_inherit
+DEL ir.ui.view: hr_payroll_account.hr_payslip_run_search_inherit
+DEL ir.ui.view: hr_payroll_account.hr_payslip_run_tree_inherit
+DEL ir.ui.view: hr_payroll_account.hr_salary_rule_form_inherit
+DEL ir.ui.view: hr_payroll_account.view_hr_payslip_inherit_form
