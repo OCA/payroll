@@ -72,6 +72,14 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-appstogrow| image:: https://github.com/appstogrow.png?size=40px
+    :target: https://github.com/appstogrow
+    :alt: appstogrow
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-appstogrow| 
+
 This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/14.0/payroll>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

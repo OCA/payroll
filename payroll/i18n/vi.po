@@ -25,20 +25,26 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: payroll
-#: code:addons/payroll/models/hr_payroll_structure.py:0
-#, python-format
-msgid "%s (copy)"
-msgstr "%s (bản sao)"
-
-#. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
-msgid "'Payslip - %s' % (object.employee_id.name)"
+msgid ""
+"\n"
+"            'Payslip - %s' % (object.employee_id.name)\n"
+"        "
 msgstr ""
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.payslip_details_report
-msgid "'Payslip Details - %s' % (object.employee_id.name)"
+msgid ""
+"\n"
+"            'Payslip Details - %s' % (object.employee_id.name)\n"
+"        "
 msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_payroll_structure.py:0
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (bản sao)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__state
@@ -55,13 +61,14 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
 msgid ""
-"<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for all "
-"selected employee(s) based on the dates and credit note specified on "
-"Payslips Run.</span>"
+"<span colspan=\"4\" nolabel=\"1\">\n"
+"                        This wizard will generate payslips for all selected "
+"employee(s)\n"
+"                        based on the dates and credit note\n"
+"                        specified\n"
+"                        on Payslips Run.\n"
+"                    </span>"
 msgstr ""
-"<span colspan=\"4\" nolabel=\"1\">Cửa sổ này sẽ tạo phiếu tính lương cho tất "
-"cả (các) nhân viên được chọn dựa trên ngày và phiếu chi được chỉ định trên "
-"Chạy phiếu tính lương.</span>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
@@ -147,12 +154,10 @@ msgstr "<strong>Tổng</strong>"
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
 msgid ""
 "A contribution register is a third party involved in the salary\n"
-"            payment of the employees. It can be the social security, the\n"
-"            state or anyone that collect or inject money on payslips."
+"                payment of the employees. It can be the social security, "
+"the\n"
+"                state or anyone that collect or inject money on payslips."
 msgstr ""
-"Contribution register là bên thứ ba liên quan tới việc thanh toán \n"
-"            tiền lương cho người lao động. Nó có thể là bảo hiểm xã hội,\n"
-"            thành phố hoặc bất kỳ ai thu hoặc chi tiển trên phiếu lương."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -166,10 +171,40 @@ msgid "Accounting Information"
 msgstr "Thông tin kế toán"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__active
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__active
 msgid "Active"
 msgstr "Có hiệu lực"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_decoration
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_state
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_icon
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
@@ -238,6 +273,12 @@ msgid ""
 msgstr ""
 "Quy tắc này được áp dụng cho việc tính toán nếu điều kiện là đúng. Bạn có "
 "thể chỉ ra điều kiện như luong_co_ban > 10000000."
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_attachment_count
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.BASIC
@@ -551,8 +592,10 @@ msgid "Details by Salary Rule Category"
 msgstr "Chi tiết theo nhóm quy tắc lương"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_contract__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__display_name
@@ -566,6 +609,7 @@ msgstr "Chi tiết theo nhóm quy tắc lương"
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__display_name
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__display_name
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__display_name
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "Tên hiển thị"
 
@@ -674,6 +718,30 @@ msgid "Fixed Amount"
 msgstr "Giá trị cố định"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_follower_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_channel_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_partner_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__activity_type_icon
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage
 msgid "For example, enter 50.0 to apply a percentage of 50%"
@@ -736,8 +804,10 @@ msgid "House Rent Allowance"
 msgstr "Phụ cấp Thuê nhà"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_contract__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__id
@@ -751,8 +821,37 @@ msgstr "Phụ cấp Thuê nhà"
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__id
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__id
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__id
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_icon
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_icon
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_unread
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__credit_note
@@ -797,6 +896,12 @@ msgid "Internal Note"
 msgstr "Ghi chú nội bộ"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_is_follower
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
 msgid "Is a Blocking Reason?"
 msgstr "Là một Lý do Phong toả?"
@@ -825,8 +930,10 @@ msgstr ""
 "hiện bằng biểu thức result = inputs.SALEURO.amount * contract.wage*0.01."
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_contract____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
+#: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees____last_update
@@ -840,6 +947,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register____last_update
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister____last_update
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails____last_update
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings____last_update
 msgid "Last Modified on"
 msgstr "Sửa lần cuối vào"
 
@@ -902,6 +1010,12 @@ msgid "Made Payment Order ? "
 msgstr "Đã tạo Lệnh thanh toán/UNC?"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_main_attachment_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: payroll
 #: model:ir.module.category,description:payroll.module_category_payroll
 msgid "Manage employee payroll"
 msgstr ""
@@ -923,6 +1037,18 @@ msgid "Meal Voucher"
 msgstr "Phiếu Ăn"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__condition_range_min
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__condition_range_min
 msgid "Minimum Range"
@@ -937,6 +1063,12 @@ msgstr "Khác"
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__monthly
 msgid "Monthly"
 msgstr "Hàng tháng"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__my_activity_date_deadline
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
@@ -963,6 +1095,24 @@ msgid "Net Salary"
 msgstr "Lương Thực Lĩnh"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_date_deadline
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_summary
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Normal Working Days paid at 100%"
@@ -974,6 +1124,12 @@ msgid "Notes"
 msgstr "Ghi chú"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction_counter
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__number_of_days
 msgid "Number of Days"
 msgstr "Số ngày"
@@ -982,6 +1138,30 @@ msgstr "Số ngày"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__number_of_hours
 msgid "Number of Hours"
 msgstr "Số giờ"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error_counter
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction_counter
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error_counter
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_unread_counter
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
 
 #. module: payroll
 #: model:res.groups,name:payroll.group_payroll_user
@@ -1036,9 +1216,9 @@ msgid "PaySlip Lines"
 msgstr "Chi tiết phiếu lương"
 
 #. module: payroll
-#: model:ir.actions.report,name:payroll.action_contribution_register
-msgid "PaySlip Lines By Conribution Register"
-msgstr "Chi tiết phiếu lương theo Conribution Register"
+#: model:ir.actions.report,print_report_name:payroll.action_contribution_register
+msgid "PaySlip Lines By Contribution Register"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -1133,6 +1313,7 @@ msgstr "Dòng Phiếu lương"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_line_action
+#: model:ir.actions.report,name:payroll.action_contribution_register
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__line_ids
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1297,6 +1478,12 @@ msgstr "Hoàn trả"
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
+msgid "Refund Payslip"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_payslip.py:0
+#, python-format
 msgid "Refund: %s"
 msgstr ""
 
@@ -1311,9 +1498,21 @@ msgid "Rejected"
 msgstr "Bị từ chối"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_user_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__salary_rule_id
 msgid "Rule"
 msgstr "Quy tắc"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
@@ -1446,6 +1645,16 @@ msgid "Status"
 msgstr "Trạng thái"
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__activity_state
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__struct_id
 msgid "Structure"
 msgstr "Cấu trúc lương"
@@ -1517,6 +1726,24 @@ msgid "Total Working Days"
 msgstr "Tổng số ngày làm việc"
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_decoration
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_unread
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_unread_counter
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__upper_bound
 msgid "Upper Bound"
 msgstr "Giới hạn Trên"
@@ -1542,6 +1769,18 @@ msgstr "Được sử dụng để hiển thị quy tắc lương trên phiếu 
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__verify
 msgid "Waiting"
 msgstr "Chờ"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__website_message_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__website_message_ids
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__website_message_ids
+msgid "Website communication history"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__weekly
@@ -1628,6 +1867,27 @@ msgstr "Bạn phải thiết lập một hợp đồng để có thể tạo chi
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "kết quả sẽ bị ảnh hưởng tới một biến số"
+
+#~ msgid ""
+#~ "<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for "
+#~ "all selected employee(s) based on the dates and credit note specified on "
+#~ "Payslips Run.</span>"
+#~ msgstr ""
+#~ "<span colspan=\"4\" nolabel=\"1\">Cửa sổ này sẽ tạo phiếu tính lương cho "
+#~ "tất cả (các) nhân viên được chọn dựa trên ngày và phiếu chi được chỉ định "
+#~ "trên Chạy phiếu tính lương.</span>"
+
+#~ msgid ""
+#~ "A contribution register is a third party involved in the salary\n"
+#~ "            payment of the employees. It can be the social security, the\n"
+#~ "            state or anyone that collect or inject money on payslips."
+#~ msgstr ""
+#~ "Contribution register là bên thứ ba liên quan tới việc thanh toán \n"
+#~ "            tiền lương cho người lao động. Nó có thể là bảo hiểm xã hội,\n"
+#~ "            thành phố hoặc bất kỳ ai thu hoặc chi tiển trên phiếu lương."
+
+#~ msgid "PaySlip Lines By Conribution Register"
+#~ msgstr "Chi tiết phiếu lương theo Conribution Register"
 
 #~ msgid ""
 #~ "* When the payslip is created the status is 'Draft'\n"
