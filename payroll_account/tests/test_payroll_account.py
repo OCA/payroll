@@ -4,29 +4,14 @@ from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
-from odoo import fields, tools
+from odoo import fields
 from odoo.exceptions import UserError
-from odoo.modules.module import get_module_resource
 from odoo.tests import common
 
 
-class TestHrPayrollAccount(common.TransactionCase):
-    def _load(self, module, *args):
-        tools.convert_file(
-            self.cr,
-            "payroll_account",
-            get_module_resource(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            self.registry._assertion_report,
-        )
-
+class TestPayrollAccount(common.TransactionCase):
     def setUp(self):
-        super(TestHrPayrollAccount, self).setUp()
-
-        self._load("account", "test", "account_minimal_test.xml")
+        super(TestPayrollAccount, self).setUp()
 
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
@@ -97,7 +82,16 @@ class TestHrPayrollAccount(common.TransactionCase):
             }
         )
 
-        # Create account journal.
+        self.account_journal = self.env["account.journal"].create(
+            {
+                "name": "Vendor Bills - Test",
+                "code": "TEXJ",
+                "type": "purchase",
+                "default_account_id": self.account_debit.id,
+                "refund_sequence": True,
+            }
+        )
+
         self.hr_contract_john = self.env["hr.contract"].create(
             {
                 "date_end": fields.Date.to_string(datetime.now() + timedelta(days=365)),
@@ -106,14 +100,14 @@ class TestHrPayrollAccount(common.TransactionCase):
                 "wage": 5000.0,
                 "employee_id": self.hr_employee_john.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
-                "journal_id": self.ref("payroll_account.expenses_journal"),
+                "journal_id": self.account_journal.id,
             }
         )
 
         self.hr_payslip = self.env["hr.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
-                "journal_id": self.ref("payroll_account.expenses_journal"),
+                "journal_id": self.account_journal.id,
             }
         )
 
