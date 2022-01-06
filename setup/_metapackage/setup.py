@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-payroll',
+        'odoo14-addon-payroll_account',
     ],
     classifiers=[
         'Programming Language :: Python',
