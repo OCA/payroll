@@ -44,6 +44,12 @@ msgid "Analytic Account"
 msgstr "বিশ্লেষণী অ্যাকাউন্ট"
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
+msgid "Base"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_credit
 msgid "Credit Account"
@@ -61,6 +67,16 @@ msgid "Debit Account"
 msgstr "ডেবিট অ্যাকাউন্ট"
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_contract
 msgid "Employee Contract"
 msgstr "কর্মচারী চুক্তি"
@@ -71,9 +87,29 @@ msgid "Generate payslips for all selected employees"
 msgstr "নির্বাচিত সমস্ত কর্মচারীদের বেতন-স্লিপ তৈরি করুন"
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
 msgid "Keep empty to use the period of the validation(Payslip) date."
 msgstr "বৈধতা (বেতন-স্লিপ) তারিখের সময়কাল ব্যবহার করতে খালি রাখুন।"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
@@ -113,6 +149,12 @@ msgstr "বেতন বিধি"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_tax_id
 msgid "Tax"
 msgstr "কর"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
+msgid "Tax lines"
+msgstr ""
 
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
