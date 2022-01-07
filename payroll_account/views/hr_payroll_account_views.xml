@@ -28,6 +28,10 @@
                             groups="analytic.group_analytic_accounting"
                         />
                         <field name="account_tax_id" />
+                        <field
+                            name="tax_base_id"
+                            attrs="{'required': [('account_tax_id', '!=', False)]}"
+                        />
                     </group>
                 </page>
             </xpath>

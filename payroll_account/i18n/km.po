@@ -45,6 +45,12 @@ msgid "Analytic Account"
 msgstr "គណនីវិភាគ"
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
+msgid "Base"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_credit
 msgid "Credit Account"
@@ -62,6 +68,16 @@ msgid "Debit Account"
 msgstr "គណនីឥណពន្ធ"
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__display_name
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_contract
 msgid "Employee Contract"
 msgstr "កិច្ចសន្យាការងារ"
@@ -72,9 +88,29 @@ msgid "Generate payslips for all selected employees"
 msgstr "បង្កើតក្រដាសប្រាក់សម្រាប់បុគ្គលិកដែលបានជ្រើសរើសទាំងអស់។"
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__id
+msgid "ID"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
 msgid "Keep empty to use the period of the validation(Payslip) date."
 msgstr "ទុកឱ្យនៅទំនេរដើម្បីប្រើរយៈពេលនៃសុពលភាពកាលបរិច្ឆេទ(Payslip) ។"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run____last_update
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
@@ -114,6 +150,12 @@ msgstr "វិធានប្រាក់ខែ"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_tax_id
 msgid "Tax"
 msgstr "ពន្ឋ"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
+msgid "Tax lines"
+msgstr ""
 
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
