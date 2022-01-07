@@ -120,7 +120,7 @@ class TestPayrollAccount(common.TransactionCase):
         )
 
     def test_00_hr_payslip(self):
-        """ checking the process of payslip. """
+        """checking the process of payslip."""
 
         date_from = datetime.now()
         date_to = datetime.now() + relativedelta.relativedelta(
