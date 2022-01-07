@@ -39,6 +39,12 @@ msgid "Analytic Account"
 msgstr ""
 
 #. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
+msgid "Base"
+msgstr ""
+
+#. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_credit
 msgid "Credit Account"
@@ -137,6 +143,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_tax_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_tax_id
 msgid "Tax"
+msgstr ""
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
+msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
