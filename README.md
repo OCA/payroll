@@ -20,7 +20,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [payroll](payroll/) | 14.0.1.1.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) | Manage your employee payroll records
-[payroll_account](payroll_account/) | 14.0.1.0.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) | Manage your payroll to accounting
+[payroll_account](payroll_account/) | 14.0.1.1.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) | Manage your payroll to accounting
 
 [//]: # (end addons)
 
