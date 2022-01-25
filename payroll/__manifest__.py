@@ -2,7 +2,7 @@
 
 {
     "name": "Payroll",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "category": "Human Resources",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
@@ -36,5 +36,5 @@
     ],
     "demo": ["demo/hr_payroll_demo.xml"],
     "application": True,
-    "maintainers": ["appstogrow"],
+    "maintainers": ["appstogrow", "nimarosa"],
 }
