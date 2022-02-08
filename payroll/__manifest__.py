@@ -36,5 +36,5 @@
     ],
     "demo": ["demo/hr_payroll_demo.xml"],
     "application": True,
-    "maintainers": ["appstogrow"],
+    "maintainers": ["appstogrow", "nimarosa"],
 }
