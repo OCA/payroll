@@ -39,6 +39,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1808,18 +1830,6 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "%s 급여 규정(%s)에 대해 잘못된 파이썬 코드가 정의되었습니다."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "%s 급여 규정(%s)에 대해 잘못된 파이썬 조건이 정의되었습니다."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "%s 급여 규정 (%s)에 대해 정의된 수량이 잘못되었습니다."
 
@@ -1858,6 +1868,12 @@ msgstr "급여 명세를 만들기 위해서는 근로 계약을 설정해야 �
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "결과는 변수에 영향을 받을 것입니다"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "%s 급여 규정(%s)에 대해 잘못된 파이썬 코드가 정의되었습니다."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "%s 급여 규정(%s)에 대해 잘못된 파이썬 조건이 정의되었습니다."
 
 #~ msgid ""
 #~ "<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for "

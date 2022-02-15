@@ -50,6 +50,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1819,18 +1841,6 @@ msgstr "كمية أو قيمة النسبة المئوية المحددة لقا
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "كود بايثون المحدد لقاعدة المرتب %s (%s) خطأ."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "شرط بايثون المحدد لقاعدة المرتب %s (%s) خطأ."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "الكمية المحددة لقاعدة المرتب %s (%s) خطأ."
 
@@ -1869,6 +1879,12 @@ msgstr "يجب تحديد عقد لإنشاء بند إيصال المرتب."
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "النتيجة سوف تتأثر بمتغير"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "كود بايثون المحدد لقاعدة المرتب %s (%s) خطأ."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "شرط بايثون المحدد لقاعدة المرتب %s (%s) خطأ."
 
 #~ msgid ""
 #~ "<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for "
