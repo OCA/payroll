@@ -39,6 +39,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1822,18 +1844,6 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "Foutieve python code gedefinieerd voor salarisregel %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "Foutieve python voorwaarde gedefinieerd voor salarisregel %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "Verkeerd aantal gedefinieerd voor salarisregel %s (%s)."
 
@@ -1872,6 +1882,12 @@ msgstr "U dient een contract in te stellen om een loonafschriftregel te maken."
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "resultaat wordt beïnvloed door een variabele"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "Foutieve python code gedefinieerd voor salarisregel %s (%s)."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "Foutieve python voorwaarde gedefinieerd voor salarisregel %s (%s)."
 
 #~ msgid ""
 #~ "<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for "
