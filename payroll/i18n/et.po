@@ -44,6 +44,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1818,18 +1840,6 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "Defineeritud Pythoni kood on vale antud palgareegli %s (%s) jaoks."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "Defineeritud Pythoni tingimus on vale antud palgareegli %s (%s) jaoks."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "Defineeritud kogus on vale antud palgareegli %s (%s) jaoks."
 
@@ -1869,6 +1879,13 @@ msgstr "Te peate määrama lepingu, et luua palgalehe rida."
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "tulemus mõjutab muutujat"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "Defineeritud Pythoni kood on vale antud palgareegli %s (%s) jaoks."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr ""
+#~ "Defineeritud Pythoni tingimus on vale antud palgareegli %s (%s) jaoks."
 
 #~ msgid "PaySlip Lines By Conribution Register"
 #~ msgstr "Palgalehe read sissemaksete registri järgi"
