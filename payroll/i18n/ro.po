@@ -41,6 +41,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1818,18 +1840,6 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "Cod python gresit definit pentru regula salariala %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "Conditie python gresita definita pentru regula salariala %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "Cantitate gresita definita pentru regula salariala %s (%s)."
 
@@ -1868,6 +1878,12 @@ msgstr "Trebuie selectat un contract pentru a crea o linie în fluturaș"
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "rezultatul va fi afectat de o variabila"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "Cod python gresit definit pentru regula salariala %s (%s)."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "Conditie python gresita definita pentru regula salariala %s (%s)."
 
 #~ msgid "PaySlip Lines By Conribution Register"
 #~ msgstr "Linii Fluturas de salariu dupa Registrul Contributiei"

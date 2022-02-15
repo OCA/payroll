@@ -99,6 +99,9 @@
                                 name="condition_python"
                                 attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
                                 colspan="4"
+                                widget="ace"
+                                options="{'mode': 'python'}"
+                                id="condition_python"
                             />
                             <newline />
                             <field
@@ -140,6 +143,9 @@
                                 colspan="4"
                                 name="amount_python_compute"
                                 attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
+                                widget="ace"
+                                options="{'mode': 'python'}"
+                                id="amount_python_compute"
                             />
                             <field
                                 name="amount_percentage"

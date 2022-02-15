@@ -39,6 +39,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1796,18 +1818,6 @@ msgstr "薪資規則 %s (%s)百分比基數或者數量定義錯誤。"
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "薪資規則 %s (%s) Python代碼定義錯誤。"
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "薪資規則 %s (%s) Python條件定義錯誤。"
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "為薪資規則  %s (%s) 定義的數量錯誤。"
 
@@ -1846,6 +1856,12 @@ msgstr "您必須設定一份合同以創建薪資單。"
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "結果將影響一個變量"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "薪資規則 %s (%s) Python代碼定義錯誤。"
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "薪資規則 %s (%s) Python條件定義錯誤。"
 
 #~ msgid ""
 #~ "<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for "

@@ -42,6 +42,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1810,18 +1832,6 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "給与ルール %s (%s)に間違ったPythonコードが定義されています。"
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "給与ルール %s (%s)に誤ったPython条件が定義されています。"
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "給与ルール%s (%s)に定義されている数量が正しくありません。"
 
@@ -1860,6 +1870,12 @@ msgstr "あなたは、給与明細行を作成するための契約を設定す
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "結果は変数に影響します。"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "給与ルール %s (%s)に間違ったPythonコードが定義されています。"
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "給与ルール %s (%s)に誤ったPython条件が定義されています。"
 
 #~ msgid "PaySlip Lines By Conribution Register"
 #~ msgstr "寄与登録の給与明細行"

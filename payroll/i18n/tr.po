@@ -47,6 +47,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1816,18 +1838,6 @@ msgstr "Yanlış yüzde bazlı veya ücret adet kuralı %s (%s) için tanımlana
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "Yanlış python kodu ücret kural %s (%s) için tanımlanan."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "Ücret kuralı için tanımlanan Yanlış python koşulu %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "Yanlış miktar maaş kural %s (%s) için tanımlanan."
 
@@ -1868,6 +1878,12 @@ msgstr "Bordro satırı oluşturmak için sözleşme düzenlenmelisiniz."
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "sonuç bir değişkene etkilenecektir"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "Yanlış python kodu ücret kural %s (%s) için tanımlanan."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "Ücret kuralı için tanımlanan Yanlış python koşulu %s (%s)."
 
 #~ msgid ""
 #~ "<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for "

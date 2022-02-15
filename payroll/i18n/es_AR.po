@@ -42,6 +42,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1827,18 +1849,6 @@ msgstr "Porcentaje base o cantidad errónea para la regla de salario %s (%s)."
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "Código python erróneo en la regla de salario %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "Código python erróneo en la regla de salario %s (%s)."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "Cantidad errónea definida para la regla de salario %s (%s)."
 
@@ -1879,6 +1889,12 @@ msgstr "Debe crear un contrato para crear una línea de colilla de pago."
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "El resultado afectará a una variable"
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "Código python erróneo en la regla de salario %s (%s)."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "Código python erróneo en la regla de salario %s (%s)."
 
 #~ msgid "'Payslip - %s' % (object.employee_id.name)"
 #~ msgstr "'Liquidacion - %s'  % (object.employee_id.name)"

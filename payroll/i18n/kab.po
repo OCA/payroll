@@ -37,6 +37,28 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python code defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid ""
+"\n"
+"Wrong python condition defined for salary rule %s (%s).\n"
+"Here is the error received:\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -1787,18 +1809,6 @@ msgstr "Azadur n umfiḍi neɣ tanecta n ulugen n uɣrud %s (%s) mačči d ameɣ
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong python code defined for salary rule %s (%s)."
-msgstr "Tangalt Python n ulugen n uɣrud %s (%s) mačči tameɣtut."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
-msgid "Wrong python condition defined for salary rule %s (%s)."
-msgstr "Tawtilt n ulugen n uɣrud %s (%s) mačči tameɣtut."
-
-#. module: payroll
-#: code:addons/payroll/models/hr_salary_rule.py:0
-#, python-format
 msgid "Wrong quantity defined for salary rule %s (%s)."
 msgstr "Tanecta n ulugen n uɣrud %s (%s) mačči tameɣtut."
 
@@ -1837,6 +1847,12 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr ""
+
+#~ msgid "Wrong python code defined for salary rule %s (%s)."
+#~ msgstr "Tangalt Python n ulugen n uɣrud %s (%s) mačči tameɣtut."
+
+#~ msgid "Wrong python condition defined for salary rule %s (%s)."
+#~ msgstr "Tawtilt n ulugen n uɣrud %s (%s) mačči tameɣtut."
 
 #~ msgid "Account"
 #~ msgstr "Amiḍan"
