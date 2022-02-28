@@ -18,14 +18,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Manel Fernandez <manelfera@outlook.com>, 2019\n"
+"PO-Revision-Date: 2022-02-28 13:17+0000\n"
+"Last-Translator: Noel estudillo <noelestudilloviera@gmail.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/odoo/teams/41243/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -34,6 +35,9 @@ msgid ""
 "            'Payslip - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            'Full de pagament - %s de %s (object.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.payslip_details_report
@@ -42,6 +46,10 @@ msgid ""
 "            'Payslip Details - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            'Detalls de la butlleta de pagament: % de %s (object.employee_id."
+"name)\n"
+"        "
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
@@ -53,6 +61,11 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"S'ha definit un codi Python incorrecte per a la regla salarial %s (%s).\n"
+"Aquí teniu l'error rebut:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
@@ -64,6 +77,12 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"S'ha definit una condició python incorrecta per a la regla salarial %s (%s)."
+"\n"
+"Aquí teniu l'error rebut:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -82,6 +101,13 @@ msgid ""
 "        \n"
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
+"* Quan es crea la nòmina, l'estat és 'Esborrany'\n"
+"        \n"
+"* Si la nòmina està en procés de verificació, l'estat és 'En espera'.\n"
+"        \n"
+"* Si es confirma la nòmina, l'estat es definirà en 'Fet'.\n"
+"        \n"
+"* Quan l'usuari cancel·la la nòmina, l'estat és 'Rebutjat'."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
@@ -94,6 +120,13 @@ msgid ""
 "                        on Payslips Run.\n"
 "                    </span>"
 msgstr ""
+"<span colspan=\"4\" nolabel=\"1\">\n"
+"                        Aquest assistent generarà nòmines per a tots els "
+"empleats seleccionats\n"
+"                        en funció de les dates i la nota de crèdit\n"
+"                        especificat\n"
+"                        a les nòmines Run.\n"
+"                    </span>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
@@ -183,6 +216,10 @@ msgid ""
 "the\n"
 "                state or anyone that collect or inject money on payslips."
 msgstr ""
+"Un registre de cotització és un tercer implicat en el salari\n"
+"                pagament dels treballadors. Pot ser la seguretat social, la\n"
+"                estat o qualsevol persona que reculli o injecti diners a les "
+"nòmines."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -199,7 +236,7 @@ msgstr "Informació comptable"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Acció necessària"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__active
@@ -211,30 +248,30 @@ msgstr "Actiu"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Activitats"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_decoration
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Activitat Excepció Decoració"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_state
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Estat de l'activitat"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_icon
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icona de tipus d'activitat"
 
 #. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
 msgid "Add a new contribution register"
-msgstr ""
+msgstr "Afegiu un registre de contribucions nou"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -244,7 +281,7 @@ msgstr "Afegir una nota interna..."
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
 msgid "Advantage Name"
-msgstr ""
+msgstr "Nom de l'avantatge"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
@@ -254,7 +291,7 @@ msgstr "Totes les regles filles"
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
 msgid "Allowance"
-msgstr ""
+msgstr "Bonificació"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__condition_select__none
@@ -303,7 +340,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_attachment_count
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Recompte de fitxers adjunts"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.BASIC
@@ -313,7 +350,7 @@ msgstr "Bàsic"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_rule_basic
 msgid "Basic Salary"
-msgstr ""
+msgstr "Salari base"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-monthly
@@ -399,7 +436,7 @@ msgstr "Codi"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_kanban
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_kanban
 msgid "Code:"
-msgstr ""
+msgstr "Codi:"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -470,7 +507,7 @@ msgstr "Contracte"
 #: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
 #: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
 msgid "Contract Advantage Templates"
-msgstr ""
+msgstr "Plantilles d'avantatge de contracte"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
@@ -501,12 +538,12 @@ msgstr "Registres de contribució"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_convanceallowance1
 msgid "Conveyance Allowance"
-msgstr ""
+msgstr "Subsistència de transport"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
 msgid "Conveyance Allowance For Marc Demo"
-msgstr ""
+msgstr "Indemnització de transport per a Marc Demo"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_uid
@@ -565,17 +602,17 @@ msgstr "Data fins"
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
-msgstr ""
+msgstr "Deducció"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
 msgid "Default value for this advantage"
-msgstr ""
+msgstr "Valor predeterminat per a aquest avantatge"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
 msgid "Defines the frequency of the wage payment."
-msgstr ""
+msgstr "Defineix la freqüència del pagament del salari."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
@@ -700,7 +737,7 @@ msgstr "Nòmines d'empleat"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_contract_advantage_template
 msgid "Employee's Advantage on Contract"
-msgstr ""
+msgstr "Avantatge de l'empleat en contracte"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
@@ -720,12 +757,14 @@ msgstr "Empleats"
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Salary Rule Category."
 msgstr ""
+"Error! No podeu crear una jerarquia recursiva de la categoria de regla "
+"salarial."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Salary Rules."
-msgstr ""
+msgstr "Error! No podeu crear una jerarquia recursiva de regles salarials."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__register_id
@@ -746,25 +785,25 @@ msgstr "Import fix"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_follower_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguidors"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_channel_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Seguidors (canals)"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_partner_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguidors (partners)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_type_icon
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icona de lletra impressionant, p. ex. fa-tasques"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage
@@ -803,7 +842,7 @@ msgstr "Generar les nòmines per tots els treballadors seleccionats"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_sales_commission
 msgid "Get 1% of sales"
-msgstr ""
+msgstr "Aconsegueix l'1% de les vendes"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
@@ -815,7 +854,7 @@ msgstr "Absències Globals"
 #: model:hr.salary.rule,name:payroll.hr_rule_taxable
 #: model:hr.salary.rule.category,name:payroll.GROSS
 msgid "Gross"
-msgstr ""
+msgstr "Brut"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
@@ -827,7 +866,7 @@ msgstr "Agrupar per"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
 msgid "House Rent Allowance"
-msgstr ""
+msgstr "Bonificació de lloguer d'habitatge"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__id
@@ -855,13 +894,13 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_icon
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_icon
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona per indicar una activitat d'excepció."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction
@@ -869,7 +908,7 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_unread
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Si està marcat, els missatges nous requereixen la vostra atenció."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
@@ -877,7 +916,7 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Si està marcat, alguns missatges tenen un error d'entrega."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__credit_note
@@ -925,12 +964,12 @@ msgstr "Nota interna"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_is_follower
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "És Seguidor"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
 msgid "Is a Blocking Reason?"
-msgstr ""
+msgstr "És un motiu de bloqueig?"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__quantity
@@ -1022,12 +1061,12 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__lower_bound
 msgid "Lower Bound"
-msgstr ""
+msgstr "Cota inferior"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
 msgid "Lower bound authorized by the employer for this advantage"
-msgstr ""
+msgstr "Límit inferior autoritzat per l'empresari per a aquest avantatge"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
@@ -1038,12 +1077,12 @@ msgstr "Realitzar ordre de pagament?"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_main_attachment_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Adjunt principal"
 
 #. module: payroll
 #: model:ir.module.category,description:payroll.module_category_payroll
 msgid "Manage employee payroll"
-msgstr ""
+msgstr "Gestionar la nòmina dels empleats"
 
 #. module: payroll
 #: model:res.groups,name:payroll.group_payroll_manager
@@ -1059,19 +1098,19 @@ msgstr "Rang màxim"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_meal_voucher
 msgid "Meal Voucher"
-msgstr ""
+msgstr "Val d'àpats"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Error de lliurament del missatge"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__condition_range_min
@@ -1093,7 +1132,7 @@ msgstr "Mensualment"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__my_activity_date_deadline
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Data límit de la meva activitat"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
@@ -1117,25 +1156,25 @@ msgstr "Net"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_rule_net
 msgid "Net Salary"
-msgstr ""
+msgstr "Salari net"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_date_deadline
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Data límit de la propera activitat"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_summary
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Resum de l'activitat següent"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tipus d'activitat següent"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
@@ -1152,7 +1191,7 @@ msgstr "Notes"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Nombre d'accions"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__number_of_days
@@ -1168,25 +1207,25 @@ msgstr "Número d'hores"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Nombre d'errors"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction_counter
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Nombre de missatges que requereixen una acció"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Nombre de missatges amb error de lliurament"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_unread_counter
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Nombre de missatges no llegits"
 
 #. module: payroll
 #: model:res.groups,name:payroll.group_payroll_user
@@ -1243,7 +1282,7 @@ msgstr "Línies de la nòmina"
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_contribution_register
 msgid "PaySlip Lines By Contribution Register"
-msgstr ""
+msgstr "Línies de la butlleta de pagament per registre de cotització"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -1266,17 +1305,17 @@ msgstr "Nòmina"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__module_payroll_account
 msgid "Payroll Accounting"
-msgstr ""
+msgstr "Comptabilitat de nòmines"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
-msgstr ""
+msgstr "Informe Registre de cotitzacions de nòmines"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll Entries"
-msgstr ""
+msgstr "Inscripcions de nòmina"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_search
@@ -1294,6 +1333,8 @@ msgstr "Nòmina"
 #, python-format
 msgid "Payslip 'Date From' must be earlier than 'Date To'."
 msgstr ""
+"La \"Data des de\" del full de pagament ha de ser anterior a la \"Data fins "
+"a\"."
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_run
@@ -1312,12 +1353,12 @@ msgstr "Detalls de càlcul de nòmina"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__payslip_count
 msgid "Payslip Count"
-msgstr ""
+msgstr "Recompte de nòmines"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_payslipdetails
 msgid "Payslip Details Report"
-msgstr ""
+msgstr "Informe de detalls de la nòmina"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_input
