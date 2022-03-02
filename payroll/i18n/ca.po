@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-02-25 12:17+0000\n"
+"PO-Revision-Date: 2022-03-02 13:17+0000\n"
 "Last-Translator: Noel estudillo <noelestudilloviera@gmail.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/odoo/teams/41243/ca/)\n"
 "Language: ca\n"
@@ -142,7 +142,7 @@ msgstr "<strong>Nom</strong>"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Reference</strong>"
-msgstr "<strong>Referència</strong> "
+msgstr "<strong>Referència</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -534,7 +534,7 @@ msgstr ""
 "Defineix les regles que seran aplicades amb aquesta nòmina, d'acord amb el "
 "contracte triat. Si deixa buit el camp contracte, aquest camp no serà "
 "obligatori i per tant s'aplicarà les regles vàlides establertes en tots els "
-"contractes d'empleat pel període triat."
+"contractes d'empleat pel període triat"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__note
@@ -648,7 +648,7 @@ msgstr "Avantatge de l'empleat en contracte"
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
 msgid "Employee's working schedule."
-msgstr "Horari de treball de l'empleat"
+msgstr "Horari de treball de l'empleat."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__employee_ids
@@ -855,7 +855,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister____last_update
 #: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails____last_update
 msgid "Last Modified on"
-msgstr "Última modificació el "
+msgstr "Última modificació el"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_uid
@@ -913,7 +913,7 @@ msgstr "Límit inferior autoritzat per l'empresari per a aquest avantatge"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
 msgid "Made Payment Order ? "
-msgstr "Realitzar ordre de pagament?"
+msgstr "Realitzar ordre de pagament? "
 
 #. module: payroll
 #: model:ir.module.category,description:payroll.module_category_payroll
@@ -1500,13 +1500,13 @@ msgstr "El contracte pel que s'aplica aquesta entrada"
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range_max
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__condition_range_max
 msgid "The maximum amount, applied for this rule."
-msgstr "L'import màxim aplicat a aquesta regla"
+msgstr "L'import màxim aplicat a aquesta regla."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range_min
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__condition_range_min
 msgid "The minimum amount, applied for this rule."
-msgstr "L'import mínim aplicat a aquesta regla"
+msgstr "L'import mínim aplicat a aquesta regla."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range
@@ -1553,7 +1553,7 @@ msgstr "S'utilitza per organitzar la seqüència de càlcul"
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__appears_on_payslip
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__appears_on_payslip
 msgid "Used to display the salary rule on payslip."
-msgstr "S'utilitza per organitzar la seqüència de càlcul"
+msgstr "S'utilitza per organitzar la seqüència de càlcul."
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__verify
@@ -1631,7 +1631,7 @@ msgstr "No podeu esborrar una nòmina que no sigui esborrany o cancel·lada"
 #: code:addons/payroll/wizard/hr_payroll_payslips_by_employees.py:0
 #, python-format
 msgid "You must select employee(s) to generate payslip(s)."
-msgstr "Ha de seleccionar un(s) empleat(s) per crear les nòmines"
+msgstr "Ha de seleccionar un(s) empleat(s) per crear les nòmines."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip_line.py:0
