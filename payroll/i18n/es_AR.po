@@ -16,14 +16,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2020\n"
+"PO-Revision-Date: 2022-03-06 07:17+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
-"Language: es\n"
+"Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -32,6 +33,9 @@ msgid ""
 "            'Payslip - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            'Nómina - %s' % (object.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.payslip_details_report
@@ -40,6 +44,9 @@ msgid ""
 "            'Payslip Details - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            'Detalles de la Nómina - %s' % (object.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
@@ -51,6 +58,11 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"Código de python incorrecto definido para la regla de salario %s (%s).\n"
+"Acá está el error recibido:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
@@ -62,6 +74,11 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"Código de python incorrecto definido para la regla de salario %s (%s).\n"
+"Acá está el error recibido:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -100,6 +117,13 @@ msgid ""
 "                        on Payslips Run.\n"
 "                    </span>"
 msgstr ""
+"<span colspan=\"4\" nolabel=\"1\">\n"
+"                        Este asistente generará recibos de pago para todos "
+"los empleados seleccionados\n"
+"                         basado en las fechas y la nota de crédito\n"
+"                         especificada\n"
+"                         en la Ejecusión de Nóminas.\n"
+"                    </span>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
@@ -189,6 +213,11 @@ msgid ""
 "the\n"
 "                state or anyone that collect or inject money on payslips."
 msgstr ""
+"Un registro de cotización es un tercero que interviene en el pago\n"
+"                 del salario de los empleados. Puede ser la seguridad "
+"social, el\n"
+"                 estado o cualquier persona que recaude o inyecte dinero en "
+"las nóminas."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -205,7 +234,7 @@ msgstr "Información Contable"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Acción Requerida"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__active
@@ -217,7 +246,7 @@ msgstr "Activo"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_decoration
