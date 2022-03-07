@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-03-06 21:17+0000\n"
+"PO-Revision-Date: 2022-03-07 17:17+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es_AR\n"
@@ -1079,7 +1079,7 @@ msgstr "Adjunto Principal"
 #. module: payroll
 #: model:ir.module.category,description:payroll.module_category_payroll
 msgid "Manage employee payroll"
-msgstr "Gestionar nómina de empleado"
+msgstr "Gestionar haberes del empleado"
 
 #. module: payroll
 #: model:res.groups,name:payroll.group_payroll_manager
@@ -1297,12 +1297,12 @@ msgstr "Nombre de la liquidacion"
 #: model:ir.ui.menu,name:payroll.payroll_menu_root
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll"
-msgstr "Nómina"
+msgstr "Haberes"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__module_payroll_account
 msgid "Payroll Accounting"
-msgstr "Contabilidad de Sueldos"
+msgstr "Contabilidad de Liquidación de Sueldos"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
@@ -1312,12 +1312,12 @@ msgstr "Reporte de Registros de Contribucion"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll Entries"
-msgstr "Registros de la liquidacion"
+msgstr "Registros de la Liquidación de Sueldos"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_search
 msgid "Payroll Structures"
-msgstr "Estructuras de Sueldos"
+msgstr "Estructuras de Liquidación de Sueldos"
 
 #. module: payroll
 #: model:ir.actions.report,name:payroll.action_report_payslip
@@ -1904,7 +1904,7 @@ msgstr "No puedes crear estructuras recursivas."
 msgid "You cannot delete a payslip which is not draft or cancelled"
 msgstr ""
 "No puede eliminar una liquidacion que no este en estado 'borrador' o "
-"'cancelada'."
+"'cancelada'"
 
 #. module: payroll
 #: code:addons/payroll/wizard/hr_payroll_payslips_by_employees.py:0
