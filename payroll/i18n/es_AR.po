@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-03-07 17:17+0000\n"
+"PO-Revision-Date: 2022-03-13 17:17+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es_AR\n"
@@ -34,7 +34,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            'Nómina - %s' % (object.employee_id.name)\n"
+"            'Liquidación - %s' % (object.employee_id.name)\n"
 "        "
 
 #. module: payroll
@@ -45,7 +45,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            'Detalles de la Nómina - %s' % (object.employee_id.name)\n"
+"            'Detalles de la Liquidación - %s' % (object.employee_id.name)\n"
 "        "
 
 #. module: payroll
@@ -118,11 +118,11 @@ msgid ""
 "                    </span>"
 msgstr ""
 "<span colspan=\"4\" nolabel=\"1\">\n"
-"                        Este asistente generará recibos de pago para todos "
-"los empleados seleccionados\n"
+"                        Este asistente generará la liquidación de sueldo "
+"para todos los empleados seleccionados\n"
 "                         basado en las fechas y la nota de crédito\n"
 "                         especificada\n"
-"                         en la Ejecusión de Nóminas.\n"
+"                         en la Ejecusión de Liquidaciones.\n"
 "                    </span>"
 
 #. module: payroll
@@ -214,10 +214,9 @@ msgid ""
 "                state or anyone that collect or inject money on payslips."
 msgstr ""
 "Un registro de cotización es un tercero que interviene en el pago\n"
-"                 del salario de los empleados. Puede ser la seguridad "
-"social, el\n"
+"                 del salario de los empleados. Puede ser la obra social, el\n"
 "                 estado o cualquier persona que recaude o inyecte dinero en "
-"las nóminas."
+"las liquidaciones."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -322,7 +321,7 @@ msgstr "Anualmente"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__appears_on_payslip
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__appears_on_payslip
 msgid "Appears on Payslip"
-msgstr "Aparece en la liquidacion"
+msgstr "Aparece en la Liquidación"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_python
@@ -379,7 +378,7 @@ msgstr "Cancelar Liquidacion"
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Cannot cancel a payslip that is done."
-msgstr "No se puede cancelar una nómina que ya está finalizada."
+msgstr "No se puede cancelar una liquidación que ya está finalizada."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__category_id
@@ -523,7 +522,7 @@ msgstr "Registro de contribución"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_payslip_lines_contribution_register
 msgid "Contribution Register's Payslip Lines"
-msgstr "Líneas de la nómina para el registro de contribución"
+msgstr "Líneas de la liquidación para el registro de contribución"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_contribution_register_action
@@ -620,10 +619,10 @@ msgid ""
 "mandatory anymore and thus the rules applied will be all the rules set on "
 "the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
-"Define las reglas que serán aplicadas a esta nómina, de acuerdo con el "
-"contrato escogido. Si deja vacío el campo contrato, este campo no será "
-"obligatorio y por tanto se aplicarán las reglas válidas establecidas en "
-"todos los contratos de empleado para el periodo elegido"
+"Define las reglas que serán aplicadas a esta liquidación de sueldo, de "
+"acuerdo con el contrato escogido. Si deja vacío el campo contrato, este "
+"campo no será obligatorio y por tanto se aplicarán las reglas válidas "
+"establecidas en todos los contratos de empleado para el periodo elegido"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__note
@@ -682,7 +681,7 @@ msgstr "Hecho"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Done Payslip Batches"
-msgstr "Procesamientos de nóminas realizados"
+msgstr "Procesamientos de Liquidaciones realizados"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -700,7 +699,7 @@ msgstr "Borrador"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Draft Payslip Batches"
-msgstr "Procesamientos de liquidaciones - borrador"
+msgstr "Procesamientos de Liquidaciones en borrador"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -730,7 +729,7 @@ msgstr "Función del empleado"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
-msgstr "Nóminas del empleado"
+msgstr "Haberes del empleado"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_contract_advantage_template
@@ -829,7 +828,7 @@ msgstr "Generar"
 #: model:ir.actions.act_window,name:payroll.action_hr_payslip_by_employees
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Generate Payslips"
-msgstr "Generar nóminas"
+msgstr "Generar liquidación de sueldos"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_employees
@@ -921,8 +920,8 @@ msgid ""
 "If its checked, indicates that all payslips generated from here are refund "
 "payslips."
 msgstr ""
-"Si está marcada, indica que todas las nóminas generadas desde aquí son "
-"nóminas reembolso."
+"Si está marcada, indica que todas las liquidaciones de sueldo generadas "
+"desde aquí son de reembolso."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__active
@@ -937,7 +936,9 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__credit_note
 msgid "Indicates this payslip has a refund of another"
-msgstr "Indica que esta nómina incluye una factura rectificativa de otra"
+msgstr ""
+"Indica que esta liquidación de sueldo incluye una factura rectificativa de "
+"otra"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1264,32 +1265,32 @@ msgstr "Liquidacion"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "PaySlip Batch"
-msgstr "Procesamiento de liquidaciones"
+msgstr "Procesamiento de liquidaciones de sueldo"
 
 #. module: payroll
 #: model:ir.actions.report,name:payroll.payslip_details_report
 msgid "PaySlip Details"
-msgstr "Detalles de la liquidacion"
+msgstr "Detalles de la liquidación de sueldo"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_payslip_lines_contribution_register
 msgid "PaySlip Lines"
-msgstr "Líneas de liquidacion"
+msgstr "Líneas de liquidación"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_contribution_register
 msgid "PaySlip Lines By Contribution Register"
-msgstr "Registro de Líneas de Nómina por Aporte"
+msgstr "Registro de Líneas de Haberes por Aporte"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 msgid "PaySlip Lines by Contribution Register"
-msgstr "Líneas de liquidacion por registro de contribución"
+msgstr "Líneas de Liquidación por registro de contribución"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 msgid "PaySlip Name"
-msgstr "Nombre de la liquidacion"
+msgstr "Nombre de la Liquidación"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.open_payroll_modules
@@ -1323,28 +1324,28 @@ msgstr "Estructuras de Liquidación de Sueldos"
 #: model:ir.actions.report,name:payroll.action_report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip"
-msgstr "Liquidacion"
+msgstr "Liquidación de Sueldo"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip 'Date From' must be earlier than 'Date To'."
 msgstr ""
-"La 'Fecha desde' debe ser anterior a la 'Fecha Hasta' en la liquidacion."
+"La 'Fecha Desde' debe ser anterior a la 'Fecha Hasta' en la liquidación."
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_run
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__payslip_run_id
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Payslip Batches"
-msgstr "Procesamientos de liquidaciones"
+msgstr "Procesamientos de Liquidaciones"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_line_action_computation_details
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__payslip_count
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Computation Details"
-msgstr "Detalles de cálculo de liquidacion"
+msgstr "Detalles de cálculo de liquidación"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__payslip_count
@@ -1354,24 +1355,24 @@ msgstr "Recuento de Liquidaciones"
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_payslipdetails
 msgid "Payslip Details Report"
-msgstr "Detalle de Liquidacion"
+msgstr "Detalle de Liquidación"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_input
 msgid "Payslip Input"
-msgstr "Entrada de Liquidacion"
+msgstr "Entrada de Liquidación"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__input_line_ids
 msgid "Payslip Inputs"
-msgstr "Entradas de liquidacion"
+msgstr "Entradas de liquidación"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_line
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Line"
-msgstr "Línea de liquidacion"
+msgstr "Línea de liquidación"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_line_action
@@ -1390,18 +1391,18 @@ msgstr "Líneas de liquidaciones por registro de contribución"
 #. module: payroll
 #: model:ir.model,name:payroll.model_payslip_lines_contribution_register
 msgid "Payslip Lines by Contribution Registers"
-msgstr "Líneas de liquidaciones por registro de contribución"
+msgstr "Líneas de liquidaciones por registros de contribución"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__name
 msgid "Payslip Name"
-msgstr "Nombre de liquidacion"
+msgstr "Nombre de la Liquidación de Sueldo"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_worked_days
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__worked_days_line_ids
 msgid "Payslip Worked Days"
-msgstr "Días trabajados - liquidados"
+msgstr "Días Trabajados - Liquidados"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action_employee
@@ -1412,7 +1413,7 @@ msgstr "Días trabajados - liquidados"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
 msgid "Payslips"
-msgstr "Liquidaciones"
+msgstr "Liquidaciones de Sueldo"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_run_action
@@ -1420,12 +1421,12 @@ msgstr "Liquidaciones"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_tree
 msgid "Payslips Batches"
-msgstr "Procesamientos de liquidaciones"
+msgstr "Procesamientos de Liquidaciones"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
 msgid "Payslips by Employees"
-msgstr "Liquidaciones por empleados"
+msgstr "Liquidaciones de Sueldo por Empleados"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_percentage
@@ -1541,7 +1542,7 @@ msgstr "Factura rectificativa"
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Refund Payslip"
-msgstr "Reembolso de Recibo de Sueldo"
+msgstr "Reembolso de Liquidación de Sueldo"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
@@ -1653,17 +1654,17 @@ msgstr "Pago planificado"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Search Payslip Batches"
-msgstr "Buscar procesamientos de liquidaciones"
+msgstr "Buscar procesamientos de Liquidaciones"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
 msgid "Search Payslip Lines"
-msgstr "Buscar líneas de liquidaciones"
+msgstr "Buscar líneas de Liquidaciones"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Search Payslips"
-msgstr "Buscar liquidaciones"
+msgstr "Buscar Liquidaciones"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
@@ -1830,7 +1831,7 @@ msgstr "Se utiliza para organizar la secuencia de cálculo"
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__appears_on_payslip
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__appears_on_payslip
 msgid "Used to display the salary rule on payslip."
-msgstr "Se usa para mostrar la regla de salario en la nómina."
+msgstr "Se usa para mostrar la regla de salario en la liquidación de sueldo."
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__verify
@@ -1903,20 +1904,21 @@ msgstr "No puedes crear estructuras recursivas."
 #, python-format
 msgid "You cannot delete a payslip which is not draft or cancelled"
 msgstr ""
-"No puede eliminar una liquidacion que no este en estado 'borrador' o "
-"'cancelada'"
+"No puede eliminar una liquidación de sueldo que no este en estado 'borrador' "
+"o 'cancelada'"
 
 #. module: payroll
 #: code:addons/payroll/wizard/hr_payroll_payslips_by_employees.py:0
 #, python-format
 msgid "You must select employee(s) to generate payslip(s)."
-msgstr "Debe seleccionar un empleado(s) para crear la(s) nómina(s)."
+msgstr ""
+"Debe seleccionar un empleado(s) para crear la(s) liquidación(es) de sueldo."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "You must set a contract to create a payslip line."
-msgstr "Debe crear un contrato para crear una línea de colilla de pago."
+msgstr "Debe crear un contrato para crear una línea de liquidación de sueldo."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage_base
