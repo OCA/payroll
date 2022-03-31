@@ -7,7 +7,7 @@ from .common import TestPayslipBase
 
 class TestPayslipFlow(TestPayslipBase):
     def test_00_payslip_flow(self):
-        """ Testing payslip flow and report printing """
+        """Testing payslip flow and report printing"""
         # I create an employee Payslip
         richard_payslip = self.env["hr.payslip"].create(
             {"name": "Payslip of Richard", "employee_id": self.richard_emp.id}
