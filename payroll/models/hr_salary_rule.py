@@ -23,7 +23,7 @@ class HrSalaryRule(models.Model):
         default="1.0",
         help="It is used in computation for percentage and fixed amount. "
         "For e.g. A rule for Meal Voucher having fixed amount of "
-        u"1€ per worked day can have its quantity defined in expression "
+        "1€ per worked day can have its quantity defined in expression "
         "like worked_days.WORK100.number_of_days.",
     )
     category_id = fields.Many2one(
