@@ -68,6 +68,8 @@ class HrSalaryRule(models.Model):
             # Available variables:
             #----------------------
             # payslip: object containing the payslips
+            # payslip.rule_parameter(code): get the value for the rule parameter specified.
+            #   By default it gets the code for payslip date.
             # employee: hr.employee object
             # contract: hr.contract object
             # rules: object containing the rules code (previously computed)
