@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_rule_parameter_view_form" model="ir.ui.view">
+        <field name="name">hr.rule.parameter.form</field>
+        <field name="model">hr.rule.parameter</field>
+        <field name="arch" type="xml">
+            <form string="Salary Rule Parameter">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="code" />
+                    </group>
+                    <group string="Versions">
+                        <field
+                            name="parameter_version_ids"
+                            nolabel="1"
+                            context="{'default_rule_parameter_id': active_id}"
+                        >
+                            <tree editable="bottom">
+                                <field name="date_from" />
+                                <field name="parameter_value" />
+                            </tree>
+                        </field>
+                    </group>
+                    <field name="description" placeholder="Description" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hr_rule_parameter_view_tree" model="ir.ui.view">
+        <field name="name">hr.rule.parameter.tree</field>
+        <field name="model">hr.rule.parameter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code" widget="badge" />
+                <field name="name" />
+                <field name="parameter_version_ids" />
+                <field
+                    name="company_id"
+                    required="1"
+                    groups="base.group_multi_company"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="hr_rule_parameter_view_search" model="ir.ui.view">
+        <field name="name">hr.rule.parameter.search</field>
+        <field name="model">hr.rule.parameter</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="name"
+                    filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="hr_rule_parameter_action" model="ir.actions.act_window">
+        <field name="name">Salary Rule Parameters</field>
+        <field name="res_model">hr.rule.parameter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_action_hr_salary_rule_parameter"
+        action="hr_rule_parameter_action"
+        name="Rule Parameters"
+        parent="payroll_menu_configuration"
+        sequence="35"
+    />
+</odoo>
