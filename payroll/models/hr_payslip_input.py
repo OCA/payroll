@@ -16,6 +16,9 @@ class HrPayslipInput(models.Model):
     code = fields.Char(
         required=True, help="The code that can be used in the salary rules"
     )
+    amount_qty = fields.Float(
+        "Amount Quantity", help="It can be used in computation for other inputs"
+    )
     amount = fields.Float(
         help="It is used in computation. For e.g. A rule for sales having "
         "1% commission of basic salary for per product can defined in "
