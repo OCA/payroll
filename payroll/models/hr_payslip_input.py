@@ -21,6 +21,9 @@ class HrPayslipInput(models.Model):
         "1% commission of basic salary for per product can defined in "
         "expression like result = inputs.SALEURO.amount * contract.wage*0.01."
     )
+    amount_qty = fields.Float(
+        "Amount Quantity", help="It can be used in computation for other inputs"
+    )
     contract_id = fields.Many2one(
         "hr.contract",
         string="Contract",
