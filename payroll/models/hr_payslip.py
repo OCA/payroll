@@ -341,6 +341,10 @@ class HrPayslip(models.Model):
         ):
             day_from = datetime.combine(date_from, time.min)
             day_to = datetime.combine(date_to, time.max)
+            day_contract_start = datetime.combine(contract.date_start, time.min)
+            # only use payslip day_from if it's greather than contract start date
+            if day_from < day_contract_start:
+                day_from = day_contract_start
 
             # compute leave days
             leaves = {}
