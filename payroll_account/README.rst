@@ -82,10 +82,13 @@ promote its widespread use.
 .. |maintainer-appstogrow| image:: https://github.com/appstogrow.png?size=40px
     :target: https://github.com/appstogrow
     :alt: appstogrow
+.. |maintainer-nimarosa| image:: https://github.com/nimarosa.png?size=40px
+    :target: https://github.com/nimarosa
+    :alt: nimarosa
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-appstogrow| 
+|maintainer-appstogrow| |maintainer-nimarosa| 
 
 This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/14.0/payroll_account>`_ project on GitHub.
 
