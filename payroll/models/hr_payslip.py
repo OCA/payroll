@@ -602,7 +602,7 @@ class HrPayslip(models.Model):
         )
         return res
 
-    @api.onchange("employee_id", "date_from", "date_to")
+    @api.onchange("employee_id", "date_from", "date_to", "struct_id")
     def onchange_employee(self):
 
         if (not self.employee_id) or (not self.date_from) or (not self.date_to):
@@ -633,7 +633,9 @@ class HrPayslip(models.Model):
 
         if not self.contract_id.struct_id:
             return
-        self.struct_id = self.contract_id.struct_id
+
+        if not self.struct_id:
+            self.struct_id = self.contract_id.struct_id
 
         # computation of the salary input
         contracts = self.env["hr.contract"].browse(contract_ids)
