@@ -6,8 +6,8 @@
         <field name="arch" type="xml">
             <tree string="Salary Rules">
                 <field name="name" />
-                <field name="code" />
-                <field name="category_id" />
+                <field name="code" decoration-bf="1" />
+                <field name="category_id" widget="badge" />
                 <field name="sequence" invisible="1" />
                 <field name="register_id" />
             </tree>
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-4">
                                     <span class="float-right">
-                                        <field name="category_id" />
+                                        <field name="category_id" widget="badge" />
                                     </span>
                                 </div>
                             </div>
@@ -78,81 +78,94 @@
                 <h2>
                     <field name="category_id" />
                 </h2>
-                <group col="4">
-                    <field name="code" />
-                    <field name="sequence" />
-                    <field name="active" />
-                    <field name="appears_on_payslip" />
-                    <field
-                        name="company_id"
-                        options="{'no_create': True}"
-                        groups="base.group_multi_company"
-                    />
+                <group name="principal">
+                    <group>
+                        <field name="code" />
+                        <field name="sequence" />
+                        <field
+                            name="company_id"
+                            options="{'no_create': True}"
+                            groups="base.group_multi_company"
+                        />
+                    </group>
+                    <group>
+                        <field name="active" />
+                        <field name="appears_on_payslip" />
+                    </group>
                 </group>
-                <notebook colspan="6">
+                <notebook>
                     <page string="General">
-                        <group col="4">
-                            <separator colspan="4" string="Conditions" />
-                            <field name="condition_select" />
-                            <newline />
+                        <group>
+                            <group string="Conditions" name="conditions">
+                                <field name="condition_select" />
+                                <field
+                                    name="condition_python"
+                                    attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
+                                    colspan="4"
+                                    widget="ace"
+                                    options="{'mode': 'python'}"
+                                    id="condition_python"
+                                />
+                                <field
+                                    name="condition_range"
+                                    attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                />
+                                <label
+                                    string="Condition Range"
+                                    attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                    for="condition_range_min"
+                                />
+                                <div
+                                    attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                >
+                                    <strong>Between </strong>
+                                    <field
+                                        name="condition_range_min"
+                                        class="oe_inline"
+                                        attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                    />
+                                    <strong> and </strong>
+                                    <field
+                                        name="condition_range_max"
+                                        class="oe_inline"
+                                        attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                    />
+                                </div>
+                                <separator colspan="4" string="Company Contribution" />
+                                <field name="register_id" />
+                            </group>
+                            <group string="Computation" name="computation">
+                                <field name="amount_select" />
+                                <field
+                                    name="amount_percentage_base"
+                                    attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"
+                                />
+                                <field
+                                    name="quantity"
+                                    attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"
+                                />
+                                <field
+                                    name="amount_fix"
+                                    attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"
+                                />
+                                <field
+                                    colspan="4"
+                                    name="amount_python_compute"
+                                    attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
+                                    widget="ace"
+                                    options="{'mode': 'python'}"
+                                    id="amount_python_compute"
+                                />
+                                <field
+                                    name="amount_percentage"
+                                    attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"
+                                />
+                            </group>
+                            <separator string="Notes" />
                             <field
-                                name="condition_python"
-                                attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
-                                colspan="4"
-                                widget="ace"
-                                options="{'mode': 'python'}"
-                                id="condition_python"
+                                name="note"
+                                placeholder="Write salary rule notes or observations here..."
                             />
-                            <newline />
-                            <field
-                                name="condition_range"
-                                attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
-                            />
-                            <newline />
-                            <field
-                                name="condition_range_min"
-                                colspan="2"
-                                attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
-                            />
-                            <newline />
-                            <field
-                                name="condition_range_max"
-                                colspan="2"
-                                attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
-                            />
-                            <newline />
-                            <separator colspan="4" string="Computation" />
-                            <field name="amount_select" />
-                            <newline />
-                            <field
-                                name="amount_percentage_base"
-                                attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"
-                            />
-                            <newline />
-                            <field
-                                name="quantity"
-                                attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"
-                            />
-                            <newline />
-                            <field
-                                name="amount_fix"
-                                attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"
-                            />
-                            <newline />
-                            <field
-                                colspan="4"
-                                name="amount_python_compute"
-                                attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
-                                widget="ace"
-                                options="{'mode': 'python'}"
-                                id="amount_python_compute"
-                            />
-                            <field
-                                name="amount_percentage"
-                                attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"
-                            />
-                            <separator colspan="4" string="Company Contribution" />
-                            <field name="register_id" />
                         </group>
                     </page>
                     <page name="rules" string="Child Rules">
@@ -163,13 +176,10 @@
                     <page string="Inputs">
                         <field name="input_ids" mode="tree">
                             <tree string="Input Data" editable="bottom">
-                                <field name="name" />
                                 <field name="code" />
+                                <field name="name" />
                             </tree>
                         </field>
-                    </page>
-                    <page string="Description">
-                        <field name="note" />
                     </page>
                 </notebook>
             </form>

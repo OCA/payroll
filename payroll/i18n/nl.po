@@ -91,6 +91,11 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "<strong> and </strong>"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Address</strong>"
@@ -107,6 +112,11 @@ msgstr "<strong>Gemachtigde handtekening</strong>"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Bank Account</strong>"
 msgstr "<strong>Rekeningnummer</strong>"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "<strong>Between </strong>"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -265,6 +275,11 @@ msgstr "Altijd waar"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Amount"
 msgstr "Bedrag"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__amount_qty
+msgid "Amount Quantity"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_select
@@ -435,6 +450,11 @@ msgstr "Voorwaarde gebaseerd op"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "Condition Range"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Conditions"
 msgstr "Voorwaarden"
 
@@ -596,7 +616,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__note
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__note
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Description"
 msgstr "Omschrijving"
 
@@ -933,6 +952,11 @@ msgid "Is a Blocking Reason?"
 msgstr "Is een blokkerende reden?"
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount_qty
+msgid "It can be used in computation for other inputs"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__quantity
 msgid ""
 "It is used in computation for percentage and fixed amount. For e.g. A rule "
@@ -1146,6 +1170,7 @@ msgstr "Standaard werkdagen 100% betaald"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Notes"
 msgstr "Opmerkingen"
 
@@ -1832,6 +1857,11 @@ msgstr "Gewerkte dagen & ingaves"
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__resource_calendar_id
 msgid "Working Schedule"
 msgstr "Werktijden"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "Write salary rule notes or observations here..."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
