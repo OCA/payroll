@@ -114,7 +114,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,confirm"
+                        statusbar_visible="draft,verify,done,cancel"
                     />
                 </header>
                 <sheet>
