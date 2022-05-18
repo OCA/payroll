@@ -226,6 +226,7 @@ class HrPayslip(models.Model):
         compute="_compute_payslip_count", string="Payslip Computation Details"
     )
 
+    @api.depends("line_ids")
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped(
