@@ -4,7 +4,7 @@
     <record id="view_cancel_payslip_form" model="ir.ui.view">
         <field name="name">view.cancel.payslip.form</field>
         <field name="model">hr.payslip</field>
-        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_payslip_cancel']" position="attributes">
                 <attribute name="states">draft,hr_check,confirm,verify,done</attribute>
