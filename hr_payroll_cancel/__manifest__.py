@@ -8,10 +8,10 @@
     "name": "Hr Payroll Cancel",
     "version": "12.0.1.0.1",
     "author": "Vauxoo, Eficent, "
-              "Serpent Consulting Services Pvt. Ltd.,"
-              "Odoo Community Association (OCA)",
+    "Serpent Consulting Services Pvt. Ltd.,"
+    "Odoo Community Association (OCA)",
     "category": "HR",
-    "website": "https://github.com/OCA/hr",
+    "website": "https://github.com/OCA/payroll",
     "license": "AGPL-3",
     "depends": [
         "account_cancel",
