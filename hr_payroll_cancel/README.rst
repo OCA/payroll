@@ -13,14 +13,17 @@ Hr Payroll Cancel
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fṕayroll-lightgray.png?logo=github
-    :target: https://github.com/OCA/ṕayroll/tree/14.0/hr_payroll_cancel
-    :alt: OCA/ṕayroll
+.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
+    :target: https://github.com/OCA/payroll/tree/14.0/hr_payroll_cancel
+    :alt: OCA/payroll
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/ṕayroll-14-0/ṕayroll-14-0-hr_payroll_cancel
+    :target: https://translation.odoo-community.org/projects/payroll-14-0/payroll-14-0-hr_payroll_cancel
     :alt: Translate me on Weblate
+.. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
+    :target: https://runbot.odoo-community.org/runbot/281/14.0
+    :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| 
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows the user to cancel a payslip whatever the previous state is
 without doing a refund. When the user cancel the journal entry is deleted
@@ -48,10 +51,10 @@ Go to: Payroll -> Employee Payslip
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/ṕayroll/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/payroll/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/ṕayroll/issues/new?body=module:%20hr_payroll_cancel%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/payroll/issues/new?body=module:%20hr_payroll_cancel%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -62,15 +65,15 @@ Authors
 ~~~~~~~
 
 * Vauxoo
-* Eficent
+* ForgeFlow
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
 ~~~~~~~~~~~~
 
 * Luis Torres (luis_t@vauxoo.com)
-* Aaron Henriquez (ahenriquez@eficent.com)
-* Lois Rilo (lois.rilo@eficent.com)
+* Aaron Henriquez (ahenriquez@forgeflow.com)
+* Lois Rilo (lois.rilo@forgeflow.com)
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Duc, Dao Dong <duc.dd@komit-consulting.com> (https://komit-consulting.com)
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
@@ -89,6 +92,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/ṕayroll <https://github.com/OCA/ṕayroll/tree/14.0/hr_payroll_cancel>`_ project on GitHub.
+This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/14.0/hr_payroll_cancel>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
