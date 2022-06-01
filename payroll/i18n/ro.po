@@ -93,6 +93,11 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "<strong> and </strong>"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Address</strong>"
@@ -109,6 +114,11 @@ msgstr "<strong>Semnatura autorizata</strong>"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Bank Account</strong>"
 msgstr "<strong>Cont bancar</strong>"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "<strong>Between </strong>"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -267,6 +277,11 @@ msgstr "Intotdeauna adevarat"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Amount"
 msgstr "Valoare"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__amount_qty
+msgid "Amount Quantity"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_select
@@ -437,6 +452,11 @@ msgstr "Conditie bazata pe"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "Condition Range"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Conditions"
 msgstr "Condiții"
 
@@ -598,7 +618,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__note
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__note
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Description"
 msgstr "Descriere"
 
@@ -929,6 +948,11 @@ msgid "Is a Blocking Reason?"
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount_qty
+msgid "It can be used in computation for other inputs"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__quantity
 msgid ""
 "It is used in computation for percentage and fixed amount. For e.g. A rule "
@@ -1142,6 +1166,7 @@ msgstr "Zile lucrătoare obișnuite plătite 100%"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Notes"
 msgstr "Note"
 
@@ -1828,6 +1853,11 @@ msgstr "Zile lucrate & Inregistrari"
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__resource_calendar_id
 msgid "Working Schedule"
 msgstr "Program de lucru"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid "Write salary rule notes or observations here..."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
