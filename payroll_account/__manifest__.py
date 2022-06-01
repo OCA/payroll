@@ -10,5 +10,5 @@
     "depends": ["payroll", "account"],
     "data": ["views/hr_payroll_account_views.xml"],
     "demo": ["demo/hr_payroll_account_demo.xml"],
-    "maintainers": ["appstogrow"],
+    "maintainers": ["appstogrow", "nimarosa"],
 }
