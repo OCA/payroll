@@ -339,18 +339,15 @@ class HrPayslip(models.Model):
         for contract in contracts.filtered(
             lambda contract: contract.resource_calendar_id
         ):
-
             # Adds support for the hr_public_holidays module.
             # This adds support to exclude public holidays from work days computation.
             # If you don't use the module, it don't make any difference or harm.
             contract = contract.with_context(
                 employee_id=self.employee_id.id, exclude_public_holidays=True
             )
-
             day_from = datetime.combine(date_from, time.min)
             day_to = datetime.combine(date_to, time.max)
             day_contract_start = datetime.combine(contract.date_start, time.min)
-
             # only use payslip day_from if it's greather than contract start date
             if day_from < day_contract_start:
                 day_from = day_contract_start
