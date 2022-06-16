@@ -4,23 +4,8 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class HrContractAdvandageTemplate(models.Model):
-    _name = "hr.contract.advantage.template"
-    _description = "Employee's Advantage on Contract"
-
-    name = fields.Char("Name", required=True)
-    code = fields.Char("Code", required=True)
-    lower_bound = fields.Float(
-        "Lower Bound", help="Lower bound authorized by the employer for this advantage"
-    )
-    upper_bound = fields.Float(
-        "Upper Bound", help="Upper bound authorized by the employer for this advantage"
-    )
-    default_value = fields.Float("Default value for this advantage")
-
-
-class HrContractPayrollAdvantage(models.Model):
-    _name = "hr.contract.payroll_advantage"
+class HrContractAdvantage(models.Model):
+    _name = "hr.contract.advantage"
     _description = "Employee's Advantages on Contract"
 
     contract_id = fields.Many2one("hr.contract")

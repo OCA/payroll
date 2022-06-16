@@ -13,6 +13,21 @@
             <xpath expr="//field[@name='wage']" position="after">
                 <field name="schedule_pay" />
             </xpath>
+            <xpath expr="//group[@name='main_info']" position="inside">
+                <separator string="Contract Advantages" />
+                <field name="hr_contract_advantage_ids">
+                    <tree editable="bottom">
+                        <field
+                            name="advantage_template_id"
+                            options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"
+                        />
+                        <field name="advantage_template_code" />
+                        <field name="advantage_lower_bound" />
+                        <field name="advantage_upper_bound" />
+                        <field name="amount" />
+                    </tree>
+                </field>
+            </xpath>
         </field>
     </record>
 </odoo>

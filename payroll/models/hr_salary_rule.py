@@ -66,8 +66,8 @@ class HrSalaryRule(models.Model):
         required=True,
         default="""
             # Available variables:
-            #----------------------
-            # payslip: object containing the payslips
+            # ----------------------
+            # payslip: object containing the payslip
             # employee: hr.employee object
             # contract: hr.contract object
             # rules: object containing the rules code (previously computed)
@@ -75,8 +75,12 @@ class HrSalaryRule(models.Model):
             #    (sum of amount of all rules belonging to that category).
             # worked_days: object containing the computed worked days
             # inputs: object containing the computed inputs
-
-            # Note: returned value have to be set in the variable 'result'
+            # advantages: object containing the employee's contract advantages
+            #
+            # Note 1: Get worked_days / inputs / advantages by code,
+            # e.g. inputs.mycode, worked_days.mycode, advantages.mycode, categories.mycode
+            #
+            # Note 2: returned value have to be set in the variable 'result'
 
             result = rules.NET > categories.NET * 0.10""",
         help="Applied this rule for calculation if condition is true. You can "
@@ -110,17 +114,21 @@ class HrSalaryRule(models.Model):
         string="Python Code",
         default="""
             # Available variables:
-            #----------------------
-            # payslip: object containing the payslips
+            # ----------------------
+            # payslip: object containing the payslip
             # employee: hr.employee object
             # contract: hr.contract object
             # rules: object containing the rules code (previously computed)
             # categories: object containing the computed salary rule categories
             #    (sum of amount of all rules belonging to that category).
-            # worked_days: object containing the computed worked days.
-            # inputs: object containing the computed inputs.
-
-            # Note: returned value have to be set in the variable 'result'
+            # worked_days: object containing the computed worked days
+            # inputs: object containing the computed inputs
+            # advantages: object containing the employee's contract advantages
+            #
+            # Note 1: Get worked_days / inputs / advantages by code,
+            # e.g. inputs.mycode, worked_days.mycode, advantages.mycode, categories.mycode
+            #
+            # Note 2: returned value have to be set in the variable 'result'
 
             result = contract.wage * 0.10""",
     )
