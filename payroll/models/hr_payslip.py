@@ -440,18 +440,24 @@ class HrPayslip(models.Model):
         rules_dict = {}
         worked_days_dict = {}
         inputs_dict = {}
+        advantages_dict = {}
         blacklist = []
         payslip = self.env["hr.payslip"].browse(payslip_id)
         for worked_days_line in payslip.worked_days_line_ids:
             worked_days_dict[worked_days_line.code] = worked_days_line
         for input_line in payslip.input_line_ids:
             inputs_dict[input_line.code] = input_line
+        for advantage_line in payslip.contract_id.hr_contract_advantage_ids:
+            advantages_dict[
+                advantage_line.advantage_template_code
+            ] = advantage_line.amount
 
         categories = BrowsableObject(payslip.employee_id.id, {}, self.env)
         inputs = InputLine(payslip.employee_id.id, inputs_dict, self.env)
         worked_days = WorkedDays(payslip.employee_id.id, worked_days_dict, self.env)
         payslips = Payslips(payslip.employee_id.id, payslip, self.env)
         rules = BrowsableObject(payslip.employee_id.id, rules_dict, self.env)
+        advantages = BrowsableObject(payslip.employee_id.id, advantages_dict, self.env)
 
         baselocaldict = {
             "categories": categories,
@@ -459,6 +465,7 @@ class HrPayslip(models.Model):
             "payslip": payslips,
             "worked_days": worked_days,
             "inputs": inputs,
+            "advantages": advantages,
         }
         # get the ids of the structures on the contracts and their parent id
         # as well

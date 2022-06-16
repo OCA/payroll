@@ -31,10 +31,6 @@ class HrContract(models.Model):
     resource_calendar_id = fields.Many2one(
         required=True, help="Employee's working schedule."
     )
-    # Link with contract advantges templates
-    hr_contract_advantage_ids = fields.One2many(
-        "hr.contract.advantage", "contract_id", string="Payroll Advantages"
-    )
 
     def get_all_structures(self):
         """
