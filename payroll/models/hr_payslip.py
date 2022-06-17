@@ -372,14 +372,14 @@ class HrPayslip(models.Model):
                         "contract_id": contract.id,
                     },
                 )
-                current_leave_struct["number_of_hours"] -= hours
+                current_leave_struct["number_of_hours"] += hours
                 work_hours = calendar.get_work_hours_count(
                     tz.localize(datetime.combine(day, time.min)),
                     tz.localize(datetime.combine(day, time.max)),
                     compute_leaves=False,
                 )
                 if work_hours:
-                    current_leave_struct["number_of_days"] -= hours / work_hours
+                    current_leave_struct["number_of_days"] += hours / work_hours
 
             # compute worked days
             work_data = contract.employee_id._get_work_days_data(
