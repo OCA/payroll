@@ -34,7 +34,7 @@
         "report/report.xml",
         "views/res_config_settings_views.xml",
     ],
-    "demo": ["demo/hr_payroll_demo.xml"],
+    "demo": [],
     "application": True,
     "maintainers": ["appstogrow", "nimarosa"],
 }
