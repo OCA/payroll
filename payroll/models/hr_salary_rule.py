@@ -75,6 +75,8 @@ class HrSalaryRule(models.Model):
             #    (sum of amount of all rules belonging to that category).
             # worked_days: object containing the computed worked days
             # inputs: object containing the computed inputs
+            # payroll: object containing miscellaneous values related to payroll
+            # current_contract: object with values calculated from the current contract
 
             # Note: returned value have to be set in the variable 'result'
 
@@ -119,6 +121,8 @@ class HrSalaryRule(models.Model):
             #    (sum of amount of all rules belonging to that category).
             # worked_days: object containing the computed worked days.
             # inputs: object containing the computed inputs.
+            # payroll: object containing miscellaneous values related to payroll
+            # current_contract: object with values calculated from the current contract
 
             # Note: returned value have to be set in the variable 'result'
 
