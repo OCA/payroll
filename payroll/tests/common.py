@@ -10,6 +10,8 @@ class TestPayslipBase(TransactionCase):
     def setUp(self):
         super(TestPayslipBase, self).setUp()
 
+        self.Payslip = self.env["hr.payslip"]
+
         # Some salary rules references
         self.hra_rule_id = self.ref("payroll.hr_salary_rule_houserentallowance1")
         self.conv_rule_id = self.ref("payroll.hr_salary_rule_convanceallowance1")
@@ -17,6 +19,9 @@ class TestPayslipBase(TransactionCase):
         self.pf_rule_id = self.ref("payroll.hr_salary_rule_providentfund1")
         self.mv_rule_id = self.ref("payroll.hr_salary_rule_meal_voucher")
         self.comm_rule_id = self.ref("payroll.hr_salary_rule_sales_commission")
+        self.basic_rule_id = self.ref("payroll.hr_rule_basic")
+        self.gross_rule_id = self.ref("payroll.hr_rule_taxable")
+        self.net_rule_id = self.ref("payroll.hr_rule_net")
 
         # I create a new employee "Richard"
         self.richard_emp = self.env["hr.employee"].create(
@@ -42,6 +47,9 @@ class TestPayslipBase(TransactionCase):
                     (4, self.pf_rule_id),
                     (4, self.mv_rule_id),
                     (4, self.comm_rule_id),
+                    (4, self.basic_rule_id),
+                    (4, self.gross_rule_id),
+                    (4, self.net_rule_id),
                 ],
             }
         )
@@ -55,5 +63,11 @@ class TestPayslipBase(TransactionCase):
                 "wage": 5000.0,
                 "employee_id": self.richard_emp.id,
                 "struct_id": self.developer_pay_structure.id,
+                "kanban_state": "done",
             }
         )
+
+    def apply_contract_cron(self):
+        self.env.ref(
+            "hr_contract.ir_cron_data_contract_update_state"
+        ).method_direct_trigger()
