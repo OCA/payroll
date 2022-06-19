@@ -1,5 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from odoo.tests import Form
 from odoo.tools import test_reports
 
 from .common import TestPayslipBase
@@ -8,13 +9,17 @@ from .common import TestPayslipBase
 class TestPayslipFlow(TestPayslipBase):
     def test_00_payslip_flow(self):
         """Testing payslip flow and report printing"""
+
+        # I put all eligible contracts (including Richard's) in an "open" state
+        self.apply_contract_cron()
+
         # I create an employee Payslip
-        richard_payslip = self.env["hr.payslip"].create(
-            {"name": "Payslip of Richard", "employee_id": self.richard_emp.id}
-        )
+        frm = Form(self.Payslip)
+        frm.employee_id = self.richard_emp
+        richard_payslip = frm.save()
 
         payslip_input = self.env["hr.payslip.input"].search(
-            [("payslip_id", "=", richard_payslip.id)]
+            [("payslip_id", "=", richard_payslip.id), ("code", "=", "SALEURO")]
         )
         # I assign the amount to Input data
         payslip_input.write({"amount": 5.0})
@@ -33,6 +38,25 @@ class TestPayslipFlow(TestPayslipBase):
         }
         # I click on 'Compute Sheet' button on payslip
         richard_payslip.with_context(context).compute_sheet()
+
+        # Find the 'NET' payslip line and check that it adds up
+        # salary + HRA + CA + MA + SALE - PF - PT
+        work100 = richard_payslip.worked_days_line_ids.filtered(
+            lambda x: x.code == "WORK100"
+        )
+        line = richard_payslip.line_ids.filtered(lambda l: l.code == "NET")
+        self.assertEqual(len(line), 1, "I found the 'NET' line")
+        self.assertEqual(
+            line[0].amount,
+            5000.0
+            + (0.4 * 5000)
+            + 800.0
+            + (work100.number_of_days * 10)
+            + 0.05
+            - 200.0
+            - (0.125 * 5000),
+            "The 'NET' amount equals salary plus allowances - deductions",
+        )
 
         # Then I click on the 'Confirm' button on payslip
         richard_payslip.action_payslip_done()
