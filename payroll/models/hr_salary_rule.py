@@ -197,10 +197,16 @@ class HrSalaryRule(models.Model):
                 safe_eval(
                     self.amount_python_compute, localdict, mode="exec", nocopy=True
                 )
+                result_qty = 1.0
+                result_rate = 100.0
+                if "result_qty" in localdict:
+                    result_qty = localdict["result_qty"]
+                if "result_rate" in localdict:
+                    result_rate = localdict["result_rate"]
                 return (
                     float(localdict["result"]),
-                    "result_qty" in localdict and localdict["result_qty"] or 1.0,
-                    "result_rate" in localdict and localdict["result_rate"] or 100.0,
+                    float(result_qty),
+                    float(result_rate),
                 )
             except Exception as ex:
                 raise UserError(
