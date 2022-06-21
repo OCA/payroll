@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="advantages_hr_contract_view_form" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.inherit.advantages</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main_info']" position="inside">
+                <separator string="Contract Advantages" />
+                <field name="advantages_ids">
+                    <tree editable="bottom">
+                        <field
+                            name="advantage_template_id"
+                            options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"
+                        />
+                        <field name="advantage_template_code" />
+                        <field name="advantage_lower_bound" />
+                        <field name="advantage_upper_bound" />
+                        <field name="amount" />
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>
