@@ -1,0 +1,3 @@
+- Set the advantages templates in the payroll module with lower and upper bounds and default value.
+- Go to the employee contract and add the advantages that you want for this contract, default value will be populated but you can change it.
+- Then in the salary rules, access this value using current_contract.advantages.[ADVANTAGE_CODE] (without brackets)
