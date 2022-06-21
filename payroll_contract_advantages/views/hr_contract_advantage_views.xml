@@ -47,7 +47,7 @@
     <menuitem
         id="hr_contract_advantage_template_menu_action"
         action="hr_contract_advantage_template_action"
-        parent="payroll_menu_configuration"
+        parent="payroll.payroll_menu_configuration"
         sequence="50"
     />
 </odoo>
