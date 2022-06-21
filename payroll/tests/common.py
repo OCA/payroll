@@ -11,17 +11,146 @@ class TestPayslipBase(TransactionCase):
         super(TestPayslipBase, self).setUp()
 
         self.Payslip = self.env["hr.payslip"]
+        self.RuleInput = self.env["hr.rule.input"]
+        self.SalaryRule = self.env["hr.salary.rule"]
+        self.SalaryRuleCateg = self.env["hr.salary.rule.category"]
 
-        # Some salary rules references
-        self.hra_rule_id = self.ref("payroll.hr_salary_rule_houserentallowance1")
-        self.conv_rule_id = self.ref("payroll.hr_salary_rule_convanceallowance1")
-        self.prof_tax_rule_id = self.ref("payroll.hr_salary_rule_professionaltax1")
-        self.pf_rule_id = self.ref("payroll.hr_salary_rule_providentfund1")
-        self.mv_rule_id = self.ref("payroll.hr_salary_rule_meal_voucher")
-        self.comm_rule_id = self.ref("payroll.hr_salary_rule_sales_commission")
-        self.basic_rule_id = self.ref("payroll.hr_rule_basic")
-        self.gross_rule_id = self.ref("payroll.hr_rule_taxable")
-        self.net_rule_id = self.ref("payroll.hr_rule_net")
+        # Salary Rule Categories
+        #
+        self.categ_basic = self.SalaryRuleCateg.create(
+            {
+                "name": "Basic",
+                "code": "BASIC",
+            }
+        )
+        self.categ_alw = self.SalaryRuleCateg.create(
+            {
+                "name": "Allowance",
+                "code": "ALW",
+            }
+        )
+        self.categ_gross = self.SalaryRuleCateg.create(
+            {
+                "name": "Gross",
+                "code": "GROSS",
+            }
+        )
+        self.categ_ded = self.SalaryRuleCateg.create(
+            {
+                "name": "Deduction",
+                "code": "DED",
+            }
+        )
+        self.categ_net = self.SalaryRuleCateg.create(
+            {
+                "name": "NET",
+                "code": "NET",
+            }
+        )
+
+        #
+        # Salary Rules
+        #
+
+        # Earnings
+        #
+        self.rule_basic = self.SalaryRule.create(
+            {
+                "name": "Basic Salary",
+                "code": "BASIC",
+                "sequence": 1,
+                "category_id": self.categ_basic.id,
+                "condition_select": "none",
+                "amount_select": "code",
+                "amount_python_compute": "result = contract.wage",
+            }
+        )
+        self.rule_hra = self.SalaryRule.create(
+            {
+                "name": "House Rent Allowance",
+                "code": "HRA",
+                "sequence": 5,
+                "category_id": self.categ_alw.id,
+                "condition_select": "none",
+                "amount_select": "percentage",
+                "amount_percentage": 40.0,
+                "amount_percentage_base": "contract.wage",
+            }
+        )
+        self.rule_meal = self.SalaryRule.create(
+            {
+                "name": "Meal Voucher",
+                "code": "MA",
+                "sequence": 16,
+                "category_id": self.categ_alw.id,
+                "condition_select": "none",
+                "amount_select": "fix",
+                "amount_fix": 10.0,
+                "quantity": "worked_days.WORK100 and worked_days.WORK100.number_of_days",
+            }
+        )
+        self.rule_commission = self.SalaryRule.create(
+            {
+                "name": "Get 1% of sales",
+                "code": "SALE",
+                "sequence": 17,
+                "category_id": self.categ_alw.id,
+                "condition_select": "none",
+                "amount_select": "code",
+                "amount_python_compute": "result = "
+                "(inputs.SALEURO and inputs.SALEURO.amount) * 0.01",
+            }
+        )
+        self.RuleInput.create(
+            {
+                "name": "Sales to Europe",
+                "code": "SALEURO",
+                "input_id": self.rule_commission.id,
+            }
+        )
+
+        # Gross
+        #
+        self.rule_gross = self.SalaryRule.create(
+            {
+                "name": "Gross",
+                "code": "GROSS",
+                "sequence": 100,
+                "category_id": self.categ_gross.id,
+                "condition_select": "none",
+                "amount_select": "code",
+                "amount_python_compute": "result = categories.BASIC + categories.ALW",
+            }
+        )
+
+        # Deductions
+        #
+        self.rule_proftax = self.SalaryRule.create(
+            {
+                "name": "Professional Tax",
+                "code": "PT",
+                "sequence": 150,
+                "category_id": self.categ_ded.id,
+                "condition_select": "none",
+                "amount_select": "fix",
+                "amount_fix": -200.0,
+            }
+        )
+
+        # Net
+        #
+        self.rule_net = self.SalaryRule.create(
+            {
+                "name": "Net",
+                "code": "NET",
+                "sequence": 200,
+                "category_id": self.categ_net.id,
+                "condition_select": "none",
+                "amount_select": "code",
+                "amount_python_compute": "result = categories.BASIC "
+                "+ categories.ALW + categories.DED",
+            }
+        )
 
         # I create a new employee "Richard"
         self.richard_emp = self.env["hr.employee"].create(
@@ -41,15 +170,13 @@ class TestPayslipBase(TransactionCase):
                 "code": "SD",
                 "company_id": self.ref("base.main_company"),
                 "rule_ids": [
-                    (4, self.hra_rule_id),
-                    (4, self.conv_rule_id),
-                    (4, self.prof_tax_rule_id),
-                    (4, self.pf_rule_id),
-                    (4, self.mv_rule_id),
-                    (4, self.comm_rule_id),
-                    (4, self.basic_rule_id),
-                    (4, self.gross_rule_id),
-                    (4, self.net_rule_id),
+                    (4, self.rule_hra.id),
+                    (4, self.rule_proftax.id),
+                    (4, self.rule_meal.id),
+                    (4, self.rule_commission.id),
+                    (4, self.rule_basic.id),
+                    (4, self.rule_gross.id),
+                    (4, self.rule_net.id),
                 ],
             }
         )
