@@ -7,11 +7,9 @@
     "version": "12.0.1.0.0",
     "license": "AGPL-3",
     "category": "Human Resources",
-    "website": "https://github.com/OCA/hr",
+    "website": "https://github.com/OCA/payroll",
     "author": "Eficent, Odoo Community Association (OCA)",
-    "depends": [
-        'hr_payroll_cancel'
-    ],
+    "depends": ["hr_payroll_cancel"],
     "data": [
         "wizard/hr_payslip_change_state_view.xml",
     ],
