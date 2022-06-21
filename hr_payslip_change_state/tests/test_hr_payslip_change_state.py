@@ -3,36 +3,25 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import UserError
-from odoo.tests.common import TransactionCase
+
+from odoo.addons.hr_payroll_cancel.tests.test_hr_payroll_cancel import (
+    TestHrPayrollCancel,
+)
 
 
-class TestHrPayslipChangeState(TransactionCase):
+class TestHrPayslipChangeState(TestHrPayrollCancel):
     def setUp(self):
         super(TestHrPayslipChangeState, self).setUp()
-        self.payslip_model = self.env["hr.payslip"]
-        self.contract_model = self.env["hr.contract"]
         self.tested_model = self.env["hr.payslip.change.state"]
 
     def test_change_state(self):
-        payslip_model = self.payslip_model
+        hr_payslip = self._create_payslip()
+        self._update_account_in_rule(self.account_debit, self.account_credit)
         tested_model = self.tested_model
-        contract = self.contract_model.create(
-            {"employee_id": 1, "name": "demo", "wage": 10000, "struct_id": 1}
-        )
-
-        payslip = payslip_model.create(
-            {
-                "employee_id": 1,
-                "name": "test_payslip",
-                "contract_id": contract.id,
-                "struct_id": 1,
-            }
-        )
-
-        context = {"active_ids": [payslip.id]}
+        context = {"active_ids": [hr_payslip.id]}
         action = tested_model.with_context(context).create({"state": "verify"})
 
-        # By default a payslip is on draft state
+        # By default, a payslip is on draft state
         action.change_state_confirm()
 
         # trying to set it to wrong states
@@ -41,13 +30,13 @@ class TestHrPayslipChangeState(TransactionCase):
             action.change_state_confirm()
 
         # Now the payslip should be computed but in state draft
-        self.assertEqual(payslip.state, "draft")
-        self.assertNotEqual(payslip.number, None)
+        self.assertEqual(hr_payslip.state, "draft")
+        self.assertNotEqual(hr_payslip.number, None)
         action.write({"state": "done"})
         action.change_state_confirm()
 
         # Now the payslip should be confirmed
-        self.assertEqual(payslip.state, "done")
+        self.assertEqual(hr_payslip.state, "done")
 
         # trying to set it to wrong states
         with self.assertRaises(UserError):
@@ -64,7 +53,7 @@ class TestHrPayslipChangeState(TransactionCase):
         action.change_state_confirm()
 
         # Now the payslip should be canceled
-        self.assertEqual(payslip.state, "cancel")
+        self.assertEqual(hr_payslip.state, "cancel")
 
         # trying to set it to wrong states
         with self.assertRaises(UserError):
@@ -79,5 +68,5 @@ class TestHrPayslipChangeState(TransactionCase):
 
         action.write({"state": "draft"})
         action.change_state_confirm()
-        # again, it shoud be draft. Also checking if wrong changes happened
-        self.assertEqual(payslip.state, "draft")
+        # again, it should be draft. Also checking if wrong changes happened
+        self.assertEqual(hr_payslip.state, "draft")

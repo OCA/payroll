@@ -1,7 +1,7 @@
 # Copyright 2019 - Eficent http://www.eficent.com/
 # Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
@@ -26,7 +26,6 @@ class HrPayslipChangeState(models.TransientModel):
              \n* When user cancel payslip the status is 'Rejected'.",
     )
 
-    @api.multi
     def change_state_confirm(self):
         record_ids = self.env.context.get("active_ids", False)
         payslip_obj = self.env["hr.payslip"]
@@ -81,7 +80,6 @@ class HrPayslipChangeState(models.TransientModel):
         return {
             "domain": "[('id','in', [" + ",".join(map(str, record_ids)) + "])]",
             "name": _("Payslips"),
-            "view_type": "form",
             "view_mode": "tree,form",
             "res_model": "hr.payslip",
             "view_id": False,

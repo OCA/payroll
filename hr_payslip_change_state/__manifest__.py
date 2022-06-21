@@ -4,7 +4,7 @@
 {
     "name": "Human Resources Payslip Change State",
     "summary": "Change the state of many payslips at a time",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "category": "Human Resources",
     "website": "https://github.com/OCA/payroll",
@@ -12,6 +12,7 @@
     "depends": ["hr_payroll_cancel"],
     "data": [
         "wizard/hr_payslip_change_state_view.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
 }
