@@ -40,7 +40,7 @@ class TestPayslipFlow(TestPayslipBase):
         richard_payslip.with_context(context).compute_sheet()
 
         # Find the 'NET' payslip line and check that it adds up
-        # salary + HRA + CA + MA + SALE - PF - PT
+        # salary + HRA + MA + SALE - PT
         work100 = richard_payslip.worked_days_line_ids.filtered(
             lambda x: x.code == "WORK100"
         )
@@ -48,13 +48,7 @@ class TestPayslipFlow(TestPayslipBase):
         self.assertEqual(len(line), 1, "I found the 'NET' line")
         self.assertEqual(
             line[0].amount,
-            5000.0
-            + (0.4 * 5000)
-            + 800.0
-            + (work100.number_of_days * 10)
-            + 0.05
-            - 200.0
-            - (0.125 * 5000),
+            5000.0 + (0.4 * 5000) + (work100.number_of_days * 10) + 0.05 - 200.0,
             "The 'NET' amount equals salary plus allowances - deductions",
         )
 
