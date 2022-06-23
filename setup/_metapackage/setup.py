@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-hr_payroll_cancel',
+        'odoo14-addon-hr_payslip_change_state',
         'odoo14-addon-payroll',
         'odoo14-addon-payroll_account',
     ],
