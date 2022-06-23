@@ -21,7 +21,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [hr_payroll_cancel](hr_payroll_cancel/) | 14.0.1.0.1 |  | Hr Payroll Cancel
-[payroll](payroll/) | 14.0.1.4.3 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your employee payroll records
+[payroll](payroll/) | 14.0.1.4.4 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your employee payroll records
 [payroll_account](payroll_account/) | 14.0.1.1.2 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your payroll to accounting
 
 [//]: # (end addons)
