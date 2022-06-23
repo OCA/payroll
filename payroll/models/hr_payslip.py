@@ -10,15 +10,31 @@ from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
 
 
-# These classes are used in the _get_payslip_lines() method
-class BrowsableObject(object):
-    def __init__(self, employee_id, vals_dict, env):
-        self.employee_id = employee_id
+class BaseBrowsableObject(object):
+    def __init__(self, vals_dict):
+        self.__dict__["base_fields"] = ["base_fields", "dict"]
         self.dict = vals_dict
-        self.env = env
 
     def __getattr__(self, attr):
         return attr in self.dict and self.dict.__getitem__(attr) or 0.0
+
+    def __setattr__(self, attr, value):
+        _fields = self.__dict__["base_fields"]
+        if attr in _fields:
+            return super().__setattr__(attr, value)
+        self.__dict__["dict"][attr] = value
+
+    def __str__(self):
+        return str(self.__dict__)
+
+
+# These classes are used in the _get_payslip_lines() method
+class BrowsableObject(BaseBrowsableObject):
+    def __init__(self, employee_id, vals_dict, env):
+        super().__init__(vals_dict)
+        self.base_fields += ["employee_id", "env"]
+        self.employee_id = employee_id
+        self.env = env
 
 
 class InputLine(BrowsableObject):
@@ -425,6 +441,95 @@ class HrPayslip(models.Model):
                 )
         return res
 
+    def _init_payroll_dict_contracts(self):
+        return {
+            "count": 0,
+        }
+
+    def get_payroll_dict(self, contracts):
+        """Setup miscellaneous dictionary values.
+        Other modules may overload this method to inject discreet values into
+        the salary rules. Such values will be available to the salary rule
+        under the `payroll.` prefix.
+
+        This method is evaluated once per payslip.
+        :param contracts: Recordset of all hr.contract records in this payslip
+        :return: a dictionary of discreet values and/or Browsable Objects
+        """
+        self.ensure_one()
+
+        res = {
+            # In salary rules refer to this as: payroll.contracts.count
+            "contracts": BaseBrowsableObject(self._init_payroll_dict_contracts()),
+        }
+        res["contracts"].count = len(contracts)
+
+        return res
+
+    def get_baselocaldict(self, contracts):
+        """Basic dictionary values that are useful in most salary rules. Inherited
+        classes that overload this method should use the name of the module as
+        the dictionary key.
+
+        This method is evaluated once per payslip.
+
+        :param contracts: Recordset of all hr.contract records in this payslip
+        :return: a dictionary of discreet values and/or Browsable Objects
+        """
+        self.ensure_one()
+
+        worked_days_dict = {}
+        inputs_dict = {}
+        payslip = self
+        for worked_days_line in payslip.worked_days_line_ids:
+            worked_days_dict[worked_days_line.code] = worked_days_line
+        for input_line in payslip.input_line_ids:
+            inputs_dict[input_line.code] = input_line
+        inputs = InputLine(payslip.employee_id.id, inputs_dict, self.env)
+        worked_days = WorkedDays(payslip.employee_id.id, worked_days_dict, self.env)
+        payslips = Payslips(payslip.employee_id.id, payslip, self.env)
+        payroll_dict = BrowsableObject(
+            payslip.employee_id.id, payslip.get_payroll_dict(contracts), self.env
+        )
+
+        baselocaldict = {
+            "payslip": payslips,
+            "worked_days": worked_days,
+            "inputs": inputs,
+            "payroll": payroll_dict,
+        }
+        return baselocaldict
+
+    def get_contract_dict(self, contract, contracts):
+        """Contract dependent dictionary values.
+        This method is called just before the salary rules are evaluated for
+        contract.
+
+        This method is evaluated once for every contract in the payslip.
+
+        :param contract: The current hr.contract being processed
+        :param contracts: Recordset of all hr.contract records in this payslip
+        :return: a dictionary of discreet values and/or Browsable Objects
+        """
+        self.ensure_one()
+
+        # res = super().get_contract_dict(contract, contracts)
+        # res.update({
+        #     # In salary rules refer to these as:
+        #     #     current_contract.foo
+        #     #     current_contract.foo.bar.baz
+        #     "foo": 0,
+        #     "bar": BaseBrowsableObject(
+        #         {
+        #             "baz": 0
+        #         }
+        #     )
+        # })
+        # <do something to update values in res>
+        # return res
+
+        return {}
+
     @api.model
     def _get_payslip_lines(self, contract_ids, payslip_id):
         def _sum_salary_rule_category(localdict, category, amount):
@@ -440,35 +545,28 @@ class HrPayslip(models.Model):
 
             return localdict
 
+        payslip = self.env["hr.payslip"].browse(payslip_id)
+        contracts = self.env["hr.contract"].browse(contract_ids)
+
         # we keep a dict with the result because a value can be overwritten by
         # another rule with the same code
         result_dict = {}
         rules_dict = {}
-        worked_days_dict = {}
-        inputs_dict = {}
+        contract_dict = {}
         blacklist = []
-        payslip = self.env["hr.payslip"].browse(payslip_id)
-        for worked_days_line in payslip.worked_days_line_ids:
-            worked_days_dict[worked_days_line.code] = worked_days_line
-        for input_line in payslip.input_line_ids:
-            inputs_dict[input_line.code] = input_line
-
         categories = BrowsableObject(payslip.employee_id.id, {}, self.env)
-        inputs = InputLine(payslip.employee_id.id, inputs_dict, self.env)
-        worked_days = WorkedDays(payslip.employee_id.id, worked_days_dict, self.env)
-        payslips = Payslips(payslip.employee_id.id, payslip, self.env)
         rules = BrowsableObject(payslip.employee_id.id, rules_dict, self.env)
+        current_contract = BrowsableObject(
+            payslip.employee_id.id, contract_dict, self.env
+        )
 
-        baselocaldict = {
-            "categories": categories,
-            "rules": rules,
-            "payslip": payslips,
-            "worked_days": worked_days,
-            "inputs": inputs,
-        }
+        baselocaldict = payslip.get_baselocaldict(contracts)
+        baselocaldict["categories"] = categories
+        baselocaldict["rules"] = rules
+        baselocaldict["current_contract"] = current_contract
+
         # get the ids of the structures on the contracts and their parent id
         # as well
-        contracts = self.env["hr.contract"].browse(contract_ids)
         if len(contracts) == 1 and payslip.struct_id:
             structure_ids = list(set(payslip.struct_id._get_parent_structure().ids))
         else:
@@ -483,6 +581,10 @@ class HrPayslip(models.Model):
 
         for contract in contracts:
             employee = contract.employee_id
+            contract_dict = payslip.get_contract_dict(contract, contracts)
+            baselocaldict["current_contract"] = BrowsableObject(
+                payslip.employee_id.id, contract_dict, self.env
+            )
             localdict = dict(baselocaldict, employee=employee, contract=contract)
             for rule in sorted_rules:
                 key = rule.code + "-" + str(contract.id)
@@ -534,6 +636,7 @@ class HrPayslip(models.Model):
                 else:
                     # blacklist this rule and its children
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
+            baselocaldict["current_contract"] = {}
 
         return list(result_dict.values())
 
