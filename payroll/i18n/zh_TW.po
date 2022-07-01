@@ -606,6 +606,15 @@ msgid "Defines the frequency of the wage payment."
 msgstr "定義薪資支付的頻率。"
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__struct_id
+msgid ""
+"Defines the rules that have to be applied to this payslip batch, accordingly "
+"to the contract chosen. If you let empty the field contract, this field "
+"isn't mandatory anymore and thus the rules applied will be all the rules set "
+"on the structure of all contracts of the employee valid for the chosen period"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
 msgid ""
 "Defines the rules that have to be applied to this payslip, accordingly to "
@@ -1541,6 +1550,11 @@ msgstr "參照"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Refetch Payslip Data"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "退款"
 
@@ -1751,6 +1765,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__struct_id
 msgid "Structure"
 msgstr "薪資結構"
 
@@ -1968,6 +1983,11 @@ msgstr "您必須設定一份合同以創建薪資單。"
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "結果將影響一個變量"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "total_net"
+msgstr ""
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "薪資規則 %s (%s) Python代碼定義錯誤。"
