@@ -614,6 +614,15 @@ msgid "Defines the frequency of the wage payment."
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__struct_id
+msgid ""
+"Defines the rules that have to be applied to this payslip batch, accordingly "
+"to the contract chosen. If you let empty the field contract, this field "
+"isn't mandatory anymore and thus the rules applied will be all the rules set "
+"on the structure of all contracts of the employee valid for the chosen period"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
 msgid ""
 "Defines the rules that have to be applied to this payslip, accordingly to "
@@ -1545,6 +1554,11 @@ msgstr "Erreferentzia"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Refetch Payslip Data"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "diru-itzultze"
 
@@ -1755,6 +1769,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__struct_id
 msgid "Structure"
 msgstr "Egitura"
 
@@ -1968,6 +1983,11 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage_base
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "total_net"
 msgstr ""
 
 #~ msgid "Account"

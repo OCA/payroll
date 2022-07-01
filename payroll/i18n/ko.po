@@ -608,6 +608,15 @@ msgid "Defines the frequency of the wage payment."
 msgstr "급여 지급 빈도를 정의합니다."
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__struct_id
+msgid ""
+"Defines the rules that have to be applied to this payslip batch, accordingly "
+"to the contract chosen. If you let empty the field contract, this field "
+"isn't mandatory anymore and thus the rules applied will be all the rules set "
+"on the structure of all contracts of the employee valid for the chosen period"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
 msgid ""
 "Defines the rules that have to be applied to this payslip, accordingly to "
@@ -1550,6 +1559,11 @@ msgstr "참조"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Refetch Payslip Data"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "환불"
 
@@ -1760,6 +1774,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__struct_id
 msgid "Structure"
 msgstr "구조"
 
@@ -1980,6 +1995,11 @@ msgstr "급여 명세를 만들기 위해서는 근로 계약을 설정해야 �
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "결과는 변수에 영향을 받을 것입니다"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "total_net"
+msgstr ""
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "%s 급여 규정(%s)에 대해 잘못된 파이썬 코드가 정의되었습니다."
