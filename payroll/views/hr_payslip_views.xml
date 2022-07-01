@@ -106,6 +106,12 @@
                         class="oe_highlight"
                     />
                     <button
+                        string="Refetch Payslip Data"
+                        name="onchange_employee"
+                        type="object"
+                        states="draft"
+                    />
+                    <button
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
@@ -142,9 +148,19 @@
                     <group col="4">
                         <label for="date_from" string="Period" />
                         <div>
-                            <field name="date_from" class="oe_inline" />
+                            <field
+                                name="date_from"
+                                widget="daterange"
+                                class="oe_inline"
+                                options="{'related_end_date': 'date_to'}"
+                            />
                             -
-                            <field name="date_to" class="oe_inline" />
+                            <field
+                                name="date_to"
+                                widget="daterange"
+                                class="oe_inline"
+                                options="{'related_start_date': 'date_from'}"
+                            />
                         </div>
                         <field
                             name="contract_id"
@@ -171,7 +187,11 @@
                                         sum="Total Working Days"
                                     />
                                     <field name="number_of_hours" />
-                                    <field name="contract_id" />
+                                    <field
+                                        name="contract_id"
+                                        domain="[('employee_id','=',parent.employee_id),('date_start','&lt;=',parent.date_to),'|',('date_end','&gt;=',parent.date_from),('date_end','=',False)]"
+                                        context="{'default_employee_id': parent.employee_id}"
+                                    />
                                     <field name="sequence" invisible="True" />
                                 </tree>
                                 <form string="Worked Day">
@@ -192,7 +212,11 @@
                                     <field name="code" />
                                     <field name="amount_qty" />
                                     <field name="amount" />
-                                    <field name="contract_id" />
+                                    <field
+                                        name="contract_id"
+                                        domain="[('employee_id','=',parent.employee_id),('date_start','&lt;=',parent.date_to),'|',('date_end','&gt;=',parent.date_from),('date_end','=',False)]"
+                                        context="{'default_employee_id': parent.employee_id}"
+                                    />
                                     <field name="sequence" invisible="True" />
                                 </tree>
                                 <form string="Payslip Line">
@@ -213,15 +237,21 @@
                                     editable="bottom"
                                     decoration-info="total == 0"
                                 >
+                                    <field name="sequence" invisible="1" />
                                     <field name="name" />
                                     <field name="code" />
                                     <field name="category_id" />
-                                    <field name="sequence" invisible="1" />
+                                    <field name="salary_rule_id" />
                                     <field name="quantity" />
                                     <field name="rate" />
-                                    <field name="salary_rule_id" />
                                     <field name="amount" />
-                                    <field name="total" />
+                                    <field
+                                        name="total"
+                                        decoration-bf="1"
+                                        decoration-danger="0 > total"
+                                        decoration-success="total > 0"
+                                        sum="total_net"
+                                    />
                                 </tree>
                                 <form string="Payslip Line">
                                     <group col="4">
@@ -241,6 +271,7 @@
                         <page string="Details By Salary Rule Category">
                             <field
                                 name="details_by_salary_rule_category"
+                                groupby='category_id'
                                 context="{'group_by':'category_id'}"
                                 domain="[('appears_on_payslip', '=', True)]"
                             >
@@ -248,10 +279,15 @@
                                     string="Payslip Lines"
                                     decoration-info="total == 0"
                                 >
-                                    <field name="category_id" />
+                                    <field name="category_id" decoration-bf="1" />
+                                    <field name="code" widget="badge" />
                                     <field name="name" />
-                                    <field name="code" />
-                                    <field name="total" />
+                                    <field
+                                        name="total"
+                                        decoration-bf="1"
+                                        decoration-danger="0 > total"
+                                        decoration-success="total > 0"
+                                    />
                                 </tree>
                             </field>
                         </page>

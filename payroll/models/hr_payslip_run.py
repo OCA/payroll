@@ -52,6 +52,17 @@ class HrPayslipRun(models.Model):
         help="If its checked, indicates that all payslips generated from here "
         "are refund payslips.",
     )
+    struct_id = fields.Many2one(
+        "hr.payroll.structure",
+        string="Structure",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        help="Defines the rules that have to be applied to this payslip batch, "
+        "accordingly to the contract chosen. If you let empty the field "
+        "contract, this field isn't mandatory anymore and thus the rules "
+        "applied will be all the rules set on the structure of all contracts "
+        "of the employee valid for the chosen period",
+    )
 
     def draft_payslip_run(self):
         return self.write({"state": "draft"})
