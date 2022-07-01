@@ -608,6 +608,15 @@ msgid "Defines the frequency of the wage payment."
 msgstr "Цалингийн төлбөрийн дараалал тодорхойлох"
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__struct_id
+msgid ""
+"Defines the rules that have to be applied to this payslip batch, accordingly "
+"to the contract chosen. If you let empty the field contract, this field "
+"isn't mandatory anymore and thus the rules applied will be all the rules set "
+"on the structure of all contracts of the employee valid for the chosen period"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
 msgid ""
 "Defines the rules that have to be applied to this payslip, accordingly to "
@@ -1555,6 +1564,11 @@ msgstr "Дугаар"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Refetch Payslip Data"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "Төлбөр буцаалт"
 
@@ -1765,6 +1779,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__struct_id
 msgid "Structure"
 msgstr "Бүтэц"
 
@@ -1984,6 +1999,11 @@ msgstr "Цалингийн хуудсын мөр үүсгэхийн тулд г�
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__amount_percentage_base
 msgid "result will be affected to a variable"
 msgstr "үр дүн нь хувьсагчид нөлөөлнө"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "total_net"
+msgstr ""
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "%s (%s) цалингийн дүрэмд буруу Python код тодорхойлогдсон байна."
