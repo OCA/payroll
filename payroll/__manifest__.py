@@ -28,6 +28,7 @@
         "views/hr_payslip_views.xml",
         "views/hr_payslip_run_views.xml",
         "views/hr_employee_views.xml",
+        "views/hr_rule_parameter_views.xml",
         "views/report_contributionregister.xml",
         "views/report_payslip.xml",
         "views/report_payslipdetails.xml",
