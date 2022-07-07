@@ -11,14 +11,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-10 10:10+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Mariana Santos Romo <msn@odoo.com>, 2019\n"
+"PO-Revision-Date: 2022-07-07 22:06+0000\n"
+"Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: payroll_account
 #: model_terms:ir.ui.view,arch_db:payroll_account.hr_contract_view_form
@@ -48,7 +49,7 @@ msgstr "Cuenta analítica"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
@@ -75,7 +76,7 @@ msgstr "Cuenta deudora"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__display_name
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_contract
@@ -95,13 +96,14 @@ msgstr "Generar las nóminas para todos los empleados seleccionados"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: payroll_account
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
 msgid "Keep empty to use the period of the validation(Payslip) date."
 msgstr ""
-"Deje en blanco para usar el período de la fecha de validación de la nómina"
+"Deje en blanco para usar el período de la fecha de validación de la "
+"liquidación."
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_contract____last_update
@@ -111,7 +113,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run____last_update
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modificación"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
@@ -156,7 +158,7 @@ msgstr "Impuesto"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
 msgid "Tax lines"
-msgstr ""
+msgstr "Lineas de impuestos"
 
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
