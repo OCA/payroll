@@ -14,6 +14,7 @@ class TestPayslipBase(TransactionCase):
         self.RuleInput = self.env["hr.rule.input"]
         self.SalaryRule = self.env["hr.salary.rule"]
         self.SalaryRuleCateg = self.env["hr.salary.rule.category"]
+        self.Contract = self.env["hr.contract"]
 
         # Salary Rule Categories
         #

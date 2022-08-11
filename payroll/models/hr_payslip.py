@@ -388,6 +388,9 @@ class HrPayslip(models.Model):
         @return: returns a list containing the leave inputs for the period
         of the payslip. One record per leave type.
         """
+        leaves_positive = (
+            self.env["ir.config_parameter"].sudo().get_param("payroll.leaves_positive")
+        )
         leaves = {}
         calendar = contract.resource_calendar_id
         tz = timezone(calendar.tz)
@@ -407,14 +410,20 @@ class HrPayslip(models.Model):
                     "contract_id": contract.id,
                 },
             )
-            current_leave_struct["number_of_hours"] -= hours
+            if leaves_positive:
+                current_leave_struct["number_of_hours"] += hours
+            else:
+                current_leave_struct["number_of_hours"] -= hours
             work_hours = calendar.get_work_hours_count(
                 tz.localize(datetime.combine(day, time.min)),
                 tz.localize(datetime.combine(day, time.max)),
                 compute_leaves=False,
             )
             if work_hours:
-                current_leave_struct["number_of_days"] -= hours / work_hours
+                if leaves_positive:
+                    current_leave_struct["number_of_days"] += hours / work_hours
+                else:
+                    current_leave_struct["number_of_days"] -= hours / work_hours
         return leaves.values()
 
     def _compute_worked_days(self, contract, day_from, day_to):
