@@ -683,6 +683,11 @@ msgid "Display Name"
 msgstr "Nom affiché"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Display non-negative values for leaves in payslip worked days lines."
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__done
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -1074,6 +1079,11 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__write_date
 msgid "Last Updated on"
 msgstr "Dernière mise à jour le"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
+msgid "Leaves with positive values"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule_category__parent_id
@@ -1913,6 +1923,13 @@ msgid "Used to display the salary rule on payslip."
 msgstr "Utilisé pour montrer la règle de salaire sur la fiche de paie."
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__leaves_positive
+msgid ""
+"Values for leaves (days and hours fields) should be positive instead of "
+"negative."
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__parameter_version_ids
 #: model_terms:ir.ui.view,arch_db:payroll.hr_rule_parameter_view_form
 msgid "Versions"
@@ -1947,6 +1964,7 @@ msgstr "Jour travaillé"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Worked Days"
 msgstr "Jours travaillés"
 
