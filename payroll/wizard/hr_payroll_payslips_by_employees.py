@@ -18,15 +18,16 @@ class HrPayslipEmployees(models.TransientModel):
             [run_data] = (
                 self.env["hr.payslip.run"]
                 .browse(active_id)
-                .read(["date_start", "date_end", "credit_note"])
+                .read(["date_start", "date_end", "credit_note", "struct_id"])
             )
         from_date = run_data.get("date_start")
         to_date = run_data.get("date_end")
+        struct_id = run_data.get("struct_id")
         if not data["employee_ids"]:
             raise UserError(_("You must select employee(s) to generate payslip(s)."))
         for employee in self.env["hr.employee"].browse(data["employee_ids"]):
             slip_data = self.env["hr.payslip"].get_payslip_vals(
-                from_date, to_date, employee.id, contract_id=False
+                from_date, to_date, employee.id, contract_id=False, struct_id=struct_id
             )
             res = {
                 "employee_id": employee.id,
@@ -46,5 +47,6 @@ class HrPayslipEmployees(models.TransientModel):
                 "company_id": employee.company_id.id,
             }
             payslips += self.env["hr.payslip"].create(res)
+        payslips._compute_name()
         payslips.compute_sheet()
         return {"type": "ir.actions.act_window_close"}

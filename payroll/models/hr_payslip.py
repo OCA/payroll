@@ -148,7 +148,7 @@ class HrPayslip(models.Model):
         required=True,
         default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
         states={"draft": [("readonly", False)]},
-        tracking=1,
+        tracking=True,
     )
     date_to = fields.Date(
         string="Date To",
@@ -158,7 +158,7 @@ class HrPayslip(models.Model):
             (datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()
         ),
         states={"draft": [("readonly", False)]},
-        tracking=1,
+        tracking=True,
     )
     # this is chaos: 4 states are defined, 3 are used ('verify' isn't) and 5
     # exist ('confirm' seems to have existed)
@@ -174,7 +174,7 @@ class HrPayslip(models.Model):
         readonly=True,
         copy=False,
         default="draft",
-        tracking=1,
+        tracking=True,
         help="""* When the payslip is created the status is \'Draft\'
         \n* If the payslip is under verification, the status is \'Waiting\'.
         \n* If the payslip is confirmed then status is set to \'Done\'.
@@ -217,12 +217,16 @@ class HrPayslip(models.Model):
         states={"draft": [("readonly", False)]},
     )
     note = fields.Text(
-        string="Internal Note", readonly=True, states={"draft": [("readonly", False)]}
+        string="Internal Note",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        tracking=True,
     )
     contract_id = fields.Many2one(
         "hr.contract",
         string="Contract",
         readonly=True,
+        tracking=True,
         states={"draft": [("readonly", False)]},
     )
     details_by_salary_rule_category = fields.One2many(
@@ -241,6 +245,7 @@ class HrPayslip(models.Model):
         string="Payslip Batches",
         readonly=True,
         copy=False,
+        tracking=True,
         states={"draft": [("readonly", False)]},
     )
     payslip_count = fields.Integer(
@@ -356,77 +361,100 @@ class HrPayslip(models.Model):
         applied for the given contract between date_from and date_to
         """
         res = []
-        # fill only if the contract as a working schedule linked
         for contract in contracts.filtered(
             lambda contract: contract.resource_calendar_id
         ):
-            # Adds support for the hr_public_holidays module.
-            # This adds support to exclude public holidays from work days computation.
-            # If you don't use the module, it don't make any difference or harm.
-            contract = contract.with_context(
-                employee_id=self.employee_id.id, exclude_public_holidays=True
-            )
             day_from = datetime.combine(date_from, time.min)
             day_to = datetime.combine(date_to, time.max)
             day_contract_start = datetime.combine(contract.date_start, time.min)
+            # Support for the hr_public_holidays module.
+            contract = contract.with_context(
+                employee_id=self.employee_id.id, exclude_public_holidays=True
+            )
             # only use payslip day_from if it's greather than contract start date
             if day_from < day_contract_start:
                 day_from = day_contract_start
+            # == compute leave days == #
+            leaves = self._compute_leave_days(contract, day_from, day_to)
+            res.extend(leaves)
+            # == compute worked days == #
+            attendances = self._compute_worked_days(contract, day_from, day_to)
+            res.append(attendances)
+        return res
 
-            # compute leave days
-            leaves = {}
-            calendar = contract.resource_calendar_id
-            tz = timezone(calendar.tz)
-            day_leave_intervals = contract.employee_id.list_leaves(
-                day_from, day_to, calendar=contract.resource_calendar_id
+    def _compute_leave_days(self, contract, day_from, day_to):
+        """
+        Leave days computation
+        @return: returns a list containing the leave inputs for the period
+        of the payslip. One record per leave type.
+        """
+        leaves = {}
+        calendar = contract.resource_calendar_id
+        tz = timezone(calendar.tz)
+        day_leave_intervals = contract.employee_id.list_leaves(
+            day_from, day_to, calendar=contract.resource_calendar_id
+        )
+        for day, hours, leave in day_leave_intervals:
+            holiday = leave[:1].holiday_id
+            current_leave_struct = leaves.setdefault(
+                holiday.holiday_status_id,
+                {
+                    "name": holiday.holiday_status_id.name or _("Global Leaves"),
+                    "sequence": 5,
+                    "code": holiday.holiday_status_id.code or "GLOBAL",
+                    "number_of_days": 0.0,
+                    "number_of_hours": 0.0,
+                    "contract_id": contract.id,
+                },
             )
-            for day, hours, leave in day_leave_intervals:
-                holiday = leave[:1].holiday_id
-                current_leave_struct = leaves.setdefault(
-                    holiday.holiday_status_id,
-                    {
-                        "name": holiday.holiday_status_id.name or _("Global Leaves"),
-                        "sequence": 5,
-                        "code": holiday.holiday_status_id.code or "GLOBAL",
-                        "number_of_days": 0.0,
-                        "number_of_hours": 0.0,
-                        "contract_id": contract.id,
-                    },
-                )
-                current_leave_struct["number_of_hours"] -= hours
-                work_hours = calendar.get_work_hours_count(
-                    tz.localize(datetime.combine(day, time.min)),
-                    tz.localize(datetime.combine(day, time.max)),
-                    compute_leaves=False,
-                )
-                if work_hours:
-                    current_leave_struct["number_of_days"] -= hours / work_hours
-
-            # compute worked days
-            work_data = contract.employee_id._get_work_days_data(
-                day_from,
-                day_to,
-                calendar=contract.resource_calendar_id,
+            current_leave_struct["number_of_hours"] -= hours
+            work_hours = calendar.get_work_hours_count(
+                tz.localize(datetime.combine(day, time.min)),
+                tz.localize(datetime.combine(day, time.max)),
                 compute_leaves=False,
             )
-            attendances = {
-                "name": _("Normal Working Days paid at 100%"),
-                "sequence": 1,
-                "code": "WORK100",
-                "number_of_days": work_data["days"],
-                "number_of_hours": work_data["hours"],
-                "contract_id": contract.id,
-            }
+            if work_hours:
+                current_leave_struct["number_of_days"] -= hours / work_hours
+        return leaves.values()
 
-            res.append(attendances)
-            res.extend(leaves.values())
-        return res
+    def _compute_worked_days(self, contract, day_from, day_to):
+        """
+        Worked days computation
+        @return: returns a list containing the total worked_days for the period
+        of the payslip. This returns the FULL work days expected for the resource
+        calendar selected for the employee (it don't substract leaves by default).
+        """
+        work_data = contract.employee_id._get_work_days_data(
+            day_from,
+            day_to,
+            calendar=contract.resource_calendar_id,
+            compute_leaves=False,
+        )
+        return {
+            "name": _("Normal Working Days paid at 100%"),
+            "sequence": 1,
+            "code": "WORK100",
+            "number_of_days": work_data["days"],
+            "number_of_hours": work_data["hours"],
+            "contract_id": contract.id,
+        }
 
     @api.model
     def get_inputs(self, contracts, date_from, date_to):
+        # TODO: We leave date_from and date_to params here for backwards
+        # compatibility reasons for the ones who inherit this function
+        # in another modules, but they are not used.
+        # Will be removed in next versions.
+        """
+        Inputs computation.
+        @returns: Returns a dict with the inputs that are fetched from the salary_structure
+        associated rules for the given contracts.
+        """
         res = []
-
+        current_structure = self.struct_id
         structure_ids = contracts.get_all_structures()
+        if current_structure:
+            structure_ids = list(set(current_structure._get_parent_structure().ids))
         rule_ids = (
             self.env["hr.payroll.structure"].browse(structure_ids).get_all_rules()
         )
@@ -434,7 +462,6 @@ class HrPayslip(models.Model):
         payslip_inputs = (
             self.env["hr.salary.rule"].browse(sorted_rule_ids).mapped("input_ids")
         )
-
         for contract in contracts:
             for payslip_input in payslip_inputs:
                 res.append(
@@ -646,65 +673,49 @@ class HrPayslip(models.Model):
         return list(result_dict.values())
 
     def get_payslip_vals(
-        self, date_from, date_to, employee_id=False, contract_id=False
+        self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
     ):
-        # defaults
+        # Initial default values for generated payslips
+        employee = self.env["hr.employee"].browse(employee_id)
         res = {
             "value": {
                 "line_ids": [],
-                # delete old input lines
                 "input_line_ids": [(2, x) for x in self.input_line_ids.ids],
-                # delete old worked days lines
                 "worked_days_line_ids": [(2, x) for x in self.worked_days_line_ids.ids],
-                # 'details_by_salary_head':[], TODO put me back
                 "name": "",
                 "contract_id": False,
                 "struct_id": False,
             }
         }
+
+        # If we don't have employee or date data, we return.
         if (not employee_id) or (not date_from) or (not date_to):
             return res
-        ttyme = datetime.combine(date_from, time.min)
-        employee = self.env["hr.employee"].browse(employee_id)
-        locale = self.env.context.get("lang") or "en_US"
-        res["value"].update(
-            {
-                "name": _("Salary Slip of %s for %s")
-                % (
-                    employee.name,
-                    tools.ustr(
-                        babel.dates.format_date(
-                            date=ttyme, format="MMMM-y", locale=locale
-                        )
-                    ),
-                ),
-                "company_id": employee.company_id.id,
-            }
-        )
-
+        # We check if contract_id is present, if not we fill with the
+        # first contract of the employee. If not contract present, we return.
         if not self.env.context.get("contract"):
-            # fill with the first contract of the employee
             contract_ids = employee.contract_id.ids
         else:
             if contract_id:
-                # set the list of contract for which the input have to be filled
                 contract_ids = [contract_id]
             else:
-                # if we don't give the contract, then the input to fill should
-                # be for all current contracts of the employee
                 contract_ids = employee._get_contracts(
                     date_from=date_from, date_to=date_to
                 ).ids
-
         if not contract_ids:
             return res
         contract = self.env["hr.contract"].browse(contract_ids[0])
         res["value"].update({"contract_id": contract.id})
-        struct = contract.struct_id
-        if not struct:
-            return res
-        res["value"].update({"struct_id": struct.id})
-        # computation of the salary input
+        # We check if struct_id is already filled, otherwise we assign the contract struct.
+        # If contract don't have a struct, we return.
+        if struct_id:
+            res["value"].update({"struct_id": struct_id[0]})
+        else:
+            struct = contract.struct_id
+            if not struct:
+                return res
+            res["value"].update({"struct_id": struct.id})
+        # Computation of the salary input and worked_day_lines
         contracts = self.env["hr.contract"].browse(contract_ids)
         worked_days_line_ids = self.get_worked_day_lines(contracts, date_from, date_to)
         input_line_ids = self.get_inputs(contracts, date_from, date_to)
@@ -716,55 +727,74 @@ class HrPayslip(models.Model):
         )
         return res
 
-    @api.onchange("employee_id", "date_from", "date_to", "struct_id")
-    def onchange_employee(self):
-
-        if (not self.employee_id) or (not self.date_from) or (not self.date_to):
-            return
-
-        employee = self.employee_id
-        date_from = self.date_from
-        date_to = self.date_to
-        contract_ids = self.contract_id.ids
-
-        ttyme = datetime.combine(date_from, time.min)
-        locale = self.env.context.get("lang") or "en_US"
-        self.name = _("Salary Slip of %s for %s") % (
-            employee.name,
-            tools.ustr(
-                babel.dates.format_date(date=ttyme, format="MMMM-y", locale=locale)
-            ),
-        )
-        self.company_id = employee.company_id
-
-        if not self.env.context.get("contract") or not self.contract_id:
-            contract_ids = employee._get_contracts(
-                date_from=date_from, date_to=date_to
+    def _get_employee_contracts(self):
+        return self.env["hr.contract"].browse(
+            self.employee_id._get_contracts(
+                date_from=self.date_from, date_to=self.date_to
             ).ids
-            if not contract_ids:
-                return
-            self.contract_id = self.env["hr.contract"].browse(contract_ids[0])
+        )
 
-        if not self.contract_id.struct_id:
-            return
-
+    @api.onchange("struct_id")
+    def onchange_struct_id(self):
         if not self.struct_id:
-            self.struct_id = self.contract_id.struct_id
-
-        # computation of the salary input
-        contracts = self.env["hr.contract"].browse(contract_ids)
-        worked_days_line_ids = self.get_worked_day_lines(contracts, date_from, date_to)
-        worked_days_lines = self.worked_days_line_ids.browse([])
-        for r in worked_days_line_ids:
-            worked_days_lines += worked_days_lines.new(r)
-        self.worked_days_line_ids = worked_days_lines
-
-        input_line_ids = self.get_inputs(contracts, date_from, date_to)
+            self.input_line_ids.unlink()
+            return
         input_lines = self.input_line_ids.browse([])
+        input_line_ids = self.get_inputs(
+            self._get_employee_contracts(), self.date_from, self.date_to
+        )
         for r in input_line_ids:
             input_lines += input_lines.new(r)
         self.input_line_ids = input_lines
-        return
+
+    @api.onchange("date_from", "date_to")
+    def onchange_dates(self):
+        if not self.date_from or not self.date_to:
+            return
+        worked_days_lines = self.worked_days_line_ids.browse([])
+        worked_days_line_ids = self.get_worked_day_lines(
+            self._get_employee_contracts(), self.date_from, self.date_to
+        )
+        for line in worked_days_line_ids:
+            worked_days_lines += worked_days_lines.new(line)
+        self.worked_days_line_ids = worked_days_lines
+
+    @api.onchange("employee_id", "date_from", "date_to")
+    def onchange_employee(self):
+        # Return if required values are not present.
+        if (not self.employee_id) or (not self.date_from) or (not self.date_to):
+            return
+        # Assign contract_id automatically when the user don't selected one.
+        if not self.env.context.get("contract") or not self.contract_id:
+            contract_ids = self._get_employee_contracts().ids
+            if not contract_ids:
+                return
+            self.contract_id = self.env["hr.contract"].browse(contract_ids[0])
+        # Assign struct_id automatically when the user don't selected one.
+        if not self.struct_id and not self.env.context.get("struct_id"):
+            if not self.contract_id.struct_id:
+                return
+            self.struct_id = self.contract_id.struct_id
+        # Compute payslip name
+        self._compute_name()
+        # Call worked_days_lines computation when employee is changed.
+        self.onchange_dates()
+        # Call input_lines computation when employee is changed.
+        self.onchange_struct_id()
+        # Assign company_id automatically based on employee selected.
+        self.company_id = self.employee_id.company_id
+
+    def _compute_name(self):
+        self.name = _("Salary Slip of %s for %s") % (
+            self.employee_id.name,
+            tools.ustr(
+                babel.dates.format_date(
+                    date=datetime.combine(self.date_from, time.min),
+                    format="MMMM-y",
+                    locale=self.env.context.get("lang") or "en_US",
+                )
+            ),
+        )
 
     @api.onchange("contract_id")
     def onchange_contract(self):
