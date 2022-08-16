@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-07-19 22:06+0000\n"
+"PO-Revision-Date: 2022-08-16 22:07+0000\n"
 "Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
@@ -654,6 +654,10 @@ msgid ""
 "isn't mandatory anymore and thus the rules applied will be all the rules set "
 "on the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
+"Define las reglas que deben ser aplicadas a este conjunto de liquidaciones, "
+"de acuerdo al contrato seleccionado. Si dejas vacío el campo contrato, este "
+"campon no sera requerido y se aplicaran todas las reglas seleccionadas en la "
+"estructura de todos los contratos del empleado para el periodo seleccionado"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
@@ -722,6 +726,8 @@ msgstr "Nombre a mostrar"
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Display non-negative values for leaves in payslip worked days lines."
 msgstr ""
+"Utilizar valores absolutos (positivos) para las ausencias en las líneas de "
+"días trabajados de la liquidación."
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__done
@@ -1113,7 +1119,7 @@ msgstr "Última actualización el"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
 msgid "Leaves with positive values"
-msgstr ""
+msgstr "Utilizar ausencias con valores absolutos (positivos)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule_category__parent_id
@@ -1617,7 +1623,7 @@ msgstr "Referencia"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refetch Payslip Data"
-msgstr ""
+msgstr "Refrescar datos externos"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1965,6 +1971,8 @@ msgid ""
 "Values for leaves (days and hours fields) should be positive instead of "
 "negative."
 msgstr ""
+"Los valores de ausencias (días y horas) seran absolutos (positivos) en vez "
+"de negativo (comportamiento por defecto)."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__parameter_version_ids
@@ -2073,7 +2081,7 @@ msgstr "El resultado afectará a una variable"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "total_net"
-msgstr ""
+msgstr "total_net"
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "Código python erróneo en la regla de salario %s (%s)."
