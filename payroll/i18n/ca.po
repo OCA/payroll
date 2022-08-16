@@ -289,11 +289,6 @@ msgid "Add an internal note..."
 msgstr "Afegir una nota interna..."
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
-msgid "Advantage Name"
-msgstr "Nom de l'avantatge"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
 msgstr "Totes les regles filles"
@@ -434,7 +429,6 @@ msgid "Close"
 msgstr "Tancar"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__code
@@ -528,12 +522,6 @@ msgid "Contract"
 msgstr "Contracte"
 
 #. module: payroll
-#: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
-#: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
-msgid "Contract Advantage Templates"
-msgstr "Plantilles d'avantatge de contracte"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
 msgid "Contribution"
 msgstr "Contribució"
@@ -576,7 +564,6 @@ msgid "Country"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -595,7 +582,6 @@ msgid "Created by"
 msgstr "Creat per"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_date
@@ -638,11 +624,6 @@ msgstr "Data fins"
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
 msgstr "Deducció"
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
-msgstr "Valor predeterminat per a aquest avantatge"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
@@ -699,7 +680,6 @@ msgstr "Detalls per categoria de regla salarial"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
@@ -785,11 +765,6 @@ msgstr "Funció de l'empleat"
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
 msgstr "Nòmines d'empleat"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract_advantage_template
-msgid "Employee's Advantage on Contract"
-msgstr "Avantatge de l'empleat en contracte"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
@@ -922,7 +897,6 @@ msgstr "Bonificació de lloguer d'habitatge"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
@@ -1054,7 +1028,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
@@ -1077,7 +1050,6 @@ msgid "Last Modified on"
 msgstr "Última modificació el"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1096,7 +1068,6 @@ msgid "Last Updated by"
 msgstr "Última actualització per"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_date
@@ -1127,16 +1098,6 @@ msgid ""
 msgstr ""
 "Enllaçar una categoria salarial amb el seu pare només s'utilitza pels "
 "informes."
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower Bound"
-msgstr "Cota inferior"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower bound authorized by the employer for this advantage"
-msgstr "Límit inferior autoritzat per l'empresari per a aquest avantatge"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
@@ -1205,7 +1166,6 @@ msgid "My Activity Deadline"
 msgstr "Data límit de la meva activitat"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1941,16 +1901,6 @@ msgid "Unread Messages Counter"
 msgstr "Comptador de missatges no llegits"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper Bound"
-msgstr "Límit superior"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper bound authorized by the employer for this advantage"
-msgstr "Límit superior autoritzat per l'empresari per a aquest avantatge"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__sequence
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__sequence
 msgid "Use to arrange calculation sequence"
@@ -2075,6 +2025,30 @@ msgstr "el resultat afectarà una variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Advantage Name"
+#~ msgstr "Nom de l'avantatge"
+
+#~ msgid "Contract Advantage Templates"
+#~ msgstr "Plantilles d'avantatge de contracte"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "Valor predeterminat per a aquest avantatge"
+
+#~ msgid "Employee's Advantage on Contract"
+#~ msgstr "Avantatge de l'empleat en contracte"
+
+#~ msgid "Lower Bound"
+#~ msgstr "Cota inferior"
+
+#~ msgid "Lower bound authorized by the employer for this advantage"
+#~ msgstr "Límit inferior autoritzat per l'empresari per a aquest avantatge"
+
+#~ msgid "Upper Bound"
+#~ msgstr "Límit superior"
+
+#~ msgid "Upper bound authorized by the employer for this advantage"
+#~ msgstr "Límit superior autoritzat per l'empresari per a aquest avantatge"
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "Codi python erroni en la regla de salari %s (%s)."
