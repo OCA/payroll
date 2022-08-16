@@ -13,6 +13,9 @@ class HrPayslipLine(models.Model):
     slip_id = fields.Many2one(
         "hr.payslip", string="Pay Slip", required=True, ondelete="cascade"
     )
+    payslip_run_id = fields.Many2one(
+        "hr.payslip.run", related="slip_id.payslip_run_id", string="Payslip Batch"
+    )
     salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
     employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
     contract_id = fields.Many2one(

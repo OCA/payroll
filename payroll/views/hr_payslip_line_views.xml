@@ -20,6 +20,7 @@
                 <field name="total" />
                 <field name="amount_select" invisible="1" />
                 <field name="register_id" invisible="1" />
+                <field name="payslip_run_id" optional="hide" />
             </tree>
         </field>
     </record>
@@ -53,6 +54,18 @@
             </form>
         </field>
     </record>
+    <record id="hr_payslip_line_view_pivot" model="ir.ui.view">
+        <field name="name">hr.payslip.line.pivot</field>
+        <field name="model">hr.payslip.line</field>
+        <field name="mode">primary</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="salary_rule_id" type="row" />
+                <field name="total" type="measure" />
+            </pivot>
+        </field>
+    </record>
     <record id="hr_payslip_line_view_search" model="ir.ui.view">
         <field name="name">hr.payslip.line.select</field>
         <field name="model">hr.payslip.line</field>
@@ -65,6 +78,7 @@
                 />
                 <field name="amount_select" />
                 <field name="slip_id" />
+                <field name="payslip_run_id" />
                 <group col="8" colspan="4" expand="0" string="Group By">
                     <filter
                         string="Salary Rule Category"
@@ -105,11 +119,15 @@
     >
         <field name="name">Payslip Computation Details</field>
         <field name="res_model">hr.payslip.line</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">
-            {'default_slip_id': active_id,'search_default_slip_id': active_id}
-        </field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="domain">[('slip_id', 'in', active_ids)]</field>
         <field name="binding_model_id" ref="model_hr_payslip" />
+    </record>
+    <record id="action_get_batch_payslip_lines" model="ir.actions.act_window">
+        <field name="name">Batch Payslip Lines</field>
+        <field name="res_model">hr.payslip.line</field>
+        <field name="view_mode">pivot,tree,form</field>
+        <field name="domain">[('payslip_run_id', 'in', active_ids)]</field>
+        <field name="binding_model_id" ref="model_hr_payslip_run" />
     </record>
 </odoo>

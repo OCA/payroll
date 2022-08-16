@@ -2,7 +2,7 @@
 
 {
     "name": "Payroll",
-    "version": "14.0.4.0.2",
+    "version": "14.0.4.1.0",
     "category": "Human Resources",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
@@ -33,6 +33,7 @@
         "views/report_payslipdetails.xml",
         "report/report.xml",
         "views/res_config_settings_views.xml",
+        "wizard/hr_payroll_send_email.xml",
     ],
     "demo": ["demo/hr_payroll_demo.xml"],
     "application": True,
