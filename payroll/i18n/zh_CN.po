@@ -253,11 +253,6 @@ msgid "Add an internal note..."
 msgstr "添加内部备注"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
-msgid "Advantage Name"
-msgstr "补贴名称"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
 msgstr "所有下级规则"
@@ -396,7 +391,6 @@ msgid "Close"
 msgstr "关闭"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__code
@@ -490,12 +484,6 @@ msgid "Contract"
 msgstr "合同"
 
 #. module: payroll
-#: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
-#: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
-msgid "Contract Advantage Templates"
-msgstr "合同优势模板"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
 msgid "Contribution"
 msgstr "缴款"
@@ -538,7 +526,6 @@ msgid "Country"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -557,7 +544,6 @@ msgid "Created by"
 msgstr "创建人"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_date
@@ -600,11 +586,6 @@ msgstr "结束日期"
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
 msgstr "扣除"
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
-msgstr "该优势的默认值"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
@@ -659,7 +640,6 @@ msgstr "详情按工资规则类别"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
@@ -745,11 +725,6 @@ msgstr "员工职能"
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
 msgstr "员工工资单"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract_advantage_template
-msgid "Employee's Advantage on Contract"
-msgstr "雇员在合同中的优势"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
@@ -878,7 +853,6 @@ msgstr "住房补贴"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
@@ -1004,7 +978,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
@@ -1027,7 +1000,6 @@ msgid "Last Modified on"
 msgstr "最后修改日"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1046,7 +1018,6 @@ msgid "Last Updated by"
 msgstr "最后更新人"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_date
@@ -1075,16 +1046,6 @@ msgid ""
 "Linking a salary category to its parent is used only for the reporting "
 "purpose."
 msgstr "薪资类别的父级类别只用于报告目的"
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower Bound"
-msgstr "下限"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower bound authorized by the employer for this advantage"
-msgstr "雇主针对该优势的授权下限"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
@@ -1153,7 +1114,6 @@ msgid "My Activity Deadline"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1879,16 +1839,6 @@ msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper Bound"
-msgstr "上限"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper bound authorized by the employer for this advantage"
-msgstr "雇主针对该优势的授权上限"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__sequence
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__sequence
 msgid "Use to arrange calculation sequence"
@@ -2013,6 +1963,30 @@ msgstr "结果将影响一个变量"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Advantage Name"
+#~ msgstr "补贴名称"
+
+#~ msgid "Contract Advantage Templates"
+#~ msgstr "合同优势模板"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "该优势的默认值"
+
+#~ msgid "Employee's Advantage on Contract"
+#~ msgstr "雇员在合同中的优势"
+
+#~ msgid "Lower Bound"
+#~ msgstr "下限"
+
+#~ msgid "Lower bound authorized by the employer for this advantage"
+#~ msgstr "雇主针对该优势的授权下限"
+
+#~ msgid "Upper Bound"
+#~ msgstr "上限"
+
+#~ msgid "Upper bound authorized by the employer for this advantage"
+#~ msgstr "雇主针对该优势的授权上限"
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "薪资规则 %s (%s) Python代码定义错误"

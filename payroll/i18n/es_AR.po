@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-08-10 00:07+0000\n"
+"PO-Revision-Date: 2022-08-16 22:07+0000\n"
 "Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es_AR\n"
@@ -286,11 +286,6 @@ msgid "Add an internal note..."
 msgstr "Añadir una nota interna..."
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
-msgid "Advantage Name"
-msgstr "Nombre de ventaja"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
 msgstr "Todas las reglas hijas"
@@ -431,7 +426,6 @@ msgid "Close"
 msgstr "Cerrar"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__code
@@ -525,12 +519,6 @@ msgid "Contract"
 msgstr "Contrato"
 
 #. module: payroll
-#: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
-#: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
-msgid "Contract Advantage Templates"
-msgstr "Plantillas de ventaja de contrato"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
 msgid "Contribution"
 msgstr "Contribución"
@@ -573,7 +561,6 @@ msgid "Country"
 msgstr "Pais"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -592,7 +579,6 @@ msgid "Created by"
 msgstr "Creado por"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_date
@@ -637,11 +623,6 @@ msgid "Deduction"
 msgstr "Deducción"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
-msgstr "Valor predeterminado para esta ventaja"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
 msgid "Defines the frequency of the wage payment."
 msgstr "Defina la frecuencia del pago de salario."
@@ -654,6 +635,10 @@ msgid ""
 "isn't mandatory anymore and thus the rules applied will be all the rules set "
 "on the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
+"Define las reglas que deben ser aplicadas a este conjunto de liquidaciones. "
+"Si dejas este campo en blanco, ya no es obligatorio y las reglas aplicadas "
+"serán las que provengan de la estructura asignada para todos los contratos "
+"del empleado para el periodo seleccionado"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
@@ -696,7 +681,6 @@ msgstr "Detalles por categoría de regla salarial"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
@@ -722,6 +706,8 @@ msgstr "Nombre a mostrar"
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Display non-negative values for leaves in payslip worked days lines."
 msgstr ""
+"Utilizar SÓLO valores absolutos (positivos) para las ausencias en las líneas "
+"de días trabajados."
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__done
@@ -782,11 +768,6 @@ msgstr "Función del empleado"
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
 msgstr "Liquidaciones del empleado"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract_advantage_template
-msgid "Employee's Advantage on Contract"
-msgstr "Ventaja del empleado en el contrato"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
@@ -918,7 +899,6 @@ msgstr "Prima de alquiler de la casa"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
@@ -1053,7 +1033,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
@@ -1076,7 +1055,6 @@ msgid "Last Modified on"
 msgstr "Última modificación en"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1095,7 +1073,6 @@ msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_date
@@ -1116,7 +1093,7 @@ msgstr "Última actualización el"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
 msgid "Leaves with positive values"
-msgstr ""
+msgstr "Valores absolutos en ausencias"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule_category__parent_id
@@ -1125,16 +1102,6 @@ msgid ""
 "purpose."
 msgstr ""
 "Enlazar una categoría salarial con su padre se usa sólo para los informes."
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower Bound"
-msgstr "Límite inferior"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower bound authorized by the employer for this advantage"
-msgstr "Límite inferior autorizado por el empleado para esta ventaja"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
@@ -1203,7 +1170,6 @@ msgid "My Activity Deadline"
 msgstr "Mi Fecha Límite de Actividad"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1620,7 +1586,7 @@ msgstr "Referencia"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refetch Payslip Data"
-msgstr ""
+msgstr "Refrescar datos externos"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1942,16 +1908,6 @@ msgid "Unread Messages Counter"
 msgstr "Contador de Mensajes sin Leer"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper Bound"
-msgstr "Límite superior"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper bound authorized by the employer for this advantage"
-msgstr "Límite superior autorizado por el empleador para esta ventaja"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__sequence
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__sequence
 msgid "Use to arrange calculation sequence"
@@ -1969,6 +1925,8 @@ msgid ""
 "Values for leaves (days and hours fields) should be positive instead of "
 "negative."
 msgstr ""
+"Los valores de ausencias (campos de dias y horas) seran absolutos "
+"(positivos) en vez de negativos (comportamiento por defecto)."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__parameter_version_ids
@@ -2078,7 +2036,31 @@ msgstr "El resultado afectará a una variable"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "total_net"
-msgstr ""
+msgstr "total_net"
+
+#~ msgid "Advantage Name"
+#~ msgstr "Nombre de ventaja"
+
+#~ msgid "Contract Advantage Templates"
+#~ msgstr "Plantillas de ventaja de contrato"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "Valor predeterminado para esta ventaja"
+
+#~ msgid "Employee's Advantage on Contract"
+#~ msgstr "Ventaja del empleado en el contrato"
+
+#~ msgid "Lower Bound"
+#~ msgstr "Límite inferior"
+
+#~ msgid "Lower bound authorized by the employer for this advantage"
+#~ msgstr "Límite inferior autorizado por el empleado para esta ventaja"
+
+#~ msgid "Upper Bound"
+#~ msgstr "Límite superior"
+
+#~ msgid "Upper bound authorized by the employer for this advantage"
+#~ msgstr "Límite superior autorizado por el empleador para esta ventaja"
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "Código python erróneo en la regla de salario %s (%s)."
