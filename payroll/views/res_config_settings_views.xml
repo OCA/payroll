@@ -41,6 +41,20 @@
                             </div>
                         </div>
                     </div>
+                    <h2>Worked Days</h2>
+                    <div class="row mt16 o_settings_container" id="worked_days">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="leaves_positive" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="leaves_positive" />
+                                <div class="text-muted">
+                                    Display non-negative values for leaves in payslip worked days lines.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </xpath>
         </field>
