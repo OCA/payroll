@@ -83,6 +83,24 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model:mail.template,body_html:payroll.mail_template_hr_payslip
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"        <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"            Dear ${object.employee_id.name},\n"
+"            <br/><br/>\n"
+"            Please find attached the payslip for ${object.payslip_run_id."
+"name}.\n"
+"            <br/><br/>\n"
+"            Do not hesitate to contact us if you have any questions.\n"
+"            <br/><br/>\n"
+"            ${user.signature | safe}\n"
+"        </p>\n"
+"    </div>\n"
+"            "
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
 msgid ""
 "<span colspan=\"4\" nolabel=\"1\">\n"
@@ -322,6 +340,11 @@ msgstr "Basal"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_rule_basic
 msgid "Basic Salary"
+msgstr ""
+
+#. module: payroll
+#: model:ir.actions.act_window,name:payroll.action_get_batch_payslip_lines
+msgid "Batch Payslip Lines"
 msgstr ""
 
 #. module: payroll
@@ -1332,6 +1355,11 @@ msgid "Payslip 'Date From' must be earlier than 'Date To'."
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__payslip_run_id
+msgid "Payslip Batch"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_run
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__payslip_run_id
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
@@ -1401,6 +1429,12 @@ msgstr "Lönebeskedsnamn"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__worked_days_line_ids
 msgid "Payslip Worked Days"
 msgstr "Lönespecifikation Arbetade dagar"
+
+#. module: payroll
+#: model:mail.template,subject:payroll.mail_template_hr_payslip
+msgid ""
+"Payslip for ${object.payslip_run_id.name} from ${object.company_id.name}"
+msgstr ""
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action_employee
@@ -1705,6 +1739,11 @@ msgstr "Sök Lön Regel"
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__semi-annually
 msgid "Semi-annually"
 msgstr "Halvårsvis"
+
+#. module: payroll
+#: model:ir.actions.act_window,name:payroll.action_partner_mass_mail
+msgid "Send email with payslip"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__sequence
