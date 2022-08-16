@@ -249,11 +249,6 @@ msgid "Add an internal note..."
 msgstr "Adăugați o notă internă..."
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
-msgid "Advantage Name"
-msgstr "Denumire beneficiu"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
 msgstr "Toate regulile subordonate"
@@ -394,7 +389,6 @@ msgid "Close"
 msgstr "Închide"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__code
@@ -488,12 +482,6 @@ msgid "Contract"
 msgstr "Contract"
 
 #. module: payroll
-#: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
-#: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
-msgid "Contract Advantage Templates"
-msgstr "Șabloane beneficii contractuale"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
 msgid "Contribution"
 msgstr "Contributie"
@@ -536,7 +524,6 @@ msgid "Country"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -555,7 +542,6 @@ msgid "Created by"
 msgstr "Creat de"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_date
@@ -598,11 +584,6 @@ msgstr "Data până la"
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
 msgstr "Deducere"
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
-msgstr "Valoarea implicită pentru acest beneficiu"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
@@ -660,7 +641,6 @@ msgstr "Detalii dupa Categoria Regulii salariale"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
@@ -746,11 +726,6 @@ msgstr "Funcția angajatului"
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
 msgstr "Fluturași de salariu angajat"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract_advantage_template
-msgid "Employee's Advantage on Contract"
-msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
@@ -879,7 +854,6 @@ msgstr "Indemnizație pentru chirie"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
@@ -1012,7 +986,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
@@ -1035,7 +1008,6 @@ msgid "Last Modified on"
 msgstr "Ultima modificare la"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1054,7 +1026,6 @@ msgid "Last Updated by"
 msgstr "Ultima actualizare făcută de"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_date
@@ -1085,16 +1056,6 @@ msgid ""
 msgstr ""
 "Conectarea unei categorii salariale la principal este utilizata doar in "
 "scopul raportarii."
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower Bound"
-msgstr "Limita inferioară"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower bound authorized by the employer for this advantage"
-msgstr "Limita inferioară aprobată de angajator pentru acest beneficiu"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
@@ -1163,7 +1124,6 @@ msgid "My Activity Deadline"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1892,16 +1852,6 @@ msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper Bound"
-msgstr "Limita superioara"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper bound authorized by the employer for this advantage"
-msgstr "Limita superioara aprobată de angajator pentru acest beneficiu"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__sequence
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__sequence
 msgid "Use to arrange calculation sequence"
@@ -2028,6 +1978,27 @@ msgstr "rezultatul va fi afectat de o variabila"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Advantage Name"
+#~ msgstr "Denumire beneficiu"
+
+#~ msgid "Contract Advantage Templates"
+#~ msgstr "Șabloane beneficii contractuale"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "Valoarea implicită pentru acest beneficiu"
+
+#~ msgid "Lower Bound"
+#~ msgstr "Limita inferioară"
+
+#~ msgid "Lower bound authorized by the employer for this advantage"
+#~ msgstr "Limita inferioară aprobată de angajator pentru acest beneficiu"
+
+#~ msgid "Upper Bound"
+#~ msgstr "Limita superioara"
+
+#~ msgid "Upper bound authorized by the employer for this advantage"
+#~ msgstr "Limita superioara aprobată de angajator pentru acest beneficiu"
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "Cod python gresit definit pentru regula salariala %s (%s)."

@@ -248,11 +248,6 @@ msgid "Add an internal note..."
 msgstr "Dodaj zabilješku..."
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
-msgid "Advantage Name"
-msgstr ""
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
 msgstr ""
@@ -391,7 +386,6 @@ msgid "Close"
 msgstr "Zatvori"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__code
@@ -485,12 +479,6 @@ msgid "Contract"
 msgstr "Ugovor"
 
 #. module: payroll
-#: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
-#: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
-msgid "Contract Advantage Templates"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
 msgid "Contribution"
 msgstr ""
@@ -533,7 +521,6 @@ msgid "Country"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -552,7 +539,6 @@ msgid "Created by"
 msgstr "Kreirao"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_date
@@ -594,11 +580,6 @@ msgstr ""
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
 msgstr ""
 
 #. module: payroll
@@ -652,7 +633,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
@@ -737,11 +717,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract_advantage_template
-msgid "Employee's Advantage on Contract"
 msgstr ""
 
 #. module: payroll
@@ -871,7 +846,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__id
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
@@ -993,7 +967,6 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
@@ -1016,7 +989,6 @@ msgid "Last Modified on"
 msgstr "Zadnja promena"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1035,7 +1007,6 @@ msgid "Last Updated by"
 msgstr "Promenio"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_date
@@ -1063,16 +1034,6 @@ msgstr ""
 msgid ""
 "Linking a salary category to its parent is used only for the reporting "
 "purpose."
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower Bound"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
-msgid "Lower bound authorized by the employer for this advantage"
 msgstr ""
 
 #. module: payroll
@@ -1142,7 +1103,6 @@ msgid "My Activity Deadline"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__name
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1863,16 +1823,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_unread_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper Bound"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__upper_bound
-msgid "Upper bound authorized by the employer for this advantage"
 msgstr ""
 
 #. module: payroll
