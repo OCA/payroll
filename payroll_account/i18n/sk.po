@@ -118,8 +118,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Pay Slip "
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -174,3 +174,6 @@ msgstr "Účtovná kniha výdajov \"%s\" nemá správne nastavený kreditný ú�
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "Účtovná kniha výdajov \"%s\" nemá správne nastavený debetný účet!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Pay Slip "

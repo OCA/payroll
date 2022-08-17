@@ -114,8 +114,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Loonafschrift"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -172,3 +172,6 @@ msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr ""
 "Bij de kostenrekening \"%s\" is geen correcte debet rekening geconfigureerd!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Loonafschrift"

@@ -117,8 +117,8 @@ msgstr "Ultima modificación"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Nómina"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -177,3 +177,6 @@ msgid ""
 msgstr ""
 "¡La cuenta deudora del diario de gastos \"%s\" no se ha configurado "
 "correctamente!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Nómina"
