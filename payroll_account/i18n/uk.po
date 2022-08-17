@@ -117,8 +117,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Розрахунковий лист"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -173,3 +173,6 @@ msgstr "Журнал витрат \"%s\" має не налаштований к
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "Журнал витрат \"%s\" має не налаштований дебетовий рахунок!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Розрахунковий лист"

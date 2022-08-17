@@ -115,8 +115,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Fluturas de salariu"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -171,3 +171,6 @@ msgstr "Jurnalul de Cheltuieli \"%s\" nu a configurat corect Contul de Credit!"
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "Jurnalul de cheltuieli \"%s\" nu a configurat corect Contul de Debit!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Fluturas de salariu"

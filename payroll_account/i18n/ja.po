@@ -115,8 +115,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "給与明細"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -171,3 +171,6 @@ msgstr "経費仕訳 %s は与信アカウントを正しく設定してあり�
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "経費仕訳 %s は、借方勘定科目を正しく設定していません。"
+
+#~ msgid "Pay Slip"
+#~ msgstr "給与明細"
