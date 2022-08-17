@@ -110,7 +110,7 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
+msgid "Payslip"
 msgstr ""
 
 #. module: payroll_account
