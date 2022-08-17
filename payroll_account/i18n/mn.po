@@ -115,8 +115,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Цалингийн хуудас"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -171,3 +171,6 @@ msgstr "\"%s\" зардлын журналыг кредит данстай зө�
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "\"%s\" зардлын журналыг дебит данстай зөв тохируулаагүй"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Цалингийн хуудас"

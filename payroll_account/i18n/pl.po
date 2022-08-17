@@ -118,8 +118,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Pasek wypłaty"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -177,3 +177,6 @@ msgid ""
 msgstr ""
 "Dziennik wydatków \"%s\" nie został prawidłowo skonfigurowany dla konta "
 "Winien!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Pasek wypłaty"
