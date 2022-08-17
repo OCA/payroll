@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-hr_payslip_change_state',
         'odoo14-addon-payroll',
         'odoo14-addon-payroll_account',
+        'odoo14-addon-payroll_contract_advantages',
     ],
     classifiers=[
         'Programming Language :: Python',
