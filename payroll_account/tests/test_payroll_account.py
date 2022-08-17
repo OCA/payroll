@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from dateutil import relativedelta
 
 from odoo import fields
-from odoo.exceptions import UserError
 from odoo.tests import common
 
 
@@ -168,10 +167,6 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertEqual(self.hr_payslip.state, "cancel", "Payslip is rejected.")
         self.hr_payslip.action_payslip_draft()
 
-        # Confirm Payslip
-        with self.assertRaises(UserError):
-            self.hr_payslip.action_payslip_done()
-
         self._update_account_in_rule(self.account_debit, self.account_credit)
         self.hr_payslip.action_payslip_done()
 
@@ -179,6 +174,41 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertTrue(
             self.hr_payslip.move_id, "Accounting Entries has not been created"
         )
+
+        # I verify that the payslip is in done state.
+        self.assertEqual(self.hr_payslip.state, "done", "State not changed!")
+
+    def test_hr_payslip_no_accounts(self):
+
+        date_from = datetime.now()
+        date_to = datetime.now() + relativedelta.relativedelta(
+            months=+1, day=1, days=-1
+        )
+        res = self.hr_payslip.get_payslip_vals(
+            date_from, date_to, self.hr_employee_john.id
+        )
+        vals = {
+            "struct_id": res["value"]["struct_id"],
+            "contract_id": self.hr_contract_john.id,
+            "name": res["value"]["name"],
+        }
+        self.hr_payslip.write(vals)
+
+        # I click on "Compute Sheet" button.
+        context = {
+            "lang": "en_US",
+            "tz": False,
+            "active_model": "hr.payslip",
+            "department_id": False,
+            "active_ids": [self.payslip_action_id],
+            "section_id": False,
+            "active_id": self.payslip_action_id,
+        }
+        self.hr_payslip.with_context(context).compute_sheet()
+
+        # Confirm Payslip (no account moves)
+        self.hr_payslip.action_payslip_done()
+        self.assertFalse(self.hr_payslip.move_id, "Accounting Entries has been created")
 
         # I verify that the payslip is in done state.
         self.assertEqual(self.hr_payslip.state, "done", "State not changed!")

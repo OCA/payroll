@@ -116,8 +116,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Feuille de paie"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -176,3 +176,6 @@ msgid ""
 msgstr ""
 "Le journal des charges \"%s\" n'a pas correctement configuré le compte de "
 "débit!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Feuille de paie"

@@ -113,8 +113,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "বেতন স্লিপ"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -169,3 +169,6 @@ msgstr "ব্যয় জার্নাল \"%s\" ক্রেডিট অ�
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "ব্যয় জার্নাল \"%s\" ডেবিট অ্যাকাউন্টটি সঠিকভাবে কনফিগার করা হয়নি!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "বেতন স্লিপ"
