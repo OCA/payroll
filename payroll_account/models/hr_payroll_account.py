@@ -1,7 +1,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+logger = logging.getLogger(__name__)
 
 
 class HrPayslipLine(models.Model):
@@ -255,10 +259,15 @@ class HrPayslip(models.Model):
                     },
                 )
                 line_ids.append(adjust_debit)
-            move_dict["line_ids"] = line_ids
-            move = self.env["account.move"].create(move_dict)
-            slip.write({"move_id": move.id, "date": date})
-            move.action_post()
+            if len(line_ids) > 0:
+                move_dict["line_ids"] = line_ids
+                move = self.env["account.move"].create(move_dict)
+                slip.write({"move_id": move.id, "date": date})
+                move.action_post()
+            else:
+                logger.warning(
+                    f"Payslip {slip.number} did not generate any account move lines"
+                )
         return res
 
 

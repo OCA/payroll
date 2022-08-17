@@ -119,8 +119,8 @@ msgstr "Última modificació el"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Nómina"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -178,3 +178,6 @@ msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr ""
 "El diari de despeses \"%s\" no ha configurat correctament el compte de dèbit!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Nómina"

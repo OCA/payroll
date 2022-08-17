@@ -116,8 +116,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Obračunski list"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -174,3 +174,6 @@ msgid ""
 msgstr ""
 "Dnevnik troškova \"%s\" nema ispravno definiran dugovni \n"
 "konto!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Obračunski list"

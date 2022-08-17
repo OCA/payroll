@@ -114,8 +114,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "សន្លឹកប្រាក់ខែ"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -170,3 +170,6 @@ msgstr "បញ្ជីចំណាយ\"%s\" មិនបានកំណត់�
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "ទិនានុប្បវត្តិចំណាយមិន%sបានកំណត់រចនាសម្ព័ន្ធគណនីឥណពន្ធបានត្រឹមត្រូវទេ!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "សន្លឹកប្រាក់ខែ"
