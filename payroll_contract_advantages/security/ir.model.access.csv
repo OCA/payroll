@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_contract_advantage_template_hr_user,payroll_contract_advantages.hr.contract.advantage.template,model_hr_contract_advantage_template,hr.group_hr_user,1,0,0,0
+access_hr_contract_advantage_template_payroll_user,payroll_contract_advantages.hr.contract.advantage.template,model_hr_contract_advantage_template,payroll.group_payroll_user,1,1,1,1
+access_hr_contract_advantage_hr_user,payroll_contract_advantages.hr.contract.advantage,model_hr_contract_advantage,hr.group_hr_user,1,0,0,0
+access_hr_contract_advantage_payroll_user,payroll_contract_advantages.hr.contract.advantage,model_hr_contract_advantage,payroll.group_payroll_user,1,1,1,1
