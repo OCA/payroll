@@ -794,16 +794,17 @@ class HrPayslip(models.Model):
         self.company_id = self.employee_id.company_id
 
     def _compute_name(self):
-        self.name = _("Salary Slip of %s for %s") % (
-            self.employee_id.name,
-            tools.ustr(
-                babel.dates.format_date(
-                    date=datetime.combine(self.date_from, time.min),
-                    format="MMMM-y",
-                    locale=self.env.context.get("lang") or "en_US",
-                )
-            ),
-        )
+        for record in self:
+            record.name = _("Salary Slip of %s for %s") % (
+                record.employee_id.name,
+                tools.ustr(
+                    babel.dates.format_date(
+                        date=datetime.combine(record.date_from, time.min),
+                        format="MMMM-y",
+                        locale=record.env.context.get("lang") or "en_US",
+                    )
+                ),
+            )
 
     @api.onchange("contract_id")
     def onchange_contract(self):
