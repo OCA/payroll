@@ -155,6 +155,22 @@ class TestPayslipBase(TransactionCase):
             }
         )
 
+        # Test Child Line
+        #
+        self.rule_child = self.SalaryRule.create(
+            {
+                "name": "Net Child Rule",
+                "code": "NET_CHILD",
+                "sequence": 190,
+                "category_id": self.categ_net.id,
+                "parent_rule_id": self.rule_net.id,
+                "condition_select": "none",
+                "amount_select": "code",
+                "amount_python_compute": "result = categories.BASIC "
+                "+ categories.ALW + categories.DED",
+            }
+        )
+
         # I create a new employee "Richard"
         self.richard_emp = self.env["hr.employee"].create(
             {

@@ -80,9 +80,15 @@ class HrSalaryRule(models.Model):
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
 
-            # Note: returned value have to be set in the variable 'result'
+            # Available compute variables:
+            #-------------------------------
+            result: returned value have to be set in the variable 'result'
 
-            result = rules.NET > categories.NET * 0.10""",
+            # Example:
+            #-------------------------------
+            result = rules.NET > categories.NET * 0.10
+
+            """,
         help="Applied this rule for calculation if condition is true. You can "
         "specify condition like basic > 1000.",
     )
@@ -114,7 +120,7 @@ class HrSalaryRule(models.Model):
         string="Python Code",
         default="""
             # Available variables:
-            #----------------------
+            #-------------------------------
             # payslip: object containing the payslips
             # employee: hr.employee object
             # contract: hr.contract object
@@ -126,9 +132,18 @@ class HrSalaryRule(models.Model):
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
 
-            # Note: returned value have to be set in the variable 'result'
+            # Available compute variables:
+            #-------------------------------
+            result: returned value have to be set in the variable 'result'
+            result_rate: the rate that will be applied to "result".
+            result_qty: the quantity of units that will be multiplied to "result".
+            result_name: if this variable is computed, it will contain the name of the line.
 
-            result = contract.wage * 0.10""",
+            # Example:
+            #-------------------------------
+            result = contract.wage * 0.10
+
+            """,
     )
     amount_percentage_base = fields.Char(
         string="Percentage based on", help="result will be affected to a variable"
@@ -177,6 +192,7 @@ class HrSalaryRule(models.Model):
                     self.amount_fix,
                     float(safe_eval(self.quantity, localdict)),
                     100.0,
+                    False,  # result_name is always False if not computed by python.
                 )
             except Exception:
                 raise UserError(
@@ -189,6 +205,7 @@ class HrSalaryRule(models.Model):
                     float(safe_eval(self.amount_percentage_base, localdict)),
                     float(safe_eval(self.quantity, localdict)),
                     self.amount_percentage,
+                    False,  # result_name is always False if not computed by python.
                 )
             except Exception:
                 raise UserError(
@@ -205,6 +222,9 @@ class HrSalaryRule(models.Model):
                 )
                 result_qty = 1.0
                 result_rate = 100.0
+                result_name = False
+                if "result_name" in localdict:
+                    result_name = localdict["result_name"]
                 if "result_qty" in localdict:
                     result_qty = localdict["result_qty"]
                 if "result_rate" in localdict:
@@ -213,6 +233,7 @@ class HrSalaryRule(models.Model):
                     float(localdict["result"]),
                     float(result_qty),
                     float(result_rate),
+                    result_name,
                 )
             except Exception as ex:
                 raise UserError(

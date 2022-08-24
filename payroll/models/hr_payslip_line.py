@@ -16,6 +16,15 @@ class HrPayslipLine(models.Model):
     payslip_run_id = fields.Many2one(
         "hr.payslip.run", related="slip_id.payslip_run_id", string="Payslip Batch"
     )
+    child_ids = fields.One2many(
+        "hr.payslip.line", "parent_line_id", string="Child Payslip Lines"
+    )
+    parent_line_id = fields.Many2one(
+        "hr.payslip.line",
+        string="Parent Payslip Line",
+        compute="_compute_parent_line_id",
+        store=True,
+    )
     salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
     employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
     contract_id = fields.Many2one(
@@ -30,6 +39,26 @@ class HrPayslipLine(models.Model):
         digits="Payroll",
         store=True,
     )
+
+    @api.depends("parent_rule_id", "contract_id", "slip_id")
+    def _compute_parent_line_id(self):
+        for line in self:
+            if line.parent_rule_id:
+                parent_line = line.slip_id.line_ids.filtered(
+                    lambda l: l.salary_rule_id == line.parent_rule_id
+                    and l.contract_id == line.contract_id
+                    and l.slip_id == line.slip_id
+                )
+                if parent_line and len(parent_line) > 1:
+                    raise UserError(
+                        _("Recursion error. Only one line should be parent of %s")
+                        % line.parent_rule_id.name
+                    )
+                line.parent_line_id = (
+                    parent_line[0].id if len(parent_line) == 1 else False
+                )
+            else:
+                line.parent_line_id = False
 
     @api.depends("quantity", "amount", "rate")
     def _compute_total(self):
