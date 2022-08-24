@@ -53,6 +53,40 @@ class TestPayslipFlow(TestPayslipBase):
         # I click on 'Compute Sheet' button on payslip
         richard_payslip.with_context(context).compute_sheet()
 
+        # Check child rules shown in table by default
+        child_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
+            lambda l: l.code == "NET_CHILD"
+        )
+        self.assertEqual(
+            len(child_line), 1, "Child line found when flag desactivated (default)"
+        )
+
+        # Check parent line id value is correct
+        parent_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
+            lambda l: l.code == "NET"
+        )
+        self.assertEqual(
+            child_line.parent_line_id.code,
+            parent_line.code,
+            "Child line parent_id is correct",
+        )
+
+        # Check parent line id is False in a rule that have not parent defined
+        self.assertEqual(
+            len(parent_line.parent_line_id), 0, "The parent line has no parent_line_id"
+        )
+
+        # We change child rules show/hide flag
+        richard_payslip.hide_child_lines = True
+
+        # Check child rules not shown in table after flag changed
+        child_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
+            lambda l: l.code == "NET_CHILD"
+        )
+        self.assertEqual(
+            len(child_line), 0, "The child line is not found when flag activated"
+        )
+
         # Find the 'NET' payslip line and check that it adds up
         # salary + HRA + MA + SALE - PT
         work100 = richard_payslip.worked_days_line_ids.filtered(
@@ -94,7 +128,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
         # I create record for generating the payslip for this Payslip run.
-
         payslip_employee = self.env["hr.payslip.employees"].create(
             {"employee_ids": [(4, self.richard_emp.id)]}
         )
