@@ -25,7 +25,7 @@ class TestSalaryRule(TestPayslipBase):
     def test_python_code_return_values(self):
 
         self.test_rule.amount_python_compute = (
-            "result_rate = 0\n" "result_qty = 0\n" "result = 0"
+            "result_rate = 0\n" "result_qty = 0\n" "result = 0\n"
         )
 
         # Open contracts
