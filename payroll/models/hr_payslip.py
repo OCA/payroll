@@ -234,6 +234,11 @@ class HrPayslip(models.Model):
         compute="_compute_details_by_salary_rule_category",
         string="Details by Salary Rule Category",
     )
+    dynamic_filtered_payslip_lines = fields.One2many(
+        "hr.payslip.line",
+        compute="_compute_dynamic_filtered_payslip_lines",
+        string="Dynamic Filtered Payslip Lines",
+    )
     credit_note = fields.Boolean(
         string="Credit Note",
         readonly=True,
@@ -251,13 +256,24 @@ class HrPayslip(models.Model):
     payslip_count = fields.Integer(
         compute="_compute_payslip_count", string="Payslip Computation Details"
     )
+    hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
+
+    @api.depends("line_ids", "hide_child_lines")
+    def _compute_dynamic_filtered_payslip_lines(self):
+        for payslip in self:
+            if payslip.hide_child_lines:
+                payslip.dynamic_filtered_payslip_lines = payslip.mapped(
+                    "line_ids"
+                ).filtered(lambda line: not line.parent_rule_id)
+            else:
+                payslip.dynamic_filtered_payslip_lines = payslip.line_ids
 
     @api.depends("line_ids")
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
             payslip.details_by_salary_rule_category = payslip.mapped(
                 "line_ids"
-            ).filtered(lambda line: line.category_id)
+            ).filtered(lambda line: line.category_id and line.appears_on_payslip)
 
     def _compute_payslip_count(self):
         for payslip in self:
@@ -632,10 +648,11 @@ class HrPayslip(models.Model):
                 localdict["result"] = None
                 localdict["result_qty"] = 1.0
                 localdict["result_rate"] = 100
+                localdict["result_name"] = None
                 # check if the rule can be applied
                 if rule._satisfy_condition(localdict) and rule.id not in blacklist:
                     # compute the amount of the rule
-                    amount, qty, rate = rule._compute_rule(localdict)
+                    amount, qty, rate, computed_name = rule._compute_rule(localdict)
                     # check if there is already a rule computed with that code
                     previous_amount = (
                         rule.code in localdict and localdict[rule.code] or 0.0
@@ -653,11 +670,12 @@ class HrPayslip(models.Model):
                     result_dict[key] = {
                         "salary_rule_id": rule.id,
                         "contract_id": contract.id,
-                        "name": rule.name,
+                        "name": computed_name and str(computed_name) or rule.name,
                         "code": rule.code,
                         "category_id": rule.category_id.id,
                         "sequence": rule.sequence,
                         "appears_on_payslip": rule.appears_on_payslip,
+                        "parent_rule_id": rule.parent_rule_id.id,
                         "condition_select": rule.condition_select,
                         "condition_python": rule.condition_python,
                         "condition_range": rule.condition_range,

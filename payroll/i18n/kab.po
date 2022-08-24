@@ -378,15 +378,45 @@ msgid "Category"
 msgstr "Taggayt"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
+msgid "Child Line Details"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__child_ids
+msgid "Child Payslip Lines"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Child Rules"
 msgstr "Ilugan arrac"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__child_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__child_ids
 msgid "Child Salary Rule"
 msgstr "Alugen n uɣrud aqruṛ"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
+msgid "Child Salary Structure"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid ""
+"Child rule functionality is useful when you need other rules to be computed "
+"before the parent one. <br/>\n"
+"                                This means that all salary rules declared as "
+"childs (parent of one rule) will be added to the computation\n"
+"                                if its parent rule is included in the salary "
+"structure. So child rules will only be computed if it's parent is\n"
+"                                computed. <br/>\n"
+"                                This functionality is useful for doing "
+"auxiliar calculations that are used as dependencies for the parent\n"
+"                                salary rule (e.x. rules required for complex "
+"tax computation that needs data from several modules)."
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__children_ids
@@ -641,11 +671,6 @@ msgid "Description"
 msgstr "Aglam"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-msgid "Details By Salary Rule Category"
-msgstr "Aglam leqqayen s taggayt n ulugen n uɣrud"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__details_by_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Details by Salary Rule Category"
@@ -713,6 +738,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Draft Slip"
 msgstr "Taferkit n tenseɣt tarrewayt"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
+msgid "Dynamic Filtered Payslip Lines"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_employee
@@ -858,6 +888,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
 msgid "Group By"
 msgstr "Sdukel s"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_child_lines
+msgid "Hide Child Lines"
+msgstr ""
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
@@ -1244,6 +1279,11 @@ msgid "Parent"
 msgstr "Ababat"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
+msgid "Parent Payslip Line"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_rule_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__parent_rule_id
 msgid "Parent Salary Rule"
@@ -1379,6 +1419,11 @@ msgstr "Inekcam n tferkit n tenseɣt"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Line"
 msgstr "Izirig n tferkit n tenseɣt"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
+msgid "Payslip Line Details"
+msgstr ""
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_line_action
@@ -1541,6 +1586,12 @@ msgid "Rate (%)"
 msgstr "Amfiḍi (%)"
 
 #. module: payroll
+#: code:addons/payroll/models/hr_payslip_line.py:0
+#, python-format
+msgid "Recursion error. Only one line should be parent of %s"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__number
 msgid "Reference"
@@ -1689,6 +1740,11 @@ msgstr "Taɣessa n uɣrud"
 #: model:ir.ui.menu,name:payroll.hr_payroll_structure_menu
 msgid "Salary Structures"
 msgstr "Tiɣessa n uɣrud"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Salary rules apearing on payslip"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__schedule_pay
@@ -1983,9 +2039,12 @@ msgid "result will be affected to a variable"
 msgstr ""
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Details By Salary Rule Category"
+#~ msgstr "Aglam leqqayen s taggayt n ulugen n uɣrud"
 
 #~ msgid "Wrong python code defined for salary rule %s (%s)."
 #~ msgstr "Tangalt Python n ulugen n uɣrud %s (%s) mačči tameɣtut."
