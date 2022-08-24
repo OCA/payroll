@@ -231,50 +231,51 @@
                             </field>
                         </page>
                         <page name="computation" string="Salary Computation">
-                            <field name="line_ids" colspan="4" nolabel="1">
+                            <group>
+                                <field
+                                    name="hide_child_lines"
+                                    widget="boolean_toggle"
+                                />
+                            </group>
+                            <field
+                                name="dynamic_filtered_payslip_lines"
+                                colspan="4"
+                                nolabel="1"
+                            >
                                 <tree
                                     string="Salary Structure"
-                                    editable="bottom"
                                     decoration-info="total == 0"
+                                    decoration-bf="parent_rule_id == False"
+                                    decoration-it="parent_rule_id != False"
+                                    decoration-muted="parent_rule_id != False"
+                                    create="false"
+                                    delete="false"
                                 >
                                     <field name="sequence" invisible="1" />
+                                    <field name="parent_line_id" invisible="1" />
+                                    <field name="parent_rule_id" invisible="1" />
+                                    <field name="code" readonly="1" />
+                                    <field
+                                        name="salary_rule_id"
+                                        readonly="1"
+                                        invisible="1"
+                                    />
+                                    <field name="category_id" readonly="1" />
                                     <field name="name" />
-                                    <field name="code" />
-                                    <field name="category_id" />
-                                    <field name="salary_rule_id" />
-                                    <field name="quantity" />
-                                    <field name="rate" />
-                                    <field name="amount" />
+                                    <field name="quantity" readonly="1" />
+                                    <field name="rate" readonly="1" />
+                                    <field name="amount" readonly="1" />
                                     <field
                                         name="total"
-                                        decoration-bf="1"
-                                        decoration-danger="0 > total"
-                                        decoration-success="total > 0"
-                                        sum="total_net"
+                                        decoration-danger="0 > total and parent_rule_id == False"
+                                        decoration-success="total > 0 and parent_rule_id == False"
+                                        readonly="1"
                                     />
                                 </tree>
-                                <form string="Payslip Line">
-                                    <group col="4">
-                                        <field name="name" />
-                                        <field name="code" />
-                                        <field name="category_id" />
-                                        <field name="sequence" />
-                                        <field name="quantity" />
-                                        <field name="rate" />
-                                        <field name="amount" />
-                                        <field name="total" />
-                                        <field name="salary_rule_id" />
-                                    </group>
-                                </form>
                             </field>
                         </page>
-                        <page name="details" string="Details By Salary Rule Category">
-                            <field
-                                name="details_by_salary_rule_category"
-                                groupby='category_id'
-                                context="{'group_by':'category_id'}"
-                                domain="[('appears_on_payslip', '=', True)]"
-                            >
+                        <page name="details" string="Salary rules apearing on payslip">
+                            <field name="details_by_salary_rule_category">
                                 <tree
                                     string="Payslip Lines"
                                     decoration-info="total == 0"
