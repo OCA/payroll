@@ -169,6 +169,17 @@
                         </group>
                     </page>
                     <page name="rules" string="Child Rules">
+                        <div class="alert alert-info" role="alert">
+                            <p>
+                                Child rule functionality is useful when you need other rules to be computed before the parent one. <br
+                                />
+                                This means that all salary rules declared as childs (parent of one rule) will be added to the computation
+                                if its parent rule is included in the salary structure. So child rules will only be computed if it's parent is
+                                computed. <br />
+                                This functionality is useful for doing auxiliar calculations that are used as dependencies for the parent
+                                salary rule (e.x. rules required for complex tax computation that needs data from several modules).
+                            </p>
+                        </div>
                         <field name="parent_rule_id" />
                         <separator string="Children Definition" />
                         <field name="child_ids" />
