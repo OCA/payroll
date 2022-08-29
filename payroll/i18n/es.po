@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-08-25 19:07+0000\n"
+"PO-Revision-Date: 2022-08-29 23:07+0000\n"
 "Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
@@ -436,12 +436,12 @@ msgstr "Categoría"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Child Line Details"
-msgstr ""
+msgstr "Detalle de líneas hijas"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__child_ids
 msgid "Child Payslip Lines"
-msgstr ""
+msgstr "Líneas hijas de liquidación"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -456,7 +456,7 @@ msgstr "Regla salarial hija"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Child Salary Structure"
-msgstr ""
+msgstr "Estructura salarial hija"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -473,6 +473,18 @@ msgid ""
 "                                salary rule (e.x. rules required for complex "
 "tax computation that needs data from several modules)."
 msgstr ""
+"La funcionalidad de reglas hijas es útil cuando se necesita que otras reglas "
+"de computen antes que la regla padre. <br/>\n"
+"                                Esto significa, que todas las reglas "
+"salariales declaradas como hijas (con una regla padre) serán agregadas al\n"
+"                                cómputo de la liquidación si la regla padre "
+"está incluida en la estructura salarial. Entonces, las reglas hijas\n"
+"                                solo serán calculadas si su padre es "
+"computado. <br/>\n"
+"                                Esta funcionalidad es útil para realizar "
+"cálculos adicionales que son usados como dependencias de la\n"
+"                                regla padre (e.j. cálculos auxiliares para "
+"impuestos complejos)."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__children_ids
@@ -808,7 +820,7 @@ msgstr "Nómina borrador"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
 msgid "Dynamic Filtered Payslip Lines"
-msgstr ""
+msgstr "Lineas de liquidación filtradas dinámicamente"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_employee
@@ -960,7 +972,7 @@ msgstr "Agrupar por"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_child_lines
 msgid "Hide Child Lines"
-msgstr ""
+msgstr "Ocultar líneas hijas"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
@@ -1361,7 +1373,7 @@ msgstr "Padre"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
 msgid "Parent Payslip Line"
-msgstr ""
+msgstr "Linea padre"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_rule_id
@@ -1504,7 +1516,7 @@ msgstr "Línea de nómina"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Payslip Line Details"
-msgstr ""
+msgstr "Detalle de líneas de la liquidación"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_line_action
@@ -1671,7 +1683,7 @@ msgstr "Tasa (%)"
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "Recursion error. Only one line should be parent of %s"
-msgstr ""
+msgstr "Error de recursion. Solo una línea puede ser padre de %s"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
@@ -1826,7 +1838,7 @@ msgstr "Estructuras salariales"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Salary rules apearing on payslip"
-msgstr ""
+msgstr "Reglas salariales mostradas"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__schedule_pay
