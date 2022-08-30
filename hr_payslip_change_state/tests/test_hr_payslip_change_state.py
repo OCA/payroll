@@ -29,8 +29,8 @@ class TestHrPayslipChangeState(TestHrPayrollCancel):
             action.write({"state": "draft"})
             action.change_state_confirm()
 
-        # Now the payslip should be computed but in state draft
-        self.assertEqual(hr_payslip.state, "draft")
+        # Now the payslip should be computed but in verify state
+        self.assertEqual(hr_payslip.state, "verify")
         self.assertNotEqual(hr_payslip.number, None)
         action.write({"state": "done"})
         action.change_state_confirm()
