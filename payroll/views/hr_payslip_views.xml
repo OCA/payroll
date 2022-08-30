@@ -5,7 +5,6 @@
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
             <tree
-                decoration-info="state in ('confirm','hr_check','accont_check')"
                 decoration-muted="state == 'cancel'"
                 string="Payslips"
                 multi_edit="1"
@@ -20,7 +19,8 @@
                 <field
                     name="state"
                     decoration-success="state == 'done'"
-                    decoration-info="state == 'draft' or state == 'verify'"
+                    decoration-warning="state == 'verify'"
+                    decoration-info="state == 'draft'"
                     decoration-danger="state == 'cancel'"
                     widget="badge"
                     optional="show"
@@ -83,39 +83,39 @@
                         string="Confirm"
                         name="action_payslip_done"
                         type="object"
-                        states="draft"
+                        states="verify"
                         class="oe_highlight"
                     />
                     <button
                         string="Refund"
                         name="refund_sheet"
-                        states="confirm,done"
+                        states="done"
                         type='object'
-                    />
-                    <button
-                        string="Set to Draft"
-                        name="action_payslip_draft"
-                        type="object"
-                        states="cancel"
                     />
                     <button
                         string="Compute Sheet"
                         name="compute_sheet"
                         type="object"
-                        states="draft"
+                        states="draft,verify"
                         class="oe_highlight"
                     />
                     <button
-                        string="Refetch Payslip Data"
-                        name="onchange_employee"
+                        string="Set to Draft"
+                        name="action_payslip_draft"
                         type="object"
-                        states="draft"
+                        states="cancel,verify"
                     />
                     <button
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        states="draft,hr_check,confirm,verify"
+                        states="draft,confirm,verify"
+                    />
+                    <button
+                        string="Refetch Payslip Data"
+                        name="onchange_employee"
+                        type="object"
+                        states="draft,verify"
                     />
                     <field
                         name="state"
@@ -134,7 +134,7 @@
                             <field
                                 name="payslip_count"
                                 widget="statinfo"
-                                string="Payslip"
+                                string="Payslip Lines"
                                 help="Payslip Computation Details"
                             />
                         </button>
@@ -174,6 +174,10 @@
                         />
                         <field name="name" />
                         <field name="credit_note" />
+                        <field
+                            name="compute_date"
+                            attrs="{'invisible':[('compute_date','==',False)]}"
+                        />
                     </group>
                     <notebook>
                         <page name="input" string="Worked Days &amp; Inputs">
@@ -330,17 +334,24 @@
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
             <search string="Search Payslips">
+                <field name="employee_id" />
                 <field
                     name="name"
                     string="Payslips"
                     filter_domain="['|',('name','ilike',self),('number','ilike',self)]"
                 />
                 <field name="date_from" />
+                <field name="contract_id" />
+                <field name="payslip_run_id" />
                 <filter
                     string="Draft"
                     name="draft"
-                    domain="[('state','=','draft')]"
-                    help="Draft Slip"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    string="Pending Review"
+                    name="verify"
+                    domain="[('state', '=', 'verify')]"
                 />
                 <filter
                     string="Done"
@@ -348,8 +359,20 @@
                     domain="[('state','=','done')]"
                     help="Done Slip"
                 />
-                <field name="employee_id" />
-                <field name="payslip_run_id" />
+                <separator />
+                <filter
+                    string="Date"
+                    name="date_filter"
+                    date="date_to"
+                    default_period="last_month"
+                />
+                <separator />
+                <filter
+                    string="Refunded"
+                    name="credit_note"
+                    domain="[('credit_note', '=', True)]"
+                />
+                <separator />
                 <group expand="0" string="Group By">
                     <filter
                         string="Employees"
