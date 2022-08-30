@@ -348,9 +348,6 @@ class HrPayslip(models.Model):
 
     def compute_sheet(self):
         for payslip in self:
-            number = payslip.number or self.env["ir.sequence"].next_by_code(
-                "salary.slip"
-            )
             # delete old payslip lines
             payslip.line_ids.unlink()
             # set the list of contract for which the rules have to be applied
@@ -361,6 +358,9 @@ class HrPayslip(models.Model):
                 or payslip.employee_id._get_contracts(
                     date_from=payslip.date_from, date_to=payslip.date_to
                 ).ids
+            )
+            number = payslip.number or self.env["ir.sequence"].next_by_code(
+                "salary.slip"
             )
             lines = [
                 (0, 0, line)
@@ -523,41 +523,7 @@ class HrPayslip(models.Model):
 
         return res
 
-    def get_baselocaldict(self, contracts):
-        """Basic dictionary values that are useful in most salary rules. Inherited
-        classes that overload this method should use the name of the module as
-        the dictionary key.
-
-        This method is evaluated once per payslip.
-
-        :param contracts: Recordset of all hr.contract records in this payslip
-        :return: a dictionary of discreet values and/or Browsable Objects
-        """
-        self.ensure_one()
-
-        worked_days_dict = {}
-        inputs_dict = {}
-        payslip = self
-        for worked_days_line in payslip.worked_days_line_ids:
-            worked_days_dict[worked_days_line.code] = worked_days_line
-        for input_line in payslip.input_line_ids:
-            inputs_dict[input_line.code] = input_line
-        inputs = InputLine(payslip.employee_id.id, inputs_dict, self.env)
-        worked_days = WorkedDays(payslip.employee_id.id, worked_days_dict, self.env)
-        payslips = Payslips(payslip.employee_id.id, payslip, self.env)
-        payroll_dict = BrowsableObject(
-            payslip.employee_id.id, payslip.get_payroll_dict(contracts), self.env
-        )
-
-        baselocaldict = {
-            "payslip": payslips,
-            "worked_days": worked_days,
-            "inputs": inputs,
-            "payroll": payroll_dict,
-        }
-        return baselocaldict
-
-    def get_contract_dict(self, contract, contracts):
+    def get_current_contract_dict(self, contract, contracts):
         """Contract dependent dictionary values.
         This method is called just before the salary rules are evaluated for
         contract.
@@ -587,117 +553,127 @@ class HrPayslip(models.Model):
 
         return {}
 
-    @api.model
-    def _get_payslip_lines(self, contract_ids, payslip_id):
-        def _sum_salary_rule_category(localdict, category, amount):
-            if category.parent_id:
-                localdict = _sum_salary_rule_category(
-                    localdict, category.parent_id, amount
-                )
+    def _get_baselocaldict(self, contracts):
+        self.ensure_one()
+        worked_days_dict = {
+            line.code: line for line in self.worked_days_line_ids if line.code
+        }
+        input_lines_dict = {
+            line.code: line for line in self.input_line_ids if line.code
+        }
+        localdict = {
+            **{
+                "payslip": Payslips(self.employee_id.id, self, self.env),
+                "worked_days": WorkedDays(
+                    self.employee_id.id, worked_days_dict, self.env
+                ),
+                "inputs": InputLine(self.employee_id.id, input_lines_dict, self.env),
+                "payroll": BrowsableObject(
+                    self.employee_id.id, self.get_payroll_dict(contracts), self.env
+                ),
+                "current_contract": BrowsableObject(self.employee_id.id, {}, self.env),
+                "categories": BrowsableObject(self.employee_id.id, {}, self.env),
+                "rules": BrowsableObject(self.employee_id.id, {}, self.env),
+                "result_rules": BrowsableObject(self.employee_id.id, {}, self.env),
+            },
+        }
+        return localdict
 
-            if category.code in localdict["categories"].dict:
-                localdict["categories"].dict[category.code] += amount
-            else:
-                localdict["categories"].dict[category.code] = amount
-
-            return localdict
-
-        payslip = self.env["hr.payslip"].browse(payslip_id)
-        contracts = self.env["hr.contract"].browse(contract_ids)
-
-        # we keep a dict with the result because a value can be overwritten by
-        # another rule with the same code
-        result_dict = {}
-        rules_dict = {}
-        contract_dict = {}
-        blacklist = []
-        categories = BrowsableObject(payslip.employee_id.id, {}, self.env)
-        rules = BrowsableObject(payslip.employee_id.id, rules_dict, self.env)
-        current_contract = BrowsableObject(
-            payslip.employee_id.id, contract_dict, self.env
-        )
-
-        baselocaldict = payslip.get_baselocaldict(contracts)
-        baselocaldict["categories"] = categories
-        baselocaldict["rules"] = rules
-        baselocaldict["current_contract"] = current_contract
-
-        # get the ids of the structures on the contracts and their parent id
-        # as well
+    def _get_salary_rules(self, contracts, payslip):
         if len(contracts) == 1 and payslip.struct_id:
             structure_ids = list(set(payslip.struct_id._get_parent_structure().ids))
         else:
             structure_ids = contracts.get_all_structures()
-        # get the rules of the structure and thier children
         rule_ids = (
             self.env["hr.payroll.structure"].browse(structure_ids).get_all_rules()
         )
-        # run the rules by sequence
         sorted_rule_ids = [id for id, sequence in sorted(rule_ids, key=lambda x: x[1])]
         sorted_rules = self.env["hr.salary.rule"].browse(sorted_rule_ids)
+        return sorted_rules
 
+    def _compute_payslip_line(self, rule, localdict, lines_dict):
+        self.ensure_one()
+        # check if there is already a rule computed with that code
+        previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
+        # compute the amount of the rule
+        amount, qty, rate, computed_name = rule._compute_rule(localdict)
+        rule_total = amount * qty * rate / 100.0
+        # set/overwrite the amount computed for this rule in the localdict
+        localdict[rule.code] = rule_total
+        localdict["rules"].dict[rule.code] = rule
+        localdict["result_rules"].dict[rule.code] = {
+            "quantity": qty,
+            "rate": rate,
+            "amount": amount,
+            "total": rule_total,
+        }
+        # sum the amount for its salary category
+        localdict = rule.category_id._sum_salary_rule_category(
+            localdict, rule_total - previous_amount
+        )
+        # create/overwrite the rule in the temporary results
+        key = rule.code + "-" + str(localdict["contract"].id)
+        lines_dict[key] = {
+            "salary_rule_id": rule.id,
+            "contract_id": localdict["contract"].id,
+            "name": computed_name and str(computed_name) or rule.name,
+            "code": rule.code,
+            "category_id": rule.category_id.id,
+            "sequence": rule.sequence,
+            "appears_on_payslip": rule.appears_on_payslip,
+            "parent_rule_id": rule.parent_rule_id.id,
+            "condition_select": rule.condition_select,
+            "condition_python": rule.condition_python,
+            "condition_range": rule.condition_range,
+            "condition_range_min": rule.condition_range_min,
+            "condition_range_max": rule.condition_range_max,
+            "amount_select": rule.amount_select,
+            "amount_fix": rule.amount_fix,
+            "amount_python_compute": rule.amount_python_compute,
+            "amount_percentage": rule.amount_percentage,
+            "amount_percentage_base": rule.amount_percentage_base,
+            "register_id": rule.register_id.id,
+            "amount": amount,
+            "employee_id": localdict["employee"].id,
+            "quantity": qty,
+            "rate": rate,
+        }
+        return localdict, lines_dict
+
+    @api.model
+    def _get_payslip_lines(self, contract_ids, payslip_id):
+        lines_dict = {}
+        blacklist = []
+        payslip = self.env["hr.payslip"].browse(payslip_id)
+        contracts = self.env["hr.contract"].browse(contract_ids)
+        baselocaldict = payslip._get_baselocaldict(contracts)
         for contract in contracts:
-            employee = contract.employee_id
-            contract_dict = payslip.get_contract_dict(contract, contracts)
+            # assign "current_contract" dict
             baselocaldict["current_contract"] = BrowsableObject(
-                payslip.employee_id.id, contract_dict, self.env
+                payslip.employee_id.id,
+                payslip.get_current_contract_dict(contract, contracts),
+                self.env,
             )
-            localdict = dict(baselocaldict, employee=employee, contract=contract)
-            for rule in sorted_rules:
-                key = rule.code + "-" + str(contract.id)
+            # set up localdict with current contract and employee values
+            localdict = dict(
+                baselocaldict, employee=contract.employee_id, contract=contract
+            )
+            for rule in self._get_salary_rules(contracts, payslip):
                 localdict["result"] = None
                 localdict["result_qty"] = 1.0
                 localdict["result_rate"] = 100
                 localdict["result_name"] = None
                 # check if the rule can be applied
                 if rule._satisfy_condition(localdict) and rule.id not in blacklist:
-                    # compute the amount of the rule
-                    amount, qty, rate, computed_name = rule._compute_rule(localdict)
-                    # check if there is already a rule computed with that code
-                    previous_amount = (
-                        rule.code in localdict and localdict[rule.code] or 0.0
+                    localdict, lines_dict = self._compute_payslip_line(
+                        rule, localdict, lines_dict
                     )
-                    # set/overwrite the amount computed for this rule in the
-                    # localdict
-                    tot_rule = amount * qty * rate / 100.0
-                    localdict[rule.code] = tot_rule
-                    rules_dict[rule.code] = rule
-                    # sum the amount for its salary category
-                    localdict = _sum_salary_rule_category(
-                        localdict, rule.category_id, tot_rule - previous_amount
-                    )
-                    # create/overwrite the rule in the temporary results
-                    result_dict[key] = {
-                        "salary_rule_id": rule.id,
-                        "contract_id": contract.id,
-                        "name": computed_name and str(computed_name) or rule.name,
-                        "code": rule.code,
-                        "category_id": rule.category_id.id,
-                        "sequence": rule.sequence,
-                        "appears_on_payslip": rule.appears_on_payslip,
-                        "parent_rule_id": rule.parent_rule_id.id,
-                        "condition_select": rule.condition_select,
-                        "condition_python": rule.condition_python,
-                        "condition_range": rule.condition_range,
-                        "condition_range_min": rule.condition_range_min,
-                        "condition_range_max": rule.condition_range_max,
-                        "amount_select": rule.amount_select,
-                        "amount_fix": rule.amount_fix,
-                        "amount_python_compute": rule.amount_python_compute,
-                        "amount_percentage": rule.amount_percentage,
-                        "amount_percentage_base": rule.amount_percentage_base,
-                        "register_id": rule.register_id.id,
-                        "amount": amount,
-                        "employee_id": contract.employee_id.id,
-                        "quantity": qty,
-                        "rate": rate,
-                    }
                 else:
                     # blacklist this rule and its children
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
+            # reset "current_contract" dict
             baselocaldict["current_contract"] = {}
-
-        return list(result_dict.values())
+        return list(lines_dict.values())
 
     def get_payslip_vals(
         self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
