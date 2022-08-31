@@ -366,13 +366,13 @@ class HrPayslip(models.Model):
                     date_from=payslip.date_from, date_to=payslip.date_to
                 ).ids
             )
+            # get localdict and linesdict
+            localdict, lines_dict = self._get_payslip_lines(contract_ids, payslip.id)
+            # write payslip lines
             number = payslip.number or self.env["ir.sequence"].next_by_code(
                 "salary.slip"
             )
-            lines = [
-                (0, 0, line)
-                for line in self._get_payslip_lines(contract_ids, payslip.id)
-            ]
+            lines = [(0, 0, line) for line in list(lines_dict.values())]
             payslip.write({"line_ids": lines, "number": number})
         return True
 
@@ -680,7 +680,7 @@ class HrPayslip(models.Model):
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
             # reset "current_contract" dict
             baselocaldict["current_contract"] = {}
-        return list(lines_dict.values())
+        return localdict, lines_dict
 
     def get_payslip_vals(
         self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
