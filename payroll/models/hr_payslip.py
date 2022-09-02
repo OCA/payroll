@@ -113,7 +113,7 @@ class HrPayslip(models.Model):
     _name = "hr.payslip"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Pay Slip"
-    _order = "number desc, id desc"
+    _order = "id desc"
 
     struct_id = fields.Many2one(
         "hr.payroll.structure",

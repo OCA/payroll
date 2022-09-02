@@ -9,7 +9,7 @@ class HrPayslipRun(models.Model):
     _name = "hr.payslip.run"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Payslip Batches"
-    _order = "name desc, id desc"
+    _order = "id desc"
 
     name = fields.Char(
         required=True, readonly=True, states={"draft": [("readonly", False)]}
