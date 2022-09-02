@@ -615,6 +615,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__date_start
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__date_from
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__date_from
