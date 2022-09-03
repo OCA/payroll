@@ -21,8 +21,8 @@ from odoo.addons.payroll.models.base_browsable import (
 class HrPayslip(models.Model):
     _name = "hr.payslip"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _description = "Pay Slip"
-    _order = "id desc"
+    _description = "Payslip"
+    _order = "number desc, id desc"
 
     struct_id = fields.Many2one(
         "hr.payroll.structure",
@@ -183,6 +183,7 @@ class HrPayslip(models.Model):
                 "line_ids"
             ).filtered(lambda line: line.category_id and line.appears_on_payslip)
 
+    @api.depends("line_ids")
     def _compute_payslip_count(self):
         for payslip in self:
             payslip.payslip_count = len(payslip.line_ids)
@@ -243,9 +244,6 @@ class HrPayslip(models.Model):
             ],
             "context": {},
         }
-
-    def check_done(self):
-        return True
 
     def unlink(self):
         if any(self.filtered(lambda payslip: payslip.state not in ("draft", "cancel"))):

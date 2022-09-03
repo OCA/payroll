@@ -83,20 +83,14 @@
                         string="Confirm"
                         name="action_payslip_done"
                         type="object"
-                        states="draft"
+                        states="verify"
                         class="oe_highlight"
                     />
                     <button
                         string="Refund"
                         name="refund_sheet"
-                        states="confirm,done"
+                        states="done"
                         type='object'
-                    />
-                    <button
-                        string="Set to Draft"
-                        name="action_payslip_draft"
-                        type="object"
-                        states="cancel,verify"
                     />
                     <button
                         string="Compute Sheet"
@@ -106,16 +100,22 @@
                         class="oe_highlight"
                     />
                     <button
-                        string="Refetch Payslip Data"
-                        name="onchange_employee"
+                        string="Set to Draft"
+                        name="action_payslip_draft"
                         type="object"
-                        states="draft"
+                        states="cancel,verify"
                     />
                     <button
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
                         states="draft,confirm,verify"
+                    />
+                    <button
+                        string="Refetch Payslip Data"
+                        name="onchange_employee"
+                        type="object"
+                        states="draft,verify"
                     />
                     <field
                         name="state"
