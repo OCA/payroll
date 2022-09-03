@@ -19,5 +19,6 @@
     "data": [
         "views/hr_payslip_view.xml",
     ],
+    "maintainers": ["appstogrow", "nimarosa"],
     "installable": True,
 }
