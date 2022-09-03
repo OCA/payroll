@@ -134,7 +134,7 @@
                             <field
                                 name="payslip_count"
                                 widget="statinfo"
-                                string="Payslip"
+                                string="Payslip Lines"
                                 help="Payslip Computation Details"
                             />
                         </button>
