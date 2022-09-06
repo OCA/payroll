@@ -131,7 +131,7 @@
                                         attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
                                     />
                                 </div>
-                                <separator colspan="4" string="Company Contribution" />
+                                <separator string="Company Contribution" />
                                 <field name="register_id" />
                             </group>
                             <group string="Computation" name="computation">
