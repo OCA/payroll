@@ -26,15 +26,6 @@ class HrSalaryRuleCategory(models.Model):
         default=lambda self: self.env.company,
     )
 
-    def _sum_salary_rule_category(self, localdict, amount):
-        self.ensure_one()
-        if self.parent_id:
-            localdict = self.parent_id._sum_salary_rule_category(localdict, amount)
-        localdict["categories"].dict[self.code] = (
-            localdict["categories"].dict.get(self.code, 0) + amount
-        )
-        return localdict
-
     @api.constrains("parent_id")
     def _check_parent_id(self):
         if not self._check_recursion():
