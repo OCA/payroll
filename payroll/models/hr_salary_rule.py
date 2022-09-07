@@ -79,6 +79,7 @@ class HrSalaryRule(models.Model):
             # inputs: object containing the computed inputs
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
+            # result_rules: object with a dict of qty, rate, amount an total of calculated rules
 
             # Available compute variables:
             #-------------------------------
@@ -131,6 +132,7 @@ class HrSalaryRule(models.Model):
             # inputs: object containing the computed inputs.
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
+            # result_rules: object with a dict of qty, rate, amount an total of calculated rules
 
             # Available compute variables:
             #-------------------------------
