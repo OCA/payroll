@@ -264,13 +264,16 @@ class HrPayslip(models.Model):
                     date_from=payslip.date_from, date_to=payslip.date_to
                 ).ids
             )
-            # get localdict and linesdict
-            localdict, lines_dict = self._get_payslip_lines(contract_ids, payslip.id)
             # write payslip lines
             number = payslip.number or self.env["ir.sequence"].next_by_code(
                 "salary.slip"
             )
-            lines = [(0, 0, line) for line in list(lines_dict.values())]
+            lines = [
+                (0, 0, line)
+                for line in list(
+                    self._get_payslip_lines(contract_ids, payslip.id).values()
+                )
+            ]
             payslip.write(
                 {
                     "line_ids": lines,
@@ -583,9 +586,17 @@ class HrPayslip(models.Model):
                 else:
                     # blacklist this rule and its children
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
+            # call localdict_hook
+            localdict = self.localdict_hook(localdict, payslip)
             # reset "current_contract" dict
             baselocaldict["current_contract"] = {}
-        return localdict, lines_dict
+        return lines_dict
+
+    def localdict_hook(self, localdict, payslip):
+        # This hook is called when the function _get_payslip_lines ends the loop
+        # and before its returns. This method by itself don't add any functionality
+        # and is intedend to be inherited to access localdict from other functions.
+        return localdict
 
     def get_payslip_vals(
         self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
