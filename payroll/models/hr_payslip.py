@@ -523,8 +523,8 @@ class HrPayslip(models.Model):
             "total": rule_total,
         }
         # sum the amount for its salary category
-        localdict = rule.category_id._sum_salary_rule_category(
-            localdict, rule_total - previous_amount
+        localdict = self._sum_salary_rule_category(
+            localdict, rule.category_id, rule_total - previous_amount
         )
         # create/overwrite the rule in the temporary results
         key = rule.code + "-" + str(localdict["contract"].id)
@@ -651,6 +651,17 @@ class HrPayslip(models.Model):
             }
         )
         return res
+
+    def _sum_salary_rule_category(self, localdict, category, amount):
+        self.ensure_one()
+        if category.parent_id:
+            localdict = self._sum_salary_rule_category(
+                localdict, category.parent_id, amount
+            )
+        localdict["categories"].dict[category.code] = (
+            localdict["categories"].dict.get(category.code, 0) + amount
+        )
+        return localdict
 
     def _get_employee_contracts(self):
         return self.env["hr.contract"].browse(
