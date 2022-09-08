@@ -117,8 +117,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "工资单"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -173,3 +173,6 @@ msgstr "费用日记账 \"%s\"未配置正确的贷方科目"
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "费用日记账 \"%s\"未配置正确的借方科目"
+
+#~ msgid "Pay Slip"
+#~ msgstr "工资单"
