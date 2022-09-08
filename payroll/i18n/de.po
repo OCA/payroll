@@ -488,6 +488,11 @@ msgid "Computation"
 msgstr "Berechnung"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__compute_date
+msgid "Compute Date"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Compute Sheet"
 msgstr "Berechnen"
@@ -616,6 +621,11 @@ msgid "Credit Note"
 msgstr "Gutschrift"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Date"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__date_start
@@ -740,11 +750,6 @@ msgstr "Entwurf"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Draft Payslip Batches"
 msgstr "Lohnabrechnungsläufe im Entwurf"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-msgid "Draft Slip"
-msgstr "Lohnkont Entwurf"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
@@ -1317,7 +1322,6 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_payslip
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__payslip_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__slip_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__payslip_id
@@ -1386,6 +1390,7 @@ msgstr "Lohnkonto Strukturen"
 
 #. module: payroll
 #: model:ir.actions.report,name:payroll.action_report_payslip
+#: model:ir.model,name:payroll.model_hr_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip"
 msgstr "Mitarbeiterabrechnung"
@@ -1506,6 +1511,11 @@ msgstr "Lohnabrechnungsläufe"
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
 msgid "Payslips by Employees"
 msgstr "Lohnabrechnungen pro Mitarbeiter"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Pending Review"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_percentage
@@ -1639,6 +1649,11 @@ msgstr ""
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Refund: %s"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Refunded"
 msgstr ""
 
 #. module: payroll
@@ -1911,11 +1926,6 @@ msgid "Total"
 msgstr "Total"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-msgid "Total Working Days"
-msgstr "Gesamt Arbeitstage"
-
-#. module: payroll
 #: model:ir.model.constraint,message:payroll.constraint_hr_rule_parameter__unique
 msgid "Two rule parameters cannot have the same code."
 msgstr ""
@@ -2072,6 +2082,12 @@ msgstr "Das Ergebnis wird einer Variablen zugewiesen"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Draft Slip"
+#~ msgstr "Lohnkont Entwurf"
+
+#~ msgid "Total Working Days"
+#~ msgstr "Gesamt Arbeitstage"
 
 #~ msgid "Details By Salary Rule Category"
 #~ msgstr "Details je Lohnartenkategorie"
