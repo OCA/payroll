@@ -76,9 +76,13 @@ class HrPayslip(models.Model):
         )
 
     def action_payslip_cancel(self):
-        moves = self.mapped("move_id")
-        moves.filtered(lambda x: x.state == "posted").button_cancel()
-        moves.unlink()
+        for payslip in self:
+            if not payslip.move_id.journal_id.restrict_mode_hash_table:
+                payslip.move_id.with_context(force_delete=True).button_cancel()
+                payslip.move_id.with_context(force_delete=True).unlink()
+            else:
+                payslip.move_id._reverse_moves()
+                payslip.move_id = False
         return super(HrPayslip, self).action_payslip_cancel()
 
     def action_payslip_done(self):
