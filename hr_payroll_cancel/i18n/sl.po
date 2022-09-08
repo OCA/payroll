@@ -20,8 +20,23 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: hr_payroll_cancel
+#: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_payroll_cancel
+#: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_payroll_cancel
+#: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: hr_payroll_cancel
 #: model:ir.model,name:hr_payroll_cancel.model_hr_payslip
-msgid "Pay Slip"
+msgid "Payslip"
 msgstr ""
 
 #. module: hr_payroll_cancel
@@ -30,7 +45,7 @@ msgid "Refunded Payslip"
 msgstr ""
 
 #. module: hr_payroll_cancel
-#: code:addons/hr_payroll_cancel/models/hr_payroll.py:31
+#: code:addons/hr_payroll_cancel/models/hr_payroll.py:0
 #, python-format
 msgid ""
 "To cancel the Original Payslip the\n"

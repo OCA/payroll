@@ -20,9 +20,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: hr_payroll_cancel
+#: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_payroll_cancel
+#: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_payroll_cancel
+#: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: hr_payroll_cancel
 #: model:ir.model,name:hr_payroll_cancel.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Feuille de paie"
+msgid "Payslip"
+msgstr ""
 
 #. module: hr_payroll_cancel
 #: model:ir.model.fields,field_description:hr_payroll_cancel.field_hr_payslip__refunded_id
@@ -30,7 +45,7 @@ msgid "Refunded Payslip"
 msgstr "Feuille de paie remboursée"
 
 #. module: hr_payroll_cancel
-#: code:addons/hr_payroll_cancel/models/hr_payroll.py:31
+#: code:addons/hr_payroll_cancel/models/hr_payroll.py:0
 #, python-format
 msgid ""
 "To cancel the Original Payslip the\n"
@@ -38,3 +53,6 @@ msgid ""
 msgstr ""
 "Pour annuler la feuille de paie originale, la\n"
 "                    feuille de paie remboursée doit être annulée en premier !"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Feuille de paie"
