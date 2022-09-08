@@ -34,6 +34,7 @@
         "report/report.xml",
         "views/res_config_settings_views.xml",
         "wizard/hr_payroll_send_email.xml",
+        "wizard/hr_payslip_change_state_view.xml",
     ],
     "demo": ["demo/hr_payroll_demo.xml"],
     "application": True,
