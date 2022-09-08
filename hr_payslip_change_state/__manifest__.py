@@ -14,5 +14,6 @@
         "wizard/hr_payslip_change_state_view.xml",
         "security/ir.model.access.csv",
     ],
+    "maintainers": ["appstogrow", "nimarosa"],
     "installable": True,
 }

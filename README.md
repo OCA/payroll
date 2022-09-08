@@ -8,7 +8,7 @@
 
 # payroll
 
-TODO: add repo description.
+Modules to manage payroll in odoo.
 
 <!-- /!\ do not modify below this line -->
 

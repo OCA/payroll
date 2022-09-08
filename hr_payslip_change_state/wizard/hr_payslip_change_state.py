@@ -45,7 +45,7 @@ class HrPayslipChangeState(models.TransientModel):
                         )
                     )
             elif new_state == "verify":
-                if rec.state == "draft":
+                if rec.state in ["draft", "verify"]:
                     rec.compute_sheet()
                 else:
                     raise UserError(
