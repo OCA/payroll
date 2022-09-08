@@ -153,8 +153,8 @@ msgstr "Nombre"
 
 #. module: payroll_contract_advantages
 #: model:ir.model,name:payroll_contract_advantages.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Liquidacion"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__advantage_upper_bound
@@ -167,3 +167,6 @@ msgstr "Limite superior"
 #: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage_template__upper_bound
 msgid "Upper bound authorized by the employer for this advantage"
 msgstr "Límite superior autorizado por el empleador para esta ventaja"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Liquidacion"
