@@ -477,20 +477,16 @@ class HrPayslip(models.Model):
             line.code: line for line in self.input_line_ids if line.code
         }
         localdict = {
-            **{
-                "payslip": Payslips(self.employee_id.id, self, self.env),
-                "worked_days": WorkedDays(
-                    self.employee_id.id, worked_days_dict, self.env
-                ),
-                "inputs": InputLine(self.employee_id.id, input_lines_dict, self.env),
-                "payroll": BrowsableObject(
-                    self.employee_id.id, self.get_payroll_dict(contracts), self.env
-                ),
-                "current_contract": BrowsableObject(self.employee_id.id, {}, self.env),
-                "categories": BrowsableObject(self.employee_id.id, {}, self.env),
-                "rules": BrowsableObject(self.employee_id.id, {}, self.env),
-                "result_rules": BrowsableObject(self.employee_id.id, {}, self.env),
-            },
+            "payslip": Payslips(self.employee_id.id, self, self.env),
+            "worked_days": WorkedDays(self.employee_id.id, worked_days_dict, self.env),
+            "inputs": InputLine(self.employee_id.id, input_lines_dict, self.env),
+            "payroll": BrowsableObject(
+                self.employee_id.id, self.get_payroll_dict(contracts), self.env
+            ),
+            "current_contract": BrowsableObject(self.employee_id.id, {}, self.env),
+            "categories": BrowsableObject(self.employee_id.id, {}, self.env),
+            "rules": BrowsableObject(self.employee_id.id, {}, self.env),
+            "result_rules": BrowsableObject(self.employee_id.id, {}, self.env),
         }
         return localdict
 
