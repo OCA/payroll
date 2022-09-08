@@ -4,9 +4,7 @@
 
 from odoo.exceptions import UserError
 
-from odoo.addons.hr_payroll_cancel.tests.test_hr_payroll_cancel import (
-    TestHrPayrollCancel,
-)
+from odoo.addons.payroll.tests.test_hr_payroll_cancel import TestHrPayrollCancel
 
 
 class TestHrPayslipChangeState(TestHrPayrollCancel):
@@ -16,28 +14,22 @@ class TestHrPayslipChangeState(TestHrPayrollCancel):
 
     def test_change_state(self):
         hr_payslip = self._create_payslip()
-        self._update_account_in_rule(self.account_debit, self.account_credit)
         tested_model = self.tested_model
         context = {"active_ids": [hr_payslip.id]}
         action = tested_model.with_context(context).create({"state": "verify"})
-
         # By default, a payslip is on draft state
         action.change_state_confirm()
-
         # trying to set it to wrong states
         with self.assertRaises(UserError):
             action.write({"state": "draft"})
             action.change_state_confirm()
-
         # Now the payslip should be computed but in verify state
         self.assertEqual(hr_payslip.state, "verify")
         self.assertNotEqual(hr_payslip.number, None)
         action.write({"state": "done"})
         action.change_state_confirm()
-
         # Now the payslip should be confirmed
         self.assertEqual(hr_payslip.state, "done")
-
         # trying to set it to wrong states
         with self.assertRaises(UserError):
             action.write({"state": "draft"})
@@ -48,13 +40,10 @@ class TestHrPayslipChangeState(TestHrPayrollCancel):
         with self.assertRaises(UserError):
             action.write({"state": "done"})
             action.change_state_confirm()
-
         action.write({"state": "cancel"})
         action.change_state_confirm()
-
         # Now the payslip should be canceled
         self.assertEqual(hr_payslip.state, "cancel")
-
         # trying to set it to wrong states
         with self.assertRaises(UserError):
             action.write({"state": "done"})
@@ -65,7 +54,6 @@ class TestHrPayslipChangeState(TestHrPayrollCancel):
         with self.assertRaises(UserError):
             action.write({"state": "cancel"})
             action.change_state_confirm()
-
         action.write({"state": "draft"})
         action.change_state_confirm()
         # again, it should be draft. Also checking if wrong changes happened
