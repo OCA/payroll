@@ -30,7 +30,7 @@ msgstr ""
 
 #. module: hr_payroll_cancel
 #: model:ir.model,name:hr_payroll_cancel.model_hr_payslip
-msgid "Pay Slip"
+msgid "Payslip"
 msgstr ""
 
 #. module: hr_payroll_cancel
