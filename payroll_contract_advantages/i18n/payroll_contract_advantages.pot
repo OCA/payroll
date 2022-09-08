@@ -150,7 +150,7 @@ msgstr ""
 
 #. module: payroll_contract_advantages
 #: model:ir.model,name:payroll_contract_advantages.model_hr_payslip
-msgid "Pay Slip"
+msgid "Payslip"
 msgstr ""
 
 #. module: payroll_contract_advantages
