@@ -165,6 +165,9 @@ class HrPayslip(models.Model):
     )
     hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
     compute_date = fields.Date("Compute Date")
+    refunded_id = fields.Many2one(
+        "hr.payslip", string="Refunded Payslip", readonly=True
+    )
 
     @api.depends("line_ids", "hide_child_lines")
     def _compute_dynamic_filtered_payslip_lines(self):
@@ -211,8 +214,23 @@ class HrPayslip(models.Model):
         return self.write({"state": "done"})
 
     def action_payslip_cancel(self):
-        if self.filtered(lambda slip: slip.state == "done"):
-            raise UserError(_("Cannot cancel a payslip that is done."))
+        allow_cancel_payslips = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.allow_cancel_payslips")
+        )
+        for payslip in self:
+            if allow_cancel_payslips:
+                if payslip.refunded_id and payslip.refunded_id.state != "cancel":
+                    raise ValidationError(
+                        _(
+                            """To cancel the Original Payslip the
+                        Refunded Payslip needs to be canceled first!"""
+                        )
+                    )
+            else:
+                if self.filtered(lambda slip: slip.state == "done"):
+                    raise UserError(_("Cannot cancel a payslip that is done."))
         return self.write({"state": "cancel"})
 
     def refund_sheet(self):
