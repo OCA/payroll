@@ -109,7 +109,7 @@
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        states="draft,confirm,verify"
+                        states="draft,confirm,verify,done"
                     />
                     <button
                         string="Refetch Payslip Data"
@@ -174,6 +174,10 @@
                         />
                         <field name="name" />
                         <field name="credit_note" />
+                        <field
+                            name="refunded_id"
+                            attrs="{'invisible': [('refunded_id', '=', False)]}"
+                        />
                         <field
                             name="compute_date"
                             attrs="{'invisible':[('compute_date','==',False)]}"
