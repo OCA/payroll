@@ -186,10 +186,7 @@
                                 <tree string="Worked Days" editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
-                                    <field
-                                        name="number_of_days"
-                                        sum="Total Working Days"
-                                    />
+                                    <field name="number_of_days" />
                                     <field name="number_of_hours" />
                                     <field
                                         name="contract_id"
