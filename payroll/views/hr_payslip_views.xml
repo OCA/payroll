@@ -79,6 +79,7 @@
         <field name="arch" type="xml">
             <form string="Payslip">
                 <header>
+                    <field name="allow_cancel_payslips" invisible="1" />
                     <button
                         string="Confirm"
                         name="action_payslip_done"
@@ -109,7 +110,13 @@
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        states="draft,confirm,verify,done"
+                        states="draft,confirm,verify"
+                    />
+                    <button
+                        string="Cancel Payslip"
+                        name="action_payslip_cancel"
+                        type="object"
+                        attrs="{'invisible': [('allow_cancel_payslips', '=', False)]}"
                     />
                     <button
                         string="Refetch Payslip Data"
