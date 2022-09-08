@@ -115,8 +115,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Phiếu lương"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -171,3 +171,6 @@ msgstr "Sổ nhật ký \"%s\" không được cấu hình phù cho cho Tài kho
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr "Sổ nhật ký \"%s\" không được cấu hình phù cho cho Tài khoản ghi Nợ!"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Phiếu lương"

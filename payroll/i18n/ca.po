@@ -531,6 +531,11 @@ msgid "Computation"
 msgstr "Càlcul"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__compute_date
+msgid "Compute Date"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Compute Sheet"
 msgstr "Calcula full"
@@ -659,6 +664,11 @@ msgid "Credit Note"
 msgstr "Factura rectificativa (abonament)"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Date"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__date_start
@@ -784,11 +794,6 @@ msgstr "Esborrany"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Draft Payslip Batches"
 msgstr "Processament de nòmines esborrany"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-msgid "Draft Slip"
-msgstr "Nòmina esborrany"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
@@ -1362,7 +1367,6 @@ msgid "Partner"
 msgstr "Empresa"
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_payslip
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__payslip_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__slip_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__payslip_id
@@ -1431,6 +1435,7 @@ msgstr "Estructura de la nòmina"
 
 #. module: payroll
 #: model:ir.actions.report,name:payroll.action_report_payslip
+#: model:ir.model,name:payroll.model_hr_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip"
 msgstr "Nòmina"
@@ -1553,6 +1558,11 @@ msgstr "Processament de les nòmines"
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
 msgid "Payslips by Employees"
 msgstr "Nòmines per empleat"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Pending Review"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_percentage
@@ -1687,6 +1697,11 @@ msgstr "Devolució de la butlleta de pagament"
 #, python-format
 msgid "Refund: %s"
 msgstr "Reemborsament: %s"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Refunded"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__register_line_ids
@@ -1964,11 +1979,6 @@ msgid "Total"
 msgstr "Total"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-msgid "Total Working Days"
-msgstr "Dies de treball totals"
-
-#. module: payroll
 #: model:ir.model.constraint,message:payroll.constraint_hr_rule_parameter__unique
 msgid "Two rule parameters cannot have the same code."
 msgstr ""
@@ -2121,6 +2131,12 @@ msgstr "el resultat afectarà una variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Draft Slip"
+#~ msgstr "Nòmina esborrany"
+
+#~ msgid "Total Working Days"
+#~ msgstr "Dies de treball totals"
 
 #~ msgid "Details By Salary Rule Category"
 #~ msgstr "Detalls per categoria de regla salarial"

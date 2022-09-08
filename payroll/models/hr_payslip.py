@@ -22,7 +22,7 @@ class HrPayslip(models.Model):
     _name = "hr.payslip"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Payslip"
-    _order = "number desc, id desc"
+    _order = "id desc"
 
     struct_id = fields.Many2one(
         "hr.payroll.structure",
@@ -283,13 +283,16 @@ class HrPayslip(models.Model):
                     date_from=payslip.date_from, date_to=payslip.date_to
                 ).ids
             )
-            # get localdict and linesdict
-            localdict, lines_dict = self._get_payslip_lines(contract_ids, payslip.id)
             # write payslip lines
             number = payslip.number or self.env["ir.sequence"].next_by_code(
                 "salary.slip"
             )
-            lines = [(0, 0, line) for line in list(lines_dict.values())]
+            lines = [
+                (0, 0, line)
+                for line in list(
+                    self._get_payslip_lines(contract_ids, payslip.id).values()
+                )
+            ]
             payslip.write(
                 {
                     "line_ids": lines,
@@ -493,20 +496,16 @@ class HrPayslip(models.Model):
             line.code: line for line in self.input_line_ids if line.code
         }
         localdict = {
-            **{
-                "payslip": Payslips(self.employee_id.id, self, self.env),
-                "worked_days": WorkedDays(
-                    self.employee_id.id, worked_days_dict, self.env
-                ),
-                "inputs": InputLine(self.employee_id.id, input_lines_dict, self.env),
-                "payroll": BrowsableObject(
-                    self.employee_id.id, self.get_payroll_dict(contracts), self.env
-                ),
-                "current_contract": BrowsableObject(self.employee_id.id, {}, self.env),
-                "categories": BrowsableObject(self.employee_id.id, {}, self.env),
-                "rules": BrowsableObject(self.employee_id.id, {}, self.env),
-                "result_rules": BrowsableObject(self.employee_id.id, {}, self.env),
-            },
+            "payslip": Payslips(self.employee_id.id, self, self.env),
+            "worked_days": WorkedDays(self.employee_id.id, worked_days_dict, self.env),
+            "inputs": InputLine(self.employee_id.id, input_lines_dict, self.env),
+            "payroll": BrowsableObject(
+                self.employee_id.id, self.get_payroll_dict(contracts), self.env
+            ),
+            "current_contract": BrowsableObject(self.employee_id.id, {}, self.env),
+            "categories": BrowsableObject(self.employee_id.id, {}, self.env),
+            "rules": BrowsableObject(self.employee_id.id, {}, self.env),
+            "result_rules": BrowsableObject(self.employee_id.id, {}, self.env),
         }
         return localdict
 
@@ -532,15 +531,12 @@ class HrPayslip(models.Model):
         # set/overwrite the amount computed for this rule in the localdict
         localdict[rule.code] = rule_total
         localdict["rules"].dict[rule.code] = rule
-        localdict["result_rules"].dict[rule.code] = {
-            "quantity": qty,
-            "rate": rate,
-            "amount": amount,
-            "total": rule_total,
-        }
+        localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(
+            {"quantity": qty, "rate": rate, "amount": amount, "total": rule_total}
+        )
         # sum the amount for its salary category
-        localdict = rule.category_id._sum_salary_rule_category(
-            localdict, rule_total - previous_amount
+        localdict = self._sum_salary_rule_category(
+            localdict, rule.category_id, rule_total - previous_amount
         )
         # create/overwrite the rule in the temporary results
         key = rule.code + "-" + str(localdict["contract"].id)
@@ -602,9 +598,17 @@ class HrPayslip(models.Model):
                 else:
                     # blacklist this rule and its children
                     blacklist += [id for id, seq in rule._recursive_search_of_rules()]
+            # call localdict_hook
+            localdict = self.localdict_hook(localdict, payslip)
             # reset "current_contract" dict
             baselocaldict["current_contract"] = {}
-        return localdict, lines_dict
+        return lines_dict
+
+    def localdict_hook(self, localdict, payslip):
+        # This hook is called when the function _get_payslip_lines ends the loop
+        # and before its returns. This method by itself don't add any functionality
+        # and is intedend to be inherited to access localdict from other functions.
+        return localdict
 
     def get_payslip_vals(
         self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
@@ -621,7 +625,6 @@ class HrPayslip(models.Model):
                 "struct_id": False,
             }
         }
-
         # If we don't have employee or date data, we return.
         if (not employee_id) or (not date_from) or (not date_to):
             return res
@@ -660,6 +663,17 @@ class HrPayslip(models.Model):
             }
         )
         return res
+
+    def _sum_salary_rule_category(self, localdict, category, amount):
+        self.ensure_one()
+        if category.parent_id:
+            localdict = self._sum_salary_rule_category(
+                localdict, category.parent_id, amount
+            )
+        localdict["categories"].dict[category.code] = (
+            localdict["categories"].dict.get(category.code, 0) + amount
+        )
+        return localdict
 
     def _get_employee_contracts(self):
         return self.env["hr.contract"].browse(

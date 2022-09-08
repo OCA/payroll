@@ -118,8 +118,8 @@ msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Recibo de Salário"
+msgid "Payslip"
+msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -178,3 +178,6 @@ msgid ""
 msgstr ""
 "O Diário de Despesas \"%s\" não foi configurado corretamente na Conta de "
 "Débito"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Recibo de Salário"
