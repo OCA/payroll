@@ -554,6 +554,11 @@ msgid "Computation"
 msgstr "Cálculo"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__compute_date
+msgid "Compute Date"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Compute Sheet"
 msgstr "Liquidar"
@@ -680,6 +685,11 @@ msgstr "Creado el"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__credit_note
 msgid "Credit Note"
 msgstr "Factura rectificativa"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Date"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
@@ -813,11 +823,6 @@ msgstr "Borrador"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Draft Payslip Batches"
 msgstr "Procesamiento de liquidaciones en borrador"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-msgid "Draft Slip"
-msgstr "Liquidación - Borrador"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
@@ -1392,7 +1397,6 @@ msgid "Partner"
 msgstr "Empresa"
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_payslip
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__payslip_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__slip_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__payslip_id
@@ -1461,6 +1465,7 @@ msgstr "Estructuras de liquidación de sueldos"
 
 #. module: payroll
 #: model:ir.actions.report,name:payroll.action_report_payslip
+#: model:ir.model,name:payroll.model_hr_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip"
 msgstr "Liquidación de Sueldo"
@@ -1584,6 +1589,11 @@ msgstr "Procesamiento de liquidaciones"
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
 msgid "Payslips by Employees"
 msgstr "Liquidaciones de sueldo por empleado"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Pending Review"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_percentage
@@ -1718,6 +1728,11 @@ msgstr "Reembolso de Liquidación de Sueldo"
 #, python-format
 msgid "Refund: %s"
 msgstr "Devolucion: %s"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Refunded"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__register_line_ids
@@ -1995,11 +2010,6 @@ msgid "Total"
 msgstr "Total"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-msgid "Total Working Days"
-msgstr "Días de trabajo totales"
-
-#. module: payroll
 #: model:ir.model.constraint,message:payroll.constraint_hr_rule_parameter__unique
 msgid "Two rule parameters cannot have the same code."
 msgstr ""
@@ -2161,6 +2171,12 @@ msgstr "El resultado afectará a una variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "Draft Slip"
+#~ msgstr "Liquidación - Borrador"
+
+#~ msgid "Total Working Days"
+#~ msgstr "Días de trabajo totales"
 
 #~ msgid "Details By Salary Rule Category"
 #~ msgstr "Detalles por categoría de regla salarial"
