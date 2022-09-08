@@ -512,12 +512,9 @@ class HrPayslip(models.Model):
         # set/overwrite the amount computed for this rule in the localdict
         localdict[rule.code] = rule_total
         localdict["rules"].dict[rule.code] = rule
-        localdict["result_rules"].dict[rule.code] = {
-            "quantity": qty,
-            "rate": rate,
-            "amount": amount,
-            "total": rule_total,
-        }
+        localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(
+            {"quantity": qty, "rate": rate, "amount": amount, "total": rule_total}
+        )
         # sum the amount for its salary category
         localdict = self._sum_salary_rule_category(
             localdict, rule.category_id, rule_total - previous_amount
