@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-08-29 23:07+0000\n"
+"PO-Revision-Date: 2022-09-10 00:07+0000\n"
 "Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
@@ -555,7 +555,7 @@ msgstr "Cálculo"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__compute_date
 msgid "Compute Date"
-msgstr ""
+msgstr "Fecha de calculo"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -688,7 +688,7 @@ msgstr "Factura rectificativa"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
@@ -1588,7 +1588,7 @@ msgstr "Nóminas por empleados"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Pending Review"
-msgstr ""
+msgstr "Pendiente de revision"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_percentage
@@ -1727,7 +1727,7 @@ msgstr "Reembolso: %s"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Refunded"
-msgstr ""
+msgstr "Reembolsado"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__register_line_ids
