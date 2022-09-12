@@ -110,13 +110,13 @@
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        states="draft,confirm,verify"
+                        states="draft,verify"
                     />
                     <button
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        attrs="{'invisible': [('allow_cancel_payslips', '=', False)]}"
+                        attrs="{'invisible': ['|', ('state', '!=', 'done'), ('allow_cancel_payslips', '=', False)]}"
                     />
                     <button
                         string="Refetch Payslip Data"
