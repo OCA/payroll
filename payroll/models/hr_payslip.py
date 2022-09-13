@@ -10,7 +10,7 @@ from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
-from odoo.addons.payroll.models.base_browsable import (
+from .base_browsable import (
     BaseBrowsableObject,
     BrowsableObject,
     InputLine,
