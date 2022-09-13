@@ -20,8 +20,6 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[hr_payroll_cancel](hr_payroll_cancel/) | 14.0.1.1.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Hr Payroll Cancel
-[hr_payslip_change_state](hr_payslip_change_state/) | 14.0.1.1.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Change the state of many payslips at a time
 [payroll](payroll/) | 14.0.5.2.1 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your employee payroll records
 [payroll_account](payroll_account/) | 14.0.1.1.3 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your payroll to accounting
 [payroll_contract_advantages](payroll_contract_advantages/) | 14.0.2.0.0 | [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Allow to define contract advantages for employees.
