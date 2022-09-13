@@ -9,7 +9,7 @@ from pytz import timezone
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
 
-from odoo.addons.payroll.models.base_browsable import (
+from .base_browsable import (
     BaseBrowsableObject,
     BrowsableObject,
     InputLine,
@@ -573,7 +573,7 @@ class HrPayslip(models.Model):
                 localdict["result_name"] = None
                 # check if the rule can be applied
                 if rule._satisfy_condition(localdict) and rule.id not in blacklist:
-                    localdict, lines_dict = self._compute_payslip_line(
+                    localdict, lines_dict = payslip._compute_payslip_line(
                         rule, localdict, lines_dict
                     )
                 else:
