@@ -79,6 +79,16 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip_change_state__state
+msgid ""
+"* When the payslip is created the status is 'Draft'.             \n"
+"* If the payslip is under verification, the status is 'Compute "
+"Sheet'.              \n"
+"* If the payslip is confirmed then status is set to 'Done'.             \n"
+"* When user cancel payslip the status is 'Rejected'."
+msgstr ""
+
+#. module: payroll
 #: model:mail.template,body_html:payroll.mail_template_hr_payslip
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
@@ -219,6 +229,11 @@ msgid "Accounting Information"
 msgstr "회계 정보"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__state
+msgid "Action"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction
 msgid "Action Needed"
@@ -268,6 +283,16 @@ msgstr "내부 노트 추가..."
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
 msgstr "모든 하위 규칙"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__allow_cancel_payslips
+msgid "Allow Cancel Payslips"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_cancel_payslips
+msgid "Allow cancel confirmed payslips"
+msgstr ""
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
@@ -359,11 +384,13 @@ msgid "Calculations"
 msgstr "계산"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
 #: model_terms:ir.ui.view,arch_db:payroll.view_payslip_lines_contribution_register
 msgid "Cancel"
 msgstr "취소"
 
 #. module: payroll
+#: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_change_state__state__cancel
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Cancel Payslip"
 msgstr "급여 명세서 취소"
@@ -380,6 +407,17 @@ msgstr "완료된 급여 명세서는 취소할 수 없습니다."
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
 msgid "Category"
 msgstr "범주"
+
+#. module: payroll
+#: model:ir.actions.act_window,name:payroll.action_hr_payslip_change_state_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
+msgid "Change state"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model,name:payroll.model_hr_payslip_change_state
+msgid "Change state of a payslip"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
@@ -494,6 +532,7 @@ msgid "Compute Date"
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_change_state__state__verify
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Compute Sheet"
 msgstr "명세서 계산"
@@ -525,6 +564,7 @@ msgid "Configuration"
 msgstr "환경 설정"
 
 #. module: payroll
+#: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_change_state__state__done
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Confirm"
 msgstr "확인"
@@ -583,6 +623,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__create_uid
@@ -601,6 +642,7 @@ msgstr "작성자"
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_date
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__create_date
@@ -700,6 +742,7 @@ msgstr "급여 규정 범주 세부사항"
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__display_name
@@ -814,6 +857,11 @@ msgid "Eventual third party involved in the salary payment of the employees."
 msgstr "직원 급여 지급에 관련된 최종 제 3자입니다."
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
+msgid "Execute"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_fix
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__amount_fix
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__amount_select__fix
@@ -918,6 +966,7 @@ msgstr "주택 임대료 수당"
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__id
@@ -961,6 +1010,20 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid ""
+"If enabled, confirmed payslips can be canceled by the user. Default: Not "
+"enabled."
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__allow_cancel_payslips
+msgid ""
+"If enabled, it allow the user to cancel confirmed payslips. Default: Not "
+"Enabled"
 msgstr ""
 
 #. module: payroll
@@ -1047,6 +1110,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_employee____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip____last_update
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line____last_update
@@ -1068,6 +1132,7 @@ msgstr "최근 수정"
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__write_uid
@@ -1086,6 +1151,7 @@ msgstr "최근 갱신한 사람"
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_date
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__write_date
@@ -1161,6 +1227,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__condition_range_min
 msgid "Minimum Range"
 msgstr "최소 범위"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Misc Functionalities"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1282,6 +1353,27 @@ msgstr ""
 #: model:res.groups,name:payroll.group_payroll_user
 msgid "Officer"
 msgstr "부서장"
+
+#. module: payroll
+#: code:addons/payroll/wizard/hr_payslip_change_state.py:0
+#, python-format
+msgid "Only draft payslips can be verified,the payslip %s is in %s state"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/wizard/hr_payslip_change_state.py:0
+#, python-format
+msgid ""
+"Only payslips in states verify or draft can be confirmed, the payslip %s is "
+"in %s state"
+msgstr ""
+
+#. module: payroll
+#: code:addons/payroll/wizard/hr_payslip_change_state.py:0
+#, python-format
+msgid ""
+"Only rejected payslips can be reset to draft, the payslip %s is in %s state"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1483,6 +1575,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action_employee
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__slip_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__slip_ids
@@ -1490,6 +1583,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
+#, python-format
 msgid "Payslips"
 msgstr "급여 명세서"
 
@@ -1648,6 +1742,11 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Refunded"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__refunded_id
+msgid "Refunded Payslip"
 msgstr ""
 
 #. module: payroll
@@ -1821,6 +1920,7 @@ msgid "Sequence"
 msgstr "순서"
 
 #. module: payroll
+#: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_change_state__state__draft
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Set to Draft"
@@ -1901,6 +2001,12 @@ msgid "The minimum amount, applied for this rule."
 msgstr "이 규칙에 적용되는 최소 금액입니다."
 
 #. module: payroll
+#: code:addons/payroll/wizard/hr_payslip_change_state.py:0
+#, python-format
+msgid "The payslip %s is already canceled please deselect it"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__condition_range
 msgid ""
@@ -1911,6 +2017,14 @@ msgstr ""
 "이 값은 % 필드 값을 계산하는 데 사용됩니다. 일반적으로 기본이지만 변수 이름 "
 "(hra, ma, lta 등) 및 기본 변수로 소문자로 된 범주 코드 필드를 사용할 수도 있"
 "습니다."
+
+#. module: payroll
+#: code:addons/payroll/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"To cancel the Original Payslip the\n"
+"                        Refunded Payslip needs to be canceled first!"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__total
@@ -2002,7 +2116,6 @@ msgstr "근무일"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Worked Days"
 msgstr "근무일"
 
