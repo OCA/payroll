@@ -11,9 +11,11 @@ from odoo.tests import common
 class TestHrPayrollCancel(common.TransactionCase):
     def setUp(self):
         super(TestHrPayrollCancel, self).setUp()
-
+        # Set system parameter
+        self.env["ir.config_parameter"].sudo().set_param(
+            "payroll.allow_cancel_payslips", True
+        )
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
-
         self.res_partner_bank = self.env["res.partner.bank"].create(
             {
                 "acc_number": "001-9876543-21",
@@ -23,70 +25,16 @@ class TestHrPayrollCancel(common.TransactionCase):
             }
         )
         self.hr_employee_anita = self.env.ref("hr.employee_mit")
-
-        self.hr_employee_anita.update(
-            {
-                "bank_account_id": self.res_partner_bank.bank_id.id,
-            }
-        )
-
-        self.account_debit = self.env["account.account"].create(
-            {
-                "name": "Debit Account",
-                "code": "334411",
-                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
-                "reconcile": True,
-            }
-        )
-        self.account_credit = self.env["account.account"].create(
-            {
-                "name": "Credit Account",
-                "code": "114433",
-                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
-                "reconcile": True,
-            }
-        )
-
         self.hr_structure_marketing_executive = self.ref("payroll.structure_001")
-
-        self.account_journal = self.env["account.journal"].create(
-            {
-                "name": "Vendor Bills - Test",
-                "code": "TEXJ",
-                "type": "purchase",
-                "default_account_id": self.account_debit.id,
-                "refund_sequence": True,
-            }
-        )
-
         self.hr_contract_anita = self.env.ref("hr_contract.hr_contract_mit")
-
-        self.hr_contract_anita.update(
-            {
-                "struct_id": self.hr_structure_marketing_executive,
-                "journal_id": self.account_journal.id,
-            }
-        )
-
         self.hr_payslip = self.env["hr.payslip"].create(
             {
                 "employee_id": self.hr_employee_anita.id,
-                "journal_id": self.account_journal.id,
             }
         )
 
-    def _update_account_in_rule(self, debit, credit):
-        salary_rules = self.env["hr.salary.rule"].search(
-            [("id", "in", self.hr_contract_anita.struct_id.rule_ids.ids)]
-        )
-        [
-            i.write({"account_debit": debit, "account_credit": credit})
-            for i in salary_rules
-        ]
-
     def test_refund_sheet(self):
         hr_payslip = self._create_payslip()
-        self._update_account_in_rule(self.account_debit, self.account_credit)
         hr_payslip.action_payslip_done()
         hr_payslip.refund_sheet()
         with self.assertRaises(ValidationError):
@@ -135,7 +83,6 @@ class TestHrPayrollCancel(common.TransactionCase):
 
     def test_action_payslip_cancel(self):
         hr_payslip = self._create_payslip()
-        self._update_account_in_rule(self.account_debit, self.account_credit)
         hr_payslip.action_payslip_done()
         hr_payslip.refund_sheet()
         hr_payslip.refunded_id.action_payslip_cancel()

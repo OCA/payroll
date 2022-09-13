@@ -8,6 +8,7 @@ from pytz import timezone
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.safe_eval import safe_eval
 
 from .base_browsable import (
     BaseBrowsableObject,
@@ -165,6 +166,19 @@ class HrPayslip(models.Model):
     )
     hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
     compute_date = fields.Date("Compute Date")
+    refunded_id = fields.Many2one(
+        "hr.payslip", string="Refunded Payslip", readonly=True
+    )
+    allow_cancel_payslips = fields.Boolean(
+        "Allow Cancel Payslips", compute="_compute_allow_cancel_payslips"
+    )
+
+    def _compute_allow_cancel_payslips(self):
+        self.allow_cancel_payslips = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.allow_cancel_payslips")
+        )
 
     @api.depends("line_ids", "hide_child_lines")
     def _compute_dynamic_filtered_payslip_lines(self):
@@ -211,8 +225,18 @@ class HrPayslip(models.Model):
         return self.write({"state": "done"})
 
     def action_payslip_cancel(self):
-        if self.filtered(lambda slip: slip.state == "done"):
-            raise UserError(_("Cannot cancel a payslip that is done."))
+        for payslip in self:
+            if payslip.allow_cancel_payslips:
+                if payslip.refunded_id and payslip.refunded_id.state != "cancel":
+                    raise ValidationError(
+                        _(
+                            """To cancel the Original Payslip the
+                        Refunded Payslip needs to be canceled first!"""
+                        )
+                    )
+            else:
+                if self.filtered(lambda slip: slip.state == "done"):
+                    raise UserError(_("Cannot cancel a payslip that is done."))
         return self.write({"state": "cancel"})
 
     def refund_sheet(self):
@@ -229,7 +253,7 @@ class HrPayslip(models.Model):
             ).action_payslip_done()
         formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("payroll.hr_payslip_view_tree", False)
-        return {
+        res = {
             "name": _("Refund Payslip"),
             "view_mode": "tree, form",
             "view_id": False,
@@ -243,6 +267,8 @@ class HrPayslip(models.Model):
             ],
             "context": {},
         }
+        payslip.write({"refunded_id": safe_eval(res["domain"])[0][2][0] or False})
+        return res
 
     def unlink(self):
         if any(self.filtered(lambda payslip: payslip.state not in ("draft", "cancel"))):
