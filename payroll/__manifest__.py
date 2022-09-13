@@ -2,7 +2,7 @@
 
 {
     "name": "Payroll",
-    "version": "14.0.5.2.1",
+    "version": "14.0.5.3.0",
     "category": "Human Resources",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
