@@ -1,5 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from odoo.fields import Date
 from odoo.tests import Form
 from odoo.tools import test_reports
 
@@ -183,4 +184,41 @@ class TestPayslipFlow(TestPayslipBase):
         self.assertEqual(len(line), 1, "I found the Test line")
         self.assertEqual(
             line[0].amount, 1.0, "The calculated dictionary value 'contracts.qty' is 1"
+        )
+
+    def test_compute_multiple_payslips(self):
+
+        self.sally = self.env["hr.employee"].create(
+            {
+                "name": "Sally",
+                "department_id": self.ref("hr.dep_rd"),
+            }
+        )
+        self.env["hr.contract"].create(
+            {
+                "date_start": Date.today(),
+                "name": "Contract for Sally",
+                "wage": 5000.0,
+                "employee_id": self.sally.id,
+                "struct_id": self.developer_pay_structure.id,
+                "kanban_state": "done",
+            }
+        )
+        self.apply_contract_cron()
+        payslips = self.Payslip.create(
+            [
+                {"employee_id": self.richard_emp.id},
+                {"employee_id": self.sally.id},
+            ]
+        )
+        payslips[0].onchange_employee()
+        payslips[1].onchange_employee()
+        self.assertEqual(len(payslips.ids), 2, "We have multiple payslips")
+
+        payslips.compute_sheet()
+        self.assertTrue(
+            payslips[0].number, "The first payslip as been assigned a number"
+        )
+        self.assertTrue(
+            payslips[1].number, "The second payslip as been assigned a number"
         )
