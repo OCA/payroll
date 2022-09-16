@@ -1,6 +1,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.fields import Date
 from odoo.tests import Form
 from odoo.tools import test_reports
 
@@ -188,22 +187,6 @@ class TestPayslipFlow(TestPayslipBase):
 
     def test_compute_multiple_payslips(self):
 
-        self.sally = self.env["hr.employee"].create(
-            {
-                "name": "Sally",
-                "department_id": self.ref("hr.dep_rd"),
-            }
-        )
-        self.env["hr.contract"].create(
-            {
-                "date_start": Date.today(),
-                "name": "Contract for Sally",
-                "wage": 5000.0,
-                "employee_id": self.sally.id,
-                "struct_id": self.developer_pay_structure.id,
-                "kanban_state": "done",
-            }
-        )
         self.apply_contract_cron()
         payslips = self.Payslip.create(
             [
