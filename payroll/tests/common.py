@@ -1,6 +1,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import datetime, timedelta
 
 from odoo.fields import Date
 from odoo.tests.common import TransactionCase
@@ -10,13 +9,20 @@ class TestPayslipBase(TransactionCase):
     def setUp(self):
         super(TestPayslipBase, self).setUp()
 
+        self.CalendarAttendance = self.env["resource.calendar.attendance"]
+        self.Contract = self.env["hr.contract"]
+        self.Department = self.env["hr.department"]
+        self.PayrollStructure = self.env["hr.payroll.structure"]
         self.Payslip = self.env["hr.payslip"]
+        self.ResourceCalendar = self.env["resource.calendar"]
         self.RuleInput = self.env["hr.rule.input"]
         self.SalaryRule = self.env["hr.salary.rule"]
         self.SalaryRuleCateg = self.env["hr.salary.rule.category"]
-        self.Contract = self.env["hr.contract"]
-        self.ResourceCalendar = self.env["resource.calendar"]
-        self.CalendarAttendance = self.env["resource.calendar.attendance"]
+
+        # Departments
+        #
+        self.dept_rd = self.Department.create({"name": "Research & Development"})
+        self.dept_sales = self.Department.create({"name": "Sales"})
 
         # Salary Rule Categories
         #
@@ -178,12 +184,12 @@ class TestPayslipBase(TransactionCase):
                 "gender": "male",
                 "birthday": "1984-05-01",
                 "country_id": self.ref("base.be"),
-                "department_id": self.ref("hr.dep_rd"),
+                "department_id": self.dept_rd.id,
             }
         )
 
         # I create a salary structure for "Software Developer"
-        self.developer_pay_structure = self.env["hr.payroll.structure"].create(
+        self.developer_pay_structure = self.PayrollStructure.create(
             {
                 "name": "Salary Structure for Software Developer",
                 "code": "SD",
@@ -201,14 +207,46 @@ class TestPayslipBase(TransactionCase):
         )
 
         # I create a contract for "Richard"
-        self.env["hr.contract"].create(
+        self.Contract.create(
             {
-                "date_end": Date.to_string(datetime.now() + timedelta(days=365)),
                 "date_start": Date.today(),
                 "name": "Contract for Richard",
                 "wage": 5000.0,
                 "employee_id": self.richard_emp.id,
                 "struct_id": self.developer_pay_structure.id,
+                "kanban_state": "done",
+            }
+        )
+
+        # I create a salary structure for "Sales Person"
+        self.sales_pay_structure = self.PayrollStructure.create(
+            {
+                "name": "Salary Structure for Sales Person",
+                "code": "SP",
+                "company_id": self.ref("base.main_company"),
+                "rule_ids": [
+                    (4, self.rule_commission.id),
+                    (4, self.rule_basic.id),
+                    (4, self.rule_gross.id),
+                    (4, self.rule_net.id),
+                ],
+            }
+        )
+
+        # I create another employee Sally and a contract for her
+        self.sally = self.env["hr.employee"].create(
+            {
+                "name": "Sally",
+                "department_id": self.dept_sales.id,
+            }
+        )
+        self.Contract.create(
+            {
+                "date_start": Date.today().strftime("%Y-%m-1"),
+                "name": "Contract for Sally",
+                "wage": 6500.0,
+                "employee_id": self.sally.id,
+                "struct_id": self.sales_pay_structure.id,
                 "kanban_state": "done",
             }
         )
