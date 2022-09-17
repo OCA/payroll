@@ -511,7 +511,7 @@ class HrPayslip(models.Model):
         for payslip in self:
             contracts = payslip._get_employee_contracts()
             if len(contracts) == 1 and payslip.struct_id:
-                structure_ids = payslip.struct_id.ids
+                structure_ids = list(set(payslip.struct_id._get_parent_structure().ids))
             else:
                 structure_ids = contracts.get_all_structures()
             rule_ids = (
@@ -610,8 +610,8 @@ class HrPayslip(models.Model):
                             id for id, seq in rule._recursive_search_of_rules()
                         ]
                     lines_dict.update(_dict)
-                    # call localdict_hook
-                    localdict = payslip.localdict_hook(localdict)
+                # call localdict_hook
+                localdict = payslip.localdict_hook(localdict)
                 # reset "current_contract" dict
                 baselocaldict["current_contract"] = {}
         return lines_dict
@@ -690,9 +690,12 @@ class HrPayslip(models.Model):
     def _get_employee_contracts(self):
         contracts = self.env["hr.contract"]
         for payslip in self:
-            contracts |= payslip.employee_id._get_contracts(
-                date_from=payslip.date_from, date_to=payslip.date_to
-            )
+            if payslip.contract_id.ids:
+                contracts |= payslip.contract_id
+            else:
+                contracts |= payslip.employee_id._get_contracts(
+                    date_from=payslip.date_from, date_to=payslip.date_to
+                )
         return contracts
 
     @api.onchange("struct_id")
