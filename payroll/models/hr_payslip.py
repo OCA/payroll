@@ -697,16 +697,17 @@ class HrPayslip(models.Model):
 
     @api.onchange("struct_id")
     def onchange_struct_id(self):
-        if not self.struct_id:
-            self.input_line_ids.unlink()
-            return
-        input_lines = self.input_line_ids.browse([])
-        input_line_ids = self.get_inputs(
-            self._get_employee_contracts(), self.date_from, self.date_to
-        )
-        for r in input_line_ids:
-            input_lines += input_lines.new(r)
-        self.input_line_ids = input_lines
+        for payslip in self:
+            if not payslip.struct_id:
+                payslip.input_line_ids.unlink()
+                return
+            input_lines = payslip.input_line_ids.browse([])
+            input_line_ids = payslip.get_inputs(
+                payslip._get_employee_contracts(), payslip.date_from, payslip.date_to
+            )
+            for r in input_line_ids:
+                input_lines += input_lines.new(r)
+            payslip.input_line_ids = input_lines
 
     @api.onchange("date_from", "date_to")
     def onchange_dates(self):
