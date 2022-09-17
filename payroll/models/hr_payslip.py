@@ -711,40 +711,46 @@ class HrPayslip(models.Model):
 
     @api.onchange("date_from", "date_to")
     def onchange_dates(self):
-        if not self.date_from or not self.date_to:
-            return
-        worked_days_lines = self.worked_days_line_ids.browse([])
-        worked_days_line_ids = self.get_worked_day_lines(
-            self._get_employee_contracts(), self.date_from, self.date_to
-        )
-        for line in worked_days_line_ids:
-            worked_days_lines += worked_days_lines.new(line)
-        self.worked_days_line_ids = worked_days_lines
+        for payslip in self:
+            if not payslip.date_from or not payslip.date_to:
+                return
+            worked_days_lines = payslip.worked_days_line_ids.browse([])
+            worked_days_line_ids = payslip.get_worked_day_lines(
+                payslip._get_employee_contracts(), payslip.date_from, payslip.date_to
+            )
+            for line in worked_days_line_ids:
+                worked_days_lines += worked_days_lines.new(line)
+            payslip.worked_days_line_ids = worked_days_lines
 
     @api.onchange("employee_id", "date_from", "date_to")
     def onchange_employee(self):
-        # Return if required values are not present.
-        if (not self.employee_id) or (not self.date_from) or (not self.date_to):
-            return
-        # Assign contract_id automatically when the user don't selected one.
-        if not self.env.context.get("contract") or not self.contract_id:
-            contract_ids = self._get_employee_contracts().ids
-            if not contract_ids:
-                return
-            self.contract_id = self.env["hr.contract"].browse(contract_ids[0])
-        # Assign struct_id automatically when the user don't selected one.
-        if not self.struct_id and not self.env.context.get("struct_id"):
-            if not self.contract_id.struct_id:
-                return
-            self.struct_id = self.contract_id.struct_id
-        # Compute payslip name
-        self._compute_name()
-        # Call worked_days_lines computation when employee is changed.
-        self.onchange_dates()
-        # Call input_lines computation when employee is changed.
-        self.onchange_struct_id()
-        # Assign company_id automatically based on employee selected.
-        self.company_id = self.employee_id.company_id
+        for payslip in self:
+            # Return if required values are not present.
+            if (
+                (not payslip.employee_id)
+                or (not payslip.date_from)
+                or (not payslip.date_to)
+            ):
+                continue
+            # Assign contract_id automatically when the user don't selected one.
+            if not payslip.env.context.get("contract") or not payslip.contract_id:
+                contract_ids = payslip._get_employee_contracts().ids
+                if not contract_ids:
+                    continue
+                payslip.contract_id = payslip.env["hr.contract"].browse(contract_ids[0])
+            # Assign struct_id automatically when the user don't selected one.
+            if not payslip.struct_id and not payslip.env.context.get("struct_id"):
+                if not payslip.contract_id.struct_id:
+                    continue
+                payslip.struct_id = payslip.contract_id.struct_id
+            # Compute payslip name
+            payslip._compute_name()
+            # Call worked_days_lines computation when employee is changed.
+            payslip.onchange_dates()
+            # Call input_lines computation when employee is changed.
+            payslip.onchange_struct_id()
+            # Assign company_id automatically based on employee selected.
+            payslip.company_id = payslip.employee_id.company_id
 
     def _compute_name(self):
         for record in self:
