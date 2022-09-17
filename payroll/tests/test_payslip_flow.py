@@ -1,5 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from odoo.fields import Date
 from odoo.tests import Form
 from odoo.tools import test_reports
 
@@ -204,4 +205,60 @@ class TestPayslipFlow(TestPayslipBase):
         )
         self.assertTrue(
             payslips[1].number, "The second payslip as been assigned a number"
+        )
+
+    def test_get_contracts_singleton(self):
+
+        payslip = self.Payslip.create({"employee_id": self.sally.id})
+        contracts = payslip._get_employee_contracts()
+        self.assertFalse(contracts, "No currently open contracts for the employee")
+
+        self.apply_contract_cron()
+        contracts = payslip._get_employee_contracts()
+        self.assertEqual(
+            len(contracts), 1, "There is one open contract for the employee"
+        )
+
+        self.sally.contract_id.date_end = Date.today().strftime("%Y-%m-15")
+        self.Contract.create(
+            {
+                "name": "Second contract for Sally",
+                "employee_id": self.sally.id,
+                "date_start": Date.today().strftime("%Y-%m-16"),
+                "struct_id": self.sales_pay_structure.id,
+                "wage": 6500.00,
+                "state": "open",
+                "kanban_state": "done",
+            }
+        )
+        contracts = payslip._get_employee_contracts()
+        self.assertEqual(
+            len(contracts), 2, "There are two open contracts for the employee"
+        )
+
+    def test_get_contracts_multiple(self):
+
+        self.sally.contract_ids[0].date_end = Date.today().strftime("%Y-%m-15")
+        self.Contract.create(
+            {
+                "name": "Second contract for Sally",
+                "employee_id": self.sally.id,
+                "date_start": Date.today().strftime("%Y-%m-16"),
+                "struct_id": self.sales_pay_structure.id,
+                "wage": 6500.00,
+                "state": "open",
+                "kanban_state": "done",
+            }
+        )
+        self.apply_contract_cron()
+
+        payslips = self.Payslip.create(
+            [
+                {"employee_id": self.richard_emp.id},
+                {"employee_id": self.sally.id},
+            ]
+        )
+        contracts = payslips._get_employee_contracts()
+        self.assertEqual(
+            len(contracts), 3, "There are 3 open contracts in the payslips"
         )
