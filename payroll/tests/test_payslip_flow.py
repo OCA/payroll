@@ -195,8 +195,7 @@ class TestPayslipFlow(TestPayslipBase):
                 {"employee_id": self.sally.id},
             ]
         )
-        payslips[0].onchange_employee()
-        payslips[1].onchange_employee()
+        payslips.onchange_employee()
         self.assertEqual(len(payslips.ids), 2, "We have multiple payslips")
 
         payslips.compute_sheet()
@@ -335,7 +334,7 @@ class TestPayslipFlow(TestPayslipBase):
             "The rules returned correspond to the rules in the salary structure",
         )
 
-    def test_get_salary_rules_multiple(self):
+    def test_get_salary_rules_multi(self):
 
         sales_allowance = self.SalaryRule.create(
             {
@@ -360,8 +359,7 @@ class TestPayslipFlow(TestPayslipBase):
                 {"employee_id": self.sally.id},
             ]
         )
-        payslips[0].onchange_employee()
-        payslips[1].onchange_employee()
+        payslips.onchange_employee()
         rules = payslips._get_salary_rules()
         self.assertEqual(
             rules,
@@ -387,7 +385,7 @@ class TestPayslipFlow(TestPayslipBase):
             "A line exists for the BASIC rule in the salary structure",
         )
 
-    def test_get_payslip_line_multiple(self):
+    def test_get_payslip_line_multi(self):
 
         self.apply_contract_cron()
         payslips = self.Payslip.create(
@@ -396,8 +394,7 @@ class TestPayslipFlow(TestPayslipBase):
                 {"employee_id": self.sally.id},
             ]
         )
-        payslips[0].onchange_employee()
-        payslips[1].onchange_employee()
+        payslips.onchange_employee()
 
         sally_key = f"BASIC-{self.sally.contract_id.id}"
         richard_key = f"BASIC-{self.richard_emp.contract_id.id}"
@@ -446,7 +443,7 @@ class TestPayslipFlow(TestPayslipBase):
             "No salary inputs because there isn't a salary structure",
         )
 
-    def test_onchange_struct_id_multiple(self):
+    def test_onchange_struct_id_multi(self):
 
         new_struct = self.PayrollStructure.create(
             {
@@ -489,4 +486,82 @@ class TestPayslipFlow(TestPayslipBase):
             payslips[1]._get_salary_rules(),
             self.rule_commission | self.rule_basic,
             "For 2nd slip salary rules have changed to new structure",
+        )
+
+    def test_onchange_dates_singleton(self):
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.sally.id})
+        self.assertFalse(payslip.worked_days_line_ids)
+        payslip.worked_days_line_ids = [
+            (0, 0, {"name": "A", "code": "A", "contract_id": self.sally.contract_id.id})
+        ]
+        payslip.write({"date_from": False, "date_to": False})
+        payslip.onchange_dates()
+        self.assertIn(
+            "A",
+            payslip.worked_days_line_ids.mapped("code"),
+            "One of date_from/date_end being false leaves worked_days_lines unchanged",
+        )
+
+    def test_onchange_dates_multi(self):
+        self.apply_contract_cron()
+        payslips = self.Payslip.create(
+            [
+                {"employee_id": self.richard_emp.id},
+                {"employee_id": self.sally.id},
+            ]
+        )
+        payslips[0].worked_days_line_ids = [
+            (
+                0,
+                0,
+                {
+                    "name": "A",
+                    "code": "A",
+                    "contract_id": self.richard_emp.contract_id.id,
+                },
+            )
+        ]
+        payslips[1].worked_days_line_ids = [
+            (0, 0, {"name": "B", "code": "B", "contract_id": self.sally.contract_id.id})
+        ]
+        payslips.write({"date_from": False, "date_to": False})
+        payslips.onchange_dates()
+        self.assertIn(
+            "A",
+            payslips[0].worked_days_line_ids.mapped("code"),
+            "1st - date_from/date_end being false leaves worked_days_lines unchanged",
+        )
+        self.assertIn(
+            "B",
+            payslips[1].worked_days_line_ids.mapped("code"),
+            "2nd - date_from/date_end being false leaves worked_days_lines unchanged",
+        )
+
+    def test_onchange_employee(self):
+
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.sally.id})
+        payslip.name = "Random name Foo"
+        payslip.write({"date_from": False, "date_to": False})
+        payslip.onchange_employee()
+        self.assertEqual(
+            payslip.name,
+            "Random name Foo",
+            "Payslip name not changed because date_from/date_to was False",
+        )
+
+        john = self.env["hr.employee"].create(
+            {
+                "name": "John",
+            }
+        )
+        payslip = self.Payslip.create({"employee_id": john.id})
+        self.assertFalse(payslip.worked_days_line_ids)
+        payslip.name = "Random name Bar"
+        payslip.onchange_dates()
+        self.assertEqual(
+            payslip.name,
+            "Random name Bar",
+            "Payslip name not changed because there is no contract",
         )
