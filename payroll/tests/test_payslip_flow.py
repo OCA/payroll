@@ -364,3 +364,38 @@ class TestPayslipFlow(TestPayslipBase):
             len(developer_rules | sales_rules),
             "There are no duplicates in returned rules",
         )
+
+    def test_get_payslip_line_singleton(self):
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.sally.id})
+        payslip.onchange_employee()
+
+        line_key = f"BASIC-{self.sally.contract_id.id}"
+        lines_dict = payslip.get_lines_dict()
+        self.assertIn(
+            line_key,
+            lines_dict.keys(),
+            "A line exists for the BASIC rule in the salary structure",
+        )
+
+    def test_get_payslip_line_multiple(self):
+
+        self.apply_contract_cron()
+        payslips = self.Payslip.create(
+            [
+                {"employee_id": self.richard_emp.id},
+                {"employee_id": self.sally.id},
+            ]
+        )
+        payslips[0].onchange_employee()
+        payslips[1].onchange_employee()
+
+        sally_key = f"BASIC-{self.sally.contract_id.id}"
+        richard_key = f"BASIC-{self.richard_emp.contract_id.id}"
+        lines_dict = payslips.get_lines_dict()
+        self.assertIn(
+            sally_key, lines_dict.keys(), "A line was created for Sally's contract"
+        )
+        self.assertIn(
+            richard_key, lines_dict.keys(), "A line was created for Richard's contract"
+        )
