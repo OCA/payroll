@@ -287,6 +287,15 @@ class TestPayslipFlow(TestPayslipBase):
         developer_rules |= self.rule_net
         return developer_rules
 
+    def _get_sales_rules(self):
+        sales_rules = self.SalaryRule
+        sales_rules |= self.rule_basic
+        sales_rules |= self.rule_commission
+        sales_rules |= self.rule_gross
+        sales_rules |= self.rule_net
+        sales_rules |= self.rule_child
+        return sales_rules
+
     def test_use_different_structure(self):
 
         developer_rules = self._get_developer_rules()
@@ -398,4 +407,86 @@ class TestPayslipFlow(TestPayslipBase):
         )
         self.assertIn(
             richard_key, lines_dict.keys(), "A line was created for Richard's contract"
+        )
+
+    def test_onchange_struct_id_singleton(self):
+
+        new_struct = self.PayrollStructure.create(
+            {
+                "name": "Simple Structure",
+                "code": "ST",
+                "company_id": self.ref("base.main_company"),
+                "rule_ids": [
+                    (4, self.rule_commission.id),
+                    (4, self.rule_basic.id),
+                ],
+            }
+        )
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.sally.id})
+        payslip.onchange_employee()
+        self.assertEqual(
+            payslip._get_salary_rules(),
+            self._get_sales_rules(),
+            "Initial rules is same as structure on contract",
+        )
+
+        payslip.struct_id = new_struct
+        payslip.onchange_struct_id()
+        self.assertEqual(
+            payslip._get_salary_rules(),
+            self.rule_commission | self.rule_basic,
+            "Salary rules have changed to new structure",
+        )
+
+        payslip.struct_id = False
+        payslip.onchange_struct_id()
+        self.assertFalse(
+            payslip.input_line_ids,
+            "No salary inputs because there isn't a salary structure",
+        )
+
+    def test_onchange_struct_id_multiple(self):
+
+        new_struct = self.PayrollStructure.create(
+            {
+                "name": "Simple Structure",
+                "code": "ST",
+                "company_id": self.ref("base.main_company"),
+                "rule_ids": [
+                    (4, self.rule_commission.id),
+                    (4, self.rule_basic.id),
+                ],
+            }
+        )
+        self.apply_contract_cron()
+        payslips = self.Payslip.create(
+            [
+                {"employee_id": self.richard_emp.id},
+                {"employee_id": self.sally.id},
+            ]
+        )
+        payslips.onchange_struct_id()
+        self.assertEqual(
+            payslips[0]._get_salary_rules(),
+            self._get_developer_rules(),
+            "Initial rules is same as structure on contract for 1st slip",
+        )
+        self.assertEqual(
+            payslips[1]._get_salary_rules(),
+            self._get_sales_rules(),
+            "Initial rules is same as structure on contract for 2nd slip",
+        )
+
+        payslips.struct_id = new_struct
+        payslips.onchange_struct_id()
+        self.assertEqual(
+            payslips[0]._get_salary_rules(),
+            self.rule_commission | self.rule_basic,
+            "For 1st slip salary rules have changed to new structure",
+        )
+        self.assertEqual(
+            payslips[1]._get_salary_rules(),
+            self.rule_commission | self.rule_basic,
+            "For 2nd slip salary rules have changed to new structure",
         )
