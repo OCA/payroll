@@ -683,11 +683,12 @@ class HrPayslip(models.Model):
         return localdict
 
     def _get_employee_contracts(self):
-        return self.env["hr.contract"].browse(
-            self.employee_id._get_contracts(
-                date_from=self.date_from, date_to=self.date_to
-            ).ids
-        )
+        contracts = self.env["hr.contract"]
+        for payslip in self:
+            contracts |= payslip.employee_id._get_contracts(
+                date_from=payslip.date_from, date_to=payslip.date_to
+            )
+        return contracts
 
     @api.onchange("struct_id")
     def onchange_struct_id(self):
