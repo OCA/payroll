@@ -516,16 +516,22 @@ class HrPayslip(models.Model):
         }
         return localdict
 
-    def _get_salary_rules(self, contracts, payslip):
-        if len(contracts) == 1 and payslip.struct_id:
-            structure_ids = list(set(payslip.struct_id._get_parent_structure().ids))
-        else:
-            structure_ids = contracts.get_all_structures()
-        rule_ids = (
-            self.env["hr.payroll.structure"].browse(structure_ids).get_all_rules()
-        )
-        sorted_rule_ids = [id for id, sequence in sorted(rule_ids, key=lambda x: x[1])]
-        sorted_rules = self.env["hr.salary.rule"].browse(sorted_rule_ids)
+    def _get_salary_rules(self):
+        rule_obj = self.env["hr.salary.rule"]
+        sorted_rules = rule_obj
+        for payslip in self:
+            contracts = payslip._get_employee_contracts()
+            if len(contracts) == 1 and payslip.struct_id:
+                structure_ids = payslip.struct_id.ids
+            else:
+                structure_ids = contracts.get_all_structures()
+            rule_ids = (
+                self.env["hr.payroll.structure"].browse(structure_ids).get_all_rules()
+            )
+            sorted_rule_ids = [
+                id for id, sequence in sorted(rule_ids, key=lambda x: x[1])
+            ]
+            sorted_rules |= rule_obj.browse(sorted_rule_ids)
         return sorted_rules
 
     def _compute_payslip_line(self, rule, localdict, lines_dict):
@@ -592,7 +598,7 @@ class HrPayslip(models.Model):
             localdict = dict(
                 baselocaldict, employee=contract.employee_id, contract=contract
             )
-            for rule in self._get_salary_rules(contracts, payslip):
+            for rule in self._get_salary_rules():
                 localdict["result"] = None
                 localdict["result_qty"] = 1.0
                 localdict["result_rate"] = 100
