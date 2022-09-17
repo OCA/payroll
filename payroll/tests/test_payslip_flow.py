@@ -262,3 +262,105 @@ class TestPayslipFlow(TestPayslipBase):
         self.assertEqual(
             len(contracts), 3, "There are 3 open contracts in the payslips"
         )
+
+    def test_compute_sheet_no_valid_contract(self):
+
+        frm = Form(self.Payslip)
+        frm.employee_id = self.richard_emp
+        payslip = frm.save()
+        payslip.compute_sheet()
+        self.assertEqual(
+            len(payslip.line_ids),
+            0,
+            "There are no lines because there are no valid contracts",
+        )
+
+    def _get_developer_rules(self):
+        developer_rules = self.SalaryRule
+        developer_rules |= self.rule_basic
+        developer_rules |= self.rule_hra
+        developer_rules |= self.rule_meal
+        developer_rules |= self.rule_commission
+        developer_rules |= self.rule_gross
+        developer_rules |= self.rule_proftax
+        developer_rules |= self.rule_child
+        developer_rules |= self.rule_net
+        return developer_rules
+
+    def test_use_different_structure(self):
+
+        developer_rules = self._get_developer_rules()
+
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.sally.id})
+        payslip.onchange_employee()
+        payslip.struct_id = self.developer_pay_structure
+        self.assertNotEqual(
+            payslip.struct_id,
+            self.sally.contract_id.struct_id,
+            "The salary structure on the payslip is different from the contract",
+        )
+        rules = payslip._get_salary_rules()
+        self.assertEqual(
+            rules,
+            developer_rules,
+            "The rules are the ones in the manually changed salary structure",
+        )
+
+    def test_get_salary_rules_singleton(self):
+
+        developer_rules = self._get_developer_rules()
+
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        rules = payslip._get_salary_rules()
+        self.assertEqual(
+            payslip.struct_id,
+            self.developer_pay_structure,
+            "The salary structure on the payslip is same as on contract",
+        )
+        self.assertEqual(
+            rules,
+            developer_rules,
+            "The rules returned correspond to the rules in the salary structure",
+        )
+
+    def test_get_salary_rules_multiple(self):
+
+        sales_allowance = self.SalaryRule.create(
+            {
+                "name": "Sales Allowance",
+                "code": "SAA",
+                "sequence": 5,
+                "category_id": self.categ_alw.id,
+                "condition_select": "none",
+                "amount_select": "fix",
+                "amount_fix": 100.0,
+            }
+        )
+        self.sales_pay_structure.rule_ids = [(4, sales_allowance.id)]
+        sales_rules = self.SalaryRule
+        sales_rules |= sales_allowance
+        developer_rules = self._get_developer_rules()
+
+        self.apply_contract_cron()
+        payslips = self.Payslip.create(
+            [
+                {"employee_id": self.richard_emp.id},
+                {"employee_id": self.sally.id},
+            ]
+        )
+        payslips[0].onchange_employee()
+        payslips[1].onchange_employee()
+        rules = payslips._get_salary_rules()
+        self.assertEqual(
+            rules,
+            developer_rules | sales_rules,
+            "The rules returned correspond to the rules in the salary structures",
+        )
+        self.assertEqual(
+            len(rules),
+            len(developer_rules | sales_rules),
+            "There are no duplicates in returned rules",
+        )
