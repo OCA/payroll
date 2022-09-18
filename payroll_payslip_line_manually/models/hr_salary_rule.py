@@ -12,6 +12,11 @@ class HrSalaryRule(models.Model):
         string="Salary Rule input from",
     )
 
+    def _reset_localdict_values(self, localdict):
+        localdict["rule"] = self
+        localdict.pop("result_list", None)
+        return super(HrSalaryRule, self)._reset_localdict_values(localdict)
+
     def _compute_rule_python(self, localdict):
         if "result_list" in localdict:
             # Return list of values dictionary. Each dictionary will be a payslip line.
@@ -21,7 +26,8 @@ class HrSalaryRule(models.Model):
                 values["analytic_account_id"]: result_dict.get("result_analytic")
                 result_list.append(values)
             return result_list
-        return super(HrSalaryRule, self)._compute_rule_python(localdict)
+        else:
+            return super(HrSalaryRule, self)._compute_rule_python(localdict)
 
     def _satisfy_condition_python(self, localdict):
         localdict["rule"] = self

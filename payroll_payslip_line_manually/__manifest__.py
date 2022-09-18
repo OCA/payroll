@@ -5,7 +5,7 @@
     "name": "Manual payslip lines, with analytic account",
     "summary": "Easily create and use salary rules",
     "author": "AppsToGROW, Odoo Community Association (OCA)",
-    "category": "Uncategorized",
+    "category": "Human Resources",
     "data": [
         "security/ir.model.access.csv",
         "views/hr_contract_views.xml",
@@ -16,6 +16,7 @@
         "demo/hr_salary_rule_demo.xml",
     ],
     "depends": [
+        "analytic",
         "payroll",
     ],
     "license": "AGPL-3",

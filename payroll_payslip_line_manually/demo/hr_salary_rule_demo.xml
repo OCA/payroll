@@ -1,6 +1,6 @@
 <odoo>
     <record id="hr_salary_rule_payslip_wage" model="hr.salary.rule">
-        <field name="name">Hourly wage</field>
+        <field name="name">Monthly wage</field>
         <field name="sequence" eval="1" />
         <field name="code">PAYSLIP_WAGE</field>
         <field name="category_id" ref="payroll.BASIC" />
@@ -24,7 +24,7 @@ for record in records:
     </record>
 
     <record id="hr_salary_rule_contract_wage" model="hr.salary.rule">
-        <field name="name">Fixed hourly wage</field>
+        <field name="name">Fixed monthly wage</field>
         <field name="sequence" eval="1" />
         <field name="code">CONTRACT_WAGE</field>
         <field name="category_id" ref="payroll.BASIC" />

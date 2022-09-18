@@ -1,4 +1,5 @@
 from odoo import fields, models
+from odoo.exceptions import UserError
 
 
 class HrPayslip(models.Model):
@@ -13,19 +14,26 @@ class HrPayslip(models.Model):
         copy=True,
     )
 
-    def _compute_payslip_line(self, rule, localdict, lines_dict):
-        self.ensure_one()
-        localdict["rule"] = rule
-        localdict.pop("result_list", None)
-        payslip_lines = rule._compute_rule(localdict)
-        if not isinstance(payslip_lines, list):
-            payslip_lines = [payslip_lines]
-        for payslip_line in payslip_lines:
-            values = payslip_line
-            total = values["quantity"] * values["rate"] * values["amount"] / 100.0
-            localdict = self._sum_salary_rule_category(
-                localdict, rule.category_id, total
-            )
+    def _compute_payslip_line(
+        self, rule, localdict, lines_dict, key, values_list, previous_amount
+    ):
+        # Should be values_list
+        if not isinstance(values_list, list):
+            values_list = [values_list]
+        # For each dict in the values_list
+        analytic_account_ids = []
+        for values in values_list:
+            # The dict should have a unique analytic account value (False is an option)
+            # TODO: This is not working, I can add 2 lines with no analytic account!
+            analytic_account_id = values.get("analytic_account_id")
+            if analytic_account_id in analytic_account_ids:
+                if analytic_account_id:
+                    analytic_name = self.env["account.analytic.account"].browse(
+                        analytic_account_id
+                    ).name
+                msg = "Please only one line with rule '{}' and analytic account '{}'!"
+                return UserError(msg.format(rule.name, analytic_name))
+            # Compute a payslip line
             key = (
                 rule.code
                 + "-"
@@ -33,30 +41,7 @@ class HrPayslip(models.Model):
                 + "-"
                 + str(values.get("analytic_account_id"))
             )
-            lines_dict[key] = {
-                "salary_rule_id": rule.id,
-                "contract_id": localdict["contract"].id,
-                "name": values.get("name") or rule.name,
-                "code": rule.code,
-                "category_id": rule.category_id.id,
-                "sequence": rule.sequence,
-                "appears_on_payslip": rule.appears_on_payslip,
-                "parent_rule_id": rule.parent_rule_id.id,
-                "condition_select": rule.condition_select,
-                "condition_python": rule.condition_python,
-                "condition_range": rule.condition_range,
-                "condition_range_min": rule.condition_range_min,
-                "condition_range_max": rule.condition_range_max,
-                "amount_select": rule.amount_select,
-                "amount_fix": rule.amount_fix,
-                "amount_python_compute": rule.amount_python_compute,
-                "amount_percentage": rule.amount_percentage,
-                "amount_percentage_base": rule.amount_percentage_base,
-                "register_id": rule.register_id.id,
-                "employee_id": localdict["employee"].id,
-                "quantity": values["quantity"],
-                "rate": values["rate"],
-                "amount": values["amount"],
-                "analytic_account_id": values.get("analytic_account_id"),
-            }
+            localdict, lines_dict = super(HrPayslip, self)._compute_payslip_line(
+                rule, localdict, lines_dict, key, values, previous_amount
+            )
         return localdict, lines_dict
