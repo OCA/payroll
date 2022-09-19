@@ -599,10 +599,7 @@ class HrPayslip(models.Model):
                     baselocaldict, employee=contract.employee_id, contract=contract
                 )
                 for rule in payslip._get_salary_rules():
-                    localdict["result"] = None
-                    localdict["result_qty"] = 1.0
-                    localdict["result_rate"] = 100
-                    localdict["result_name"] = None
+                    localdict = rule._reset_localdict_values(localdict)
                     # check if the rule can be applied
                     if rule._satisfy_condition(localdict) and rule.id not in blacklist:
                         localdict, _dict = payslip._compute_payslip_line(
