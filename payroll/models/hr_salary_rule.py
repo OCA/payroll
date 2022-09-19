@@ -178,6 +178,13 @@ class HrSalaryRule(models.Model):
             children_rules += rule.child_ids._recursive_search_of_rules()
         return [(rule.id, rule.sequence) for rule in self] + children_rules
 
+    def _reset_localdict_values(self, localdict):
+        localdict["result_name"] = None
+        localdict["result_qty"] = 1.0
+        localdict["result_rate"] = 100
+        localdict["result"] = None
+        return localdict
+
     # TODO should add some checks on the type of result (should be float)
     def _compute_rule(self, localdict):
         """
