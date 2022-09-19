@@ -183,9 +183,9 @@ class HrSalaryRule(models.Model):
         """
         :param localdict: dictionary containing the environement in which to
                           compute the rule
-        :return: returns a tuple build as the base/amount computed, the quantity
-                 and the rate
-        :rtype: (float, float, float)
+        :return: returns a dict with values for the payslip line.
+                 The dict should minimum have "name", "quantity", "rate" and "amount".
+        :rtype: {"name": string, "quantity": float, "rate": float, "amount": float}
         """
         self.ensure_one()
         method = "_compute_rule_{}".format(self.amount_select)
@@ -193,12 +193,12 @@ class HrSalaryRule(models.Model):
 
     def _compute_rule_fix(self, localdict):
         try:
-            return (
-                self.amount_fix,
-                float(safe_eval(self.quantity, localdict)),
-                100.0,
-                False,  # result_name is always False if not computed by python.
-            )
+            return {
+                "name": self.name,
+                "quantity": float(safe_eval(self.quantity, localdict)),
+                "rate": 100.0,
+                "amount": self.amount_fix,
+            }
         except Exception:
             raise UserError(
                 _("Wrong quantity defined for salary rule %s (%s).")
@@ -207,12 +207,12 @@ class HrSalaryRule(models.Model):
 
     def _compute_rule_percentage(self, localdict):
         try:
-            return (
-                float(safe_eval(self.amount_percentage_base, localdict)),
-                float(safe_eval(self.quantity, localdict)),
-                self.amount_percentage,
-                False,  # result_name is always False if not computed by python.
-            )
+            return {
+                "name": self.name,
+                "quantity": float(safe_eval(self.quantity, localdict)),
+                "rate": self.amount_percentage,
+                "amount": float(safe_eval(self.amount_percentage_base, localdict)),
+            }
         except Exception:
             raise UserError(
                 _(
@@ -236,12 +236,12 @@ class HrSalaryRule(models.Model):
                 result_qty = localdict["result_qty"]
             if "result_rate" in localdict:
                 result_rate = localdict["result_rate"]
-            return (
-                float(localdict["result"]),
-                float(result_qty),
-                float(result_rate),
-                result_name,
-            )
+            return {
+                "quantity": result_qty,
+                "rate": result_rate,
+                "amount": float(localdict["result"]),
+                "name": result_name,
+            }
         except Exception as ex:
             raise UserError(
                 _(
