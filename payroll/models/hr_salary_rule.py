@@ -224,24 +224,8 @@ class HrSalaryRule(models.Model):
 
     def _compute_rule_code(self, localdict):
         try:
-            safe_eval(
-                self.amount_python_compute, localdict, mode="exec", nocopy=True
-            )
-            result_qty = 1.0
-            result_rate = 100.0
-            result_name = False
-            if "result_name" in localdict:
-                result_name = localdict["result_name"]
-            if "result_qty" in localdict:
-                result_qty = localdict["result_qty"]
-            if "result_rate" in localdict:
-                result_rate = localdict["result_rate"]
-            return {
-                "quantity": result_qty,
-                "rate": result_rate,
-                "amount": float(localdict["result"]),
-                "name": result_name,
-            }
+            safe_eval(self.amount_python_compute, localdict, mode="exec", nocopy=True)
+            return self._get_rule_dict(localdict)
         except Exception as ex:
             raise UserError(
                 _(
@@ -254,6 +238,17 @@ Here is the error received:
                 )
                 % (self.name, self.code, repr(ex))
             )
+
+    def _get_rule_dict(self, localdict):
+        name = localdict.get("result_name") or self.name
+        quantity = float(localdict["result_qty"]) if "result_qty" in localdict else 1.0
+        rate = float(localdict["result_rate"]) if "result_rate" in localdict else 100.0
+        return {
+            "name": name,
+            "quantity": quantity,
+            "rate": rate,
+            "amount": float(localdict["result"]),
+        }
 
     def _satisfy_condition(self, localdict):
         """
@@ -272,8 +267,7 @@ Here is the error received:
         try:
             result = safe_eval(self.condition_range, localdict)
             return (
-                self.condition_range_min <= result <= self.condition_range_max
-                or False
+                self.condition_range_min <= result <= self.condition_range_max or False
             )
         except Exception:
             raise UserError(
