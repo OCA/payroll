@@ -528,7 +528,11 @@ class HrPayslip(models.Model):
         # check if there is already a rule computed with that code
         previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
         # compute the amount of the rule
-        amount, qty, rate, computed_name = rule._compute_rule(localdict)
+        values = rule._compute_rule(localdict)
+        amount = values["amount"]
+        qty = values["quantity"]
+        rate = values["rate"]
+        computed_name = values["name"]
         rule_total = amount * qty * rate / 100.0
         # set/overwrite the amount computed for this rule in the localdict
         localdict[rule.code] = rule_total
