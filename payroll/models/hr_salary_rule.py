@@ -188,67 +188,72 @@ class HrSalaryRule(models.Model):
         :rtype: (float, float, float)
         """
         self.ensure_one()
-        if self.amount_select == "fix":
-            try:
-                return (
-                    self.amount_fix,
-                    float(safe_eval(self.quantity, localdict)),
-                    100.0,
-                    False,  # result_name is always False if not computed by python.
+        method = "_compute_rule_{}".format(self.amount_select)
+        return api.call_kw(self, method, [self.ids, localdict], {})
+
+    def _compute_rule_fix(self, localdict):
+        try:
+            return (
+                self.amount_fix,
+                float(safe_eval(self.quantity, localdict)),
+                100.0,
+                False,  # result_name is always False if not computed by python.
+            )
+        except Exception:
+            raise UserError(
+                _("Wrong quantity defined for salary rule %s (%s).")
+                % (self.name, self.code)
+            )
+
+    def _compute_rule_percentage(self, localdict):
+        try:
+            return (
+                float(safe_eval(self.amount_percentage_base, localdict)),
+                float(safe_eval(self.quantity, localdict)),
+                self.amount_percentage,
+                False,  # result_name is always False if not computed by python.
+            )
+        except Exception:
+            raise UserError(
+                _(
+                    "Wrong percentage base or quantity defined for salary "
+                    "rule %s (%s)."
                 )
-            except Exception:
-                raise UserError(
-                    _("Wrong quantity defined for salary rule %s (%s).")
-                    % (self.name, self.code)
-                )
-        elif self.amount_select == "percentage":
-            try:
-                return (
-                    float(safe_eval(self.amount_percentage_base, localdict)),
-                    float(safe_eval(self.quantity, localdict)),
-                    self.amount_percentage,
-                    False,  # result_name is always False if not computed by python.
-                )
-            except Exception:
-                raise UserError(
-                    _(
-                        "Wrong percentage base or quantity defined for salary "
-                        "rule %s (%s)."
-                    )
-                    % (self.name, self.code)
-                )
-        else:
-            try:
-                safe_eval(
-                    self.amount_python_compute, localdict, mode="exec", nocopy=True
-                )
-                result_qty = 1.0
-                result_rate = 100.0
-                result_name = False
-                if "result_name" in localdict:
-                    result_name = localdict["result_name"]
-                if "result_qty" in localdict:
-                    result_qty = localdict["result_qty"]
-                if "result_rate" in localdict:
-                    result_rate = localdict["result_rate"]
-                return (
-                    float(localdict["result"]),
-                    float(result_qty),
-                    float(result_rate),
-                    result_name,
-                )
-            except Exception as ex:
-                raise UserError(
-                    _(
-                        """
+                % (self.name, self.code)
+            )
+
+    def _compute_rule_code(self, localdict):
+        try:
+            safe_eval(
+                self.amount_python_compute, localdict, mode="exec", nocopy=True
+            )
+            result_qty = 1.0
+            result_rate = 100.0
+            result_name = False
+            if "result_name" in localdict:
+                result_name = localdict["result_name"]
+            if "result_qty" in localdict:
+                result_qty = localdict["result_qty"]
+            if "result_rate" in localdict:
+                result_rate = localdict["result_rate"]
+            return (
+                float(localdict["result"]),
+                float(result_qty),
+                float(result_rate),
+                result_name,
+            )
+        except Exception as ex:
+            raise UserError(
+                _(
+                    """
 Wrong python code defined for salary rule %s (%s).
 Here is the error received:
 
 %s
 """
-                    )
-                    % (self.name, self.code, repr(ex))
                 )
+                % (self.name, self.code, repr(ex))
+            )
 
     def _satisfy_condition(self, localdict):
         """
@@ -257,34 +262,38 @@ Here is the error received:
                  given contract. Return False otherwise.
         """
         self.ensure_one()
+        method = "_satisfy_condition_{}".format(self.condition_select)
+        return api.call_kw(self, method, [self.ids, localdict], {})
 
-        if self.condition_select == "none":
-            return True
-        elif self.condition_select == "range":
-            try:
-                result = safe_eval(self.condition_range, localdict)
-                return (
-                    self.condition_range_min <= result <= self.condition_range_max
-                    or False
-                )
-            except Exception:
-                raise UserError(
-                    _("Wrong range condition defined for salary rule %s (%s).")
-                    % (self.name, self.code)
-                )
-        else:  # python code
-            try:
-                safe_eval(self.condition_python, localdict, mode="exec", nocopy=True)
-                return "result" in localdict and localdict["result"] or False
-            except Exception as ex:
-                raise UserError(
-                    _(
-                        """
+    def _satisfy_condition_none(self, localdict):
+        return True
+
+    def _satisfy_condition_range(self, localdict):
+        try:
+            result = safe_eval(self.condition_range, localdict)
+            return (
+                self.condition_range_min <= result <= self.condition_range_max
+                or False
+            )
+        except Exception:
+            raise UserError(
+                _("Wrong range condition defined for salary rule %s (%s).")
+                % (self.name, self.code)
+            )
+
+    def _satisfy_condition_python(self, localdict):
+        try:
+            safe_eval(self.condition_python, localdict, mode="exec", nocopy=True)
+            return "result" in localdict and localdict["result"] or False
+        except Exception as ex:
+            raise UserError(
+                _(
+                    """
 Wrong python condition defined for salary rule %s (%s).
 Here is the error received:
 
 %s
 """
-                    )
-                    % (self.name, self.code, repr(ex))
                 )
+                % (self.name, self.code, repr(ex))
+            )
