@@ -8,9 +8,9 @@ from odoo.addons.payroll.models.hr_payslip import BrowsableObject
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
-    def get_contract_dict(self, contract, contracts):
+    def get_current_contract_dict(self, contract, contracts):
         self.ensure_one()
-        res = super().get_contract_dict(contract, contracts)
+        res = super().get_current_contract_dict(contract, contracts)
         advantages_dict = {}
         for advantage in contract.advantages_ids:
             advantages_dict[advantage.advantage_template_code] = advantage.amount
