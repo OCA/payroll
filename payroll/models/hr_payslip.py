@@ -466,7 +466,7 @@ class HrPayslip(models.Model):
         """
         self.ensure_one()
 
-        # res = super().get_contract_dict(contract, contracts)
+        # res = super().get_current_contract_dict(contract, contracts)
         # res.update({
         #     # In salary rules refer to these as:
         #     #     current_contract.foo
