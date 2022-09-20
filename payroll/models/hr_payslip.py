@@ -523,18 +523,20 @@ class HrPayslip(models.Model):
             sorted_rules |= rule_obj.browse(sorted_rule_ids)
         return sorted_rules
 
-    def _compute_rule(self, rule, localdict, lines_dict):
+    def _compute_payslip_line(self, rule, localdict, lines_dict):
         self.ensure_one()
         # check if there is already a rule computed with that code
         previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
         # compute the rule to get some values for the payslip line
         values = rule._compute_rule(localdict)
         key = rule.code + "-" + str(localdict["contract"].id)
-        return self._get_line_dict(
+        return self._get_lines_dict(
             rule, localdict, lines_dict, key, values, previous_amount
         )
 
-    def _get_line_dict(self, rule, localdict, lines_dict, key, values, previous_amount):
+    def _get_lines_dict(
+        self, rule, localdict, lines_dict, key, values, previous_amount
+    ):
         total = values["quantity"] * values["rate"] * values["amount"] / 100.0
         values["total"] = total
         # set/overwrite the amount computed for this rule in the localdict
@@ -600,7 +602,7 @@ class HrPayslip(models.Model):
                     localdict = rule._reset_localdict_values(localdict)
                     # check if the rule can be applied
                     if rule._satisfy_condition(localdict) and rule.id not in blacklist:
-                        localdict, _dict = payslip._compute_rule(
+                        localdict, _dict = payslip._compute_payslip_line(
                             rule, localdict, lines_dict
                         )
                     else:
