@@ -605,12 +605,12 @@ class HrPayslip(models.Model):
                         localdict, _dict = payslip._compute_payslip_line(
                             rule, localdict, lines_dict
                         )
+                        lines_dict.update(_dict)
                     else:
                         # blacklist this rule and its children
                         blacklist += [
                             id for id, seq in rule._recursive_search_of_rules()
                         ]
-                    lines_dict.update(_dict)
                 # call localdict_hook
                 localdict = payslip.localdict_hook(localdict)
                 # reset "current_contract" dict
