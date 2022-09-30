@@ -1,6 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import logging
+import math
 from datetime import date, datetime, time
 
 import babel
@@ -483,6 +484,11 @@ class HrPayslip(models.Model):
 
         return {}
 
+    def _get_tools_dict(self):
+        # _get_tools_dict() is intended to be inherited by other private modules
+        # to add tools or python libraries available in localdict
+        return {"math": math}  # "math" object is useful for doing calculations
+
     def _get_baselocaldict(self, contracts):
         self.ensure_one()
         worked_days_dict = {
@@ -502,6 +508,9 @@ class HrPayslip(models.Model):
             "categories": BrowsableObject(self.employee_id.id, {}, self.env),
             "rules": BrowsableObject(self.employee_id.id, {}, self.env),
             "result_rules": BrowsableObject(self.employee_id.id, {}, self.env),
+            "tools": BrowsableObject(
+                self.employee_id.id, self._get_tools_dict(), self.env
+            ),
         }
         return localdict
 
