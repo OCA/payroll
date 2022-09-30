@@ -256,14 +256,15 @@
                             >
                                 <tree
                                     string="Salary Structure"
-                                    decoration-info="total == 0"
+                                    decoration-info="total == 0 and appears_on_payslip == True"
                                     decoration-bf="parent_rule_id == False"
                                     decoration-it="parent_rule_id != False"
-                                    decoration-muted="parent_rule_id != False"
+                                    decoration-muted="parent_rule_id != False or appears_on_payslip != True"
                                     create="false"
                                     delete="false"
                                 >
-                                    <field name="sequence" invisible="1" />
+                                    <field name="appears_on_payslip" invisible="1" />
+                                    <field name="sequence" optional="hide" />
                                     <field name="parent_line_id" invisible="1" />
                                     <field name="parent_rule_id" invisible="1" />
                                     <field name="code" readonly="1" />
@@ -295,6 +296,9 @@
                                     <field name="category_id" decoration-bf="1" />
                                     <field name="code" widget="badge" />
                                     <field name="name" />
+                                    <field name="quantity" />
+                                    <field name="rate" readonly="1" />
+                                    <field name="amount" />
                                     <field
                                         name="total"
                                         decoration-bf="1"
