@@ -66,20 +66,19 @@ class HrSalaryRule(models.Model):
         required=True,
         default="""
             # Available variables:
-            #----------------------
+            #-------------------------------
             # payslip: object containing the payslips
-            # payslip.rule_parameter(code): get the value for the rule parameter specified.
-            #   By default it gets the code for payslip date.
             # employee: hr.employee object
             # contract: hr.contract object
             # rules: object containing the rules code (previously computed)
             # categories: object containing the computed salary rule categories
             #    (sum of amount of all rules belonging to that category).
-            # worked_days: object containing the computed worked days
-            # inputs: object containing the computed inputs
+            # worked_days: object containing the computed worked days.
+            # inputs: object containing the computed inputs.
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
             # result_rules: object with a dict of qty, rate, amount an total of calculated rules
+            # tools: object that contain libraries and tools that can be used in calculations
 
             # Available compute variables:
             #-------------------------------
@@ -87,7 +86,7 @@ class HrSalaryRule(models.Model):
 
             # Example:
             #-------------------------------
-            result = rules.NET > categories.NET * 0.10
+            # result = worked_days.WORK0 and worked_days.WORK0.number_of_days > 0
 
             """,
         help="Applied this rule for calculation if condition is true. You can "
@@ -133,6 +132,7 @@ class HrSalaryRule(models.Model):
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
             # result_rules: object with a dict of qty, rate, amount an total of calculated rules
+            # tools: object that contain libraries and tools that can be used in calculations
 
             # Available compute variables:
             #-------------------------------
@@ -143,7 +143,7 @@ class HrSalaryRule(models.Model):
 
             # Example:
             #-------------------------------
-            result = contract.wage * 0.10
+            # result = contract.wage * 0.10
 
             """,
     )

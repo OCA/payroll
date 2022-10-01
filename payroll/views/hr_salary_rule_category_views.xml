@@ -5,14 +5,36 @@
         <field name="model">hr.salary.rule.category</field>
         <field name="arch" type="xml">
             <form string="Salary Categories">
-                <group col="4">
-                    <field name="name" />
-                    <field name="code" />
-                    <field name="parent_id" />
-                </group>
-                <group string="Notes">
-                    <field name="note" nolabel="1" />
-                </group>
+                <sheet>
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="code" />
+                            <field name="parent_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Salary Rules">
+                            <separator string="Asociated Salary Rules" />
+                            <field name="salary_rules_ids" nolabel="1" create="false">
+                                <tree>
+                                    <field name="code" decoration-bf="1" />
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group string="Notes">
+                        <field
+                            name="note"
+                            placeholder="Add your notes or category explanation here..."
+                            nolabel="1"
+                        />
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
