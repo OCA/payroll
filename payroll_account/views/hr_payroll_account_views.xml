@@ -18,7 +18,7 @@
         <field name="model">hr.salary.rule</field>
         <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="/form/notebook/page[@name='rules']" position="after">
+            <page name="inputs" position="after">
                 <page string="Accounting">
                     <group>
                         <group>
@@ -36,7 +36,7 @@
                         </group>
                     </group>
                 </page>
-            </xpath>
+            </page>
         </field>
     </record>
     <!-- Contract View -->
