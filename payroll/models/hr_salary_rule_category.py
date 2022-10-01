@@ -19,6 +19,9 @@ class HrSalaryRuleCategory(models.Model):
     children_ids = fields.One2many(
         "hr.salary.rule.category", "parent_id", string="Children"
     )
+    salary_rules_ids = fields.One2many(
+        "hr.salary.rule", "category_id", string="Salary Rule Categories"
+    )
     note = fields.Text(string="Description")
     company_id = fields.Many2one(
         "res.company",
