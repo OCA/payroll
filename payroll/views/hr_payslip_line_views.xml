@@ -9,14 +9,25 @@
                 editable="bottom"
                 decoration-info="total == 0"
             >
+
+                <field name="allow_edit_payslip_lines" invisible="1" />
                 <field name="category_id" />
                 <field name="employee_id" invisible="1" />
                 <field name="sequence" />
                 <field name="name" />
                 <field name="code" />
-                <field name="quantity" />
-                <field name="rate" />
-                <field name="amount" />
+                <field
+                    name="quantity"
+                    attrs="{'readonly': [('allow_edit_payslip_lines', '!=', True)]}"
+                />
+                <field
+                    name="rate"
+                    attrs="{'readonly': [('allow_edit_payslip_lines', '!=', True)]}"
+                />
+                <field
+                    name="amount"
+                    attrs="{'readonly': [('allow_edit_payslip_lines', '!=', True)]}"
+                />
                 <field name="total" />
                 <field name="amount_select" invisible="1" />
                 <field name="register_id" invisible="1" />
