@@ -35,10 +35,8 @@ class HrPayslipLine(models.Model):
     amount = fields.Float(digits="Payroll")
     quantity = fields.Float(digits="Payroll", default=1.0)
     total = fields.Float(
-        compute="_compute_total",
         string="Total",
         digits="Payroll",
-        store=True,
     )
     allow_edit_payslip_lines = fields.Boolean(
         "Allow editing", compute="_compute_allow_edit_payslip_lines"
@@ -70,11 +68,6 @@ class HrPayslipLine(models.Model):
                 )
             else:
                 line.parent_line_id = False
-
-    @api.depends("quantity", "amount", "rate")
-    def _compute_total(self):
-        for line in self:
-            line.total = float(line.quantity) * line.amount * line.rate / 100
 
     @api.model_create_multi
     def create(self, vals_list):
