@@ -18,3 +18,15 @@ class ResConfigSettings(models.TransientModel):
         string="Allow cancel confirmed payslips",
         help="If enabled, it allow the user to cancel confirmed payslips. Default: Not Enabled",
     )
+    prevent_compute_on_confirm = fields.Boolean(
+        config_parameter="payroll.prevent_compute_on_confirm",
+        string="No compute on confirm",
+        help="If enabled, this setting will prevent the payslip to be re-computed on confirm.",
+        default=True,
+    )
+    allow_edit_payslip_lines = fields.Boolean(
+        config_parameter="payroll.allow_edit_payslip_lines",
+        string="Payslip lines editable",
+        help="Allow editing payslip lines manually in views and forms",
+        default=False,
+    )
