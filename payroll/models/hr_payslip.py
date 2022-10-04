@@ -176,6 +176,16 @@ class HrPayslip(models.Model):
     allow_cancel_payslips = fields.Boolean(
         "Allow Cancel Payslips", compute="_compute_allow_cancel_payslips"
     )
+    prevent_compute_on_confirm = fields.Boolean(
+        "Prevent Compute on Confirm", compute="_compute_prevent_compute_on_confirm"
+    )
+
+    def _compute_prevent_compute_on_confirm(self):
+        self.prevent_compute_on_confirm = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.prevent_compute_on_confirm")
+        )
 
     def _compute_allow_cancel_payslips(self):
         self.allow_cancel_payslips = (
@@ -224,7 +234,10 @@ class HrPayslip(models.Model):
         return self.write({"state": "draft"})
 
     def action_payslip_done(self):
-        if not self.env.context.get("without_compute_sheet"):
+        if (
+            not self.env.context.get("without_compute_sheet")
+            and not self.prevent_compute_on_confirm
+        ):
             self.compute_sheet()
         return self.write({"state": "done"})
 

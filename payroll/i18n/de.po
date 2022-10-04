@@ -413,6 +413,17 @@ msgid "Allow cancel confirmed payslips"
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__allow_edit_payslip_lines
+msgid "Allow editing"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__allow_edit_payslip_lines
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Allow editing payslip lines manually in views and forms"
+msgstr ""
+
+#. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
 msgid "Allowance"
 msgstr "Zuwendung"
@@ -499,6 +510,11 @@ msgstr "Zweimonatlich"
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-weekly
 msgid "Bi-weekly"
 msgstr "Zweiwöchentlich"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Calculation Settings"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
@@ -1156,6 +1172,14 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__prevent_compute_on_confirm
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid ""
+"If enabled, this setting will prevent the payslip to be re-computed on "
+"confirm."
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__credit_note
 msgid ""
 "If its checked, indicates that all payslips generated from here are refund "
@@ -1378,11 +1402,6 @@ msgid "Minimum Range"
 msgstr "Minimaler Bereich"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
-msgid "Misc Functionalities"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Miscellaneous"
 msgstr "Sonstiges"
@@ -1438,6 +1457,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_id
 msgid "Next Activity Type"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
+msgid "No compute on confirm"
 msgstr ""
 
 #. module: payroll
@@ -1724,6 +1748,11 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
+msgid "Payslip lines editable"
+msgstr ""
+
+#. module: payroll
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action_employee
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__slip_ids
@@ -1778,6 +1807,11 @@ msgstr "Periode"
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Post payroll slips in accounting"
 msgstr "Lohnabrechnungen in Buchhaltung einfügen"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__prevent_compute_on_confirm
+msgid "Prevent Compute on Confirm"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_payslip_lines_contribution_register
