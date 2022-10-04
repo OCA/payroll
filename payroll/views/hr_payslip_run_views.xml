@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <search string="Search Payslip Batches">
                 <field name="name" string="Payslip Batches" />
+                <field name="company_id" groups="base.group_multi_company" />
                 <field name="date_start" />
                 <field name="date_end" />
                 <filter
@@ -36,6 +37,7 @@
                 sample="1"
             >
                 <field name="name" />
+                <field name="company_id" groups="base.group_multi_company" />
                 <field name="date_start" decoration-bf="1" />
                 <field name="date_end" decoration-bf="1" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
@@ -63,6 +65,10 @@
                                 <div class="col-6">
                                     <strong>
                                         <field name="name" />
+                                        <field
+                                            name="company_id"
+                                            groups="base.group_multi_company"
+                                        />
                                     </strong>
                                 </div>
                                 <div class="col-6">
