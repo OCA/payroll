@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <h2>Misc Functionalities</h2>
+                    <h2>Calculation Settings</h2>
                     <div class="row mt16 o_settings_container" id="worked_days">
                         <div class="col-lg-6 col-12 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt16 o_settings_container" id="worked_days">
+                    <div class="row mt16 o_settings_container" id="cancel_payslips">
                         <div class="col-lg-6 col-12 o_setting_box">
                             <div class="o_setting_left_pane">
                                 <field name="allow_cancel_payslips" />
@@ -64,6 +64,32 @@
                                 <label for="allow_cancel_payslips" />
                                 <div class="text-muted">
                                     If enabled, confirmed payslips can be canceled by the user. Default: Not enabled.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" id="compute_on_confirm">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="prevent_compute_on_confirm" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="prevent_compute_on_confirm" />
+                                <div class="text-muted">
+                                    If enabled, this setting will prevent the payslip to be re-computed on confirm.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt16 o_settings_container" id="editing_lines">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="allow_edit_payslip_lines" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="allow_edit_payslip_lines" />
+                                <div class="text-muted">
+                                    Allow editing payslip lines manually in views and forms
                                 </div>
                             </div>
                         </div>
