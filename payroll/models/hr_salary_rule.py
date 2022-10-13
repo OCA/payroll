@@ -265,6 +265,10 @@ Here is the error received:
         """
         self.ensure_one()
         method = "_satisfy_condition_{}".format(self.condition_select)
+        if self.parent_rule_id:
+            current_result = api.call_kw(self, method, [self.ids, localdict], {})
+            parent_result = self.parent_rule_id._satisfy_condition(localdict)
+            return current_result and parent_result
         return api.call_kw(self, method, [self.ids, localdict], {})
 
     def _satisfy_condition_none(self, localdict):
