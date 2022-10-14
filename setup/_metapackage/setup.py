@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-payroll',
         'odoo14-addon-payroll_account',
         'odoo14-addon-payroll_contract_advantages',
+        'odoo14-addon-payroll_hr_public_holidays',
     ],
     classifiers=[
         'Programming Language :: Python',
