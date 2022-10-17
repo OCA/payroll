@@ -60,9 +60,6 @@ class TestPayslipBase(TransactionCase):
         #
         # Salary Rules
         #
-
-        # Earnings
-        #
         self.rule_basic = self.SalaryRule.create(
             {
                 "name": "Basic Salary",
@@ -70,10 +67,13 @@ class TestPayslipBase(TransactionCase):
                 "sequence": 1,
                 "category_id": self.categ_basic.id,
                 "condition_select": "none",
-                "amount_select": "code",
-                "amount_python_compute": "result = contract.wage",
+                "amount_select": "fix",
+                "amount_fix": 1000.0,
             }
         )
+
+        # Earnings
+        #
         self.rule_hra = self.SalaryRule.create(
             {
                 "name": "House Rent Allowance",
@@ -98,39 +98,6 @@ class TestPayslipBase(TransactionCase):
                 "quantity": "worked_days.WORK100 and worked_days.WORK100.number_of_days",
             }
         )
-        self.rule_commission = self.SalaryRule.create(
-            {
-                "name": "Get 1% of sales",
-                "code": "SALE",
-                "sequence": 17,
-                "category_id": self.categ_alw.id,
-                "condition_select": "none",
-                "amount_select": "code",
-                "amount_python_compute": "result = "
-                "(inputs.SALEURO and inputs.SALEURO.amount) * 0.01",
-            }
-        )
-        self.RuleInput.create(
-            {
-                "name": "Sales to Europe",
-                "code": "SALEURO",
-                "input_id": self.rule_commission.id,
-            }
-        )
-
-        # Gross
-        #
-        self.rule_gross = self.SalaryRule.create(
-            {
-                "name": "Gross",
-                "code": "GROSS",
-                "sequence": 100,
-                "category_id": self.categ_gross.id,
-                "condition_select": "none",
-                "amount_select": "code",
-                "amount_python_compute": "result = categories.BASIC + categories.ALW",
-            }
-        )
 
         # Deductions
         #
@@ -146,34 +113,18 @@ class TestPayslipBase(TransactionCase):
             }
         )
 
-        # Net
-        #
-        self.rule_net = self.SalaryRule.create(
-            {
-                "name": "Net",
-                "code": "NET",
-                "sequence": 200,
-                "category_id": self.categ_net.id,
-                "condition_select": "none",
-                "amount_select": "code",
-                "amount_python_compute": "result = categories.BASIC "
-                "+ categories.ALW + categories.DED",
-            }
-        )
-
         # Test Child Line
         #
         self.rule_child = self.SalaryRule.create(
             {
-                "name": "Net Child Rule",
-                "code": "NET_CHILD",
+                "name": "Basic Child Rule",
+                "code": "BASIC_CHILD",
                 "sequence": 190,
-                "category_id": self.categ_net.id,
-                "parent_rule_id": self.rule_net.id,
+                "category_id": self.categ_basic.id,
+                "parent_rule_id": self.rule_basic.id,
                 "condition_select": "none",
-                "amount_select": "code",
-                "amount_python_compute": "result = categories.BASIC "
-                "+ categories.ALW + categories.DED",
+                "amount_select": "fix",
+                "amount_fix": 100.0,
             }
         )
 
@@ -195,13 +146,10 @@ class TestPayslipBase(TransactionCase):
                 "code": "SD",
                 "company_id": self.ref("base.main_company"),
                 "rule_ids": [
+                    (4, self.rule_basic.id),
                     (4, self.rule_hra.id),
                     (4, self.rule_proftax.id),
                     (4, self.rule_meal.id),
-                    (4, self.rule_commission.id),
-                    (4, self.rule_basic.id),
-                    (4, self.rule_gross.id),
-                    (4, self.rule_net.id),
                 ],
             }
         )
@@ -225,10 +173,7 @@ class TestPayslipBase(TransactionCase):
                 "code": "SP",
                 "company_id": self.ref("base.main_company"),
                 "rule_ids": [
-                    (4, self.rule_commission.id),
                     (4, self.rule_basic.id),
-                    (4, self.rule_gross.id),
-                    (4, self.rule_net.id),
                 ],
             }
         )

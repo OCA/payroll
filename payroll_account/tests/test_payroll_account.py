@@ -74,7 +74,6 @@ class TestPayrollAccount(common.TransactionCase):
                             self.ref("payroll.hr_salary_rule_professionaltax1"),
                             self.ref("payroll.hr_salary_rule_providentfund1"),
                             self.ref("payroll.hr_salary_rule_meal_voucher"),
-                            self.ref("payroll.hr_salary_rule_sales_commission"),
                         ],
                     )
                 ],

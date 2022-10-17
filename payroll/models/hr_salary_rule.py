@@ -48,7 +48,7 @@ class HrSalaryRule(models.Model):
         default=lambda self: self.env.company,
     )
     condition_select = fields.Selection(
-        [("none", "Always True"), ("range", "Range"), ("python", "Python Expression")],
+        [("none", "Always True"), ("range", "Range")],
         string="Condition Based on",
         default="none",
         required=True,
@@ -61,37 +61,6 @@ class HrSalaryRule(models.Model):
         "lowercase as a variable names (hra, ma, lta, etc.) and the "
         "variable basic.",
     )
-    condition_python = fields.Text(
-        string="Python Condition",
-        required=True,
-        default="""
-            # Available variables:
-            #-------------------------------
-            # payslip: object containing the payslips
-            # employee: hr.employee object
-            # contract: hr.contract object
-            # rules: object containing the rules code (previously computed)
-            # categories: object containing the computed salary rule categories
-            #    (sum of amount of all rules belonging to that category).
-            # worked_days: object containing the computed worked days.
-            # inputs: object containing the computed inputs.
-            # payroll: object containing miscellaneous values related to payroll
-            # current_contract: object with values calculated from the current contract
-            # result_rules: object with a dict of qty, rate, amount an total of calculated rules
-            # tools: object that contain libraries and tools that can be used in calculations
-
-            # Available compute variables:
-            #-------------------------------
-            # result: returned value have to be set in the variable 'result'
-
-            # Example:
-            #-------------------------------
-            # result = worked_days.WORK0 and worked_days.WORK0.number_of_days > 0
-
-            """,
-        help="Applied this rule for calculation if condition is true. You can "
-        "specify condition like basic > 1000.",
-    )
     condition_range_min = fields.Float(
         string="Minimum Range", help="The minimum amount, applied for this rule."
     )
@@ -102,7 +71,6 @@ class HrSalaryRule(models.Model):
         [
             ("percentage", "Percentage (%)"),
             ("fix", "Fixed Amount"),
-            ("code", "Python Code"),
         ],
         string="Amount Type",
         index=True,
@@ -115,37 +83,6 @@ class HrSalaryRule(models.Model):
         string="Percentage (%)",
         digits="Payroll Rate",
         help="For example, enter 50.0 to apply a percentage of 50%",
-    )
-    amount_python_compute = fields.Text(
-        string="Python Code",
-        default="""
-            # Available variables:
-            #-------------------------------
-            # payslip: object containing the payslips
-            # employee: hr.employee object
-            # contract: hr.contract object
-            # rules: object containing the rules code (previously computed)
-            # categories: object containing the computed salary rule categories
-            #    (sum of amount of all rules belonging to that category).
-            # worked_days: object containing the computed worked days.
-            # inputs: object containing the computed inputs.
-            # payroll: object containing miscellaneous values related to payroll
-            # current_contract: object with values calculated from the current contract
-            # result_rules: object with a dict of qty, rate, amount an total of calculated rules
-            # tools: object that contain libraries and tools that can be used in calculations
-
-            # Available compute variables:
-            #-------------------------------
-            # result: returned value have to be set in the variable 'result'
-            # result_rate: the rate that will be applied to "result".
-            # result_qty: the quantity of units that will be multiplied to "result".
-            # result_name: if this variable is computed, it will contain the name of the line.
-
-            # Example:
-            #-------------------------------
-            # result = contract.wage * 0.10
-
-            """,
     )
     amount_percentage_base = fields.Char(
         string="Percentage based on", help="result will be affected to a variable"
@@ -229,23 +166,6 @@ class HrSalaryRule(models.Model):
                 % (self.name, self.code)
             )
 
-    def _compute_rule_code(self, localdict):
-        try:
-            safe_eval(self.amount_python_compute, localdict, mode="exec", nocopy=True)
-            return self._get_rule_dict(localdict)
-        except Exception as ex:
-            raise UserError(
-                _(
-                    """
-Wrong python code defined for salary rule %s (%s).
-Here is the error received:
-
-%s
-"""
-                )
-                % (self.name, self.code, repr(ex))
-            )
-
     def _get_rule_dict(self, localdict):
         name = localdict.get("result_name") or self.name
         quantity = float(localdict["result_qty"]) if "result_qty" in localdict else 1.0
@@ -280,21 +200,4 @@ Here is the error received:
             raise UserError(
                 _("Wrong range condition defined for salary rule %s (%s).")
                 % (self.name, self.code)
-            )
-
-    def _satisfy_condition_python(self, localdict):
-        try:
-            safe_eval(self.condition_python, localdict, mode="exec", nocopy=True)
-            return "result" in localdict and localdict["result"] or False
-        except Exception as ex:
-            raise UserError(
-                _(
-                    """
-Wrong python condition defined for salary rule %s (%s).
-Here is the error received:
-
-%s
-"""
-                )
-                % (self.name, self.code, repr(ex))
             )
