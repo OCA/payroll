@@ -12,7 +12,7 @@ class TestSalaryRule(TestPayslipBase):
 
         self.test_rule = self.Rule.create(
             {
-                "name": "test rule",
+                "name": "Test Rule",
                 "code": "TEST",
                 "category_id": self.env.ref("payroll.ALW").id,
                 "sequence": 6,
@@ -21,6 +21,33 @@ class TestSalaryRule(TestPayslipBase):
             }
         )
         self.developer_pay_structure.write({"rule_ids": [(4, self.test_rule.id)]})
+
+        self.parent_test_rule = self.Rule.create(
+            {
+                "name": "Parent Test Rule",
+                "code": "PARENT_TEST",
+                "category_id": self.env.ref("payroll.ALW").id,
+                "sequence": 6,
+                "parent_rule_id": self.test_rule.id,
+                "amount_select": "code",
+                "amount_python_compute": "result = 100",
+            }
+        )
+        self.developer_pay_structure.write(
+            {"rule_ids": [(4, self.parent_test_rule.id)]}
+        )
+
+        self.child_test_rule = self.Rule.create(
+            {
+                "name": "Child Test Rule",
+                "code": "CHILD_TEST",
+                "category_id": self.env.ref("payroll.ALW").id,
+                "sequence": 7,
+                "parent_rule_id": self.test_rule.id,
+                "amount_select": "code",
+                "amount_python_compute": "result = 100",
+            }
+        )
 
     def test_python_code_return_values(self):
 
@@ -67,3 +94,47 @@ class TestSalaryRule(TestPayslipBase):
         self.assertEqual(line.amount, 2.0, "The amount is zero")
         self.assertEqual(line.rate, 100.0, "The rate is zero")
         self.assertEqual(line.quantity, 1.0, "The quantity is zero")
+
+    def test_parent_child_order(self):
+        # Open contracts
+        cc = self.env["hr.contract"].search([("employee_id", "=", self.richard_emp.id)])
+        cc.kanban_state = "done"
+        self.env.ref(
+            "hr_contract.ir_cron_data_contract_update_state"
+        ).method_direct_trigger()
+
+        # Compute Payslip
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        payslip.compute_sheet()
+
+        # Check child test rule calculated without being in the structure
+        line = payslip.line_ids.filtered(lambda l: l.code == "CHILD_TEST")
+        self.assertEqual(len(line), 1, "Child line founded")
+
+        # Change sequence of child rule to calculate before of the parent rule
+        self.child_test_rule.sequence = 5
+
+        # Compute Payslip
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        payslip.compute_sheet()
+
+        # Child rule should be computed
+        line = payslip.line_ids.filtered(lambda l: l.code == "CHILD_TEST")
+        self.assertEqual(len(line), 1, "Child line founded")
+
+        # Change the parent rule condition to return False
+        self.test_rule.condition_select = "python"
+        self.test_rule.condition_python = "result = False"
+
+        # Compute Payslip
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        payslip.compute_sheet()
+
+        # Parent and child rule should not be calculated even if child rule condition is true
+        parent_line = payslip.line_ids.filtered(lambda l: l.code == "PARENT_TEST")
+        child_line = payslip.line_ids.filtered(lambda l: l.code == "CHILD_TEST")
+        self.assertEqual(len(parent_line), 0, "No parent line found")
+        self.assertEqual(len(child_line), 0, "No child line found")
