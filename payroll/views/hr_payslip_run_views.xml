@@ -123,25 +123,29 @@
                     <h1>
                         <field name="name" />
                     </h1>
-                    <group col="4">
-                        <label for="date_start" string="Period" />
-                        <div>
-                            <field
-                                name="date_start"
-                                widget="daterange"
-                                class="oe_inline"
-                                options="{'related_end_date': 'date_end'}"
-                            />
-                            -
-                            <field
-                                name="date_end"
-                                widget="daterange"
-                                class="oe_inline"
-                                options="{'related_start_date': 'date_start'}"
-                            />
-                        </div>
-                        <field name="credit_note" />
-                        <field name="struct_id" />
+                    <group>
+                        <group name="period_group">
+                            <label for="date_start" string="Period" />
+                            <div>
+                                <field
+                                    name="date_start"
+                                    widget="daterange"
+                                    class="oe_inline"
+                                    options="{'related_end_date': 'date_end'}"
+                                />
+                                -
+                                <field
+                                    name="date_end"
+                                    widget="daterange"
+                                    class="oe_inline"
+                                    options="{'related_start_date': 'date_start'}"
+                                />
+                            </div>
+                        </group>
+                        <group name="other">
+                            <field name="struct_id" />
+                            <field name="credit_note" />
+                        </group>
                     </group>
                     <separator string="Payslips" />
                     <field name="slip_ids" />
