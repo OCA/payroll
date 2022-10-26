@@ -1,0 +1,71 @@
+<odoo>
+    <record id="hr_salary_rule_payslip_wage" model="hr.salary.rule">
+        <field name="name">Hourly wage</field>
+        <field name="sequence" eval="1" />
+        <field name="code">PAYSLIP_WAGE</field>
+        <field name="category_id" ref="payroll.BASIC" />
+        <field name="line_manually_model">hr.payslip</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+record = payslip.line_manually_ids
+if record:
+    record = record.filtered(lambda x: x.salary_rule_id.id == rule.id)
+result = bool(record)
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result_list = []
+records = payslip.line_manually_ids.filtered(lambda x: x.salary_rule_id.id == rule.id)
+for record in records:
+    result_list.append(
+        record.get_result_dict()
+    )
+        </field>
+    </record>
+
+    <record id="hr_salary_rule_contract_wage" model="hr.salary.rule">
+        <field name="name">Fixed hourly wage</field>
+        <field name="sequence" eval="1" />
+        <field name="code">CONTRACT_WAGE</field>
+        <field name="category_id" ref="payroll.BASIC" />
+        <field name="line_manually_model">hr.contract</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+record = contract.line_manually_ids
+if record:
+    record = record.filtered(lambda x: x.salary_rule_id.id == rule.id)
+result = bool(record)
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+default_hourly_wage = 10
+
+result_list = []
+records = contract.line_manually_ids.filtered(lambda x: x.salary_rule_id.id == rule.id)
+for record in records:
+    months = 1.5 # get from e.g. input
+    result_list.append(
+        record.get_result_dict(
+            months=months,
+            multiply_with="result_qty",
+            uom="hours",
+            default_amount=default_hourly_wage,
+        )
+    )
+        </field>
+    </record>
+
+    <!-- Salary Structure -->
+    <record id="structure_analytic" model="hr.payroll.structure">
+        <field name="code">MLS</field>
+        <field name="name">Manual Lines Structure</field>
+        <field
+            eval="[(6, 0, [
+                ref('hr_salary_rule_payslip_wage'),
+                ref('hr_salary_rule_contract_wage'),
+            ])]"
+            name="rule_ids"
+        />
+        <field name="company_id" ref="base.main_company" />
+    </record>
+</odoo>

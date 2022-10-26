@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_hr_payslip_form" model="ir.ui.view">
+        <field name="name">hr.payslip.form manual payslip lines</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='input_line_ids']" position="after">
+                <separator string="Manual payslip lines" />
+                <field name="line_manually_ids">
+                    <tree editable="bottom">
+                        <field
+                            name="salary_rule_id"
+                            domain="[('line_manually_model','=','hr.payslip')]"
+                        />
+                        <field
+                            name="analytic_account_id"
+                            groups="analytic.group_analytic_accounting"
+                        />
+                        <field name="quantity" />
+                        <field name="rate" />
+                        <field name="amount" />
+                        <field name="total" />
+                        <field name="model" groups="base.group_no_one" />
+                        <field name="res_id" groups="base.group_no_one" />
+                    </tree>
+                </field>
+            </xpath>
+            <xpath
+                expr="//field[@name='dynamic_filtered_payslip_lines']/tree/field[@name='category_id']"
+                position="after"
+            >
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_hr_contract_form" model="ir.ui.view">
+        <field name="name">hr.contract.form salary rules</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="fields" string="Recurring payslip lines">
+                    <field name="line_manually_ids">
+                        <tree editable="bottom">
+                            <field
+                                name="salary_rule_id"
+                                domain="[('line_manually_model','=','hr.contract')]"
+                            />
+                            <field
+                                name="analytic_account_id"
+                                groups="analytic.group_analytic_accounting"
+                            />
+                            <field name="quantity" />
+                            <field name="rate" />
+                            <field name="amount" />
+                            <field name="total" />
+                            <field name="model" groups="base.group_no_one" />
+                            <field name="res_id" groups="base.group_no_one" />
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payslip_line_manually,hr.payslip.line.manually,model_hr_payslip_line_manually,payroll.group_payroll_user,1,1,1,1
