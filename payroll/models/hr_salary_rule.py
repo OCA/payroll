@@ -208,8 +208,8 @@ class HrSalaryRule(models.Model):
             }
         except Exception:
             raise UserError(
-                _("Wrong quantity defined for salary rule %s (%s).")
-                % (self.name, self.code)
+                _("Wrong quantity defined for salary rule %s (%s) for employee %s.")
+                % (self.name, self.code, localdict["employee"].name)
             )
 
     def _compute_rule_percentage(self, localdict):
@@ -224,9 +224,9 @@ class HrSalaryRule(models.Model):
             raise UserError(
                 _(
                     "Wrong percentage base or quantity defined for salary "
-                    "rule %s (%s)."
+                    "rule %s (%s) for employee %s."
                 )
-                % (self.name, self.code)
+                % (self.name, self.code, localdict["employee"].name)
             )
 
     def _compute_rule_code(self, localdict):
@@ -237,13 +237,13 @@ class HrSalaryRule(models.Model):
             raise UserError(
                 _(
                     """
-Wrong python code defined for salary rule %s (%s).
+Wrong python code defined for salary rule %s (%s) for employee %s.
 Here is the error received:
 
 %s
 """
                 )
-                % (self.name, self.code, repr(ex))
+                % (self.name, self.code, localdict["employee"].name, repr(ex))
             )
 
     def _get_rule_dict(self, localdict):
@@ -282,8 +282,10 @@ Here is the error received:
             )
         except Exception:
             raise UserError(
-                _("Wrong range condition defined for salary rule %s (%s).")
-                % (self.name, self.code)
+                _(
+                    "Wrong range condition defined for salary rule %s (%s) for employee %s."
+                )
+                % (self.name, self.code, localdict["employee"].name)
             )
 
     def _satisfy_condition_python(self, localdict):
@@ -294,11 +296,11 @@ Here is the error received:
             raise UserError(
                 _(
                     """
-Wrong python condition defined for salary rule %s (%s).
+Wrong python condition defined for salary rule %s (%s) for employee %s.
 Here is the error received:
 
 %s
 """
                 )
-                % (self.name, self.code, repr(ex))
+                % (self.name, self.code, localdict["employee"].name, repr(ex))
             )
