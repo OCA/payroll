@@ -9,7 +9,8 @@ access_hr_payslip_input_user,hr.payslip.input.user,model_hr_payslip_input,payrol
 access_hr_payslip_worked_days_officer,hr.payslip.worked_days.officer,model_hr_payslip_worked_days,payroll.group_payroll_user,1,1,1,1
 access_hr_payslip_run,hr.payslip.run,model_hr_payslip_run,payroll.group_payroll_manager,1,1,1,1
 access_hr_rule_input_officer,hr.rule.input.office,model_hr_rule_input,payroll.group_payroll_user,1,1,1,1
-access_hr_salary_rule_user,hr.salary.rule.user,model_hr_salary_rule,payroll.group_payroll_user,1,1,1,1
+access_hr_salary_rule_user,hr.salary.rule user,model_hr_salary_rule,payroll.group_payroll_user,1,0,0,0
+access_hr_salary_rule_manager,hr.salary.rule manager,model_hr_salary_rule,payroll.group_payroll_manager,1,1,1,1
 access_hr_payslip_batch_employees_transient,hr.payslip.employees.batch,model_hr_payslip_employees,hr.group_hr_user,1,1,1,0
 access_hr_payslip_lines_contribution_register_transient,payslip.lines.contribution.register,model_payslip_lines_contribution_register,hr.group_hr_user,1,1,1,0
 access_hr_rule_parameter_manager,access_hr_rule_parameter_manager,model_hr_rule_parameter,payroll.group_payroll_manager,1,1,1,1

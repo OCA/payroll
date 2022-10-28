@@ -49,7 +49,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Wrong python code defined for salary rule %s (%s).\n"
+"Wrong python code defined for salary rule %s (%s) for employee %s.\n"
 "Here is the error received:\n"
 "\n"
 "%s\n"
@@ -60,7 +60,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Wrong python condition defined for salary rule %s (%s).\n"
+"Wrong python condition defined for salary rule %s (%s) for employee %s.\n"
 "Here is the error received:\n"
 "\n"
 "%s\n"
@@ -2338,20 +2338,22 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
-msgstr "薪资规则 %s (%s)百分比基数或者数量定义错误。"
+msgid ""
+"Wrong percentage base or quantity defined for salary rule %s (%s) for "
+"employee %s."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong quantity defined for salary rule %s (%s)."
-msgstr "为薪资规则  %s (%s) 定义的数量错误。"
+msgid "Wrong quantity defined for salary rule %s (%s) for employee %s."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong range condition defined for salary rule %s (%s)."
-msgstr "薪资规则%s (%s) 范围条件定义错误。"
+msgid "Wrong range condition defined for salary rule %s (%s) for employee %s."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -2387,6 +2389,18 @@ msgstr "结果将影响一个变量"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#, python-format
+#~ msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
+#~ msgstr "薪资规则 %s (%s)百分比基数或者数量定义错误。"
+
+#, python-format
+#~ msgid "Wrong quantity defined for salary rule %s (%s)."
+#~ msgstr "为薪资规则  %s (%s) 定义的数量错误。"
+
+#, python-format
+#~ msgid "Wrong range condition defined for salary rule %s (%s)."
+#~ msgstr "薪资规则%s (%s) 范围条件定义错误。"
 
 #~ msgid "General"
 #~ msgstr "一般"
