@@ -45,7 +45,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Wrong python code defined for salary rule %s (%s).\n"
+"Wrong python code defined for salary rule %s (%s) for employee %s.\n"
 "Here is the error received:\n"
 "\n"
 "%s\n"
@@ -56,7 +56,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Wrong python condition defined for salary rule %s (%s).\n"
+"Wrong python condition defined for salary rule %s (%s) for employee %s.\n"
 "Here is the error received:\n"
 "\n"
 "%s\n"
@@ -2354,25 +2354,22 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
+msgid ""
+"Wrong percentage base or quantity defined for salary rule %s (%s) for "
+"employee %s."
 msgstr ""
-"Nem megfelelően lett a százalék alapja vagy mennyisége meghatározva ennek a "
-"fizetési szabálynak %s (%s)."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong quantity defined for salary rule %s (%s)."
+msgid "Wrong quantity defined for salary rule %s (%s) for employee %s."
 msgstr ""
-"Nem megfelelően lett a mennyisége meghatározva ennek a fizetési szabálynak "
-"%s (%s)."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong range condition defined for salary rule %s (%s)."
+msgid "Wrong range condition defined for salary rule %s (%s) for employee %s."
 msgstr ""
-"Rosszúl lett a tartomány meghatározva ehhez a fizetési szabályhoz %s (%s)."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -2411,6 +2408,23 @@ msgstr "az eredmény egy változóhoz lesz rendelve"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#, python-format
+#~ msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
+#~ msgstr ""
+#~ "Nem megfelelően lett a százalék alapja vagy mennyisége meghatározva ennek "
+#~ "a fizetési szabálynak %s (%s)."
+
+#, python-format
+#~ msgid "Wrong quantity defined for salary rule %s (%s)."
+#~ msgstr ""
+#~ "Nem megfelelően lett a mennyisége meghatározva ennek a fizetési "
+#~ "szabálynak %s (%s)."
+
+#, python-format
+#~ msgid "Wrong range condition defined for salary rule %s (%s)."
+#~ msgstr ""
+#~ "Rosszúl lett a tartomány meghatározva ehhez a fizetési szabályhoz %s (%s)."
 
 #~ msgid "General"
 #~ msgstr "Általános"

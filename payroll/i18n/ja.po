@@ -46,7 +46,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Wrong python code defined for salary rule %s (%s).\n"
+"Wrong python code defined for salary rule %s (%s) for employee %s.\n"
 "Here is the error received:\n"
 "\n"
 "%s\n"
@@ -57,7 +57,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Wrong python condition defined for salary rule %s (%s).\n"
+"Wrong python condition defined for salary rule %s (%s) for employee %s.\n"
 "Here is the error received:\n"
 "\n"
 "%s\n"
@@ -2344,21 +2344,22 @@ msgstr ""
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
+msgid ""
+"Wrong percentage base or quantity defined for salary rule %s (%s) for "
+"employee %s."
 msgstr ""
-"給与ルール%s (%s)に定義されている割合の基数または量が正しくありません。"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong quantity defined for salary rule %s (%s)."
-msgstr "給与ルール%s (%s)に定義されている数量が正しくありません。"
+msgid "Wrong quantity defined for salary rule %s (%s) for employee %s."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
-msgid "Wrong range condition defined for salary rule %s (%s)."
-msgstr "給与ルール%s (%s)に間違った範囲条件が定義されています。"
+msgid "Wrong range condition defined for salary rule %s (%s) for employee %s."
+msgstr ""
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -2394,6 +2395,19 @@ msgstr "結果は変数に影響します。"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#, python-format
+#~ msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
+#~ msgstr ""
+#~ "給与ルール%s (%s)に定義されている割合の基数または量が正しくありません。"
+
+#, python-format
+#~ msgid "Wrong quantity defined for salary rule %s (%s)."
+#~ msgstr "給与ルール%s (%s)に定義されている数量が正しくありません。"
+
+#, python-format
+#~ msgid "Wrong range condition defined for salary rule %s (%s)."
+#~ msgstr "給与ルール%s (%s)に間違った範囲条件が定義されています。"
 
 #~ msgid "General"
 #~ msgstr "一般"
