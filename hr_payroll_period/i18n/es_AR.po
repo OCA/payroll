@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-11-01 18:44+0000\n"
+"PO-Revision-Date: 2022-11-01 22:44+0000\n"
 "Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es_AR\n"
@@ -532,12 +532,14 @@ msgid ""
 "The company on the selected period must be the same as the company on the "
 "payslip."
 msgstr ""
+"La compañía del periodo seleccionado debe ser la misma que la de la "
+"liquidacion."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip_run.py:0
 #, python-format
 msgid "The payslip batch %s still has unconfirmed payslips."
-msgstr ""
+msgstr "La liquidación por lotes %s aun contiene liquidaciones no confirmadas."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip_run.py:0
@@ -547,69 +549,73 @@ msgid ""
 "                        must be the same as the schedule on the\n"
 "                        payslip batch."
 msgstr ""
+"El calendario del periodo seleccionado\n"
+"                        debe ser el mismo que el calendario en\n"
+"                        la liquidación por lotes."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Third"
-msgstr ""
+msgstr "Tercer"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__4
 msgid "Thursday"
-msgstr ""
+msgstr "Jueves"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_search
 msgid "To Close"
-msgstr ""
+msgstr "Pendiente cierre"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__2
 msgid "Tuesday"
-msgstr ""
+msgstr "Martes"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__type_id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__type_id
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__type_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__type_name
 msgid "Type Name"
-msgstr ""
+msgstr "Nombre del tipo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__3
 msgid "Wednesday"
-msgstr ""
+msgstr "Miercoles"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__payment_week
 msgid "Week of Payment"
-msgstr ""
+msgstr "Semana de pago"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__payment_weekday
 msgid "Weekday of Payment"
-msgstr ""
+msgstr "Dia semanal de pago"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Weekly (52)"
-msgstr ""
+msgstr "Semanal (52)"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_period.py:0
 #, python-format
 msgid "You can not set to draft a period that already has payslips computed"
 msgstr ""
+"No puedes cambiar a borrador un periodo que ya tiene liquidaciones computadas"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "You must create periods before confirming the fiscal year."
-msgstr ""
+msgstr "Debes crear los periodos antes de confirmar el año fiscal."
