@@ -1,6 +1,10 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import logging
+
 from odoo import fields
+
+_logger = logging.getLogger(__name__)
 
 
 class BaseBrowsableObject(object):
@@ -96,7 +100,12 @@ class Payslips(BrowsableObject):
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
 
-    def rule_parameter(self, code):
-        return self.env["hr.rule.parameter"]._get_parameter_from_code(
-            code, self.dict.date_to
+    def time_parameter(self, code):
+        return self.env["base.time.parameter"]._get_value_from_model_code_date(
+            "hr.payslip", code, self.dict.date_to
         )
+
+    # deprecated
+    def rule_parameter(self, code):
+        _logger.warning("Salary rule: payslip.rule_parameter -> payslip.time_parameter")
+        return self.time_parameter(code)
