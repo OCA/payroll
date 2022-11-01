@@ -14,4 +14,3 @@ from . import hr_payslip_input
 from . import hr_payslip_worked_days
 from . import hr_payslip_run
 from . import res_config_settings
-from . import hr_rule_parameter

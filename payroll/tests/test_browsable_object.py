@@ -1,6 +1,14 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.addons.payroll.models.hr_payslip import BaseBrowsableObject, BrowsableObject
+from datetime import date
+
+from odoo.tests import Form
+
+from odoo.addons.payroll.models.hr_payslip import (
+    BaseBrowsableObject,
+    BrowsableObject,
+    Payslips,
+)
 
 from .common import TestPayslipBase
 
@@ -70,3 +78,24 @@ class TestBrowsableObject(TestPayslipBase):
             350.0,
             "Updating of attribute using dot ('.') notation succeeded",
         )
+
+    def test_payslips_time_parameter(self):
+        self.env["base.time.parameter"].create(
+            {
+                "code": "TEST_CODE",
+                "type": "text",
+                "version_ids": [
+                    (0, 0, {"date_from": date(2022, 1, 1), "value_text": "TEST_VALUE"})
+                ],
+            }
+        )
+        # I create an employee Payslip
+        frm = Form(self.Payslip)
+        frm.employee_id = self.richard_emp
+        richard_payslip = frm.save()
+
+        browsable_payslip = Payslips(self.richard_emp.id, richard_payslip, self.env)
+        time_value = browsable_payslip.time_parameter("TEST_CODE")
+        rule_value = browsable_payslip.time_parameter("TEST_CODE")
+        self.assertEqual(time_value, "TEST_VALUE", "value = TEST_VALUE")
+        self.assertEqual(rule_value, "TEST_VALUE", "value = TEST_VALUE")
