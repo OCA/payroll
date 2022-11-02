@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-10-09 20:34+0000\n"
+"PO-Revision-Date: 2022-11-02 05:45+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es_AR\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -58,6 +58,12 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"Código python incorrecto definido para la regla salarial %s (%s) del "
+"empleado %s.\n"
+"Aquí está el error recibido:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
@@ -69,6 +75,12 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"Código python incorrecto definido para la regla salarial %s (%s) del "
+"empleado %s.\n"
+"Aquí está el error recibido:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -2496,18 +2508,23 @@ msgid ""
 "Wrong percentage base or quantity defined for salary rule %s (%s) for "
 "employee %s."
 msgstr ""
+"Base de porcentaje incorrecta o cantidad definida para la regla salarial %s "
+"(%s) del empleado %s."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Wrong quantity defined for salary rule %s (%s) for employee %s."
 msgstr ""
+"Cantidad incorrecta definida para la regla salarial %s (%s) del empleado %s."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Wrong range condition defined for salary rule %s (%s) for employee %s."
 msgstr ""
+"Se definió una condición de rango incorrecta para la regla salarial %s (%s) "
+"del empleado %s."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
