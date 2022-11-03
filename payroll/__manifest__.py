@@ -10,7 +10,6 @@
     "license": "LGPL-3",
     "author": "Odoo SA, Odoo Community Association (OCA)",
     "depends": [
-        "base_time_parameter",
         "hr_contract",
         "hr_holidays",
         "mail",
@@ -23,7 +22,6 @@
         "wizard/hr_payroll_contribution_register_report_views.xml",
         "wizard/hr_payroll_payslips_by_employees_views.xml",
         "views/menus.xml",
-        "views/base_time_parameter_views.xml",
         "views/hr_contract_views.xml",
         "views/hr_payroll_structure_views.xml",
         "views/hr_salary_rule_category_views.xml",
