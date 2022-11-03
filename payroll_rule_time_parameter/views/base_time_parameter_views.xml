@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="base_time_parameter_action" model="ir.actions.act_window">
+        <field name="name">Rule Parameters</field>
+        <field name="res_model">base.time.parameter</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="domain"
+            eval="[('model_id', '=', ref('payroll.model_hr_payslip'))]"
+        />
+        <field
+            name="context"
+            eval="{'default_model_id': ref('payroll.model_hr_payslip')}"
+        />
+    </record>
+    <menuitem
+        id="menu_action_base_time_parameter"
+        action="base_time_parameter_action"
+        name="Time Parameters"
+        parent="payroll.payroll_menu_configuration"
+        sequence="35"
+    />
+</odoo>
