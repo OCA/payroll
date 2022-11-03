@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="base_time_parameter_action" model="ir.actions.act_window">
-        <field name="name">Salary Rule Time Parameters</field>
+        <field name="name">Rule Parameters</field>
         <field name="res_model">base.time.parameter</field>
         <field name="view_mode">tree,form</field>
         <field
@@ -17,7 +17,7 @@
         id="menu_action_base_time_parameter"
         action="base_time_parameter_action"
         name="Time Parameters"
-        parent="payroll_menu_configuration"
+        parent="payroll.payroll_menu_configuration"
         sequence="35"
     />
 </odoo>
