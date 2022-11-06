@@ -103,23 +103,6 @@
                             </div>
                         </div>
                     </div>
-                    <h2>Features</h2>
-                    <div
-                        class="row mt16 o_settings_container"
-                        id="show_details_by_salary_rule_category"
-                    >
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
-                                <field name="show_details_by_salary_rule_category" />
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="show_details_by_salary_rule_category" />
-                                <div class="text-muted">
-                                    Show details by salary rule category
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </xpath>
         </field>
