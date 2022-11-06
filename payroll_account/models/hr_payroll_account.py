@@ -104,7 +104,7 @@ class HrPayslip(models.Model):
                 "journal_id": slip.journal_id.id,
                 "date": date,
             }
-            for line in slip.details_by_salary_rule_category:
+            for line in slip.line_ids:
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
                     continue
