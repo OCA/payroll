@@ -174,11 +174,22 @@ class HrPayslip(models.Model):
         "hr.payslip", string="Refunded Payslip", readonly=True
     )
     allow_cancel_payslips = fields.Boolean(
-        "Allow Cancel Payslips", compute="_compute_allow_cancel_payslips"
+        "Allow Canceling Payslips", compute="_compute_allow_cancel_payslips"
     )
     prevent_compute_on_confirm = fields.Boolean(
         "Prevent Compute on Confirm", compute="_compute_prevent_compute_on_confirm"
     )
+    show_details_by_salary_rule_category = fields.Boolean(
+        "Show Details by Salary Rule Category",
+        compute="_compute_show_details_by_salary_rule_category",
+    )
+
+    def _compute_allow_cancel_payslips(self):
+        self.allow_cancel_payslips = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.allow_cancel_payslips")
+        )
 
     def _compute_prevent_compute_on_confirm(self):
         self.prevent_compute_on_confirm = (
@@ -187,11 +198,11 @@ class HrPayslip(models.Model):
             .get_param("payroll.prevent_compute_on_confirm")
         )
 
-    def _compute_allow_cancel_payslips(self):
-        self.allow_cancel_payslips = (
+    def _compute_show_details_by_salary_rule_category(self):
+        self.show_details_by_salary_rule_category = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("payroll.allow_cancel_payslips")
+            .get_param("payroll.show_details_by_salary_rule_category")
         )
 
     @api.depends("line_ids", "hide_child_lines")

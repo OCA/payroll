@@ -80,6 +80,7 @@
             <form string="Payslip">
                 <header>
                     <field name="allow_cancel_payslips" invisible="1" />
+                    <field name="show_details_by_salary_rule_category" invisible="1" />
                     <button
                         string="Confirm"
                         name="action_payslip_done"
@@ -197,8 +198,8 @@
                                 <tree string="Worked Days" editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
-                                    <field name="number_of_days" />
-                                    <field name="number_of_hours" />
+                                    <field name="number_of_days" string="Days" />
+                                    <field name="number_of_hours" string="Hours" />
                                     <field
                                         name="contract_id"
                                         domain="[('employee_id','=',parent.employee_id),('date_start','&lt;=',parent.date_to),'|',('date_end','&gt;=',parent.date_from),('date_end','=',False)]"
@@ -287,7 +288,11 @@
                                 </tree>
                             </field>
                         </page>
-                        <page name="details" string="Salary rules apearing on payslip">
+                        <page
+                            name="details"
+                            string="Salary rules appearing on payslip"
+                            attrs="{'invisible': [('show_details_by_salary_rule_category', '=', False)]}"
+                        >
                             <field name="details_by_salary_rule_category">
                                 <tree
                                     string="Payslip Lines"

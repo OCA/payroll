@@ -10,23 +10,28 @@ class ResConfigSettings(models.TransientModel):
     leaves_positive = fields.Boolean(
         config_parameter="payroll.leaves_positive",
         string="Leaves with positive values",
-        help="Values for leaves (days and hours fields) "
-        "should be positive instead of negative.",
+        help="In payslip worked days, leave days/hours have positive values",
     )
     allow_cancel_payslips = fields.Boolean(
         config_parameter="payroll.allow_cancel_payslips",
-        string="Allow cancel confirmed payslips",
-        help="If enabled, it allow the user to cancel confirmed payslips. Default: Not Enabled",
+        string="Allow canceling confirmed payslips",
+        help="Allow users to cancel confirmed payslips.",
     )
     prevent_compute_on_confirm = fields.Boolean(
         config_parameter="payroll.prevent_compute_on_confirm",
-        string="No compute on confirm",
-        help="If enabled, this setting will prevent the payslip to be re-computed on confirm.",
+        string="Confirm payslips without recomputing",
+        help="Prevent payslips from being recomputed when confirming them",
         default=True,
     )
     allow_edit_payslip_lines = fields.Boolean(
         config_parameter="payroll.allow_edit_payslip_lines",
-        string="Payslip lines editable",
-        help="Allow editing payslip lines manually in views and forms",
+        string="Allow editing payslip lines",
+        help="Allow users to edit some payslip line fields manually",
+        default=False,
+    )
+    show_details_by_salary_rule_category = fields.Boolean(
+        config_parameter="payroll.show_details_by_salary_rule_category",
+        string="Show salary rules appearing on payslip",
+        help="Show Details by Salary Rule Category",
         default=False,
     )
