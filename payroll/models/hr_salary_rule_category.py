@@ -9,7 +9,7 @@ class HrSalaryRuleCategory(models.Model):
     _description = "Salary Rule Category"
 
     name = fields.Char(required=True, translate=True)
-    code = fields.Char(required=True)
+    code = fields.Char(required=False)
     parent_id = fields.Many2one(
         "hr.salary.rule.category",
         string="Parent",
