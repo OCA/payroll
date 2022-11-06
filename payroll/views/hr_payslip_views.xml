@@ -80,7 +80,6 @@
             <form string="Payslip">
                 <header>
                     <field name="allow_cancel_payslips" invisible="1" />
-                    <field name="show_details_by_salary_rule_category" invisible="1" />
                     <button
                         string="Confirm"
                         name="action_payslip_done"
@@ -285,31 +284,7 @@
                                         decoration-success="total > 0 and parent_rule_id == False"
                                         readonly="1"
                                     />
-                                </tree>
-                            </field>
-                        </page>
-                        <page
-                            name="details"
-                            string="Salary rules appearing on payslip"
-                            attrs="{'invisible': [('show_details_by_salary_rule_category', '=', False)]}"
-                        >
-                            <field name="details_by_salary_rule_category">
-                                <tree
-                                    string="Payslip Lines"
-                                    decoration-info="total == 0"
-                                >
-                                    <field name="category_id" decoration-bf="1" />
-                                    <field name="code" widget="badge" />
-                                    <field name="name" />
-                                    <field name="quantity" />
-                                    <field name="rate" readonly="1" />
-                                    <field name="amount" />
-                                    <field
-                                        name="total"
-                                        decoration-bf="1"
-                                        decoration-danger="0 > total"
-                                        decoration-success="total > 0"
-                                    />
+                                    <field name="appears_on_payslip" optional="hide" />
                                 </tree>
                             </field>
                         </page>
