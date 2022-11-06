@@ -12,7 +12,7 @@ class HrSalaryRule(models.Model):
 
     name = fields.Char(required=True, translate=True)
     code = fields.Char(
-        required=True,
+        required=False,
         help="The code of salary rules can be used as reference in computation "
         "of other rules. In that case, it is case sensitive.",
     )
@@ -27,7 +27,7 @@ class HrSalaryRule(models.Model):
         "like worked_days.WORK100.number_of_days.",
     )
     category_id = fields.Many2one(
-        "hr.salary.rule.category", string="Category", required=True
+        "hr.salary.rule.category", string="Category", required=False
     )
     active = fields.Boolean(
         default=True,

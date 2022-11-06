@@ -551,7 +551,7 @@ class HrPayslip(models.Model):
         previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
         # compute the rule to get some values for the payslip line
         values = rule._compute_rule(localdict)
-        key = rule.code + "-" + str(localdict["contract"].id)
+        key = (rule.code or str(rule.id)) + "-" + str(localdict["contract"].id)
         return self._get_lines_dict(
             rule, localdict, lines_dict, key, values, previous_amount
         )
