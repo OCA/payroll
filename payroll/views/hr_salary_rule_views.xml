@@ -86,11 +86,11 @@
                     </h1>
                     <label for="category_id" class="oe_edit_only" />
                     <h2>
-                        <field name="category_id" />
+                        <field name="category_id" required="1" />
                     </h2>
                     <group name="principal">
                         <group>
-                            <field name="code" />
+                            <field name="code" required="1" />
                             <field name="sequence" />
                             <field name="register_id" />
                             <field

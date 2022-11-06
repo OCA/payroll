@@ -141,11 +141,6 @@ class HrPayslip(models.Model):
         tracking=True,
         states={"draft": [("readonly", False)]},
     )
-    details_by_salary_rule_category = fields.One2many(
-        "hr.payslip.line",
-        compute="_compute_details_by_salary_rule_category",
-        string="Details by Salary Rule Category",
-    )
     dynamic_filtered_payslip_lines = fields.One2many(
         "hr.payslip.line",
         compute="_compute_dynamic_filtered_payslip_lines",
@@ -179,10 +174,6 @@ class HrPayslip(models.Model):
     prevent_compute_on_confirm = fields.Boolean(
         "Prevent Compute on Confirm", compute="_compute_prevent_compute_on_confirm"
     )
-    show_details_by_salary_rule_category = fields.Boolean(
-        "Show Details by Salary Rule Category",
-        compute="_compute_show_details_by_salary_rule_category",
-    )
 
     def _compute_allow_cancel_payslips(self):
         self.allow_cancel_payslips = (
@@ -198,13 +189,6 @@ class HrPayslip(models.Model):
             .get_param("payroll.prevent_compute_on_confirm")
         )
 
-    def _compute_show_details_by_salary_rule_category(self):
-        self.show_details_by_salary_rule_category = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("payroll.show_details_by_salary_rule_category")
-        )
-
     @api.depends("line_ids", "hide_child_lines")
     def _compute_dynamic_filtered_payslip_lines(self):
         for payslip in self:
@@ -214,13 +198,6 @@ class HrPayslip(models.Model):
                 ).filtered(lambda line: not line.parent_rule_id)
             else:
                 payslip.dynamic_filtered_payslip_lines = payslip.line_ids
-
-    @api.depends("line_ids")
-    def _compute_details_by_salary_rule_category(self):
-        for payslip in self:
-            payslip.details_by_salary_rule_category = payslip.mapped(
-                "line_ids"
-            ).filtered(lambda line: line.category_id and line.appears_on_payslip)
 
     def _compute_payslip_count(self):
         for payslip in self:
