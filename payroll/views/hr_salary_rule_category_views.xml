@@ -18,7 +18,7 @@
                     </group>
                     <notebook>
                         <page string="Salary Rules">
-                            <separator string="Asociated Salary Rules" />
+                            <separator string="Associated Salary Rules" />
                             <field name="salary_rules_ids" nolabel="1" create="false">
                                 <tree>
                                     <field name="code" decoration-bf="1" />

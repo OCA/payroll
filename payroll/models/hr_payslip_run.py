@@ -30,6 +30,13 @@ class HrPayslipRun(models.Model):
         tracking=1,
         default="draft",
     )
+    company_id = fields.Many2one(
+        "res.company",
+        string="Company",
+        required=True,
+        copy=False,
+        default=lambda self: self.env.company,
+    )
     date_start = fields.Date(
         string="Date From",
         required=True,
