@@ -29,9 +29,3 @@ class ResConfigSettings(models.TransientModel):
         help="Allow users to edit some payslip line fields manually",
         default=False,
     )
-    show_details_by_salary_rule_category = fields.Boolean(
-        config_parameter="payroll.show_details_by_salary_rule_category",
-        string="Show salary rules appearing on payslip",
-        help="Show Details by Salary Rule Category",
-        default=False,
-    )
