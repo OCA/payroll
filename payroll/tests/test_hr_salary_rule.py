@@ -72,6 +72,7 @@ class TestSalaryRule(TestPayslipBase):
         self.assertEqual(line.amount, 0.0, "The amount is zero")
         self.assertEqual(line.rate, 0.0, "The rate is zero")
         self.assertEqual(line.quantity, 0.0, "The quantity is zero")
+        self.assertEqual(line.code, "TEST", "The code is 'TEST'")
 
     def test_python_code_result_not_set(self):
 
