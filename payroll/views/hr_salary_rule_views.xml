@@ -70,6 +70,7 @@
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <form string="Salary Rules">
+                <field name="require_code_and_category" invisible="1" />
                 <div
                     class="alert alert-info oe_edit_only"
                     role="alert"
@@ -86,11 +87,17 @@
                     </h1>
                     <label for="category_id" class="oe_edit_only" />
                     <h2>
-                        <field name="category_id" required="1" />
+                        <field
+                            name="category_id"
+                            attrs="{'required': [('require_code_and_category','=',True)]}"
+                        />
                     </h2>
                     <group name="principal">
                         <group>
-                            <field name="code" required="1" />
+                            <field
+                                name="code"
+                                attrs="{'required': [('require_code_and_category','=',True)]}"
+                            />
                             <field name="sequence" />
                             <field name="register_id" />
                             <field
