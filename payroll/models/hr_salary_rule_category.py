@@ -28,6 +28,20 @@ class HrSalaryRuleCategory(models.Model):
         string="Company",
         default=lambda self: self.env.company,
     )
+    require_code = fields.Boolean(
+        "Require code",
+        compute="_compute_require_code",
+        default=lambda self: self._compute_require_code(),
+    )
+
+    def _compute_require_code(self):
+        require = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.require_code_and_category")
+        )
+        self.require_code = require
+        return require
 
     @api.constrains("parent_id")
     def _check_parent_id(self):
