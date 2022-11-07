@@ -79,9 +79,13 @@
         <field name="model">hr.payroll.structure</field>
         <field name="arch" type="xml">
             <form string="Employee Function">
+                <field name="require_code" invisible="1" />
                 <group col="4">
                     <field name="name" />
-                    <field name="code" />
+                    <field
+                        name="code"
+                        attrs="{'required': [('require_code','=',True)]}"
+                    />
                     <field name="parent_id" />
                     <field
                         name="company_id"
