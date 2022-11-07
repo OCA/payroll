@@ -164,6 +164,7 @@ class HrPayslip(models.Model):
         compute="_compute_payslip_count", string="Payslip Computation Details"
     )
     hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
+    hide_invisible_lines = fields.Boolean(string="Hide Invisible Lines", default=False)
     compute_date = fields.Date("Compute Date")
     refunded_id = fields.Many2one(
         "hr.payslip", string="Refunded Payslip", readonly=True
@@ -189,15 +190,15 @@ class HrPayslip(models.Model):
             .get_param("payroll.prevent_compute_on_confirm")
         )
 
-    @api.depends("line_ids", "hide_child_lines")
+    @api.depends("line_ids", "hide_child_lines", "hide_invisible_lines")
     def _compute_dynamic_filtered_payslip_lines(self):
         for payslip in self:
+            lines = payslip.line_ids
             if payslip.hide_child_lines:
-                payslip.dynamic_filtered_payslip_lines = payslip.mapped(
-                    "line_ids"
-                ).filtered(lambda line: not line.parent_rule_id)
-            else:
-                payslip.dynamic_filtered_payslip_lines = payslip.line_ids
+                lines = lines.filtered(lambda line: not line.parent_rule_id)
+            if payslip.hide_invisible_lines:
+                lines = lines.filtered(lambda line: line.appears_on_payslip)
+            payslip.dynamic_filtered_payslip_lines = lines
 
     def _compute_payslip_count(self):
         for payslip in self:

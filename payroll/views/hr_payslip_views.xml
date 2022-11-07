@@ -248,6 +248,10 @@
                                     name="hide_child_lines"
                                     widget="boolean_toggle"
                                 />
+                                <field
+                                    name="hide_invisible_lines"
+                                    widget="boolean_toggle"
+                                />
                             </group>
                             <field
                                 name="dynamic_filtered_payslip_lines"
@@ -284,7 +288,6 @@
                                         decoration-success="total > 0 and parent_rule_id == False"
                                         readonly="1"
                                     />
-                                    <field name="appears_on_payslip" optional="hide" />
                                 </tree>
                             </field>
                         </page>
