@@ -5,6 +5,7 @@
         <field name="model">hr.salary.rule.category</field>
         <field name="arch" type="xml">
             <form string="Salary Categories">
+                <field name="require_code" invisible="1" />
                 <sheet>
                     <label for="name" class="oe_edit_only" />
                     <h1>
@@ -12,7 +13,10 @@
                     </h1>
                     <group>
                         <group>
-                            <field name="code" required="1" />
+                            <field
+                                name="code"
+                                attrs="{'required': [('require_code','=',True)]}"
+                            />
                             <field name="parent_id" />
                         </group>
                     </group>

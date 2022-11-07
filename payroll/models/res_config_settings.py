@@ -29,3 +29,9 @@ class ResConfigSettings(models.TransientModel):
         help="Allow users to edit some payslip line fields manually",
         default=False,
     )
+    require_code_and_category = fields.Boolean(
+        config_parameter="payroll.require_code_and_category",
+        string="Require code and category",
+        help="Require rule.code, rule.category, category.code, structure.code",
+        default=False,
+    )
