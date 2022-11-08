@@ -146,9 +146,9 @@
                                     <p>
                                         <h4><strong>Security Notice</strong></h4><br />
                                         <strong
-                                            >You are NOT allowed to see rule code.</strong><br
+                                            >You are NOT allowed to see the rule python code.</strong><br
                                             />
-                                        Salary rule code view and editing is only allowed to user with the required access rights.
+                                        Salary rule code view and editing is only allowed to users with the required specific access rights.
                                         If you think there is an error, ask your system adminsitrator.
                                     </p>
                                     </div>
@@ -217,9 +217,9 @@
                                     <p>
                                         <h4><strong>Security Notice</strong></h4><br />
                                         <strong
-                                            >You are NOT allowed to see rule code.</strong><br
+                                            >You are NOT allowed to see the rule python code.</strong><br
                                             />
-                                        Salary rule code view and editing is only allowed to user with the required access rights.
+                                        Salary rule code view and editing is only allowed to users with the required specific access rights.
                                         If you think there is an error, ask your system adminsitrator.
                                     </p>
                                     </div>
