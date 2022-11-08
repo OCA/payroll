@@ -20,7 +20,7 @@ class HrPayrollStructure(models.Model):
         return self.env.ref("hr_payroll.structure_base", False)
 
     name = fields.Char(required=True)
-    code = fields.Char(string="Reference", required=False)
+    code = fields.Char(string="Reference")
     company_id = fields.Many2one(
         "res.company",
         string="Company",
