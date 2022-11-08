@@ -164,7 +164,9 @@ class HrPayslip(models.Model):
         compute="_compute_payslip_count", string="Payslip Computation Details"
     )
     hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
-    hide_invisible_lines = fields.Boolean(string="Hide Invisible Lines", default=False)
+    hide_invisible_lines = fields.Boolean(
+        string="Show only lines that appear on payslip", default=False
+    )
     compute_date = fields.Date("Compute Date")
     refunded_id = fields.Many2one(
         "hr.payslip", string="Refunded Payslip", readonly=True
