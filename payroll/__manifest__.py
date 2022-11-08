@@ -2,8 +2,8 @@
 
 {
     "name": "Payroll",
-    "version": "14.0.5.5.4",
-    "category": "Human Resources",
+    "version": "14.0.6.0.0",
+    "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
     "summary": "Manage your employee payroll records",
