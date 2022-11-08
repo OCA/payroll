@@ -31,7 +31,7 @@ class ResConfigSettings(models.TransientModel):
     )
     require_code_and_category = fields.Boolean(
         config_parameter="payroll.require_code_and_category",
-        string="Require code and category",
+        string="Require code/category on rules, categories and structures",
         help="Require rule.code, rule.category, category.code, structure.code",
         default=False,
     )
