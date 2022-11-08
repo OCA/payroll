@@ -511,7 +511,7 @@ class HrPayslip(models.Model):
             line.code: line for line in self.input_line_ids if line.code
         }
         localdict = {
-            "payslip": Payslips(self.employee_id.id, self, self.env),
+            "payslips": Payslips(self.employee_id.id, self, self.env),
             "worked_days": WorkedDays(self.employee_id.id, worked_days_dict, self.env),
             "inputs": InputLine(self.employee_id.id, input_lines_dict, self.env),
             "payroll": BrowsableObject(
@@ -618,7 +618,10 @@ class HrPayslip(models.Model):
                 )
                 # set up localdict with current contract and employee values
                 localdict = dict(
-                    baselocaldict, employee=contract.employee_id, contract=contract
+                    baselocaldict,
+                    employee=contract.employee_id,
+                    contract=contract,
+                    payslip=payslip,
                 )
                 for rule in payslip._get_salary_rules():
                     localdict = rule._reset_localdict_values(localdict)
