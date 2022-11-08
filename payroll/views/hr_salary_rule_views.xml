@@ -229,19 +229,23 @@
                                     <ul>
                                         <li>
                                             <code
-                                            >payslip:</code> contains current payslip data
+                                            >payslip:</code> contains current payslip object data (hr.payslip)
                                         </li>
                                         <li>
                                             <code
-                                            >employee:</code> contains current employee data
+                                            >payslips:</code> contains payslips data (Payslips - Browsable Object)
                                         </li>
                                         <li>
                                             <code
-                                            >contract:</code> contains current contract data
+                                            >employee:</code> contains current employee object data (hr.employee)
                                         </li>
                                         <li>
                                             <code
-                                            >rules:</code> contains the rule code (previusly computed)
+                                            >contract:</code> contains current contract object data (hr.contract)
+                                        </li>
+                                        <li>
+                                            <code
+                                            >rules:</code> contains the rules code (previusly computed)
                                         </li>
                                         <li>
                                             <code
