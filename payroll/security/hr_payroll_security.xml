@@ -23,6 +23,12 @@
                 eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
             />
         </record>
+        <!-- Allow python editing -->
+        <record id="group_payroll_allow_python" model="res.groups">
+            <field name="name">Payroll: Allow to edit python code in rules</field>
+            <field name="category_id" ref="base.module_category_hidden" />
+            <field name="implied_ids" eval="[(4, ref('payroll.group_payroll_user'))]" />
+        </record>
         <record id="base.default_user" model="res.users">
             <field name="groups_id" eval="[(4,ref('payroll.group_payroll_manager'))]" />
         </record>

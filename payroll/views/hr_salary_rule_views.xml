@@ -135,7 +135,23 @@
                                         options="{'mode': 'python'}"
                                         id="condition_python"
                                         nolabel="1"
+                                        groups="payroll.group_payroll_allow_python"
                                     />
+                                    <div
+                                        class="alert alert-danger"
+                                        groups="!payroll.group_payroll_allow_python"
+                                        attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
+                                        role="alert"
+                                    >
+                                    <p>
+                                        <h4><strong>Security Notice</strong></h4><br />
+                                        <strong
+                                            >You are NOT allowed to see rule code.</strong><br
+                                            />
+                                        Salary rule code view and editing is only allowed to user with the required access rights.
+                                        If you think there is an error, ask your system adminsitrator.
+                                    </p>
+                                    </div>
                                     <field
                                         name="condition_range"
                                         attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
@@ -190,7 +206,23 @@
                                         options="{'mode': 'python'}"
                                         id="amount_python_compute"
                                         nolabel="1"
+                                        groups="payroll.group_payroll_allow_python"
                                     />
+                                    <div
+                                        class="alert alert-danger"
+                                        groups="!payroll.group_payroll_allow_python"
+                                        attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
+                                        role="alert"
+                                    >
+                                    <p>
+                                        <h4><strong>Security Notice</strong></h4><br />
+                                        <strong
+                                            >You are NOT allowed to see rule code.</strong><br
+                                            />
+                                        Salary rule code view and editing is only allowed to user with the required access rights.
+                                        If you think there is an error, ask your system adminsitrator.
+                                    </p>
+                                    </div>
                                     <field
                                         name="amount_percentage"
                                         attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"
