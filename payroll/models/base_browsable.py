@@ -99,13 +99,3 @@ class Payslips(BrowsableObject):
         )
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
-
-    def time_parameter(self, code):
-        return self.env["base.time.parameter"]._get_value_from_model_code_date(
-            "hr.payslip", code, self.dict.date_to
-        )
-
-    # deprecated
-    def rule_parameter(self, code):
-        _logger.warning("Salary rule: payslip.rule_parameter -> payslip.time_parameter")
-        return self.time_parameter(code)
