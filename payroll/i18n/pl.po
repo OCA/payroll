@@ -126,7 +126,8 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "<code>contract:</code> contains current contract data"
+msgid ""
+"<code>contract:</code> contains current contract object data (hr.contract)"
 msgstr ""
 
 #. module: payroll
@@ -138,7 +139,8 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "<code>employee:</code> contains current employee data"
+msgid ""
+"<code>employee:</code> contains current employee object data (hr.employee)"
 msgstr ""
 
 #. module: payroll
@@ -153,7 +155,13 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "<code>payslip:</code> contains current payslip data"
+msgid "<code>payslip:</code> contains current payslip object data (hr.payslip)"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid ""
+"<code>payslips:</code> contains payslips data (Payslips - Browsable Object)"
 msgstr ""
 
 #. module: payroll
@@ -196,7 +204,7 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "<code>rules:</code> contains the rule code (previusly computed)"
+msgid "<code>rules:</code> contains the rules code (previusly computed)"
 msgstr ""
 
 #. module: payroll
@@ -631,8 +639,6 @@ msgstr "Zamknij"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__code
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__code
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__code
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__code
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__code
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__code
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__code
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -657,8 +663,6 @@ msgstr "Firmy"
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__company_id
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__company_id
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
 msgid "Company"
@@ -762,12 +766,6 @@ msgid "Conveyance Allowance For Marc Demo"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__country_id
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__country_id
-msgid "Country"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -778,8 +776,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__create_uid
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__create_uid
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__create_uid
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__create_uid
@@ -797,8 +793,6 @@ msgstr "Utworzona przez"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__create_date
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__create_date
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__create_date
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__create_date
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__create_date
@@ -820,7 +814,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__date_from
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__date_start
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__date_from
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__date_from
 msgid "Date From"
 msgstr "Data Początkowa"
@@ -867,11 +860,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__note
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__name
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__name
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__description
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__note
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__note
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_rule_parameter_view_form
 msgid "Description"
 msgstr "Opis"
 
@@ -894,8 +885,6 @@ msgstr "Szcegóły przez kategorie zasad wynagrodzenia"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__display_name
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__display_name
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__display_name
@@ -1123,8 +1112,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__id
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__id
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__id
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__id
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__id
@@ -1289,8 +1276,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule____last_update
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category____last_update
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register____last_update
@@ -1311,8 +1296,6 @@ msgstr "Data ostatniej modyfikacji"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__write_uid
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__write_uid
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__write_uid
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__write_uid
@@ -1330,8 +1313,6 @@ msgstr "Ostatnio aktualizowane przez"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__write_date
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__write_date
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__write_date
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__write_date
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__write_date
@@ -1423,7 +1404,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__name
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__name
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -1463,12 +1443,6 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
 msgid "No compute on confirm"
-msgstr ""
-
-#. module: payroll
-#: code:addons/payroll/models/hr_rule_parameter.py:0
-#, python-format
-msgid "No rule parameter with code '%s' was found for %s "
 msgstr ""
 
 #. module: payroll
@@ -1553,11 +1527,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Other Inputs"
 msgstr "Inne parametry"
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__parameter_value
-msgid "Parameter Value"
-msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__parent_id
@@ -1832,7 +1801,6 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_python_compute
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__amount_python_compute
-#: model:ir.model.fields,help:payroll.field_hr_rule_parameter_value__parameter_value
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__amount_select__code
 #: model:ir.model.fields.selection,name:payroll.selection__hr_salary_rule__amount_select__code
 msgid "Python Code"
@@ -1960,16 +1928,6 @@ msgid "Rule Configuration"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter_value__rule_parameter_id
-msgid "Rule Parameter"
-msgstr ""
-
-#. module: payroll
-#: model:ir.ui.menu,name:payroll.menu_action_hr_salary_rule_parameter
-msgid "Rule Parameters"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "SMS Delivery error"
@@ -2011,22 +1969,6 @@ msgstr "Kategoria reguły wynagrodzenia"
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__input_id
 msgid "Salary Rule Input"
 msgstr "Wejście Reguły wynagrodzenia"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_rule_parameter
-#: model_terms:ir.ui.view,arch_db:payroll.hr_rule_parameter_view_form
-msgid "Salary Rule Parameter"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_rule_parameter_value
-msgid "Salary Rule Parameter Value"
-msgstr ""
-
-#. module: payroll
-#: model:ir.actions.act_window,name:payroll.hr_rule_parameter_action
-msgid "Salary Rule Parameters"
-msgstr ""
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_salary_rule_form
@@ -2242,16 +2184,6 @@ msgid "Total"
 msgstr "Suma"
 
 #. module: payroll
-#: model:ir.model.constraint,message:payroll.constraint_hr_rule_parameter__unique
-msgid "Two rule parameters cannot have the same code."
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.constraint,message:payroll.constraint_hr_rule_parameter_value__unique
-msgid "Two rules parameters with the same code cannot start the same day"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_decoration
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_exception_decoration
 msgid "Type of the exception activity on record."
@@ -2286,12 +2218,6 @@ msgstr "Stosowane do wyświetlenia reguły płacowej na pasku"
 msgid ""
 "Values for leaves (days and hours fields) should be positive instead of "
 "negative."
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_parameter__parameter_version_ids
-#: model_terms:ir.ui.view,arch_db:payroll.hr_rule_parameter_view_form
-msgid "Versions"
 msgstr ""
 
 #. module: payroll
