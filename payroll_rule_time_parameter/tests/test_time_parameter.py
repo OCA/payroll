@@ -2,8 +2,6 @@ from datetime import date
 
 from odoo.tests.common import TransactionCase
 
-from odoo.addons.payroll.models.hr_payslip import Payslips
-
 
 class TestTimeParameter(TransactionCase):
     def setUp(self):
@@ -33,8 +31,7 @@ class TestTimeParameter(TransactionCase):
             }
         )
 
-        browsable_payslip = Payslips(employee.id, payslip, self.env)
-        time_value = browsable_payslip.time_parameter("TEST_CODE")
-        rule_value = browsable_payslip.time_parameter("TEST_CODE")
+        time_value = payslip.get_time_parameter("TEST_CODE")
+        rule_value = payslip.get_time_parameter("TEST_CODE")
         self.assertEqual(time_value, "TEST_VALUE", "value = TEST_VALUE")
         self.assertEqual(rule_value, "TEST_VALUE", "value = TEST_VALUE")
