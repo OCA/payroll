@@ -2,7 +2,7 @@
     "name": "Payroll Rule Time Parameter",
     "summary": "",
     "author": "nimarosa, appstogrow, Odoo Community Association (OCA)",
-    "category": "Human Resources",
+    "category": "Payroll",
     "data": [
         "security/ir.model.access.csv",
         "views/base_time_parameter_views.xml",
