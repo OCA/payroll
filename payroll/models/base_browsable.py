@@ -1,6 +1,10 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import logging
+
 from odoo import fields
+
+_logger = logging.getLogger(__name__)
 
 
 class BaseBrowsableObject(object):
@@ -95,8 +99,3 @@ class Payslips(BrowsableObject):
         )
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
-
-    def rule_parameter(self, code):
-        return self.env["hr.rule.parameter"]._get_parameter_from_code(
-            code, self.dict.date_to
-        )

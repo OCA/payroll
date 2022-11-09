@@ -2,7 +2,7 @@
 {
     "name": "Payroll Accounting",
     "version": "14.0.1.3.0",
-    "category": "Human Resources",
+    "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "license": "LGPL-3",
     "summary": "Manage your payroll to accounting",

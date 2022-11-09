@@ -3,13 +3,17 @@
 {
     "name": "Payroll",
     "version": "14.0.5.5.4",
-    "category": "Human Resources",
+    "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
     "summary": "Manage your employee payroll records",
     "license": "LGPL-3",
     "author": "Odoo SA, Odoo Community Association (OCA)",
-    "depends": ["hr_contract", "hr_holidays", "mail"],
+    "depends": [
+        "hr_contract",
+        "hr_holidays",
+        "mail",
+    ],
     "data": [
         "security/hr_payroll_security.xml",
         "security/ir.model.access.csv",
@@ -27,7 +31,6 @@
         "views/hr_payslip_views.xml",
         "views/hr_payslip_run_views.xml",
         "views/hr_employee_views.xml",
-        "views/hr_rule_parameter_views.xml",
         "views/report_contributionregister.xml",
         "views/report_payslip.xml",
         "views/report_payslipdetails.xml",

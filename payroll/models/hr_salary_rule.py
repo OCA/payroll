@@ -67,7 +67,8 @@ class HrSalaryRule(models.Model):
         default="""
             # Available variables:
             #-------------------------------
-            # payslip: object containing the payslips
+            # payslip: hr.payslip object
+            # payslips: object containing payslips (browsable)
             # employee: hr.employee object
             # contract: hr.contract object
             # rules: object containing the rules code (previously computed)
@@ -121,7 +122,8 @@ class HrSalaryRule(models.Model):
         default="""
             # Available variables:
             #-------------------------------
-            # payslip: object containing the payslips
+            # payslip: hr.payslip object
+            # payslips: object containing payslips (browsable)
             # employee: hr.employee object
             # contract: hr.contract object
             # rules: object containing the rules code (previously computed)
