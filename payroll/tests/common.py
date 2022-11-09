@@ -207,7 +207,7 @@ class TestPayslipBase(TransactionCase):
         )
 
         # I create a contract for "Richard"
-        self.Contract.create(
+        self.richard_contract = self.Contract.create(
             {
                 "date_start": Date.today(),
                 "name": "Contract for Richard",
