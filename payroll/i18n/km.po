@@ -414,12 +414,12 @@ msgstr "ច្បាប់កុមារទាំងអស់"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__allow_cancel_payslips
-msgid "Allow Cancel Payslips"
+msgid "Allow Canceling Payslips"
 msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_cancel_payslips
-msgid "Allow cancel confirmed payslips"
+msgid "Allow canceling confirmed payslips"
 msgstr ""
 
 #. module: payroll
@@ -428,9 +428,24 @@ msgid "Allow editing"
 msgstr ""
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
+msgid "Allow editing payslip lines"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Allow users to cancel confirmed payslips"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__allow_cancel_payslips
+msgid "Allow users to cancel confirmed payslips."
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_edit_payslip_lines
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
-msgid "Allow editing payslip lines manually in views and forms"
+msgid "Allow users to edit some payslip line fields manually"
 msgstr ""
 
 #. module: payroll
@@ -487,7 +502,7 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
-msgid "Asociated Salary Rules"
+msgid "Associated Salary Rules"
 msgstr ""
 
 #. module: payroll
@@ -654,6 +669,7 @@ msgstr "ក្រុមហ៊ុន"
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__company_id
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
 msgid "Company"
@@ -711,6 +727,11 @@ msgstr "កំណត់ផ្លាស់ប្តូរ"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Confirm"
 msgstr "បញ្ជាក់"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
+msgid "Confirm payslips without recomputing"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__contract_id
@@ -817,6 +838,11 @@ msgid "Date To"
 msgstr "ថ្ងៃទៅមុខ"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Days"
+msgstr ""
+
+#. module: payroll
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
 msgstr "ការកាត់ថ្លៃ។"
@@ -860,7 +886,6 @@ msgid "Description"
 msgstr "ការពិពណ៌​នា​"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__details_by_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Details by Salary Rule Category"
 msgstr "ការរៀបរាប់ពីចំណាប់ថ្នាក់ប្រាក់ខែ"
@@ -886,11 +911,6 @@ msgstr "ការរៀបរាប់ពីចំណាប់ថ្នាក់
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "ឈ្មោះសំរាប់បង្ហាញ"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
-msgid "Display non-negative values for leaves in payslip worked days lines."
-msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__done
@@ -1088,6 +1108,11 @@ msgid "Hide Child Lines"
 msgstr ""
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "Hours"
+msgstr ""
+
+#. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
 msgid "House Rent Allowance"
 msgstr "ប្រាក់ឧបត្ថម្ភជួលផ្ទះ"
@@ -1143,28 +1168,6 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
-msgid ""
-"If enabled, confirmed payslips can be canceled by the user. Default: Not "
-"enabled."
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_res_config_settings__allow_cancel_payslips
-msgid ""
-"If enabled, it allow the user to cancel confirmed payslips. Default: Not "
-"Enabled"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_res_config_settings__prevent_compute_on_confirm
-#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
-msgid ""
-"If enabled, this setting will prevent the payslip to be re-computed on "
-"confirm."
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__credit_note
 msgid ""
 "If its checked, indicates that all payslips generated from here are refund "
@@ -1188,6 +1191,12 @@ msgstr ""
 msgid ""
 "If you have doubts about coding salary rules, check the \"Help\" tab in this "
 "form."
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__leaves_positive
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "In payslip worked days, leave days/hours have positive values"
 msgstr ""
 
 #. module: payroll
@@ -1433,11 +1442,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
-msgid "No compute on confirm"
 msgstr ""
 
 #. module: payroll
@@ -1713,11 +1717,6 @@ msgid ""
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
-msgid "Payslip lines editable"
-msgstr ""
-
-#. module: payroll
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action_employee
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__slip_ids
@@ -1770,12 +1769,18 @@ msgstr "រយៈពេល"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
-msgid "Post payroll slips in accounting"
-msgstr "ប័ណ្ណការងារបើកយឺត ៗ ក្នុងគណនេយ្យ។"
+msgid "Post payslips in accounting"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__prevent_compute_on_confirm
 msgid "Prevent Compute on Confirm"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__prevent_compute_on_confirm
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Prevent payslips from being recomputed when confirming them"
 msgstr ""
 
 #. module: payroll
@@ -1910,6 +1915,29 @@ msgid "Rejected"
 msgstr "លុបចោល"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__require_code
+#: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__require_code
+msgid "Require code"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__require_code_and_category
+#: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__require_code_and_category
+msgid "Require code and category"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__require_code_and_category
+msgid "Require code/category on rules, categories and structures"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_res_config_settings__require_code_and_category
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
+msgid "Require rule.code, rule.category, category.code, structure.code"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_user_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_user_id
 msgid "Responsible User"
@@ -2008,11 +2036,6 @@ msgid "Salary Structures"
 msgstr "រចនាសម្ព័ន្ធប្រាក់ខែ"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-msgid "Salary rules apearing on payslip"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__schedule_pay
 msgid "Scheduled Pay"
 msgstr "កំណត់ពេលបង់។"
@@ -2067,6 +2090,11 @@ msgstr "កំណត់ជាសេចក្ដីព្រាង"
 #: model:ir.ui.menu,name:payroll.menu_payroll_global_settings
 msgid "Settings"
 msgstr "ការកំណត់"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_invisible_lines
+msgid "Show only lines that appear on payslip"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -2217,13 +2245,6 @@ msgid "Used to display the salary rule on payslip."
 msgstr "ត្រូវបានប្រើដើម្បីបង្ហាញវិធានប្រាក់បៀរវត្សនៅលើការបង់ប្រាក់។"
 
 #. module: payroll
-#: model:ir.model.fields,help:payroll.field_res_config_settings__leaves_positive
-msgid ""
-"Values for leaves (days and hours fields) should be positive instead of "
-"negative."
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__verify
 msgid "Waiting"
 msgstr "កំពុងរង់ចាំ"
@@ -2324,6 +2345,9 @@ msgstr "លទ្ធផលនឹងត្រូវបានប៉ះពាល់
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Post payroll slips in accounting"
+#~ msgstr "ប័ណ្ណការងារបើកយឺត ៗ ក្នុងគណនេយ្យ។"
 
 #, python-format
 #~ msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."

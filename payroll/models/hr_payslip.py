@@ -542,7 +542,7 @@ class HrPayslip(models.Model):
         previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
         # compute the rule to get some values for the payslip line
         values = rule._compute_rule(localdict)
-        key = (rule.code or str(rule.id)) + "-" + str(localdict["contract"].id)
+        key = (rule.code or "id" + str(rule.id)) + "-" + str(localdict["contract"].id)
         return self._get_lines_dict(
             rule, localdict, lines_dict, key, values, previous_amount
         )
@@ -553,9 +553,10 @@ class HrPayslip(models.Model):
         total = values["quantity"] * values["rate"] * values["amount"] / 100.0
         values["total"] = total
         # set/overwrite the amount computed for this rule in the localdict
-        localdict[rule.code] = total
-        localdict["rules"].dict[rule.code] = rule
-        localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(values)
+        if rule.code:
+            localdict[rule.code] = total
+            localdict["rules"].dict[rule.code] = rule
+            localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(values)
         # sum the amount for its salary category
         localdict = self._sum_salary_rule_category(
             localdict, rule.category_id, total - previous_amount
@@ -699,9 +700,10 @@ class HrPayslip(models.Model):
             localdict = self._sum_salary_rule_category(
                 localdict, category.parent_id, amount
             )
-        localdict["categories"].dict[category.code] = (
-            localdict["categories"].dict.get(category.code, 0) + amount
-        )
+        if category.code:
+            localdict["categories"].dict[category.code] = (
+                localdict["categories"].dict.get(category.code, 0) + amount
+            )
         return localdict
 
     def _get_employee_contracts(self):
