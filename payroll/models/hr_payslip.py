@@ -141,11 +141,6 @@ class HrPayslip(models.Model):
         tracking=True,
         states={"draft": [("readonly", False)]},
     )
-    details_by_salary_rule_category = fields.One2many(
-        "hr.payslip.line",
-        compute="_compute_details_by_salary_rule_category",
-        string="Details by Salary Rule Category",
-    )
     dynamic_filtered_payslip_lines = fields.One2many(
         "hr.payslip.line",
         compute="_compute_dynamic_filtered_payslip_lines",
@@ -169,23 +164,19 @@ class HrPayslip(models.Model):
         compute="_compute_payslip_count", string="Payslip Computation Details"
     )
     hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
+    hide_invisible_lines = fields.Boolean(
+        string="Show only lines that appear on payslip", default=False
+    )
     compute_date = fields.Date("Compute Date")
     refunded_id = fields.Many2one(
         "hr.payslip", string="Refunded Payslip", readonly=True
     )
     allow_cancel_payslips = fields.Boolean(
-        "Allow Cancel Payslips", compute="_compute_allow_cancel_payslips"
+        "Allow Canceling Payslips", compute="_compute_allow_cancel_payslips"
     )
     prevent_compute_on_confirm = fields.Boolean(
         "Prevent Compute on Confirm", compute="_compute_prevent_compute_on_confirm"
     )
-
-    def _compute_prevent_compute_on_confirm(self):
-        self.prevent_compute_on_confirm = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("payroll.prevent_compute_on_confirm")
-        )
 
     def _compute_allow_cancel_payslips(self):
         self.allow_cancel_payslips = (
@@ -194,22 +185,22 @@ class HrPayslip(models.Model):
             .get_param("payroll.allow_cancel_payslips")
         )
 
-    @api.depends("line_ids", "hide_child_lines")
+    def _compute_prevent_compute_on_confirm(self):
+        self.prevent_compute_on_confirm = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.prevent_compute_on_confirm")
+        )
+
+    @api.depends("line_ids", "hide_child_lines", "hide_invisible_lines")
     def _compute_dynamic_filtered_payslip_lines(self):
         for payslip in self:
+            lines = payslip.line_ids
             if payslip.hide_child_lines:
-                payslip.dynamic_filtered_payslip_lines = payslip.mapped(
-                    "line_ids"
-                ).filtered(lambda line: not line.parent_rule_id)
-            else:
-                payslip.dynamic_filtered_payslip_lines = payslip.line_ids
-
-    @api.depends("line_ids")
-    def _compute_details_by_salary_rule_category(self):
-        for payslip in self:
-            payslip.details_by_salary_rule_category = payslip.mapped(
-                "line_ids"
-            ).filtered(lambda line: line.category_id and line.appears_on_payslip)
+                lines = lines.filtered(lambda line: not line.parent_rule_id)
+            if payslip.hide_invisible_lines:
+                lines = lines.filtered(lambda line: line.appears_on_payslip)
+            payslip.dynamic_filtered_payslip_lines = lines
 
     def _compute_payslip_count(self):
         for payslip in self:
@@ -551,7 +542,7 @@ class HrPayslip(models.Model):
         previous_amount = rule.code in localdict and localdict[rule.code] or 0.0
         # compute the rule to get some values for the payslip line
         values = rule._compute_rule(localdict)
-        key = rule.code + "-" + str(localdict["contract"].id)
+        key = (rule.code or "id" + str(rule.id)) + "-" + str(localdict["contract"].id)
         return self._get_lines_dict(
             rule, localdict, lines_dict, key, values, previous_amount
         )
@@ -562,9 +553,10 @@ class HrPayslip(models.Model):
         total = values["quantity"] * values["rate"] * values["amount"] / 100.0
         values["total"] = total
         # set/overwrite the amount computed for this rule in the localdict
-        localdict[rule.code] = total
-        localdict["rules"].dict[rule.code] = rule
-        localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(values)
+        if rule.code:
+            localdict[rule.code] = total
+            localdict["rules"].dict[rule.code] = rule
+            localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(values)
         # sum the amount for its salary category
         localdict = self._sum_salary_rule_category(
             localdict, rule.category_id, total - previous_amount
@@ -708,9 +700,10 @@ class HrPayslip(models.Model):
             localdict = self._sum_salary_rule_category(
                 localdict, category.parent_id, amount
             )
-        localdict["categories"].dict[category.code] = (
-            localdict["categories"].dict.get(category.code, 0) + amount
-        )
+        if category.code:
+            localdict["categories"].dict[category.code] = (
+                localdict["categories"].dict.get(category.code, 0) + amount
+            )
         return localdict
 
     def _get_employee_contracts(self):

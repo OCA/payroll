@@ -12,7 +12,6 @@ class HrSalaryRule(models.Model):
 
     name = fields.Char(required=True, translate=True)
     code = fields.Char(
-        required=True,
         help="The code of salary rules can be used as reference in computation "
         "of other rules. In that case, it is case sensitive.",
     )
@@ -26,9 +25,7 @@ class HrSalaryRule(models.Model):
         "1€ per worked day can have its quantity defined in expression "
         "like worked_days.WORK100.number_of_days.",
     )
-    category_id = fields.Many2one(
-        "hr.salary.rule.category", string="Category", required=True
-    )
+    category_id = fields.Many2one("hr.salary.rule.category", string="Category")
     active = fields.Boolean(
         default=True,
         help="If the active field is set to false, it will allow you to hide"
@@ -162,6 +159,11 @@ class HrSalaryRule(models.Model):
     )
     input_ids = fields.One2many("hr.rule.input", "input_id", string="Inputs", copy=True)
     note = fields.Text(string="Description")
+    require_code_and_category = fields.Boolean(
+        "Require code and category",
+        compute="_compute_require_code_and_category",
+        default=lambda self: self._compute_require_code_and_category(),
+    )
 
     @api.constrains("parent_rule_id")
     def _check_parent_rule_id(self):
@@ -186,6 +188,15 @@ class HrSalaryRule(models.Model):
         localdict["result_rate"] = 100
         localdict["result"] = None
         return localdict
+
+    def _compute_require_code_and_category(self):
+        require = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("payroll.require_code_and_category")
+        )
+        self.require_code_and_category = require
+        return require
 
     # TODO should add some checks on the type of result (should be float)
     def _compute_rule(self, localdict):

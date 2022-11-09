@@ -197,8 +197,8 @@
                                 <tree string="Worked Days" editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
-                                    <field name="number_of_days" />
-                                    <field name="number_of_hours" />
+                                    <field name="number_of_days" string="Days" />
+                                    <field name="number_of_hours" string="Hours" />
                                     <field
                                         name="contract_id"
                                         domain="[('employee_id','=',parent.employee_id),('date_start','&lt;=',parent.date_to),'|',('date_end','&gt;=',parent.date_from),('date_end','=',False)]"
@@ -248,6 +248,10 @@
                                     name="hide_child_lines"
                                     widget="boolean_toggle"
                                 />
+                                <field
+                                    name="hide_invisible_lines"
+                                    widget="boolean_toggle"
+                                />
                             </group>
                             <field
                                 name="dynamic_filtered_payslip_lines"
@@ -283,27 +287,6 @@
                                         decoration-danger="0 > total and parent_rule_id == False"
                                         decoration-success="total > 0 and parent_rule_id == False"
                                         readonly="1"
-                                    />
-                                </tree>
-                            </field>
-                        </page>
-                        <page name="details" string="Salary rules apearing on payslip">
-                            <field name="details_by_salary_rule_category">
-                                <tree
-                                    string="Payslip Lines"
-                                    decoration-info="total == 0"
-                                >
-                                    <field name="category_id" decoration-bf="1" />
-                                    <field name="code" widget="badge" />
-                                    <field name="name" />
-                                    <field name="quantity" />
-                                    <field name="rate" readonly="1" />
-                                    <field name="amount" />
-                                    <field
-                                        name="total"
-                                        decoration-bf="1"
-                                        decoration-danger="0 > total"
-                                        decoration-success="total > 0"
                                     />
                                 </tree>
                             </field>
