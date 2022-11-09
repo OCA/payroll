@@ -1,0 +1,24 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payroll_rule_time_parameter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payroll_rule_time_parameter
+#: model:ir.actions.act_window,name:payroll_rule_time_parameter.base_time_parameter_action
+msgid "Rule Parameters"
+msgstr ""
+
+#. module: payroll_rule_time_parameter
+#: model:ir.ui.menu,name:payroll_rule_time_parameter.menu_action_base_time_parameter
+msgid "Time Parameters"
+msgstr ""
