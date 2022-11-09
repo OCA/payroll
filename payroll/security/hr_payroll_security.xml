@@ -25,9 +25,7 @@
         </record>
         <!-- Allow python editing -->
         <record id="group_payroll_allow_python" model="res.groups">
-            <field
-                name="name"
-            >Payroll: Allow editing python code in salary rules</field>
+            <field name="name">Payroll: Access to python code in salary rules</field>
             <field name="category_id" ref="base.module_category_hidden" />
             <field name="implied_ids" eval="[(4, ref('payroll.group_payroll_user'))]" />
         </record>
