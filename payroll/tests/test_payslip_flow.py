@@ -42,17 +42,17 @@ class TestPayslipFlow(TestPayslipBase):
         # I verify the payslip is in draft state
         self.assertEqual(richard_payslip.state, "draft", "State not changed!")
 
-        context = {
-            "lang": "en_US",
-            "tz": False,
-            "active_model": "ir.ui.menu",
-            "department_id": False,
-            "section_id": False,
-            "active_ids": [self.ref("payroll.hr_payslip_menu")],
-            "active_id": self.ref("payroll.hr_payslip_menu"),
-        }
         # I click on 'Compute Sheet' button on payslip
-        richard_payslip.with_context(context).compute_sheet()
+        richard_payslip.with_context(
+            {},
+            lang="en_US",
+            tz=False,
+            active_model="ir.ui.menu",
+            department_id=False,
+            section_id=False,
+            active_ids=[self.ref("payroll.hr_payslip_menu")],
+            active_id=self.ref("payroll.hr_payslip_menu"),
+        ).compute_sheet()
 
         # Check child rules shown in table by default
         child_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
@@ -154,7 +154,7 @@ class TestPayslipFlow(TestPayslipBase):
         # I print the contribution register report
         context = {
             "model": "hr.contribution.register",
-            "active_ids": [self.ref("payroll.hr_houserent_register")],
+            "active_ids": [self.register_hra.id],
         }
         test_reports.try_report_action(
             self.env.cr,

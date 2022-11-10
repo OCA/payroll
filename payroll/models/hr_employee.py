@@ -12,7 +12,6 @@ class HrEmployee(models.Model):
     )
     payslip_count = fields.Integer(
         compute="_compute_payslip_count",
-        string="Payslip Count",
         groups="payroll.group_payroll_user",
     )
 
