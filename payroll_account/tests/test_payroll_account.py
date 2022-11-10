@@ -12,6 +12,9 @@ class TestPayrollAccount(common.TransactionCase):
     def setUp(self):
         super(TestPayrollAccount, self).setUp()
 
+        # Activate company currency
+        self.env.user.company_id.currency_id.active = True
+
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
         self.res_partner_bank = self.env["res.partner.bank"].create(
@@ -150,16 +153,16 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertEqual(self.hr_payslip.state, "draft", "State not changed!")
 
         # I click on "Compute Sheet" button.
-        context = {
-            "lang": "en_US",
-            "tz": False,
-            "active_model": "hr.payslip",
-            "department_id": False,
-            "active_ids": [self.payslip_action_id],
-            "section_id": False,
-            "active_id": self.payslip_action_id,
-        }
-        self.hr_payslip.with_context(context).compute_sheet()
+        self.hr_payslip.with_context(
+            {},
+            lang="en_US",
+            tz=False,
+            active_model="hr.payslip",
+            department_id=False,
+            active_ids=[self.payslip_action_id],
+            section_id=False,
+            active_id=self.payslip_action_id,
+        ).compute_sheet()
 
         # I want to check cancel button.
         # So I first cancel the sheet then make it set to draft.
@@ -195,16 +198,16 @@ class TestPayrollAccount(common.TransactionCase):
         self.hr_payslip.write(vals)
 
         # I click on "Compute Sheet" button.
-        context = {
-            "lang": "en_US",
-            "tz": False,
-            "active_model": "hr.payslip",
-            "department_id": False,
-            "active_ids": [self.payslip_action_id],
-            "section_id": False,
-            "active_id": self.payslip_action_id,
-        }
-        self.hr_payslip.with_context(context).compute_sheet()
+        self.hr_payslip.with_context(
+            {},
+            lang="en_US",
+            tz=False,
+            active_model="hr.payslip",
+            department_id=False,
+            active_ids=[self.payslip_action_id],
+            section_id=False,
+            active_id=self.payslip_action_id,
+        ).compute_sheet()
 
         # Confirm Payslip (no account moves)
         self.hr_payslip.action_payslip_done()
