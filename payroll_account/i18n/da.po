@@ -72,16 +72,6 @@ msgid "Debit Account"
 msgstr "Debit konto"
 
 #. module: payroll_account
-#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_contract
 msgid "Employee Contract"
 msgstr "Ansættelseskontrakt"
@@ -92,29 +82,9 @@ msgid "Generate payslips for all selected employees"
 msgstr "Generer lønsedler for alle valgte medarbejdere"
 
 #. module: payroll_account
-#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__id
-msgid "ID"
-msgstr ""
-
-#. module: payroll_account
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
 msgid "Keep empty to use the period of the validation(Payslip) date."
 msgstr "Hold tom for at bruge perioden fra valideringsdatoen (Lønseddel)."
-
-#. module: payroll_account
-#: model:ir.model.fields,field_description:payroll_account.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule____last_update
-msgid "Last Modified on"
-msgstr ""
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
