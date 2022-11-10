@@ -69,16 +69,6 @@ msgid "Debit Account"
 msgstr "Cuenta deudora"
 
 #. module: payroll_account
-#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__display_name
-#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__display_name
-msgid "Display Name"
-msgstr "Nombre para mostrar"
-
-#. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_contract
 msgid "Employee Contract"
 msgstr "Contrato de empleado"
@@ -89,31 +79,11 @@ msgid "Generate payslips for all selected employees"
 msgstr "Generar las nóminas para todos los empleados seleccionados"
 
 #. module: payroll_account
-#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__id
-#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__id
-msgid "ID"
-msgstr "ID"
-
-#. module: payroll_account
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
 msgid "Keep empty to use the period of the validation(Payslip) date."
 msgstr ""
 "Deje en blanco para usar el período de la fecha de validación de la "
 "liquidación."
-
-#. module: payroll_account
-#: model:ir.model.fields,field_description:payroll_account.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_employees____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run____last_update
-#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule____last_update
-msgid "Last Modified on"
-msgstr "Ultima modificación"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
@@ -177,6 +147,15 @@ msgid ""
 msgstr ""
 "¡La cuenta deudora del diario de gastos \"%s\" no se ha configurado "
 "correctamente!"
+
+#~ msgid "Display Name"
+#~ msgstr "Nombre para mostrar"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modificación"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Nómina"
