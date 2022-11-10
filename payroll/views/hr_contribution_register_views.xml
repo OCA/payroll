@@ -4,7 +4,7 @@
         <field name="name">hr.contribution.register.tree</field>
         <field name="model">hr.contribution.register</field>
         <field name="arch" type="xml">
-            <tree string="Contribution Registers">
+            <tree>
                 <field name="name" />
                 <field
                     name="company_id"

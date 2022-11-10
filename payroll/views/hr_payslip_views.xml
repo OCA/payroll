@@ -4,12 +4,7 @@
         <field name="name">hr.payslip.tree</field>
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
-            <tree
-                decoration-muted="state == 'cancel'"
-                string="Payslips"
-                multi_edit="1"
-                sample="1"
-            >
+            <tree decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
                 <field name="number" readonly="1" decoration-bf="1" />
                 <field name="employee_id" readonly="1" />
                 <field name="name" />
@@ -194,7 +189,7 @@
                         <page name="input" string="Worked Days &amp; Inputs">
                             <separator name="worked" string="Worked Days" />
                             <field name="worked_days_line_ids">
-                                <tree string="Worked Days" editable="bottom">
+                                <tree editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
                                     <field name="number_of_days" string="Days" />
@@ -219,7 +214,7 @@
                             </field>
                             <separator name="other" string="Other Inputs" />
                             <field name="input_line_ids" colspan="4" nolabel="1">
-                                <tree string="Input Data" editable="bottom">
+                                <tree editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
                                     <field name="amount_qty" />
@@ -259,7 +254,6 @@
                                 nolabel="1"
                             >
                                 <tree
-                                    string="Salary Structure"
                                     decoration-info="total == 0 and appears_on_payslip == True"
                                     decoration-bf="parent_rule_id == False"
                                     decoration-it="parent_rule_id != False"

@@ -192,7 +192,6 @@ ref('hr_salary_rule_convanceallowance1'),ref('hr_salary_rule_professionaltax1'),
         <field name="company_id" ref="base.main_company" />
         <field eval="1" name="active" />
         <field name="name">Roger Scott</field>
-        <field name="work_location">Building 1, Second Floor</field>
         <field name="work_phone">+3282823500</field>
         <field
             name="image_1920"
