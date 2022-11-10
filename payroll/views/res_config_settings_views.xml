@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="open_payroll_modules" model="ir.actions.act_window">
+        <field name="name">Payroll</field>
+        <field name="res_model">ir.module.module</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field
+            name="context"
+            eval="{'search_default_category_id': ref('base.module_category_payroll_localization'), 'search_default_name': 'Payroll'}"
+        />
+        <field name="search_view_id" ref="base.view_module_filter" />
+    </record>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.payroll</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="45" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Payroll"
+                    string="Payroll"
+                    data-key="payroll"
+                    groups="payroll.group_payroll_manager"
+                >
+                    <h2>Accounting</h2>
+                    <div class="row mt16 o_settings_container" id="payroll_accountant">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_payroll_account" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label
+                                    for="module_payroll_account"
+                                    string="Payroll Entries"
+                                />
+                                <div class="text-muted">
+                                    Post payslips in accounting
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Calculation Settings</h2>
+                    <div class="row mt16 o_settings_container" id="leaves_positive">
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="leaves_positive" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="leaves_positive" />
+                                <div class="text-muted">
+                                    In payslip worked days, leave days/hours have positive values
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        id="allow_cancel_payslips"
+                    >
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="allow_cancel_payslips" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="allow_cancel_payslips" />
+                                <div class="text-muted">
+                                    Allow users to cancel confirmed payslips
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        id="prevent_compute_on_confirm"
+                    >
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="prevent_compute_on_confirm" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="prevent_compute_on_confirm" />
+                                <div class="text-muted">
+                                    Prevent payslips from being recomputed when confirming them
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        id="allow_edit_payslip_lines"
+                    >
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="allow_edit_payslip_lines" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="allow_edit_payslip_lines" />
+                                <div class="text-muted">
+                                    Allow users to edit some payslip line fields manually
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row mt16 o_settings_container"
+                        id="require_code_and_category"
+                    >
+                        <div class="col-lg-6 col-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="require_code_and_category" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="require_code_and_category" />
+                                <div class="text-muted">
+                                    Require rule.code, rule.category, category.code, structure.code
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="payroll_configuration_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'payroll'}</field>
+    </record>
+    <menuitem
+        id="menu_payroll_global_settings"
+        name="Settings"
+        parent="payroll_menu_configuration"
+        sequence="0"
+        action="payroll_configuration_action"
+        groups="base.group_system"
+    />
+</odoo>
