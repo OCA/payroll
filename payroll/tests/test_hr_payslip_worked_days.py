@@ -19,7 +19,7 @@ class TestWorkedDays(TestPayslipBase):
             {
                 "name": "TestLeaveType",
                 "code": "TESTLV",
-                "allocation_type": "no",
+                "allocation_validation_type": "no",
                 "leave_validation_type": "no_validation",
             }
         )

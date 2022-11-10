@@ -14,13 +14,13 @@ Payroll
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
-    :target: https://github.com/OCA/payroll/tree/14.0/payroll
+    :target: https://github.com/OCA/payroll/tree/15.0/payroll
     :alt: OCA/payroll
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/payroll-14-0/payroll-14-0-payroll
+    :target: https://translation.odoo-community.org/projects/payroll-15-0/payroll-15-0-payroll
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/281/14.0
+    :target: https://runbot.odoo-community.org/runbot/281/15.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -34,51 +34,13 @@ This module is a backport from Odoo SA and as such, it is not included in the OC
 .. contents::
    :local:
 
-Changelog
-=========
-
-14.0.6.0.0 (2022-11-04)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* #87 payroll_rule_time_parameter: remove from payroll
-* Removed hr.rule.parameter & hr.rule.parameter.value (see payroll_rule_time_parameter)
-
-14.0.5.3.0 (2022-09-13)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* #67 Merge payslip_cancel and payslip_change_state in base module
-* Merged hr_payroll_cancel, adding a setting to enable this feature (by default disabled).
-* Merged hr_payroll_change_state (there is no setting to disable this feature).
-
-14.0.5.0.0 (2022-08-29)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* #60 Improve views, add child functionalities, allow compute of name
-
-14.0.4.0.0 (2022-08-17)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* #45 Remove contract_advantage_template model and new module
-* Removed hr.contract.advantage.template (moved to payroll_contract_advantages)
-
-14.0.3.0.0 (2022-08-15)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* #47 payslip refactoring
-
-14.0.2.0.0 (2022-07-07)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* #31 major-rule-parameters-function
-* Added hr.rule.parameter & hr.rule.parameter.value
-
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/payroll/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/payroll/issues/new?body=module:%20payroll%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/payroll/issues/new?body=module:%20payroll%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -123,6 +85,6 @@ Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-appstogrow| |maintainer-nimarosa| 
 
-This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/14.0/payroll>`_ project on GitHub.
+This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/15.0/payroll>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

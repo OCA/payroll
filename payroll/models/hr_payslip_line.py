@@ -36,7 +36,6 @@ class HrPayslipLine(models.Model):
     quantity = fields.Float(digits="Payroll", default=1.0)
     total = fields.Float(
         compute="_compute_total",
-        string="Total",
         digits="Payroll",
         store=True,
     )

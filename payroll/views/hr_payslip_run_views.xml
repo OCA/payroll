@@ -32,7 +32,6 @@
             <tree
                 decoration-info="state in ('confirm','hr_check','accont_check')"
                 decoration-muted="state == 'cancel'"
-                string="Payslips Batches"
                 multi_edit="1"
                 sample="1"
             >

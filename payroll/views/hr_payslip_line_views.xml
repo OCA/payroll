@@ -4,11 +4,7 @@
         <field name="name">hr.payslip.line.tree</field>
         <field name="model">hr.payslip.line</field>
         <field name="arch" type="xml">
-            <tree
-                string="Salary Structure"
-                editable="bottom"
-                decoration-info="total == 0"
-            >
+            <tree editable="bottom" decoration-info="total == 0">
 
                 <field name="allow_edit_payslip_lines" invisible="1" />
                 <field name="category_id" />
@@ -77,7 +73,6 @@
                         <group>
                             <field name="child_ids" readonly="1" nolabel="1">
                                 <tree
-                                    string="Child Salary Structure"
                                     editable="false"
                                     decoration-info="total == 0"
                                     decoration-bf="parent_line_id == False"

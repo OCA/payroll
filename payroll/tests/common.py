@@ -11,6 +11,7 @@ class TestPayslipBase(TransactionCase):
 
         self.CalendarAttendance = self.env["resource.calendar.attendance"]
         self.Contract = self.env["hr.contract"]
+        self.ContributionRegister = self.env["hr.contribution.register"]
         self.Department = self.env["hr.department"]
         self.PayrollStructure = self.env["hr.payroll.structure"]
         self.Payslip = self.env["hr.payslip"]
@@ -175,6 +176,12 @@ class TestPayslipBase(TransactionCase):
                 "amount_python_compute": "result = categories.BASIC "
                 "+ categories.ALW + categories.DED",
             }
+        )
+
+        # Contribution Registers
+        #
+        self.register_hra = self.ContributionRegister.create(
+            {"name": "House Rent Allowance"}
         )
 
         # I create a new employee "Richard"

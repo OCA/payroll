@@ -14,7 +14,7 @@ class TestSalaryRule(TestPayslipBase):
             {
                 "name": "Test Rule",
                 "code": "TEST",
-                "category_id": self.env.ref("payroll.ALW").id,
+                "category_id": self.categ_alw.id,
                 "sequence": 6,
                 "amount_select": "code",
                 "amount_python_compute": "result = 0",
@@ -26,7 +26,7 @@ class TestSalaryRule(TestPayslipBase):
             {
                 "name": "Parent Test Rule",
                 "code": "PARENT_TEST",
-                "category_id": self.env.ref("payroll.ALW").id,
+                "category_id": self.categ_alw.id,
                 "sequence": 6,
                 "parent_rule_id": self.test_rule.id,
                 "amount_select": "code",
@@ -41,7 +41,7 @@ class TestSalaryRule(TestPayslipBase):
             {
                 "name": "Child Test Rule",
                 "code": "CHILD_TEST",
-                "category_id": self.env.ref("payroll.ALW").id,
+                "category_id": self.categ_alw.id,
                 "sequence": 7,
                 "parent_rule_id": self.test_rule.id,
                 "amount_select": "code",
