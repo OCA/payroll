@@ -68,12 +68,13 @@ class HrPayslip(models.Model):
 
     @api.onchange("contract_id")
     def onchange_contract(self):
-        super(HrPayslip, self).onchange_contract()
+        res = super(HrPayslip, self).onchange_contract()
         self.journal_id = (
             self.contract_id.journal_id.id
             or (not self.contract_id and self.default_get(["journal_id"])["journal_id"])
             or self.journal_id
         )
+        return res
 
     def action_payslip_cancel(self):
         for payslip in self:
