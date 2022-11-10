@@ -40,9 +40,10 @@ class HrPayslipChangeState(models.TransientModel):
                     raise UserError(
                         _(
                             "Only rejected payslips can be reset to "
-                            "draft, the payslip %s is in "
-                            "%s state" % (rec.name, rec.state)
+                            "draft, the payslip %(nm)s is in "
+                            "%(st)s state"
                         )
+                        % {"nm": rec.name, "st": rec.state}
                     )
             elif new_state == "verify":
                 if rec.state in ["draft", "verify"]:
@@ -51,9 +52,10 @@ class HrPayslipChangeState(models.TransientModel):
                     raise UserError(
                         _(
                             "Only draft payslips can be verified,"
-                            "the payslip %s is in "
-                            "%s state" % (rec.name, rec.state)
+                            "the payslip %(nm)s is in "
+                            "%(st)s state"
                         )
+                        % {"nm": rec.name, "st": rec.state}
                     )
             elif new_state == "done":
                 if rec.state in ("verify", "draft"):
@@ -62,9 +64,10 @@ class HrPayslipChangeState(models.TransientModel):
                     raise UserError(
                         _(
                             "Only payslips in states verify or draft"
-                            " can be confirmed, the payslip %s is in "
-                            "%s state" % (rec.name, rec.state)
+                            " can be confirmed, the payslip %(nm)s is in "
+                            "%(st)s state"
                         )
+                        % {"nm": rec.name, "st": rec.state}
                     )
             elif new_state == "cancel":
                 if rec.state != "cancel":
@@ -72,9 +75,10 @@ class HrPayslipChangeState(models.TransientModel):
                 else:
                     raise UserError(
                         _(
-                            "The payslip %s is already canceled "
-                            "please deselect it" % rec.name
+                            "The payslip %(nm)s is already canceled "
+                            "please deselect it"
                         )
+                        % {"nm": rec.name}
                     )
 
         return {

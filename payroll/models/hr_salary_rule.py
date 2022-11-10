@@ -219,11 +219,14 @@ class HrSalaryRule(models.Model):
                 "rate": 100.0,
                 "amount": self.amount_fix,
             }
-        except Exception:
+        except Exception as ex:
             raise UserError(
-                _("Wrong quantity defined for salary rule %s (%s) for employee %s.")
-                % (self.name, self.code, localdict["employee"].name)
-            )
+                _(
+                    "Wrong quantity defined for salary rule "
+                    "%(nm)s (%(code)s) for employee %(ee)s."
+                )
+                % {"nm": self.name, "code": self.code, "ee": localdict["employee"].name}
+            ) from ex
 
     def _compute_rule_percentage(self, localdict):
         try:
@@ -233,14 +236,14 @@ class HrSalaryRule(models.Model):
                 "rate": self.amount_percentage,
                 "amount": float(safe_eval(self.amount_percentage_base, localdict)),
             }
-        except Exception:
+        except Exception as ex:
             raise UserError(
                 _(
                     "Wrong percentage base or quantity defined for salary "
-                    "rule %s (%s) for employee %s."
+                    "rule %(nm)s (%(code)s) for employee %(ee)s."
                 )
-                % (self.name, self.code, localdict["employee"].name)
-            )
+                % {"nm": self.name, "code": self.code, "ee": localdict["employee"].name}
+            ) from ex
 
     def _compute_rule_code(self, localdict):
         try:
@@ -250,14 +253,19 @@ class HrSalaryRule(models.Model):
             raise UserError(
                 _(
                     """
-Wrong python code defined for salary rule %s (%s) for employee %s.
+Wrong python code defined for salary rule %(nm)s (%(code)s) for employee %(ee)s.
 Here is the error received:
 
-%s
+%(err)s
 """
                 )
-                % (self.name, self.code, localdict["employee"].name, repr(ex))
-            )
+                % {
+                    "nm": self.name,
+                    "code": self.code,
+                    "ee": localdict["employee"].name,
+                    "err": repr(ex),
+                }
+            ) from ex
 
     def _get_rule_dict(self, localdict):
         name = localdict.get("result_name") or self.name
@@ -293,13 +301,14 @@ Here is the error received:
             return (
                 self.condition_range_min <= result <= self.condition_range_max or False
             )
-        except Exception:
+        except Exception as ex:
             raise UserError(
                 _(
-                    "Wrong range condition defined for salary rule %s (%s) for employee %s."
+                    "Wrong range condition defined for salary rule "
+                    "%(nm)s (%(code)s) for employee %(ee)s."
                 )
-                % (self.name, self.code, localdict["employee"].name)
-            )
+                % {"nm": self.name, "code": self.code, "ee": localdict["employee"].name}
+            ) from ex
 
     def _satisfy_condition_python(self, localdict):
         try:
@@ -309,11 +318,16 @@ Here is the error received:
             raise UserError(
                 _(
                     """
-Wrong python condition defined for salary rule %s (%s) for employee %s.
+Wrong python condition defined for salary rule %(nm)s (%(code)s) for employee %(ee)s.
 Here is the error received:
 
-%s
+%(err)s
 """
                 )
-                % (self.name, self.code, localdict["employee"].name, repr(ex))
-            )
+                % {
+                    "nm": self.name,
+                    "code": self.code,
+                    "ee": localdict["employee"].name,
+                    "err": repr(ex),
+                }
+            ) from ex

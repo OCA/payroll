@@ -4,7 +4,7 @@
         <field name="name">hr.payroll.structure.tree</field>
         <field name="model">hr.payroll.structure</field>
         <field name="arch" type="xml">
-            <tree string="Employee Function">
+            <tree>
                 <field name="name" />
                 <field name="code" />
                 <field name="rule_ids" />
@@ -21,7 +21,7 @@
         <field name="model">hr.payroll.structure</field>
         <field name="field_parent">children_ids</field>
         <field name="arch" type="xml">
-            <tree string="Salary Structure">
+            <tree>
                 <field name="name" />
                 <field name="code" />
                 <field
