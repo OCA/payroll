@@ -5,13 +5,11 @@
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='salary_and_advantages']" position="inside">
+            <xpath expr="//group[@name='salary_info']" position="inside">
+                <field name="schedule_pay" />
                 <field name="struct_id" required="1" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="currency_id" invisible="1" />
-            </xpath>
-            <xpath expr="//field[@name='wage']" position="after">
-                <field name="schedule_pay" />
             </xpath>
         </field>
     </record>

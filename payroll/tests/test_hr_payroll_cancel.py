@@ -25,7 +25,6 @@ class TestHrPayrollCancel(common.TransactionCase):
             }
         )
         self.hr_employee_anita = self.env.ref("hr.employee_mit")
-        self.hr_structure_marketing_executive = self.ref("payroll.structure_001")
         self.hr_contract_anita = self.env.ref("hr_contract.hr_contract_mit")
         self.hr_payslip = self.env["hr.payslip"].create(
             {
@@ -69,16 +68,16 @@ class TestHrPayrollCancel(common.TransactionCase):
             [("payslip_id", "=", self.hr_payslip.id)]
         )
         payslip_input.write({"amount": 5.0})
-        context = {
-            "lang": "en_US",
-            "tz": False,
-            "active_model": "hr.payslip",
-            "department_id": False,
-            "active_ids": [self.payslip_action_id],
-            "section_id": False,
-            "active_id": self.payslip_action_id,
-        }
-        self.hr_payslip.with_context(context).compute_sheet()
+        self.hr_payslip.with_context(
+            {},
+            lang="en_US",
+            tz=False,
+            active_model="hr.payslip",
+            department_id=False,
+            active_ids=[self.payslip_action_id],
+            section_id=False,
+            active_id=self.payslip_action_id,
+        ).compute_sheet()
         return self.hr_payslip
 
     def test_action_payslip_cancel(self):

@@ -15,8 +15,9 @@ class TestHrPayslipChangeState(TestHrPayrollCancel):
     def test_change_state(self):
         hr_payslip = self._create_payslip()
         tested_model = self.tested_model
-        context = {"active_ids": [hr_payslip.id]}
-        action = tested_model.with_context(context).create({"state": "verify"})
+        action = tested_model.with_context({}, active_ids=[hr_payslip.id]).create(
+            {"state": "verify"}
+        )
         # By default, a payslip is on draft state
         action.change_state_confirm()
         # trying to set it to wrong states

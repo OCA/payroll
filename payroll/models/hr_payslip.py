@@ -57,7 +57,6 @@ class HrPayslip(models.Model):
         states={"draft": [("readonly", False)]},
     )
     date_from = fields.Date(
-        string="Date From",
         readonly=True,
         required=True,
         default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
@@ -65,7 +64,6 @@ class HrPayslip(models.Model):
         tracking=True,
     )
     date_to = fields.Date(
-        string="Date To",
         readonly=True,
         required=True,
         default=lambda self: fields.Date.to_string(
@@ -144,10 +142,8 @@ class HrPayslip(models.Model):
     dynamic_filtered_payslip_lines = fields.One2many(
         "hr.payslip.line",
         compute="_compute_dynamic_filtered_payslip_lines",
-        string="Dynamic Filtered Payslip Lines",
     )
     credit_note = fields.Boolean(
-        string="Credit Note",
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="Indicates this payslip has a refund of another",
@@ -163,11 +159,11 @@ class HrPayslip(models.Model):
     payslip_count = fields.Integer(
         compute="_compute_payslip_count", string="Payslip Computation Details"
     )
-    hide_child_lines = fields.Boolean(string="Hide Child Lines", default=False)
+    hide_child_lines = fields.Boolean(default=False)
     hide_invisible_lines = fields.Boolean(
         string="Show only lines that appear on payslip", default=False
     )
-    compute_date = fields.Date("Compute Date")
+    compute_date = fields.Date()
     refunded_id = fields.Many2one(
         "hr.payslip", string="Refunded Payslip", readonly=True
     )
@@ -384,7 +380,7 @@ class HrPayslip(models.Model):
         of the payslip. This returns the FULL work days expected for the resource
         calendar selected for the employee (it don't substract leaves by default).
         """
-        work_data = contract.employee_id._get_work_days_data(
+        work_data = contract.employee_id._get_work_days_data_batch(
             day_from,
             day_to,
             calendar=contract.resource_calendar_id,
@@ -394,8 +390,8 @@ class HrPayslip(models.Model):
             "name": _("Normal Working Days paid at 100%"),
             "sequence": 1,
             "code": "WORK100",
-            "number_of_days": work_data["days"],
-            "number_of_hours": work_data["hours"],
+            "number_of_days": work_data[contract.employee_id.id]["days"],
+            "number_of_hours": work_data[contract.employee_id.id]["hours"],
             "contract_id": contract.id,
         }
 
@@ -776,16 +772,16 @@ class HrPayslip(models.Model):
 
     def _compute_name(self):
         for record in self:
-            record.name = _("Salary Slip of %s for %s") % (
-                record.employee_id.name,
-                tools.ustr(
+            record.name = _("Salary Slip of %(name)s for %(dt)s") % {
+                "name": record.employee_id.name,
+                "dt": tools.ustr(
                     babel.dates.format_date(
                         date=datetime.combine(record.date_from, time.min),
                         format="MMMM-y",
                         locale=record.env.context.get("lang") or "en_US",
                     )
                 ),
-            )
+            }
 
     @api.onchange("contract_id")
     def onchange_contract(self):
