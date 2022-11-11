@@ -144,12 +144,16 @@ class TestPayslipFlow(TestPayslipBase):
         # I print the payslip report
         data, data_format = self.env.ref(
             "payroll.action_report_payslip"
-        )._render_qweb_pdf(richard_payslip.ids)
+        )._render_qweb_pdf(
+            self.env.ref("payroll.action_report_payslip"), res_ids=richard_payslip.ids
+        )
 
         # I print the payslip details report
         data, data_format = self.env.ref(
             "payroll.payslip_details_report"
-        )._render_qweb_pdf(richard_payslip.ids)
+        )._render_qweb_pdf(
+            self.env.ref("payroll.payslip_details_report"), res_ids=richard_payslip.ids
+        )
 
         # I print the contribution register report
         context = {
