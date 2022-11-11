@@ -126,11 +126,12 @@
                                         decoration-info="1"
                                         decoration-bf="1"
                                         nolabel="1"
+                                        colspan="2"
                                     />
                                     <field
                                         name="condition_python"
                                         attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
-                                        colspan="4"
+                                        colspan="2"
                                         widget="ace"
                                         options="{'mode': 'python'}"
                                         id="condition_python"
@@ -169,6 +170,7 @@
                                         decoration-info="1"
                                         decoration-bf="1"
                                         nolabel="1"
+                                        colspan="2"
                                     />
                                     <field
                                         name="amount_percentage_base"
@@ -183,7 +185,7 @@
                                         attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"
                                     />
                                     <field
-                                        colspan="4"
+                                        colspan="2"
                                         name="amount_python_compute"
                                         attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
                                         widget="ace"
@@ -223,109 +225,107 @@
                             </field>
                         </page>
                         <page name="help" string="Help">
-                            <group>
-                                <div style="margin-top: 4px;">
-                                    <h3>Salary Rules formula definition (Python)</h3>
-                                    <p>
-                                        In python definition in salary rules, you can write any code like you will do
-                                        in python. Any methematical operation or python function is supported.
-                                    </p>
-                                    <p>
-                                        The following objects and variables are available to you to use it in salary rules calculations.
-                                    </p>
-                                    <ul>
-                                        <li>
-                                            <code
-                                            >payslip:</code> contains current payslip object data (hr.payslip)
-                                        </li>
-                                        <li>
-                                            <code
-                                            >payslips:</code> contains payslips data (Payslips - Browsable Object)
-                                        </li>
-                                        <li>
-                                            <code
-                                            >employee:</code> contains current employee object data (hr.employee)
-                                        </li>
-                                        <li>
-                                            <code
-                                            >contract:</code> contains current contract object data (hr.contract)
-                                        </li>
-                                        <li>
-                                            <code
-                                            >rules:</code> contains the rules code (previusly computed)
-                                        </li>
-                                        <li>
-                                            <code
-                                            >categories:</code> contains the sum of amount of all rules belonging to that category
-                                        </li>
-                                        <li>
-                                            <code
-                                            >worked_days:</code> contains the computed worked days data
-                                        </li>
-                                        <li>
-                                            <code
-                                            >inputs:</code> contains the computed input data
-                                        </li>
-                                        <li>
-                                            <code
-                                            >payroll:</code> contains miscellaneous values related to payroll
-                                        </li>
-                                        <li>
-                                            <code
-                                            >current_contract:</code> contains values related/calculated for current contract
-                                        </li>
-                                        <li>
-                                            <code
-                                            >result_rules:</code> contains the values of previusly computed lines (qty, rate, amount, total)
-                                        </li>
-                                        <li>
-                                            <code
-                                            >tools:</code> contains tools and libraries which help with mathematical operations
-                                        </li>
-                                    </ul>
-                                    <p>
-                                        The calculations should be performed using the objects and variables below.
-                                        Then, you have to use specific compute variables which will store the data
-                                        for salary rule computation.
-                                    </p>
-                                    <ul>
-                                        <li>
-                                            <code
-                                            >result:</code> the returned value should be in this variable. It matches with "amount" column.
-                                        </li>
-                                        <li>
-                                            <code
-                                            >result_rate:</code> the rate that should be applied to "result"
-                                        </li>
-                                        <li>
-                                            <code
-                                            >result_qty:</code> the quantity of units that will be multiplied to "result"
-                                        </li>
-                                        <li>
-                                            <code
-                                            >result_name:</code> overrides the current name of the rule and allows to make dynamic names
-                                        </li>
-                                    </ul>
-                                    <h3>Examples</h3>
-                                    <ul>
-                                        <li>
-                                            <code>result = contract.wage * 0.10</code>
-                                        </li>
-                                        <li>
-                                            <code>
-                                                result = contract.wage
-                                                result_qty = worked_days.WORK100.number_of_days
-                                            </code>
-                                        </li>
-                                        <li>
-                                            <code>
-                                                result = contract.wage
-                                                result_rate = 10.0
-                                            </code>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </group>
+                            <div style="margin-top: 4px;">
+                                <h3>Salary Rules formula definition (Python)</h3>
+                                <p>
+                                    In python definition in salary rules, you can write any code like you will do
+                                    in python. Any methematical operation or python function is supported.
+                                </p>
+                                <p>
+                                    The following objects and variables are available to you to use it in salary rules calculations.
+                                </p>
+                                <ul>
+                                    <li>
+                                        <code
+                                        >payslip:</code> contains current payslip object data (hr.payslip)
+                                    </li>
+                                    <li>
+                                        <code
+                                        >payslips:</code> contains payslips data (Payslips - Browsable Object)
+                                    </li>
+                                    <li>
+                                        <code
+                                        >employee:</code> contains current employee object data (hr.employee)
+                                    </li>
+                                    <li>
+                                        <code
+                                        >contract:</code> contains current contract object data (hr.contract)
+                                    </li>
+                                    <li>
+                                        <code
+                                        >rules:</code> contains the rules code (previusly computed)
+                                    </li>
+                                    <li>
+                                        <code
+                                        >categories:</code> contains the sum of amount of all rules belonging to that category
+                                    </li>
+                                    <li>
+                                        <code
+                                        >worked_days:</code> contains the computed worked days data
+                                    </li>
+                                    <li>
+                                        <code
+                                        >inputs:</code> contains the computed input data
+                                    </li>
+                                    <li>
+                                        <code
+                                        >payroll:</code> contains miscellaneous values related to payroll
+                                    </li>
+                                    <li>
+                                        <code
+                                        >current_contract:</code> contains values related/calculated for current contract
+                                    </li>
+                                    <li>
+                                        <code
+                                        >result_rules:</code> contains the values of previusly computed lines (qty, rate, amount, total)
+                                    </li>
+                                    <li>
+                                        <code
+                                        >tools:</code> contains tools and libraries which help with mathematical operations
+                                    </li>
+                                </ul>
+                                <p>
+                                    The calculations should be performed using the objects and variables below.
+                                    Then, you have to use specific compute variables which will store the data
+                                    for salary rule computation.
+                                </p>
+                                <ul>
+                                    <li>
+                                        <code
+                                        >result:</code> the returned value should be in this variable. It matches with "amount" column.
+                                    </li>
+                                    <li>
+                                        <code
+                                        >result_rate:</code> the rate that should be applied to "result"
+                                    </li>
+                                    <li>
+                                        <code
+                                        >result_qty:</code> the quantity of units that will be multiplied to "result"
+                                    </li>
+                                    <li>
+                                        <code
+                                        >result_name:</code> overrides the current name of the rule and allows to make dynamic names
+                                    </li>
+                                </ul>
+                                <h3>Examples</h3>
+                                <ul>
+                                    <li>
+                                        <code>result = contract.wage * 0.10</code>
+                                    </li>
+                                    <li>
+                                        <code>
+                                            result = contract.wage
+                                            result_qty = worked_days.WORK100.number_of_days
+                                        </code>
+                                    </li>
+                                    <li>
+                                        <code>
+                                            result = contract.wage
+                                            result_rate = 10.0
+                                        </code>
+                                    </li>
+                                </ul>
+                            </div>
                         </page>
                     </notebook>
                 </sheet>
