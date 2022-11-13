@@ -32,6 +32,7 @@ msgid "Accounting Entry"
 msgstr "Дансны бичилт"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Adjustment Entry"
@@ -99,6 +100,7 @@ msgid "Payslip Line"
 msgstr "Цалингийн хуудасын мөр"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Payslip of %s"
@@ -129,6 +131,7 @@ msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
@@ -136,6 +139,7 @@ msgid ""
 msgstr "\"%s\" зардлын журналыг кредит данстай зөв тохируулаагүй"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
