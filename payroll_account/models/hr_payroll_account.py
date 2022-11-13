@@ -12,7 +12,7 @@ class HrPayslipLine(models.Model):
     _inherit = "hr.payslip.line"
 
     def _get_partner_id(self, credit_account):
-        """
+        """account_
         Get partner_id of slip line to use in account_move_line
         """
         # use partner of salary rule or fallback on employee's address
@@ -23,15 +23,15 @@ class HrPayslipLine(models.Model):
         if credit_account:
             if (
                 register_partner_id
-                or self.salary_rule_id.account_credit.internal_type
-                in ("receivable", "payable")
+                or self.salary_rule_id.account_credit.account_type
+                in ("asset_receivable", "liability_payable")
             ):
                 return partner_id
         else:
             if (
                 register_partner_id
-                or self.salary_rule_id.account_debit.internal_type
-                in ("receivable", "payable")
+                or self.salary_rule_id.account_debit.account_type
+                in ("asset_receivable", "liability_payable")
             ):
                 return partner_id
         return False
@@ -60,11 +60,12 @@ class HrPayslip(models.Model):
         "account.move", "Accounting Entry", readonly=True, copy=False
     )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         if "journal_id" in self.env.context:
-            vals["journal_id"] = self.env.context.get("journal_id")
-        return super(HrPayslip, self).create(vals)
+            for vals in vals_list:
+                vals["journal_id"] = self.env.context.get("journal_id")
+        return super(HrPayslip, self).create(vals_list)
 
     @api.onchange("contract_id")
     def onchange_contract(self):
@@ -113,6 +114,13 @@ class HrPayslip(models.Model):
                 credit_account_id = line.salary_rule_id.account_credit.id
                 account_id = debit_account_id or credit_account_id
                 analytic_salary_id = line.salary_rule_id.analytic_account_id.id
+                move_line_analytic_ids = []
+                if analytic_salary_id:
+                    move_line_analytic_ids.append((4, analytic_salary_id.id))
+                elif slip.contract_id.analytic_account_id:
+                    move_line_analytic_ids.append(
+                        (4, slip.contract_id.analytic_account_id.id)
+                    )
 
                 tax_ids = False
                 tax_tag_ids = False
@@ -180,8 +188,7 @@ class HrPayslip(models.Model):
                             "date": date,
                             "debit": amount > 0.0 and amount or 0.0,
                             "credit": amount < 0.0 and -amount or 0.0,
-                            "analytic_account_id": analytic_salary_id
-                            or slip.contract_id.analytic_account_id.id,
+                            "analytic_line_ids": move_line_analytic_ids,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                             "tax_ids": tax_ids,
                             "tax_repartition_line_id": tax_repartition_line_id,
@@ -204,8 +211,7 @@ class HrPayslip(models.Model):
                             "date": date,
                             "debit": amount < 0.0 and -amount or 0.0,
                             "credit": amount > 0.0 and amount or 0.0,
-                            "analytic_account_id": analytic_salary_id
-                            or slip.contract_id.analytic_account_id.id,
+                            "analytic_line_ids": move_line_analytic_ids,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                             "tax_ids": tax_ids,
                             "tax_repartition_line_id": tax_repartition_line_id,
