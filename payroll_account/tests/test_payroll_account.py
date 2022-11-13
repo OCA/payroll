@@ -48,7 +48,7 @@ class TestPayrollAccount(common.TransactionCase):
             {
                 "name": "Debit Account",
                 "code": "334411",
-                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
+                "account_type": "expense",
                 "reconcile": True,
             }
         )
@@ -56,7 +56,7 @@ class TestPayrollAccount(common.TransactionCase):
             {
                 "name": "Credit Account",
                 "code": "114433",
-                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
+                "account_type": "expense",
                 "reconcile": True,
             }
         )
