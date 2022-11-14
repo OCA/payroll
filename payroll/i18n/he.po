@@ -2203,6 +2203,18 @@ msgid "Waiting"
 msgstr "ממתין"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__website_message_ids
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,help:payroll.field_hr_payslip__website_message_ids
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__weekly
 msgid "Weekly"
 msgstr "שבועי"
