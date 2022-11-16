@@ -12,7 +12,6 @@ class HrPayslipRun(models.Model):
     _inherit = "hr.payslip.run"
 
     name = fields.Char(
-        "Name",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -132,8 +131,8 @@ class HrPayslipRun(models.Model):
             if next((p for p in run.slip_ids if p.state == "draft"), False):
                 raise UserError(
                     _(
-                        "The payslip batch %s still has unconfirmed "
-                        "payslips." % run.name
+                        "The payslip batch %s still has unconfirmed " "payslips.",
+                        run.name,
                     )
                 )
         self.update_periods()
