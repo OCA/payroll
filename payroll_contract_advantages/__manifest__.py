@@ -2,7 +2,7 @@
 
 {
     "name": "Payroll Contract Advantages",
-    "version": "14.0.3.0.0",
+    "version": "15.0.3.0.0",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "summary": "Allow to define contract advantages for employees.",
