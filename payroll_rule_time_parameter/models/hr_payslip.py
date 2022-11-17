@@ -7,9 +7,11 @@ from odoo import models
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
-    def rule_parameter(self, code, return_type="float"):
+    def rule_parameter(self, code, date=False, return_type="float"):
         self.ensure_one()
-        time_parameter = self.get_time_parameter(code, date=self.date_from)
+        if not date:
+            date = self.date_from
+        time_parameter = self.get_time_parameter(code, date=date)
         return (
             return_type == "float" and float(time_parameter) or time_parameter or 0.00
         )
