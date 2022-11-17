@@ -26,7 +26,7 @@ addon | version | maintainers | summary
 [payroll_account](payroll_account/) | 14.0.2.1.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your payroll to accounting
 [payroll_contract_advantages](payroll_contract_advantages/) | 14.0.3.0.0 | [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Allow to define contract advantages for employees.
 [payroll_hr_public_holidays](payroll_hr_public_holidays/) | 14.0.2.0.0 | [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Integration between payroll and hr_public_holidays
-[payroll_rule_time_parameter](payroll_rule_time_parameter/) | 14.0.2.0.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Payroll Rule Time Parameter
+[payroll_rule_time_parameter](payroll_rule_time_parameter/) | 14.0.2.0.1 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Payroll Rule Time Parameter
 
 [//]: # (end addons)
 
