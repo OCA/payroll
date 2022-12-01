@@ -33,6 +33,7 @@ msgid "Accounting Entry"
 msgstr "Nalog"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Adjustment Entry"
@@ -101,6 +102,7 @@ msgid "Payslip Line"
 msgstr "Stavka platne liste"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Payslip of %s"
@@ -131,6 +133,7 @@ msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
@@ -138,6 +141,7 @@ msgid ""
 msgstr "U dnevniku troškova \"%s\" nije korektno podešen potražni konto!"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
