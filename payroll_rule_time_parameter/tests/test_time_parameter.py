@@ -11,9 +11,9 @@ class TestTimeParameter(TransactionCase):
         self.env["base.time.parameter"].create(
             {
                 "code": "TEST_CODE",
-                "type": "text",
+                "type": "string",
                 "version_ids": [
-                    (0, 0, {"date_from": date(2022, 1, 1), "value_text": "TEST_VALUE"})
+                    (0, 0, {"date_from": date(2022, 1, 1), "value": "TEST_VALUE"})
                 ],
             }
         )

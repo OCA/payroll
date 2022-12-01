@@ -57,7 +57,7 @@ def move_records(cr, legacy):
 
     sql_insert_versions = """
     INSERT INTO base_time_parameter_version (
-        parameter_id, company_id, code, date_from, value_text
+        parameter_id, company_id, code, date_from, value
     )
     VALUES {versions}
     """.format(
