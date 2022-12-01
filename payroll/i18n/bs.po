@@ -39,6 +39,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid ""
@@ -51,6 +52,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid ""
@@ -63,6 +65,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "%s (copy)"
@@ -558,6 +561,7 @@ msgid "Cancel Payslip"
 msgstr "Otkaži listić"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Cannot cancel a payslip that is done."
@@ -971,6 +975,7 @@ msgid "Employees"
 msgstr "Zaposleni"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule_category.py:0
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Salary Rule Category."
@@ -978,6 +983,7 @@ msgstr ""
 "Greška! Ne možete kreirati rekurzivne kategorije pravila obračuna plata."
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Salary Rules."
@@ -1033,6 +1039,7 @@ msgid "For example, enter 50.0 to apply a percentage of 50%"
 msgstr "Na primjer, unesite 50.0 da primjenite procenat od 50%"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/report/report_contribution_register.py:0
 #, python-format
 msgid "Form content is missing, this report cannot be printed."
@@ -1060,6 +1067,7 @@ msgid "Get 1% of sales"
 msgstr "Dobij 1% od prodaje"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Global Leaves"
@@ -1410,6 +1418,7 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Normal Working Days paid at 100%"
@@ -1461,6 +1470,7 @@ msgid "Officer"
 msgstr "Oficir"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #, python-format
 msgid ""
@@ -1468,6 +1478,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #, python-format
 msgid ""
@@ -1476,6 +1487,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #, python-format
 msgid ""
@@ -1590,6 +1602,7 @@ msgid "Payslip"
 msgstr "Obračunski listić"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip 'Date From' must be earlier than 'Date To'."
@@ -1683,6 +1696,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action_employee
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__slip_ids
@@ -1822,6 +1836,7 @@ msgid "Rate (%)"
 msgstr "Stopa (%)"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "Recursion error. Only one line should be parent of %s"
@@ -1844,12 +1859,14 @@ msgid "Refund"
 msgstr "Refundacija"
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Refund Payslip"
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Refund: %s"
@@ -1973,6 +1990,7 @@ msgid "Salary Rules formula definition (Python)"
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Salary Slip of %(name)s for %(dt)s"
@@ -2139,6 +2157,7 @@ msgid "The minimum amount, applied for this rule."
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #, python-format
 msgid "The payslip %(nm)s is already canceled please deselect it"
@@ -2159,6 +2178,7 @@ msgid "Time Off Type"
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid ""
@@ -2240,6 +2260,7 @@ msgid "Write salary rule notes or observations here..."
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid ""
@@ -2248,6 +2269,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid ""
@@ -2255,6 +2277,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid ""
@@ -2263,18 +2286,21 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "You cannot create a recursive salary structure."
 msgstr "Ne možete kreirati rekurzivnu strukturu plate."
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "You cannot delete a payslip which is not draft or cancelled"
 msgstr ""
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/wizard/hr_payroll_payslips_by_employees.py:0
 #, python-format
 msgid "You must select employee(s) to generate payslip(s)."
@@ -2282,6 +2308,7 @@ msgstr ""
 "Morate odabrati jednog ili više zaposlenika da generišete platne listiće."
 
 #. module: payroll
+#. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "You must set a contract to create a payslip line."
