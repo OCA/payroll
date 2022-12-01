@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.11.0
+_commit: v1.11.1
 _src_path: gh:oca/oca-addons-repo-template
 ci: GitHub
 dependency_installation_mode: PIP
@@ -14,8 +14,8 @@ odoo_version: 15.0
 org_name: Odoo Community Association (OCA)
 org_slug: OCA
 rebel_module_groups: []
-repo_description: Modules to manage your payroll in odoo
-repo_name: Modules to manage your payroll in odoo
+repo_description: Modules to manage your Payroll in Odoo
+repo_name: Modules to manage your Payroll in Odoo
 repo_slug: payroll
 repo_website: https://github.com/OCA/payroll
 travis_apt_packages: []

@@ -7,9 +7,9 @@
 
 <!-- /!\ do not modify above this line -->
 
-# Modules to manage your payroll in odoo
+# Modules to manage your Payroll in Odoo
 
-Modules to manage your payroll in odoo
+Modules to manage your Payroll in Odoo
 
 <!-- /!\ do not modify below this line -->
 
