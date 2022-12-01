@@ -7,9 +7,9 @@
 
 <!-- /!\ do not modify above this line -->
 
-# Addons to manage your Payroll in odoo
+# Addons to manage your Payroll in Odoo
 
-Addons to manage your Payroll in odoo. 
+Addons to manage your Payroll in Odoo
 
 <!-- /!\ do not modify below this line -->
 
