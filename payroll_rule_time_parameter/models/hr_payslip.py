@@ -7,9 +7,9 @@ from odoo import models
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
-    def rule_parameter(self, code, date=False, data_type="value"):
+    def rule_parameter(self, code, date=False, get="value"):
         self.ensure_one()
         if not date:
             date = self.date_from
-        time_parameter = self.get_time_parameter(code, date=date, data_type=data_type)
+        time_parameter = self.get_time_parameter(code, date=date, get=get)
         return time_parameter
