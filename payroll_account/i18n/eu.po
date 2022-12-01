@@ -33,6 +33,7 @@ msgid "Accounting Entry"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Adjustment Entry"
@@ -99,6 +100,7 @@ msgid "Payslip Line"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Payslip of %s"
@@ -129,6 +131,7 @@ msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
@@ -136,6 +139,7 @@ msgid ""
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""

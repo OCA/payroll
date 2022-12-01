@@ -32,6 +32,7 @@ msgid "Accounting Entry"
 msgstr "บัญทึกทางบัญชี"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Adjustment Entry"
@@ -98,6 +99,7 @@ msgid "Payslip Line"
 msgstr "รายการสลิปเงินเดือน"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Payslip of %s"
@@ -128,6 +130,7 @@ msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
@@ -135,6 +138,7 @@ msgid ""
 msgstr "สมุดรายวันรายจ่าย \"%s\" ไม่ได้กำหนดค่าบัญชีเครดิตที่เหมาะสม"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""

@@ -31,6 +31,7 @@ msgid "Accounting Entry"
 msgstr "অ্যাকাউন্টিং এন্ট্রি"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Adjustment Entry"
@@ -97,6 +98,7 @@ msgid "Payslip Line"
 msgstr "বেতন-স্লিপ লাইন"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid "Payslip of %s"
@@ -127,6 +129,7 @@ msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
@@ -134,6 +137,7 @@ msgid ""
 msgstr "ব্যয় জার্নাল \"%s\" ক্রেডিট অ্যাকাউন্টটি সঠিকভাবে কনফিগার করা হয়নি!"
 
 #. module: payroll_account
+#. odoo-python
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
 msgid ""
