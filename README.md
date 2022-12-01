@@ -7,9 +7,9 @@
 
 <!-- /!\ do not modify above this line -->
 
-# payroll
+# Modules to manage your Payroll in Odoo
 
-TODO: add repo description.
+Modules to manage your Payroll in Odoo
 
 <!-- /!\ do not modify below this line -->
 
