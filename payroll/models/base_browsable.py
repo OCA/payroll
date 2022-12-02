@@ -99,3 +99,32 @@ class Payslips(BrowsableObject):
         )
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
+
+    def sum_category(self, code, from_date, to_date=None):
+        if to_date is None:
+            to_date = fields.Date.today()
+
+        self.env["hr.payslip"].flush(
+            ["credit_note", "employee_id", "state", "date_from", "date_to"]
+        )
+        self.env["hr.payslip.line"].flush(["total", "slip_id", "category_id"])
+        self.env["hr.salary.rule.category"].flush(["code"])
+
+        hicherarchy_codes = (
+            self.env["hr.salary.rule.category"]
+            .search([("code", "=", code)])
+            .children_ids.mapped("code")
+        )
+        hicherarchy_codes.append(code)
+
+        self.env.cr.execute(
+            """SELECT sum(case when hp.credit_note is not True then
+            (pl.total) else (-pl.total) end)
+                    FROM hr_payslip as hp, hr_payslip_line as pl, hr_salary_rule_category as rc
+                    WHERE hp.employee_id = %s AND hp.state = 'done'
+                    AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = pl.slip_id
+                    AND rc.id = pl.category_id AND rc.code in %s""",
+            (self.employee_id, from_date, to_date, tuple(hicherarchy_codes)),
+        )
+        res = self.env.cr.fetchone()
+        return res and res[0] or 0.0
