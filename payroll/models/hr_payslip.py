@@ -487,7 +487,10 @@ class HrPayslip(models.Model):
     def _get_tools_dict(self):
         # _get_tools_dict() is intended to be inherited by other private modules
         # to add tools or python libraries available in localdict
-        return {"math": math}  # "math" object is useful for doing calculations
+        return {
+            "math": math,
+            "datetime": datetime,
+        }  # "math" object is useful for doing calculations
 
     def _get_baselocaldict(self, contracts):
         self.ensure_one()
