@@ -115,6 +115,21 @@ class Payslips(BrowsableObject):
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
 
+    def min_rule(self, code, from_date, to_date=None):
+        if to_date is None:
+            to_date = fields.Date.today()
+        self.env.cr.execute(
+            """SELECT min(case when hp.credit_note = False then
+            (pl.total) else (-pl.total) end)
+                    FROM hr_payslip as hp, hr_payslip_line as pl
+                    WHERE hp.employee_id = %s AND hp.state = 'done'
+                    AND hp.date_from >= %s AND hp.date_to <= %s AND
+                     hp.id = pl.slip_id AND pl.code = %s""",
+            (self.employee_id, from_date, to_date, code),
+        )
+        res = self.env.cr.fetchone()
+        return res and res[0] or 0.0
+
     def sum_category(self, code, from_date, to_date=None):
         if to_date is None:
             to_date = fields.Date.today()
@@ -157,6 +172,29 @@ class Payslips(BrowsableObject):
 
         self.env.cr.execute(
             """SELECT max(case when hp.credit_note is not True then
+            (pl.total) else (-pl.total) end)
+                    FROM hr_payslip as hp, hr_payslip_line as pl, hr_salary_rule_category as rc
+                    WHERE hp.employee_id = %s AND hp.state = 'done'
+                    AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = pl.slip_id
+                    AND rc.id = pl.category_id AND rc.code in %s""",
+            (self.employee_id, from_date, to_date, tuple(hicherarchy_codes)),
+        )
+        res = self.env.cr.fetchone()
+        return res and res[0] or 0.0
+
+    def min_category(self, code, from_date, to_date=None):
+        if to_date is None:
+            to_date = fields.Date.today()
+
+        hicherarchy_codes = (
+            self.env["hr.salary.rule.category"]
+            .search([("code", "=", code)])
+            .children_ids.mapped("code")
+        )
+        hicherarchy_codes.append(code)
+
+        self.env.cr.execute(
+            """SELECT min(case when hp.credit_note is not True then
             (pl.total) else (-pl.total) end)
                     FROM hr_payslip as hp, hr_payslip_line as pl, hr_salary_rule_category as rc
                     WHERE hp.employee_id = %s AND hp.state = 'done'
