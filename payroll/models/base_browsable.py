@@ -100,7 +100,7 @@ class Payslips(BrowsableObject):
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
 
-    def rule_max(self, code, from_date, to_date=None):
+    def max_rule(self, code, from_date, to_date=None):
         if to_date is None:
             to_date = fields.Date.today()
         self.env.cr.execute(
@@ -144,7 +144,7 @@ class Payslips(BrowsableObject):
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
 
-    def category_max(self, code, from_date, to_date=None):
+    def max_category(self, code, from_date, to_date=None):
         if to_date is None:
             to_date = fields.Date.today()
 
