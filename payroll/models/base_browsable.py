@@ -85,7 +85,7 @@ class Payslips(BrowsableObject):
     """a class that will be used into the python code, mainly for
     usability purposes"""
 
-    def sum(self, code, from_date, to_date=None):
+    def sum_rule(self, code, from_date, to_date=None):
         if to_date is None:
             to_date = fields.Date.today()
         self.env.cr.execute(
@@ -99,6 +99,12 @@ class Payslips(BrowsableObject):
         )
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
+
+    def sum(self, code, from_date, to_date=None):
+        _logger.warning(
+            "Payslips Object: sum() method is DEPRECATED. Use sum_rule() instead."
+        )
+        return self.sum_rule(code, from_date, to_date)
 
     def average_rule(self, code, from_date, to_date=None):
         if to_date is None:
