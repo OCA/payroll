@@ -14,13 +14,13 @@ Payroll Public Holidays
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
-    :target: https://github.com/OCA/payroll/tree/14.0/payroll_hr_public_holidays
+    :target: https://github.com/OCA/payroll/tree/15.0/payroll_hr_public_holidays
     :alt: OCA/payroll
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/payroll-14-0/payroll-14-0-payroll_hr_public_holidays
+    :target: https://translation.odoo-community.org/projects/payroll-15-0/payroll-15-0-payroll_hr_public_holidays
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/281/14.0
+    :target: https://runbot.odoo-community.org/runbot/281/15.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -86,6 +86,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-nimarosa| 
 
-This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/14.0/payroll_hr_public_holidays>`_ project on GitHub.
+This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/15.0/payroll_hr_public_holidays>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
