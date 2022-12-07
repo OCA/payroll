@@ -238,15 +238,17 @@
                             </field>
                         </page>
                         <page name="computation" string="Salary Computation">
-                            <group>
-                                <field
-                                    name="hide_child_lines"
-                                    widget="boolean_toggle"
-                                />
-                                <field
-                                    name="hide_invisible_lines"
-                                    widget="boolean_toggle"
-                                />
+                            <group name="controls">
+                                <group>
+                                    <field
+                                        name="hide_child_lines"
+                                        widget="boolean_toggle"
+                                    />
+                                    <field
+                                        name="hide_invisible_lines"
+                                        widget="boolean_toggle"
+                                    />
+                                </group>
                             </group>
                             <field
                                 name="dynamic_filtered_payslip_lines"
