@@ -79,3 +79,10 @@ class HrPayslip(models.Model):
         elif vals.get("date_to") and not vals.get("date_payment"):
             vals["date_payment"] = vals["date_to"]
         return super(HrPayslip, self).create(vals)
+
+    def _compute_name(self):
+        for record in self:
+            record.name = _("Salary Slip of %s for %s") % (
+                record.employee_id.name, record.hr_period_id.name
+            )
+            
