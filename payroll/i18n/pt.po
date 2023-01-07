@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2023-01-07 17:42+0000\n"
+"PO-Revision-Date: 2023-01-07 20:44+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/odoo/teams/41243/pt/)\n"
 "Language: pt\n"
@@ -60,6 +60,11 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"Código python incorreto na regra salarial %s (%s) e funcionário %s.\n"
+"Aqui está o erro recebido:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
@@ -71,6 +76,11 @@ msgid ""
 "\n"
 "%s\n"
 msgstr ""
+"\n"
+"Condição python incorreto na regra salarial %s (%s) e funcionário %s.\n"
+"Aqui está o erro recebido:\n"
+"\n"
+"%s\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -146,6 +156,7 @@ msgstr ""
 msgid ""
 "<code>contract:</code> contains current contract object data (hr.contract)"
 msgstr ""
+"<code>contract:</code> contém dados atuais do objeto contrato (hr.contract)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -161,6 +172,8 @@ msgstr ""
 msgid ""
 "<code>employee:</code> contains current employee object data (hr.employee)"
 msgstr ""
+"<code>employee:</code> contém dados atuais do objeto funcionário (hr."
+"employee)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -178,12 +191,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payslip:</code> contains current payslip object data (hr.payslip)"
 msgstr ""
+"<code>payslip:</code> contém dados atuais do objeto recibo de pagamento (hr."
+"payslip)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>payslips:</code> contains payslips data (Payslips - Browsable Object)"
 msgstr ""
+"<code>payslips:</code> contém dados das folhas de pagamento (Payslips - "
+"Objeto Navegável)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -234,7 +251,7 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>rules:</code> contains the rules code (previusly computed)"
-msgstr ""
+msgstr "<code>rules:</code> contém o código das regras (previamente computado)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -479,12 +496,12 @@ msgstr "Todas as regras descendentes"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__allow_cancel_payslips
 msgid "Allow Canceling Payslips"
-msgstr ""
+msgstr "Permitir o Cancelamento de Recibos de Vencimento"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_cancel_payslips
 msgid "Allow canceling confirmed payslips"
-msgstr ""
+msgstr "Permitir o cancelamento de recibos de vencimento confirmados"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__allow_edit_payslip_lines
@@ -494,23 +511,27 @@ msgstr "Permitir a edição"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
 msgid "Allow editing payslip lines"
-msgstr ""
+msgstr "Permitir a edição de linhas de pagamento"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow users to cancel confirmed payslips"
 msgstr ""
+"Permitir que os utilizadores cancelem as folhas de pagamento confirmadas"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_cancel_payslips
 msgid "Allow users to cancel confirmed payslips."
 msgstr ""
+"Permitir que os utilizadores cancelem as folhas de pagamento confirmadas."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_edit_payslip_lines
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow users to edit some payslip line fields manually"
 msgstr ""
+"Permitir aos utiizadores editar manualmente alguns campos de linhas de "
+"vencimentos"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
@@ -568,7 +589,7 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Associated Salary Rules"
-msgstr ""
+msgstr "Regras Salariais Associadas"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_attachment_count
@@ -809,7 +830,7 @@ msgstr "Confirmar"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
 msgid "Confirm payslips without recomputing"
-msgstr ""
+msgstr "Confirmar as folhas de pagamento sem recálculo"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__contract_id
@@ -918,7 +939,7 @@ msgstr "Data para"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Days"
-msgstr ""
+msgstr "Dias"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.DED
@@ -1031,7 +1052,7 @@ msgstr "Lotes de Recibos de Vencimento em Rascunho"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
 msgid "Dynamic Filtered Payslip Lines"
-msgstr ""
+msgstr "Linhas de Vencimento Filtradas Dinamicamente"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_employee
@@ -1198,7 +1219,7 @@ msgstr "Ocultar Linhas Descendentes"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Hours"
-msgstr ""
+msgstr "Horas"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
@@ -1288,6 +1309,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "In payslip worked days, leave days/hours have positive values"
 msgstr ""
+"Nos dias trabalhados nas folhas de vencimento, os dias/horas de férias têm "
+"valores positivos"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -1678,7 +1701,7 @@ msgstr "Linhas do Recibo de Vencimento"
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_contribution_register
 msgid "PaySlip Lines By Contribution Register"
-msgstr ""
+msgstr "Linhas de Vencimento por Contribuições Salariais"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -1706,7 +1729,7 @@ msgstr "Contabilização da Folha de Salários"
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
-msgstr ""
+msgstr "Relatório de Registos de Contribuições Salariais"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
@@ -1799,7 +1822,7 @@ msgstr "Linhas de Recibo de Vencimento por Registo de Contribuição"
 #. module: payroll
 #: model:ir.model,name:payroll.model_payslip_lines_contribution_register
 msgid "Payslip Lines by Contribution Registers"
-msgstr ""
+msgstr "Linhas de Vencimentos por Registos de Contribuição"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__name
@@ -1874,7 +1897,7 @@ msgstr "Período"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Post payslips in accounting"
-msgstr ""
+msgstr "Contabilizar as Folha de Salários"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__prevent_compute_on_confirm
@@ -1885,7 +1908,7 @@ msgstr "Impedir o Cálculo na Confirmação"
 #: model:ir.model.fields,help:payroll.field_res_config_settings__prevent_compute_on_confirm
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Prevent payslips from being recomputed when confirming them"
-msgstr ""
+msgstr "Impedir que as folhas salariais sejam recalculadas quando confirmadas"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_payslip_lines_contribution_register
@@ -2019,24 +2042,24 @@ msgstr "Rejeitado"
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__require_code
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__require_code
 msgid "Require code"
-msgstr ""
+msgstr "Exigir código"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__require_code_and_category
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__require_code_and_category
 msgid "Require code and category"
-msgstr ""
+msgstr "Exigir código e categoria"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__require_code_and_category
 msgid "Require code/category on rules, categories and structures"
-msgstr ""
+msgstr "Exigir código/categoria em regras, categorias e estruturas"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__require_code_and_category
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Require rule.code, rule.category, category.code, structure.code"
-msgstr ""
+msgstr "Exigir rule.code, rule.category, category.code, structure.code"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_user_id
@@ -2195,7 +2218,7 @@ msgstr "Configurações"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_invisible_lines
 msgid "Show only lines that appear on payslip"
-msgstr ""
+msgstr "Mostrar apenas as linhas que aparecem no recibo de vencimento"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -2412,18 +2435,21 @@ msgid ""
 "Wrong percentage base or quantity defined for salary rule %s (%s) for "
 "employee %s."
 msgstr ""
+"Base percentual ou quantidade errada na regra salarial %s (%s) e empregado "
+"%s."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Wrong quantity defined for salary rule %s (%s) for employee %s."
-msgstr ""
+msgstr "Quantidade errada na regra salarial %s (%s) para o funcionário %s."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Wrong range condition defined for salary rule %s (%s) for employee %s."
 msgstr ""
+"Condição de intervalo errada na regra salarial %s (%s) para o funcionário %s."
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
