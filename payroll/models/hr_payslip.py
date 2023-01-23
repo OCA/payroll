@@ -784,3 +784,18 @@ class HrPayslip(models.Model):
             return line[0].total
         else:
             return 0.0
+
+    def line_sum_where(self, field_name, value, rules, result_rules):
+        """
+        The method may be used in salary rule code.
+        It will sum the total of the previously computed rules
+        where the given field has the given value.
+        E.g.: total_seq_10 = payslip.line_sum_where("sequence", 10, rules, result_rules)
+        """
+        return sum(
+            [
+                result_rules.dict[code].dict["total"]
+                for code, rule in rules.dict.items()
+                if getattr(rule, field_name) == value
+            ]
+        )
