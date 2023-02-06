@@ -200,3 +200,48 @@ class TestSalaryRule(TestPayslipBase):
             lambda record: record.name == "rule without category"
         )
         self.assertEqual(len(line), 1, "Line found: rule without category")
+
+    def test_line_sum_where(self):
+        rule_fix_1 = self.SalaryRule.create(
+            {
+                "name": "Fixed rule 1",
+                "sequence": 1,
+                "condition_select": "none",
+                "amount_select": "fix",
+                "amount_fix": 100.0,
+            }
+        )
+        rule_fix_2 = self.SalaryRule.create(
+            {
+                "name": "Fixed rule 2",
+                "sequence": 2,
+                "condition_select": "none",
+                "amount_select": "fix",
+                "amount_fix": 200.0,
+            }
+        )
+        rule_line_sum_where = self.Rule.create(
+            {
+                "name": "Total fixed values",
+                "sequence": 3,
+                "amount_select": "code",
+                "amount_python_compute": """result = payslip.line_sum_where(
+                    "amount_select", "fix", rules, result_rules
+                )""",
+            }
+        )
+        self.sales_pay_structure.rule_ids = [
+            (4, rule_fix_1.id),
+            (4, rule_fix_2.id),
+            (4, rule_line_sum_where.id),
+        ]
+        payslip = self.Payslip.create(
+            {
+                "employee_id": self.richard_emp.id,
+                "contract_id": self.richard_contract.id,
+                "struct_id": self.sales_pay_structure.id,
+            }
+        )
+        payslip.compute_sheet()
+        line = payslip.line_ids.filtered(lambda l: l.name == "Total fixed values")
+        self.assertEqual(line.total, 300, "Fixed rules: 100 + 200 = 300")
