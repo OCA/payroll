@@ -103,7 +103,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>\n"
-"                                                result = contract.wage\n"
+"                                                result_name = \"Custom name"
+"\"\n"
+"                                            </code>"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid ""
+"<code>\n"
 "                                                result_qty = worked_days."
 "WORK100.number_of_days\n"
 "                                            </code>"
@@ -113,7 +121,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>\n"
-"                                                result = contract.wage\n"
 "                                                result_rate = 10.0\n"
 "                                            </code>"
 msgstr ""
@@ -156,6 +163,14 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid ""
+"<code>payslip.line_sum_where(field_name, value, rules, result_rules)</code>\n"
+"                                                    Sum previously computed "
+"rules where the given field has the given value."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payslip:</code> contains current payslip object data (hr.payslip)"
 msgstr ""
 
@@ -180,20 +195,22 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
-"<code>result_name:</code> overrides the current name of the rule and allows "
-"to make dynamic names"
+"<code>result_name</code> (optional): overrides the current name of the rule "
+"and allows to make dynamic names"
 msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
-"<code>result_qty:</code> the quantity of units that will be multiplied to "
-"\"result\""
+"<code>result_qty</code> (optional): the quantity of units that will be "
+"multiplied to \"result\""
 msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "<code>result_rate:</code> the rate that should be applied to \"result\""
+msgid ""
+"<code>result_rate</code> (optional): the rate that should be applied to "
+"\"result\""
 msgstr ""
 
 #. module: payroll

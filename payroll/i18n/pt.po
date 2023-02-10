@@ -116,10 +116,10 @@ msgid ""
 "* If the payslip is confirmed then status is set to 'Done'.             \n"
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
-"* Quando o recibo de vencimento é criado, o estado é 'Rascunho'.             "
-"\n"
-"* Se estiver sob verificação, o estado é 'Computação de Folha'.             "
-"\n"
+"* Quando o recibo de vencimento é criado, o estado é "
+"'Rascunho'.             \n"
+"* Se estiver sob verificação, o estado é 'Computação de "
+"Folha'.             \n"
 "* Se estiver confirmado, o estado é definido como 'Feito'.             \n"
 "* Quando o utilizador cancela o recibo, o estado é 'Rejeitado'."
 
@@ -127,7 +127,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>\n"
-"                                                result = contract.wage\n"
+"                                                result_name = \"Custom name"
+"\"\n"
+"                                            </code>"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid ""
+"<code>\n"
 "                                                result_qty = worked_days."
 "WORK100.number_of_days\n"
 "                                            </code>"
@@ -137,7 +145,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>\n"
-"                                                result = contract.wage\n"
 "                                                result_rate = 10.0\n"
 "                                            </code>"
 msgstr ""
@@ -189,6 +196,14 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
+msgid ""
+"<code>payslip.line_sum_where(field_name, value, rules, result_rules)</code>\n"
+"                                                    Sum previously computed "
+"rules where the given field has the given value."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payslip:</code> contains current payslip object data (hr.payslip)"
 msgstr ""
 "<code>payslip:</code> contém dados atuais do objeto recibo de pagamento (hr."
@@ -219,25 +234,23 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
-"<code>result_name:</code> overrides the current name of the rule and allows "
-"to make dynamic names"
+"<code>result_name</code> (optional): overrides the current name of the rule "
+"and allows to make dynamic names"
 msgstr ""
-"<code>result_name:</code> anula o nome atual da regra e permite fazer nomes "
-"dinâmicos"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
-"<code>result_qty:</code> the quantity of units that will be multiplied to "
-"\"result\""
+"<code>result_qty</code> (optional): the quantity of units that will be "
+"multiplied to \"result\""
 msgstr ""
-"<code>resultado_qty:</code> a quantidade de unidades que será multiplicada "
-"por \"result\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "<code>result_rate:</code> the rate that should be applied to \"result\""
-msgstr "<code>result_rate:</code> a taxa que deve ser aplicada ao \"result\""
+msgid ""
+"<code>result_rate</code> (optional): the rate that should be applied to "
+"\"result\""
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -2488,6 +2501,25 @@ msgstr "resultado será afetado a uma variável"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid ""
+#~ "<code>result_name:</code> overrides the current name of the rule and "
+#~ "allows to make dynamic names"
+#~ msgstr ""
+#~ "<code>result_name:</code> anula o nome atual da regra e permite fazer "
+#~ "nomes dinâmicos"
+
+#~ msgid ""
+#~ "<code>result_qty:</code> the quantity of units that will be multiplied to "
+#~ "\"result\""
+#~ msgstr ""
+#~ "<code>resultado_qty:</code> a quantidade de unidades que será "
+#~ "multiplicada por \"result\""
+
+#~ msgid ""
+#~ "<code>result_rate:</code> the rate that should be applied to \"result\""
+#~ msgstr ""
+#~ "<code>result_rate:</code> a taxa que deve ser aplicada ao \"result\""
 
 #, python-format
 #~ msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."
