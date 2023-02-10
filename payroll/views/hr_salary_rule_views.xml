@@ -237,6 +237,13 @@
                                         <li>
                                             <code
                                             >payslip:</code> contains current payslip object data (hr.payslip)
+                                            <ul>
+                                                <li>
+                                                    <code
+                                                    >payslip.line_sum_where(field_name, value, rules, result_rules)</code>
+                                                    Sum previously computed rules where the given field has the given value.
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li>
                                             <code
@@ -295,15 +302,15 @@
                                         </li>
                                         <li>
                                             <code
-                                            >result_rate:</code> the rate that should be applied to "result"
+                                            >result_qty</code> (optional): the quantity of units that will be multiplied to "result"
                                         </li>
                                         <li>
                                             <code
-                                            >result_qty:</code> the quantity of units that will be multiplied to "result"
+                                            >result_rate</code> (optional): the rate that should be applied to "result"
                                         </li>
                                         <li>
                                             <code
-                                            >result_name:</code> overrides the current name of the rule and allows to make dynamic names
+                                            >result_name</code> (optional): overrides the current name of the rule and allows to make dynamic names
                                         </li>
                                     </ul>
                                     <h3>Examples</h3>
@@ -313,14 +320,17 @@
                                         </li>
                                         <li>
                                             <code>
-                                                result = contract.wage
                                                 result_qty = worked_days.WORK100.number_of_days
                                             </code>
                                         </li>
                                         <li>
                                             <code>
-                                                result = contract.wage
                                                 result_rate = 10.0
+                                            </code>
+                                        </li>
+                                        <li>
+                                            <code>
+                                                result_name = "Custom name"
                                             </code>
                                         </li>
                                     </ul>
