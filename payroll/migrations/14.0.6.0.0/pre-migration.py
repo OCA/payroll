@@ -4,13 +4,14 @@ from odoo.addons.payroll.migrations.move_records import move_records
 
 
 def rename_tables(cr):
-    openupgrade.rename_tables(
-        cr,
-        [
-            ("hr_rule_parameter", None),
-            ("hr_rule_parameter_value", None),
-        ],
-    )
+    if openupgrade.table_exists(cr, "hr_rule_parameter"):
+        openupgrade.rename_tables(
+            cr,
+            [
+                ("hr_rule_parameter", None),
+                ("hr_rule_parameter_value", None),
+            ],
+        )
 
 
 @openupgrade.migrate()
