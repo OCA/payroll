@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2022-11-09 22:45+0000\n"
+"PO-Revision-Date: 2023-02-21 07:55+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es_AR\n"
@@ -132,6 +132,10 @@ msgid ""
 "\"\n"
 "                                            </code>"
 msgstr ""
+"<code>\n"
+"                                                result_name = \"Nombre "
+"personalizado\"\n"
+"                                            </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -141,6 +145,10 @@ msgid ""
 "WORK100.number_of_days\n"
 "                                            </code>"
 msgstr ""
+"<code>\n"
+"                                                result_qty = worked_days."
+"WORK100.number_of_days\n"
+"                                            </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -149,6 +157,9 @@ msgid ""
 "                                                result_rate = 10.0\n"
 "                                            </code>"
 msgstr ""
+"<code>\n"
+"                                                result_rate = 10.0\n"
+"                                            </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -202,6 +213,9 @@ msgid ""
 "                                                    Sum previously computed "
 "rules where the given field has the given value."
 msgstr ""
+"<code>payslip.line_sum_where(field_name, value, rules, result_rules)</code>\n"
+"                                                    Suma las reglas "
+"computadas previamente donde los campos dados tienen el valor dado."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -238,6 +252,8 @@ msgid ""
 "<code>result_name</code> (optional): overrides the current name of the rule "
 "and allows to make dynamic names"
 msgstr ""
+"<code>result_name</code> (opcional): sobrescribe el nombre actual de la "
+"regla y permite hacer nombres dinámicos"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -245,6 +261,8 @@ msgid ""
 "<code>result_qty</code> (optional): the quantity of units that will be "
 "multiplied to \"result\""
 msgstr ""
+"<code>result_qty</code> (opcional): la cantidad de unidades que serán "
+"multiplicadas a \"result\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -252,6 +270,8 @@ msgid ""
 "<code>result_rate</code> (optional): the rate that should be applied to "
 "\"result\""
 msgstr ""
+"<code>result_rate</code> (opcional): la tasa que debe ser aplicada a \"result"
+"\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
