@@ -22,7 +22,7 @@ class HrPayslip(models.Model):
     @api.constrains("hr_period_id", "company_id")
     def _check_period_company(self):
         for slip in self:
-            if slip.hr_period_id:
+            if slip.hr_period_id and slip.hr_period_id.company_id != slip.company_id:
                 if slip.hr_period_id.company_id != slip.company_id:
                     raise UserError(
                         _(

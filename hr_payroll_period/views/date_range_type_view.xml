@@ -4,7 +4,7 @@
         <field name="name">date.range.type.hr.tree</field>
         <field name="model">date.range.type</field>
         <field name="arch" type="xml">
-            <tree name="Payroll Range Types">
+            <tree>
                 <field name="name" />
                 <field name="allow_overlap" />
                 <field

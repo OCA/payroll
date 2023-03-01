@@ -94,7 +94,6 @@ class HrFiscalYear(models.Model):
     )
     schedule_pay = fields.Selection(
         get_schedules,
-        "Scheduled Pay",
         required=True,
         states={"draft": [("readonly", False)]},
         default="monthly",
@@ -143,7 +142,7 @@ class HrFiscalYear(models.Model):
     @api.onchange("schedule_pay", "date_start")
     def onchange_schedule(self):
         if self.schedule_pay and self.date_start:
-            year = datetime.strptime(str(self.date_start), DF).year
+            year = strptime(str(self.date_start), DF).year
             schedule_name = next(
                 (s[1] for s in get_schedules(self) if s[0] == self.schedule_pay), False
             )
@@ -152,8 +151,8 @@ class HrFiscalYear(models.Model):
                 "schedule": schedule_name,
             }
 
-    @api.model
     def get_generator_vals(self):
+        self.ensure_one()
         no_interval = 1
         if self.schedule_pay == "daily":
             unit_of_time = DAILY
@@ -196,6 +195,7 @@ class HrFiscalYear(models.Model):
         """
         Create every periods a payroll fiscal year
         """
+        self.ensure_one()
         for fy in self:
             for period in fy.period_ids:
                 period.unlink()
@@ -208,10 +208,8 @@ class HrFiscalYear(models.Model):
                 )
             )
         if self.schedule_pay == "semi-monthly":
-            period_start = datetime.strptime(str(self.date_start), DF)
-            next_year_start = datetime.strptime(str(self.date_end), DF) + relativedelta(
-                days=1
-            )
+            period_start = strptime(str(self.date_start), DF)
+            next_year_start = strptime(str(self.date_end), DF) + relativedelta(days=1)
             #  Case for semi-monthly schedules
             delta_1 = relativedelta(days=14)
             delta_2 = relativedelta(months=1)
@@ -255,7 +253,8 @@ class HrFiscalYear(models.Model):
                             "date_end": date_end,
                             "date_payment": self._get_day_of_payment(date_end),
                             "company_id": self.company_id.id,
-                            "name": _("%s Period #%s") % (self.name, number),
+                            "name": _("%(name)s Period #%(number)s")
+                            % {"name": self.name, "number": number},
                             "number": number,
                             "state": "draft",
                             "type_id": period_type.id,

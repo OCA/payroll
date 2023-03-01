@@ -12,7 +12,6 @@ class HrPayslipRun(models.Model):
     _inherit = "hr.payslip.run"
 
     name = fields.Char(
-        "Name",
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -31,13 +30,13 @@ class HrPayslipRun(models.Model):
         "Date of Payment", states={"close": [("readonly", True)]}
     )
     schedule_pay = fields.Selection(
-        get_schedules, "Scheduled Pay", states={"close": [("readonly", True)]}
+        get_schedules, states={"close": [("readonly", True)]}
     )
 
     @api.constrains("hr_period_id", "company_id")
     def _check_period_company(self):
         for run in self:
-            if run.hr_period_id:
+            if run.hr_period_id and run.hr_period_id.company_id != run.company_id:
                 if run.hr_period_id.company_id != run.company_id:
                     raise UserError(
                         _(
@@ -49,7 +48,7 @@ class HrPayslipRun(models.Model):
     @api.constrains("hr_period_id", "schedule_pay")
     def _check_period_schedule(self):
         for run in self:
-            if run.hr_period_id:
+            if run.hr_period_id and run.hr_period_id.schedule_pay != run.schedule_pay:
                 if run.hr_period_id.schedule_pay != run.schedule_pay:
                     raise UserError(
                         _(
@@ -131,10 +130,8 @@ class HrPayslipRun(models.Model):
         for run in self:
             if next((p for p in run.slip_ids if p.state == "draft"), False):
                 raise UserError(
-                    _(
-                        "The payslip batch %s still has unconfirmed "
-                        "payslips." % run.name
-                    )
+                    _("The payslip batch %s still has unconfirmed " "payslips.")
+                    % run.name
                 )
         self.update_periods()
         return super(HrPayslipRun, self).close_payslip_run()

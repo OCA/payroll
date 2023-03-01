@@ -122,8 +122,8 @@ class PayslipCase(test_hr_fiscalyear.TestHrFiscalyear):
             pay.write({"state": "draft"})
             with self.assertRaises(UserError):
                 run.close_payslip_run()
-            pay.write({"state": "open"})
-            pay.hr_payslip.action_payslip_done()
+            pay.write({"state": "draft"})
+            pay.action_payslip_done()
         run.close_payslip_run()
         next_period = fy.search_period(number=periods[0].number + 1)
         self.assertEqual(next_period.state, "open")
