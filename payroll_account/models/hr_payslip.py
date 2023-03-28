@@ -8,35 +8,6 @@ from odoo.exceptions import UserError
 logger = logging.getLogger(__name__)
 
 
-class HrPayslipLine(models.Model):
-    _inherit = "hr.payslip.line"
-
-    def _get_partner_id(self, credit_account):
-        """
-        Get partner_id of slip line to use in account_move_line
-        """
-        # use partner of salary rule or fallback on employee's address
-        register_partner_id = self.salary_rule_id.register_id.partner_id
-        partner_id = (
-            register_partner_id.id or self.slip_id.employee_id.address_home_id.id
-        )
-        if credit_account:
-            if (
-                register_partner_id
-                or self.salary_rule_id.account_credit.internal_type
-                in ("receivable", "payable")
-            ):
-                return partner_id
-        else:
-            if (
-                register_partner_id
-                or self.salary_rule_id.account_debit.internal_type
-                in ("receivable", "payable")
-            ):
-                return partner_id
-        return False
-
-
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
@@ -273,46 +244,3 @@ class HrPayslip(models.Model):
                     f"Payslip {slip.number} did not generate any account move lines"
                 )
         return res
-
-
-class HrSalaryRule(models.Model):
-    _inherit = "hr.salary.rule"
-
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", "Analytic Account"
-    )
-    account_tax_id = fields.Many2one("account.tax", "Tax")
-    account_debit = fields.Many2one(
-        "account.account", "Debit Account", domain=[("deprecated", "=", False)]
-    )
-    account_credit = fields.Many2one(
-        "account.account", "Credit Account", domain=[("deprecated", "=", False)]
-    )
-
-    tax_base_id = fields.Many2one("hr.salary.rule", "Base")
-    tax_line_ids = fields.One2many("hr.salary.rule", "tax_base_id", string="Tax lines")
-
-
-class HrContract(models.Model):
-    _inherit = "hr.contract"
-    _description = "Employee Contract"
-
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", "Analytic Account"
-    )
-    journal_id = fields.Many2one("account.journal", "Salary Journal")
-
-
-class HrPayslipRun(models.Model):
-    _inherit = "hr.payslip.run"
-
-    journal_id = fields.Many2one(
-        "account.journal",
-        "Salary Journal",
-        states={"draft": [("readonly", False)]},
-        readonly=True,
-        required=True,
-        default=lambda self: self.env["account.journal"].search(
-            [("type", "=", "general")], limit=1
-        ),
-    )
