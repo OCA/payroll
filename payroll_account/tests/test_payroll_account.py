@@ -10,7 +10,7 @@ from odoo.tests import common
 
 class TestPayrollAccount(common.TransactionCase):
     def setUp(self):
-        super(TestPayrollAccount, self).setUp()
+        super().setUp()
 
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
