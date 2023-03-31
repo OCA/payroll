@@ -33,7 +33,7 @@ msgid "Accounting Entry"
 msgstr "Muhasebe Kaydı"
 
 #. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Adjustment Entry"
 msgstr "Düzeltme Kaydı"
@@ -49,6 +49,12 @@ msgstr "Analitik Hesap"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
+msgstr ""
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__company_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__company_id
+msgid "Company"
 msgstr ""
 
 #. module: payroll_account
@@ -129,7 +135,7 @@ msgid "Payslip Line"
 msgstr "Bordro Satırı"
 
 #. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip of %s"
 msgstr "%s Maaş Bordrosu"
@@ -159,7 +165,7 @@ msgid "Tax lines"
 msgstr ""
 
 #. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Credit Account!"
@@ -167,7 +173,7 @@ msgstr ""
 "Gider Yevmiyesi \"%s\" Alacak Hesabı düzgün olarak yapılandırılmış değil!"
 
 #. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
