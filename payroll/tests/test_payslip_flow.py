@@ -236,7 +236,7 @@ class TestPayslipFlow(TestPayslipBase):
         )
         contracts = payslip._get_employee_contracts()
         self.assertEqual(
-            len(contracts), 2, "There are two open contracts for the employee"
+            len(contracts), 1, "There is one open contract for the employee"
         )
 
     def test_get_contracts_multiple(self):
