@@ -565,3 +565,35 @@ class TestPayslipFlow(TestPayslipBase):
             "Random name Bar",
             "Payslip name not changed because there is no contract",
         )
+
+    def test_employee_multiple_contracts(self):
+
+        self.sally.contract_ids[0].date_end = Date.today().strftime("%Y-%m-15")
+        self.Contract.create(
+            {
+                "name": "Second contract for Sally",
+                "employee_id": self.sally.id,
+                "date_start": Date.today().strftime("%Y-%m-16"),
+                "struct_id": self.sales_pay_structure.id,
+                "wage": 6500.00,
+                "state": "open",
+                "kanban_state": "done",
+            }
+        )
+        self.apply_contract_cron()
+
+        payslip = self.Payslip.create(
+            {"employee_id": self.sally.id},
+        )
+
+        # 1st attempt
+        contracts = payslip._get_employee_contracts()
+        self.assertEqual(
+            len(contracts), 2, "There are 2 open contracts in the payslips"
+        )
+        # 2nd attempt (after setting payslip.contract_id) should yield same result
+        payslip.contract_id = self.sally.contract_ids[0].id
+        contracts = payslip._get_employee_contracts()
+        self.assertEqual(
+            len(contracts), 2, "There are still 2 open contracts in the payslips"
+        )

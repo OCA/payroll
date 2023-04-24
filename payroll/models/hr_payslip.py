@@ -712,12 +712,11 @@ class HrPayslip(models.Model):
     def _get_employee_contracts(self):
         contracts = self.env["hr.contract"]
         for payslip in self:
-            if payslip.contract_id.ids:
+            contracts |= payslip.employee_id._get_contracts(
+                date_from=payslip.date_from, date_to=payslip.date_to
+            )
+            if not contracts and payslip.contract_id.ids:
                 contracts |= payslip.contract_id
-            else:
-                contracts |= payslip.employee_id._get_contracts(
-                    date_from=payslip.date_from, date_to=payslip.date_to
-                )
         return contracts
 
     @api.onchange("struct_id")
