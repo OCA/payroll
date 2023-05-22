@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+  <record model="date.range.type" id="date_range_hr_fiscal_year">
+      <field name="name">HR Fiscal Year</field>
+      <field name="allow_overlap" eval="False" />
+      <field name="hr_fiscal_year" eval="True" />
+  </record>
+
+  <record model="date.range.type" id="date_range_hr_period">
+      <field name="name">HR Period</field>
+      <field name="allow_overlap" eval="False" />
+      <field name="hr_period" eval="True" />
+  </record>
+
+</odoo>
