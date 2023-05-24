@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2015-07-27 23:36+0000\n"
 "PO-Revision-Date: 2022-11-01 22:44+0000\n"
 "Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-hr-7-0/language/es/)"
-"\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-hr-7-0/language/"
+"es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,8 +22,8 @@ msgstr ""
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
-msgid "%s Period #%s"
-msgstr "%s Periodo #%s"
+msgid "%(name)s Period #%(number)s"
+msgstr ""
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
@@ -169,13 +169,7 @@ msgid "Defines the frequency of the wage payment."
 msgstr "Define la frecuencia del pago del salario."
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base__display_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__display_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__display_name
 msgid "Display Name"
 msgstr "Nombre para mostrar"
@@ -283,13 +277,7 @@ msgid "HR Period"
 msgstr "Periodo"
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base__id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__id
 msgid "ID"
 msgstr "ID"
@@ -311,13 +299,7 @@ msgid "Last"
 msgstr "Ultimo"
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base____last_update
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run____last_update
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
@@ -445,11 +427,15 @@ msgid "Saturday"
 msgstr "Sabado"
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__schedule_pay
+msgid "Schedule Pay"
+msgstr ""
+
+#. module: hr_payroll_period
+#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__schedule_pay
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_filter
 msgid "Scheduled Pay"
 msgstr "Pago planificado"
@@ -620,3 +606,7 @@ msgstr ""
 #, python-format
 msgid "You must create periods before confirming the fiscal year."
 msgstr "Debes crear los periodos antes de confirmar el año fiscal."
+
+#, python-format
+#~ msgid "%s Period #%s"
+#~ msgstr "%s Periodo #%s"

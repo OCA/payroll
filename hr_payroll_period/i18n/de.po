@@ -21,7 +21,7 @@ msgstr ""
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
-msgid "%s Period #%s"
+msgid "%(name)s Period #%(number)s"
 msgstr ""
 
 #. module: hr_payroll_period
@@ -170,13 +170,7 @@ msgid "Defines the frequency of the wage payment."
 msgstr ""
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base__display_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees__display_name
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__display_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__display_name
 msgid "Display Name"
 msgstr ""
@@ -285,13 +279,7 @@ msgid "HR Period"
 msgstr ""
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base__id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees__id
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__id
 msgid "ID"
 msgstr ""
@@ -313,13 +301,7 @@ msgid "Last"
 msgstr ""
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base____last_update
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees____last_update
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run____last_update
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -447,11 +429,15 @@ msgid "Saturday"
 msgstr ""
 
 #. module: hr_payroll_period
-#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_employees__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__schedule_pay
+msgid "Schedule Pay"
+msgstr ""
+
+#. module: hr_payroll_period
+#: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__schedule_pay
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_filter
 msgid "Scheduled Pay"
 msgstr ""
