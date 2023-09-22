@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-10 10:10+0000\n"
-"PO-Revision-Date: 2023-06-22 13:08+0000\n"
+"PO-Revision-Date: 2023-09-22 11:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
 "Language: it\n"
@@ -55,7 +55,7 @@ msgstr "Conto avere"
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__date
 msgid "Date Account"
-msgstr ""
+msgstr "Data conto"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_debit
@@ -77,7 +77,8 @@ msgstr "Genera le buste paga per tutti i dipendenti selezionati"
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
 msgid "Keep empty to use the period of the validation(Payslip) date."
 msgstr ""
-"Tenere vuoto per utilizzare il periodo della data di validazione (busta paga)"
+"Tenere vuoto per utilizzare il periodo della data di validazione (busta "
+"paga)."
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
@@ -124,7 +125,7 @@ msgstr "Imposta"
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Credit Account!"
 msgstr ""
-"Il registro spese \"%s\" non ha configurato correttamente il conto avere."
+"Il registro spese \"%s\" non ha configurato correttamente il conto avere!"
 
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
@@ -132,4 +133,4 @@ msgstr ""
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
 msgstr ""
-"Il registro spese \"%s\" non ha configurato correttamente il conto dare."
+"Il registro spese \"%s\" non ha configurato correttamente il conto dare!"
