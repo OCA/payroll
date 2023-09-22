@@ -1506,8 +1506,8 @@ msgstr "Cantidad de errores"
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction_counter
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Cantidad de mensajes que requieren una acción"
+msgid "Number of messages requiring action"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error_counter
@@ -2387,6 +2387,9 @@ msgstr "El resultado afectará a una variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Cantidad de mensajes que requieren una acción"
 
 #~ msgid ""
 #~ "<div style=\"margin: 0px; padding: 0px;\">\n"
