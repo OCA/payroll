@@ -1103,8 +1103,8 @@ msgstr "Nòmina"
 #, python-format
 msgid "Payslip 'Date From' must be earlier than 'Date To'."
 msgstr ""
-"La \"Data des de\" del full de pagament ha de ser anterior a la \"Data fins "
-"a\"."
+"La \"Data des de\" del full de pagament ha de ser anterior a la \"Data fins a"
+"\"."
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_run
