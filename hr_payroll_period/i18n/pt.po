@@ -509,8 +509,7 @@ msgstr "Domingo"
 #. module: hr_payroll_period
 #: model:ir.model.fields,help:hr_payroll_period.field_hr_fiscalyear__active
 #: model:ir.model.fields,help:hr_payroll_period.field_hr_period__active
-msgid ""
-"The active field allows you to hide the date range without removing it."
+msgid "The active field allows you to hide the date range without removing it."
 msgstr "O campo ativo permite ocultar o período sem o remover."
 
 #. module: hr_payroll_period
