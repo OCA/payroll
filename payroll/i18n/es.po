@@ -61,8 +61,8 @@ msgid ""
 "%(err)s\n"
 msgstr ""
 "\n"
-"Código de Python incorrecto definido para la regla salarial %(nm)s (%(code)s)"
-" para los empleados %(ee)s.\n"
+"Código de Python incorrecto definido para la regla salarial %(nm)s "
+"(%(code)s) para los empleados %(ee)s.\n"
 "Aquí está el error recibido:\n"
 "\n"
 "%(err)s\n"
@@ -197,7 +197,8 @@ msgstr "<code>entradas:</code> contiene los datos de entrada calculados"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payroll:</code> contains miscellaneous values related to payroll"
-msgstr "<code>nómina:</code> contiene valores varios relacionados con la nómina"
+msgstr ""
+"<code>nómina:</code> contiene valores varios relacionados con la nómina"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -248,7 +249,8 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>result_rate:</code> the rate that should be applied to \"result\""
-msgstr "<code>tasa_resultado:</code> la tasa que debe aplicarse a \"resultado\""
+msgstr ""
+"<code>tasa_resultado:</code> la tasa que debe aplicarse a \"resultado\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -302,8 +304,8 @@ msgstr ""
 "        <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "            Querido<t t-out=\"object.employee_id.name\"></t>,\n"
 "            <br><br>\n"
-"           Se adjunta la nómina de <t t-out=\"object.payslip_run_id.name\""
-"></t>.\n"
+"           Se adjunta la nómina de <t t-out=\"object.payslip_run_id.name\"></"
+"t>.\n"
 "            <br><br>\n"
 "            No dude en ponerse en contacto con nosotros si tiene alguna "
 "pregunta.\n"

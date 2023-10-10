@@ -164,8 +164,8 @@ msgid ""
 "<code>current_contract:</code> contains values related/calculated for "
 "current contract"
 msgstr ""
-"<code>current_contract:</code> حاوی مقادیر مرتبط/محاسبه‌شده برای قرارداد "
-"فعلی است"
+"<code>current_contract:</code> حاوی مقادیر مرتبط/محاسبه‌شده برای قرارداد فعلی "
+"است"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -194,8 +194,8 @@ msgstr ""
 msgid ""
 "<code>payslips:</code> contains payslips data (Payslips - Browsable Object)"
 msgstr ""
-"<code>فیش‌های حقوقی:</code> حاوی داده‌های فیش حقوقی است (فیش‌های حقوق - شی "
-"قابل مرور)"
+"<code>فیش‌های حقوقی:</code> حاوی داده‌های فیش حقوقی است (فیش‌های حقوق - شی قابل "
+"مرور)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -695,8 +695,8 @@ msgid ""
 msgstr ""
 "عملکرد قانون فرزند زمانی مفید است که نیاز دارید قوانین دیگری قبل از قوانین "
 "اصلی محاسبه شوند. <br/>\n"
-"این بدان معنی است که تمام قوانین حقوق و دستمزد اعلام شده به عنوان فرزند ("
-"والدین یک قانون) در صورتی به محاسبه اضافه می شود که قانون والدین آن در "
+"این بدان معنی است که تمام قوانین حقوق و دستمزد اعلام شده به عنوان فرزند "
+"(والدین یک قانون) در صورتی به محاسبه اضافه می شود که قانون والدین آن در "
 "ساختار حقوق گنجانده شود. بنابراین قوانین فرزند فقط در صورتی محاسبه می شوند "
 "که والد آن محاسبه شود.\n"
 "<br/>\n"
@@ -1253,8 +1253,8 @@ msgid ""
 "If its checked, indicates that all payslips generated from here are refund "
 "payslips."
 msgstr ""
-"اگر علامت زده شود، نشان می‌دهد که تمام فیش‌های حقوقی که از اینجا تولید "
-"می‌شوند، فیش‌های بازپرداخت هستند."
+"اگر علامت زده شود، نشان می‌دهد که تمام فیش‌های حقوقی که از اینجا تولید می‌شوند، "
+"فیش‌های بازپرداخت هستند."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__active
@@ -1344,8 +1344,8 @@ msgid ""
 "SALEURO.amount * contract.wage*0.01."
 msgstr ""
 "در محاسبات استفاده می شود. برای مثال قاعده ای برای فروش دارای 1% کارمزد حقوق "
-"پایه برای هر محصول می تواند به صورت result = inputs.SALEURO.amount * contract"
-".wage*0.01 تعریف شود."
+"پایه برای هر محصول می تواند به صورت result = inputs.SALEURO.amount * "
+"contract.wage*0.01 تعریف شود."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
@@ -1606,8 +1606,8 @@ msgid ""
 "Only rejected payslips can be reset to draft, the payslip %(nm)s is in "
 "%(st)s state"
 msgstr ""
-"فقط فیش های حقوقی رد شده را می توان به پیش نویس بازنشانی کرد، فیش حقوقی %(nm)"
-"s در وضعیت %(st)s است"
+"فقط فیش های حقوقی رد شده را می توان به پیش نویس بازنشانی کرد، فیش حقوقی "
+"%(nm)s در وضعیت %(st)s است"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -2299,8 +2299,8 @@ msgid ""
 "(hra, ma, lta, etc.) and the variable basic."
 msgstr ""
 "این برای محاسبه مقادیر فیلدهای % استفاده خواهد شد. به طور کلی روی پایه است، "
-"اما می توانید از فیلدهای کد دسته ها با حروف کوچک به عنوان نام متغیر (hra، ma،"
-" lta و غیره) و متغیر basic نیز استفاده کنید."
+"اما می توانید از فیلدهای کد دسته ها با حروف کوچک به عنوان نام متغیر (hra، "
+"ma، lta و غیره) و متغیر basic نیز استفاده کنید."
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_leave_type
