@@ -16,7 +16,6 @@
     },
     "license": "LGPL-3",
     "maintainers": ["appstogrow", "nimarosa"],
-    "pre_init_hook": "pre_init_hook",
-    "version": "14.0.2.0.2",
+    "version": "16.0.1.0.0",
     "website": "https://github.com/OCA/payroll",
 }
