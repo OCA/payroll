@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class HrEmployee(models.AbstractModel):
     _inherit = "hr.employee.base"
 
-    contract_id = fields.Many2one(search="_search_contract")
+    contract_id = fields.Many2one(comodel_name="hr.contract", search="_search_contract")
 
     @api.model
     def _search_contract(self, operator, value):
