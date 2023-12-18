@@ -1,9 +1,9 @@
-# Project specific
-oca.cfg
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+/.venv
+/.pytest_cache
+/.ruff_cache
 
 # C extensions
 *.so
@@ -16,7 +16,6 @@ build/
 develop-eggs/
 dist/
 eggs/
-lib/
 lib64/
 parts/
 sdist/
