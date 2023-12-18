@@ -111,6 +111,14 @@ xmlid_renames = [
         "hr_payroll.view_hr_salary_rule_category_filter",
         "hr_payroll.hr_salary_rule_category_view_search",
     ),
+    (
+        "hr_payroll.group_hr_payroll_manager",
+        "hr_payroll.group_payroll_manager",
+    ),
+    (
+        "hr_payroll.group_hr_payroll_user",
+        "hr_payroll.group_payroll_user",
+    ),
 ]
 
 
