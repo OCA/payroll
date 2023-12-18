@@ -4,14 +4,8 @@
 from openupgradelib import openupgrade
 
 xmlid_renames = [
-    (
-        "payroll.act_contribution_reg_payslip_lines",
-        "payroll.hr_payslip_line_action",
-    ),
-    (
-        "payroll.act_hr_employee_payslip_list",
-        "payroll.hr_payslip_action_employee",
-    ),
+    ("payroll.act_contribution_reg_payslip_lines", "payroll.hr_payslip_line_action",),
+    ("payroll.act_hr_employee_payslip_list", "payroll.hr_payslip_action_employee",),
     (
         "payroll.act_payslip_lines",
         "payroll.hr_payslip_line_action_computation_details",
@@ -39,19 +33,13 @@ xmlid_renames = [
         "payroll.hr_contribution_register_menu",
     ),
     ("payroll.menu_department_tree", "payroll.hr_payslip_menu"),
-    (
-        "payroll.menu_hr_payroll_configuration",
-        "payroll.payroll_menu_configuration",
-    ),
+    ("payroll.menu_hr_payroll_configuration", "payroll.payroll_menu_configuration",),
     (
         "payroll.menu_hr_payroll_global_settings",
         "payroll.menu_payroll_global_settings",
     ),
     ("payroll.menu_hr_payroll_root", "payroll.payroll_menu_root",),
-    (
-        "payroll.menu_hr_payroll_structure_view",
-        "payroll.hr_payroll_structure_menu",
-    ),
+    ("payroll.menu_hr_payroll_structure_view", "payroll.hr_payroll_structure_menu",),
     ("payroll.menu_hr_payslip_run", "payroll.hr_payslip_run_menu"),
     ("payroll.hr_contract_form_inherit", "payroll.hr_contract_view_form"),
     (
@@ -81,10 +69,7 @@ xmlid_renames = [
     ("payroll.hr_salary_rule_list", "payroll.hr_salary_rule_view_tree_children"),
     ("payroll.hr_salary_rule_tree", "payroll.hr_salary_rule_view_tree"),
     ("payroll.payroll_hr_employee_view_form", "payroll.hr_employee_view_form"),
-    (
-        "payroll.view_hr_employee_grade_form",
-        "payroll.hr_payroll_structure_view_form",
-    ),
+    ("payroll.view_hr_employee_grade_form", "payroll.hr_payroll_structure_view_form",),
     (
         "payroll.view_hr_payroll_structure_filter",
         "payroll.hr_payroll_structure_view_search",
@@ -99,10 +84,7 @@ xmlid_renames = [
     ),
     ("payroll.view_hr_payslip_filter", "payroll.hr_payslip_view_search"),
     ("payroll.view_hr_payslip_form", "payroll.hr_payslip_view_form"),
-    (
-        "payroll.view_hr_payslip_line_filter",
-        "payroll.hr_payslip_line_view_search",
-    ),
+    ("payroll.view_hr_payslip_line_filter", "payroll.hr_payslip_line_view_search",),
     ("payroll.view_hr_payslip_line_form", "payroll.hr_payslip_line_view_form"),
     ("payroll.view_hr_payslip_line_tree", "payroll.hr_payslip_line_view_tree"),
     ("payroll.view_hr_payslip_tree", "payroll.hr_payslip_view_tree"),
@@ -111,14 +93,8 @@ xmlid_renames = [
         "payroll.view_hr_salary_rule_category_filter",
         "payroll.hr_salary_rule_category_view_search",
     ),
-    (
-        "payroll.group_hr_payroll_manager",
-        "payroll.group_payroll_manager",
-    ),
-    (
-        "payroll.group_hr_payroll_user",
-        "payroll.group_payroll_user",
-    ),
+    ("payroll.group_hr_payroll_manager", "payroll.group_payroll_manager",),
+    ("payroll.group_hr_payroll_user", "payroll.group_payroll_user",),
 ]
 
 
