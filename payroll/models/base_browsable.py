@@ -7,7 +7,7 @@ from odoo import fields
 _logger = logging.getLogger(__name__)
 
 
-class BaseBrowsableObject(object):
+class BaseBrowsableObject:
     def __init__(self, vals_dict):
         self.__dict__["base_fields"] = ["base_fields", "dict"]
         self.dict = vals_dict

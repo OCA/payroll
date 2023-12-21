@@ -55,9 +55,10 @@ class HrPayslipLine(models.Model):
         for line in self:
             if line.parent_rule_id:
                 parent_line = line.slip_id.line_ids.filtered(
-                    lambda l: l.salary_rule_id == line.parent_rule_id
-                    and l.contract_id == line.contract_id
-                    and l.slip_id == line.slip_id
+                    lambda record, line=line: record.salary_rule_id
+                    == line.parent_rule_id
+                    and record.contract_id == line.contract_id
+                    and record.slip_id == line.slip_id
                 )
                 if parent_line and len(parent_line) > 1:
                     raise UserError(
@@ -92,4 +93,4 @@ class HrPayslipLine(models.Model):
                     raise UserError(
                         _("You must set a contract to create a payslip line.")
                     )
-        return super(HrPayslipLine, self).create(vals_list)
+        return super().create(vals_list)

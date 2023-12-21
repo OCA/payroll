@@ -27,7 +27,10 @@
         </p>
     </div>
             </field>
-            <field name="report_template" ref="payroll.action_report_payslip" />
+            <field
+                name="report_template_ids"
+                eval="[(4, ref('payroll.action_report_payslip'))]"
+            />
             <field name="lang">{{object.employee_id.address_home_id.lang}}</field>
             <field name="auto_delete" eval="True" />
         </record>
