@@ -25,8 +25,8 @@
                     groups="base.group_multi_company"
                     options="{'no_create': True}"
                 />
-                <field name="payslip_run_id" invisible="1" />
-                <field name="message_needaction" invisible="1" />
+                <field name="payslip_run_id" column_invisible="1" />
+                <field name="message_needaction" column_invisible="1" />
             </tree>
         </field>
     </record>
@@ -79,45 +79,45 @@
                         string="Confirm"
                         name="action_payslip_done"
                         type="object"
-                        states="verify"
+                        invisible="state != 'verify'"
                         class="oe_highlight"
                     />
                     <button
                         string="Refund"
                         name="refund_sheet"
-                        states="done"
+                        invisible="state != 'done'"
                         type='object'
                     />
                     <button
                         string="Compute Sheet"
                         name="compute_sheet"
                         type="object"
-                        states="draft,verify"
+                        invisible="state not in ('draft','verify')"
                         class="oe_highlight"
                     />
                     <button
                         string="Set to Draft"
                         name="action_payslip_draft"
                         type="object"
-                        states="cancel,verify"
+                        invisible="state not in ('cancel','verify')"
                     />
                     <button
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        states="draft,verify"
+                        invisible="state not in ('draft','verify')"
                     />
                     <button
                         string="Cancel Payslip"
                         name="action_payslip_cancel"
                         type="object"
-                        attrs="{'invisible': ['|', ('state', '!=', 'done'), ('allow_cancel_payslips', '=', False)]}"
+                        invisible="state != 'done' or not allow_cancel_payslips"
                     />
                     <button
                         string="Refetch Payslip Data"
                         name="onchange_employee"
                         type="object"
-                        states="draft,verify"
+                        invisible="state not in ('draft','verify')"
                     />
                     <field
                         name="state"
@@ -144,7 +144,11 @@
                     <div class="oe_title">
                         <label for="employee_id" class="oe_edit_only" />
                         <h1>
-                            <field name="employee_id" placeholder="Employee" />
+                            <field
+                                name="employee_id"
+                                placeholder="Employee"
+                                readonly="state != 'draft'"
+                            />
                         </h1>
                     </div>
                     <group col="4">
@@ -154,41 +158,38 @@
                                 name="date_from"
                                 widget="daterange"
                                 class="oe_inline"
-                                options="{'related_end_date': 'date_to'}"
+                                options="{'end_date_field': 'date_to'}"
+                                readonly="state != 'draft'"
                             />
                             -
                             <field
                                 name="date_to"
                                 widget="daterange"
                                 class="oe_inline"
-                                options="{'related_start_date': 'date_from'}"
+                                options="{'start_date_field': 'date_from'}"
+                                readonly="state != 'draft'"
                             />
                         </div>
                         <field
                             name="contract_id"
                             domain="[('employee_id','=',employee_id),('date_start','&lt;=',date_to),'|',('date_end','&gt;=',date_from),('date_end','=',False)]"
                             context="{'default_employee_id': employee_id}"
+                            readonly="state != 'draft'"
                         />
                         <field name="number" />
-                        <field
-                            name="struct_id"
-                            attrs="{'required':[('contract_id','!=',False)]}"
-                        />
-                        <field name="name" />
-                        <field name="credit_note" />
-                        <field
-                            name="refunded_id"
-                            attrs="{'invisible': [('refunded_id', '=', False)]}"
-                        />
-                        <field
-                            name="compute_date"
-                            attrs="{'invisible':[('compute_date','==',False)]}"
-                        />
+                        <field name="struct_id" required="contract_id" />
+                        <field name="name" force_save="1" />
+                        <field name="credit_note" readonly="state != 'draft'" />
+                        <field name="refunded_id" invisible="not refunded_id" />
+                        <field name="compute_date" invisible="not compute_date" />
                     </group>
                     <notebook>
                         <page name="input" string="Worked Days &amp; Inputs">
                             <separator name="worked" string="Worked Days" />
-                            <field name="worked_days_line_ids">
+                            <field
+                                name="worked_days_line_ids"
+                                readonly="state != 'draft'"
+                            >
                                 <tree editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
@@ -199,7 +200,7 @@
                                         domain="[('employee_id','=',parent.employee_id),('date_start','&lt;=',parent.date_to),'|',('date_end','&gt;=',parent.date_from),('date_end','=',False)]"
                                         context="{'default_employee_id': parent.employee_id}"
                                     />
-                                    <field name="sequence" invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
                                 </tree>
                                 <form string="Worked Day">
                                     <group col="4">
@@ -213,7 +214,12 @@
                                 </form>
                             </field>
                             <separator name="other" string="Other Inputs" />
-                            <field name="input_line_ids" colspan="4" nolabel="1">
+                            <field
+                                name="input_line_ids"
+                                colspan="4"
+                                nolabel="1"
+                                readonly="state != 'draft'"
+                            >
                                 <tree editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
@@ -224,7 +230,7 @@
                                         domain="[('employee_id','=',parent.employee_id),('date_start','&lt;=',parent.date_to),'|',('date_end','&gt;=',parent.date_from),('date_end','=',False)]"
                                         context="{'default_employee_id': parent.employee_id}"
                                     />
-                                    <field name="sequence" invisible="True" />
+                                    <field name="sequence" column_invisible="True" />
                                 </tree>
                                 <form string="Payslip Line">
                                     <group col="4">
@@ -261,15 +267,18 @@
                                     create="false"
                                     delete="false"
                                 >
-                                    <field name="appears_on_payslip" invisible="1" />
+                                    <field
+                                        name="appears_on_payslip"
+                                        column_invisible="1"
+                                    />
                                     <field name="sequence" optional="hide" />
-                                    <field name="parent_line_id" invisible="1" />
-                                    <field name="parent_rule_id" invisible="1" />
+                                    <field name="parent_line_id" column_invisible="1" />
+                                    <field name="parent_rule_id" column_invisible="1" />
                                     <field name="code" readonly="1" />
                                     <field
                                         name="salary_rule_id"
                                         readonly="1"
-                                        invisible="1"
+                                        column_invisible="1"
                                     />
                                     <field name="category_id" readonly="1" />
                                     <field name="name" />
@@ -291,10 +300,12 @@
                                     <field
                                         name="company_id"
                                         groups="base.group_multi_company"
+                                        readonly="state != 'draft'"
                                     />
                                     <field
                                         name="payslip_run_id"
                                         domain="[('state','=','draft')]"
+                                        readonly="state != 'draft'"
                                     />
                                 </group>
                                 <group name="accounting" string="Accounting">
@@ -305,6 +316,7 @@
                                 <field
                                     name="note"
                                     placeholder="Add an internal note..."
+                                    readonly="state != 'draft'"
                                 />
                             </div>
                         </page>

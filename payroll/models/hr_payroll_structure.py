@@ -66,7 +66,7 @@ class HrPayrollStructure(models.Model):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or {}, code=_("%s (copy)") % self.code)
-        return super(HrPayrollStructure, self).copy(default)
+        return super().copy(default)
 
     def get_all_rules(self):
         """

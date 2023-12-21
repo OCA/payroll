@@ -19,7 +19,6 @@
     <record id="hr_payroll_structure_view_tree_children" model="ir.ui.view">
         <field name="name">hr.payroll.structure.tree</field>
         <field name="model">hr.payroll.structure</field>
-        <field name="field_parent">children_ids</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -82,10 +81,7 @@
                 <field name="require_code" invisible="1" />
                 <group col="4">
                     <field name="name" />
-                    <field
-                        name="code"
-                        attrs="{'required': [('require_code','=',True)]}"
-                    />
+                    <field name="code" required="require_code" />
                     <field name="parent_id" />
                     <field
                         name="company_id"
@@ -100,7 +96,7 @@
                                 <field name="name" />
                                 <field name="code" />
                                 <field name="category_id" />
-                                <field name="sequence" invisible="1" />
+                                <field name="sequence" column_invisible="1" />
                                 <field name="register_id" />
                             </tree>
                         </field>

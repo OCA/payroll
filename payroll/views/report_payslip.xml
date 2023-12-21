@@ -28,7 +28,7 @@
                                 </td>
                                 <td colspan="3">
                                     <div
-                                        t-field="o.employee_id.address_home_id"
+                                        t-field="o.employee_id.work_contact_id"
                                         t-options='{"widget": "contact", "fields": ["address", "name", "phone"],
 "no_marker": True, "phone_icons": True}'
                                     />

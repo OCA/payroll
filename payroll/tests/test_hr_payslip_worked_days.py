@@ -1,5 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import time
 from datetime import date, datetime
 
 from odoo.tests.common import Form
@@ -54,12 +55,23 @@ class TestWorkedDays(TestPayslipBase):
             )
 
     def _common_contract_leave_setup(self):
-
         self.richard_emp.resource_id.calendar_id = self.full_calendar
         self.richard_emp.contract_ids.resource_calendar_id = self.full_calendar
 
         # I put all eligible contracts (including Richard's) in an "open" state
         self.apply_contract_cron()
+
+        self.env["hr.leave.allocation"].create(
+            {
+                "name": "Annual Time Off",
+                "employee_id": self.richard_emp.id,
+                "holiday_status_id": self.holiday_type.id,
+                "number_of_days": 20,
+                "state": "confirm",
+                "date_from": time.strftime("%Y-01-01"),
+                "date_to": time.strftime("%Y-12-31"),
+            }
+        )
 
         # Create the leave
         self.LeaveRequest.create(
@@ -74,7 +86,6 @@ class TestWorkedDays(TestPayslipBase):
         )
 
     def test_worked_days_negative(self):
-
         self._common_contract_leave_setup()
 
         # Set system parameter
@@ -107,7 +118,6 @@ class TestWorkedDays(TestPayslipBase):
         )
 
     def test_leaves_positive(self):
-
         self._common_contract_leave_setup()
 
         # Set system parameter

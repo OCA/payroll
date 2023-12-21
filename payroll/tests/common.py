@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestPayslipBase(TransactionCase):
     def setUp(self):
-        super(TestPayslipBase, self).setUp()
+        super().setUp()
 
         self.CalendarAttendance = self.env["resource.calendar.attendance"]
         self.Contract = self.env["hr.contract"]
