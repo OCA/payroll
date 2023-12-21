@@ -6,27 +6,18 @@
         <field name="arch" type="xml">
             <tree editable="bottom" decoration-info="total == 0">
 
-                <field name="allow_edit_payslip_lines" invisible="1" />
+                <field name="allow_edit_payslip_lines" column_invisible="1" />
                 <field name="category_id" />
-                <field name="employee_id" invisible="1" />
+                <field name="employee_id" column_invisible="1" />
                 <field name="sequence" />
                 <field name="name" />
                 <field name="code" />
-                <field
-                    name="quantity"
-                    attrs="{'readonly': [('allow_edit_payslip_lines', '!=', True)]}"
-                />
-                <field
-                    name="rate"
-                    attrs="{'readonly': [('allow_edit_payslip_lines', '!=', True)]}"
-                />
-                <field
-                    name="amount"
-                    attrs="{'readonly': [('allow_edit_payslip_lines', '!=', True)]}"
-                />
+                <field name="quantity" readonly="not allow_edit_payslip_lines" />
+                <field name="rate" readonly="not allow_edit_payslip_lines" />
+                <field name="amount" readonly="not allow_edit_payslip_lines" />
                 <field name="total" />
-                <field name="amount_select" invisible="1" />
-                <field name="register_id" invisible="1" />
+                <field name="amount_select" column_invisible="1" />
+                <field name="register_id" column_invisible="1" />
                 <field name="payslip_run_id" optional="hide" />
             </tree>
         </field>
@@ -51,12 +42,12 @@
                         <field name="amount_select" readonly="1" />
                         <field
                             name="amount_fix"
-                            attrs="{'invisible':[('amount_select','!=','fix')]}"
+                            invisible="amount_select != 'fix'"
                             readonly="1"
                         />
                         <field
                             name="amount_percentage"
-                            attrs="{'invisible':[('amount_select','!=','percentage')]}"
+                            invisible="amount_select != 'percentage'"
                             readonly="1"
                         />
                         <field name="sequence" readonly="1" />
@@ -77,8 +68,8 @@
                                     decoration-info="total == 0"
                                     decoration-bf="parent_line_id == False"
                                 >
-                                    <field name="sequence" invisible="1" />
-                                    <field name="parent_line_id" invisible="1" />
+                                    <field name="sequence" column_invisible="1" />
+                                    <field name="parent_line_id" column_invisible="1" />
                                     <field name="name" />
                                     <field name="code" />
                                     <field name="category_id" />

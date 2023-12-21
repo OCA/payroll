@@ -9,7 +9,7 @@ from odoo.addons.payroll.tests.test_hr_payroll_cancel import TestHrPayrollCancel
 
 class TestHrPayslipChangeState(TestHrPayrollCancel):
     def setUp(self):
-        super(TestHrPayslipChangeState, self).setUp()
+        super().setUp()
         self.tested_model = self.env["hr.payslip.change.state"]
 
     def test_change_state(self):

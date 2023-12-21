@@ -47,7 +47,7 @@
                     widget="badge"
                     optional="show"
                 />
-                <field name="message_needaction" invisible="1" />
+                <field name="message_needaction" column_invisible="1" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
@@ -109,13 +109,13 @@
                         name="close_payslip_run"
                         type="object"
                         string="Close"
-                        states="draft"
+                        invisible="state != 'draft'"
                         class="oe_highlight"
                     />
                     <button
                         name="%(action_hr_payslip_by_employees)d"
                         type="action"
-                        states="draft"
+                        invisible="state != 'draft'"
                         string="Generate Payslips"
                         class="oe_highlight"
                     />
@@ -123,14 +123,14 @@
                         string="Set to Draft"
                         name="draft_payslip_run"
                         type="object"
-                        states="close"
+                        invisible="state != 'close'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <label for="name" class="oe_edit_only" />
                     <h1>
-                        <field name="name" />
+                        <field name="name" readonly="state != 'draft'" />
                     </h1>
                     <group>
                         <group name="period_group">
@@ -140,14 +140,16 @@
                                     name="date_start"
                                     widget="daterange"
                                     class="oe_inline"
-                                    options="{'related_end_date': 'date_end'}"
+                                    options="{'end_date_field': 'date_end'}"
+                                    readonly="state != 'draft'"
                                 />
                                 -
                                 <field
                                     name="date_end"
                                     widget="daterange"
                                     class="oe_inline"
-                                    options="{'related_start_date': 'date_start'}"
+                                    options="{'start_date_field': 'date_start'}"
+                                    readonly="state != 'draft'"
                                 />
                             </div>
                             <field
@@ -156,12 +158,12 @@
                             />
                         </group>
                         <group name="other">
-                            <field name="struct_id" />
-                            <field name="credit_note" />
+                            <field name="struct_id" readonly="state != 'draft'" />
+                            <field name="credit_note" readonly="state != 'draft'" />
                         </group>
                     </group>
                     <separator string="Payslips" />
-                    <field name="slip_ids" />
+                    <field name="slip_ids" readonly="state != 'draft'" />
                 </sheet>
             </form>
         </field>

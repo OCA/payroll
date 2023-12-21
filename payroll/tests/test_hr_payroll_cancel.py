@@ -10,7 +10,7 @@ from odoo.tests import common
 
 class TestHrPayrollCancel(common.TransactionCase):
     def setUp(self):
-        super(TestHrPayrollCancel, self).setUp()
+        super().setUp()
         # Set system parameter
         self.env["ir.config_parameter"].sudo().set_param(
             "payroll.allow_cancel_payslips", True

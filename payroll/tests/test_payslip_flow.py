@@ -56,7 +56,7 @@ class TestPayslipFlow(TestPayslipBase):
 
         # Check child rules shown in table by default
         child_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
-            lambda l: l.code == "NET_CHILD"
+            lambda record: record.code == "NET_CHILD"
         )
         self.assertEqual(
             len(child_line), 1, "Child line found when flag desactivated (default)"
@@ -64,7 +64,7 @@ class TestPayslipFlow(TestPayslipBase):
 
         # Check parent line id value is correct
         parent_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
-            lambda l: l.code == "NET"
+            lambda record: record.code == "NET"
         )
         self.assertEqual(
             child_line.parent_line_id.code,
@@ -82,7 +82,7 @@ class TestPayslipFlow(TestPayslipBase):
 
         # Check child rules not shown in table after flag changed
         child_line = richard_payslip.dynamic_filtered_payslip_lines.filtered(
-            lambda l: l.code == "NET_CHILD"
+            lambda record: record.code == "NET_CHILD"
         )
         self.assertEqual(
             len(child_line), 0, "The child line is not found when flag activated"
@@ -93,7 +93,7 @@ class TestPayslipFlow(TestPayslipBase):
         work100 = richard_payslip.worked_days_line_ids.filtered(
             lambda x: x.code == "WORK100"
         )
-        line = richard_payslip.line_ids.filtered(lambda l: l.code == "NET")
+        line = richard_payslip.line_ids.filtered(lambda record: record.code == "NET")
         self.assertEqual(len(line), 1, "I found the 'NET' line")
         self.assertEqual(
             line[0].amount,
@@ -169,7 +169,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_contract_qty(self):
-
         # I set the test rule to detect contract count
         self.test_rule.amount_python_compute = (
             "result = payroll.contracts and payroll.contracts.count or -1.0"
@@ -184,14 +183,13 @@ class TestPayslipFlow(TestPayslipBase):
         richard_payslip.onchange_employee()
         richard_payslip.compute_sheet()
 
-        line = richard_payslip.line_ids.filtered(lambda l: l.code == "TEST")
+        line = richard_payslip.line_ids.filtered(lambda record: record.code == "TEST")
         self.assertEqual(len(line), 1, "I found the Test line")
         self.assertEqual(
             line[0].amount, 1.0, "The calculated dictionary value 'contracts.qty' is 1"
         )
 
     def test_compute_multiple_payslips(self):
-
         self.apply_contract_cron()
         payslips = self.Payslip.create(
             [
@@ -211,7 +209,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_get_contracts_singleton(self):
-
         payslip = self.Payslip.create({"employee_id": self.sally.id})
         contracts = payslip._get_employee_contracts()
         self.assertFalse(contracts, "No currently open contracts for the employee")
@@ -236,11 +233,10 @@ class TestPayslipFlow(TestPayslipBase):
         )
         contracts = payslip._get_employee_contracts()
         self.assertEqual(
-            len(contracts), 1, "There is one open contract for the employee"
+            len(contracts), 2, "There is 2 open contracts for the employee"
         )
 
     def test_get_contracts_multiple(self):
-
         self.sally.contract_ids[0].date_end = Date.today().strftime("%Y-%m-15")
         self.Contract.create(
             {
@@ -267,7 +263,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_compute_sheet_no_valid_contract(self):
-
         frm = Form(self.Payslip)
         frm.employee_id = self.richard_emp
         payslip = frm.save()
@@ -300,7 +295,6 @@ class TestPayslipFlow(TestPayslipBase):
         return sales_rules
 
     def test_use_different_structure(self):
-
         developer_rules = self._get_developer_rules()
 
         self.apply_contract_cron()
@@ -320,7 +314,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_get_salary_rules_singleton(self):
-
         developer_rules = self._get_developer_rules()
 
         self.apply_contract_cron()
@@ -339,7 +332,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_get_salary_rules_multi(self):
-
         sales_allowance = self.SalaryRule.create(
             {
                 "name": "Sales Allowance",
@@ -390,7 +382,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_get_payslip_line_multi(self):
-
         self.apply_contract_cron()
         payslips = self.Payslip.create(
             [
@@ -411,7 +402,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_onchange_struct_id_singleton(self):
-
         new_struct = self.PayrollStructure.create(
             {
                 "name": "Simple Structure",
@@ -448,7 +438,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_onchange_struct_id_multi(self):
-
         new_struct = self.PayrollStructure.create(
             {
                 "name": "Simple Structure",
@@ -543,7 +532,6 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_onchange_employee(self):
-
         self.apply_contract_cron()
         payslip = self.Payslip.create({"employee_id": self.sally.id})
         payslip.name = "Random name Foo"

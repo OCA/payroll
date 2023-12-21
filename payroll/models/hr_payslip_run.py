@@ -11,15 +11,12 @@ class HrPayslipRun(models.Model):
     _description = "Payslip Batches"
     _order = "id desc"
 
-    name = fields.Char(
-        required=True, readonly=True, states={"draft": [("readonly", False)]}
-    )
+    name = fields.Char(required=True, readonly=True)
     slip_ids = fields.One2many(
         "hr.payslip",
         "payslip_run_id",
         string="Payslips",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     state = fields.Selection(
         [("draft", "Draft"), ("close", "Close")],
@@ -41,20 +38,17 @@ class HrPayslipRun(models.Model):
         string="Date From",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         default=lambda self: fields.Date.today().replace(day=1),
     )
     date_end = fields.Date(
         string="Date To",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
         default=lambda self: fields.Date.today().replace(day=1)
         + relativedelta(months=+1, day=1, days=-1),
     )
     credit_note = fields.Boolean(
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="If its checked, indicates that all payslips generated from here "
         "are refund payslips.",
     )
@@ -62,7 +56,6 @@ class HrPayslipRun(models.Model):
         "hr.payroll.structure",
         string="Structure",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Defines the rules that have to be applied to this payslip batch, "
         "accordingly to the contract chosen. If you let empty the field "
         "contract, this field isn't mandatory anymore and thus the rules "

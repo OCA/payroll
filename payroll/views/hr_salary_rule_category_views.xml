@@ -13,10 +13,7 @@
                     </h1>
                     <group>
                         <group>
-                            <field
-                                name="code"
-                                attrs="{'required': [('require_code','=',True)]}"
-                            />
+                            <field name="code" required="require_code" />
                             <field name="parent_id" />
                         </group>
                     </group>
@@ -49,7 +46,7 @@
             <tree>
                 <field name="name" />
                 <field name="code" />
-                <field name="parent_id" invisible="1" />
+                <field name="parent_id" column_invisible="1" />
             </tree>
         </field>
     </record>
