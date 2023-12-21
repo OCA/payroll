@@ -7,7 +7,6 @@ from odoo.tools.translate import _
 
 
 class HrPayslipChangeState(models.TransientModel):
-
     _name = "hr.payslip.change.state"
     _description = "Change state of a payslip"
 

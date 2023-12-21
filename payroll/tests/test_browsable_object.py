@@ -11,7 +11,6 @@ class TestBrowsableObject(TestPayslipBase):
         super().setUp()
 
     def test_init(self):
-
         obj = BrowsableObject(self.richard_emp.id, {"test": 1}, self.env)
 
         self.assertEqual(obj.test, 1, "Simple initialization")
@@ -51,7 +50,6 @@ class TestBrowsableObject(TestPayslipBase):
         )
 
     def test_update_attribute(self):
-
         obj = BrowsableObject(
             self.richard_emp.id,
             {

@@ -208,7 +208,7 @@ class HrSalaryRule(models.Model):
         :rtype: {"name": string, "quantity": float, "rate": float, "amount": float}
         """
         self.ensure_one()
-        method = "_compute_rule_{}".format(self.amount_select)
+        method = f"_compute_rule_{self.amount_select}"
         return api.call_kw(self, method, [self.ids, localdict], {})
 
     def _compute_rule_fix(self, localdict):
@@ -285,7 +285,7 @@ Here is the error received:
                  given contract. Return False otherwise.
         """
         self.ensure_one()
-        method = "_satisfy_condition_{}".format(self.condition_select)
+        method = f"_satisfy_condition_{self.condition_select}"
         if self.parent_rule_id:
             current_result = api.call_kw(self, method, [self.ids, localdict], {})
             parent_result = self.parent_rule_id._satisfy_condition(localdict)

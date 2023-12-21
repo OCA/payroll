@@ -16,111 +16,71 @@
         <field name="priority" eval="45" />
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div
-                    class="app_settings_block"
-                    data-string="Payroll"
+            <xpath expr="//form" position="inside">
+                <app
                     string="Payroll"
-                    data-key="payroll"
+                    name="payroll"
                     groups="payroll.group_payroll_manager"
                 >
-                    <h2>Accounting</h2>
-                    <div class="row mt16 o_settings_container" id="payroll_accountant">
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                    <block title="Accounting" id="payroll_accountant">
+                        <setting>
                                 <field name="module_payroll_account" />
-                            </div>
-                            <div class="o_setting_right_pane">
                                 <label
-                                    for="module_payroll_account"
-                                    string="Payroll Entries"
-                                />
+                                for="module_payroll_account"
+                                string="Payroll Entries"
+                            />
                                 <div class="text-muted">
                                     Post payslips in accounting
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h2>Calculation Settings</h2>
-                    <div class="row mt16 o_settings_container" id="leaves_positive">
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                        </setting>
+                    </block>
+                    <block title="Calculation Settings" id="leaves_positive">
+                        <setting>
                                 <field name="leaves_positive" />
-                            </div>
-                            <div class="o_setting_right_pane">
                                 <label for="leaves_positive" />
                                 <div class="text-muted">
                                     In payslip worked days, leave days/hours have positive values
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="row mt16 o_settings_container"
-                        id="allow_cancel_payslips"
-                    >
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                        </setting>
+                    </block>
+                    <block id="allow_cancel_payslips">
+                        <setting>
                                 <field name="allow_cancel_payslips" />
-                            </div>
-                            <div class="o_setting_right_pane">
                                 <label for="allow_cancel_payslips" />
                                 <div class="text-muted">
                                     Allow users to cancel confirmed payslips
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="row mt16 o_settings_container"
-                        id="prevent_compute_on_confirm"
-                    >
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                        </setting>
+                    </block>
+                    <block id="prevent_compute_on_confirm">
+                        <setting>
                                 <field name="prevent_compute_on_confirm" />
-                            </div>
-                            <div class="o_setting_right_pane">
                                 <label for="prevent_compute_on_confirm" />
                                 <div class="text-muted">
                                     Prevent payslips from being recomputed when confirming them
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="row mt16 o_settings_container"
-                        id="allow_edit_payslip_lines"
-                    >
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                        </setting>
+                    </block>
+                    <block id="allow_edit_payslip_lines">
+                        <setting>
                                 <field name="allow_edit_payslip_lines" />
-                            </div>
-                            <div class="o_setting_right_pane">
                                 <label for="allow_edit_payslip_lines" />
                                 <div class="text-muted">
                                     Allow users to edit some payslip line fields manually
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="row mt16 o_settings_container"
-                        id="require_code_and_category"
-                    >
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                        </setting>
+                    </block>
+                    <block id="require_code_and_category">
+                        <setting>
                                 <field name="require_code_and_category" />
-                            </div>
-                            <div class="o_setting_right_pane">
                                 <label for="require_code_and_category" />
                                 <div class="text-muted">
                                     Require rule.code, rule.category, category.code, structure.code
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                        </setting>
+                    </block>
 
-                </div>
+                </app>
             </xpath>
         </field>
     </record>

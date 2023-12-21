@@ -8,7 +8,7 @@
                 <field name="name" />
                 <field name="code" decoration-bf="1" />
                 <field name="category_id" widget="badge" />
-                <field name="sequence" invisible="1" />
+                <field name="sequence" column_invisible="1" />
                 <field name="register_id" />
             </tree>
         </field>
@@ -50,13 +50,12 @@
     <record id="hr_salary_rule_view_tree" model="ir.ui.view">
         <field name="name">hr.salary.rule.tree</field>
         <field name="model">hr.salary.rule</field>
-        <field name="field_parent">child_ids</field>
         <field eval="20" name="priority" />
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
                 <field name="code" />
-                <field name="category_id" invisible="True" />
+                <field name="category_id" column_invisible="True" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
@@ -74,7 +73,7 @@
                 <div
                     class="alert alert-info oe_edit_only"
                     role="alert"
-                    attrs="{'invisible':[('amount_select','!=','code')]}"
+                    invisible="amount_select != 'code'"
                 >
             <p>
                 If you have doubts about coding salary rules, check the "Help" tab in this form.
@@ -89,15 +88,12 @@
                     <h2>
                         <field
                             name="category_id"
-                            attrs="{'required': [('require_code_and_category','=',True)]}"
+                            required="require_code_and_category"
                         />
                     </h2>
                     <group name="principal">
                         <group>
-                            <field
-                                name="code"
-                                attrs="{'required': [('require_code_and_category','=',True)]}"
-                            />
+                            <field name="code" required="require_code_and_category" />
                             <field name="sequence" />
                             <field name="register_id" />
                             <field
@@ -130,7 +126,8 @@
                                     />
                                     <field
                                         name="condition_python"
-                                        attrs="{'invisible':[('condition_select','!=','python')], 'required': [('condition_select','=','python')]}"
+                                        invisible="condition_select != 'python'"
+                                        required="condition_select == 'python'"
                                         colspan="2"
                                         widget="ace"
                                         options="{'mode': 'python'}"
@@ -139,27 +136,32 @@
                                     />
                                     <field
                                         name="condition_range"
-                                        attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                        invisible="condition_select != 'range'"
+                                        required="condition_select == 'range'"
                                     />
                                     <label
                                         string="Condition Range"
-                                        attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                        invisible="condition_select != 'range'"
+                                        required="condition_select == 'range'"
                                         for="condition_range_min"
                                     />
                                     <div
-                                        attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                        invisible="condition_select != 'range'"
+                                        required="condition_select == 'range'"
                                     >
                                         <strong>Between </strong>
                                         <field
                                             name="condition_range_min"
                                             class="oe_inline"
-                                            attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                            invisible="condition_select != 'range'"
+                                            required="condition_select == 'range'"
                                         />
                                         <strong> and </strong>
                                         <field
                                             name="condition_range_max"
                                             class="oe_inline"
-                                            attrs="{'invisible':[('condition_select','!=','range')], 'required':[('condition_select','=','range')]}"
+                                            invisible="condition_select != 'range'"
+                                            required="condition_select == 'range'"
                                         />
                                     </div>
                                 </group>
@@ -174,20 +176,24 @@
                                     />
                                     <field
                                         name="amount_percentage_base"
-                                        attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"
+                                        invisible="amount_select != 'percentage'"
+                                        required="amount_select == 'percentage'"
                                     />
                                     <field
                                         name="quantity"
-                                        attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"
+                                        invisible="amount_select != 'code'"
+                                        required="amount_select == 'code'"
                                     />
                                     <field
                                         name="amount_fix"
-                                        attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"
+                                        invisible="amount_select != 'fix'"
+                                        required="amount_select == 'fix'"
                                     />
                                     <field
                                         colspan="2"
                                         name="amount_python_compute"
-                                        attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"
+                                        invisible="amount_select != 'code'"
+                                        required="amount_select == 'code'"
                                         widget="ace"
                                         options="{'mode': 'python'}"
                                         id="amount_python_compute"
@@ -195,7 +201,8 @@
                                     />
                                     <field
                                         name="amount_percentage"
-                                        attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"
+                                        invisible="amount_select != 'percentage'"
+                                        required="amount_select == 'percentage'"
                                     />
                                 </group>
                             </group>

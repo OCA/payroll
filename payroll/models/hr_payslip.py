@@ -33,34 +33,28 @@ class HrPayslip(models.Model):
         "hr.payroll.structure",
         string="Structure",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Defines the rules that have to be applied to this payslip, "
         "accordingly to the contract chosen. If you let empty the field "
         "contract, this field isn't mandatory anymore and thus the rules "
         "applied will be all the rules set on the structure of all contracts "
         "of the employee valid for the chosen period",
     )
-    name = fields.Char(
-        string="Payslip Name", readonly=True, states={"draft": [("readonly", False)]}
-    )
+    name = fields.Char(string="Payslip Name", readonly=True)
     number = fields.Char(
         string="Reference",
         readonly=True,
         copy=False,
-        states={"draft": [("readonly", False)]},
     )
     employee_id = fields.Many2one(
         "hr.employee",
         string="Employee",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     date_from = fields.Date(
         readonly=True,
         required=True,
         default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     date_to = fields.Date(
@@ -69,7 +63,6 @@ class HrPayslip(models.Model):
         default=lambda self: fields.Date.to_string(
             (datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()
         ),
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     state = fields.Selection(
@@ -95,7 +88,6 @@ class HrPayslip(models.Model):
         "slip_id",
         string="Payslip Lines",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_id = fields.Many2one(
         "res.company",
@@ -103,7 +95,6 @@ class HrPayslip(models.Model):
         readonly=True,
         copy=False,
         default=lambda self: self.env.company,
-        states={"draft": [("readonly", False)]},
     )
     worked_days_line_ids = fields.One2many(
         "hr.payslip.worked_days",
@@ -111,25 +102,21 @@ class HrPayslip(models.Model):
         string="Payslip Worked Days",
         copy=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     input_line_ids = fields.One2many(
         "hr.payslip.input",
         "payslip_id",
         string="Payslip Inputs",
         readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     paid = fields.Boolean(
         string="Made Payment Order ? ",
         readonly=True,
         copy=False,
-        states={"draft": [("readonly", False)]},
     )
     note = fields.Text(
         string="Internal Note",
         readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     contract_id = fields.Many2one(
@@ -137,7 +124,6 @@ class HrPayslip(models.Model):
         string="Contract",
         readonly=True,
         tracking=True,
-        states={"draft": [("readonly", False)]},
     )
     dynamic_filtered_payslip_lines = fields.One2many(
         "hr.payslip.line",
@@ -145,7 +131,6 @@ class HrPayslip(models.Model):
     )
     credit_note = fields.Boolean(
         readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Indicates this payslip has a refund of another",
     )
     payslip_run_id = fields.Many2one(
@@ -154,7 +139,6 @@ class HrPayslip(models.Model):
         readonly=True,
         copy=False,
         tracking=True,
-        states={"draft": [("readonly", False)]},
     )
     payslip_count = fields.Integer(
         compute="_compute_payslip_count", string="Payslip Computation Details"
@@ -279,7 +263,7 @@ class HrPayslip(models.Model):
             raise UserError(
                 _("You cannot delete a payslip which is not draft or cancelled")
             )
-        return super(HrPayslip, self).unlink()
+        return super().unlink()
 
     def compute_sheet(self):
         for payslip in self:
