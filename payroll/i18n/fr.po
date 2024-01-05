@@ -621,11 +621,6 @@ msgid "Child Salary Rule"
 msgstr "Règle de salaire enfant"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "Child Salary Structure"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "Child rule functionality is useful when you need other rules to be computed "
@@ -781,7 +776,6 @@ msgstr "Registre des contribution des lignes de bulletin"
 #: model:ir.actions.act_window,name:payroll.hr_contribution_register_action
 #: model:ir.ui.menu,name:payroll.hr_contribution_register_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_tree
 msgid "Contribution Registers"
 msgstr "Registres des contributions"
 
@@ -983,7 +977,6 @@ msgstr "Contrat de l'employé"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree
 msgid "Employee Function"
 msgstr "Fonction de l'employé"
 
@@ -1189,9 +1182,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1240,12 +1231,6 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip__credit_note
 msgid "Indicates this payslip has a refund of another"
 msgstr "Indique que ce bulletin de paie est le remboursement d'un autre"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "Input Data"
-msgstr "Données d'entrée"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__input_ids
@@ -1756,7 +1741,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_employee_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
 #, python-format
 msgid "Payslips"
 msgstr "Feuilles de paye"
@@ -1765,7 +1749,6 @@ msgstr "Feuilles de paye"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_run_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_run_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_tree
 msgid "Payslips Batches"
 msgstr "Lots de bulletins de paie"
 
@@ -1983,12 +1966,6 @@ msgid "Rule Configuration"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "Catégories de salaires"
@@ -2008,7 +1985,6 @@ msgstr "Règles salariales"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__salary_rules_ids
 #: model:ir.ui.menu,name:payroll.menu_hr_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_tree
 msgid "Salary Rule Categories"
 msgstr "Catégories de règles pour le salaire"
 
@@ -2033,8 +2009,6 @@ msgstr "Règle salariale en entrée"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree_children
 msgid "Salary Rules"
 msgstr "Règles salariales"
 
@@ -2052,9 +2026,6 @@ msgstr "Bulletin de paie de %s pour %s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree_children
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Salary Structure"
 msgstr "Structure salariale"
 
@@ -2378,6 +2349,9 @@ msgstr "le résultat sera affecté à une variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Input Data"
+#~ msgstr "Données d'entrée"
 
 #~ msgid "Post payroll slips in accounting"
 #~ msgstr "Transmettre les bulletins de paie au service comptabilité"

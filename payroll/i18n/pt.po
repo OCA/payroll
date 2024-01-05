@@ -706,11 +706,6 @@ msgid "Child Salary Rule"
 msgstr "Regra de Salário descendente"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "Child Salary Structure"
-msgstr "Estrutura Salarial Descendente"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "Child rule functionality is useful when you need other rules to be computed "
@@ -879,7 +874,6 @@ msgstr "Registo da contribuição das rubricas dos recibos de vencimento"
 #: model:ir.actions.act_window,name:payroll.hr_contribution_register_action
 #: model:ir.ui.menu,name:payroll.hr_contribution_register_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_tree
 msgid "Contribution Registers"
 msgstr "Registo de Contribuição"
 
@@ -1086,7 +1080,6 @@ msgstr "Contrato do Funcionário"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree
 msgid "Employee Function"
 msgstr "Função do Funcionário"
 
@@ -1287,9 +1280,7 @@ msgstr "Se marcado, há novas mensagens que pedem a sua atenção."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se estiver marcado, algumas mensagens têm um erro de entrega."
 
@@ -1346,12 +1337,6 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip__credit_note
 msgid "Indicates this payslip has a refund of another"
 msgstr "Indica este recibo de vencimento como reembolso de outro"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "Input Data"
-msgstr "Entrada Dados"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__input_ids
@@ -1868,7 +1853,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_employee_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
 #, python-format
 msgid "Payslips"
 msgstr "Recibos de Vencimento"
@@ -1877,7 +1861,6 @@ msgstr "Recibos de Vencimento"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_run_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_run_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_tree
 msgid "Payslips Batches"
 msgstr "Lotes de Recibos de Vencimento"
 
@@ -2095,12 +2078,6 @@ msgid "Rule Configuration"
 msgstr "Configuração de Regras"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Erro de entrega de SMS"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "Categorias salariais"
@@ -2120,7 +2097,6 @@ msgstr "Regras de Salários"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__salary_rules_ids
 #: model:ir.ui.menu,name:payroll.menu_hr_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_tree
 msgid "Salary Rule Categories"
 msgstr "Regra categorias salariais"
 
@@ -2145,8 +2121,6 @@ msgstr "Entrada de regra salarial"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree_children
 msgid "Salary Rules"
 msgstr "Regras de Salários"
 
@@ -2164,9 +2138,6 @@ msgstr "Recibo de Vencimento de %s para %s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree_children
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Salary Structure"
 msgstr "Estrutura do salário"
 
@@ -2505,6 +2476,15 @@ msgstr "resultado será afetado a uma variável"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Child Salary Structure"
+#~ msgstr "Estrutura Salarial Descendente"
+
+#~ msgid "Input Data"
+#~ msgstr "Entrada Dados"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Erro de entrega de SMS"
 
 #~ msgid ""
 #~ "<code>result_name:</code> overrides the current name of the rule and "

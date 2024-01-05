@@ -618,11 +618,6 @@ msgid "Child Salary Rule"
 msgstr "Unterlohnart"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "Child Salary Structure"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "Child rule functionality is useful when you need other rules to be computed "
@@ -778,7 +773,6 @@ msgstr "Beitragskonto Lohnkonto Zeilen"
 #: model:ir.actions.act_window,name:payroll.hr_contribution_register_action
 #: model:ir.ui.menu,name:payroll.hr_contribution_register_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_tree
 msgid "Contribution Registers"
 msgstr "Anteile Arbeitgeber / Arbeitnehmer"
 
@@ -978,7 +972,6 @@ msgstr "Arbeitsvertrag"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree
 msgid "Employee Function"
 msgstr "Mitarbeiter Funktion"
 
@@ -1180,9 +1173,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1230,12 +1221,6 @@ msgstr ""
 msgid "Indicates this payslip has a refund of another"
 msgstr ""
 "Zeigt an, dass dieses Lohnkonto eine Rückerstattung eines anderen beinhaltet"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "Input Data"
-msgstr "Eingabedaten"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__input_ids
@@ -1745,7 +1730,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_employee_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
 #, python-format
 msgid "Payslips"
 msgstr "Abrechnungen Mitarbeitervergütung"
@@ -1754,7 +1738,6 @@ msgstr "Abrechnungen Mitarbeitervergütung"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_run_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_run_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_tree
 msgid "Payslips Batches"
 msgstr "Lohnabrechnungsläufe"
 
@@ -1972,12 +1955,6 @@ msgid "Rule Configuration"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "Lohn Kategorien"
@@ -1997,7 +1974,6 @@ msgstr "Verkaufsregel"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__salary_rules_ids
 #: model:ir.ui.menu,name:payroll.menu_hr_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_tree
 msgid "Salary Rule Categories"
 msgstr "Lohnartenkategorien"
 
@@ -2022,8 +1998,6 @@ msgstr "Eingabe für Lohnart"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree_children
 msgid "Salary Rules"
 msgstr "Lohnarten"
 
@@ -2041,9 +2015,6 @@ msgstr "Lohnkonto von %s für %s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree_children
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Salary Structure"
 msgstr "Vergütungsstruktur"
 
@@ -2366,6 +2337,9 @@ msgstr "Das Ergebnis wird einer Variablen zugewiesen"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Input Data"
+#~ msgstr "Eingabedaten"
 
 #~ msgid "Post payroll slips in accounting"
 #~ msgstr "Lohnabrechnungen in Buchhaltung einfügen"

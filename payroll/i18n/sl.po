@@ -627,11 +627,6 @@ msgid "Child Salary Rule"
 msgstr "Podrejeno plačno pravilo"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "Child Salary Structure"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "Child rule functionality is useful when you need other rules to be computed "
@@ -787,7 +782,6 @@ msgstr "Postavke prispevkov v plačilni listi"
 #: model:ir.actions.act_window,name:payroll.hr_contribution_register_action
 #: model:ir.ui.menu,name:payroll.hr_contribution_register_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_tree
 msgid "Contribution Registers"
 msgstr "Registri prispevkov"
 
@@ -987,7 +981,6 @@ msgstr "Pogodba zaposlenega"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree
 msgid "Employee Function"
 msgstr "Funkcija delojemalca"
 
@@ -1186,9 +1179,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1236,12 +1227,6 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip__credit_note
 msgid "Indicates this payslip has a refund of another"
 msgstr "Nakaže, da vsebuje ta plačilna lista povračilo za drugo."
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "Input Data"
-msgstr "Vhodni podatki"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__input_ids
@@ -1747,7 +1732,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_employee_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
 #, python-format
 msgid "Payslips"
 msgstr "Payslips"
@@ -1756,7 +1740,6 @@ msgstr "Payslips"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_run_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_run_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_tree
 msgid "Payslips Batches"
 msgstr "Paketi plačilnih kuvert"
 
@@ -1974,12 +1957,6 @@ msgid "Rule Configuration"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "Kategorije plač"
@@ -1999,7 +1976,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__salary_rules_ids
 #: model:ir.ui.menu,name:payroll.menu_hr_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_tree
 msgid "Salary Rule Categories"
 msgstr "Kategorije plačnih pravil"
 
@@ -2024,8 +2000,6 @@ msgstr "Vnos plačnega pravila"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree_children
 msgid "Salary Rules"
 msgstr "Plačna pravila"
 
@@ -2043,9 +2017,6 @@ msgstr "Plačilna lista %s za %s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree_children
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Salary Structure"
 msgstr "Struktura plače"
 
@@ -2365,6 +2336,9 @@ msgstr "koeficient vpliva na rezultat"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Input Data"
+#~ msgstr "Vhodni podatki"
 
 #, python-format
 #~ msgid "Wrong percentage base or quantity defined for salary rule %s (%s)."

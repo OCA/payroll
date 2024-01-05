@@ -617,11 +617,6 @@ msgid "Child Salary Rule"
 msgstr "下級薪資規則"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "Child Salary Structure"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "Child rule functionality is useful when you need other rules to be computed "
@@ -777,7 +772,6 @@ msgstr "繳納登記冊的薪資單明細"
 #: model:ir.actions.act_window,name:payroll.hr_contribution_register_action
 #: model:ir.ui.menu,name:payroll.hr_contribution_register_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_tree
 msgid "Contribution Registers"
 msgstr "繳納登記冊"
 
@@ -976,7 +970,6 @@ msgstr "員工合同"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree
 msgid "Employee Function"
 msgstr "員工職能"
 
@@ -1175,9 +1168,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1222,12 +1213,6 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip__credit_note
 msgid "Indicates this payslip has a refund of another"
 msgstr "表示這張薪資單有另一個退款"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
-msgid "Input Data"
-msgstr "輸入數據"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__input_ids
@@ -1730,7 +1715,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_employee_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_tree
 #, python-format
 msgid "Payslips"
 msgstr "薪資單"
@@ -1739,7 +1723,6 @@ msgstr "薪資單"
 #: model:ir.actions.act_window,name:payroll.hr_payslip_run_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_run_menu
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_tree
 msgid "Payslips Batches"
 msgstr "薪資單批處理"
 
@@ -1957,12 +1940,6 @@ msgid "Rule Configuration"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "薪資類別"
@@ -1982,7 +1959,6 @@ msgstr "薪酬制度"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__salary_rules_ids
 #: model:ir.ui.menu,name:payroll.menu_hr_salary_rule_category
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_tree
 msgid "Salary Rule Categories"
 msgstr "薪資規則類別"
 
@@ -2007,8 +1983,6 @@ msgstr "薪資規則輸入項"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_tree_children
 msgid "Salary Rules"
 msgstr "薪資規則"
 
@@ -2026,9 +2000,6 @@ msgstr "薪資條為%s為 %s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_tree_children
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Salary Structure"
 msgstr "薪資結構"
 
@@ -2346,6 +2317,9 @@ msgstr "結果將影響一個變量"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "Input Data"
+#~ msgstr "輸入數據"
 
 #~ msgid "Post payroll slips in accounting"
 #~ msgstr "在會計帳簿中發佈薪資單"
