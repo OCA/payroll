@@ -10,7 +10,7 @@ from odoo.tests import common
 
 class TestPayrollAccount(common.TransactionCase):
     def setUp(self):
-        super(TestPayrollAccount, self).setUp()
+        super().setUp()
 
         # Activate company currency
         self.env.user.company_id.currency_id.active = True
@@ -182,7 +182,6 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertEqual(self.hr_payslip.state, "done", "State not changed!")
 
     def test_hr_payslip_no_accounts(self):
-
         date_from = datetime.now()
         date_to = datetime.now() + relativedelta.relativedelta(
             months=+1, day=1, days=-1
