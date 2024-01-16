@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2023-10-12 09:41+0000\n"
+"PO-Revision-Date: 2024-01-16 15:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
 "Language: it\n"
@@ -42,6 +42,9 @@ msgid ""
 "            'Payslip - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            'Busta paga- %s' % (object.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.payslip_details_report
@@ -50,6 +53,9 @@ msgid ""
 "            'Payslip Details - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            'Dettagli busta paga - %s' % (object.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #. odoo-python
@@ -63,6 +69,12 @@ msgid ""
 "\n"
 "%(err)s\n"
 msgstr ""
+"\n"
+"Codice Python errato definito per la regola retribuzine %(nm)s (%(code)s) "
+"per dipendente %(ee)s.\n"
+"Questo è l'errore ricevuto:\n"
+"\n"
+"%(err)s\n"
 
 #. module: payroll
 #. odoo-python
@@ -76,6 +88,12 @@ msgid ""
 "\n"
 "%(err)s\n"
 msgstr ""
+"\n"
+"Condizione Pyhon errata definita per la regola retribuzine %(nm)s (%(code)s) "
+"per dipendente %(ee)s.\n"
+"Questo è l'errore ricevuto:\n"
+"\n"
+"%(err)s\n"
 
 #. module: payroll
 #. odoo-python
@@ -95,6 +113,13 @@ msgid ""
 "        \n"
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
+"* Quando viene creata la busta paga lo stato è 'Bozza'\n"
+"        \n"
+"* Se la busta paga è in verifica lo stato è 'Validazione'.\n"
+"        \n"
+"* Se la busta paga è confermata lo stato è impostato a 'Completata'.\n"
+"        \n"
+"* Quando l'utente annulla la busta paga lo stato è 'Respinta'."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_change_state__state
@@ -105,6 +130,11 @@ msgid ""
 "* If the payslip is confirmed then status is set to 'Done'.             \n"
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
+"* Quando viene creata la busta paga è in stato 'Bozza'.             \n"
+"* Se la busta paga è in verifica, lo stato è 'Calcola scheda'.              "
+"\n"
+"* Se la busta paga è confermata lo stato è 'Completata'.             \n"
+"* Quando l'utente annulla la busta paga lo stato è 'Respinta'."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -115,6 +145,11 @@ msgid ""
 "number_of_days\n"
 "                                        </code>"
 msgstr ""
+"<code>\n"
+"                                            result = contract.wage\n"
+"                                            result_qty = worked_days.WORK100."
+"number_of_days\n"
+"                                        </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -124,6 +159,10 @@ msgid ""
 "                                            result_rate = 10.0\n"
 "                                        </code>"
 msgstr ""
+"<code>\n"
+"                                            result = contract.wage\n"
+"                                            result_rate = 10.0\n"
+"                                        </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -131,12 +170,16 @@ msgid ""
 "<code>categories:</code> contains the sum of amount of all rules belonging "
 "to that category"
 msgstr ""
+"<code>categories:</code> contiene la smma del valore di tutte le regole "
+"appartenenti alla categoria"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>contract:</code> contains current contract object data (hr.contract)"
 msgstr ""
+"<code>contract:</code> contiene i dati dell'oggetto contratto attuale (hr."
+"contract)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -144,38 +187,45 @@ msgid ""
 "<code>current_contract:</code> contains values related/calculated for "
 "current contract"
 msgstr ""
+"<code>current_contract:</code> Contiene i valori relativi/calcolati per il "
+"contratto attuale"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>employee:</code> contains current employee object data (hr.employee)"
 msgstr ""
+"<code>employee:</code> contiene i dati oggetto dipendente attuale (hr."
+"employee)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>inputs:</code> contains the computed input data"
-msgstr ""
+msgstr "<code>inputs:</code> contiene i dati inseriti calcolati"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payroll:</code> contains miscellaneous values related to payroll"
-msgstr ""
+msgstr "<code>payroll:</code> contiene valori misti relativi alla busta paga"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payslip:</code> contains current payslip object data (hr.payslip)"
 msgstr ""
+"<code>payslip:</code> contiene i dati oggetto busta paga attuale (hr.payslip)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>payslips:</code> contains payslips data (Payslips - Browsable Object)"
 msgstr ""
+"<code>payslips:</code> contiene i dati delle buste paga (Buste paga - ogetto "
+"navigabile)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>result = contract.wage * 0.10</code>"
-msgstr ""
+msgstr "<code>result = contract.wage * 0.10</code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -183,6 +233,8 @@ msgid ""
 "<code>result:</code> the returned value should be in this variable. It "
 "matches with \"amount\" column."
 msgstr ""
+"<code>result:</code> il valore restituito deve essere in questa variabile. "
+"Corrisponde alla colonna \"valore\"."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -190,6 +242,8 @@ msgid ""
 "<code>result_name:</code> overrides the current name of the rule and allows "
 "to make dynamic names"
 msgstr ""
+"<code>result_name:</code> sovrascrive il nome attuale della regola e "
+"consente di creare nomi dinamici"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -197,11 +251,15 @@ msgid ""
 "<code>result_qty:</code> the quantity of units that will be multiplied to "
 "\"result\""
 msgstr ""
+"<code>result_qty:</code> la quantità di unità che verranno moltiplicate per "
+"\"risultato\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>result_rate:</code> the rate that should be applied to \"result\""
 msgstr ""
+"<code>result_rate:</code> il coefficiente che deve essere applicato a "
+"\"risultato\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -456,13 +514,14 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_cancel_payslips
 msgid "Allow users to cancel confirmed payslips."
-msgstr ""
+msgstr "Consenti all'utente di annullare buste paga confermate."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_edit_payslip_lines
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow users to edit some payslip line fields manually"
 msgstr ""
+"Consente ll'utente di modificare alcune righe della busta paga manualmente"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
@@ -487,7 +546,7 @@ msgstr "Importo"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__amount_qty
 msgid "Amount Quantity"
-msgstr ""
+msgstr "Quantità valore"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_select
@@ -520,13 +579,13 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Associated Salary Rules"
-msgstr ""
+msgstr "Regole retribuzione associate"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_attachment_count
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Conteggio allegati"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.BASIC
@@ -541,7 +600,7 @@ msgstr "Stipendio base"
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_get_batch_payslip_lines
 msgid "Batch Payslip Lines"
-msgstr ""
+msgstr "Gruppo righe busta paga"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-monthly
@@ -556,7 +615,7 @@ msgstr "Bisettimanale"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Calculation Settings"
-msgstr ""
+msgstr "Impostazione calcolo"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
@@ -593,22 +652,22 @@ msgstr "Categoria"
 #: model:ir.actions.act_window,name:payroll.action_hr_payslip_change_state_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
 msgid "Change state"
-msgstr ""
+msgstr "Cambia stato"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_change_state
 msgid "Change state of a payslip"
-msgstr ""
+msgstr "Cambia stato di una busta paga"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Child Line Details"
-msgstr ""
+msgstr "Dettagli riga figlia"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__child_ids
 msgid "Child Payslip Lines"
-msgstr ""
+msgstr "Righe busta paga figlia"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -635,6 +694,19 @@ msgid ""
 "                                    salary rule (e.x. rules required for "
 "complex tax computation that needs data from several modules)."
 msgstr ""
+"La funzionalità regola figlia è utile quando serve calcolare altre regole "
+"prima di quella madre. <br/>\n"
+"                                    Questo significa che tutte le regole "
+"retribuzione dichiarate come figlie (madre di una regola) verranno aggiunte "
+"al calcolo\n"
+"                                    se la loro regola madre è inclusa nella "
+"struttura della retribuzione. Così le regole figlie verranno calcolate solo "
+"se la loro madre è\n"
+"                                    calcolata. <br/>\n"
+"                                    Questa funzionalità è utile per fare "
+"calcoli ausiliari che sono usati come dipendenze per la regola retribuzine\n"
+"                                    madre (es. regole richieste per calcolo "
+"di tasse complesse che richidono dati da diversi moduli)."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__children_ids
@@ -701,7 +773,7 @@ msgstr "Calcolo"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__compute_date
 msgid "Compute Date"
-msgstr ""
+msgstr "Data calcolo"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_change_state__state__verify
@@ -718,7 +790,7 @@ msgstr "Condizione basata su"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Condition Range"
-msgstr ""
+msgstr "Intervallo condizione"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -744,7 +816,7 @@ msgstr "Conferma"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
 msgid "Confirm payslips without recomputing"
-msgstr ""
+msgstr "Conferma la busta paga senza ricalcolare"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__contract_id
@@ -787,7 +859,7 @@ msgstr "Indennità di trasporto"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
 msgid "Conveyance Allowance For Marc Demo"
-msgstr ""
+msgstr "Indennità di viaggio per Marc Demo"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
@@ -832,7 +904,7 @@ msgstr "Nota di credito"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
@@ -852,7 +924,7 @@ msgstr "Alla data"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Days"
-msgstr ""
+msgstr "Giorni"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.DED
@@ -872,6 +944,11 @@ msgid ""
 "isn't mandatory anymore and thus the rules applied will be all the rules set "
 "on the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
+"Definisce le regole che devono essere applicate per questo gruppo busta paga "
+"in accordo con il contratto scelto. Se lasciate vuoto il campo contratto il "
+"campo non è più obbligatorio e così le regole applicate saranno tutte le "
+"regole impostata nella struttura di contratti degli impiegati validi per il "
+"periodo selezionato"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
@@ -881,11 +958,11 @@ msgid ""
 "mandatory anymore and thus the rules applied will be all the rules set on "
 "the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
-"Definisce le regole che devono essere applicata per questa busta paga in "
-"accordo con il contratto scelto. Se lasciate vuoto il campo contratto il "
+"Definisce le regole che devono essere applicate per questo gruppo busta paga "
+"in accordo con il contratto scelto. Se lasciate vuoto il campo contratto il "
 "campo non è più obbligatorio e così le regole applicate saranno tutte le "
 "regole impostata nella struttura di contratti degli impiegati validi per il "
-"periodo selezoinato"
+"periodo selezionato"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__note
@@ -955,7 +1032,7 @@ msgstr "Gruppi busta paga in bozza"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
 msgid "Dynamic Filtered Payslip Lines"
-msgstr ""
+msgstr "Righe busta paga filtrate dinamicamente"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_employee
@@ -1020,12 +1097,12 @@ msgstr "Eventuale terzo coinvolto nel pagamento stipendi del dipendente."
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Examples"
-msgstr ""
+msgstr "Esempi"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
 msgid "Execute"
-msgstr ""
+msgstr "Esegui"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_fix
@@ -1039,13 +1116,13 @@ msgstr "Importo fisso"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_follower_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguito da"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_partner_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguito da (partner)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_type_icon
@@ -1111,27 +1188,27 @@ msgstr "Raggruppa per"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__has_message
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Help"
-msgstr ""
+msgstr "Aiuto"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_child_lines
 msgid "Hide Child Lines"
-msgstr ""
+msgstr "Nascondi righe figlie"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Hours"
-msgstr ""
+msgstr "Ore"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
 msgid "House Rent Allowance"
-msgstr ""
+msgstr "Indennità per l'affitto della casa"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
@@ -1154,7 +1231,7 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_icon
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_icon
@@ -1166,13 +1243,13 @@ msgstr "Icona per indicare un'attività eccezione."
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__credit_note
@@ -1198,6 +1275,8 @@ msgid ""
 "If you have doubts about coding salary rules, check the \"Help\" tab in this "
 "form."
 msgstr ""
+"Se ci sono dubbi sulla codifica delle regole della retribuzione, controllare "
+"la linguetta \"Aiuto\" in questa maschera."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__leaves_positive
