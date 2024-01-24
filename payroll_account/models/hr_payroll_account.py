@@ -18,7 +18,7 @@ class HrPayslipLine(models.Model):
         # use partner of salary rule or fallback on employee's address
         register_partner_id = self.salary_rule_id.register_id.partner_id
         partner_id = (
-            register_partner_id.id or self.slip_id.employee_id.address_home_id.id
+            register_partner_id.id or self.slip_id.employee_id.work_contact_id.id
         )
         if credit_account:
             if (
@@ -42,7 +42,6 @@ class HrPayslip(models.Model):
 
     date = fields.Date(
         "Date Account",
-        states={"draft": [("readonly", False)]},
         readonly=True,
         help="Keep empty to use the period of the validation(Payslip) date.",
     )
@@ -51,7 +50,6 @@ class HrPayslip(models.Model):
         "Salary Journal",
         readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
         default=lambda self: self.env["account.journal"].search(
             [("type", "=", "general")], limit=1
         ),
@@ -182,7 +180,7 @@ class HrPayslip(models.Model):
                         {
                             "name": line.name,
                             "partner_id": line._get_partner_id(credit_account=False)
-                            or slip.employee_id.address_home_id.id,
+                            or slip.employee_id.work_contact_id.id,
                             "account_id": debit_account_id,
                             "journal_id": slip.journal_id.id,
                             "date": date,
@@ -205,7 +203,7 @@ class HrPayslip(models.Model):
                         {
                             "name": line.name,
                             "partner_id": line._get_partner_id(credit_account=True)
-                            or slip.employee_id.address_home_id.id,
+                            or slip.employee_id.work_contact_id.id,
                             "account_id": credit_account_id,
                             "journal_id": slip.journal_id.id,
                             "date": date,
@@ -316,7 +314,6 @@ class HrPayslipRun(models.Model):
     journal_id = fields.Many2one(
         "account.journal",
         "Salary Journal",
-        states={"draft": [("readonly", False)]},
         readonly=True,
         required=True,
         default=lambda self: self.env["account.journal"].search(

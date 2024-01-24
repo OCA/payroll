@@ -28,7 +28,7 @@ class TestPayrollAccount(common.TransactionCase):
 
         self.hr_employee_john = self.env["hr.employee"].create(
             {
-                "address_home_id": self.ref("base.res_partner_address_2"),
+                "work_contact_id": self.ref("base.res_partner_address_2"),
                 "address_id": self.ref("base.res_partner_address_27"),
                 "birthday": "1984-05-01",
                 "children": 0.0,

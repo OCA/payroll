@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
         <field name="arch" type="xml">
             <field name="paid" position="after">
-                <field name="date"  readonly="state != 'draft'"/>
+                <field name="date" readonly="state != 'draft'" />
                 <field name="journal_id" required="1" readonly="state != 'draft'" />
                 <field name="move_id" readonly="1" />
             </field>
@@ -29,9 +29,7 @@
                                 groups="analytic.group_analytic_accounting"
                             />
                             <field name="account_tax_id" />
-                            <field
-                                name="tax_base_id"
-                                required="account_tax_id"/>
+                            <field name="tax_base_id" required="account_tax_id" />
                         </group>
                     </group>
                 </page>
@@ -72,7 +70,7 @@
         <field name="inherit_id" ref="payroll.hr_payslip_run_view_tree" />
         <field name="arch" type="xml">
             <field name="date_end" position="after">
-                <field name="journal_id"  readonly="state != 'draft'"/>
+                <field name="journal_id" readonly="state != 'draft'" />
             </field>
         </field>
     </record>
@@ -82,7 +80,7 @@
         <field name="inherit_id" ref="payroll.hr_payslip_run_view_form" />
         <field name="arch" type="xml">
             <field name="credit_note" position="before">
-                <field name="journal_id"  readonly="state != 'draft'"/>
+                <field name="journal_id" readonly="state != 'draft'" />
             </field>
         </field>
     </record>
