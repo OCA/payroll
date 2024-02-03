@@ -1,5 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from datetime import timedelta
+
 from odoo.fields import Date
 from odoo.tests import Form
 from odoo.tools import test_reports
@@ -222,12 +224,14 @@ class TestPayslipFlow(TestPayslipBase):
             len(contracts), 1, "There is one open contract for the employee"
         )
 
-        self.sally.contract_id.date_end = Date.today().strftime("%Y-%m-15")
+        self.sally.contract_id.date_end = (Date.today() - timedelta(days=1)).strftime(
+            "%Y-%m-%d"
+        )
         self.Contract.create(
             {
                 "name": "Second contract for Sally",
                 "employee_id": self.sally.id,
-                "date_start": Date.today().strftime("%Y-%m-16"),
+                "date_start": Date.today().strftime("%Y-%m-%d"),
                 "struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
                 "state": "open",
@@ -241,12 +245,14 @@ class TestPayslipFlow(TestPayslipBase):
 
     def test_get_contracts_multiple(self):
 
-        self.sally.contract_ids[0].date_end = Date.today().strftime("%Y-%m-15")
+        self.sally.contract_ids[0].date_end = (
+            Date.today() - timedelta(days=1)
+        ).strftime("%Y-%m-%d")
         self.Contract.create(
             {
                 "name": "Second contract for Sally",
                 "employee_id": self.sally.id,
-                "date_start": Date.today().strftime("%Y-%m-16"),
+                "date_start": Date.today().strftime("%Y-%m-%d"),
                 "struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
                 "state": "open",
