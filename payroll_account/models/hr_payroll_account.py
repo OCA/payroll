@@ -113,13 +113,15 @@ class HrPayslip(models.Model):
                 debit_account_id = line.salary_rule_id.account_debit.id
                 credit_account_id = line.salary_rule_id.account_credit.id
                 account_id = debit_account_id or credit_account_id
-                analytic_salary_id = line.salary_rule_id.analytic_account_id.id
-                move_line_analytic_ids = []
-                if analytic_salary_id:
-                    move_line_analytic_ids.append((4, analytic_salary_id.id))
-                elif slip.contract_id.analytic_account_id:
-                    move_line_analytic_ids.append(
-                        (4, slip.contract_id.analytic_account_id.id)
+                analytic_salary_id = line.salary_rule_id.analytic_account_id
+                move_line_analytic_ids = {}
+                if slip.contract_id.analytic_account_id:
+                    move_line_analytic_ids.update(
+                        {line.slip_id.contract_id.analytic_account_id.id: 100}
+                    )
+                elif analytic_salary_id:
+                    move_line_analytic_ids.update(
+                        {line.salary_rule_id.analytic_account_id.id: 100}
                     )
 
                 tax_ids = False
@@ -188,7 +190,7 @@ class HrPayslip(models.Model):
                             "date": date,
                             "debit": amount > 0.0 and amount or 0.0,
                             "credit": amount < 0.0 and -amount or 0.0,
-                            "analytic_line_ids": move_line_analytic_ids,
+                            "analytic_distribution": move_line_analytic_ids,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                             "tax_ids": tax_ids,
                             "tax_repartition_line_id": tax_repartition_line_id,
@@ -211,7 +213,7 @@ class HrPayslip(models.Model):
                             "date": date,
                             "debit": amount < 0.0 and -amount or 0.0,
                             "credit": amount > 0.0 and amount or 0.0,
-                            "analytic_line_ids": move_line_analytic_ids,
+                            "analytic_distribution": move_line_analytic_ids,
                             "tax_line_id": line.salary_rule_id.account_tax_id.id,
                             "tax_ids": tax_ids,
                             "tax_repartition_line_id": tax_repartition_line_id,
