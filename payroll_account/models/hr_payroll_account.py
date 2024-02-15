@@ -80,6 +80,7 @@ class HrPayslip(models.Model):
     def action_payslip_cancel(self):
         for payslip in self:
             if not payslip.move_id.journal_id.restrict_mode_hash_table:
+                # TODO : cancel all the grouped payslips
                 payslip.move_id.with_context(force_delete=True).button_cancel()
                 payslip.move_id.with_context(force_delete=True).unlink()
             else:
@@ -87,24 +88,7 @@ class HrPayslip(models.Model):
                 payslip.move_id = False
         return super(HrPayslip, self).action_payslip_cancel()
 
-    def action_payslip_done(self):
-        # Define account move general information based on the first slip
-        first_slip = self[0]
-
-        move_date = first_slip.date or first_slip.date_to
-        move_journal = first_slip.journal_id.id
-
-        move_dict = {
-            "journal_id": move_journal,
-            "date": move_date,
-        }
-
-        if len(self) == 1:
-            move_dict["narration"] = _("Payslip of %s") % (first_slip.employee_id.name)
-            move_dict["ref"] = first_slip.number
-        else:
-            move_dict["narration"] = _("Payslips of %s") % (move_date)
-
+    def _check_can_merge(self, move_date, move_journal):
         # Check that payslips can be accounted together
         for slip in self:
             # Check date
@@ -128,14 +112,50 @@ class HrPayslip(models.Model):
                     % (slip.number)
                 )
 
-        # Initialize account move and account move lines
-        move = self.env["account.move"].create({})
-        move_lines = []
+    def _merge_move_lines(self, move_lines, line_ids):
+        for line in line_ids:
+            del line[2]["partner_id"]
+            account_in_move = False
+            for move_line in move_lines:
+                if (
+                    line[2]["account_id"] == move_line[2]["account_id"]
+                    and line[2]["analytic_distribution"]
+                    == move_line[2]["analytic_distribution"]
+                    and line[2]["debit"] == move_line[2]["debit"] == 0
+                ):
+                    account_in_move = True
+                    move_line[2]["credit"] += line[2]["credit"]
+                    break
+                if (
+                    line[2]["account_id"] == move_line[2]["account_id"]
+                    and line[2]["analytic_distribution"]
+                    == move_line[2]["analytic_distribution"]
+                    and line[2]["credit"] == move_line[2]["credit"] == 0
+                ):
+                    account_in_move = True
+                    move_line[2]["debit"] += line[2]["debit"]
+                    break
+            if not account_in_move:
+                move_lines.append(line)
+        return move_lines
+
+    def action_payslip_done(self):
+        # Check if we can merge payslips in accounting
+        if len(self) > 1 and self.env.company.action_group_payslips:
+            # Define account move general information based on the first slip
+            move_date = self[0].date or self[0].date_to
+            move_journal = self[0].journal_id.id
+            self._check_can_merge(move_date, move_journal)
+
+            # Initialize account move and account move lines
+            move = False
+            move_lines = []
         # Compute account move lines
         for slip in self:
             line_ids = []
             debit_sum = 0.0
             credit_sum = 0.0
+            date = slip.date or slip.date_to
             currency = (
                 slip.company_id.currency_id or slip.journal_id.company_id.currency_id
             )
@@ -307,48 +327,43 @@ class HrPayslip(models.Model):
                 )
                 line_ids.append(adjust_debit)
             if len(line_ids) > 0:
-                if len(self) == 1 or self.env.company.action_group_payslips is not True:
-                    move_lines = line_ids
-                    first_slip = False
+                if len(self) == 1 or not self.env.company.action_group_payslips:
+                    # We do a single account move
+                    name = _("Payslip of %s") % (slip.employee_id.name)
+                    move_dict = {
+                        "narration": name,
+                        "ref": slip.number,
+                        "journal_id": slip.journal_id.id,
+                        "date": date,
+                    }
+                    move_dict["line_ids"] = line_ids
+                    move_slip = self.env["account.move"].create(move_dict)
+                    slip.write({"move_id": move_slip.id})
+                    move_slip.action_post()
+
                 else:
-                    for line_id in line_ids:
-                        del line_id[2]["partner_id"]
-                        account_in_move = False
-                        for move_line in move_lines:
-                            if (
-                                line_id[2]["account_id"] == move_line[2]["account_id"]
-                                and line_id[2]["analytic_distribution"]
-                                == move_line[2]["analytic_distribution"]
-                                and line_id[2]["debit"] == move_line[2]["debit"] == 0
-                            ):
-                                account_in_move = True
-                                move_line[2]["credit"] += line_id[2]["credit"]
-                                break
-                            if (
-                                line_id[2]["account_id"] == move_line[2]["account_id"]
-                                and line_id[2]["analytic_distribution"]
-                                == move_line[2]["analytic_distribution"]
-                                and line_id[2]["credit"] == move_line[2]["credit"] == 0
-                            ):
-                                account_in_move = True
-                                move_line[2]["debit"] += line_id[2]["debit"]
-                                break
-                        if not account_in_move:
-                            move_lines.append(line_id)
+                    # We want to merge account entries in a single account move
+                    if not move:
+                        move = self.env["account.move"].create({})
+                    move_lines = self._merge_move_lines(move_lines, line_ids)
+                    slip.write({"move_id": move.id})
             else:
                 logger.warning(
                     f"Payslip {slip.number} did not generate any account move lines"
                 )
-            # Link payslip with the account move
-            slip.write({"move_id": move.id, "date": date})
-            # Change payslip's state to "Done"
-            super(HrPayslip, slip).action_payslip_done()
+            res = super(HrPayslip, slip).action_payslip_done()
 
-        # Add account move lines in the account move
-        move_dict["line_ids"] = move_lines
-        move.write(move_dict)
-        # Post the account move
-        return move.action_post()
+        # Add account move lines into the global account move
+        if len(self) > 1 and self.env.company.action_group_payslips:
+            move_dict = {
+                "narration": _("Payslips of %s") % (move_date),
+                "journal_id": move_journal,
+                "date": move_date,
+            }
+            move_dict["line_ids"] = move_lines
+            move.write(move_dict)
+            move.action_post()
+        return res
 
 
 class HrSalaryRule(models.Model):
