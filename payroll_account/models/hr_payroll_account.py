@@ -111,159 +111,69 @@ class HrPayslip(models.Model):
                     continue
                 debit_account_id = line.salary_rule_id.account_debit.id
                 credit_account_id = line.salary_rule_id.account_credit.id
-                account_id = debit_account_id or credit_account_id
                 analytic_salary_id = line.salary_rule_id.analytic_account_id.id
-
                 tax_ids = False
                 tax_tag_ids = False
-                if line.salary_rule_id.tax_line_ids:
-                    account_tax_ids = [
-                        salary_rule_id.account_tax_id.id
-                        for salary_rule_id in line.salary_rule_id.tax_line_ids
-                    ]
-                    tax_ids = [
-                        (4, account_tax_id, 0) for account_tax_id in account_tax_ids
-                    ]
-                    tax_tag_ids = (
-                        self.env["account.tax.repartition.line"]
-                        .search(
-                            [
-                                ("invoice_tax_id", "in", account_tax_ids),
-                                ("repartition_type", "=", "base"),
-                            ]
-                        )
-                        .tag_ids
-                    )
-
                 tax_repartition_line_id = False
                 if line.salary_rule_id.account_tax_id:
-                    tax_repartition_line_id = (
-                        self.env["account.tax.repartition.line"]
-                        .search(
-                            [
-                                (
-                                    "invoice_tax_id",
-                                    "=",
-                                    line.salary_rule_id.account_tax_id.id,
-                                ),
-                                ("account_id", "=", account_id),
-                            ]
-                        )
-                        .id
-                    )
-                    tax_tag_ids = (
-                        self.env["account.tax.repartition.line"]
-                        .search(
-                            [
-                                (
-                                    "invoice_tax_id",
-                                    "=",
-                                    line.salary_rule_id.account_tax_id.id,
-                                ),
-                                ("repartition_type", "=", "tax"),
-                                ("account_id", "=", account_id),
-                            ]
-                        )
-                        .tag_ids
-                    )
+                    (
+                        tax_ids,
+                        tax_tag_ids,
+                        tax_repartition_line_id,
+                    ) = self._get_tax_details(line)
 
                 if debit_account_id:
-                    debit_line = (
-                        0,
-                        0,
-                        {
-                            "name": line.name,
-                            "partner_id": line._get_partner_id(credit_account=False)
-                            or slip.employee_id.address_home_id.id,
-                            "account_id": debit_account_id,
-                            "journal_id": slip.journal_id.id,
-                            "date": date,
-                            "debit": amount > 0.0 and amount or 0.0,
-                            "credit": amount < 0.0 and -amount or 0.0,
-                            "analytic_account_id": analytic_salary_id
-                            or slip.contract_id.analytic_account_id.id,
-                            "tax_line_id": line.salary_rule_id.account_tax_id.id,
-                            "tax_ids": tax_ids,
-                            "tax_repartition_line_id": tax_repartition_line_id,
-                            "tax_tag_ids": tax_tag_ids,
-                        },
+                    debit_line = self._prepare_debit_line(
+                        line,
+                        slip,
+                        amount,
+                        date,
+                        debit_account_id,
+                        analytic_salary_id,
+                        tax_ids,
+                        tax_tag_ids,
+                        tax_repartition_line_id,
                     )
-                    line_ids.append(debit_line)
-                    debit_sum += debit_line[2]["debit"] - debit_line[2]["credit"]
+                    line_ids.append((0, 0, debit_line))
+                    debit_sum += debit_line["debit"] - debit_line["credit"]
 
                 if credit_account_id:
-                    credit_line = (
-                        0,
-                        0,
-                        {
-                            "name": line.name,
-                            "partner_id": line._get_partner_id(credit_account=True)
-                            or slip.employee_id.address_home_id.id,
-                            "account_id": credit_account_id,
-                            "journal_id": slip.journal_id.id,
-                            "date": date,
-                            "debit": amount < 0.0 and -amount or 0.0,
-                            "credit": amount > 0.0 and amount or 0.0,
-                            "analytic_account_id": analytic_salary_id
-                            or slip.contract_id.analytic_account_id.id,
-                            "tax_line_id": line.salary_rule_id.account_tax_id.id,
-                            "tax_ids": tax_ids,
-                            "tax_repartition_line_id": tax_repartition_line_id,
-                            "tax_tag_ids": tax_tag_ids,
-                        },
+                    credit_line = self._prepare_credit_line(
+                        line,
+                        slip,
+                        amount,
+                        date,
+                        credit_account_id,
+                        analytic_salary_id,
+                        tax_ids,
+                        tax_tag_ids,
+                        tax_repartition_line_id,
                     )
-                    line_ids.append(credit_line)
-                    credit_sum += credit_line[2]["credit"] - credit_line[2]["debit"]
+                    line_ids.append((0, 0, credit_line))
+                    credit_sum += credit_line["credit"] - credit_line["debit"]
 
+            journal = slip.journal_id
+            acc_id = journal.default_account_id.id
+            if not acc_id:
+                raise UserError(
+                    _(
+                        "The Expense Journal '%s' has not properly configured"
+                        "the Debit Account!"
+                    )
+                    % (journal.name)
+                )
             if currency.compare_amounts(credit_sum, debit_sum) == -1:
-                acc_id = slip.journal_id.default_account_id.id
-                if not acc_id:
-                    raise UserError(
-                        _(
-                            'The Expense Journal "%s" has not properly '
-                            "configured the Credit Account!"
-                        )
-                        % (slip.journal_id.name)
-                    )
-                adjust_credit = (
-                    0,
-                    0,
-                    {
-                        "name": _("Adjustment Entry"),
-                        "partner_id": False,
-                        "account_id": acc_id,
-                        "journal_id": slip.journal_id.id,
-                        "date": date,
-                        "debit": 0.0,
-                        "credit": currency.round(debit_sum - credit_sum),
-                    },
+                debit_adjust_line = self._prepare_adjust_debit_line(
+                    currency, credit_sum, debit_sum, journal, date
                 )
-                line_ids.append(adjust_credit)
-
+                if debit_adjust_line:
+                    line_ids.append((0, 0, debit_adjust_line))
             elif currency.compare_amounts(debit_sum, credit_sum) == -1:
-                acc_id = slip.journal_id.default_account_id.id
-                if not acc_id:
-                    raise UserError(
-                        _(
-                            'The Expense Journal "%s" has not properly '
-                            "configured the Debit Account!"
-                        )
-                        % (slip.journal_id.name)
-                    )
-                adjust_debit = (
-                    0,
-                    0,
-                    {
-                        "name": _("Adjustment Entry"),
-                        "partner_id": False,
-                        "account_id": acc_id,
-                        "journal_id": slip.journal_id.id,
-                        "date": date,
-                        "debit": currency.round(credit_sum - debit_sum),
-                        "credit": 0.0,
-                    },
+                credit_adjust_line = self._prepare_adjust_credit_line(
+                    currency, credit_sum, debit_sum, journal, date
                 )
-                line_ids.append(adjust_debit)
+                if credit_adjust_line:
+                    line_ids.append((0, 0, credit_adjust_line))
             if len(line_ids) > 0:
                 move_dict["line_ids"] = line_ids
                 move = self.env["account.move"].create(move_dict)
@@ -274,6 +184,149 @@ class HrPayslip(models.Model):
                     f"Payslip {slip.number} did not generate any account move lines"
                 )
         return res
+
+    def _prepare_debit_line(
+        self,
+        line,
+        slip,
+        amount,
+        date,
+        debit_account_id,
+        analytic_salary_id,
+        tax_ids,
+        tax_tag_ids,
+        tax_repartition_line_id,
+    ):
+        return {
+            "name": line.name,
+            "partner_id": line._get_partner_id(credit_account=False)
+            or slip.employee_id.address_home_id.id,
+            "account_id": debit_account_id,
+            "journal_id": slip.journal_id.id,
+            "date": date,
+            "debit": amount > 0.0 and amount or 0.0,
+            "credit": amount < 0.0 and -amount or 0.0,
+            "analytic_account_id": analytic_salary_id
+            or slip.contract_id.analytic_account_id.id,
+            "tax_line_id": line.salary_rule_id.account_tax_id.id,
+            "tax_ids": tax_ids,
+            "tax_repartition_line_id": tax_repartition_line_id,
+            "tax_tag_ids": tax_tag_ids,
+        }
+
+    def _prepare_credit_line(
+        self,
+        line,
+        slip,
+        amount,
+        date,
+        credit_account_id,
+        analytic_salary_id,
+        tax_ids,
+        tax_tag_ids,
+        tax_repartition_line_id,
+    ):
+        return {
+            "name": line.name,
+            "partner_id": line._get_partner_id(credit_account=True)
+            or slip.employee_id.address_home_id.id,
+            "account_id": credit_account_id,
+            "journal_id": slip.journal_id.id,
+            "date": date,
+            "debit": amount < 0.0 and -amount or 0.0,
+            "credit": amount > 0.0 and amount or 0.0,
+            "analytic_account_id": analytic_salary_id
+            or slip.contract_id.analytic_account_id.id,
+            "tax_line_id": line.salary_rule_id.account_tax_id.id,
+            "tax_ids": tax_ids,
+            "tax_repartition_line_id": tax_repartition_line_id,
+            "tax_tag_ids": tax_tag_ids,
+        }
+
+    def _prepare_adjust_credit_line(
+        self, currency, credit_sum, debit_sum, journal, date
+    ):
+        acc_id = journal.default_account_id.id
+        return {
+            "name": _("Adjustment Entry"),
+            "partner_id": False,
+            "account_id": acc_id,
+            "journal_id": journal.id,
+            "date": date,
+            "debit": 0.0,
+            "credit": currency.round(debit_sum - credit_sum),
+        }
+
+    def _prepare_adjust_debit_line(
+        self, currency, credit_sum, debit_sum, journal, date
+    ):
+        acc_id = journal.default_account_id.id
+        return {
+            "name": _("Adjustment Entry"),
+            "partner_id": False,
+            "account_id": acc_id,
+            "journal_id": journal.id,
+            "date": date,
+            "debit": currency.round(credit_sum - debit_sum),
+            "credit": 0.0,
+        }
+
+    def _get_tax_details(self, line):
+        tax_ids = False
+        tax_tag_ids = False
+        salary_rule = line.salary_rule_id
+        if salary_rule.tax_line_ids:
+            account_tax_ids = [
+                salary_rule_id.account_tax_id.id
+                for salary_rule_id in salary_rule.tax_line_ids
+            ]
+            tax_ids = [(4, account_tax_id, 0) for account_tax_id in account_tax_ids]
+            tax_tag_ids = (
+                self.env["account.tax.repartition.line"]
+                .search(
+                    [
+                        ("invoice_tax_id", "in", account_tax_ids),
+                        ("repartition_type", "=", "base"),
+                    ]
+                )
+                .tag_ids
+            )
+
+        tax_repartition_line_id = False
+        if salary_rule.account_tax_id:
+            tax_repartition_line_id = (
+                self.env["account.tax.repartition.line"]
+                .search(
+                    [
+                        ("invoice_tax_id", "=", salary_rule.account_tax_id.id),
+                        (
+                            "account_id",
+                            "=",
+                            salary_rule.account_debit.id
+                            or salary_rule.account_credit.id,
+                        ),
+                    ]
+                )
+                .id
+            )
+            tax_tag_ids += (
+                self.env["account.tax.repartition.line"]
+                .search(
+                    [
+                        ("invoice_tax_id", "=", salary_rule.account_tax_id.id),
+                        ("repartition_type", "=", "tax"),
+                        (
+                            "account_id",
+                            "=",
+                            salary_rule.account_debit.id
+                            or salary_rule.account_credit.id,
+                        ),
+                    ]
+                )
+                .tag_ids
+            )
+
+        return tax_ids, tax_tag_ids, tax_repartition_line_id
 
 
 class HrSalaryRule(models.Model):
