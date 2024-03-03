@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-payroll Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-hr_payroll_document>=16.0dev,<16.1dev',
         'odoo-addon-payroll>=16.0dev,<16.1dev',
         'odoo-addon-payroll_account>=16.0dev,<16.1dev',
     ],
