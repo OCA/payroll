@@ -132,20 +132,22 @@ msgstr ""
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Credit Account!"
+msgid "The Expense Journal '%s' has not properly configuredthe Debit Account!"
 msgstr ""
-"Le journal des charges \"%s\" n'a pas correctement configuré le compte de "
-"crédit!"
 
-#. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr ""
-"Le journal des charges \"%s\" n'a pas correctement configuré le compte de "
-"débit!"
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+#~ msgstr ""
+#~ "Le journal des charges \"%s\" n'a pas correctement configuré le compte de "
+#~ "crédit!"
+
+#, python-format
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+#~ msgstr ""
+#~ "Le journal des charges \"%s\" n'a pas correctement configuré le compte de "
+#~ "débit!"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Feuille de paie"

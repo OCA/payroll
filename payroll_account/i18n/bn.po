@@ -129,16 +129,18 @@ msgstr ""
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Credit Account!"
-msgstr "ব্যয় জার্নাল \"%s\" ক্রেডিট অ্যাকাউন্টটি সঠিকভাবে কনফিগার করা হয়নি!"
+msgid "The Expense Journal '%s' has not properly configuredthe Debit Account!"
+msgstr ""
 
-#. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr "ব্যয় জার্নাল \"%s\" ডেবিট অ্যাকাউন্টটি সঠিকভাবে কনফিগার করা হয়নি!"
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+#~ msgstr "ব্যয় জার্নাল \"%s\" ক্রেডিট অ্যাকাউন্টটি সঠিকভাবে কনফিগার করা হয়নি!"
+
+#, python-format
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+#~ msgstr "ব্যয় জার্নাল \"%s\" ডেবিট অ্যাকাউন্টটি সঠিকভাবে কনফিগার করা হয়নি!"
 
 #~ msgid "Pay Slip"
 #~ msgstr "বেতন স্লিপ"

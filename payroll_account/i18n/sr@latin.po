@@ -133,16 +133,18 @@ msgstr ""
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Credit Account!"
-msgstr "U dnevniku troškova \"%s\" nije korektno podešen potražni konto!"
+msgid "The Expense Journal '%s' has not properly configuredthe Debit Account!"
+msgstr ""
 
-#. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr "U dnevniku troškova \"%s\" nije korektno podešen dugovni konto!"
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+#~ msgstr "U dnevniku troškova \"%s\" nije korektno podešen potražni konto!"
+
+#, python-format
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+#~ msgstr "U dnevniku troškova \"%s\" nije korektno podešen dugovni konto!"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Platna lista"

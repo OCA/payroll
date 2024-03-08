@@ -134,16 +134,18 @@ msgstr ""
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Credit Account!"
-msgstr "Účtovná kniha výdajov \"%s\" nemá správne nastavený kreditný účet!"
+msgid "The Expense Journal '%s' has not properly configuredthe Debit Account!"
+msgstr ""
 
-#. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr "Účtovná kniha výdajov \"%s\" nemá správne nastavený debetný účet!"
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+#~ msgstr "Účtovná kniha výdajov \"%s\" nemá správne nastavený kreditný účet!"
+
+#, python-format
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+#~ msgstr "Účtovná kniha výdajov \"%s\" nemá správne nastavený debetný účet!"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Pay Slip "

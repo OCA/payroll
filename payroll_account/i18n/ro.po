@@ -131,16 +131,20 @@ msgstr ""
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Credit Account!"
-msgstr "Jurnalul de Cheltuieli \"%s\" nu a configurat corect Contul de Credit!"
+msgid "The Expense Journal '%s' has not properly configuredthe Debit Account!"
+msgstr ""
 
-#. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr "Jurnalul de cheltuieli \"%s\" nu a configurat corect Contul de Debit!"
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+#~ msgstr ""
+#~ "Jurnalul de Cheltuieli \"%s\" nu a configurat corect Contul de Credit!"
+
+#, python-format
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+#~ msgstr ""
+#~ "Jurnalul de cheltuieli \"%s\" nu a configurat corect Contul de Debit!"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Fluturas de salariu"

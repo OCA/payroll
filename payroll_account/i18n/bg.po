@@ -134,18 +134,21 @@ msgstr ""
 #. module: payroll_account
 #: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Credit Account!"
+msgid "The Expense Journal '%s' has not properly configuredthe Debit Account!"
 msgstr ""
-"Журналът за разходите \"%s\" не е конфигуриран правилно за кредитната сметка "
 
-#. module: payroll_account
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
 #, python-format
-msgid ""
-"The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr ""
-"Журналът за разходите '%s' не е конфигуриран правилно за дебитната сметка "
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+#~ msgstr ""
+#~ "Журналът за разходите \"%s\" не е конфигуриран правилно за кредитната "
+#~ "сметка "
+
+#, python-format
+#~ msgid ""
+#~ "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+#~ msgstr ""
+#~ "Журналът за разходите '%s' не е конфигуриран правилно за дебитната сметка "
 
 #~ msgid "Pay Slip"
 #~ msgstr "Фиш за заплата"
