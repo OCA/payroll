@@ -16,7 +16,7 @@
                 />
             </field>
             <field name="name" position="after">
-                <field name="date_payment" required="1" />
+                <field name="date_payment" />
             </field>
         </field>
     </record>
