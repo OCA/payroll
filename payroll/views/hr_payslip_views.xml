@@ -161,15 +161,8 @@
                                 options="{'end_date_field': 'date_to'}"
                                 readonly="state != 'draft'"
                             />
-                            -
-                            <field
-                                name="date_to"
-                                widget="daterange"
-                                class="oe_inline"
-                                options="{'start_date_field': 'date_from'}"
-                                readonly="state != 'draft'"
-                            />
                         </div>
+                        <field name="date_to" column_invisible="True" />
                         <field
                             name="contract_id"
                             domain="[('employee_id','=',employee_id),('date_start','&lt;=',date_to),'|',('date_end','&gt;=',date_from),('date_end','=',False)]"
