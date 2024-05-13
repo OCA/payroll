@@ -75,8 +75,8 @@ class HrSalaryRule(models.Model):
             # inputs: object containing the computed inputs.
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
-            # result_rules: object with a dict of qty, rate, amount an total of calculated rules
-            # tools: object that contain libraries and tools that can be used in calculations
+            # result_rules: object with a dict of qty, rate, amount an total of calculated rules # noqa: E501
+            # tools: object that contain libraries and tools that can be used in calculations # noqa: E501
 
             # Available compute variables:
             #-------------------------------
@@ -130,15 +130,15 @@ class HrSalaryRule(models.Model):
             # inputs: object containing the computed inputs.
             # payroll: object containing miscellaneous values related to payroll
             # current_contract: object with values calculated from the current contract
-            # result_rules: object with a dict of qty, rate, amount an total of calculated rules
-            # tools: object that contain libraries and tools that can be used in calculations
+            # result_rules: object with a dict of qty, rate, amount an total of calculated rules # noqa: E501
+            # tools: object that contain libraries and tools that can be used in calculations # noqa: E501
 
             # Available compute variables:
             #-------------------------------
             # result: returned value have to be set in the variable 'result'
             # result_rate: the rate that will be applied to "result".
             # result_qty: the quantity of units that will be multiplied to "result".
-            # result_name: if this variable is computed, it will contain the name of the line.
+            # result_name: if this variable is computed, it will contain the name of the line. # noqa: E501
 
             # Example:
             #-------------------------------

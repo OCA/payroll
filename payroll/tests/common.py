@@ -96,7 +96,7 @@ class TestPayslipBase(TransactionCase):
                 "condition_select": "none",
                 "amount_select": "fix",
                 "amount_fix": 10.0,
-                "quantity": "worked_days.WORK100 and worked_days.WORK100.number_of_days",
+                "quantity": "worked_days.WORK100 and worked_days.WORK100.number_of_days",  # noqa: E501
             }
         )
         self.rule_commission = self.SalaryRule.create(
