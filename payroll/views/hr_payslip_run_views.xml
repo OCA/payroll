@@ -143,14 +143,6 @@
                                     options="{'end_date_field': 'date_end'}"
                                     readonly="state != 'draft'"
                                 />
-                                -
-                                <field
-                                    name="date_end"
-                                    widget="daterange"
-                                    class="oe_inline"
-                                    options="{'start_date_field': 'date_start'}"
-                                    readonly="state != 'draft'"
-                                />
                             </div>
                             <field
                                 name="company_id"

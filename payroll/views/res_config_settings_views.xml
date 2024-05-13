@@ -23,60 +23,57 @@
                     groups="payroll.group_payroll_manager"
                 >
                     <block title="Accounting" id="payroll_accountant">
-                        <setting>
-                                <field name="module_payroll_account" />
-                                <label
-                                for="module_payroll_account"
-                                string="Payroll Entries"
-                            />
-                                <div class="text-muted">
-                                    Post payslips in accounting
-                                </div>
+                        <setting
+                            id=""
+                            string="Payroll Entries"
+                            help="Post payslips in accounting"
+                        >
+                            <field name="module_payroll_account" />
                         </setting>
                     </block>
                     <block title="Calculation Settings" id="leaves_positive">
-                        <setting>
-                                <field name="leaves_positive" />
-                                <label for="leaves_positive" />
-                                <div class="text-muted">
-                                    In payslip worked days, leave days/hours have positive values
-                                </div>
+                        <setting
+                            id=""
+                            string="Leaves with positive values"
+                            help="In payslip worked days, leave days/hours have positive values"
+                        >
+                            <field name="leaves_positive" />
                         </setting>
                     </block>
                     <block id="allow_cancel_payslips">
-                        <setting>
-                                <field name="allow_cancel_payslips" />
-                                <label for="allow_cancel_payslips" />
-                                <div class="text-muted">
-                                    Allow users to cancel confirmed payslips
-                                </div>
+                        <setting
+                            id=""
+                            string="Allow canceling confirmed payslips"
+                            help="Allow users to cancel confirmed payslips"
+                        >
+                            <field name="allow_cancel_payslips" />
                         </setting>
                     </block>
                     <block id="prevent_compute_on_confirm">
-                        <setting>
-                                <field name="prevent_compute_on_confirm" />
-                                <label for="prevent_compute_on_confirm" />
-                                <div class="text-muted">
-                                    Prevent payslips from being recomputed when confirming them
-                                </div>
+                        <setting
+                            id=""
+                            string="Confirm payslips without recomputing"
+                            help="Prevent payslips from being recomputed when confirming them"
+                        >
+                            <field name="prevent_compute_on_confirm" />
                         </setting>
                     </block>
                     <block id="allow_edit_payslip_lines">
-                        <setting>
-                                <field name="allow_edit_payslip_lines" />
-                                <label for="allow_edit_payslip_lines" />
-                                <div class="text-muted">
-                                    Allow users to edit some payslip line fields manually
-                                </div>
+                        <setting
+                            id=""
+                            string="Allow editing payslip lines"
+                            help="Allow users to edit some payslip line fields manually"
+                        >
+                            <field name="allow_edit_payslip_lines" />
                         </setting>
                     </block>
                     <block id="require_code_and_category">
-                        <setting>
-                                <field name="require_code_and_category" />
-                                <label for="require_code_and_category" />
-                                <div class="text-muted">
-                                    Require rule.code, rule.category, category.code, structure.code
-                                </div>
+                        <setting
+                            id=""
+                            string="Require code/category on rules, categories and structures"
+                            help="Require rule.code, rule.category, category.code, structure.code"
+                        >
+                            <field name="require_code_and_category" />
                         </setting>
                     </block>
 
