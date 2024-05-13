@@ -33,6 +33,7 @@
                             name="note"
                             placeholder="Add your notes or category explanation here..."
                             nolabel="1"
+                            colspan="2"
                         />
                     </group>
                 </sheet>

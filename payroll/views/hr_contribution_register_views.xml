@@ -64,7 +64,7 @@
                 <group>
                     <separator string="Description" />
                     <newline />
-                    <field name="note" nolabel="1" />
+                    <field name="note" nolabel="1" colspan="2" />
                 </group>
             </form>
         </field>
