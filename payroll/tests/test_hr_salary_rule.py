@@ -132,7 +132,7 @@ class TestSalaryRule(TestPayslipBase):
         payslip.onchange_employee()
         payslip.compute_sheet()
 
-        # Parent and child rule should not be calculated even if child rule condition is true
+        # Parent and child rule should not be calculated even if child rule condition is true # noqa: E501
         parent_line = payslip.line_ids.filtered(
             lambda record: record.code == "PARENT_TEST"
         )
