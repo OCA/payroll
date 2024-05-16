@@ -415,6 +415,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_cancel_payslips
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow canceling confirmed payslips"
 msgstr ""
 
@@ -425,6 +426,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow editing payslip lines"
 msgstr ""
 
@@ -721,6 +723,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Confirm payslips without recomputing"
 msgstr ""
 
@@ -1140,7 +1143,9 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1231,23 +1236,6 @@ msgid ""
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_input____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_input____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_salary_rule____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category____last_update
-#: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1283,6 +1271,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Leaves with positive values"
 msgstr ""
 
@@ -1296,12 +1285,6 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
 msgid "Made Payment Order ? "
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_main_attachment_id
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: payroll
@@ -1895,6 +1878,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__require_code_and_category
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Require code/category on rules, categories and structures"
 msgstr ""
 
@@ -1918,6 +1902,12 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Rule Configuration"
+msgstr ""
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: payroll
@@ -2198,18 +2188,6 @@ msgstr ""
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip__state__verify
 msgid "Waiting"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__website_message_ids
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__website_message_ids
-msgid "Website Messages"
-msgstr ""
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_payslip__website_message_ids
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__website_message_ids
-msgid "Website communication history"
 msgstr ""
 
 #. module: payroll

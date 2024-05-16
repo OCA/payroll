@@ -517,6 +517,7 @@ msgstr "Permitir la anulación de nóminas"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_cancel_payslips
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow canceling confirmed payslips"
 msgstr "Permitir la anulación de nóminas confirmadas"
 
@@ -527,6 +528,7 @@ msgstr "Permitir la edición"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow editing payslip lines"
 msgstr "Permitir la edición de las líneas de la nómina"
 
@@ -841,6 +843,7 @@ msgstr "Confirmar"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Confirm payslips without recomputing"
 msgstr "Confirmar nóminas sin volver a calcular"
 
@@ -1270,7 +1273,9 @@ msgstr "Si se activa, los nuevos mensajes requieren tu atención."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
+#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si se activa, algunos mensajes tienen un error de envio."
 
@@ -1380,23 +1385,6 @@ msgstr ""
 "expresión como 'result = inputs.SALEURO.amount * contract.wage*0.01'."
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contribution_register____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_input____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_line____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_rule_input____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_salary_rule____last_update
-#: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category____last_update
-#: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__write_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__write_uid
@@ -1432,6 +1420,7 @@ msgstr "Última actualización el"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Leaves with positive values"
 msgstr "Utilizar ausencias con valores absolutos (positivos)"
 
@@ -1447,12 +1436,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
 msgid "Made Payment Order ? "
 msgstr "¿Realizar orden de pago? "
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_main_attachment_id
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Adjunto principal"
 
 #. module: payroll
 #: model:ir.module.category,description:payroll.module_category_payroll
@@ -2053,6 +2036,7 @@ msgstr "Requieren código y categoría"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__require_code_and_category
+#: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Require code/category on rules, categories and structures"
 msgstr "Exigir código/categoría sobre normas, categorías y estructuras"
 
@@ -2078,6 +2062,12 @@ msgstr "Regla"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Rule Configuration"
 msgstr "Configuración de reglas"
+
+#. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de envio de SMS"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
@@ -2379,18 +2369,6 @@ msgid "Waiting"
 msgstr "En espera"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__website_message_ids
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__website_message_ids
-msgid "Website Messages"
-msgstr "Mensajes del sitio"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_payslip__website_message_ids
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__website_message_ids
-msgid "Website communication history"
-msgstr "Historial de comunicación del sitio"
-
-#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__weekly
 msgid "Weekly"
 msgstr "Semanalmente"
@@ -2493,8 +2471,17 @@ msgstr "El resultado afectará a una variable"
 msgid "total_net"
 msgstr "total_net"
 
-#~ msgid "SMS Delivery error"
-#~ msgstr "Error de envio de SMS"
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Adjunto principal"
+
+#~ msgid "Website Messages"
+#~ msgstr "Mensajes del sitio"
+
+#~ msgid "Website communication history"
+#~ msgstr "Historial de comunicación del sitio"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Cantidad de mensajes que requieren una acción"
