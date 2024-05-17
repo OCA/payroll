@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2024-04-04 11:39+0000\n"
+"PO-Revision-Date: 2024-05-17 12:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
 "Language: it\n"
@@ -187,7 +187,7 @@ msgid ""
 "<code>current_contract:</code> contains values related/calculated for "
 "current contract"
 msgstr ""
-"<code>current_contract:</code> Contiene i valori relativi/calcolati per il "
+"<code>current_contract:</code> contiene i valori relativi/calcolati per il "
 "contratto attuale"
 
 #. module: payroll
@@ -552,7 +552,7 @@ msgstr "Consenti all'utente di annullare buste paga confermate."
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow users to edit some payslip line fields manually"
 msgstr ""
-"Consente ll'utente di modificare alcune righe della busta paga manualmente"
+"Consente all'utente di modificare alcune righe della busta paga manualmente"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
@@ -726,17 +726,17 @@ msgid ""
 "complex tax computation that needs data from several modules)."
 msgstr ""
 "La funzionalità regola figlia è utile quando serve calcolare altre regole "
-"prima di quella madre. <br/>\n"
+"prima di quella padre. <br/>\n"
 "                                    Questo significa che tutte le regole "
-"retribuzione dichiarate come figlie (madre di una regola) verranno aggiunte "
+"retribuzione dichiarate come figlie (padre di una regola) verranno aggiunte "
 "al calcolo\n"
-"                                    se la loro regola madre è inclusa nella "
+"                                    se la loro regola padre è inclusa nella "
 "struttura della retribuzione. Così le regole figlie verranno calcolate solo "
-"se la loro madre è\n"
+"se la regola padre è\n"
 "                                    calcolata. <br/>\n"
 "                                    Questa funzionalità è utile per fare "
 "calcoli ausiliari che sono usati come dipendenze per la regola retribuzione\n"
-"                                    madre (es. regole richieste per calcolo "
+"                                    padre (es. regole richieste per calcolo "
 "di tasse complesse che richidono dati da diversi moduli)."
 
 #. module: payroll
@@ -976,9 +976,9 @@ msgid ""
 "on the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
 "Definisce le regole che devono essere applicate per questo gruppo busta paga "
-"in accordo con il contratto scelto. Se lasciate vuoto il campo contratto il "
+"in accordo con il contratto scelto. Se si lascia vuoto il campo contratto il "
 "campo non è più obbligatorio e così le regole applicate saranno tutte le "
-"regole impostata nella struttura di contratti degli impiegati validi per il "
+"regole impostate nella struttura di contratti degli impiegati validi per il "
 "periodo selezionato"
 
 #. module: payroll
@@ -1370,10 +1370,10 @@ msgid ""
 "for Meal Voucher having fixed amount of 1€ per worked day can have its "
 "quantity defined in expression like worked_days.WORK100.number_of_days."
 msgstr ""
-"Si utilizza nel calcolo per la valori percentuali e fissi. Per es. una egola "
-"per i buoni pasto che ha un valore fisso di 1€ per giorno lavorato può avere "
-"la sua quantità definita in una espressione come worked_days.WORK100."
-"number_of_days."
+"Si utilizza nel calcolo per la valori percentuali e fissi. Per es. una "
+"regola per i buoni pasto che ha un valore fisso di 1€ per giorno lavorato "
+"può avere la sua quantità definita in una espressione come worked_days."
+"WORK100.number_of_days."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount
@@ -1448,7 +1448,7 @@ msgid ""
 "Linking a salary category to its parent is used only for the reporting "
 "purpose."
 msgstr ""
-"Il collegamento di una categoria retribuzione alla madre è uilizzato solo a "
+"Il collegamento di una categoria retribuzione al padre è uilizzato solo a "
 "fini di rendicontazione."
 
 #. module: payroll
@@ -1662,7 +1662,7 @@ msgstr "Padre"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
 msgid "Parent Payslip Line"
-msgstr "Riga busa paga madre"
+msgstr "Riga busa paga padre"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_rule_id
@@ -1995,7 +1995,7 @@ msgstr "Tasso (%)"
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "Recursion error. Only one line should be parent of %s"
-msgstr "Errore ricorsione. Solo una riga può essere madre di %s"
+msgstr "Errore ricorsione. Solo una riga può essere padre di %s"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
@@ -2143,7 +2143,7 @@ msgstr "Definizione formula regole retribuzione (Python)"
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Salary Slip of %(name)s for %(dt)s"
-msgstr "Foglo retribuzione di %(name)s per %(dt)s"
+msgstr "Foglio retribuzione di %(name)s per %(dt)s"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
@@ -2335,7 +2335,7 @@ msgid ""
 "(hra, ma, lta, etc.) and the variable basic."
 msgstr ""
 "Questo viene utilizzato per il calcolo dei valori dei campi %; generalmente "
-"è elementare, ma si possono anch usare campi docie categorie in minuscolo "
+"è elementare, ma si possono anche usare campi codice categorie in minuscolo "
 "come nome variabile (hra, ma, lta, etc.) e la variabile elementare."
 
 #. module: payroll
@@ -2456,7 +2456,7 @@ msgid ""
 "Wrong range condition defined for salary rule %(nm)s (%(code)s) for employee "
 "%(ee)s."
 msgstr ""
-"Erroreintervallo condizione definito per la regola retribuzione %(nm)s "
+"Errore intervallo condizione definito per la regola retribuzione %(nm)s "
 "(%(code)s) per il dipendente %(ee)s."
 
 #. module: payroll
