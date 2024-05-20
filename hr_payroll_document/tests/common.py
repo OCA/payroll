@@ -9,7 +9,7 @@ from odoo.addons.mail.tests.common import mail_new_test_user
 
 class TestHrPayrollDocument(common.TransactionCase):
     def setUp(self):
-        super(TestHrPayrollDocument, self).setUp()
+        super().setUp()
         self.env.user.tz = "Europe/Brussels"
         self.user_admin = self.env.ref("base.user_admin")
 
