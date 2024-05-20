@@ -54,7 +54,9 @@ class PayrollManagamentWizard(models.TransientModel):
 
             path = "/tmp/" + _("Payroll ") + employee.name + ".pdf"
 
-            # Encrypt the payroll file with the identification identifier of the employee
+            """
+            Encrypt the payroll file with the identification identifier of the employee
+            """
             pdfWriter.encrypt(employee.identification_id, algorithm="AES-256")
 
             f = open(path, "wb")
