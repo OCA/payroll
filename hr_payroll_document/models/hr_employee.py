@@ -1,9 +1,39 @@
-from odoo import _, models
+from odoo import _, fields, models
 from odoo.exceptions import ValidationError
 
 
 class Employee(models.Model):
     _inherit = "hr.employee"
+
+    payroll_count = fields.Integer(
+        compute="_compute_payroll_count",
+    )
+
+    def _compute_payroll_count(self):
+        self.payroll_count = len(
+            self.env["ir.attachment"].search(
+                [
+                    ("document_type", "=", "payroll"),
+                    ("res_model", "=", self._name),
+                    ("res_id", "in", self.ids),
+                ]
+            )
+        )
+
+    def action_get_payroll_tree_view(self):
+        action = self.env.ref("base.action_attachment").sudo().read()[0]
+        action["context"] = {
+            "default_res_model": self._name,
+            "default_res_id": self.ids[0],
+        }
+        action["domain"] = str(
+            [
+                ("document_type", "=", "payroll"),
+                ("res_model", "=", self._name),
+                ("res_id", "in", self.ids),
+            ]
+        )
+        return action
 
     def write(self, vals):
         res = super().write(vals)
