@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <record id="view_payroll_tree" model="ir.ui.view">
+            <field name="name">payroll.view.tree</field>
+            <field name="model">ir.attachment.payroll.custom</field>
+            <field name="arch" type="xml">
+                <tree name="Payrolls" create="false" delete="true" edit="false">
+                    <field name="employee" />
+                    <field name="identification_id" />
+                    <field name="create_date" />
+                    <field name="subject" />
+                    <field name="attachment_id" widget="binary" column_invisible="1" />
+                    <button name="download" string="Download" type="object" />
+                </tree>
+            </field>
+        </record>
+
+         <record id="view_payroll_filter" model="ir.ui.view">
+            <field name="name">payroll.view.search</field>
+            <field name="model">ir.attachment.payroll.custom</field>
+            <field name="arch" type="xml">
+                <search string="Payrolls">
+                    <field name="subject" />
+                    <field name="identification_id" />
+                    <field name="employee" />
+                    <separator />
+                    <group expand="0" string="Group By">
+                        <filter
+                        name="group_employee"
+                        string="Employee"
+                        domain="[]"
+                        context="{'group_by': 'employee'}"
+                    />
+                        <filter
+                        name="group_subject"
+                        string="Subject"
+                        domain="[]"
+                        context="{'group_by': 'subject'}"
+                    />
+                        <filter
+                        name="group_identification_id"
+                        string="Identification ID"
+                        domain="[]"
+                        context="{'group_by': 'identification_id'}"
+                    />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="payrolls_view_action" model="ir.actions.act_window">
+            <field name="name">Payrolls</field>
+            <field name="res_model">ir.attachment.payroll.custom</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_payroll_tree" />
+            <field name="search_view_id" ref="view_payroll_filter" />
+        </record>
+
+        <menuitem
+        id="payrolls_menu_action"
+        action="payrolls_view_action"
+        parent="hr.menu_hr_root"
+    />
+
+
+        <record id="hr_employee_view_tree_payroll" model="ir.ui.view">
+            <field name="name">inherit_view.hr_employee</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button
+                    class="oe_stat_button"
+                    icon="fa-money"
+                    name="action_get_payroll_tree_view"
+                    type="object"
+                    groups="hr.group_hr_user"
+                >
+                        <field
+                        name="payroll_count"
+                        widget="statinfo"
+                        string="Payrolls"
+                    />
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_users_view_form_profile_inherit" model="ir.ui.view">
+            <field name="name">hr.res_user.view.form.inherit.document</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="hr.res_users_view_form_profile" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button
+                    class="oe_stat_button"
+                    icon="fa-money"
+                    name="action_get_attachment_tree_view"
+                    type="object"
+                    groups="hr.group_hr_user"
+                >
+                        Payrolls
+                    </button>
+                </div>
+            </field>
+        </record>
+</odoo>

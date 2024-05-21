@@ -10,5 +10,5 @@ class Attachment(models.Model):
         "attachment_id3",
         "document_id",
         string="Attachment",
-        invisible=1,
     )
+    document_type = fields.Selection([("payroll", "Payroll")])
