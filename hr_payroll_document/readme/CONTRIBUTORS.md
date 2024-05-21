@@ -1,2 +1,3 @@
-- Antoni Marroig Campomar \<<amarroig@apsl.net>\>
-- Miquel Alzanillas Monserrat \<<malzanillas@apsl.net>\>
+- [APSL-Nagarro](https://www.apsl.tech):
+  - Antoni Marroig \<<amarroig@apsl.net>\>
+  - Miquel Alzanillas \<<malzanillas@apsl.net>\>

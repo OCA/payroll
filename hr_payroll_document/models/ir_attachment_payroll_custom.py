@@ -9,10 +9,15 @@ class IRAttachmentPayrollCustom(models.Model):
         comodel_name="ir.attachment",
         string="Attachment File",
         prefetch=False,
-        invisible=True,
         ondelete="cascade",
     )
     employee = fields.Char()
     identification_id = fields.Char("Identification ID")
     create_date = fields.Date(default=fields.Date.context_today)
     subject = fields.Char()
+
+    def download(self):
+        return {
+            "type": "ir.actions.act_url",
+            "url": "web/content/" + str(self.attachment_id.id) + "/?download=True",
+        }
