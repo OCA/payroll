@@ -12,14 +12,11 @@ class PayrollManagamentWizard(models.TransientModel):
     _description = "Payroll Management"
 
     subject = fields.Char(
-        help="Enter the title of the payroll whether it is the month, week, day, etc."
+        help="Enter the title of the payroll whether it is the month, week, day, etc.",
+        required=True,
     )
     payrolls = fields.Many2many(
-        "ir.attachment",
-        "payrol_rel",
-        "doc_id",
-        "attach_id3",
-        copy=False,
+        "ir.attachment", "payrol_rel", "doc_id", "attach_id3", copy=False, required=True
     )
 
     def send_payrolls(self):
@@ -43,7 +40,6 @@ class PayrollManagamentWizard(models.TransientModel):
                         employees.add(employee)
                     else:
                         not_found.add(value)
-                    break
 
         for employee in list(employees):
             pdfWriter = PdfWriter()
@@ -54,9 +50,8 @@ class PayrollManagamentWizard(models.TransientModel):
 
             path = "/tmp/" + _("Payroll ") + employee.name + ".pdf"
 
-            """
-            Encrypt the payroll file with the identification identifier of the employee
-            """
+            # Encrypt the payroll file with the identification identifier
+            # of the employee
             pdfWriter.encrypt(employee.identification_id, algorithm="AES-256")
 
             f = open(path, "wb")
@@ -66,6 +61,12 @@ class PayrollManagamentWizard(models.TransientModel):
             # Send payroll to the employee
             self.send_mail(employee, path)
 
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "hr_payroll_document.payrolls_view_action"
+        )
+        action["views"] = [
+            [self.env.ref("hr_payroll_document.view_payroll_tree").id, "list"]
+        ]
         if not_found:
             return {
                 "type": "ir.actions.client",
@@ -76,17 +77,7 @@ class PayrollManagamentWizard(models.TransientModel):
                     + ", ".join(list(not_found)),
                     "sticky": True,
                     "type": "warning",
-                    "next": {
-                        "name": _("Payrolls sent"),
-                        "type": "ir.actions.act_window",
-                        "res_model": "hr.employee",
-                        "views": [
-                            (
-                                self.env.ref("hr.hr_employee_public_view_kanban").id,
-                                "list",
-                            )
-                        ],
-                    },
+                    "next": action,
                 },
             }
 
@@ -98,14 +89,7 @@ class PayrollManagamentWizard(models.TransientModel):
                 "message": _("Payrolls sent to employees correctly"),
                 "sticky": False,
                 "type": "success",
-                "next": {
-                    "name": _("Payrolls sent"),
-                    "type": "ir.actions.act_window",
-                    "res_model": "hr.employee",
-                    "views": [
-                        (self.env.ref("hr.hr_employee_public_view_kanban").id, "list")
-                    ],
-                },
+                "next": action,
             },
         }
 
@@ -143,6 +127,7 @@ class PayrollManagamentWizard(models.TransientModel):
             "store_fname": encoded_string,
             "res_model": "hr.employee",
             "res_id": employee.id,
+            "document_type": "payroll",
         }
 
         # Save payroll attachment to all employee payrolls attachments

@@ -7,7 +7,7 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="subject" required="1" />
+                            <field name="subject" />
                         </group>
                         <field name="payrolls" widget="many2many_binary" />
                     <footer>
@@ -30,6 +30,7 @@
         <record id="payrolls_management_wizard_action" model="ir.actions.act_window">
             <field name="name">Payrolls Management</field>
             <field name="res_model">payroll.management.wizard</field>
+            <field name="view_id" ref="payrolls_management_wizard_form" />
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

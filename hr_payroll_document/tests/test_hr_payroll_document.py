@@ -2,14 +2,53 @@ import base64
 
 from odoo import _
 from odoo.exceptions import UserError, ValidationError
-from odoo.modules.module import get_module_resource
+from odoo.tests import common
+from odoo.tools.misc import file_path
 
-from odoo.addons.hr_payroll_document.tests.common import TestHrPayrollDocument
+from odoo.addons.mail.tests.common import mail_new_test_user
 
 
-class TestHRPayrollDocument(TestHrPayrollDocument):
-    def setUp(self, *args, **kwargs):
-        super().setUp(*args, **kwargs)
+class TestHRPayrollDocument(common.TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env.user.tz = "Europe/Brussels"
+        cls.user_admin = cls.env.ref("base.user_admin")
+
+        # Fix Company without country
+        cls.env.company.country_id = False
+
+        # Test users to use through the various tests
+        cls.user_employee = mail_new_test_user(
+            cls.env, login="david", groups="base.group_user"
+        )
+        cls.user_employee_id = cls.user_employee.id
+
+        # Hr Data
+        cls.employee_emp = cls.env["hr.employee"].create(
+            {
+                "name": "David Employee",
+                "user_id": cls.user_employee_id,
+                "company_id": 1,
+                "identification_id": "30831011V",
+            }
+        )
+
+        with open(file_path("hr_payroll_document/tests/test.pdf"), "rb") as pdf_file:
+            encoded_string = base64.b64encode(pdf_file.read())
+        ir_values = {
+            "name": "test",
+            "type": "binary",
+            "datas": encoded_string,
+            "store_fname": encoded_string,
+            "res_model": "payroll.management.wizard",
+            "res_id": 1,
+        }
+        cls.attachment = cls.env["ir.attachment"].create(ir_values)
+        cls.subject = "January"
+        cls.wizard = cls.env["payroll.management.wizard"].create(
+            {"payrolls": [cls.attachment.id], "subject": cls.subject}
+        )
 
     def fill_company_id(self):
         self.env.company.country_id = self.env["res.country"].search(
@@ -17,9 +56,7 @@ class TestHRPayrollDocument(TestHrPayrollDocument):
         )
 
     def test_extension_error(self):
-        with open(
-            get_module_resource("hr_payroll_document", "tests", "test.docx"), "rb"
-        ) as pdf_file:
+        with open(file_path("hr_payroll_document/tests/test.docx"), "rb") as pdf_file:
             encoded_string = base64.b64encode(pdf_file.read())
         ir_values = {
             "name": "test",
@@ -53,55 +90,20 @@ class TestHRPayrollDocument(TestHrPayrollDocument):
         self.fill_company_id()
         self.env["hr.employee"].search([("id", "=", 1)]).identification_id = "37936636E"
         self.assertEqual(
-            self.wizard.send_payrolls(),
-            {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Employees not found"),
-                    "message": _("IDs whose employee has not been found: ")
-                    + "51000278D",
-                    "sticky": True,
-                    "type": "warning",
-                    "next": {
-                        "name": _("Payrolls sent"),
-                        "type": "ir.actions.act_window",
-                        "res_model": "hr.employee",
-                        "views": [
-                            (
-                                self.env.ref("hr.hr_employee_public_view_kanban").id,
-                                "list",
-                            )
-                        ],
-                    },
-                },
-            },
+            self.wizard.send_payrolls()["params"]["title"], _("Employees not found")
+        )
+        self.assertEqual(
+            self.wizard.send_payrolls()["params"]["message"],
+            _("IDs whose employee has not been found: ") + "51000278D",
         )
 
     def test_send_payrolls_correctly(self):
         self.fill_company_id()
         self.env["hr.employee"].search([("id", "=", 1)]).identification_id = "51000278D"
         self.assertEqual(
-            self.wizard.send_payrolls(),
-            {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Payrolls sent"),
-                    "message": _("Payrolls sent to employees correctly"),
-                    "sticky": False,
-                    "type": "success",
-                    "next": {
-                        "name": _("Payrolls sent"),
-                        "type": "ir.actions.act_window",
-                        "res_model": "hr.employee",
-                        "views": [
-                            (
-                                self.env.ref("hr.hr_employee_public_view_kanban").id,
-                                "list",
-                            )
-                        ],
-                    },
-                },
-            },
+            self.wizard.send_payrolls()["params"]["title"], _("Payrolls sent")
+        )
+        self.assertEqual(
+            self.wizard.send_payrolls()["params"]["message"],
+            _("Payrolls sent to employees correctly"),
         )
