@@ -8,7 +8,10 @@
     "summary": "Manage your payroll to accounting",
     "author": "Odoo SA, Odoo Community Association (OCA)",
     "depends": ["payroll", "account"],
-    "data": ["views/hr_payroll_account_views.xml"],
+    "data": [
+        "views/hr_payroll_account_views.xml",
+        "views/res_config_settings_views.xml",
+    ],
     "demo": ["demo/hr_payroll_account_demo.xml"],
     "maintainers": ["appstogrow", "nimarosa"],
 }
