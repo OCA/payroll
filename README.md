@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [hr_payroll_period](hr_payroll_period/) | 15.0.1.0.1 | [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Add payroll periods
-[payroll](payroll/) | 15.0.1.3.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your employee payroll records
+[payroll](payroll/) | 15.0.1.4.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your employee payroll records
 [payroll_account](payroll_account/) | 15.0.1.1.0 | [![appstogrow](https://github.com/appstogrow.png?size=30px)](https://github.com/appstogrow) [![nimarosa](https://github.com/nimarosa.png?size=30px)](https://github.com/nimarosa) | Manage your payroll to accounting
 
 [//]: # (end addons)
