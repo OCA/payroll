@@ -10,7 +10,7 @@ from odoo.tests import common
 
 class TestPayrollAccount(common.TransactionCase):
     def setUp(self):
-        super(TestPayrollAccount, self).setUp()
+        super().setUp()
 
         # Activate company currency
         self.env.user.company_id.currency_id.active = True
