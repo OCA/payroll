@@ -209,7 +209,9 @@ class HrSalaryRule(models.Model):
         """
         self.ensure_one()
         method = "_compute_rule_{}".format(self.amount_select)
-        return api.call_kw(self, method, [self.ids, localdict], {})
+        return api.call_kw(
+            self, method, [self.ids, localdict], {"context": self.env.context}
+        )
 
     def _compute_rule_fix(self, localdict):
         try:
