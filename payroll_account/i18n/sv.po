@@ -35,7 +35,7 @@ msgstr "Bokföringstransaktion"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Adjustment Entry"
 msgstr "Korrigeringstransaktion"
@@ -51,6 +51,12 @@ msgstr "Objektkonto"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
+msgstr ""
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__company_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__company_id
+msgid "Company"
 msgstr ""
 
 #. module: payroll_account
@@ -102,7 +108,7 @@ msgstr "Lönespecifikationsrad"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip of %s"
 msgstr "Lönespecifikation för %s"
@@ -133,7 +139,7 @@ msgstr ""
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Credit Account!"
@@ -141,7 +147,7 @@ msgstr "Utgiftsjournalen \"%s\" saknar kredit-konto"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
