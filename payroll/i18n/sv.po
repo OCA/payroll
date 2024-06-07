@@ -17,14 +17,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Martin Trigaux, 2019\n"
+"PO-Revision-Date: 2024-06-07 16:37+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/odoo/teams/41243/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -33,6 +34,9 @@ msgid ""
 "            'Payslip - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            \"Lönebesked - %s\" % (objekt.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.payslip_details_report
@@ -41,6 +45,9 @@ msgid ""
 "            'Payslip Details - %s' % (object.employee_id.name)\n"
 "        "
 msgstr ""
+"\n"
+"            \"Detaljer om lönebesked - %s\" % (objekt.employee_id.name)\n"
+"        "
 
 #. module: payroll
 #. odoo-python
@@ -54,6 +61,12 @@ msgid ""
 "\n"
 "%(err)s\n"
 msgstr ""
+"\n"
+"Fel pythonkod definierad för löneregel %(nm)s (%(code)s) för anställd %(ee)s."
+"\n"
+"Här är det mottagna felet:\n"
+"\n"
+"%(err)s\n"
 
 #. module: payroll
 #. odoo-python
@@ -67,6 +80,12 @@ msgid ""
 "\n"
 "%(err)s\n"
 msgstr ""
+"\n"
+"Fel pythonvillkor definierat för löneregel %(nm)s (%(code)s) för anställd "
+"%(ee)s.\n"
+"Här är det mottagna felet:\n"
+"\n"
+"%(err)s\n"
 
 #. module: payroll
 #. odoo-python
@@ -86,6 +105,13 @@ msgid ""
 "        \n"
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
+"* När lönebeskedet skapas är statusen \"utkast\n"
+"        \n"
+"* Om lönebeskedet är under verifiering är statusen \"Väntande\".\n"
+"        \n"
+"* Om lönebeskedet bekräftas sätts statusen till \"Klar\".\n"
+"        \n"
+"* Om användaren återkallar lönebeskedet är statusen \"Avvisad\"."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_change_state__state
@@ -96,6 +122,11 @@ msgid ""
 "* If the payslip is confirmed then status is set to 'Done'.             \n"
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
+"* När lönebeskedet skapas är statusen \"utkast\".             \n"
+"* Om lönebeskedet är under kontroll är statusen \"Beräkna ark\""
+".              \n"
+"* Om lönebeskedet bekräftas sätts statusen till \"Klar\".             \n"
+"* Om användaren återkallar lönebeskedet är statusen \"Rejected\"."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -106,6 +137,11 @@ msgid ""
 "number_of_days\n"
 "                                        </code>"
 msgstr ""
+"<code>\n"
+"                                            resultat = kontrakt.lön\n"
+"                                            resultat_kvot = arbetade_dagar."
+"WORK100.antal_dagar\n"
+"                                        </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -115,6 +151,10 @@ msgid ""
 "                                            result_rate = 10.0\n"
 "                                        </code>"
 msgstr ""
+"<code>\n"
+"                                            resultat = avtal.lön\n"
+"                                            resultat_ränta = 10,0\n"
+"                                        </code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -122,12 +162,16 @@ msgid ""
 "<code>categories:</code> contains the sum of amount of all rules belonging "
 "to that category"
 msgstr ""
+"<code>categories:</code> innehåller summan av beloppet för alla regler som "
+"tillhör den kategorin"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>contract:</code> contains current contract object data (hr.contract)"
 msgstr ""
+"<code>contract:</code> innehåller data om aktuellt kontraktsobjekt (hr."
+"contract)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -135,38 +179,46 @@ msgid ""
 "<code>current_contract:</code> contains values related/calculated for "
 "current contract"
 msgstr ""
+"<code>aktuellt_kontrakt:</code> innehåller värden relaterade/beräknade för "
+"aktuellt kontrakt"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>employee:</code> contains current employee object data (hr.employee)"
 msgstr ""
+"<code>anställd:</code> innehåller aktuell data för anställningsobjektet (hr."
+"employee)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>inputs:</code> contains the computed input data"
-msgstr ""
+msgstr "<code>inmatningar:</code> innehåller de beräknade indata"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payroll:</code> contains miscellaneous values related to payroll"
-msgstr ""
+msgstr "<code>lön:</code> innehåller diverse värden relaterade till lön"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>payslip:</code> contains current payslip object data (hr.payslip)"
 msgstr ""
+"<code>lönespecifikation:</code> innehåller data för aktuell "
+"lönespecifikation (hr.payslip)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid ""
 "<code>payslips:</code> contains payslips data (Payslips - Browsable Object)"
 msgstr ""
+"<code>lönebesked:</code> innehåller lönebeskedsdata (Lönebesked - "
+"Blädderbart objekt)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>result = contract.wage * 0.10</code>"
-msgstr ""
+msgstr "<code>resultat = avtal.lön * 0,10</code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -174,6 +226,8 @@ msgid ""
 "<code>result:</code> the returned value should be in this variable. It "
 "matches with \"amount\" column."
 msgstr ""
+"<code>resultat:</code> det returnerade värdet ska finnas i denna variabel. "
+"Den matchar med kolumnen \"amount\"."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -181,6 +235,8 @@ msgid ""
 "<code>result_name:</code> overrides the current name of the rule and allows "
 "to make dynamic names"
 msgstr ""
+"<code>result_name:</code> åsidosätter det aktuella namnet på regeln och gör "
+"det möjligt att skapa dynamiska namn"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -188,11 +244,13 @@ msgid ""
 "<code>result_qty:</code> the quantity of units that will be multiplied to "
 "\"result\""
 msgstr ""
+"<code>result_qty:</code> den mängd enheter som ska multipliceras till "
+"\"result\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>result_rate:</code> the rate that should be applied to \"result\""
-msgstr ""
+msgstr "<code>result_rate:</code> den ränta som ska tillämpas på \"result\""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -200,11 +258,13 @@ msgid ""
 "<code>result_rules:</code> contains the values of previusly computed lines "
 "(qty, rate, amount, total)"
 msgstr ""
+"<code>result_rules:</code> innehåller värdena för tidigare beräknade rader ("
+"qty, rate, amount, total)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>rules:</code> contains the rules code (previusly computed)"
-msgstr ""
+msgstr "<code>rules:</code> innehåller regelkoden (tidigare beräknad)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -212,11 +272,14 @@ msgid ""
 "<code>tools:</code> contains tools and libraries which help with "
 "mathematical operations"
 msgstr ""
+"<code>tools:</code> innehåller verktyg och bibliotek som hjälper till med "
+"matematiska operationer"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>worked_days:</code> contains the computed worked days data"
 msgstr ""
+"<code>worked_days:</code> innehåller beräknade uppgifter om arbetade dagar"
 
 #. module: payroll
 #: model:mail.template,body_html:payroll.mail_template_hr_payslip
@@ -235,6 +298,19 @@ msgid ""
 "    </div>\n"
 "            "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"        <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"            Kära <t t-out=\"object.employee_id.name\"></t>,\n"
+"            <br><br>\n"
+"            Vänligen bifoga lönebeskedet för <t t-out=\"object.payslip_run_id"
+".name\"></t>.\n"
+"            <br><br>\n"
+"            Tveka inte att kontakta oss om du har några frågor.\n"
+"            <br><br>\n"
+"            <t t-out=\"user.signature\"></t>\n"
+"        </p>\n"
+"    </div>\n"
+"            "
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_hr_payslip_by_employees
@@ -247,62 +323,69 @@ msgid ""
 "                        on Payslips Run.\n"
 "                    </span>"
 msgstr ""
+"<span colspan=\"4\" nolabel=\"1\">\n"
+"                        Denna guide kommer att generera lönebesked för alla "
+"valda anställda\n"
+"                        baserat på de datum och den kreditnota\n"
+"                        specificerade\n"
+"                        på Lönebeskedskörning.\n"
+"                    </span>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<strong> and </strong>"
-msgstr ""
+msgstr "<strong> och </strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Address</strong>"
-msgstr ""
+msgstr "<strong>Adress</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Authorized signature</strong>"
-msgstr ""
+msgstr "<strong>Auktoriserad signatur</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Bank Account</strong>"
-msgstr ""
+msgstr "<strong>Bankkonto</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<strong>Between </strong>"
-msgstr ""
+msgstr "<strong>Mellanrum </strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 msgid "<strong>Date From:</strong>"
-msgstr ""
+msgstr "<strong>Datum från:</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Date From</strong>"
-msgstr ""
+msgstr "<strong>Datum från</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 msgid "<strong>Date To:</strong>"
-msgstr ""
+msgstr "<strong>Datum till:</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Date To</strong>"
-msgstr ""
+msgstr "<strong>Datum till</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Designation</strong>"
-msgstr ""
+msgstr "<strong>Beteckning</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
@@ -314,7 +397,7 @@ msgstr "<strong>Epost</strong>"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Identification No</strong>"
-msgstr ""
+msgstr "<strong>Identifiering nr</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
@@ -326,12 +409,12 @@ msgstr "<strong>Namn</strong>"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "<strong>Reference</strong>"
-msgstr ""
+msgstr "<strong>Referens</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 msgid "<strong>Register Name:</strong>"
-msgstr ""
+msgstr "<strong>Registrera namn:</strong>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -346,6 +429,11 @@ msgid ""
 "the\n"
 "                state or anyone that collect or inject money on payslips."
 msgstr ""
+"Ett avgiftsregister är en tredje part som är involverad i de anställdas\n"
+"                 de anställdas löneutbetalningar. Det kan vara "
+"socialförsäkringen, staten\n"
+"                 eller någon annan som samlar in eller tillför pengar på "
+"lönebesked."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -361,13 +449,13 @@ msgstr "Konteringsinformation"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__state
 msgid "Action"
-msgstr ""
+msgstr "Åtgärd"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Åtgärder krävs"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__active
@@ -379,40 +467,40 @@ msgstr "Aktiv"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteter"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_decoration
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Aktivitet Undantag Dekoration"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_state
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Aktivitet Stat"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_icon
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Aktivitetstyp Ikon"
 
 #. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
 msgid "Add a new contribution register"
-msgstr ""
+msgstr "Lägg till ett nytt inbetalningsregister"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Add an internal note..."
-msgstr "Lägg till intern notering"
+msgstr "Lägg till intern notering..."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Add your notes or category explanation here..."
-msgstr ""
+msgstr "Lägg till dina anteckningar eller kategoriförklaring här ..."
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
@@ -422,45 +510,45 @@ msgstr "Alla underordnade Regler"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__allow_cancel_payslips
 msgid "Allow Canceling Payslips"
-msgstr ""
+msgstr "Tillåt annullering av lönebesked"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_cancel_payslips
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow canceling confirmed payslips"
-msgstr ""
+msgstr "Tillåt annullering av bekräftade lönebesked"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__allow_edit_payslip_lines
 msgid "Allow editing"
-msgstr ""
+msgstr "Tillåt redigering"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__allow_edit_payslip_lines
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow editing payslip lines"
-msgstr ""
+msgstr "Tillåt redigering av lönebeskedets rader"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow users to cancel confirmed payslips"
-msgstr ""
+msgstr "Tillåt användare att annullera bekräftade lönebesked"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_cancel_payslips
 msgid "Allow users to cancel confirmed payslips."
-msgstr ""
+msgstr "Tillåt användare att annullera bekräftade lönebesked."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__allow_edit_payslip_lines
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Allow users to edit some payslip line fields manually"
-msgstr ""
+msgstr "Tillåt användare att redigera vissa fält på lönebeskedets rad manuellt"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.ALW
 msgid "Allowance"
-msgstr ""
+msgstr "Ersättning"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__condition_select__none
@@ -480,7 +568,7 @@ msgstr "Belopp"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__amount_qty
 msgid "Amount Quantity"
-msgstr ""
+msgstr "Belopp Kvantitet"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_select
@@ -513,13 +601,13 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Associated Salary Rules"
-msgstr ""
+msgstr "Tillhörande löneregler"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_attachment_count
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Antal bifogade filer"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.BASIC
@@ -529,12 +617,12 @@ msgstr "Basal"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_rule_basic
 msgid "Basic Salary"
-msgstr ""
+msgstr "Grundlön"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_get_batch_payslip_lines
 msgid "Batch Payslip Lines"
-msgstr ""
+msgstr "Batch Payslip Lines"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-monthly
@@ -549,7 +637,7 @@ msgstr "Varannan vecka"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Calculation Settings"
-msgstr ""
+msgstr "Inställningar för beräkning"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
@@ -573,7 +661,7 @@ msgstr "Avbryt lönebesked"
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Cannot cancel a payslip that is done."
-msgstr ""
+msgstr "Det går inte att makulera ett lönebesked som är gjort."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__category_id
@@ -586,22 +674,22 @@ msgstr "Kategori"
 #: model:ir.actions.act_window,name:payroll.action_hr_payslip_change_state_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
 msgid "Change state"
-msgstr ""
+msgstr "Ändra tillstånd"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_change_state
 msgid "Change state of a payslip"
-msgstr ""
+msgstr "Ändra status på ett lönebesked"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Child Line Details"
-msgstr ""
+msgstr "Detaljer om barnlinjen"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__child_ids
 msgid "Child Payslip Lines"
-msgstr ""
+msgstr "Betalningslinjer för barn"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -628,6 +716,18 @@ msgid ""
 "                                    salary rule (e.x. rules required for "
 "complex tax computation that needs data from several modules)."
 msgstr ""
+"Funktionen för underordnade regler är användbar när du vill att andra regler "
+"ska beräknas före den överordnade regeln. <br/>\n"
+"                                    Detta innebär att alla löneregler som "
+"deklarerats som barn (förälder till en regel) kommer att läggas till i "
+"beräkningen\n"
+"                                    om dess överordnade regel ingår i "
+"lönestrukturen. Så barnregler kommer bara att beräknas om dess förälder är\n"
+"                                    beräknats. <br/>\n"
+"                                    Denna funktion är användbar för att göra "
+"hjälpberäkningar som används som beroenden för den överordnade\n"
+"                                    löneregeln (t.ex. regler som krävs för "
+"komplexa skatteberäkningar som behöver data från flera moduler)."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__children_ids
@@ -663,7 +763,7 @@ msgstr "Kod"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_kanban
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_kanban
 msgid "Code:"
-msgstr ""
+msgstr "Kod:"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -694,7 +794,7 @@ msgstr "Beräkning"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__compute_date
 msgid "Compute Date"
-msgstr ""
+msgstr "Beräkna datum"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_change_state__state__verify
@@ -711,7 +811,7 @@ msgstr "Tillstånd Baserat på"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Condition Range"
-msgstr ""
+msgstr "Tillståndsintervall"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -738,7 +838,7 @@ msgstr "Bekräfta"
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__prevent_compute_on_confirm
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Confirm payslips without recomputing"
-msgstr ""
+msgstr "Bekräfta lönebesked utan att räkna om"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__contract_id
@@ -776,12 +876,12 @@ msgstr "Medarbetarregister"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_convanceallowance1
 msgid "Conveyance Allowance"
-msgstr ""
+msgstr "Ersättning för transport"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
 msgid "Conveyance Allowance For Marc Demo"
-msgstr ""
+msgstr "Överlåtelse Ersättning för Marc Demo"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
@@ -826,7 +926,7 @@ msgstr "Kreditnota"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__date_from
@@ -846,17 +946,17 @@ msgstr "Datum till"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Days"
-msgstr ""
+msgstr "Dagar"
 
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.DED
 msgid "Deduction"
-msgstr ""
+msgstr "Avdrag"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
 msgid "Defines the frequency of the wage payment."
-msgstr ""
+msgstr "Definierar frekvensen för löneutbetalningen."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__struct_id
@@ -866,6 +966,11 @@ msgid ""
 "isn't mandatory anymore and thus the rules applied will be all the rules set "
 "on the structure of all contracts of the employee valid for the chosen period"
 msgstr ""
+"Definierar de regler som ska tillämpas på denna lönebeskedssats, i enlighet "
+"med det valda kontraktet. Om du låter fältet för avtal vara tomt är fältet "
+"inte längre obligatoriskt och de regler som tillämpas blir då alla regler "
+"som anges i strukturen för alla avtal för den anställde som gäller för den "
+"valda perioden"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__struct_id
@@ -877,7 +982,7 @@ msgid ""
 msgstr ""
 "Definierar regler som måste tillämpas på denna lönespecifikation, baserat på "
 "det valda kontraktet. Om du låter fältet vara tomt är detta fält inte "
-"obligatoriskt längre och därmed  blir de tillämpade reglerna alla "
+"obligatoriskt längre och därmed blir de tillämpade reglerna alla "
 "bestämmelser satta från strukturen på alla avtal för den anställde som "
 "gäller för den valda perioden"
 
@@ -949,7 +1054,7 @@ msgstr "Utkast lönespecifikation i partier"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__dynamic_filtered_payslip_lines
 msgid "Dynamic Filtered Payslip Lines"
-msgstr ""
+msgstr "Dynamiskt filtrerade lönebesked"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_employee
@@ -978,7 +1083,7 @@ msgstr "Anställdas lönespecifikation"
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
 msgid "Employee's working schedule."
-msgstr ""
+msgstr "Medarbetarens arbetsschema."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_employees__employee_ids
@@ -994,13 +1099,14 @@ msgstr "Anställda"
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Salary Rule Category."
 msgstr ""
+"Error (Fel)! Du kan inte skapa en rekursiv hierarki för Salary Rule Category."
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_salary_rule.py:0
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Salary Rules."
-msgstr ""
+msgstr "Error (Fel)! Du kan inte skapa en rekursiv hierarki av Salary Rules."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__register_id
@@ -1011,12 +1117,12 @@ msgstr "Eventuell tredje part inblandad i lön betala de anställda."
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Examples"
-msgstr ""
+msgstr "Exempel"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_change_state_form
 msgid "Execute"
-msgstr ""
+msgstr "Utför"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_fix
@@ -1030,19 +1136,19 @@ msgstr "Fast belopp"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_follower_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Följare"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_partner_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Följare (Partners)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_type_icon
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Font awesome-ikon, t.ex. fa-tasks"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage
@@ -1076,20 +1182,20 @@ msgstr "Generera lönespecifikationer för valda anställda"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_sales_commission
 msgid "Get 1% of sales"
-msgstr ""
+msgstr "Få 1% av försäljningen"
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Global Leaves"
-msgstr ""
+msgstr "Globala löv"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_rule_taxable
 #: model:hr.salary.rule.category,name:payroll.GROSS
 msgid "Gross"
-msgstr ""
+msgstr "Brutto"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
@@ -1102,27 +1208,27 @@ msgstr "Gruppera efter"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__has_message
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Har meddelande"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Help"
-msgstr ""
+msgstr "Hjälp"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_child_lines
 msgid "Hide Child Lines"
-msgstr ""
+msgstr "Dölj barnlinjer"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Hours"
-msgstr ""
+msgstr "Timmar"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
 msgid "House Rent Allowance"
-msgstr ""
+msgstr "Bostadshyrestillägg"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
@@ -1145,19 +1251,19 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_exception_icon
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_icon
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Ikon för att indikera en undantagsaktivitet."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Om den är markerad kräver nya meddelanden din uppmärksamhet."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
@@ -1165,7 +1271,7 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Om kryssrutan är markerad får vissa meddelanden ett leveransfel."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__credit_note
@@ -1184,7 +1290,7 @@ msgid ""
 "rule without removing it."
 msgstr ""
 "Om det aktiva fältet är satt till falskt, kommer det att tillåta dig dölja "
-"löneneregeln utan att ta bort det."
+"löneregeln utan att ta bort det."
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -1192,12 +1298,14 @@ msgid ""
 "If you have doubts about coding salary rules, check the \"Help\" tab in this "
 "form."
 msgstr ""
+"Om du är osäker på hur lönereglerna ska kodas, se fliken \"Hjälp\" i det här "
+"formuläret."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__leaves_positive
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "In payslip worked days, leave days/hours have positive values"
-msgstr ""
+msgstr "I lönebeskedet har arbetade dagar, semesterdagar/timmar positiva värden"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -1207,6 +1315,10 @@ msgid ""
 "                                    in python. Any methematical operation or "
 "python function is supported."
 msgstr ""
+"I python-definitionen i lönereglerna kan du skriva vilken kod som helst som "
+"du skulle göra\n"
+"                                    i python. Alla metamatiska operationer "
+"eller pythonfunktioner stöds."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__credit_note
@@ -1229,17 +1341,17 @@ msgstr "Intern notering"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_is_follower
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Är följare"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
 msgid "Is a Blocking Reason?"
-msgstr ""
+msgstr "Är det en blockerande anledning?"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount_qty
 msgid "It can be used in computation for other inputs"
-msgstr ""
+msgstr "Den kan användas i beräkningen för andra indata"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__quantity
@@ -1248,6 +1360,9 @@ msgid ""
 "for Meal Voucher having fixed amount of 1€ per worked day can have its "
 "quantity defined in expression like worked_days.WORK100.number_of_days."
 msgstr ""
+"Det används vid beräkning av procent och fasta belopp. T.ex. en regel för "
+"måltidskuponger med ett fast belopp på 1€ per arbetsdag kan ha sin kvantitet "
+"definierad i ett uttryck som worked_days.WORK100.number_of_days."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount
@@ -1298,7 +1413,7 @@ msgstr "Senast uppdaterad"
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Leaves with positive values"
-msgstr ""
+msgstr "Löv med positiva värden"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule_category__parent_id
@@ -1315,7 +1430,7 @@ msgstr "Tillverkade betalningsorder? "
 #. module: payroll
 #: model:ir.module.category,description:payroll.module_category_payroll
 msgid "Manage employee payroll"
-msgstr ""
+msgstr "Hantera anställdas löner"
 
 #. module: payroll
 #: model:res.groups,name:payroll.group_payroll_manager
@@ -1331,19 +1446,19 @@ msgstr "Maximalt omfång"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_meal_voucher
 msgid "Meal Voucher"
-msgstr ""
+msgstr "Måltidskupong"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Fel vid leverans av meddelande"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_ids
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Meddelanden"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__condition_range_min
@@ -1365,7 +1480,7 @@ msgstr "Månatlig"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__my_activity_date_deadline
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Min aktivitet Deadline"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
@@ -1383,36 +1498,36 @@ msgstr "Namn"
 #. module: payroll
 #: model:hr.salary.rule.category,name:payroll.NET
 msgid "Net"
-msgstr ""
+msgstr "Netto"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_rule_net
 msgid "Net Salary"
-msgstr ""
+msgstr "Nettolön"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_calendar_event_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_calendar_event_id
 msgid "Next Activity Calendar Event"
-msgstr ""
+msgstr "Nästa aktivitet i aktivitetskalendern"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_date_deadline
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Deadline för nästa aktivitet"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_summary
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Nästa Aktivitet Sammanfattning"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_type_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Nästa aktivitetstyp"
 
 #. module: payroll
 #. odoo-python
@@ -1431,7 +1546,7 @@ msgstr "Anteckningar"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_needaction_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Antal åtgärder"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_worked_days__number_of_days
@@ -1447,19 +1562,19 @@ msgstr "Antal timmar"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Antal fel"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_needaction_counter
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Antal meddelanden som kräver åtgärder"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Antal meddelanden med leveransfel"
 
 #. module: payroll
 #: model:res.groups,name:payroll.group_payroll_user
@@ -1473,6 +1588,8 @@ msgstr "Tjänsteman"
 msgid ""
 "Only draft payslips can be verified,the payslip %(nm)s is in %(st)s state"
 msgstr ""
+"Endast utkast till lönebesked kan verifieras,lönebeskedet %(nm)s är i %(st)s "
+"tillstånd"
 
 #. module: payroll
 #. odoo-python
@@ -1482,6 +1599,8 @@ msgid ""
 "Only payslips in states verify or draft can be confirmed, the payslip %(nm)s "
 "is in %(st)s state"
 msgstr ""
+"Endast lönebesked i stater verifiera eller utkast kan bekräftas, "
+"lönebeskedet %(nm)s finns i %(st)s stat"
 
 #. module: payroll
 #. odoo-python
@@ -1491,6 +1610,8 @@ msgid ""
 "Only rejected payslips can be reset to draft, the payslip %(nm)s is in "
 "%(st)s state"
 msgstr ""
+"Endast avvisade lönebesked kan återställas till utkast, lönebeskedet %(nm)s "
+"befinner sig i %(st)s tillstånd"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1506,7 +1627,7 @@ msgstr "Överordnad"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
 msgid "Parent Payslip Line"
-msgstr ""
+msgstr "Föräldrarnas lönebesked"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_rule_id
@@ -1546,7 +1667,7 @@ msgstr "Lönespecifikatiosrader"
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_contribution_register
 msgid "PaySlip Lines By Contribution Register"
-msgstr ""
+msgstr "Lönespecifikationer Rader efter bidragsregister"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
@@ -1569,22 +1690,22 @@ msgstr "Lönehantering"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__module_payroll_account
 msgid "Payroll Accounting"
-msgstr ""
+msgstr "Redovisning av löner"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
 msgid "Payroll Code"
-msgstr ""
+msgstr "Lönekod"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
-msgstr ""
+msgstr "Rapport om löneavgiftsregister"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll Entries"
-msgstr ""
+msgstr "Löneregistreringar"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_search
@@ -1603,12 +1724,12 @@ msgstr "Lönespecifikation"
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip 'Date From' must be earlier than 'Date To'."
-msgstr ""
+msgstr "Lönebeskedets \"Datum från\" måste vara tidigare än \"Datum till\"."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__payslip_run_id
 msgid "Payslip Batch"
-msgstr ""
+msgstr "Batch för lönebesked"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_run
@@ -1627,12 +1748,12 @@ msgstr "Lönespecifikation Computation Detaljer"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__payslip_count
 msgid "Payslip Count"
-msgstr ""
+msgstr "Räkning av lönebesked"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_payslipdetails
 msgid "Payslip Details Report"
-msgstr ""
+msgstr "Rapport med detaljer om lönebesked"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payslip_input
@@ -1654,7 +1775,7 @@ msgstr "Lönespecifikationsrad"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Payslip Line Details"
-msgstr ""
+msgstr "Detaljer om Payslip Line"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_line_action
@@ -1673,7 +1794,7 @@ msgstr "Lönerader per mottagare i registret"
 #. module: payroll
 #: model:ir.model,name:payroll.model_payslip_lines_contribution_register
 msgid "Payslip Lines by Contribution Registers"
-msgstr ""
+msgstr "Rader för lönebesked per bidragsregister"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__name
@@ -1691,6 +1812,7 @@ msgstr "Lönespecifikation Arbetade dagar"
 msgid ""
 "Payslip for {{object.payslip_run_id.name}} from {{object.company_id.name}}"
 msgstr ""
+"Lönebesked för {{object.payslip_run_id.name}} från {{object.company_id.name}}"
 
 #. module: payroll
 #. odoo-python
@@ -1720,7 +1842,7 @@ msgstr "Lönespecifikationer av anställda"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Pending Review"
-msgstr ""
+msgstr "Pågående granskning"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_percentage
@@ -1745,18 +1867,18 @@ msgstr "Period"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Post payslips in accounting"
-msgstr ""
+msgstr "Bokföra lönebesked i bokföringen"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__prevent_compute_on_confirm
 msgid "Prevent Compute on Confirm"
-msgstr ""
+msgstr "Förhindra beräkna på bekräfta"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__prevent_compute_on_confirm
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Prevent payslips from being recomputed when confirming them"
-msgstr ""
+msgstr "Förhindra att lönebesked räknas om när du bekräftar dem"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_payslip_lines_contribution_register
@@ -1766,12 +1888,12 @@ msgstr "Skriv ut"
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_professionaltax1
 msgid "Professional Tax"
-msgstr ""
+msgstr "Professionell skatt"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_providentfund1
 msgid "Provident Fund"
-msgstr ""
+msgstr "Trygghetsfond"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_python_compute
@@ -1837,7 +1959,7 @@ msgstr "Kurs (%)"
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "Recursion error. Only one line should be parent of %s"
-msgstr ""
+msgstr "Fel vid rekursion. Endast en rad ska vara överordnad %s"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
@@ -1848,7 +1970,7 @@ msgstr "Referens"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refetch Payslip Data"
-msgstr ""
+msgstr "Hämta uppgifter om lönebesked"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1860,24 +1982,24 @@ msgstr "Kreditfaktura"
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Refund Payslip"
-msgstr ""
+msgstr "Återbetalning Betalningsbevis"
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Refund: %s"
-msgstr ""
+msgstr "Återbetalning: %s"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Refunded"
-msgstr ""
+msgstr "Återbetalade"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__refunded_id
 msgid "Refunded Payslip"
-msgstr ""
+msgstr "Återbetalad lönespecifikation"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__register_line_ids
@@ -1893,31 +2015,31 @@ msgstr "Avvisad"
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__require_code
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__require_code
 msgid "Require code"
-msgstr ""
+msgstr "Kräver kod"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__require_code_and_category
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__require_code_and_category
 msgid "Require code and category"
-msgstr ""
+msgstr "Kräv kod och kategori"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__require_code_and_category
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Require code/category on rules, categories and structures"
-msgstr ""
+msgstr "Kräv kod/kategori för regler, kategorier och strukturer"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_res_config_settings__require_code_and_category
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Require rule.code, rule.category, category.code, structure.code"
-msgstr ""
+msgstr "Kräver regel.kod, regel.kategori, kategori.kod, struktur.kod"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_user_id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Ansvarig användare"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__salary_rule_id
@@ -1927,13 +2049,13 @@ msgstr "Regel"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Rule Configuration"
-msgstr ""
+msgstr "Regelkonfiguration"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "Fel vid leverans av SMS"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
@@ -1948,7 +2070,7 @@ msgstr "Löneuträkning"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_salary_rule
 msgid "Salary Rule"
-msgstr ""
+msgstr "Löneregel"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_salary_rule_category_action
@@ -1985,14 +2107,14 @@ msgstr "LöneRegler"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Salary Rules formula definition (Python)"
-msgstr ""
+msgstr "Definition av formel för löneregler (Python)"
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "Salary Slip of %(name)s for %(dt)s"
-msgstr ""
+msgstr "Lönespecifikation för %(name)s för %(dt)s"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
@@ -2039,12 +2161,12 @@ msgstr "Halvårsvis"
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_partner_mass_mail
 msgid "Send email with payslip"
-msgstr ""
+msgstr "Skicka e-post med lönebesked"
 
 #. module: payroll
 #: model:mail.template,name:payroll.mail_template_hr_payslip
 msgid "Send payslip by email"
-msgstr ""
+msgstr "Skicka lönebesked via e-post"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__sequence
@@ -2070,7 +2192,7 @@ msgstr "Inställningar"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_invisible_lines
 msgid "Show only lines that appear on payslip"
-msgstr ""
+msgstr "Visa endast rader som förekommer på lönebeskedet"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -2092,6 +2214,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Status baserad på aktiviteter\n"
+"Försenad: Förfallodatumet har redan passerats\n"
+"Idag: Aktivitetsdatumet är idag\n"
+"Planerad: Framtida aktiviteter."
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__struct_id
@@ -2107,6 +2233,10 @@ msgid ""
 "variables which will store the data\n"
 "                                    for salary rule computation."
 msgstr ""
+"Beräkningarna ska utföras med hjälp av objekten och variablerna nedan.\n"
+"                                    Sedan måste du använda specifika "
+"beräkningsvariabler som lagrar data\n"
+"                                    för beräkningen av lönereglerna."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__code
@@ -2143,6 +2273,8 @@ msgid ""
 "The following objects and variables are available to you to use it in salary "
 "rules calculations."
 msgstr ""
+"Följande objekt och variabler är tillgängliga för att du ska kunna använda "
+"dem i beräkningar av löneregler."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range_max
@@ -2161,7 +2293,7 @@ msgstr "Det minsta belopp som tillämpas för den här regeln."
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 #, python-format
 msgid "The payslip %(nm)s is already canceled please deselect it"
-msgstr ""
+msgstr "Lönebeskedet %(nm)s är redan annullerat vänligen avmarkera det"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range
@@ -2178,7 +2310,7 @@ msgstr ""
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_leave_type
 msgid "Time Off Type"
-msgstr ""
+msgstr "Typ av ledig tid"
 
 #. module: payroll
 #. odoo-python
@@ -2188,6 +2320,8 @@ msgid ""
 "To cancel the Original Payslip the\n"
 "                        Refunded Payslip needs to be canceled first!"
 msgstr ""
+"För att makulera det ursprungliga lönebeskedet måste\n"
+"                        det återbetalda lönebeskedet först annulleras!"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__total
@@ -2201,7 +2335,7 @@ msgstr "Totalt"
 #: model:ir.model.fields,help:payroll.field_hr_payslip__activity_exception_decoration
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Typ av undantagsaktivitet som registreras."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__sequence
@@ -2248,7 +2382,7 @@ msgstr "Arbetsschema"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Write salary rule notes or observations here..."
-msgstr ""
+msgstr "Skriv anteckningar om löneregler eller observationer här..."
 
 #. module: payroll
 #. odoo-python
@@ -2258,6 +2392,8 @@ msgid ""
 "Wrong percentage base or quantity defined for salary rule %(nm)s (%(code)s) "
 "for employee %(ee)s."
 msgstr ""
+"Fel procentbas eller kvantitet definierad för löneregel %(nm)s (%(code)s) "
+"för anställd %(ee)s."
 
 #. module: payroll
 #. odoo-python
@@ -2266,6 +2402,7 @@ msgstr ""
 msgid ""
 "Wrong quantity defined for salary rule %(nm)s (%(code)s) for employee %(ee)s."
 msgstr ""
+"Fel kvantitet definierad för löneregel %(nm)s (%(code)s) för anställd %(ee)s."
 
 #. module: payroll
 #. odoo-python
@@ -2275,34 +2412,36 @@ msgid ""
 "Wrong range condition defined for salary rule %(nm)s (%(code)s) for employee "
 "%(ee)s."
 msgstr ""
+"Fel intervallvillkor definierat för löneregel %(nm)s (%(code)s) för anställd "
+"%(ee)s."
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 #, python-format
 msgid "You cannot create a recursive salary structure."
-msgstr ""
+msgstr "Du kan inte skapa en rekursiv lönestruktur."
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 #, python-format
 msgid "You cannot delete a payslip which is not draft or cancelled"
-msgstr ""
+msgstr "Du kan inte radera ett lönebesked som inte är utkast eller makulerat"
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payroll_payslips_by_employees.py:0
 #, python-format
 msgid "You must select employee(s) to generate payslip(s)."
-msgstr "Du måste välja anställda för att skapa lönebesked"
+msgstr "Du måste välja anställda för att skapa lönebesked."
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
 #, python-format
 msgid "You must set a contract to create a payslip line."
-msgstr ""
+msgstr "Du måste ange ett avtal för att skapa en lönebeskedsrad."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage_base
@@ -2313,7 +2452,7 @@ msgstr "resultat kommer att påverkas av en variabel"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
-msgstr ""
+msgstr "total_net"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Senast redigerad"
