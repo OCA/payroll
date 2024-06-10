@@ -37,7 +37,7 @@ msgstr "Kirjanpitovienti"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Adjustment Entry"
 msgstr "Korjausvienti"
@@ -53,6 +53,12 @@ msgstr "Kustannuspaikka"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
+msgstr ""
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__company_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__company_id
+msgid "Company"
 msgstr ""
 
 #. module: payroll_account
@@ -105,7 +111,7 @@ msgstr "Palkkalaskelman rivi"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip of %s"
 msgstr "%s palkkalaskelma"
@@ -136,7 +142,7 @@ msgstr ""
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Credit Account!"
@@ -144,7 +150,7 @@ msgstr "Kulupäiväkirja \"%s\" ei ole määrittänyt kredit-tiliä oikein!"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
