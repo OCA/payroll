@@ -32,7 +32,7 @@ msgstr "অ্যাকাউন্টিং এন্ট্রি"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Adjustment Entry"
 msgstr "সমন্বয়ন ভুক্তি"
@@ -48,6 +48,12 @@ msgstr "বিশ্লেষণী অ্যাকাউন্ট"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
+msgstr ""
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__company_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__company_id
+msgid "Company"
 msgstr ""
 
 #. module: payroll_account
@@ -99,7 +105,7 @@ msgstr "বেতন-স্লিপ লাইন"
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid "Payslip of %s"
 msgstr "বেতন-স্লিপ এর %s"
@@ -130,7 +136,7 @@ msgstr ""
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Credit Account!"
@@ -138,7 +144,7 @@ msgstr "ব্যয় জার্নাল \"%s\" ক্রেডিট অ�
 
 #. module: payroll_account
 #. odoo-python
-#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#: code:addons/payroll_account/models/hr_payslip.py:0
 #, python-format
 msgid ""
 "The Expense Journal \"%s\" has not properly configured the Debit Account!"
