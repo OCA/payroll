@@ -8,35 +8,6 @@ from odoo.exceptions import UserError
 logger = logging.getLogger(__name__)
 
 
-class HrPayslipLine(models.Model):
-    _inherit = "hr.payslip.line"
-
-    def _get_partner_id(self, credit_account):
-        """account_
-        Get partner_id of slip line to use in account_move_line
-        """
-        # use partner of salary rule or fallback on employee's address
-        register_partner_id = self.salary_rule_id.register_id.partner_id
-        partner_id = (
-            register_partner_id.id or self.slip_id.employee_id.address_home_id.id
-        )
-        if credit_account:
-            if (
-                register_partner_id
-                or self.salary_rule_id.account_credit.account_type
-                in ("asset_receivable", "liability_payable")
-            ):
-                return partner_id
-        else:
-            if (
-                register_partner_id
-                or self.salary_rule_id.account_debit.account_type
-                in ("asset_receivable", "liability_payable")
-            ):
-                return partner_id
-        return False
-
-
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
@@ -283,45 +254,145 @@ class HrPayslip(models.Model):
                 )
         return res
 
+    def _prepare_debit_line(
+        self,
+        line,
+        slip,
+        amount,
+        date,
+        debit_account_id,
+        analytic_salary_id,
+        tax_ids,
+        tax_tag_ids,
+        tax_repartition_line_id,
+    ):
+        return {
+            "name": line.name,
+            "partner_id": line._get_partner_id(credit_account=False)
+            or slip.employee_id.address_home_id.id,
+            "account_id": debit_account_id,
+            "journal_id": slip.journal_id.id,
+            "date": date,
+            "debit": amount > 0.0 and amount or 0.0,
+            "credit": amount < 0.0 and -amount or 0.0,
+            "analytic_account_id": analytic_salary_id
+            or slip.contract_id.analytic_account_id.id,
+            "tax_line_id": line.salary_rule_id.account_tax_id.id,
+            "tax_ids": tax_ids,
+            "tax_repartition_line_id": tax_repartition_line_id,
+            "tax_tag_ids": tax_tag_ids,
+        }
 
-class HrSalaryRule(models.Model):
-    _inherit = "hr.salary.rule"
+    def _prepare_credit_line(
+        self,
+        line,
+        slip,
+        amount,
+        date,
+        credit_account_id,
+        analytic_salary_id,
+        tax_ids,
+        tax_tag_ids,
+        tax_repartition_line_id,
+    ):
+        return {
+            "name": line.name,
+            "partner_id": line._get_partner_id(credit_account=True)
+            or slip.employee_id.address_home_id.id,
+            "account_id": credit_account_id,
+            "journal_id": slip.journal_id.id,
+            "date": date,
+            "debit": amount < 0.0 and -amount or 0.0,
+            "credit": amount > 0.0 and amount or 0.0,
+            "analytic_account_id": analytic_salary_id
+            or slip.contract_id.analytic_account_id.id,
+            "tax_line_id": line.salary_rule_id.account_tax_id.id,
+            "tax_ids": tax_ids,
+            "tax_repartition_line_id": tax_repartition_line_id,
+            "tax_tag_ids": tax_tag_ids,
+        }
 
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", "Analytic Account"
-    )
-    account_tax_id = fields.Many2one("account.tax", "Tax")
-    account_debit = fields.Many2one(
-        "account.account", "Debit Account", domain=[("deprecated", "=", False)]
-    )
-    account_credit = fields.Many2one(
-        "account.account", "Credit Account", domain=[("deprecated", "=", False)]
-    )
+    def _prepare_adjust_credit_line(
+        self, currency, credit_sum, debit_sum, journal, date
+    ):
+        acc_id = journal.default_account_id.id
+        return {
+            "name": _("Adjustment Entry"),
+            "partner_id": False,
+            "account_id": acc_id,
+            "journal_id": journal.id,
+            "date": date,
+            "debit": 0.0,
+            "credit": currency.round(debit_sum - credit_sum),
+        }
 
-    tax_base_id = fields.Many2one("hr.salary.rule", "Base")
-    tax_line_ids = fields.One2many("hr.salary.rule", "tax_base_id", string="Tax lines")
+    def _prepare_adjust_debit_line(
+        self, currency, credit_sum, debit_sum, journal, date
+    ):
+        acc_id = journal.default_account_id.id
+        return {
+            "name": _("Adjustment Entry"),
+            "partner_id": False,
+            "account_id": acc_id,
+            "journal_id": journal.id,
+            "date": date,
+            "debit": currency.round(credit_sum - debit_sum),
+            "credit": 0.0,
+        }
 
+    def _get_tax_details(self, line):
+        tax_ids = False
+        tax_tag_ids = False
+        salary_rule = line.salary_rule_id
+        if salary_rule.tax_line_ids:
+            account_tax_ids = [
+                salary_rule_id.account_tax_id.id
+                for salary_rule_id in salary_rule.tax_line_ids
+            ]
+            tax_ids = [(4, account_tax_id, 0) for account_tax_id in account_tax_ids]
+            tax_tag_ids = (
+                self.env["account.tax.repartition.line"]
+                .search(
+                    [
+                        ("invoice_tax_id", "in", account_tax_ids),
+                        ("repartition_type", "=", "base"),
+                    ]
+                )
+                .tag_ids
+            )
 
-class HrContract(models.Model):
-    _inherit = "hr.contract"
-    _description = "Employee Contract"
+        tax_repartition_line_id = False
+        if salary_rule.account_tax_id:
+            tax_repartition_line_id = (
+                self.env["account.tax.repartition.line"]
+                .search(
+                    [
+                        ("invoice_tax_id", "=", salary_rule.account_tax_id.id),
+                        (
+                            "account_id",
+                            "=",
+                            salary_rule.account_debit.id
+                            or salary_rule.account_credit.id,
+                        ),
+                    ]
+                )
+                .id
+            )
+            tax_tag_ids += (
+                self.env["account.tax.repartition.line"]
+                .search(
+                    [
+                        ("invoice_tax_id", "=", salary_rule.account_tax_id.id),
+                        ("repartition_type", "=", "tax"),
+                        (
+                            "account_id",
+                            "=",
+                            salary_rule.account_debit.id
+                            or salary_rule.account_credit.id,
+                        ),
+                    ]
+                )
+                .tag_ids
+            )
 
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", "Analytic Account"
-    )
-    journal_id = fields.Many2one("account.journal", "Salary Journal")
-
-
-class HrPayslipRun(models.Model):
-    _inherit = "hr.payslip.run"
-
-    journal_id = fields.Many2one(
-        "account.journal",
-        "Salary Journal",
-        states={"draft": [("readonly", False)]},
-        readonly=True,
-        required=True,
-        default=lambda self: self.env["account.journal"].search(
-            [("type", "=", "general")], limit=1
-        ),
-    )
+        return tax_ids, tax_tag_ids, tax_repartition_line_id
