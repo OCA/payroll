@@ -329,7 +329,7 @@ class HrPayslip(models.Model):
             res.append(attendances)
         return res
 
-    def _compute_leave_days(self, contract, day_from, day_to):
+    def _compute_leave_days(self, contract, day_from, day_to, leave_domain=None):
         """
         Leave days computation
         @return: returns a list containing the leave inputs for the period
@@ -342,7 +342,10 @@ class HrPayslip(models.Model):
         calendar = contract.resource_calendar_id
         tz = timezone(calendar.tz)
         day_leave_intervals = contract.employee_id.list_leaves(
-            day_from, day_to, calendar=contract.resource_calendar_id
+            day_from,
+            day_to,
+            calendar=contract.resource_calendar_id,
+            domain=leave_domain,
         )
         for day, hours, leave in day_leave_intervals:
             holiday = leave[:1].holiday_id
