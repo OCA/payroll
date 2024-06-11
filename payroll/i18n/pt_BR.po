@@ -19,15 +19,17 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Fernando Colus <fcolus1@gmail.com>, 2020\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/odoo/"
-"teams/41243/pt_BR/)\n"
+"PO-Revision-Date: 2024-06-11 15:36+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/odoo/teams/"
+"41243/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -339,7 +341,7 @@ msgstr "<strong>Nome de Registro:</strong>"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 msgid "<strong>Total</strong>"
-msgstr "Total"
+msgstr "<strong>Total</strong>"
 
 #. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
@@ -962,12 +964,12 @@ msgstr "Funcionário"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_contract
 msgid "Employee Contract"
-msgstr "Contrato do Funcionário"
+msgstr "Contrato de Funcionário"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
 msgid "Employee Function"
-msgstr "Função do Funcionário"
+msgstr "Função de Funcionário"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
@@ -2175,7 +2177,7 @@ msgstr "A quantidade máxima, aplicada para esta regra."
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__condition_range_min
 #: model:ir.model.fields,help:payroll.field_hr_salary_rule__condition_range_min
 msgid "The minimum amount, applied for this rule."
-msgstr "A quantidade mínima, aplicada para esta regra"
+msgstr "A quantidade mínima, aplicada para esta regra."
 
 #. module: payroll
 #. odoo-python
@@ -2192,9 +2194,9 @@ msgid ""
 "but you can also use categories code fields in lowercase as a variable names "
 "(hra, ma, lta, etc.) and the variable basic."
 msgstr ""
-"Isso será usado para calcular os valores de campos %  em geral é básico, mas "
+"Isso será usado para calcular os valores de campos % em geral é básico, mas "
 "você também pode usar os campos de código de categorias em letras minúsculas "
-"como um nomes de variáveis ​​(HRA, ma, lta, etc) e básicos variável."
+"como um nomes de variáveis (hra, ma, lta, etc) e básicos variável."
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_leave_type
@@ -2266,7 +2268,7 @@ msgstr "Dia Trabalhado"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Worked Days"
-msgstr "Dias trabalhados :"
+msgstr "Dias trabalhados"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
