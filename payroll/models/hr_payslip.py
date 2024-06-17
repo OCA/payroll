@@ -308,6 +308,7 @@ class HrPayslip(models.Model):
         applied for the given contract between date_from and date_to
         """
         res = []
+        date_from, date_to = self._date_hook(date_from, date_to)
         for contract in contracts.filtered(
             lambda contract: contract.resource_calendar_id
         ):
@@ -328,6 +329,10 @@ class HrPayslip(models.Model):
             attendances = self._compute_worked_days(contract, day_from, day_to)
             res.append(attendances)
         return res
+
+    def _date_hook(self, date_from, date_to):
+        # The hook is used by the module payroll_fetch_prev_month
+        return date_from, date_to
 
     def _compute_leave_days(self, contract, day_from, day_to):
         """
