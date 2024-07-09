@@ -302,3 +302,53 @@ class HrFiscalYear(models.Model):
         return next(
             (p for p in self.period_ids if p.number == number), self.env["hr.period"]
         )
+
+    @api.model
+    def cron_create_next_fiscal_year(self):
+        current_year = datetime.now().year
+        next_year = current_year + 1
+        # Get the latest fiscal year that has not ended yet
+        latest_fiscal_year = self.search(
+            [("date_end", "<", datetime(next_year, 1, 1).strftime(DF))],
+            order="date_end desc",
+            limit=1,
+        )
+        if not latest_fiscal_year:
+            return self
+        latest_period_end = max(latest_fiscal_year.period_ids.mapped("date_end"))
+        fiscal_year_start = latest_period_end + relativedelta(days=1)
+        fiscal_year_end = datetime(next_year, 12, 31).strftime(DF)
+        # Check if a fiscal year with the same start and end dates already exists
+        existing_fiscal_year = self.search(
+            [
+                ("date_start", "=", fiscal_year_start),
+                ("date_end", "=", fiscal_year_end),
+            ],
+            limit=1,
+        )
+        if existing_fiscal_year:
+            return existing_fiscal_year
+
+        schedule_pay = latest_fiscal_year.schedule_pay
+        payment_weekday = latest_fiscal_year.payment_weekday
+        payment_week = latest_fiscal_year.payment_week
+        schedule_name = next(
+            (s[1] for s in get_schedules(self) if s[0] == schedule_pay), False
+        )
+
+        fiscal_year = self.create(
+            {
+                "name": "%(year)s - %(schedule)s"
+                % {
+                    "year": next_year,
+                    "schedule": schedule_name,
+                },
+                "date_start": fiscal_year_start,
+                "date_end": fiscal_year_end,
+                "schedule_pay": schedule_pay,
+                "payment_weekday": payment_weekday,
+                "payment_week": payment_week,
+            }
+        )
+        fiscal_year.create_periods()
+        return fiscal_year
