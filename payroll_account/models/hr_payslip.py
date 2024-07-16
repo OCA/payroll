@@ -430,97 +430,107 @@ class HrPayslip(models.Model):
     def action_payslip_done(self):
         res = super(HrPayslip, self).action_payslip_done()
 
-        can_merge = False
+        for rec in self:
+            # not batch, run original core odoo (generate_journal_single, this will until post)
+            if not rec.payslip_run_id:
+                rec.generate_journal_single()
+            else:
 
-        # check all confirm except the current record
-        rec_done = self.env["hr.payslip"].search(
-            [("state", "=", "done"), ("payslip_run_id", "=", self.payslip_run_id.id)]
-        )
-        rec_all = self.env["hr.payslip"].search(
-            [("payslip_run_id", "=", self.payslip_run_id.id)]
-        )
+                # for batch, merge journal until draft
 
-        if len(rec_all) == len(rec_done):
-            can_merge = True
+                can_merge = False
 
-        if can_merge:
-            merge_line_ids = []
-            journal_id = False
-            journal_date = False
-            batch_name = False
-            for rec in rec_done:
-                if rec.payslip_run_id:
-                    rec.generate_journal_batch()
-                    journal_id = rec.move_id.id
-                    journal_date = rec.move_id.date
-                    batch_name = rec.payslip_run_id.name
-                    for move_rec in rec.move_id.line_ids:
-                        move_line = (
-                            0,
-                            0,
-                            {
-                                "name": move_rec.name,
-                                "partner_id": move_rec.partner_id.id
-                                if move_rec.partner_id
-                                else False,
-                                "account_id": move_rec.account_id.id,
-                                "analytic_account_id": move_rec.analytic_account_id.id
-                                if move_rec.analytic_account_id
-                                else False,
-                                "journal_id": move_rec.journal_id.id,
-                                "date": move_rec.date,
-                                "debit": move_rec.debit,
-                                "credit": move_rec.credit,
-                            },
-                        )
-                        merge_line_ids.append(move_line)
+                # check all confirm except the current record
+                rec_done = self.env["hr.payslip"].search(
+                    [
+                        ("state", "=", "done"),
+                        ("payslip_run_id", "=", self.payslip_run_id.id),
+                    ]
+                )
+                rec_all = self.env["hr.payslip"].search(
+                    [("payslip_run_id", "=", self.payslip_run_id.id)]
+                )
 
-                    # delete draft journal per payslip
-                    rec.move_id.unlink()
-                    rec.move_id = False
+                if len(rec_all) == len(rec_done):
+                    can_merge = True
 
-            move_narration = _("Payslip Batch")
-            move_dict = {
-                "narration": move_narration,
-                "ref": batch_name,
-                "journal_id": journal_id,
-                "date": journal_date,
-            }
+                if can_merge:
+                    merge_line_ids = []
+                    journal_id = False
+                    journal_date = False
+                    batch_name = False
+                    for rec in rec_done:
+                        if rec.payslip_run_id:
+                            rec.generate_journal_batch()
+                            journal_id = rec.move_id.id
+                            journal_date = rec.move_id.date
+                            batch_name = rec.payslip_run_id.name
+                            for move_rec in rec.move_id.line_ids:
+                                move_line = (
+                                    0,
+                                    0,
+                                    {
+                                        "name": move_rec.name,
+                                        "partner_id": move_rec.partner_id.id
+                                        if move_rec.partner_id
+                                        else False,
+                                        "account_id": move_rec.account_id.id,
+                                        "analytic_account_id": move_rec.analytic_account_id.id
+                                        if move_rec.analytic_account_id
+                                        else False,
+                                        "journal_id": move_rec.journal_id.id,
+                                        "date": move_rec.date,
+                                        "debit": move_rec.debit,
+                                        "credit": move_rec.credit,
+                                    },
+                                )
+                                merge_line_ids.append(move_line)
 
-            final_merge_line_ids = []
-            for line in merge_line_ids:
-                # search account_id and analytic_account_id
-                found_src = False
-                found_src_id = 0
-                if len(final_merge_line_ids) > 0:
-                    for src in final_merge_line_ids:
-                        if (
-                            src[2]["account_id"] == line[2]["account_id"]
-                            and src[2]["analytic_account_id"]
-                            == line[2]["analytic_account_id"]
-                            and src[2]["partner_id"] == line[2]["partner_id"]
-                        ):
-                            found_src = True
-                            break
+                            # delete draft journal per payslip
+                            rec.move_id.unlink()
+                            rec.move_id = False
 
-                        found_src_id += 1
+                    move_narration = _("Payslip Batch")
+                    move_dict = {
+                        "narration": move_narration,
+                        "ref": batch_name,
+                        "journal_id": journal_id,
+                        "date": journal_date,
+                    }
 
-                if not found_src:
-                    final_merge_line_ids.append(line)
-                else:
-                    final_merge_line_ids[found_src_id][2]["debit"] += line[2]["debit"]
-                    final_merge_line_ids[found_src_id][2]["credit"] += line[2]["credit"]
+                    final_merge_line_ids = []
+                    for line in merge_line_ids:
+                        # search account_id and analytic_account_id
+                        found_src = False
+                        found_src_id = 0
+                        if len(final_merge_line_ids) > 0:
+                            for src in final_merge_line_ids:
+                                if (
+                                    src[2]["account_id"] == line[2]["account_id"]
+                                    and src[2]["analytic_account_id"]
+                                    == line[2]["analytic_account_id"]
+                                    and src[2]["partner_id"] == line[2]["partner_id"]
+                                ):
+                                    found_src = True
+                                    break
 
-            if final_merge_line_ids:
-                move_dict["line_ids"] = final_merge_line_ids
-                move = self.env["account.move"].create(move_dict)
-                # update all slip to this journal
-                for rec in rec_done:
-                    rec.write({"move_id": move.id, "date": journal_date})
+                                found_src_id += 1
 
-        else:
-            for rec in self:
-                if not rec.payslip_run_id:
-                    rec.generate_journal_single()
+                        if not found_src:
+                            final_merge_line_ids.append(line)
+                        else:
+                            final_merge_line_ids[found_src_id][2]["debit"] += line[2][
+                                "debit"
+                            ]
+                            final_merge_line_ids[found_src_id][2]["credit"] += line[2][
+                                "credit"
+                            ]
+
+                    if final_merge_line_ids:
+                        move_dict["line_ids"] = final_merge_line_ids
+                        move = self.env["account.move"].create(move_dict)
+                        # update all slip to this journal
+                        for rec in rec_done:
+                            rec.write({"move_id": move.id, "date": journal_date})
 
         return res
