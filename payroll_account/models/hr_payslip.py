@@ -486,9 +486,10 @@ class HrPayslip(models.Model):
                                 )
                                 merge_line_ids.append(move_line)
 
+                    for rec in rec_done:
+                        if rec.payslip_run_id:
                             # delete draft journal per payslip
                             rec.move_id.unlink()
-                            rec.move_id = False
 
                     move_narration = _("Payslip Batch")
                     move_dict = {
