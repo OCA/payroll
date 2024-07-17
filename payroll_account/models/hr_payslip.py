@@ -535,3 +535,5 @@ class HrPayslip(models.Model):
                             rec.write({"move_id": move.id, "date": journal_date})
 
         return res
+
+# test
