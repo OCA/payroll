@@ -1,11 +1,14 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import logging
 from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
 from odoo import fields
 from odoo.tests import common
+
+_logger = logging.getLogger(__name__)
 
 
 class TestPayrollAccount(common.TransactionCase):
@@ -112,7 +115,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "journal_id": self.account_journal.id,
             }
         )
-        
+
         self.hr_contract_jane = self.env["hr.contract"].create(
             {
                 "date_start": fields.Date.today(),
@@ -300,17 +303,37 @@ class TestPayrollAccount(common.TransactionCase):
         )
 
         # Add the bonus rule to the structure
-        self.hr_structure_softwaredeveloper.write({
-            'rule_ids': [(4, bonus_rule.id)]
-        })
-        
-        
+        self.hr_structure_softwaredeveloper.write({"rule_ids": [(4, bonus_rule.id)]})
+
+        # Verify the rule was added to the structure
+        self.assertIn(
+            bonus_rule,
+            self.hr_structure_softwaredeveloper.rule_ids,
+            "Bonus rule not added to the structure",
+        )
+
         # Create and compute a payslip
         payslip = self.create_payslip(self.hr_employee_john)
         payslip.compute_sheet()
 
+        # Check if the bonus line is in the payslip lines
+        bonus_payslip_line = payslip.line_ids.filtered(lambda l: l.code == "BONUS")
+        self.assertTrue(bonus_payslip_line, "Bonus line not found in payslip lines")
+        self.assertEqual(
+            bonus_payslip_line.total, 1000.0, "Incorrect bonus amount in payslip"
+        )
+
         # Confirm the payslip
         payslip.action_payslip_done()
+
+        # Log debugging information
+        _logger.info(
+            "Payslip lines: %s", payslip.line_ids.mapped(lambda l: (l.name, l.total))
+        )
+        _logger.info(
+            "Move lines: %s",
+            payslip.move_id.line_ids.mapped(lambda l: (l.name, l.debit, l.credit)),
+        )
 
         # Check that the bonus is reflected in the accounting entry
         bonus_line = payslip.move_id.line_ids.filtered(lambda l: l.name == "Bonus")
