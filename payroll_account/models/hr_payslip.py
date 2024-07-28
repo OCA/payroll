@@ -71,7 +71,7 @@ class HrPayslip(models.Model):
                 individual_payslips |= slip
 
         # Process payslips with payslip_run_id
-        for payslip_run, slips in payslips_by_run.items():
+        for payslip_run, _slips in payslips_by_run.items():
             all_run_slips = self.env["hr.payslip"].search(
                 [("payslip_run_id", "=", payslip_run.id)]
             )
@@ -183,11 +183,13 @@ class HrPayslip(models.Model):
             )
 
         if line.salary_rule_id.account_tax_id:
-            tax_tag_ids |= line.salary_rule_id.account_tax_id.invoice_repartition_line_ids.filtered(
-                lambda x: x.repartition_type == "tax"
-            ).mapped(
-                "tag_ids"
+            repartition_lines = (
+                line.salary_rule_id.account_tax_id.invoice_repartition_line_ids
             )
+            tax_lines = repartition_lines.filtered(
+                lambda x: x.repartition_type == "tax"
+            )
+            tax_tag_ids |= tax_lines.mapped("tag_ids")
 
         return [(6, 0, tax_tag_ids.ids)]
 
@@ -296,7 +298,7 @@ class HrPayslip(models.Model):
             if not acc_id:
                 raise UserError(
                     _(
-                        'The Expense Journal "%s" has not properly configured the Credit Account!'
+                        """The Journal '%s' hasn't properly configured the Credit Account!"""
                     )
                     % (slip.journal_id.name)
                 )
@@ -318,7 +320,7 @@ class HrPayslip(models.Model):
             if not acc_id:
                 raise UserError(
                     _(
-                        'The Expense Journal "%s" has not properly configured the Debit Account!'
+                        """The Journal '%s' hasn't properly configured the Debit Account!"""
                     )
                     % (slip.journal_id.name)
                 )
