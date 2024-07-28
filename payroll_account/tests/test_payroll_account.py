@@ -294,15 +294,17 @@ class TestPayrollAccount(common.TransactionCase):
                 "sequence": 5,
                 "amount_select": "fix",
                 "amount_fix": 1000.0,
-                "struct_id": self.hr_structure_softwaredeveloper.id,
                 "account_debit": self.account_debit.id,
                 "account_credit": self.account_credit.id,
             }
         )
 
         # Add the bonus rule to the structure
-        self.hr_structure_softwaredeveloper.write({"rule_ids": [(4, bonus_rule.id)]})
-
+        self.hr_structure_softwaredeveloper.write({
+            'rule_ids': [(4, bonus_rule.id)]
+        })
+        
+        
         # Create and compute a payslip
         payslip = self.create_payslip(self.hr_employee_john)
         payslip.compute_sheet()
