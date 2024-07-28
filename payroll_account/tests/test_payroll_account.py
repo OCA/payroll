@@ -48,17 +48,6 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        self.hr_contract_jane = self.env["hr.contract"].create(
-            {
-                "date_start": fields.Date.today(),
-                "name": "Contract for Jane",
-                "wage": 4000.0,
-                "employee_id": self.hr_employee_jane.id,
-                "struct_id": self.hr_structure_softwaredeveloper.id,
-                "journal_id": self.account_journal.id,
-            }
-        )
-
         self.hr_salary_rule_houserentallowance1 = self.ref(
             "payroll.hr_salary_rule_houserentallowance1"
         )
@@ -119,6 +108,17 @@ class TestPayrollAccount(common.TransactionCase):
                 "name": "Contract for John",
                 "wage": 5000.0,
                 "employee_id": self.hr_employee_john.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "journal_id": self.account_journal.id,
+            }
+        )
+        
+        self.hr_contract_jane = self.env["hr.contract"].create(
+            {
+                "date_start": fields.Date.today(),
+                "name": "Contract for Jane",
+                "wage": 4000.0,
+                "employee_id": self.hr_employee_jane.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
                 "journal_id": self.account_journal.id,
             }
