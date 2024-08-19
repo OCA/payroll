@@ -89,8 +89,8 @@ msgid ""
 "%(err)s\n"
 msgstr ""
 "\n"
-"Condizione Pyhon errata definita per la regola retribuzione %(nm)s (%(code)s)"
-" per dipendente %(ee)s.\n"
+"Condizione Pyhon errata definita per la regola retribuzione %(nm)s "
+"(%(code)s) per dipendente %(ee)s.\n"
 "Questo è l'errore ricevuto:\n"
 "\n"
 "%(err)s\n"
@@ -131,8 +131,8 @@ msgid ""
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
 "* Quando viene creata la busta paga è in stato 'Bozza'.             \n"
-"* Se la busta paga è in verifica, lo stato è 'Calcola scheda'.              "
-"\n"
+"* Se la busta paga è in verifica, lo stato è 'Calcola "
+"scheda'.              \n"
 "* Se la busta paga è confermata lo stato è 'Completata'.             \n"
 "* Quando l'utente annulla la busta paga lo stato è 'Respinta'."
 
@@ -1281,9 +1281,7 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
@@ -2071,12 +2069,6 @@ msgid "Rule Configuration"
 msgstr "Configurazione regola"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "Categorie stipendio"
@@ -2413,8 +2405,8 @@ msgid ""
 "Wrong percentage base or quantity defined for salary rule %(nm)s (%(code)s) "
 "for employee %(ee)s."
 msgstr ""
-"Errore base percentuale o quantità definite per la regola retribuzione %(nm)"
-"s (%(code)s) per il dipendente %(ee)s."
+"Errore base percentuale o quantità definite per la regola retribuzione "
+"%(nm)s (%(code)s) per il dipendente %(ee)s."
 
 #. module: payroll
 #. odoo-python
@@ -2476,6 +2468,9 @@ msgstr "il risultato sarà influenzato da una variabile"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ultima modifica il"
