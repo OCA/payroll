@@ -62,8 +62,8 @@ msgid ""
 "%(err)s\n"
 msgstr ""
 "\n"
-"Fel pythonkod definierad för löneregel %(nm)s (%(code)s) för anställd %(ee)s."
-"\n"
+"Fel pythonkod definierad för löneregel %(nm)s (%(code)s) för anställd "
+"%(ee)s.\n"
 "Här är det mottagna felet:\n"
 "\n"
 "%(err)s\n"
@@ -123,8 +123,8 @@ msgid ""
 "* When user cancel payslip the status is 'Rejected'."
 msgstr ""
 "* När lönebeskedet skapas är statusen \"utkast\".             \n"
-"* Om lönebeskedet är under kontroll är statusen \"Beräkna ark\""
-".              \n"
+"* Om lönebeskedet är under kontroll är statusen \"Beräkna "
+"ark\".              \n"
 "* Om lönebeskedet bekräftas sätts statusen till \"Klar\".             \n"
 "* Om användaren återkallar lönebeskedet är statusen \"Rejected\"."
 
@@ -258,8 +258,8 @@ msgid ""
 "<code>result_rules:</code> contains the values of previusly computed lines "
 "(qty, rate, amount, total)"
 msgstr ""
-"<code>result_rules:</code> innehåller värdena för tidigare beräknade rader ("
-"qty, rate, amount, total)"
+"<code>result_rules:</code> innehåller värdena för tidigare beräknade rader "
+"(qty, rate, amount, total)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -302,8 +302,8 @@ msgstr ""
 "        <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "            Kära <t t-out=\"object.employee_id.name\"></t>,\n"
 "            <br><br>\n"
-"            Vänligen bifoga lönebeskedet för <t t-out=\"object.payslip_run_id"
-".name\"></t>.\n"
+"            Vänligen bifoga lönebeskedet för <t t-out=\"object."
+"payslip_run_id.name\"></t>.\n"
 "            <br><br>\n"
 "            Tveka inte att kontakta oss om du har några frågor.\n"
 "            <br><br>\n"
@@ -1267,9 +1267,7 @@ msgstr "Om den är markerad kräver nya meddelanden din uppmärksamhet."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Om kryssrutan är markerad får vissa meddelanden ett leveransfel."
 
@@ -1305,7 +1303,8 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_res_config_settings__leaves_positive
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "In payslip worked days, leave days/hours have positive values"
-msgstr "I lönebeskedet har arbetade dagar, semesterdagar/timmar positiva värden"
+msgstr ""
+"I lönebeskedet har arbetade dagar, semesterdagar/timmar positiva värden"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -2052,12 +2051,6 @@ msgid "Rule Configuration"
 msgstr "Regelkonfiguration"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Fel vid leverans av SMS"
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "Lönekategorier"
@@ -2453,6 +2446,9 @@ msgstr "resultat kommer att påverkas av en variabel"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Fel vid leverans av SMS"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Senast redigerad"

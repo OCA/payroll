@@ -1155,9 +1155,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip__message_has_sms_error
 #: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_error
-#: model:ir.model.fields,help:payroll.field_hr_payslip_run__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1930,12 +1928,6 @@ msgid "Rule Configuration"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_sms_error
-#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_form
 msgid "Salary Categories"
 msgstr "ចំណាប់ថ្នាកប្រាក់បៀវត្ស"
@@ -2387,8 +2379,8 @@ msgstr ""
 #~ "all selected employee(s) based on the dates and credit note specified on "
 #~ "Payslips Run.</span>"
 #~ msgstr ""
-#~ "<span colspan=\"4\" nolabel="
-#~ "\"1\">អ្នកជំនួយការនេះនឹងបង្កើតប្រាក់សំណងសម្រាប់និយោជិក(s)ទាំងអស់ដែលបានជ្រើសរើសដោយផ្អែកលើកាលបរិច្ឆេទនិងកំណត់ត្រាឥណទានដែលបានបញ្ជាក់នៅលើផេយលីបរត់</"
+#~ "<span colspan=\"4\" "
+#~ "nolabel=\"1\">អ្នកជំនួយការនេះនឹងបង្កើតប្រាក់សំណងសម្រាប់និយោជិក(s)ទាំងអស់ដែលបានជ្រើសរើសដោយផ្អែកលើកាលបរិច្ឆេទនិងកំណត់ត្រាឥណទានដែលបានបញ្ជាក់នៅលើផេយលីបរត់</"
 #~ "span>"
 
 #~ msgid ""
