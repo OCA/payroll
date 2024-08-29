@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * hr_payroll_account
+#
+# Translators:
+# Martin Trigaux, 2018
+# RGB Consulting <odoo@rgbconsulting.com>, 2018
+# Quim - eccit <quim@eccit.com>, 2018
+# Arnau Ros, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server saas~11.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-10 10:10+0000\n"
+"PO-Revision-Date: 2022-02-28 13:17+0000\n"
+"Last-Translator: Noel estudillo <noelestudilloviera@gmail.com>\n"
+"Language-Team: Catalan (https://www.transifex.com/odoo/teams/41243/ca/)\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: payroll_account
+#: model_terms:ir.ui.view,arch_db:payroll_account.hr_contract_view_form
+#: model_terms:ir.ui.view,arch_db:payroll_account.hr_salary_rule_view_form
+msgid "Accounting"
+msgstr "Comptabilitat"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__move_id
+msgid "Accounting Entry"
+msgstr "Entrada comptable"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid "Adjustment Entry"
+msgstr "Entrada d'ajusts"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__analytic_account_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__analytic_account_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__analytic_account_id
+msgid "Analytic Account"
+msgstr "Compte analític"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
+msgid "Base"
+msgstr "Base"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_credit
+msgid "Credit Account"
+msgstr "Compte de crèdit"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__date
+msgid "Date Account"
+msgstr "Data del compte"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_debit
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_debit
+msgid "Debit Account"
+msgstr "Compte de dèbit"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_contract
+msgid "Employee Contract"
+msgstr "Contracte d'empleat"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip_employees
+msgid "Generate payslips for all selected employees"
+msgstr "Generar les nòmines per tots els treballadors seleccionats"
+
+#. module: payroll_account
+#: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
+msgid "Keep empty to use the period of the validation(Payslip) date."
+msgstr ""
+"Deixeu en blanc per utilitzar el període de la data de validació de la "
+"nòmina."
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip
+msgid "Payslip"
+msgstr ""
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip_run
+msgid "Payslip Batches"
+msgstr "Processament de nòmines"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip_line
+msgid "Payslip Line"
+msgstr "Línea de nómina"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid "Payslip of %s"
+msgstr "Nòmina de%s"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__journal_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__journal_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__journal_id
+msgid "Salary Journal"
+msgstr "Diari de salari"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_salary_rule
+msgid "Salary Rule"
+msgstr "Regla salarial"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_tax_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_tax_id
+msgid "Tax"
+msgstr "Impost"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
+msgid "Tax lines"
+msgstr "Línies fiscals"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid ""
+"The Expense Journal \"%s\" has not properly configured the Credit Account!"
+msgstr ""
+"El diari de despeses \"%s\" no ha configurat correctament el compte de "
+"crèdit!"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid ""
+"The Expense Journal \"%s\" has not properly configured the Debit Account!"
+msgstr ""
+"El diari de despeses \"%s\" no ha configurat correctament el compte de dèbit!"
+
+#~ msgid "Display Name"
+#~ msgstr "Nom de visualització"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificació el"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Nómina"

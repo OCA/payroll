@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * hr_payroll_account
+#
+# Translators:
+# Martin Trigaux, 2018
+# mohammad azarbara <mohammadazarbara98@gmail.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server saas~11.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-10 10:10+0000\n"
+"PO-Revision-Date: 2023-04-17 12:33+0000\n"
+"Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>\n"
+"Language-Team: Persian (https://www.transifex.com/odoo/teams/41243/fa/)\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: payroll_account
+#: model_terms:ir.ui.view,arch_db:payroll_account.hr_contract_view_form
+#: model_terms:ir.ui.view,arch_db:payroll_account.hr_salary_rule_view_form
+msgid "Accounting"
+msgstr "حسابداری"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__move_id
+msgid "Accounting Entry"
+msgstr "ورودی حسابداری"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid "Adjustment Entry"
+msgstr "ورودی تنظیم"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__analytic_account_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__analytic_account_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__analytic_account_id
+msgid "Analytic Account"
+msgstr "حساب تحلیلی"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
+msgid "Base"
+msgstr "پایه"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_credit
+msgid "Credit Account"
+msgstr "حساب بستانکار"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__date
+msgid "Date Account"
+msgstr "حساب تاریخ"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_debit
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_debit
+msgid "Debit Account"
+msgstr "حساب بدهکار"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_contract
+msgid "Employee Contract"
+msgstr "قرارداد کارمند"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip_employees
+msgid "Generate payslips for all selected employees"
+msgstr "برای همه کارمندان منتخب فیش حقوقی ایجاد کنید"
+
+#. module: payroll_account
+#: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
+msgid "Keep empty to use the period of the validation(Payslip) date."
+msgstr "برای استفاده از دوره تاریخ اعتبار (فیش حقوق) خالی نگه دارید."
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip
+msgid "Payslip"
+msgstr "فیش حقوق"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip_run
+msgid "Payslip Batches"
+msgstr "دسته‌های فیش حقوقی"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_payslip_line
+msgid "Payslip Line"
+msgstr "موارد فیش حقوقی"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid "Payslip of %s"
+msgstr "فیش حقوقی %s"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_contract__journal_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip__journal_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__journal_id
+msgid "Salary Journal"
+msgstr "روزنامه حقوق"
+
+#. module: payroll_account
+#: model:ir.model,name:payroll_account.model_hr_salary_rule
+msgid "Salary Rule"
+msgstr "قواعد حقوق"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_tax_id
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__account_tax_id
+msgid "Tax"
+msgstr "مالیات"
+
+#. module: payroll_account
+#: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
+#: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
+msgid "Tax lines"
+msgstr "موارد مالیات"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid ""
+"The Expense Journal \"%s\" has not properly configured the Credit Account!"
+msgstr "روزنامه تن‌خواه \"%s\" به صورت صحیح حساب بستانکار را تنظیم نکرده!"
+
+#. module: payroll_account
+#. odoo-python
+#: code:addons/payroll_account/models/hr_payroll_account.py:0
+#, python-format
+msgid ""
+"The Expense Journal \"%s\" has not properly configured the Debit Account!"
+msgstr "روزنامه تن‌خواه \"%s\" به صورت صحیح حساب بدهکار را تنظیم نکرده!"
