@@ -1,11 +1,14 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import logging
 from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
 from odoo import fields
 from odoo.tests import common
+
+_logger = logging.getLogger(__name__)
 
 
 class TestPayrollAccount(common.TransactionCase):
@@ -35,6 +38,16 @@ class TestPayrollAccount(common.TransactionCase):
                 "marital": "single",
                 "name": "John",
                 "bank_account_id": self.res_partner_bank.bank_id.id,
+            }
+        )
+
+        # Additional setup for new tests
+        self.hr_employee_jane = self.env["hr.employee"].create(
+            {
+                "name": "Jane",
+                "gender": "female",
+                "birthday": "1990-05-15",
+                "department_id": self.ref("hr.dep_sales"),
             }
         )
 
@@ -103,10 +116,31 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
+        self.hr_contract_jane = self.env["hr.contract"].create(
+            {
+                "date_start": fields.Date.today(),
+                "name": "Contract for Jane",
+                "wage": 4000.0,
+                "employee_id": self.hr_employee_jane.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "journal_id": self.account_journal.id,
+            }
+        )
+
         self.hr_payslip = self.env["hr.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
                 "journal_id": self.account_journal.id,
+            }
+        )
+
+        # Create a payslip run
+        self.payslip_run = self.env["hr.payslip.run"].create(
+            {
+                "name": "Payslip Run",
+                "date_start": fields.Date.today(),
+                "date_end": fields.Date.today()
+                + relativedelta.relativedelta(months=+1, day=1, days=-1),
             }
         )
 
@@ -212,3 +246,167 @@ class TestPayrollAccount(common.TransactionCase):
 
         # I verify that the payslip is in done state.
         self.assertEqual(self.hr_payslip.state, "done", "State not changed!")
+
+    def test_payslip_run_accounting(self):
+        """Test accounting entries for a payslip run (grouped payslips)."""
+        # Create payslips for both employees
+        payslip_john = self.create_payslip(self.hr_employee_john, self.payslip_run)
+        payslip_jane = self.create_payslip(self.hr_employee_jane, self.payslip_run)
+
+        # Compute payslips
+        payslip_john.compute_sheet()
+        payslip_jane.compute_sheet()
+
+        # Confirm the payslip run
+        self.payslip_run.action_validate()
+
+        # Check that a single accounting entry was created for the run
+        self.assertTrue(
+            self.payslip_run.move_id, "No accounting entry created for payslip run"
+        )
+        self.assertEqual(
+            payslip_john.move_id,
+            self.payslip_run.move_id,
+            "Incorrect move assigned to John's payslip",
+        )
+        self.assertEqual(
+            payslip_jane.move_id,
+            self.payslip_run.move_id,
+            "Incorrect move assigned to Jane's payslip",
+        )
+
+        # Verify the contents of the accounting entry
+        move_lines = self.payslip_run.move_id.line_ids
+        self.assertTrue(len(move_lines) > 0, "No move lines created for payslip run")
+
+        # Check that the move lines balance out to zero
+        total_debit = sum(line.debit for line in move_lines)
+        total_credit = sum(line.credit for line in move_lines)
+        self.assertAlmostEqual(
+            total_debit, total_credit, msg="Move lines do not balance for payslip run"
+        )
+
+    def test_different_salary_rules(self):
+        """Test accounting entries for different types of salary rules."""
+        # Create a new salary rule for a bonus
+        bonus_rule = self.env["hr.salary.rule"].create(
+            {
+                "name": "Bonus",
+                "code": "BONUS",
+                "category_id": self.ref("payroll.ALW"),
+                "sequence": 5,
+                "amount_select": "fix",
+                "amount_fix": 1000.0,
+                "account_debit": self.account_debit.id,
+                "account_credit": self.account_credit.id,
+            }
+        )
+
+        # Add the bonus rule to the structure
+        self.hr_structure_softwaredeveloper.write({"rule_ids": [(4, bonus_rule.id)]})
+
+        # Verify the rule was added to the structure
+        self.assertIn(
+            bonus_rule,
+            self.hr_structure_softwaredeveloper.rule_ids,
+            "Bonus rule not added to the structure",
+        )
+
+        # Create and compute a payslip
+        payslip = self.create_payslip(self.hr_employee_john)
+        payslip.compute_sheet()
+
+        # Check if the bonus line is in the payslip lines
+        bonus_payslip_line = payslip.line_ids.filtered(lambda l: l.code == "BONUS")
+        self.assertTrue(bonus_payslip_line, "Bonus line not found in payslip lines")
+        self.assertEqual(
+            bonus_payslip_line.total, 1000.0, "Incorrect bonus amount in payslip"
+        )
+
+        # Confirm the payslip
+        payslip.action_payslip_done()
+
+        # Log debugging information
+        _logger.info(
+            "Payslip lines: %s", payslip.line_ids.mapped(lambda l: (l.name, l.total))
+        )
+        _logger.info(
+            "Move lines: %s",
+            payslip.move_id.line_ids.mapped(lambda l: (l.name, l.debit, l.credit)),
+        )
+
+        # Check that the bonus is reflected in the accounting entry
+        bonus_line = payslip.move_id.line_ids.filtered(lambda l: l.name == "Bonus")
+        self.assertTrue(bonus_line, "Bonus not reflected in accounting entry")
+        self.assertEqual(
+            bonus_line.debit, 1000.0, "Incorrect bonus amount in accounting entry"
+        )
+
+    def test_zero_amount_payslip(self):
+        """Test payslip with zero amount."""
+        # Modify the contract to have zero wage
+        self.hr_contract_john.wage = 0.0
+
+        # Create and compute a payslip
+        payslip = self.create_payslip(self.hr_employee_john)
+        payslip.compute_sheet()
+
+        # Confirm the payslip
+        payslip.action_payslip_done()
+
+        # Check that no accounting entry was created
+        self.assertFalse(
+            payslip.move_id, "Accounting entry created for zero amount payslip"
+        )
+
+    def test_negative_amount_payslip(self):
+        """Test payslip with negative amount."""
+        # Create a negative salary rule (e.g., for recovery of overpayment)
+        negative_rule = self.env["hr.salary.rule"].create(
+            {
+                "name": "Recovery",
+                "code": "RECOV",
+                "category_id": self.ref("payroll.DED"),
+                "sequence": 100,
+                "amount_select": "fix",
+                "amount_fix": -500.0,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "account_debit": self.account_credit.id,  # Reversed for negative amount
+                "account_credit": self.account_debit.id,  # Reversed for negative amount
+            }
+        )
+
+        # Add the negative rule to the structure
+        self.hr_structure_softwaredeveloper.write({"rule_ids": [(4, negative_rule.id)]})
+
+        # Create and compute a payslip
+        payslip = self.create_payslip(self.hr_employee_john)
+        payslip.compute_sheet()
+
+        # Confirm the payslip
+        payslip.action_payslip_done()
+
+        # Check that the negative amount is correctly reflected in the accounting entry
+        recovery_line = payslip.move_id.line_ids.filtered(
+            lambda l: l.name == "Recovery"
+        )
+        self.assertTrue(recovery_line, "Recovery not reflected in accounting entry")
+        self.assertEqual(
+            recovery_line.credit, 500.0, "Incorrect recovery amount in accounting entry"
+        )
+
+    def create_payslip(self, employee, payslip_run=None):
+        """Helper method to create a payslip."""
+        payslip = self.env["hr.payslip"].create(
+            {
+                "name": f"Payslip - {employee.name}",
+                "employee_id": employee.id,
+                "payslip_run_id": payslip_run and payslip_run.id or False,
+                "date_from": fields.Date.today(),
+                "date_to": fields.Date.today()
+                + relativedelta.relativedelta(months=+1, day=1, days=-1),
+                "contract_id": employee.contract_id.id,
+                "struct_id": employee.contract_id.struct_id.id,
+            }
+        )
+        return payslip
