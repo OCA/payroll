@@ -208,8 +208,10 @@ class HrSalaryRule(models.Model):
         :rtype: {"name": string, "quantity": float, "rate": float, "amount": float}
         """
         self.ensure_one()
-        method = f"_compute_rule_{self.amount_select}"
-        return api.call_kw(self, method, [self.ids, localdict], {})
+        method = "_compute_rule_{}".format(self.amount_select)
+        return api.call_kw(
+            self, method, [self.ids, localdict], {"context": self.env.context}
+        )
 
     def _compute_rule_fix(self, localdict):
         try:

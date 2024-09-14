@@ -471,7 +471,10 @@ class HrPayslip(models.Model):
     def _get_tools_dict(self):
         # _get_tools_dict() is intended to be inherited by other private modules
         # to add tools or python libraries available in localdict
-        return {"math": math}  # "math" object is useful for doing calculations
+        return {
+            "math": math,
+            "datetime": datetime,
+        }  # "math" object is useful for doing calculations
 
     def _get_baselocaldict(self, contracts):
         self.ensure_one()
@@ -533,10 +536,10 @@ class HrPayslip(models.Model):
         total = values["quantity"] * values["rate"] * values["amount"] / 100.0
         values["total"] = total
         # set/overwrite the amount computed for this rule in the localdict
-        if rule.code:
-            localdict[rule.code] = total
-            localdict["rules"].dict[rule.code] = rule
-            localdict["result_rules"].dict[rule.code] = BaseBrowsableObject(values)
+        code = rule.code or rule.id
+        localdict[code] = total
+        localdict["rules"].dict[code] = rule
+        localdict["result_rules"].dict[code] = BaseBrowsableObject(values)
         # sum the amount for its salary category
         localdict = self._sum_salary_rule_category(
             localdict, rule.category_id, total - previous_amount
@@ -781,3 +784,18 @@ class HrPayslip(models.Model):
             return line[0].total
         else:
             return 0.0
+
+    def line_sum_where(self, field_name, value, rules, result_rules):
+        """
+        The method may be used in salary rule code.
+        It will sum the total of the previously computed rules
+        where the given field has the given value.
+        E.g.: total_seq_10 = payslip.line_sum_where("sequence", 10, rules, result_rules)
+        """
+        return sum(
+            [
+                result_rules.dict[code].dict["total"]
+                for code, rule in rules.dict.items()
+                if getattr(rule, field_name) == value
+            ]
+        )
