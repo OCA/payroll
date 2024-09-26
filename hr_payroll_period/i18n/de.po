@@ -100,6 +100,13 @@ msgid "Contract"
 msgstr "Vertrag"
 
 #. module: hr_payroll_period
+#: model:ir.actions.server,name:hr_payroll_period.ir_cron_hr_payroll_period_ir_actions_server
+#: model:ir.cron,cron_name:hr_payroll_period.ir_cron_hr_payroll_period
+#: model:ir.cron,name:hr_payroll_period.ir_cron_hr_payroll_period
+msgid "Create Next Fiscal Year"
+msgstr ""
+
+#. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 msgid "Create Periods"
 msgstr ""
