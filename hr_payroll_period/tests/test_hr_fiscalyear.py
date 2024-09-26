@@ -1,6 +1,8 @@
 # Copyright 2015 Savoir-faire Linux. All Rights Reserved.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from datetime import date
+from datetime import date, datetime
+
+from dateutil.relativedelta import relativedelta
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
@@ -344,3 +346,48 @@ class TestHrFiscalyear(common.TransactionCase):
         self.assertEqual(periods[2].date_payment, date(2015, 5, 4))
         self.assertEqual(periods[22].date_payment, date(2016, 3, 5))
         self.assertEqual(periods[23].date_payment, date(2016, 3, 19))
+
+    def test_cron_create_next_fiscal_year(self):
+        # if we are in 2024, it should create the periods for 2025
+        current_year = datetime.now().year
+        current_fiscal_year = self.fy_model.search(
+            [
+                ("date_start", "=", f"{current_year}-01-01"),
+                ("date_end", "=", f"{current_year}-12-31"),
+            ],
+            limit=1,
+        )
+
+        # If 2024 doesn't exist, create it
+        if not current_fiscal_year:
+            current_fiscal_year = self.create_fiscal_year(
+                {
+                    "date_start": f"{current_year}-01-01",
+                    "date_end": f"{current_year}-12-31",
+                }
+            )
+            current_fiscal_year.create_periods()
+        next_fiscal_year = self.env["hr.fiscalyear"].cron_create_next_fiscal_year()
+        periods = self.get_periods(next_fiscal_year)
+        # Ensure the periods are continuous and within the fiscal year dates
+        for i, period in enumerate(periods):
+            if i == 0:
+                self.assertEqual(period.date_start, next_fiscal_year.date_start)
+            else:
+                self.assertEqual(
+                    period.date_start, periods[i - 1].date_end + relativedelta(days=1)
+                )
+            if i == len(periods) - 1:
+                self.assertEqual(period.date_end, next_fiscal_year.date_end)
+        # Check that the first period of next fiscal year starts 1 day after
+        current_year_periods = self.get_periods(current_fiscal_year)
+        last_period_current_year = current_year_periods[-1]
+        first_period_next_year = periods[0]
+        self.assertEqual(
+            first_period_next_year.date_start,
+            last_period_current_year.date_end + relativedelta(days=1),
+        )
+        # Check that the first period end is on last of January
+        self.assertEqual(
+            first_period_next_year.date_end, datetime(current_year + 1, 1, 31).date()
+        )
