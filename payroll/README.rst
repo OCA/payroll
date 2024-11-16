@@ -65,6 +65,7 @@ Contributors
 -  Hilar AK <hilarak@gmail.com>
 -  Nimarosa (Nicolas Rodriguez) <nicolarsande@gmail.com>
 -  Henrik Norlin (@appstogrow)
+-  Régis Pirard <regis.pirard@tincid.com>
 
 Maintainers
 -----------

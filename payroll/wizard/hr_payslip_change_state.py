@@ -83,7 +83,7 @@ class HrPayslipChangeState(models.TransientModel):
         return {
             "domain": "[('id','in', [" + ",".join(map(str, record_ids)) + "])]",
             "name": _("Payslips"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "hr.payslip",
             "view_id": False,
             "context": False,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_payslip_line_view_tree" model="ir.ui.view">
-        <field name="name">hr.payslip.line.tree</field>
+        <field name="name">hr.payslip.line.list</field>
         <field name="model">hr.payslip.line</field>
         <field name="arch" type="xml">
-            <tree editable="bottom" decoration-info="total == 0">
+            <list editable="bottom" decoration-info="total == 0">
                 <field name="allow_edit_payslip_lines" column_invisible="1" />
                 <field name="category_id" />
                 <field name="employee_id" column_invisible="1" />
@@ -18,7 +18,7 @@
                 <field name="amount_select" column_invisible="1" />
                 <field name="register_id" column_invisible="1" />
                 <field name="payslip_run_id" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="hr_payslip_line_view_form" model="ir.ui.view">
@@ -62,8 +62,8 @@
                     <page name="child_ids" string="Child Line Details">
                         <group>
                             <field name="child_ids" readonly="1" nolabel="1">
-                                <tree
-                                    editable="false"
+                                <list
+                                    edit="false"
                                     decoration-info="total == 0"
                                     decoration-bf="parent_line_id == False"
                                 >
@@ -82,7 +82,7 @@
                                         decoration-success="total > 0 and parent_line_id == False"
                                         sum="total_net"
                                     />
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </page>
@@ -155,14 +155,14 @@
     >
         <field name="name">Payslip Computation Details</field>
         <field name="res_model">hr.payslip.line</field>
-        <field name="view_mode">tree,pivot,form</field>
+        <field name="view_mode">list,pivot,form</field>
         <field name="domain">[('slip_id', 'in', active_ids)]</field>
         <field name="binding_model_id" ref="model_hr_payslip" />
     </record>
     <record id="action_get_batch_payslip_lines" model="ir.actions.act_window">
         <field name="name">Batch Payslip Lines</field>
         <field name="res_model">hr.payslip.line</field>
-        <field name="view_mode">pivot,tree,form</field>
+        <field name="view_mode">pivot,list,form</field>
         <field name="domain">[('payslip_run_id', 'in', active_ids)]</field>
         <field name="binding_model_id" ref="model_hr_payslip_run" />
     </record>

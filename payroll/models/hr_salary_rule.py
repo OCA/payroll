@@ -37,7 +37,7 @@ class HrSalaryRule(models.Model):
         help="Used to display the salary rule on payslip.",
     )
     parent_rule_id = fields.Many2one(
-        "hr.salary.rule", string="Parent Salary Rule", index=True
+        comodel_name="hr.salary.rule", string="Parent Salary Rule", index=True
     )
     company_id = fields.Many2one(
         "res.company",
@@ -167,10 +167,15 @@ class HrSalaryRule(models.Model):
 
     @api.constrains("parent_rule_id")
     def _check_parent_rule_id(self):
-        if not self._check_recursion(parent="parent_rule_id"):
-            raise ValidationError(
-                _("Error! You cannot create recursive hierarchy of Salary Rules.")
-            )
+        if self.env.registry[self._name]._name != "hr.salary.rule":
+            # HrPayslipLine inherits from "hr.salary.rule" and we don't
+            # want to do this check on a payslip line
+            return
+        for rule in self:
+            if rule._has_cycle(field_name="parent_rule_id"):
+                raise ValidationError(
+                    _("Error! You cannot create recursive hierarchy of Salary Rules.")
+                )
 
     def _recursive_search_of_rules(self):
         """

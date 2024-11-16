@@ -3,7 +3,7 @@
     <record id="open_payroll_modules" model="ir.actions.act_window">
         <field name="name">Payroll</field>
         <field name="res_model">ir.module.module</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field
             name="context"
             eval="{'search_default_category_id': ref('base.module_category_payroll_localization'), 'search_default_name': 'Payroll'}"

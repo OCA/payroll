@@ -3,7 +3,7 @@
 import time
 from datetime import date, datetime
 
-from odoo.tests.common import Form
+from odoo.tests import Form
 
 from .common import TestPayslipBase
 
@@ -20,7 +20,7 @@ class TestWorkedDays(TestPayslipBase):
             {
                 "name": "TestLeaveType",
                 "code": "TESTLV",
-                "allocation_validation_type": "no",
+                "allocation_validation_type": "no_validation",
                 "leave_validation_type": "no_validation",
             }
         )

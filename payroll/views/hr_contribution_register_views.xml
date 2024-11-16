@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_contribution_register_view_tree" model="ir.ui.view">
-        <field name="name">hr.contribution.register.tree</field>
+        <field name="name">hr.contribution.register.list</field>
         <field name="model">hr.contribution.register</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
                     options="{'no_create': True}"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="hr_contribution_register_view_kanban" model="ir.ui.view">
@@ -20,7 +20,7 @@
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_content oe_kanban_global_click">
                             <div class="row">
                                 <div class="col-12">
@@ -72,7 +72,7 @@
     <record id="hr_contribution_register_action" model="ir.actions.act_window">
         <field name="name">Contribution Registers</field>
         <field name="res_model">hr.contribution.register</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Add a new contribution register</p>
             <p>
