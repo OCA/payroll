@@ -5,7 +5,6 @@
         <field name="model">hr.payslip.line</field>
         <field name="arch" type="xml">
             <tree editable="bottom" decoration-info="total == 0">
-
                 <field name="allow_edit_payslip_lines" column_invisible="1" />
                 <field name="category_id" />
                 <field name="employee_id" column_invisible="1" />

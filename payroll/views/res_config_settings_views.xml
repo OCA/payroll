@@ -76,7 +76,6 @@
                             <field name="require_code_and_category" />
                         </setting>
                     </block>
-
                 </app>
             </xpath>
         </field>
