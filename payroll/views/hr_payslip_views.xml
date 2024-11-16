@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_payslip_view_tree" model="ir.ui.view">
-        <field name="name">hr.payslip.tree</field>
+        <field name="name">hr.payslip.list</field>
         <field name="model">hr.payslip</field>
         <field name="arch" type="xml">
-            <tree decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
+            <list decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
                 <field name="number" readonly="1" decoration-bf="1" />
                 <field name="employee_id" readonly="1" />
                 <field name="name" />
@@ -27,7 +27,7 @@
                 />
                 <field name="payslip_run_id" column_invisible="1" />
                 <field name="message_needaction" column_invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="hr_payslip_view_kanban" model="ir.ui.view">
@@ -36,7 +36,7 @@
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_content oe_kanban_global_click">
                             <div class="row">
                                 <div class="col-6">
@@ -183,7 +183,7 @@
                                 name="worked_days_line_ids"
                                 readonly="state != 'draft'"
                             >
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
                                     <field name="number_of_days" string="Days" />
@@ -194,7 +194,7 @@
                                         context="{'default_employee_id': parent.employee_id}"
                                     />
                                     <field name="sequence" column_invisible="True" />
-                                </tree>
+                                </list>
                                 <form string="Worked Day">
                                     <group col="4">
                                         <field name="name" />
@@ -213,7 +213,7 @@
                                 nolabel="1"
                                 readonly="state != 'draft'"
                             >
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="name" />
                                     <field name="code" />
                                     <field name="amount_qty" />
@@ -224,7 +224,7 @@
                                         context="{'default_employee_id': parent.employee_id}"
                                     />
                                     <field name="sequence" column_invisible="True" />
-                                </tree>
+                                </list>
                                 <form string="Payslip Line">
                                     <group col="4">
                                         <field name="name" />
@@ -252,7 +252,7 @@
                                 colspan="4"
                                 nolabel="1"
                             >
-                                <tree
+                                <list
                                     decoration-info="total == 0 and appears_on_payslip == True"
                                     decoration-bf="parent_rule_id == False"
                                     decoration-it="parent_rule_id != False"
@@ -284,7 +284,7 @@
                                         decoration-success="total > 0 and parent_rule_id == False"
                                         readonly="1"
                                     />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="accounting" string="Accounting Information">
@@ -315,11 +315,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -358,7 +354,7 @@
                     string="Date"
                     name="date_filter"
                     date="date_to"
-                    default_period="last_month"
+                    default_period="month-1"
                 />
                 <separator />
                 <filter
@@ -396,13 +392,13 @@
     <record id="hr_payslip_action" model="ir.actions.act_window">
         <field name="name">Employee Payslips</field>
         <field name="res_model">hr.payslip</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="hr_payslip_view_search" />
     </record>
     <record id="hr_payslip_action_employee" model="ir.actions.act_window">
         <field name="res_model">hr.payslip</field>
         <field name="name">Payslips</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">
             {
                 'search_default_employee_id': [active_id],
