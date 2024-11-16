@@ -75,10 +75,10 @@
                     role="alert"
                     invisible="amount_select != 'code'"
                 >
-            <p>
+                    <p>
                 If you have doubts about coding salary rules, check the "Help" tab in this form.
             </p>
-        </div>
+                </div>
                 <sheet>
                     <label for="name" class="oe_edit_only" />
                     <h1>
@@ -211,7 +211,7 @@
                             <div class="alert alert-info" role="alert">
                                 <p>
                                     Child rule functionality is useful when you need other rules to be computed before the parent one. <br
-                                    />
+                                />
                                     This means that all salary rules declared as childs (parent of one rule) will be added to the computation
                                     if its parent rule is included in the salary structure. So child rules will only be computed if it's parent is
                                     computed. <br />
@@ -244,51 +244,51 @@
                                 <ul>
                                     <li>
                                         <code
-                                        >payslip:</code> contains current payslip object data (hr.payslip)
+                                    >payslip:</code> contains current payslip object data (hr.payslip)
                                     </li>
                                     <li>
                                         <code
-                                        >payslips:</code> contains payslips data (Payslips - Browsable Object)
+                                    >payslips:</code> contains payslips data (Payslips - Browsable Object)
                                     </li>
                                     <li>
                                         <code
-                                        >employee:</code> contains current employee object data (hr.employee)
+                                    >employee:</code> contains current employee object data (hr.employee)
                                     </li>
                                     <li>
                                         <code
-                                        >contract:</code> contains current contract object data (hr.contract)
+                                    >contract:</code> contains current contract object data (hr.contract)
                                     </li>
                                     <li>
                                         <code
-                                        >rules:</code> contains the rules code (previusly computed)
+                                    >rules:</code> contains the rules code (previusly computed)
                                     </li>
                                     <li>
                                         <code
-                                        >categories:</code> contains the sum of amount of all rules belonging to that category
+                                    >categories:</code> contains the sum of amount of all rules belonging to that category
                                     </li>
                                     <li>
                                         <code
-                                        >worked_days:</code> contains the computed worked days data
+                                    >worked_days:</code> contains the computed worked days data
                                     </li>
                                     <li>
                                         <code
-                                        >inputs:</code> contains the computed input data
+                                    >inputs:</code> contains the computed input data
                                     </li>
                                     <li>
                                         <code
-                                        >payroll:</code> contains miscellaneous values related to payroll
+                                    >payroll:</code> contains miscellaneous values related to payroll
                                     </li>
                                     <li>
                                         <code
-                                        >current_contract:</code> contains values related/calculated for current contract
+                                    >current_contract:</code> contains values related/calculated for current contract
                                     </li>
                                     <li>
                                         <code
-                                        >result_rules:</code> contains the values of previusly computed lines (qty, rate, amount, total)
+                                    >result_rules:</code> contains the values of previusly computed lines (qty, rate, amount, total)
                                     </li>
                                     <li>
                                         <code
-                                        >tools:</code> contains tools and libraries which help with mathematical operations
+                                    >tools:</code> contains tools and libraries which help with mathematical operations
                                     </li>
                                 </ul>
                                 <p>
@@ -299,19 +299,19 @@
                                 <ul>
                                     <li>
                                         <code
-                                        >result:</code> the returned value should be in this variable. It matches with "amount" column.
+                                    >result:</code> the returned value should be in this variable. It matches with "amount" column.
                                     </li>
                                     <li>
                                         <code
-                                        >result_rate:</code> the rate that should be applied to "result"
+                                    >result_rate:</code> the rate that should be applied to "result"
                                     </li>
                                     <li>
                                         <code
-                                        >result_qty:</code> the quantity of units that will be multiplied to "result"
+                                    >result_qty:</code> the quantity of units that will be multiplied to "result"
                                     </li>
                                     <li>
                                         <code
-                                        >result_name:</code> overrides the current name of the rule and allows to make dynamic names
+                                    >result_name:</code> overrides the current name of the rule and allows to make dynamic names
                                     </li>
                                 </ul>
                                 <h3>Examples</h3>
