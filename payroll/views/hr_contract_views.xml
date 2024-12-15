@@ -5,7 +5,7 @@
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='salary_info']" position="inside">
+            <xpath expr="//group[@name='salary']" position="inside">
                 <field name="schedule_pay" />
                 <field name="struct_id" required="1" />
                 <field name="company_id" groups="base.group_multi_company" />
