@@ -1,0 +1,90 @@
+<odoo>
+    <!-- Master Data Values -->
+    <record model="hr.data.type.value" id="value_colcontr1">
+        <field name="type_id" ref="data_colcontr" />
+        <field name="name">General Labor Law</field>
+    </record>
+    <record model="hr.data.type.value" id="value_colcontr2">
+        <field name="type_id" ref="data_colcontr" />
+        <field name="name">Collective Contract</field>
+    </record>
+    <record model="hr.data.type.value" id="value_profcateg1">
+        <field name="type_id" ref="data_profcateg" />
+        <field name="name">Category A</field>
+    </record>
+    <record model="hr.data.type.value" id="value_profcateg2">
+        <field name="type_id" ref="data_profcateg" />
+        <field name="name">Category B</field>
+    </record>
+
+    <record model="hr.data.type.value" id="value_paygrade1">
+        <field name="type_id" ref="data_paygrade" />
+        <field name="name">Grade 1</field>
+    </record>
+    <record model="hr.data.type.value" id="value_paygrade2">
+        <field name="type_id" ref="data_paygrade" />
+        <field name="name">Grade 2</field>
+    </record>
+
+    <record model="hr.data.type.value" id="value_ss1">
+        <field name="type_id" ref="data_sspos" />
+        <field name="name">SS Position 1</field>
+    </record>
+    <record model="hr.data.type.value" id="value_ss2">
+        <field name="type_id" ref="data_sspos" />
+        <field name="name">SS Position 2</field>
+    </record>
+
+    <record model="hr.data.type.value" id="value_tax1">
+        <field name="type_id" ref="data_taxpos" />
+        <field name="name">Tax Position 1</field>
+    </record>
+    <record model="hr.data.type.value" id="value_tax2">
+        <field name="type_id" ref="data_taxpos" />
+        <field name="name">Tax Position 2</field>
+    </record>
+
+    <!-- Employee Data Values -->
+    <record model="hr.employee.data.value" id="contract_value_contrcol">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_colcontr" />
+        <field name="value_id" ref="value_colcontr1" />
+        <field name="date_start">2019-01-01</field>
+    </record>
+    <record model="hr.employee.data.value" id="contract_value1">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_profcateg" />
+        <field name="value_id" ref="value_profcateg1" />
+        <field name="date_start">2019-01-01</field>
+    </record>
+    <record model="hr.employee.data.value" id="contract_value2">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_paygrade" />
+        <field name="value_id" ref="value_paygrade1" />
+        <field name="date_start">2019-01-01</field>
+    </record>
+    <record model="hr.employee.data.value" id="contract_value3">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_sspos" />
+        <field name="value_id" ref="value_ss1" />
+        <field name="date_start">2019-01-01</field>
+    </record>
+    <record model="hr.employee.data.value" id="contract_value4">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_taxpos" />
+        <field name="value_id" ref="value_tax1" />
+        <field name="date_start">2019-01-01</field>
+    </record>
+    <record model="hr.employee.data.value" id="contract_value_sal1">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_base_salary" />
+        <field name="value_float">3000.00</field>
+        <field name="date_start">2019-01-01</field>
+    </record>
+    <record model="hr.employee.data.value" id="contract_value_sal2">
+        <field name="contract_id" ref="hr_contract.hr_contract_mit" />
+        <field name="type_id" ref="data_exempt" />
+        <field name="value_bool">True</field>
+        <field name="date_start">2019-01-01</field>
+    </record>
+</odoo>
