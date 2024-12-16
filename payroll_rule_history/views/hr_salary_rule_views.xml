@@ -1,0 +1,85 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_salary_rule_history_view">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_tree_children" />
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="date_start" optional="show" />
+                <field name="date_end" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_salary_rule_view_form">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
+        <field name="arch" type="xml">
+            <label for="name" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        name="action_rule_history"
+                        class="oe_stat_button"
+                        icon="fa-money"
+                        type="object"
+                    >
+                        <span class="o_stat_text">Rule History</span>
+                        <!-- TODO:
+                        <field name="history_rule_count" widget="statinfo" string="Rule History" />
+                        -->
+                    </button>
+                </div>
+            </label>
+
+            <field name="appears_on_payslip" position="after">
+                <field
+                    name="has_history"
+                    widget="boolean_toggle"
+                    invisible="base_rule_id"
+                />
+                <field name="base_rule_id" invisible="not base_rule_id" />
+                <field name="date_start" invisible="not base_rule_id" />
+                <field name="date_end" invisible="not base_rule_id" />
+            </field>
+
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="invisible">has_history</attribute>
+            </xpath>
+            <page name="rules" position="attributes">
+                <attribute name="invisible">has_history</attribute>
+            </page>
+            <page name="inputs" position="attributes">
+                <attribute name="invisible">has_history</attribute>
+            </page>
+            <page name="help" position="attributes">
+                <attribute name="invisible">has_history</attribute>
+            </page>
+            <page name="rules" position="after">
+                <page
+                    name="rule_history"
+                    string="Rule History"
+                    invisible="not has_history"
+                >
+                    <field name="history_rule_ids" />
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_salary_rule_view_search">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_search" />
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter
+                    name="is_base_rule"
+                    string="Is Base Rule"
+                    domain="[('base_rule_id', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="payroll.action_salary_rule_form" model="ir.actions.act_window">
+        <field name="context">{"search_default_is_base_rule": 1}</field>
+    </record>
+</odoo>
