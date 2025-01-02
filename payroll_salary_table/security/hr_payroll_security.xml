@@ -1,0 +1,19 @@
+<odoo noupdate="1">
+    <!-- Company-restricted Records -->
+    <record model="ir.rule" id="hr_salary_table_company_rule">
+        <field name="name">Salary Table: multi-company</field>
+        <field name="model_id" ref="model_hr_salary_table" />
+        <field name="global" eval="True" />
+        <field name="domain_force">
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+        </field>
+    </record>
+    <record model="ir.rule" id="hr_salary_table_line_company_rule">
+        <field name="name">Salary Table Line: multi-company</field>
+        <field name="model_id" ref="model_hr_salary_table_line" />
+        <field name="global" eval="True" />
+        <field name="domain_force">
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+        </field>
+    </record>
+</odoo>
