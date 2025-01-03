@@ -69,6 +69,7 @@ Contributors
 ------------
 
 - Nimarosa (Nicolas Rodriguez) <nicolarsande@gmail.com>
+- ``Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>``\ \_
 
 Maintainers
 -----------
