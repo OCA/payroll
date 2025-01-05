@@ -68,6 +68,7 @@
             </kanban>
         </field>
     </record>
+
     <record id="hr_payslip_view_form" model="ir.ui.view">
         <field name="name">hr.payslip.form</field>
         <field name="model">hr.payslip</field>
@@ -151,30 +152,39 @@
                             />
                         </h1>
                     </div>
-                    <group col="4">
-                        <label for="date_from" string="Period" />
-                        <div>
+                    <group name="top">
+                        <group name="left">
+                            <label for="date_from" string="Period" />
+                            <div>
+                                <field
+                                    name="date_from"
+                                    string="period"
+                                    widget="daterange"
+                                    class="oe_inline"
+                                    options="{'end_date_field': 'date_to'}"
+                                    readonly="state != 'draft'"
+                                />
+                            </div>
+                            <field name="date_to" invisible="True" />
                             <field
-                                name="date_from"
-                                widget="daterange"
-                                class="oe_inline"
-                                options="{'end_date_field': 'date_to'}"
+                                name="contract_id"
+                                domain="[('employee_id','=',employee_id),('date_start','&lt;=',date_to),'|',('date_end','&gt;=',date_from),('date_end','=',False)]"
+                                context="{'default_employee_id': employee_id}"
                                 readonly="state != 'draft'"
                             />
-                        </div>
-                        <field name="date_to" column_invisible="True" />
-                        <field
-                            name="contract_id"
-                            domain="[('employee_id','=',employee_id),('date_start','&lt;=',date_to),'|',('date_end','&gt;=',date_from),('date_end','=',False)]"
-                            context="{'default_employee_id': employee_id}"
-                            readonly="state != 'draft'"
-                        />
-                        <field name="number" />
-                        <field name="struct_id" required="contract_id" force_save="1" />
-                        <field name="name" force_save="1" />
-                        <field name="credit_note" readonly="state != 'draft'" />
-                        <field name="refunded_id" invisible="not refunded_id" />
-                        <field name="compute_date" invisible="not compute_date" />
+                            <field name="number" />
+                            <field
+                                name="struct_id"
+                                required="contract_id"
+                                force_save="1"
+                            />
+                        </group>
+                        <group name="right">
+                            <field name="name" force_save="1" />
+                            <field name="credit_note" readonly="state != 'draft'" />
+                            <field name="refunded_id" invisible="not refunded_id" />
+                            <field name="compute_date" invisible="not compute_date" />
+                        </group>
                     </group>
                     <notebook>
                         <page name="input" string="Worked Days &amp; Inputs">
@@ -319,6 +329,7 @@
             </form>
         </field>
     </record>
+
     <record id="hr_payslip_view_search" model="ir.ui.view">
         <field name="name">hr.payslip.select</field>
         <field name="model">hr.payslip</field>
