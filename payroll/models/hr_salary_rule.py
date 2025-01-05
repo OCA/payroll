@@ -1,5 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import traceback
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
@@ -247,8 +249,8 @@ class HrSalaryRule(models.Model):
     def _compute_rule_code(self, localdict):
         try:
             safe_eval(self.amount_python_compute, localdict, mode="exec", nocopy=True)
-            return self._get_rule_dict(localdict)
         except Exception as ex:
+            exc_text = "".join(traceback.format_exception(ex))
             raise UserError(
                 _(
                     """
@@ -262,9 +264,10 @@ Here is the error received:
                     "nm": self.name,
                     "code": self.code,
                     "ee": localdict["employee"].name,
-                    "err": repr(ex),
+                    "err": exc_text,
                 }
             ) from ex
+        return self._get_rule_dict(localdict)
 
     def _get_rule_dict(self, localdict):
         name = localdict.get("result_name") or self.name
@@ -312,8 +315,8 @@ Here is the error received:
     def _satisfy_condition_python(self, localdict):
         try:
             safe_eval(self.condition_python, localdict, mode="exec", nocopy=True)
-            return "result" in localdict and localdict["result"] or False
         except Exception as ex:
+            exc_text = "".join(traceback.format_exception(ex))
             raise UserError(
                 _(
                     """
@@ -327,6 +330,7 @@ Here is the error received:
                     "nm": self.name,
                     "code": self.code,
                     "ee": localdict["employee"].name,
-                    "err": repr(ex),
+                    "err": exc_text,
                 }
             ) from ex
+        return "result" in localdict and localdict["result"] or False

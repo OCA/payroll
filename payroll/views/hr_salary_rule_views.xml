@@ -5,6 +5,7 @@
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <list>
+                <field name="sequence" optional="hide" />
                 <field name="name" />
                 <field name="code" decoration-bf="1" />
                 <field name="category_id" widget="badge" />
