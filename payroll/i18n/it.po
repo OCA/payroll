@@ -308,8 +308,8 @@ msgid ""
 "            "
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">"
-"\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+"\">\n"
 "            Spettabile <t t-out=\"object.employee_id.name\"/>,\n"
 "            <br/><br/>\n"
 "            trova in allegato la busta paga per <t t-out=\"object."
@@ -2452,6 +2452,11 @@ msgstr "Per generare le buste paga è necessario selezionare i dipendenti."
 msgid "You must set a contract to create a payslip line."
 msgstr ""
 "Per creare una riga per la busta paga è necessario definire un contratto."
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
+msgid "period"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__amount_percentage_base
