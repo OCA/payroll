@@ -11,36 +11,18 @@ logger = logging.getLogger(__name__)
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
+    journal_id = fields.Many2one(related="contract_id.journal_id", store=True)
     date = fields.Date(
         "Date Account",
-        states={"draft": [("readonly", False)]},
-        readonly=True,
         help="Keep empty to use the period of the validation(Payslip) date.",
-    )
-    journal_id = fields.Many2one(
-        "account.journal",
-        "Salary Journal",
-        readonly=True,
-        required=True,
-        states={"draft": [("readonly", False)]},
-        default=lambda self: self.env["account.journal"].search(
-            [("type", "=", "general")], limit=1
-        ),
     )
     move_id = fields.Many2one(
         "account.move", "Accounting Entry", readonly=True, copy=False
     )
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        if "journal_id" in self.env.context:
-            for vals in vals_list:
-                vals["journal_id"] = self.env.context.get("journal_id")
-        return super(HrPayslip, self).create(vals_list)
-
     @api.onchange("contract_id")
     def onchange_contract(self):
-        res = super(HrPayslip, self).onchange_contract()
+        res = super().onchange_contract()
         self.journal_id = (
             self.contract_id.journal_id.id
             or (not self.contract_id and self.default_get(["journal_id"])["journal_id"])
@@ -56,10 +38,10 @@ class HrPayslip(models.Model):
             else:
                 payslip.move_id._reverse_moves()
                 payslip.move_id = False
-        return super(HrPayslip, self).action_payslip_cancel()
+        return super().action_payslip_cancel()
 
     def action_payslip_done(self):
-        res = super(HrPayslip, self).action_payslip_done()
+        res = super().action_payslip_done()
 
         for slip in self:
             line_ids = []
@@ -154,8 +136,7 @@ class HrPayslip(models.Model):
                         0,
                         {
                             "name": line.name,
-                            "partner_id": line._get_partner_id(credit_account=False)
-                            or slip.employee_id.address_home_id.id,
+                            "partner_id": line._get_partner_id(credit_account=False),
                             "account_id": debit_account_id,
                             "journal_id": slip.journal_id.id,
                             "date": date,
@@ -177,8 +158,7 @@ class HrPayslip(models.Model):
                         0,
                         {
                             "name": line.name,
-                            "partner_id": line._get_partner_id(credit_account=True)
-                            or slip.employee_id.address_home_id.id,
+                            "partner_id": line._get_partner_id(credit_account=True),
                             "account_id": credit_account_id,
                             "journal_id": slip.journal_id.id,
                             "date": date,
@@ -249,7 +229,7 @@ class HrPayslip(models.Model):
                 slip.write({"move_id": move.id, "date": date})
                 move.action_post()
             else:
-                logger.warning(
+                logger.info(
                     f"Payslip {slip.number} did not generate any account move lines"
                 )
         return res
@@ -268,8 +248,7 @@ class HrPayslip(models.Model):
     ):
         return {
             "name": line.name,
-            "partner_id": line._get_partner_id(credit_account=False)
-            or slip.employee_id.address_home_id.id,
+            "partner_id": line._get_partner_id(credit_account=False),
             "account_id": debit_account_id,
             "journal_id": slip.journal_id.id,
             "date": date,
@@ -297,8 +276,7 @@ class HrPayslip(models.Model):
     ):
         return {
             "name": line.name,
-            "partner_id": line._get_partner_id(credit_account=True)
-            or slip.employee_id.address_home_id.id,
+            "partner_id": line._get_partner_id(credit_account=True),
             "account_id": credit_account_id,
             "journal_id": slip.journal_id.id,
             "date": date,
