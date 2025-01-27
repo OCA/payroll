@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="payroll.hr_employee_payroll" model="hr.employee">
-        <field name="address_home_id" ref="base.res_partner_main2" />
+        <field name="private_street">Abbey Road</field>
     </record>
 </odoo>
