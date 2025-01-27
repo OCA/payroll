@@ -7,15 +7,7 @@ from odoo import fields, models
 class HrSalaryRule(models.Model):
     _inherit = "hr.salary.rule"
 
-    company_id = fields.Many2one(
-        "res.company",
-        string="Company",
-        required=True,
-        default=lambda self: self.env.company,
-    )
-    analytic_account_id = fields.Many2one(
-        "account.analytic.account", "Analytic Account"
-    )
+    analytic_account_id = fields.Many2one("account.analytic.account")
     account_tax_id = fields.Many2one("account.tax", "Tax")
     account_debit = fields.Many2one(
         "account.account",
@@ -29,6 +21,5 @@ class HrSalaryRule(models.Model):
         domain=[("deprecated", "=", False)],
         company_dependent=True,
     )
-
     tax_base_id = fields.Many2one("hr.salary.rule", "Base")
     tax_line_ids = fields.One2many("hr.salary.rule", "tax_base_id", string="Tax lines")
