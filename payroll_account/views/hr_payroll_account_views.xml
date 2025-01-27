@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_payslip_view_form" model="ir.ui.view">
         <field name="name">hr.payslip.inherit.form</field>
@@ -6,7 +5,7 @@
         <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
         <field name="arch" type="xml">
             <field name="paid" position="after">
-                <field name="date" />
+                <field name="date" readonly="state != 'draft'" />
                 <field name="journal_id" required="1" />
                 <field name="move_id" readonly="1" />
             </field>
@@ -31,7 +30,7 @@
                             <field name="account_tax_id" />
                             <field
                                 name="tax_base_id"
-                                attrs="{'required': [('account_tax_id', '!=', False)]}"
+                                required="account_tax_id != False"
                             />
                         </group>
                     </group>
@@ -68,7 +67,7 @@
         </field>
     </record>
     <record id="hr_payslip_run_view_tree" model="ir.ui.view">
-        <field name="name">hr.payslip.run.tree.inherit</field>
+        <field name="name">hr.payslip.run.list.inherit</field>
         <field name="model">hr.payslip.run</field>
         <field name="inherit_id" ref="payroll.hr_payslip_run_view_tree" />
         <field name="arch" type="xml">
@@ -83,7 +82,7 @@
         <field name="inherit_id" ref="payroll.hr_payslip_run_view_form" />
         <field name="arch" type="xml">
             <field name="credit_note" position="before">
-                <field name="journal_id" />
+                <field name="journal_id" readonly="state != 'draft'" />
             </field>
         </field>
     </record>
