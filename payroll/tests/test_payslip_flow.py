@@ -161,6 +161,7 @@ class TestPayslipFlow(TestPayslipBase):
         context = {
             "model": "hr.contribution.register",
             "active_ids": [self.register_hra.id],
+            "discard_logo_check": True,
         }
         test_reports.try_report_action(
             self.env.cr,
@@ -169,6 +170,7 @@ class TestPayslipFlow(TestPayslipBase):
             context=context,
             our_module="payroll",
         )
+        # FIXME: try_report_action is not used anymore in the Odoo codebase
 
     def test_contract_qty(self):
         # I set the test rule to detect contract count
