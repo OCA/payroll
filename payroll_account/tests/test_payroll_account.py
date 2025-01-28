@@ -40,9 +40,6 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        self.hr_salary_rule_houserentallowance1 = self.ref(
-            "payroll.hr_salary_rule_houserentallowance1"
-        )
         self.account_debit = self.env["account.account"].create(
             {
                 "name": "Debit Account",
@@ -60,29 +57,6 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
-            {
-                "name": "Salary Structure for Software Developer",
-                "code": "SD",
-                "company_id": self.ref("base.main_company"),
-                "parent_id": self.ref("payroll.structure_base"),
-                "rule_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.ref("payroll.hr_salary_rule_houserentallowance1"),
-                            self.ref("payroll.hr_salary_rule_convanceallowance1"),
-                            self.ref("payroll.hr_salary_rule_professionaltax1"),
-                            self.ref("payroll.hr_salary_rule_providentfund1"),
-                            self.ref("payroll.hr_salary_rule_meal_voucher"),
-                            self.ref("payroll.hr_salary_rule_sales_commission"),
-                        ],
-                    )
-                ],
-            }
-        )
-
         self.account_journal = self.env["account.journal"].create(
             {
                 "name": "Vendor Bills - Test",
@@ -90,6 +64,19 @@ class TestPayrollAccount(common.TransactionCase):
                 "type": "purchase",
                 "default_account_id": self.account_debit.id,
                 "refund_sequence": True,
+            }
+        )
+
+        rules = [
+            self.ref("payroll.hr_salary_rule_houserentallowance1"),
+            self.ref("payroll.hr_salary_rule_providentfund1"),
+        ]
+        self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
+            {
+                "name": "Salary Structure for Software Developer",
+                "code": "SD",
+                "parent_id": self.ref("payroll.structure_base"),
+                "rule_ids": [(6, 0, rules)],
             }
         )
 
@@ -105,31 +92,23 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        self.hr_payslip = self.env["hr.payslip"].create(
-            {
-                "employee_id": self.hr_employee_john.id,
-                "journal_id": self.account_journal.id,
-            }
-        )
-
     def _update_account_in_rule(self, debit, credit):
-        rule_houserentallowance1 = self.env["hr.salary.rule"].browse(
-            self.hr_salary_rule_houserentallowance1
-        )
-        rule_houserentallowance1.write(
-            {"account_debit": debit, "account_credit": credit}
-        )
+        rule_HRA = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule_HRA.write({"account_debit": debit, "account_credit": credit})
 
-    def test_00_hr_payslip(self):
-        """checking the process of payslip."""
-
+    def _prepare_payslip(self, employee):
         date_from = datetime.now()
         date_to = datetime.now() + relativedelta.relativedelta(
             months=+1, day=1, days=-1
         )
-        res = self.hr_payslip.get_payslip_vals(
-            date_from, date_to, self.hr_employee_john.id
+        self.hr_payslip = self.env["hr.payslip"].create(
+            {
+                "employee_id": self.hr_employee_john.id,
+                "contract_id": self.hr_contract_john.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+            }
         )
+        res = self.hr_payslip.get_payslip_vals(date_from, date_to, employee.id)
         vals = {
             "struct_id": res["value"]["struct_id"],
             "contract_id": res["value"]["contract_id"],
@@ -141,6 +120,12 @@ class TestPayrollAccount(common.TransactionCase):
         vals["input_line_ids"] = [(0, 0, i) for i in res["value"]["input_line_ids"]]
         vals.update({"contract_id": self.hr_contract_john.id})
         self.hr_payslip.write(vals)
+        return self.hr_payslip
+
+    def test_00_hr_payslip(self):
+        """checking the process of payslip."""
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        self._prepare_payslip(self.hr_employee_john)
 
         # I assign the amount to Input data.
         payslip_input = self.env["hr.payslip.input"].search(
@@ -169,31 +154,16 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertEqual(self.hr_payslip.state, "cancel", "Payslip is rejected.")
         self.hr_payslip.action_payslip_draft()
 
-        self._update_account_in_rule(self.account_debit, self.account_credit)
         self.hr_payslip.action_payslip_done()
 
         # I verify that the Accounting Entries are created.
-        self.assertTrue(
-            self.hr_payslip.move_id, "Accounting Entries has not been created"
-        )
+        self.assertTrue(self.hr_payslip.move_id, "Accounting Entries should be created")
 
         # I verify that the payslip is in done state.
         self.assertEqual(self.hr_payslip.state, "done", "State not changed!")
 
     def test_hr_payslip_no_accounts(self):
-        date_from = datetime.now()
-        date_to = datetime.now() + relativedelta.relativedelta(
-            months=+1, day=1, days=-1
-        )
-        res = self.hr_payslip.get_payslip_vals(
-            date_from, date_to, self.hr_employee_john.id
-        )
-        vals = {
-            "struct_id": res["value"]["struct_id"],
-            "contract_id": self.hr_contract_john.id,
-            "name": res["value"]["name"],
-        }
-        self.hr_payslip.write(vals)
+        self._prepare_payslip(self.hr_employee_john)
 
         # I click on "Compute Sheet" button.
         self.hr_payslip.with_context(
