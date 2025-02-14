@@ -38,8 +38,5 @@ class HrContract(models.Model):
                  hierachy (parent=False first, then first level children and
                  so on) and without duplicates
         """
-        structures = self.mapped("struct_id")
-        if not structures:
-            return []
-        # YTI TODO return browse records
-        return list(set(structures._get_parent_structure().ids))
+        # TODO: remove, too simple and not used
+        return self.struct_id.get_structure_with_parents()
