@@ -175,13 +175,13 @@ class HrSalaryRule(models.Model):
 
     def _recursive_search_of_rules(self):
         """
-        @return: returns a list of tuple (id, sequence) which are all the
-                 children of the passed rule_ids
+        Returns the rules in reverse dependency order, children first
+        @return: recordset of rules
         """
-        children_rules = []
-        for rule in self.filtered(lambda rule: rule.child_ids):
-            children_rules += rule.child_ids._recursive_search_of_rules()
-        return [(rule.id, rule.sequence) for rule in self] + children_rules
+        if not self:
+            return self.env["hr.salary.rule"]
+        else:
+            return self.child_ids._recursive_search_of_rules() | self
 
     def _reset_localdict_values(self, localdict):
         localdict["result_name"] = None
