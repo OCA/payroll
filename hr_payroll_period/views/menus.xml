@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="hr_period_configure"
+        parent="payroll.payroll_menu_configuration"
+        name="Fiscal Years and Periods"
+        groups="payroll.group_payroll_manager"
+        sequence="50"
+    />
+</odoo>
