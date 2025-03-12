@@ -143,17 +143,13 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <label for="employee_id" class="oe_edit_only" />
                         <h1>
-                            <field
-                                name="employee_id"
-                                placeholder="Employee"
-                                readonly="state != 'draft'"
-                            />
+                            <field name="name" force_save="1" />
                         </h1>
                     </div>
                     <group name="top">
                         <group name="left">
+                            <field name="employee_id" readonly="state != 'draft'" />
                             <label for="date_from" string="Period" />
                             <div>
                                 <field
@@ -180,7 +176,6 @@
                             />
                         </group>
                         <group name="right">
-                            <field name="name" force_save="1" />
                             <field name="credit_note" readonly="state != 'draft'" />
                             <field name="refunded_id" invisible="not refunded_id" />
                             <field name="compute_date" invisible="not compute_date" />
