@@ -2288,37 +2288,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "Pēdējoreiz modificēts"
-
-#~ msgid "Input Data"
-#~ msgstr "Ievades Dati"
-
-#, python-format
-#~ msgid "Salary Slip of %s for %s"
-#~ msgstr "%s Alga priekš %s"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Draft Slip"
-#~ msgstr "Algas Lapas Melnraksts"
-
-#~ msgid "Total Working Days"
-#~ msgstr "Darba Dienas Kopā"
-
-#~ msgid "Details By Salary Rule Category"
-#~ msgstr "Detaļas pa Algas Noteikumu Kategorijām"
-
-#~ msgid "Account"
-#~ msgstr "Konts"
-
-#~ msgid "French Payroll"
-#~ msgstr "French Payroll"
-
-#~ msgid "Indian Payroll"
-#~ msgstr "Indian Payroll"
-
-#~ msgid "Refund: "
-#~ msgstr "Atmaksa: "

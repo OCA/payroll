@@ -2283,37 +2283,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
-
-#~ msgid "Input Data"
-#~ msgstr "ข้อมูลอินพุต"
-
-#, python-format
-#~ msgid "Salary Slip of %s for %s"
-#~ msgstr "สลิปเงินเดือน %s (%s)"
-
-#~ msgid "General"
-#~ msgstr "ทั่วไป"
-
-#~ msgid "Draft Slip"
-#~ msgstr "ร่างสลิป"
-
-#~ msgid "Total Working Days"
-#~ msgstr "วันทำงานทั้งหมด"
-
-#~ msgid "Details By Salary Rule Category"
-#~ msgstr "รายละเอียดตามหมวดเกณฑ์เงินเดือน"
-
-#~ msgid "Account"
-#~ msgstr "บัญชี"
-
-#~ msgid "French Payroll"
-#~ msgstr "French Payroll"
-
-#~ msgid "Indian Payroll"
-#~ msgstr "Indian Payroll"
-
-#~ msgid "Refund: "
-#~ msgstr "คืนเงิน:"

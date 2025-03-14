@@ -2281,18 +2281,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "Síðast breytt þann"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Account"
-#~ msgstr "Bókhaldslykill"
-
-#~ msgid "French Payroll"
-#~ msgstr "French Payroll"
-
-#~ msgid "Indian Payroll"
-#~ msgstr "Indian Payroll"
