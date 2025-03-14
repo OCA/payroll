@@ -2289,21 +2289,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "תאריך שינוי אחרון"
-
-#~ msgid "General"
-#~ msgstr "כללי"
-
-#~ msgid "Account"
-#~ msgstr "חשבון"
-
-#~ msgid "French Payroll"
-#~ msgstr "שכר צרפתי"
-
-#~ msgid "Indian Payroll"
-#~ msgstr "משכורות הודיות"
-
-#~ msgid "You cannot delete a payslip which is not draft or cancelled!"
-#~ msgstr "אינך יכול למחוק תלוש שכר שאינו טיוטה או מבוטל!"

@@ -2282,21 +2282,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "Τελευταία τροποποίηση στις"
-
-#~ msgid "General"
-#~ msgstr "Γενικά"
-
-#~ msgid "Account"
-#~ msgstr "Λογαριασμός"
-
-#~ msgid "French Payroll"
-#~ msgstr "Μισθοδοσία Γαλλίας"
-
-#~ msgid "Indian Payroll"
-#~ msgstr "Ινδία  - Μισθοδοσία"
-
-#~ msgid "Refund: "
-#~ msgstr "Επιστροφή:"

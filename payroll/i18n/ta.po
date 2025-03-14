@@ -2282,9 +2282,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#~ msgid "Last Modified on"
-#~ msgstr "கடைசியாக திருத்திய"
-
-#~ msgid "Account"
-#~ msgstr "கணக்கு"
