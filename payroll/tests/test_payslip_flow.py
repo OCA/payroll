@@ -243,15 +243,13 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_get_contracts_multiple(self):
-        self.sally.contract_ids[0].date_end = (
-            Date.today() - timedelta(days=1)
-        ).strftime("%Y-%m-%d")
+        self.sally.contract_ids[0].date_end = Date.today().strftime("%Y-%m-01")
 
         self.Contract.create(
             {
                 "name": "Second contract for Sally",
                 "employee_id": self.sally.id,
-                "date_start": Date.today().strftime("%Y-%m-%d"),
+                "date_start": Date.today().strftime("%Y-%m-02"),
                 "struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
                 "state": "open",
