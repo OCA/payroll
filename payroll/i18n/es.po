@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2025-04-23 12:29+0000\n"
+"PO-Revision-Date: 2025-04-23 13:36+0000\n"
 "Last-Translator: \"Leonardo J. Caballero G.\" <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
@@ -214,7 +214,7 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "<code>result = contract.wage * 0.10</code>"
-msgstr "<code>result = contract. Wage * 0.10</code>"
+msgstr "<code>result = contract.wage * 0.10</code>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -506,7 +506,7 @@ msgstr "Añada aquí sus notas o la explicación de su categoría..."
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
-msgstr "Todas las reglas hijas"
+msgstr "Todas las reglas secundarias"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__allow_cancel_payslips
@@ -742,7 +742,7 @@ msgstr "Hijos"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Children Definition"
-msgstr "Definición de las reglas hijas"
+msgstr "Definición de las reglas secundarias"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_run__state__close
