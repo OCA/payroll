@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2025-04-23 12:29+0000\n"
+"PO-Revision-Date: 2025-04-23 13:36+0000\n"
 "Last-Translator: \"Leonardo J. Caballero G.\" <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish (Venezuela) (https://www.transifex.com/odoo/teams/"
 "41243/es_VE/)\n"
@@ -500,7 +500,7 @@ msgstr "Añada aquí sus notas o la explicación de su categoría..."
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
 msgid "All Children Rules"
-msgstr "Todas las reglas hijas"
+msgstr "Todas las reglas secundarias"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__allow_cancel_payslips
@@ -680,22 +680,22 @@ msgstr "Cambiar estado de la liquidación"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "Child Line Details"
-msgstr "Detalle de líneas hijas"
+msgstr "Detalle de líneas secundarias"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__child_ids
 msgid "Child Payslip Lines"
-msgstr "Líneas hijas de liquidación"
+msgstr "Líneas secundarias de liquidación"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Child Rules"
-msgstr "Reglas hijas"
+msgstr "Reglas secundarias"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__child_ids
 msgid "Child Salary Rule"
-msgstr "Regla salarial hija"
+msgstr "Regla salarial secundaria"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -736,7 +736,7 @@ msgstr "Hijos"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
 msgid "Children Definition"
-msgstr "Definición de los hijos"
+msgstr "Definición de las reglas secundarias"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_run__state__close
@@ -1210,7 +1210,7 @@ msgstr "Ayuda"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__hide_child_lines
 msgid "Hide Child Lines"
-msgstr "Ocultar líneas hijas"
+msgstr "Ocultar líneas secundarias"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
