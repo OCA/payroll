@@ -30,3 +30,5 @@ class HrPayslipInput(models.Model):
         required=True,
         help="The contract for which applied this input",
     )
+
+    company_id = fields.Many2one(related="payslip_id.company_id")
