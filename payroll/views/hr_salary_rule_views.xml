@@ -182,8 +182,8 @@
                                     />
                                     <field
                                         name="quantity"
-                                        invisible="amount_select != 'code'"
-                                        required="amount_select == 'code'"
+                                        invisible="amount_select == 'code'"
+                                        required="amount_select != 'code'"
                                     />
                                     <field
                                         name="amount_fix"
