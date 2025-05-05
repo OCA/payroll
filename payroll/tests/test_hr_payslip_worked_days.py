@@ -19,7 +19,6 @@ class TestWorkedDays(TestPayslipBase):
         self.holiday_type = self.LeaveType.create(
             {
                 "name": "TestLeaveType",
-                "code": "TESTLV",
                 "allocation_validation_type": "no_validation",
                 "leave_validation_type": "no_validation",
             }
@@ -100,10 +99,10 @@ class TestWorkedDays(TestPayslipBase):
 
         worked_days_codes = richard_payslip.worked_days_line_ids.mapped("code")
         self.assertIn(
-            "TESTLV", worked_days_codes, "The leave is in the 'Worked Days' list"
+            "GLOBAL", worked_days_codes, "The leave is in the 'Worked Days' list"
         )
         wdl_ids = richard_payslip.worked_days_line_ids.filtered(
-            lambda x: x.code == "TESTLV"
+            lambda x: x.code == "GLOBAL"
         )
         self.assertEqual(len(wdl_ids), 1, "There is only one line matching the leave")
         self.assertEqual(
@@ -132,10 +131,10 @@ class TestWorkedDays(TestPayslipBase):
 
         worked_days_codes = richard_payslip.worked_days_line_ids.mapped("code")
         self.assertIn(
-            "TESTLV", worked_days_codes, "The leave is in the 'Worked Days' list"
+            "GLOBAL", worked_days_codes, "The leave is in the 'Worked Days' list"
         )
         wdl_ids = richard_payslip.worked_days_line_ids.filtered(
-            lambda x: x.code == "TESTLV"
+            lambda x: x.code == "GLOBAL"
         )
         self.assertEqual(len(wdl_ids), 1, "There is only one line matching the leave")
         self.assertEqual(
