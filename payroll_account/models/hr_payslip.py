@@ -25,7 +25,10 @@ class HrPayslip(models.Model):
         res = super().onchange_contract()
         self.journal_id = (
             self.contract_id.journal_id.id
-            or (not self.contract_id and self.default_get(["journal_id"])["journal_id"])
+            or (
+                not self.contract_id
+                and self.default_get(["journal_id"]).get("journal_id")
+            )
             or self.journal_id
         )
         return res
