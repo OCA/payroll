@@ -344,10 +344,14 @@ class HrPayslip(models.Model):
                 {
                     "name": holiday.holiday_status_id.name or _("Global Leaves"),
                     "sequence": getattr(
-                        holiday.holiday_status_id.work_entry_type_id, "sequence", 5
+                        getattr(holiday.holiday_status_id, "work_entry_type_id", None),
+                        "sequence",
+                        5,
                     ),
                     "code": getattr(
-                        holiday.holiday_status_id.work_entry_type_id, "code", "GLOBAL"
+                        getattr(holiday.holiday_status_id, "work_entry_type_id", None),
+                        "code",
+                        "GLOBAL",
                     ),
                     "number_of_days": 0.0,
                     "number_of_hours": 0.0,
