@@ -1564,11 +1564,6 @@ msgid "Payroll Accounting"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr ""
@@ -2159,11 +2154,6 @@ msgstr ""
 "Acesta va fi folosit pentru a calcula valorile campurilor %; în general este "
 "de baza, dar puteți de asemenea sa folositi campurile categorii de coduri cu "
 "litere mici ca nume al variabilei (hra, ma, lta, etc.) si valiabila de baza."
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr ""
 
 #. module: payroll
 #. odoo-python

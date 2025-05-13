@@ -1560,11 +1560,6 @@ msgid "Payroll Accounting"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr "Цалингийн суутгалын бүртгэлийн тайлан"
@@ -2155,11 +2150,6 @@ msgstr ""
 "Энэ нь талбарын утгын % бодоход хэрэглэгддэг; ерөнхийдөө энэ нь дараах "
 "үндэстэй, ангилалын кодын талбаруудыг жижиг үсгээр хувьсагч болгож хэрэглэж "
 "болно (hra, ma, lta, гм.). мөн хувьсагчийн нэрийг ашиглаж болно."
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr ""
 
 #. module: payroll
 #. odoo-python

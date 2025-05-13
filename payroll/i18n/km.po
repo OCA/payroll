@@ -1557,11 +1557,6 @@ msgid "Payroll Accounting"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr "របាយការណ៍ចុះឈ្មោះវិភាគទានប្រាក់ខែ"
@@ -2155,11 +2150,6 @@ msgstr ""
 "វានឹងត្រូវបានប្រើដើម្បីគណនាតម្លៃ% វាល។ "
 "ជាទូទៅវាគឺនៅលើមូលដ្ឋានប៉ុន្តែអ្នកក៏អាចប្រើប្រភេទលេខកូដប្រភេទនៅក្នុងអក្សរតូចជាឈ្មោះអថេរ "
 "(ហេរ៉ាម៉ាឡេតាជាដើម) និងអថេរមូលដ្ឋាន។"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr ""
 
 #. module: payroll
 #. odoo-python

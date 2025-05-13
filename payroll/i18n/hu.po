@@ -1567,11 +1567,6 @@ msgid "Payroll Accounting"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr ""
@@ -2162,11 +2157,6 @@ msgstr ""
 "Ez a % mező értékeinek a számítására használt; általánosan ez van alapban, "
 "de tud kategorizált kód mezőket is használni kisbetűvel mint változó nevek "
 "(hra, ma, lta, stb.) és az alap  változókat."
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr ""
 
 #. module: payroll
 #. odoo-python
