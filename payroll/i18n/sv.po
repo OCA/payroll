@@ -1669,11 +1669,6 @@ msgid "Payroll Accounting"
 msgstr "Redovisning av löner"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr "Lönekod"
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr "Rapport om löneavgiftsregister"
@@ -2277,11 +2272,6 @@ msgstr ""
 "variabel namn (hra, ma, lta, etc.) och den variabla grundläggande."
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr "Typ av ledig tid"
-
-#. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid ""
@@ -2431,3 +2421,9 @@ msgstr "resultat kommer att påverkas av en variabel"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "Payroll Code"
+#~ msgstr "Lönekod"
+
+#~ msgid "Time Off Type"
+#~ msgstr "Typ av ledig tid"

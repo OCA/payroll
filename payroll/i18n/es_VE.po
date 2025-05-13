@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
 "PO-Revision-Date: 2025-04-23 19:23+0000\n"
 "Last-Translator: \"Leonardo J. Caballero G.\" <leonardocaballero@gmail.com>\n"
-"Language-Team: Spanish (Venezuela) (https://www.transifex.com/odoo/teams/"
-"41243/es_VE/)\n"
+"Language-Team: Spanish (Venezuela) (https://www.transifex.com/odoo/"
+"teams/41243/es_VE/)\n"
 "Language: es_VE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,8 +54,8 @@ msgid ""
 "%(err)s\n"
 msgstr ""
 "\n"
-"Código de Python incorrecto definido para la regla salarial %(nm)s (%(code)s)"
-" para los empleados %(ee)s.\n"
+"Código de Python incorrecto definido para la regla salarial %(nm)s "
+"(%(code)s) para los empleados %(ee)s.\n"
 "Aquí está el error recibido:\n"
 "\n"
 "%(err)s\n"
@@ -160,8 +160,8 @@ msgstr ""
 msgid ""
 "<code>contract:</code> contains current contract object data (hr.contract)"
 msgstr ""
-"<code>contract:</code> contiene los datos del objeto contrato actual "
-"(hr.contract)"
+"<code>contract:</code> contiene los datos del objeto contrato actual (hr."
+"contract)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -177,8 +177,8 @@ msgstr ""
 msgid ""
 "<code>employee:</code> contains current employee object data (hr.employee)"
 msgstr ""
-"<code>employee:</code> contiene datos del objeto del empleado actual "
-"(hr.employee)"
+"<code>employee:</code> contiene datos del objeto del empleado actual (hr."
+"employee)"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -292,12 +292,12 @@ msgid ""
 "            "
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">"
-"\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+"\">\n"
 "            Estimado(a) <t t-out=\"object.employee_id.name\"/>,\n"
 "            <br/><br/>\n"
-"            Por favor, en el adjunto encontrará de la nómina de <t t-out="
-"\"object.payslip_run_id.name\"/>.\n"
+"            Por favor, en el adjunto encontrará de la nómina de <t t-"
+"out=\"object.payslip_run_id.name\"/>.\n"
 "            <br/><br/>\n"
 "            No dude en ponerse en contacto con nosotros si tiene alguna "
 "pregunta.\n"
@@ -1356,8 +1356,8 @@ msgid ""
 msgstr ""
 "Es usada para calcular el porcentaje y la cantidad fija, por ejemplo, un "
 "vale de alimentos con una cantidad fija de 1€ por día trabajado puede tener "
-"una cantidad definida en la expresión como "
-"worked_days.WORK100.number_of_days."
+"una cantidad definida en la expresión como worked_days.WORK100."
+"number_of_days."
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount
@@ -1683,11 +1683,6 @@ msgstr "Nómina"
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__module_payroll_account
 msgid "Payroll Accounting"
 msgstr "Contabilidad de payroll"
-
-#. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr "Código de nómina"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
@@ -2296,11 +2291,6 @@ msgstr ""
 "como nombres de variables (hra, ma, lta, etc.) y las variables básicas."
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr "Tipo de Tiempo Libre"
-
-#. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid ""
@@ -2453,3 +2443,9 @@ msgstr "el resultado afectará a una variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "Payroll Code"
+#~ msgstr "Código de nómina"
+
+#~ msgid "Time Off Type"
+#~ msgstr "Tipo de Tiempo Libre"

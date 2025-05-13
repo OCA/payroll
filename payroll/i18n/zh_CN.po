@@ -1554,11 +1554,6 @@ msgid "Payroll Accounting"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr "工资表缴款名册报告"
@@ -2146,11 +2141,6 @@ msgid ""
 msgstr ""
 "这个规则将用于计算%字段的值；一般来说是基数，你也可以用小写的类别代码作为一个"
 "变量名（hra，ma，lta等）作为可变的基数。"
-
-#. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr ""
 
 #. module: payroll
 #. odoo-python

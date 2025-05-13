@@ -1645,11 +1645,6 @@ msgid "Payroll Accounting"
 msgstr "حسابداری حقوق و دستمزد"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_leave_type__code
-msgid "Payroll Code"
-msgstr "کد حقوق و دستمزد"
-
-#. module: payroll
 #: model:ir.model,name:payroll.model_report_payroll_report_contributionregister
 msgid "Payroll Contribution Register Report"
 msgstr "گزارش ثبت نام مشارکت حقوق و دستمزد"
@@ -2253,11 +2248,6 @@ msgstr ""
 "ma، lta و غیره) و متغیر basic نیز استفاده کنید."
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_leave_type
-msgid "Time Off Type"
-msgstr "نوع زمان خاموش"
-
-#. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid ""
@@ -2405,3 +2395,9 @@ msgstr "نتیجه بر یک متغیر تأثیر می گذارد"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "Payroll Code"
+#~ msgstr "کد حقوق و دستمزد"
+
+#~ msgid "Time Off Type"
+#~ msgstr "نوع زمان خاموش"
