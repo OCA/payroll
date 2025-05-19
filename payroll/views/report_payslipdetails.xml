@@ -6,6 +6,7 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                        
+                       
                         <h2 t-field="o.name" class="text-center pb-2"/>
                         <table class="table table-sm table-bordered">
                             <tr>
