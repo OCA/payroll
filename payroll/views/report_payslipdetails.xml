@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
+
 <odoo>
     <template id="report_payslipdetails">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <h2>Pay Slip</h2>
-                        <p t-field="o.name" />
+                       
+                        <h2 t-field="o.name" class="text-center pb-2"/>
                         <table class="table table-sm table-bordered">
                             <tr>
                                 <td>
@@ -16,7 +16,49 @@
                                     <span t-field="o.employee_id" />
                                 </td>
                                 <td>
+                                    <strong>Pan Number</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id.job_id" />
+                                </td>
+                            </tr>
+                            <tr>
+                             <td>
                                     <strong>Designation</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id.job_id" />
+                                </td>
+                                <td>
+                                    <strong>Bank Ac</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id.bank_account_id" />
+                                </td>
+                            </tr>
+                            <tr>
+                             <td>
+                                    <strong>Employee ID</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id" />
+                                </td>
+                                <td>
+                                    <strong>IFSC Code</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id.bank_account_id" />
+                                </td>
+                            </tr>
+                             <tr>
+                             <td>
+                                    <strong>Date Of Join</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.employee_id.job_id" />
+                                </td>
+                                <td>
+                                    <strong>Paid Days</strong>
                                 </td>
                                 <td>
                                     <span t-field="o.employee_id.job_id" />
@@ -24,125 +66,92 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <strong>Address</strong>
+                                     <strong>LOP Days</strong>
                                 </td>
-                                <td colspan="3">
-                                    <div
-                                        t-field="o.employee_id.work_contact_id"
-                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
-                                    />
+                                <td>
+                                    <span t-field="o.employee_id.job_id" />
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <strong>Email</strong>
-                                </td>
-                                <td>
-                                    <span t-field="o.employee_id.work_email" />
-                                </td>
-                                <td>
-                                    <strong>Identification No</strong>
-                                </td>
-                                <td>
-                                    <span t-field="o.employee_id.identification_id" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Reference</strong>
-                                </td>
-                                <td>
-                                    <span t-field="o.number" />
-                                </td>
-                                <td>
-                                    <strong>Bank Account</strong>
-                                </td>
-                                <td>
-                                    <span t-field="o.employee_id.bank_account_id" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Date From</strong>
-                                </td>
-                                <td>
-                                    <span t-field="o.date_from" />
-                                </td>
-                                <td>
-                                    <strong>Date To</strong>
-                                </td>
-                                <td>
-                                    <span t-field="o.date_to" />
-                                </td>
-                            </tr>
-                        </table>
-                        <h3>Details by Salary Rule Category</h3>
-                        <table class="table table-sm mb32">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Salary Rule Category</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    t-foreach="get_details_by_rule_category.get(o.id, [])"
-                                    t-as="h"
-                                >
-                                    <td>
-                                        <span t-esc="h['code']" />
-                                    </td>
-                                    <td>
-                                        <span t-esc="'..'*h['level']" />
-                                        <span t-esc="h['rule_category']" />
-                                    </td>
-                                    <td class="text-right">
-                                        <span
-                                            t-esc="h['total']"
-                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
-                                        />
-                                    </td>
-                                </tr>
-                            </tbody>
+                           
                         </table>
                         <h3>Payslip Lines by Contribution Register</h3>
-                        <table class="table table-sm mt32">
+                        <table class="table table-sm mb32">
                             <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Quantity/rate</th>
-                                    <th>Amount</th>
-                                    <th>Total</th>
+                                <tr style="background-color:orange; color:#ffa803;">
+                                    <th>Earning</th>
+                                    <th>Rs</th>
+                                    <th>Deducation</th>
+                                     <th>Rs</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    t-foreach="get_lines_by_contribution_register.get(o.id, [])"
-                                    t-as="p"
-                                >
+                                <t t-set="earnings" t-value="[]"/>
+                                <t t-set="deductions" t-value="[]"/>
+
+                                <!-- Categorize lines into earnings and deductions -->
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <t t-if="line.total >= 0">
+                                        <t t-set="earnings" t-value="earnings + [line]"/>
+                                    </t>
+                                    <t t-if="line.total &lt; 0">
+                                        <t t-set="deductions" t-value="deductions + [line]"/>
+                                    </t>
+                                </t>
+
+                                <!-- Calculate the maximum number of rows to show -->
+                                <t t-set="max_len" t-value="max(len(earnings), len(deductions))"/>
+
+                                <!-- Loop to print rows -->
+                                <t t-foreach="range(max_len)" t-as="i">
+                                    <tr>
+                                        <!-- Earnings Column -->
+                                        <td>
+                                            <t t-if="i &lt; len(earnings)">
+                                                <span t-esc="earnings[i].name"/>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-if="i &lt; len(earnings)">
+                                                <span t-esc="earnings[i].total"/>
+                                            </t>
+                                        </td>
+
+                                        <!-- Deductions Column -->
+                                        <td>
+                                            <t t-if="i &lt; len(deductions)">
+                                                <span t-esc="deductions[i].name"/>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <t t-if="i &lt; len(deductions)">
+                                                <span t-esc="abs(deductions[i].total)"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total Earnings</th>
                                     <td>
-                                        <span t-esc="p.get('code', '')" />
+                                        <span t-esc="sum(l.total for l in earnings)"/>
                                     </td>
+                                    <th>Total Deduction</th>
                                     <td>
-                                        <span t-esc="p.get('name', '')" />
-                                    </td>
-                                    <td>
-                                        <span t-esc="p.get('quantity', '')" />
-                                    </td>
-                                    <td>
-                                        <span t-esc="p.get('amount', 0)" />
-                                    </td>
-                                    <td class="text-right">
-                                        <span
-                                            t-esc="p.get('total', 0)"
-                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
-                                        />
+                                        <span t-esc="abs(sum(l.total for l in deductions))"/>
                                     </td>
                                 </tr>
-                            </tbody>
+                                <tr>
+                                    <td colspan="3" style="font-weight:bold; text-align:left;">
+                                        Net Salary
+                                    </td>
+                                    <td style="font-weight:bold; margin-left:40px;">
+                                        <span t-esc="sum(l.total for l in earnings) - abs(sum(l.total for l in deductions))"/>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
+                        
                         <p class="text-right">
                             <strong>Authorized signature</strong>
                         </p>
