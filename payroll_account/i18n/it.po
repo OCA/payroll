@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-10 10:10+0000\n"
-"PO-Revision-Date: 2023-09-22 11:37+0000\n"
+"PO-Revision-Date: 2025-05-29 16:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: payroll_account
 #: model_terms:ir.ui.view,arch_db:payroll_account.hr_contract_view_form
@@ -83,7 +83,7 @@ msgstr "Conto dare"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_run__display_name
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_contract
