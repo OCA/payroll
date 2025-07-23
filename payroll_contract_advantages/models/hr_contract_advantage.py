@@ -21,7 +21,7 @@ class HrContractAdvantage(models.Model):
     advantage_upper_bound = fields.Float(
         string="Upper Bound", related="advantage_template_id.upper_bound", readonly=True
     )
-    amount = fields.Float(string="Amount")
+    amount = fields.Float()
 
     @api.onchange("advantage_template_id")
     def _onchange_advantage_template_id(self):

@@ -5,7 +5,7 @@
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='main_info']" position="inside">
+            <xpath expr="//group[@name='yearly_advantages']" position="inside">
                 <separator string="Contract Advantages" />
                 <field name="advantages_ids">
                     <tree editable="bottom">
