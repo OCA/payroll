@@ -27,12 +27,14 @@ msgid "Advantage Template"
 msgstr "Plantilla de ventaja"
 
 #. module: payroll_contract_advantages
+#. odoo-python
 #: code:addons/payroll_contract_advantages/models/hr_contract_advantage.py:0
 #, python-format
 msgid "Advantage amount can't be greater than upper bound limit."
 msgstr "El importe de la ventaja no puede ser mayor que el límite superior."
 
 #. module: payroll_contract_advantages
+#. odoo-python
 #: code:addons/payroll_contract_advantages/models/hr_contract_advantage.py:0
 #, python-format
 msgid "Advantage amount can't be less than lower bound limit."
@@ -80,14 +82,12 @@ msgstr "Creado en"
 
 #. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
-msgstr "Valor por defecto para esta ventaja"
+msgid "Default Value"
+msgstr ""
 
 #. module: payroll_contract_advantages
-#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract__display_name
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__display_name
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__display_name
-#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_payslip__display_name
 msgid "Display Name"
 msgstr "Nombre para mostrar"
 
@@ -107,18 +107,14 @@ msgid "Employee's Advantages on Contract"
 msgstr "Ventajas de contrato en empleados"
 
 #. module: payroll_contract_advantages
-#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract__id
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__id
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__id
-#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_payslip__id
 msgid "ID"
 msgstr "ID"
 
 #. module: payroll_contract_advantages
-#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract____last_update
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage____last_update
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template____last_update
-#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_payslip____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -167,6 +163,9 @@ msgstr "Limite superior"
 #: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage_template__upper_bound
 msgid "Upper bound authorized by the employer for this advantage"
 msgstr "Límite superior autorizado por el empleador para esta ventaja"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "Valor por defecto para esta ventaja"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Liquidacion"
