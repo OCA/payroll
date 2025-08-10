@@ -1,7 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     "name": "Payroll Accounting",
-    "version": "18.0.1.0.2",
+    "version": "18.0.1.0.3",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "license": "LGPL-3",
