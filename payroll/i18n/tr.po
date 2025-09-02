@@ -21,14 +21,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Ertuğrul Güreş <ertugrulg@projetgrup.com>, 2020\n"
+"PO-Revision-Date: 2025-09-02 23:43+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: Turkish (https://www.transifex.com/odoo/teams/41243/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -2255,9 +2256,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 msgid "You cannot create a recursive salary structure."
-msgstr ""
-" 88% match \n"
-"Özyinelemeli bir maaş yapısı oluşturamazsınız."
+msgstr "Özyinelemeli bir maaş yapısı oluşturamazsınız."
 
 #. module: payroll
 #. odoo-python
