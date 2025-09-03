@@ -12,14 +12,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-10 10:10+0000\n"
-"PO-Revision-Date: 2018-09-21 13:17+0000\n"
-"Last-Translator: Buket Şeker <buket_skr@hotmail.com>, 2018\n"
+"PO-Revision-Date: 2025-09-03 22:42+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
 "Language-Team: Turkish (https://www.transifex.com/odoo/teams/41243/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: payroll_account
 #: model_terms:ir.ui.view,arch_db:payroll_account.hr_contract_view_form
@@ -50,13 +51,13 @@ msgstr "Analitik Hesap"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
-msgstr ""
+msgstr "Baz"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__company_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__company_id
 msgid "Company"
-msgstr ""
+msgstr "Şirket"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
@@ -93,7 +94,7 @@ msgstr "Onaylama (Payslip) tarihinin dönemini kullanmak için boş bırakın."
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
 msgid "Payslip"
-msgstr ""
+msgstr "Bordro"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
@@ -134,7 +135,7 @@ msgstr "Vergi"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
 msgid "Tax lines"
-msgstr ""
+msgstr "Vergi satırları"
 
 #. module: payroll_account
 #. odoo-python
