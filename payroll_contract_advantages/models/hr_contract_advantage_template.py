@@ -9,6 +9,7 @@ class HrContractAdvandageTemplate(models.Model):
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)
+    active = fields.Boolean(default=True)
     currency_id = fields.Many2one(
         "res.currency",
         required=True,
