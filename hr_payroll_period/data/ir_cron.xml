@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record id="ir_cron_hr_payroll_period" model="ir.cron">
-        <field name='name'>Create Next Fiscal Year</field>
+        <field name='name'>Create Next Payroll Fiscal Year</field>
         <field name='interval_number'>1</field>
         <field name='interval_type'>months</field>
         <field name="numbercall">-1</field>

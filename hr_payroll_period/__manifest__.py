@@ -27,6 +27,7 @@
         "views/hr_payslip_view.xml",
         "views/hr_payslip_run_view.xml",
         "views/hr_payslip_employee_view.xml",
+        "views/res_config_settings_view.xml",
     ],
     "installable": True,
     "maintainers": ["nimarosa"],

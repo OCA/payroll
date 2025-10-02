@@ -349,6 +349,7 @@ class TestHrFiscalyear(common.TransactionCase):
 
     def test_cron_create_next_fiscal_year(self):
         # if we are in 2024, it should create the periods for 2025
+        self.env.company.payroll_fiscalyear_creation_months_before = 12
         current_year = datetime.now().year
         current_fiscal_year = self.fy_model.search(
             [

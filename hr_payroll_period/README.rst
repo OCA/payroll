@@ -54,6 +54,10 @@ Configuration
 
 Create a fiscal year
 ~~~~~~~~~~~~~~~~~~~~
+
+Go to: Payroll -> Configuration -> Settings -> Payroll
+ - Put the number of months in advance for creating the new HR periods
+
 Go to: Payroll -> Configuration -> Payroll Fiscal Year
 
  - Select a type of schedule, e.g. monthly

@@ -305,44 +305,45 @@ class HrFiscalYear(models.Model):
 
     @api.model
     def cron_create_next_fiscal_year(self):
-        current_year = datetime.now().year
+        company = self.env.company
+        today = fields.Date.context_today(self)
+        current_year = today.year
         next_year = current_year + 1
-        # Get the latest fiscal year that has not ended yet
-        latest_fiscal_year = self.search(
-            [("date_end", "<", datetime(next_year, 1, 1).strftime(DF))],
-            order="date_end desc",
+        current_fy = self.search(
+            [("date_start", "<=", today), ("date_end", ">=", today)],
             limit=1,
         )
-        if not latest_fiscal_year:
+        if not current_fy:
             return self
-        latest_period_end = max(latest_fiscal_year.period_ids.mapped("date_end"))
-        fiscal_year_start = latest_period_end + relativedelta(days=1)
+
+        threshold_date = fields.Date.from_string(current_fy.date_end) - relativedelta(
+            months=company.payroll_fiscalyear_creation_months_before
+        )
+        if today < threshold_date:
+            return self
+        fiscal_year_start = fields.Date.from_string(
+            current_fy.date_end
+        ) + relativedelta(days=1)
         fiscal_year_end = datetime(next_year, 12, 31).strftime(DF)
-        # Check if a fiscal year with the same start and end dates already exists
-        existing_fiscal_year = self.search(
+        existing_fy = self.search(
             [
                 ("date_start", "=", fiscal_year_start),
                 ("date_end", "=", fiscal_year_end),
             ],
             limit=1,
         )
-        if existing_fiscal_year:
-            return existing_fiscal_year
-
-        schedule_pay = latest_fiscal_year.schedule_pay
-        payment_weekday = latest_fiscal_year.payment_weekday
-        payment_week = latest_fiscal_year.payment_week
+        if existing_fy:
+            return existing_fy
+        schedule_pay = current_fy.schedule_pay
+        payment_weekday = current_fy.payment_weekday
+        payment_week = current_fy.payment_week
         schedule_name = next(
             (s[1] for s in get_schedules(self) if s[0] == schedule_pay), False
         )
-
         fiscal_year = self.create(
             {
                 "name": "%(year)s - %(schedule)s"
-                % {
-                    "year": next_year,
-                    "schedule": schedule_name,
-                },
+                % {"year": next_year, "schedule": schedule_name},
                 "date_start": fiscal_year_start,
                 "date_end": fiscal_year_end,
                 "schedule_pay": schedule_pay,

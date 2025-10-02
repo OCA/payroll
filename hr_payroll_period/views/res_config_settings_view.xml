@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_fiscalyear" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.fiscalyear</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50" />
+        <field name="inherit_id" ref="payroll.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='payroll']" position="inside">
+                <h2>Payroll Fiscal Year Periods Automation</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="period_automatyion_settings_container"
+                >
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="payroll_fiscalyear_creation_months_before" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                            />
+                            <div class="row">
+                                <div class="text-muted col-lg-8">
+                                    Number of months before year end to automatically create the Payroll next fiscal year.
+                                    <br />Default = 1 (December 1st).
+                                </div>
+                            </div>
+                            <div class="content-group mt16">
+                                <field
+                                    name="payroll_fiscalyear_creation_months_before"
+                                    widget="integer"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
