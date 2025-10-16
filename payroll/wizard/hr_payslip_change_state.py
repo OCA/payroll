@@ -73,10 +73,7 @@ class HrPayslipChangeState(models.TransientModel):
                     rec.action_payslip_cancel()
                 else:
                     raise UserError(
-                        _(
-                            "The payslip %(nm)s is already canceled "
-                            "please deselect it"
-                        )
+                        _("The payslip %(nm)s is already canceled please deselect it")
                         % {"nm": rec.name}
                     )
 

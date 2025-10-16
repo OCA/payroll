@@ -569,8 +569,7 @@ class HrPayslip(models.Model):
     @api.model
     def _get_payslip_lines(self, _contract_ids, payslip_id):
         _logger.warning(
-            "Use of _get_payslip_lines() is deprecated. "
-            "Use get_lines_dict() instead."
+            "Use of _get_payslip_lines() is deprecated. Use get_lines_dict() instead."
         )
         return self.browse(payslip_id).get_lines_dict()
 
