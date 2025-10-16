@@ -183,3 +183,39 @@ class TestPayrollAccount(common.TransactionCase):
 
         # I verify that the payslip is in done state.
         self.assertEqual(self.hr_payslip.state, "done", "State not changed!")
+
+    def test_partner_logic_account_types(self):
+        """Test partner logic for different account types."""
+        # Employee already has work_contact_id auto-created
+        employee_partner = self.hr_employee_john.work_contact_id
+
+        # Create register with different partner
+        register_partner = self.env["res.partner"].create({"name": "Tax Authority"})
+        register = self.env["hr.contribution.register"].create(
+            {"name": "Tax Register", "partner_id": register_partner.id}
+        )
+
+        # Create rule and payslip line
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule.register_id = register
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+
+        # Test asset_receivable -> employee partner
+        self.account_credit.account_type = "asset_receivable"
+        rule.account_credit = self.account_credit
+        self.assertEqual(line._get_partner_id(True), employee_partner.id)
+
+        # Test liability_current -> employee partner
+        self.account_credit.account_type = "liability_current"
+        self.assertEqual(line._get_partner_id(True), employee_partner.id)
+
+        # Test liability_payable -> register partner
+        self.account_credit.account_type = "liability_payable"
+        self.assertEqual(line._get_partner_id(True), register_partner.id)
+
+        # Test other account types -> no partner
+        self.account_credit.account_type = "expense"
+        self.assertFalse(line._get_partner_id(True))
