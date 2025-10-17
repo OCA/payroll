@@ -352,7 +352,7 @@
                 />
                 <field name="category_id" />
                 <field name="condition_range_min" />
-                <group col="8" colspan="4" expand="0" string="Group By">
+                <group>
                     <filter
                         string="Category"
                         name="head"

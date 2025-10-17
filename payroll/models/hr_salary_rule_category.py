@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -47,7 +47,7 @@ class HrSalaryRuleCategory(models.Model):
     def _check_parent_id(self):
         if self._has_cycle():
             raise ValidationError(
-                _(
+                self.env._(
                     "Error! You cannot create recursive hierarchy of Salary "
                     "Rule Category."
                 )

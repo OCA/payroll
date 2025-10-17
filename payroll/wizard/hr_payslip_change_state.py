@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models
 from odoo.exceptions import UserError
-from odoo.tools.translate import _
 
 
 class HrPayslipChangeState(models.TransientModel):
@@ -36,50 +35,48 @@ class HrPayslipChangeState(models.TransientModel):
                 if rec.state == "cancel":
                     rec.action_payslip_draft()
                 else:
-                    raise UserError(
-                        _(
-                            "Only rejected payslips can be reset to "
-                            "draft, the payslip %(nm)s is in "
-                            "%(st)s state"
-                        )
-                        % {"nm": rec.name, "st": rec.state}
+                    msg = self.env._(
+                        "Only rejected payslips can be reset to draft, "
+                        "the payslip %(nm)s is in %(st)s state",
+                        nm=rec.name,
+                        st=rec.state,
                     )
+                    raise UserError(msg)
             elif new_state == "verify":
                 if rec.state in ["draft", "verify"]:
                     rec.compute_sheet()
                 else:
-                    raise UserError(
-                        _(
-                            "Only draft payslips can be verified,"
-                            "the payslip %(nm)s is in "
-                            "%(st)s state"
-                        )
-                        % {"nm": rec.name, "st": rec.state}
+                    msg = self.env._(
+                        "Only draft payslips can be verified, the "
+                        "payslip %(nm)s is in %(st)s state",
+                        nm=rec.name,
+                        st=rec.state,
                     )
+                    raise UserError(msg)
             elif new_state == "done":
                 if rec.state in ("verify", "draft"):
                     rec.action_payslip_done()
                 else:
-                    raise UserError(
-                        _(
-                            "Only payslips in states verify or draft"
-                            " can be confirmed, the payslip %(nm)s is in "
-                            "%(st)s state"
-                        )
-                        % {"nm": rec.name, "st": rec.state}
+                    msg = self.env._(
+                        "Only payslips in states verify or draft can be "
+                        "confirmed, the payslip %(nm)s is in %(st)s state",
+                        nm=rec.name,
+                        st=rec.state,
                     )
+                    raise UserError(msg)
             elif new_state == "cancel":
                 if rec.state != "cancel":
                     rec.action_payslip_cancel()
                 else:
-                    raise UserError(
-                        _("The payslip %(nm)s is already canceled please deselect it")
-                        % {"nm": rec.name}
+                    msg = self.env._(
+                        "The payslip %(nm)s is already canceled please deselect it",
+                        nm=rec.name,
                     )
+                    raise UserError(msg)
 
         return {
             "domain": "[('id','in', [" + ",".join(map(str, record_ids)) + "])]",
-            "name": _("Payslips"),
+            "name": self.env._("Payslips"),
             "view_mode": "list,form",
             "res_model": "hr.payslip",
             "view_id": False,

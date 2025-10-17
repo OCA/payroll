@@ -2,7 +2,7 @@
 
 import traceback
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
@@ -170,7 +170,9 @@ class HrSalaryRule(models.Model):
         for rule in self:
             if rule._has_cycle(field_name="parent_rule_id"):
                 raise ValidationError(
-                    _("Error! You cannot create recursive hierarchy of Salary Rules.")
+                    self.env._(
+                        "Error! You cannot create recursive hierarchy of Salary Rules."
+                    )
                 )
 
     def _recursive_search_of_rules(self):
@@ -210,7 +212,8 @@ class HrSalaryRule(models.Model):
         """
         self.ensure_one()
         method = f"_compute_rule_{self.amount_select}"
-        return api.call_kw(self, method, [self.ids, localdict], {})
+        compute = getattr(self, method)
+        return compute(localdict)
 
     def _compute_rule_fix(self, localdict):
         try:
@@ -222,11 +225,13 @@ class HrSalaryRule(models.Model):
             }
         except Exception as ex:
             raise UserError(
-                _(
-                    "Wrong quantity defined for salary rule "
-                    "%(nm)s (%(code)s) for employee %(ee)s."
+                self.env._(
+                    "Wrong quantity defined for salary rule %(nm)s (%(code)s) "
+                    "for employee %(ee)s.",
+                    nm=self.name,
+                    code=self.code,
+                    ee=localdict["employee"].name,
                 )
-                % {"nm": self.name, "code": self.code, "ee": localdict["employee"].name}
             ) from ex
 
     def _compute_rule_percentage(self, localdict):
@@ -239,33 +244,30 @@ class HrSalaryRule(models.Model):
             }
         except Exception as ex:
             raise UserError(
-                _(
+                self.env._(
                     "Wrong percentage base or quantity defined for salary "
-                    "rule %(nm)s (%(code)s) for employee %(ee)s."
+                    "rule %(nm)s (%(code)s) for employee %(ee)s.",
+                    nm=self.name,
+                    code=self.code,
+                    ee=localdict["employee"].name,
                 )
-                % {"nm": self.name, "code": self.code, "ee": localdict["employee"].name}
             ) from ex
 
     def _compute_rule_code(self, localdict):
         try:
-            safe_eval(self.amount_python_compute, localdict, mode="exec", nocopy=True)
+            safe_eval(self.amount_python_compute, localdict, mode="exec")
         except Exception as ex:
             exc_text = "".join(traceback.format_exception(ex))
             raise UserError(
-                _(
-                    """
-Wrong python code defined for salary rule %(nm)s (%(code)s) for employee %(ee)s.
-Here is the error received:
-
-%(err)s
-"""
+                self.env._(
+                    "\nWrong python code defined for salary rule %(nm)s "
+                    "(%(code)s) for employee %(ee)s.\nHere is the error "
+                    "received:\n\n%(err)s\n",
+                    nm=self.name,
+                    code=self.code,
+                    ee=localdict["employee"].name,
+                    err=exc_text,
                 )
-                % {
-                    "nm": self.name,
-                    "code": self.code,
-                    "ee": localdict["employee"].name,
-                    "err": exc_text,
-                }
             ) from ex
         return self._get_rule_dict(localdict)
 
@@ -288,11 +290,12 @@ Here is the error received:
         """
         self.ensure_one()
         method = f"_satisfy_condition_{self.condition_select}"
+        check = getattr(self, method)
         if self.parent_rule_id:
-            current_result = api.call_kw(self, method, [self.ids, localdict], {})
+            current_result = check(localdict)
             parent_result = self.parent_rule_id._satisfy_condition(localdict)
             return current_result and parent_result
-        return api.call_kw(self, method, [self.ids, localdict], {})
+        return check(localdict)
 
     def _satisfy_condition_none(self, localdict):
         return True
@@ -305,32 +308,29 @@ Here is the error received:
             )
         except Exception as ex:
             raise UserError(
-                _(
-                    "Wrong range condition defined for salary rule "
-                    "%(nm)s (%(code)s) for employee %(ee)s."
+                self.env._(
+                    "Wrong range condition defined for salary rule %(nm)s "
+                    "(%(code)s) for employee %(ee)s.",
+                    nm=self.name,
+                    code=self.code,
+                    ee=localdict["employee"].name,
                 )
-                % {"nm": self.name, "code": self.code, "ee": localdict["employee"].name}
             ) from ex
 
     def _satisfy_condition_python(self, localdict):
         try:
-            safe_eval(self.condition_python, localdict, mode="exec", nocopy=True)
+            safe_eval(self.condition_python, localdict, mode="exec")
         except Exception as ex:
             exc_text = "".join(traceback.format_exception(ex))
             raise UserError(
-                _(
-                    """
-Wrong python condition defined for salary rule %(nm)s (%(code)s) for employee %(ee)s.
-Here is the error received:
-
-%(err)s
-"""
+                self.env._(
+                    "\nWrong python condition defined for salary rule %(nm)s "
+                    "(%(code)s) for employee %(ee)s.\nHere is the error "
+                    "received:\n\n%(err)s\n",
+                    nm=self.name,
+                    code=self.code,
+                    ee=localdict["employee"].name,
+                    err=exc_text,
                 )
-                % {
-                    "nm": self.name,
-                    "code": self.code,
-                    "ee": localdict["employee"].name,
-                    "err": exc_text,
-                }
             ) from ex
         return "result" in localdict and localdict["result"] or False

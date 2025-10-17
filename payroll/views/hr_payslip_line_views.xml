@@ -115,7 +115,7 @@
                 <field name="amount_select" />
                 <field name="slip_id" />
                 <field name="payslip_run_id" />
-                <group col="8" colspan="4" expand="0" string="Group By">
+                <group>
                     <filter
                         string="Salary Rule Category"
                         name="category_id"

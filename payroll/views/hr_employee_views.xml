@@ -17,6 +17,16 @@
                     <field name="payslip_count" widget="statinfo" string="Payslips" />
                 </button>
             </xpath>
+            <xpath
+                expr="//page[@name='payroll_information']//group[@name='contract']//field[@name='structure_type_id']"
+                position="after"
+            >
+                <field
+                    name="struct_id"
+                    required="contract_date_start"
+                    domain="[('company_id', '=', company_id)]"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>

@@ -4,7 +4,7 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -34,7 +34,7 @@ class ContributionRegisterReport(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         if not data.get("form"):
             raise UserError(
-                _("Form content is missing, this report cannot be printed.")
+                self.env._("Form content is missing, this report cannot be printed.")
             )
 
         register_ids = self.env.context.get("active_ids", [])
