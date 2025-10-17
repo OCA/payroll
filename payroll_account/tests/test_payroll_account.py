@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from dateutil import relativedelta
 
@@ -15,28 +15,47 @@ class TestPayrollAccount(common.TransactionCase):
         # Activate company currency
         self.env.user.company_id.currency_id.active = True
 
+        # Ensure a default/base user exists for tests.
+        # Ensure a simple default user exists and bind it to xmlid 'base.default_user'.
+        IrModelData = self.env["ir.model.data"]
+        try:
+            self.env.ref("base.default_user")
+        except ValueError:
+            default_user = self.env["res.users"].create(
+                {
+                    "name": "Default User",
+                    "login": "default",
+                    "email": "default@example.com",
+                }
+            )
+            IrModelData.create(
+                {
+                    "module": "base",
+                    "name": "default_user",
+                    "model": "res.users",
+                    "res_id": default_user.id,
+                    "noupdate": True,
+                }
+            )
+
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
+        partner = self.env["res.partner"].create({"name": "Partner 12"})
+        bank = self.env["res.bank"].create({"name": "Test Bank"})
         self.res_partner_bank = self.env["res.partner.bank"].create(
             {
                 "acc_number": "001-9876543-21",
-                "partner_id": self.ref("base.res_partner_12"),
+                "partner_id": partner.id,
                 "acc_type": "bank",
-                "bank_id": self.ref("base.res_bank_1"),
+                "bank_id": bank.id,
             }
         )
 
+        department = self.env["hr.department"].create({"name": "R&D"})
         self.hr_employee_john = self.env["hr.employee"].create(
             {
-                "address_id": self.ref("base.res_partner_address_27"),
-                "birthday": "1984-05-01",
-                "children": 0.0,
-                "country_id": self.ref("base.in"),
-                "department_id": self.ref("hr.dep_rd"),
-                "gender": "male",
-                "marital": "single",
                 "name": "John",
-                "bank_account_id": self.res_partner_bank.bank_id.id,
+                "department_id": department.id,
             }
         )
 
@@ -67,34 +86,51 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        rules = [
-            self.ref("payroll.hr_salary_rule_houserentallowance1"),
-            self.ref("payroll.hr_salary_rule_providentfund1"),
-        ]
+        # Create minimal salary rules locally (avoid demo xmlids)
+        self.hra_rule = self.env["hr.salary.rule"].create(
+            {
+                "name": "House Rent Allowance",
+                "code": "HRA",
+                "sequence": 5,
+                "amount_select": "percentage",
+                "amount_percentage": 40.0,
+                "amount_percentage_base": "contract.wage",
+            }
+        )
+        self.pf_rule = self.env["hr.salary.rule"].create(
+            {
+                "name": "Provident Fund",
+                "code": "PF",
+                "sequence": 150,
+                "amount_select": "fix",
+                "amount_fix": -200.0,
+            }
+        )
+        rules = [self.hra_rule.id, self.pf_rule.id]
         self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
             {
                 "name": "Salary Structure for Software Developer",
                 "code": "SD",
-                "parent_id": self.ref("payroll.structure_base"),
                 "rule_ids": [(6, 0, rules)],
             }
         )
 
-        self.hr_contract_john = self.env["hr.contract"].create(
+        # Reuse the existing version created at employee creation to avoid
+        # (employee_id, date_version) unique conflicts.
+        self.hr_employee_john.version_id.write(
             {
-                "date_end": fields.Date.to_string(datetime.now() + timedelta(days=365)),
-                "date_start": fields.Date.today(),
+                "contract_date_start": fields.Date.today(),
                 "name": "Contract for John",
                 "wage": 5000.0,
-                "employee_id": self.hr_employee_john.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
                 "journal_id": self.account_journal.id,
             }
         )
+        self.hr_contract_john = self.hr_employee_john.version_id
 
     def _update_account_in_rule(self, debit, credit):
-        rule_HRA = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
-        rule_HRA.write({"account_debit": debit, "account_credit": credit})
+        # Update the HRA rule created in setUp
+        self.hra_rule.write({"account_debit": debit, "account_credit": credit})
 
     def _prepare_payslip(self, employee):
         date_from = datetime.now()
