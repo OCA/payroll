@@ -1,4 +1,4 @@
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -24,7 +24,9 @@ class HrPayslipEmployees(models.TransientModel):
         to_date = run_data.get("date_end")
         struct_id = run_data.get("struct_id")
         if not data["employee_ids"]:
-            raise UserError(_("You must select employee(s) to generate payslip(s)."))
+            raise UserError(
+                self.env._("You must select employee(s) to generate payslip(s).")
+            )
         for employee in self.env["hr.employee"].browse(data["employee_ids"]):
             slip_data = self.env["hr.payslip"].get_payslip_vals(
                 from_date, to_date, employee.id, contract_id=False, struct_id=struct_id

@@ -19,7 +19,7 @@ class HrPayslipWorkedDays(models.Model):
     number_of_days = fields.Float(string="Number of Days")
     number_of_hours = fields.Float(string="Number of Hours")
     contract_id = fields.Many2one(
-        "hr.contract",
+        "hr.version",
         string="Contract",
         required=True,
         help="The contract for which applied this input",

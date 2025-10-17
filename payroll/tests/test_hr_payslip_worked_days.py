@@ -55,7 +55,7 @@ class TestWorkedDays(TestPayslipBase):
 
     def _common_contract_leave_setup(self):
         self.richard_emp.resource_id.calendar_id = self.full_calendar
-        self.richard_emp.contract_ids.resource_calendar_id = self.full_calendar
+        self.richard_emp.version_ids.resource_calendar_id = self.full_calendar
 
         # I put all eligible contracts (including Richard's) in an "open" state
         self.apply_contract_cron()

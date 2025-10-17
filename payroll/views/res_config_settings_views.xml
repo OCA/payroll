@@ -82,11 +82,9 @@
     </record>
     <record id="payroll_configuration_action" model="ir.actions.act_window">
         <field name="name">Settings</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.config.settings</field>
         <field name="view_mode">form</field>
-        <field name="target">inline</field>
-        <field name="context">{'module' : 'payroll'}</field>
+        <field name="context">{'module': 'payroll'}</field>
     </record>
     <menuitem
         id="menu_payroll_global_settings"

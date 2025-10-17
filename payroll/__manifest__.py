@@ -2,7 +2,7 @@
 
 {
     "name": "Payroll",
-    "version": "18.0.1.1.3",
+    "version": "19.0.1.0.0",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
@@ -10,7 +10,6 @@
     "license": "LGPL-3",
     "author": "Odoo SA, Odoo Community Association (OCA)",
     "depends": [
-        "hr_contract",
         "hr_holidays",
         "mail",
     ],

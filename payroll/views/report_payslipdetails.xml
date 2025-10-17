@@ -58,7 +58,9 @@
                                     <strong>Bank Account</strong>
                                 </td>
                                 <td>
-                                    <span t-field="o.employee_id.bank_account_id" />
+                                    <span
+                                        t-field="o.employee_id.primary_bank_account_id"
+                                    />
                                 </td>
                             </tr>
                             <tr>

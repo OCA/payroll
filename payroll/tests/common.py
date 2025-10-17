@@ -10,7 +10,7 @@ class TestPayslipBase(TransactionCase):
         super().setUp()
 
         self.CalendarAttendance = self.env["resource.calendar.attendance"]
-        self.Contract = self.env["hr.contract"]
+        self.Contract = self.env["hr.version"]
         self.ContributionRegister = self.env["hr.contribution.register"]
         self.Department = self.env["hr.department"]
         self.PayrollStructure = self.env["hr.payroll.structure"]
@@ -188,7 +188,7 @@ class TestPayslipBase(TransactionCase):
         self.richard_emp = self.env["hr.employee"].create(
             {
                 "name": "Richard",
-                "gender": "male",
+                "sex": "male",
                 "birthday": "1984-05-01",
                 "country_id": self.ref("base.be"),
                 "department_id": self.dept_rd.id,
@@ -213,17 +213,17 @@ class TestPayslipBase(TransactionCase):
             }
         )
 
-        # I create a contract for "Richard"
-        self.richard_contract = self.Contract.create(
+        # Initialize current contract (hr.version) for "Richard" by updating
+        # the version created at employee creation to avoid duplicate date_version
+        self.richard_emp.version_id.write(
             {
-                "date_start": Date.today(),
+                "contract_date_start": Date.today(),
                 "name": "Contract for Richard",
                 "wage": 5000.0,
-                "employee_id": self.richard_emp.id,
                 "struct_id": self.developer_pay_structure.id,
-                "kanban_state": "done",
             }
         )
+        self.richard_contract = self.richard_emp.version_id
 
         # I create a salary structure for "Sales Person"
         self.sales_pay_structure = self.PayrollStructure.create(
@@ -247,18 +247,30 @@ class TestPayslipBase(TransactionCase):
                 "department_id": self.dept_sales.id,
             }
         )
-        self.Contract.create(
+        # Initialize Sally's current contract by updating existing version
+        from dateutil.relativedelta import relativedelta
+
+        # Initialize Sally's contract to start next month
+        next_month_start = (Date.today() + relativedelta(months=1, day=1)).strftime(
+            "%Y-%m-%d"
+        )
+        self.sally.version_id.write(
             {
-                "date_start": Date.today().strftime("%Y-%m-1"),
+                "date_version": next_month_start,
+                "contract_date_start": next_month_start,
                 "name": "Contract for Sally",
                 "wage": 6500.0,
-                "employee_id": self.sally.id,
                 "struct_id": self.sales_pay_structure.id,
-                "kanban_state": "done",
             }
         )
 
     def apply_contract_cron(self):
-        self.env.ref(
-            "hr_contract.ir_cron_data_contract_update_state"
-        ).method_direct_trigger()
+        # Open Richard and Sally contracts for current period
+        today = Date.today().strftime("%Y-%m-%d")
+        for emp in (self.richard_emp, self.sally):
+            emp.version_id.write(
+                {
+                    "contract_date_start": today,
+                    "contract_date_end": False,
+                }
+            )

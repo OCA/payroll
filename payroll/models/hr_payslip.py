@@ -8,7 +8,7 @@ import babel
 from dateutil.relativedelta import relativedelta
 from pytz import timezone
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from .base_browsable import (
@@ -119,7 +119,7 @@ class HrPayslip(models.Model):
         tracking=True,
     )
     contract_id = fields.Many2one(
-        "hr.contract",
+        "hr.version",
         string="Contract",
         readonly=True,
         tracking=True,
@@ -189,7 +189,7 @@ class HrPayslip(models.Model):
     def _check_dates(self):
         if any(self.filtered(lambda payslip: payslip.date_from > payslip.date_to)):
             raise ValidationError(
-                _("Payslip 'Date From' must be earlier than 'Date To'.")
+                self.env._("Payslip 'Date From' must be earlier than 'Date To'.")
             )
 
     def copy(self, default=None):
@@ -216,14 +216,14 @@ class HrPayslip(models.Model):
             if payslip.allow_cancel_payslips:
                 if payslip.refunded_id and payslip.refunded_id.state != "cancel":
                     raise ValidationError(
-                        _(
+                        self.env._(
                             """To cancel the Original Payslip the
                         Refunded Payslip needs to be canceled first!"""
                         )
                     )
             else:
                 if self.filtered(lambda slip: slip.state == "done"):
-                    raise UserError(_("Cannot cancel a payslip that is done."))
+                    raise UserError(self.env._("Cannot cancel a payslip that is done."))
         return self.write({"state": "cancel"})
 
     def refund_sheet(self):
@@ -231,7 +231,10 @@ class HrPayslip(models.Model):
         for payslip in self:
             # Create a refund slip
             copied_payslip = payslip.copy(
-                {"credit_note": True, "name": _("Refund: %s") % payslip.name}
+                {
+                    "credit_note": True,
+                    "name": self.env._("Refund: %(name)s", name=payslip.name),
+                }
             )
             # Assign a number
             number = copied_payslip.number or self.env["ir.sequence"].next_by_code(
@@ -252,7 +255,7 @@ class HrPayslip(models.Model):
         formview_ref = self.env.ref("payroll.hr_payslip_view_form", False)
         treeview_ref = self.env.ref("payroll.hr_payslip_view_tree", False)
         res = {
-            "name": _("Refund Payslip"),
+            "name": self.env._("Refund Payslip"),
             "view_mode": "list, form",
             "view_id": False,
             "res_model": "hr.payslip",
@@ -267,12 +270,14 @@ class HrPayslip(models.Model):
         }
         return res
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_draft_cancel(self):
         if any(self.filtered(lambda payslip: payslip.state not in ("draft", "cancel"))):
             raise UserError(
-                _("You cannot delete a payslip which is not draft or cancelled")
+                self.env._(
+                    "You cannot delete a payslip which is not draft or cancelled"
+                )
             )
-        return super().unlink()
 
     def compute_sheet(self):
         for payslip in self:
@@ -333,7 +338,7 @@ class HrPayslip(models.Model):
         )
         leaves = {}
         calendar = contract.resource_calendar_id
-        tz = timezone(calendar.tz)
+        tz = timezone(calendar.tz or contract.employee_id.tz or "UTC")
         day_leave_intervals = contract.employee_id.list_leaves(
             day_from, day_to, calendar=contract.resource_calendar_id
         )
@@ -342,7 +347,8 @@ class HrPayslip(models.Model):
             current_leave_struct = leaves.setdefault(
                 holiday.holiday_status_id,
                 {
-                    "name": holiday.holiday_status_id.name or _("Global Leaves"),
+                    "name": holiday.holiday_status_id.name
+                    or self.env._("Global Leaves"),
                     "sequence": getattr(
                         getattr(holiday.holiday_status_id, "work_entry_type_id", None),
                         "sequence",
@@ -388,7 +394,7 @@ class HrPayslip(models.Model):
             compute_leaves=False,
         )
         return {
-            "name": _("Normal Working Days paid at 100%"),
+            "name": self.env._("Normal Working Days paid at 100%"),
             "sequence": 1,
             "code": "WORK100",
             "number_of_days": work_data[contract.employee_id.id]["days"],
@@ -507,11 +513,14 @@ class HrPayslip(models.Model):
 
     def _get_salary_rules(self):
         "Return rules for the Paylips, sorted by sequence"
+        # Only compute rules when there is at least one valid contract in the period
+        contracts = self._get_employee_contracts()
+        if not contracts:
+            return self.env["hr.salary.rule"]
         current_structure = self.struct_id
         if current_structure:
             structures = current_structure.get_structure_with_parents()
         else:
-            contracts = self._get_employee_contracts()
             structures = contracts.struct_id.get_structure_with_parents()
         return structures.get_all_rules()
 
@@ -619,6 +628,9 @@ class HrPayslip(models.Model):
     def get_payslip_vals(
         self, date_from, date_to, employee_id=False, contract_id=False, struct_id=False
     ):
+        # Normalize incoming dates (tests may pass datetimes)
+        date_from = fields.Date.to_date(date_from) if date_from else date_from
+        date_to = fields.Date.to_date(date_to) if date_to else date_to
         # Initial default values for generated payslips
         employee = self.env["hr.employee"].browse(employee_id)
         res = {
@@ -634,20 +646,28 @@ class HrPayslip(models.Model):
         # If we don't have employee or date data, we return.
         if (not employee_id) or (not date_from) or (not date_to):
             return res
-        # We check if contract_id is present, if not we fill with the
-        # first contract of the employee. If not contract present, we return.
+        # We check if contract_id is present, if not we pick the contract(s)
+        # of the employee in the given period. If no contract present, we return.
         if not self.env.context.get("contract"):
-            contract_ids = employee.contract_id.ids
+            contracts_by_emp = employee._get_contracts(
+                date_start=date_from,
+                date_end=date_to,
+            )
+            default_versions = self.env["hr.version"]
+            contract_ids = contracts_by_emp.get(employee.id, default_versions).ids
         else:
             if contract_id:
                 contract_ids = [contract_id]
             else:
-                contract_ids = employee._get_contracts(
-                    date_from=date_from, date_to=date_to
-                ).ids
+                contracts_by_emp = employee._get_contracts(
+                    date_start=date_from,
+                    date_end=date_to,
+                )
+                default_versions = self.env["hr.version"]
+                contract_ids = contracts_by_emp.get(employee.id, default_versions).ids
         if not contract_ids:
             return res
-        contract = self.env["hr.contract"].browse(contract_ids[0])
+        contract = self.env["hr.version"].browse(contract_ids[0])
         res["value"].update({"contract_id": contract.id})
         # We check if struct_id is already filled, otherwise we assign the contract struct. # noqa: E501
         # If contract don't have a struct, we return.
@@ -659,7 +679,7 @@ class HrPayslip(models.Model):
                 return res
             res["value"].update({"struct_id": struct.id})
         # Computation of the salary input and worked_day_lines
-        contracts = self.env["hr.contract"].browse(contract_ids)
+        contracts = self.env["hr.version"].browse(contract_ids)
         worked_days_line_ids = self.get_worked_day_lines(contracts, date_from, date_to)
         input_line_ids = self.get_inputs(contracts, date_from, date_to)
         res["value"].update(
@@ -683,13 +703,20 @@ class HrPayslip(models.Model):
         return localdict
 
     def _get_employee_contracts(self):
-        contracts = self.env["hr.contract"]
+        contracts = self.env["hr.version"]
         for payslip in self:
             if payslip.contract_id.ids:
-                contracts |= payslip.contract_id
+                # only keep contract if it overlaps the payslip period
+                if payslip.contract_id._is_overlapping_period(
+                    payslip.date_from, payslip.date_to
+                ):
+                    contracts |= payslip.contract_id
             else:
-                contracts |= payslip.employee_id._get_contracts(
-                    date_from=payslip.date_from, date_to=payslip.date_to
+                contracts_by_emp = payslip.employee_id._get_contracts(
+                    date_start=payslip.date_from, date_end=payslip.date_to
+                )
+                contracts |= contracts_by_emp.get(
+                    payslip.employee_id.id, payslip.env["hr.version"]
                 )
         return contracts
 
@@ -735,7 +762,7 @@ class HrPayslip(models.Model):
                 contract_ids = payslip._get_employee_contracts().ids
                 if not contract_ids:
                     continue
-                payslip.contract_id = payslip.env["hr.contract"].browse(contract_ids[0])
+                payslip.contract_id = payslip.env["hr.version"].browse(contract_ids[0])
             # Assign struct_id automatically when the user don't selected one.
             if not payslip.struct_id and not payslip.env.context.get("struct_id"):
                 if not payslip.contract_id.struct_id:
@@ -757,10 +784,11 @@ class HrPayslip(models.Model):
                 format="MMMM-y",
                 locale=record.env.context.get("lang") or "en_US",
             )
-            record.name = _("Salary Slip of %(name)s for %(dt)s") % {
-                "name": record.employee_id.name,
-                "dt": str(date_formatted),
-            }
+            record.name = record.env._(
+                "Salary Slip of %(name)s for %(dt)s",
+                name=record.employee_id.name,
+                dt=str(date_formatted),
+            )
 
     @api.onchange("contract_id")
     def onchange_contract(self):

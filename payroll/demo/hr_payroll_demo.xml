@@ -198,24 +198,16 @@ ref('hr_salary_rule_convanceallowance1'),ref('hr_salary_rule_professionaltax1'),
             type="base64"
             file="payroll/static/img/hr_employee_payroll-image.jpg"
         />
-    </record>
-    <!-- Employee Contract -->
-    <record id="hr_contract_firstcontract1" model="hr.contract">
-        <field name="name">Marketing Executive Contract</field>
-        <field name="date_start" eval="time.strftime('%Y-%m')+'-1'" />
-        <field name="date_end" eval="time.strftime('%Y')+'-12-31'" />
+        <field name="date_version" eval="time.strftime('%Y-%m')+'-1'" />
+        <field name="contract_date_start" eval="time.strftime('%Y-%m')+'-1'" />
+        <field name="contract_date_end" eval="time.strftime('%Y')+'-12-31'" />
         <field name="struct_id" ref="payroll.structure_001" />
-        <field name="employee_id" ref="hr_employee_payroll" />
-        <field name="notes">Default contract for marketing executives</field>
         <field eval="4000.0" name="wage" />
+        <field name="additional_note">Default contract for marketing executives</field>
     </record>
-    <record id="hr_contract_marc_demo" model="hr.contract">
-        <field name="name">Contract For Marc Demo</field>
-        <field name="date_start" eval="time.strftime('%Y-%m')+'-1'" />
-        <field name="date_end" eval="time.strftime('%Y')+'-12-31'" />
+    <record id="hr.employee_qdp" model="hr.employee">
         <field name="struct_id" ref="payroll.structure_002" />
-        <field name="employee_id" ref="hr.employee_qdp" />
-        <field name="notes">This is Marc Demo's contract</field>
         <field eval="5000.0" name="wage" />
+        <field name="additional_note">This is Marc Demo's contract</field>
     </record>
 </odoo>

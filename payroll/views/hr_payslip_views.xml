@@ -369,7 +369,7 @@
                     domain="[('credit_note', '=', True)]"
                 />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Employees"
                         name="employee_id"

@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -30,7 +30,9 @@ class HrPayrollStructure(models.Model):
     )
     note = fields.Text(string="Description")
     parent_id = fields.Many2one(
-        "hr.payroll.structure", string="Parent", default=_get_parent
+        "hr.payroll.structure",
+        string="Parent",
+        default=lambda self: self._get_parent(),
     )
     children_ids = fields.One2many(
         "hr.payroll.structure", "parent_id", string="Children", copy=True
@@ -60,12 +62,16 @@ class HrPayrollStructure(models.Model):
     @api.constrains("parent_id")
     def _check_parent_id(self):
         if self._has_cycle():
-            raise ValidationError(_("You cannot create a recursive salary structure."))
+            raise ValidationError(
+                self.env._("You cannot create a recursive salary structure.")
+            )
 
-    @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
-        default = dict(default or {}, code=_("%s (copy)") % self.code)
+        default = dict(
+            default or {},
+            code=self.env._("%(code)s (copy)", code=self.code),
+        )
         return super().copy(default)
 
     def get_all_rules(self):

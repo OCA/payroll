@@ -223,18 +223,21 @@ class TestPayslipFlow(TestPayslipBase):
             len(contracts), 1, "There is one open contract for the employee"
         )
 
-        self.sally.contract_id.date_end = (Date.today() - timedelta(days=1)).strftime(
+        # Close current contract and create a contract starting next month
+        from dateutil.relativedelta import relativedelta
+
+        next_month_start = (Date.today() + relativedelta(months=1, day=1)).strftime(
             "%Y-%m-%d"
         )
+        self.sally.version_id.contract_date_end = Date.today().strftime("%Y-%m-%d")
         self.Contract.create(
             {
                 "name": "Second contract for Sally",
                 "employee_id": self.sally.id,
-                "date_start": Date.today().strftime("%Y-%m-%d"),
+                "date_version": next_month_start,
+                "contract_date_start": next_month_start,
                 "struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
-                "state": "open",
-                "kanban_state": "done",
             }
         )
         contracts = payslip._get_employee_contracts()
@@ -243,20 +246,28 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
     def test_get_contracts_multiple(self):
-        self.sally.contract_ids[0].date_end = Date.today().strftime("%Y-%m-01")
-
+        # Prepare two sequential contracts within current month
+        first_day = Date.today().strftime("%Y-%m-01")
+        mid_day = Date.today().strftime("%Y-%m-%d")
+        next_day = (Date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
+        self.sally.version_ids[0].write(
+            {
+                "date_version": first_day,
+                "contract_date_start": first_day,
+                "contract_date_end": mid_day,
+            }
+        )
         self.Contract.create(
             {
                 "name": "Second contract for Sally",
                 "employee_id": self.sally.id,
-                "date_start": Date.today().strftime("%Y-%m-02"),
+                "date_version": next_day,
+                "contract_date_start": next_day,
                 "struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
-                "state": "open",
-                "kanban_state": "done",
             }
         )
-        self.apply_contract_cron()
+        # Do not change dates; keep two sequential contracts inside current month
 
         payslips = self.Payslip.create(
             [
@@ -273,6 +284,9 @@ class TestPayslipFlow(TestPayslipBase):
         frm = Form(self.Payslip)
         frm.employee_id = self.richard_emp
         payslip = frm.save()
+        # Use a period before the contract start so there is no valid contract
+        prev_day = (Date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+        payslip.write({"date_from": prev_day, "date_to": prev_day})
         payslip.compute_sheet()
         self.assertEqual(
             len(payslip.line_ids),
@@ -310,7 +324,7 @@ class TestPayslipFlow(TestPayslipBase):
         payslip.struct_id = self.developer_pay_structure
         self.assertNotEqual(
             payslip.struct_id,
-            self.sally.contract_id.struct_id,
+            self.sally.version_id.struct_id,
             "The salary structure on the payslip is different from the contract",
         )
         rules = payslip._get_salary_rules()
@@ -380,7 +394,7 @@ class TestPayslipFlow(TestPayslipBase):
         payslip = self.Payslip.create({"employee_id": self.sally.id})
         payslip.onchange_employee()
 
-        line_key = f"BASIC-{self.sally.contract_id.id}"
+        line_key = f"BASIC-{self.sally.version_id.id}"
         lines_dict = payslip.get_lines_dict()
         self.assertIn(
             line_key,
@@ -398,8 +412,8 @@ class TestPayslipFlow(TestPayslipBase):
         )
         payslips.onchange_employee()
 
-        sally_key = f"BASIC-{self.sally.contract_id.id}"
-        richard_key = f"BASIC-{self.richard_emp.contract_id.id}"
+        sally_key = f"BASIC-{self.sally.version_id.id}"
+        richard_key = f"BASIC-{self.richard_emp.version_id.id}"
         lines_dict = payslips.get_lines_dict()
         self.assertIn(
             sally_key, lines_dict.keys(), "A line was created for Sally's contract"
@@ -493,7 +507,7 @@ class TestPayslipFlow(TestPayslipBase):
         payslip = self.Payslip.create({"employee_id": self.sally.id})
         self.assertFalse(payslip.worked_days_line_ids)
         payslip.worked_days_line_ids = [
-            (0, 0, {"name": "A", "code": "A", "contract_id": self.sally.contract_id.id})
+            (0, 0, {"name": "A", "code": "A", "contract_id": self.sally.version_id.id})
         ]
         payslip.write({"date_from": False, "date_to": False})
         payslip.onchange_dates()
@@ -518,12 +532,12 @@ class TestPayslipFlow(TestPayslipBase):
                 {
                     "name": "A",
                     "code": "A",
-                    "contract_id": self.richard_emp.contract_id.id,
+                    "contract_id": self.richard_emp.version_id.id,
                 },
             )
         ]
         payslips[1].worked_days_line_ids = [
-            (0, 0, {"name": "B", "code": "B", "contract_id": self.sally.contract_id.id})
+            (0, 0, {"name": "B", "code": "B", "contract_id": self.sally.version_id.id})
         ]
         payslips.write({"date_from": False, "date_to": False})
         payslips.onchange_dates()

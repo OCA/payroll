@@ -25,7 +25,7 @@ class HrPayslipInput(models.Model):
         "Amount Quantity", help="It can be used in computation for other inputs"
     )
     contract_id = fields.Many2one(
-        "hr.contract",
+        "hr.version",
         string="Contract",
         required=True,
         help="The contract for which applied this input",
