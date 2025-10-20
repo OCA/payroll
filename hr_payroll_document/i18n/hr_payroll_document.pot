@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,6 +30,7 @@ msgstr ""
 #. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_ir_attachment
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment__payrol_rel
+#: model:ir.model.fields,field_description:hr_payroll_document.field_product_document__payrol_rel
 msgid "Attachment"
 msgstr ""
 
@@ -66,8 +67,20 @@ msgid "Display Name"
 msgstr ""
 
 #. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment__document_type
+#: model:ir.model.fields,field_description:hr_payroll_document.field_product_document__document_type
+msgid "Document Type"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_tree
+msgid "Download"
+msgstr ""
+
+#. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_hr_employee
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__employee
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Employee"
 msgstr ""
 
@@ -86,6 +99,11 @@ msgid ""
 msgstr ""
 
 #. module: hr_payroll_document
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
+msgid "Group By"
+msgstr ""
+
+#. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__id
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__id
 msgid "ID"
@@ -101,13 +119,8 @@ msgstr ""
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__identification_id
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Identification ID"
-msgstr ""
-
-#. module: hr_payroll_document
-#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom____last_update
-#: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: hr_payroll_document
@@ -132,6 +145,7 @@ msgstr ""
 #. module: hr_payroll_document
 #. odoo-python
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
+#: model:ir.model.fields.selection,name:hr_payroll_document.selection__ir_attachment__document_type__payroll
 #, python-format
 msgid "Payroll"
 msgstr ""
@@ -141,6 +155,11 @@ msgstr ""
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #, python-format
 msgid "Payroll "
+msgstr ""
+
+#. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_hr_employee__payroll_count
+msgid "Payroll Count"
 msgstr ""
 
 #. module: hr_payroll_document
@@ -164,7 +183,12 @@ msgid "Payroll {{ctx.get('subject')}}"
 msgstr ""
 
 #. module: hr_payroll_document
+#: model:ir.actions.act_window,name:hr_payroll_document.payrolls_view_action
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__payrolls
+#: model:ir.ui.menu,name:hr_payroll_document.payrolls_menu_action
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.hr_employee_view_tree_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Payrolls"
 msgstr ""
 
@@ -177,10 +201,6 @@ msgstr ""
 #. module: hr_payroll_document
 #. odoo-python
 #: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
-#: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
-#: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
-#: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
-#: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #, python-format
 msgid "Payrolls sent"
@@ -202,6 +222,7 @@ msgstr ""
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__subject
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__subject
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Subject"
 msgstr ""
 
@@ -210,6 +231,11 @@ msgstr ""
 #: code:addons/hr_payroll_document/models/hr_employee.py:0
 #, python-format
 msgid "The field identification ID is not valid"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model:ir.model,name:hr_payroll_document.model_res_users
+msgid "User"
 msgstr ""
 
 #. module: hr_payroll_document
