@@ -1,4 +1,7 @@
-from odoo import fields, models
+# Copyright 2025 Simone Rubino - PyTech
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.fields import Domain
 
@@ -18,6 +21,25 @@ class Employee(models.Model):
     payroll_count = fields.Integer(
         compute="_compute_payroll_count",
     )
+
+    def _validate_payroll_identification(self, code=None):
+        # Override if the identification should be validated in another way
+        if code is None and len(self) == 1:
+            code = self.identification_id
+        if country_code := self.env.company.country_id.code:
+            is_valid = self.env["res.partner"]._check_vat_number(country_code, code)
+        else:
+            is_valid = True
+        return is_valid
+
+    @api.constrains("identification_id")
+    def _constrain_payroll_identification(self):
+        # Only check the employees that have an `identification_id`
+        for employee in self.filtered("identification_id"):
+            if not employee._validate_payroll_identification():
+                raise ValidationError(
+                    self.env._("The field identification ID is not valid")
+                )
 
     def _compute_payroll_count(self):
         self.payroll_count = len(
@@ -44,15 +66,3 @@ class Employee(models.Model):
             ]
         )
         return action
-
-    def write(self, vals):
-        res = super().write(vals)
-        if "identification_id" in vals and not self.env[
-            "res.partner"
-        ]._check_vat_number(
-            self.env.company.country_id.code, vals["identification_id"]
-        ):
-            raise ValidationError(
-                self.env._("The field identification ID is not valid")
-            )
-        return res

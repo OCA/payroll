@@ -157,7 +157,5 @@ class PayrollManagamentWizard(models.TransientModel):
             employee.id, force_send=True
         )
 
-    def validate_id(self, number):
-        return self.env["res.partner"]._check_vat_number(
-            self.env.company.country_id.code, number
-        )
+    def validate_id(self, code):
+        return self.env["hr.employee"]._validate_payroll_identification(code=code)
