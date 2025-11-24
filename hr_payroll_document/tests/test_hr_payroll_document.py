@@ -4,53 +4,13 @@ import io
 import pypdf
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import common
-from odoo.tools.misc import file_path
 
-from odoo.addons.mail.tests.common import mail_new_test_user
+from odoo.addons.hr_payroll_document.tests.common import TestHrPayrollDocument
 
 
-class TestHRPayrollDocument(common.TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env.user.tz = "Europe/Brussels"
-        cls.user_admin = cls.env.ref("base.user_admin")
-
-        # Fix Company without country
-        cls.env.company.country_id = False
-
-        # Test users to use through the various tests
-        cls.user_employee = mail_new_test_user(
-            cls.env, login="david", groups="base.group_user"
-        )
-        cls.user_employee_id = cls.user_employee.id
-
-        # Hr Data
-        cls.employee_emp = cls.env["hr.employee"].create(
-            {
-                "name": "David Employee",
-                "user_id": cls.user_employee_id,
-                "company_id": 1,
-                "identification_id": "30831011V",
-            }
-        )
-
-        with open(file_path("hr_payroll_document/tests/test.pdf"), "rb") as pdf_file:
-            encoded_string = base64.b64encode(pdf_file.read())
-        ir_values = {
-            "name": "test",
-            "type": "binary",
-            "datas": encoded_string,
-            "store_fname": encoded_string,
-            "res_model": "payroll.management.wizard",
-            "res_id": 1,
-        }
-        cls.attachment = cls.env["ir.attachment"].create(ir_values)
-        cls.subject = "January"
-        cls.wizard = cls.env["payroll.management.wizard"].create(
-            {"payrolls": [cls.attachment.id], "subject": cls.subject}
-        )
+class TestHRPayrollDocument(TestHrPayrollDocument):
+    def setUp(self, *args, **kwargs):
+        super().setUp(*args, **kwargs)
 
     def fill_company_id(self):
         self.env.company.country_id = self.env["res.country"].search(
@@ -58,20 +18,8 @@ class TestHRPayrollDocument(common.TransactionCase):
         )
 
     def test_extension_error(self):
-        with open(file_path("hr_payroll_document/tests/test.docx"), "rb") as pdf_file:
-            encoded_string = base64.b64encode(pdf_file.read())
-        ir_values = {
-            "name": "test",
-            "type": "binary",
-            "datas": encoded_string,
-            "store_fname": encoded_string,
-            "res_model": "payroll.management.wizard",
-            "res_id": 1,
-        }
-        self.attachment = self.env["ir.attachment"].create(ir_values)
-        self.subject = "January"
-        self.wizard = self.env["payroll.management.wizard"].create(
-            {"payrolls": [self.attachment.id], "subject": self.subject}
+        self.wizard = self._create_wizard(
+            "January", "hr_payroll_document/tests/test.docx"
         )
         with self.assertRaises(ValidationError):
             self.wizard.send_payrolls()
