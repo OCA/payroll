@@ -1,4 +1,6 @@
 import base64
+import contextlib
+from unittest import mock
 
 from odoo.tests import common
 from odoo.tools.misc import file_path as open_file_path
@@ -50,4 +52,24 @@ class TestHrPayrollDocument(common.TransactionCase):
         cls.subject = subject
         return cls.env["payroll.management.wizard"].create(
             {"payrolls": [cls.attachment.id], "subject": cls.subject}
+        )
+
+    @contextlib.contextmanager
+    def _mock_valid_identification(self, employee, identification_code):
+        def _mocked_validate_payroll_identification(self, code=None):
+            if code is None:
+                code = employee.identification_id
+            return code == identification_code
+
+        with mock.patch.object(
+            type(employee),
+            "_validate_payroll_identification",
+            _mocked_validate_payroll_identification,
+        ) as patch:
+            patch.side_effect = _mocked_validate_payroll_identification
+            yield
+
+    def fill_company_id(self):
+        self.env.company.country_id = self.env["res.country"].search(
+            [("name", "=", "Spain")]
         )

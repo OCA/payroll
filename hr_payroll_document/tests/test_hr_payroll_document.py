@@ -12,11 +12,6 @@ class TestHRPayrollDocument(TestHrPayrollDocument):
     def setUp(self, *args, **kwargs):
         super().setUp(*args, **kwargs)
 
-    def fill_company_id(self):
-        self.env.company.country_id = self.env["res.country"].search(
-            [("name", "=", "Spain")]
-        )
-
     def test_extension_error(self):
         self.wizard = self._create_wizard(
             "January", "hr_payroll_document/tests/test.docx"
