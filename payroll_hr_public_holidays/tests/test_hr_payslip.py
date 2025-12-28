@@ -31,7 +31,7 @@ class TestPublicHolidays(TransactionCase):
         )
 
         # Create a public holiday
-        self.public_holiday = self.env["hr.holidays.public"].create(
+        self.public_holiday = self.env["calendar.public.holiday"].create(
             {
                 "year": 2024,
                 "line_ids": [

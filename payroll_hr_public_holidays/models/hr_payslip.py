@@ -25,11 +25,11 @@ class HrPayslip(models.Model):
 
     def _compute_public_holidays_days(self, contract, date_from, date_to):
         # get public holidays list
-        public_holidays = self.env["hr.holidays.public"].get_holidays_list(
+        public_holidays = self.env["calendar.public.holiday"].get_holidays_list(
             year=date_from.year,
             start_dt=date_from,
             end_dt=date_to,
-            employee_id=contract.employee_id.id,
+            partner_id=contract.employee_id.message_partner_ids.id,
         )
         ph_days = len(public_holidays)
         ph_hours = (

@@ -3,13 +3,13 @@
 
 {
     "name": "Payroll Public Holidays",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "summary": "Integration between payroll and hr_public_holidays",
     "license": "AGPL-3",
     "author": "Nimarosa, Odoo Community Association (OCA)",
-    "depends": ["payroll", "hr_holidays", "hr_holidays_public"],
+    "depends": ["payroll", "hr_holidays", "calendar_public_holiday"],
     "data": [],
     "installable": True,
     "maintainers": ["nimarosa"],
