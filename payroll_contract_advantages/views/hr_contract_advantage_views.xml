@@ -31,13 +31,13 @@
         <field name="name">hr.contract.advantage.template.tree</field>
         <field name="model">hr.contract.advantage.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="code" />
                 <field name="lower_bound" />
                 <field name="upper_bound" />
                 <field name="default_value" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="hr_contract_advantage_template_action" model="ir.actions.act_window">
