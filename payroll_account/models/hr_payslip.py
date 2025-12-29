@@ -227,6 +227,7 @@ class HrPayslip(models.Model):
             TaxRepLine = self.env["account.tax.repartition.line"]
             tax_repartition_line_id = TaxRepLine.search(
                 [
+                    ("document_type", "=", "invoice"),
                     ("tax_id", "=", salary_rule.account_tax_id.id),
                     (
                         "account_id",
@@ -237,6 +238,7 @@ class HrPayslip(models.Model):
             ).id
             tax_tag_ids += TaxRepLine.search(
                 [
+                    ("document_type", "=", "invoice"),
                     ("tax_id", "=", salary_rule.account_tax_id.id),
                     ("repartition_type", "=", "tax"),
                     (
