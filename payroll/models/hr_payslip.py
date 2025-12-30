@@ -38,7 +38,7 @@ class HrPayslip(models.Model):
         "applied will be all the rules set on the structure of all contracts "
         "of the employee valid for the chosen period",
     )
-    name = fields.Char(string="Payslip Name", readonly=True)
+    name = fields.Char(string="Payslip Name")
     number = fields.Char(
         string="Reference",
         readonly=True,
