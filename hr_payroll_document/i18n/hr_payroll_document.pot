@@ -61,6 +61,18 @@ msgid "Created on"
 msgstr ""
 
 #. module: hr_payroll_document
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_employee_form
+msgid "Disable encryption"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_hr_employee__no_payroll_encryption
+#: model:ir.model.fields,field_description:hr_payroll_document.field_res_users__no_payroll_encryption
+msgid "Disable payrolls encryption"
+msgstr ""
+
+#. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__display_name
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__display_name
 msgid "Display Name"
@@ -124,6 +136,14 @@ msgid "Identification ID"
 msgstr ""
 
 #. module: hr_payroll_document
+#: model:ir.model.fields,help:hr_payroll_document.field_hr_employee__no_payroll_encryption
+#: model:ir.model.fields,help:hr_payroll_document.field_res_users__no_payroll_encryption
+msgid ""
+"If this is disabled (default), the PDF payrolls are encrypted using the Identification No.\n"
+"Only future payrolls are affected by this change, existing payrolls will not change their encryption status."
+msgstr ""
+
+#. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__write_uid
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__write_uid
 msgid "Last Updated by"
@@ -146,6 +166,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #: model:ir.model.fields.selection,name:hr_payroll_document.selection__ir_attachment__document_type__payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
 #, python-format
 msgid "Payroll"
 msgstr ""

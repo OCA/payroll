@@ -23,7 +23,34 @@ msgid ""
 "              <html>\n"
 "                  <head></head>\n"
 "                  <body style=\"margin: 0; padding: 0;\">\n"
-"                    <table style=\"padding:20px;background-color:#ededed; border-collapse:separate\" width=\"100%\" cellpadding=\"0\" border=\"0\"><tbody><!-- HEADER --><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px;background-color:#fff; padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody><tr><td style=\"text-align:right\" valign=\"middle\"><img src=\"/logo.png\" style=\"padding:0px;margin:0px; height:auto; width:80px\" alt=\"{{object.company_id.name}}\"></td></tr><tr><td style=\"text-align:left\" valign=\"middle\"><h2 style=\"color:rgb(28, 130, 156)\"><font style=\"color:rgb(107, 175, 103);\">Payroll <t t-out=\"ctx.get('subject')\" contenteditable=\"false\" data-oe-t-inline=\"true\"/></font></h2></td></tr></tbody></table></td></tr><!-- CONTENT --><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px;background-color:rgb(255, 255, 255); padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\"><p> </p><p>Hello <t t-out=\"object.name\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>,</p><br><p>We send you the payroll with the subject <t t-out=\"ctx.get('subject')\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>.<br></p></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\"><br></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\"><br><p></p></td></tr></tbody></table></td></tr><!-- FOOTER --><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px;background-color:#95ce3f; padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody> </tbody></table></td></tr></tbody></table>\n"
+"                    <table style=\"padding:20px;background-color:#ededed; "
+"border-collapse:separate\" width=\"100%\" cellpadding=\"0\" "
+"border=\"0\"><tbody><!-- HEADER --><tr><td style=\"min-width:590px\" "
+"align=\"center\"><table style=\"min-width:590px;background-color:#fff; "
+"padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" "
+"border=\"0\"><tbody><tr><td style=\"text-align:right\" "
+"valign=\"middle\"><img src=\"/logo.png\" style=\"padding:0px;margin:0px; "
+"height:auto; width:80px\" alt=\"{{object.company_id.name}}\"></td></"
+"tr><tr><td style=\"text-align:left\" valign=\"middle\"><h2 style=\"color:"
+"rgb(28, 130, 156)\"><font style=\"color:rgb(107, 175, 103);\">Payroll <t t-"
+"out=\"ctx.get('subject')\" contenteditable=\"false\" data-oe-t-"
+"inline=\"true\"/></font></h2></td></tr></tbody></table></td></tr><!-- "
+"CONTENT --><tr><td style=\"min-width:590px\" align=\"center\"><table "
+"style=\"min-width:590px;background-color:rgb(255, 255, 255); padding:20px; "
+"border-collapse:separate\" width=\"590\" cellpadding=\"0\" "
+"border=\"0\"><tbody><tr><td style=\"font-family:Arial,Helvetica,sans-serif;"
+"color:#555; font-size:14px\" valign=\"top\"><p> </p><p>Hello <t t-"
+"out=\"object.name\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>,</"
+"p><br><p>We send you the payroll with the subject <t t-out=\"ctx."
+"get('subject')\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>.<br></"
+"p></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:"
+"#555; font-size:14px\" valign=\"top\"><br></td></tr><tr><td style=\"font-"
+"family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" "
+"valign=\"top\"><br><p></p></td></tr></tbody></table></td></tr><!-- FOOTER --"
+"><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-"
+"width:590px;background-color:#95ce3f; padding:20px; border-collapse:"
+"separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody> </tbody></"
+"table></td></tr></tbody></table>\n"
 "                    <p></p>\n"
 "                  </html>\n"
 "              \n"
@@ -34,33 +61,33 @@ msgstr ""
 "                  <head></head>\n"
 "                  <body style=\"margin: 0; padding: 0;\">\n"
 "                    <table style=\"padding:20px;background-color:#ededed; "
-"border-collapse:separate\" width=\"100%\" cellpadding=\"0\" border=\"0\""
-"><tbody><!-- HEADER --><tr><td style=\"min-width:590px\" align=\"center\""
-"><table style=\"min-width:590px;background-color:#fff; padding:20px; border-"
-"collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\""
-"><tbody><tr><td style=\"text-align:right\" valign=\"middle\"><img src=\"/logo"
-".png\" style=\"padding:0px;margin:0px; height:auto; width:80px\" alt=\""
-"{{object.company_id.name}}\"></td></tr><tr><td style=\"text-align:left\" "
-"valign=\"middle\"><h2 style=\"color:rgb(28, 130, 156)\"><font style=\"color"
-":rgb(107, 175, 103);\">Stipendio<t t-out=\"ctx.get('subject')\" "
-"contenteditable=\"false\" data-oe-t-inline=\"true\""
-"/></font></h2></td></tr></tbody></table></td></tr><!-- CONTENT --><tr><td "
-"style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px"
-";background-color:rgb(255, 255, 255); padding:20px; border-collapse:"
-"separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody><tr><td style"
-"=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" "
-"valign=\"top\"><p> </p><p>Hello <t t-out=\"object.name\" contenteditable="
-"\"false\" data-oe-t-inline=\"true\"/>,</p><br><p>Abbiamo inviato la "
-"retribuzione con soggetto<t t-out=\"ctx.get('subject')\" contenteditable="
-"\"false\" data-oe-t-inline=\"true\"/>.<br></p></td></tr><tr><td style=\"font-"
-"family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\""
-"><br></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-"
-"serif;color:#555; font-size:14px\" valign=\"top\""
-"><br><p></p></td></tr></tbody></table></td></tr><!-- FOOTER --><tr><td style"
-"=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px"
-";background-color:#95ce3f; padding:20px; border-collapse:separate\" width="
-"\"590\" cellpadding=\"0\" border=\"0\"><tbody> "
-"</tbody></table></td></tr></tbody></table>\n"
+"border-collapse:separate\" width=\"100%\" cellpadding=\"0\" "
+"border=\"0\"><tbody><!-- HEADER --><tr><td style=\"min-width:590px\" "
+"align=\"center\"><table style=\"min-width:590px;background-color:#fff; "
+"padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" "
+"border=\"0\"><tbody><tr><td style=\"text-align:right\" "
+"valign=\"middle\"><img src=\"/logo.png\" style=\"padding:0px;margin:0px; "
+"height:auto; width:80px\" alt=\"{{object.company_id.name}}\"></td></"
+"tr><tr><td style=\"text-align:left\" valign=\"middle\"><h2 style=\"color:"
+"rgb(28, 130, 156)\"><font style=\"color:rgb(107, 175, 103);\">Stipendio<t t-"
+"out=\"ctx.get('subject')\" contenteditable=\"false\" data-oe-t-"
+"inline=\"true\"/></font></h2></td></tr></tbody></table></td></tr><!-- "
+"CONTENT --><tr><td style=\"min-width:590px\" align=\"center\"><table "
+"style=\"min-width:590px;background-color:rgb(255, 255, 255); padding:20px; "
+"border-collapse:separate\" width=\"590\" cellpadding=\"0\" "
+"border=\"0\"><tbody><tr><td style=\"font-family:Arial,Helvetica,sans-serif;"
+"color:#555; font-size:14px\" valign=\"top\"><p> </p><p>Hello <t t-"
+"out=\"object.name\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>,</"
+"p><br><p>Abbiamo inviato la retribuzione con soggetto<t t-out=\"ctx."
+"get('subject')\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>.<br></"
+"p></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:"
+"#555; font-size:14px\" valign=\"top\"><br></td></tr><tr><td style=\"font-"
+"family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" "
+"valign=\"top\"><br><p></p></td></tr></tbody></table></td></tr><!-- FOOTER --"
+"><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-"
+"width:590px;background-color:#95ce3f; padding:20px; border-collapse:"
+"separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody> </tbody></"
+"table></td></tr></tbody></table>\n"
 "                    <p></p>\n"
 "                  </html>\n"
 "              \n"
@@ -69,6 +96,7 @@ msgstr ""
 #. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_ir_attachment
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment__payrol_rel
+#: model:ir.model.fields,field_description:hr_payroll_document.field_product_document__payrol_rel
 msgid "Attachment"
 msgstr "Allegato"
 
@@ -99,14 +127,38 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: hr_payroll_document
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_employee_form
+msgid "Disable encryption"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_hr_employee__no_payroll_encryption
+#: model:ir.model.fields,field_description:hr_payroll_document.field_res_users__no_payroll_encryption
+msgid "Disable payrolls encryption"
+msgstr ""
+
+#. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__display_name
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment__document_type
+#: model:ir.model.fields,field_description:hr_payroll_document.field_product_document__document_type
+msgid "Document Type"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_tree
+msgid "Download"
+msgstr ""
+
+#. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_hr_employee
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__employee
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Employee"
 msgstr "Dipendente"
 
@@ -120,10 +172,14 @@ msgstr "Dipendenti non trovati"
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,help:hr_payroll_document.field_payroll_management_wizard__subject
-msgid ""
-"Enter the title of the payroll whether it is the month, week, day, etc."
+msgid "Enter the title of the payroll whether it is the month, week, day, etc."
 msgstr ""
 "Inserire il titolo della retribuzione se è il mese, settimana, giorno, ecc."
+
+#. module: hr_payroll_document
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
+msgid "Group By"
+msgstr ""
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__id
@@ -141,14 +197,19 @@ msgstr "ID il cui dipendente non è stato trovato: "
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__identification_id
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Identification ID"
 msgstr "ID identificazione"
 
 #. module: hr_payroll_document
-#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom____last_update
-#: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
+#: model:ir.model.fields,help:hr_payroll_document.field_hr_employee__no_payroll_encryption
+#: model:ir.model.fields,help:hr_payroll_document.field_res_users__no_payroll_encryption
+msgid ""
+"If this is disabled (default), the PDF payrolls are encrypted using the "
+"Identification No.\n"
+"Only future payrolls are affected by this change, existing payrolls will not "
+"change their encryption status."
+msgstr ""
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__write_uid
@@ -172,6 +233,8 @@ msgstr "Firma PDF mancante"
 #. module: hr_payroll_document
 #. odoo-python
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
+#: model:ir.model.fields.selection,name:hr_payroll_document.selection__ir_attachment__document_type__payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
 #, python-format
 msgid "Payroll"
 msgstr "Retribuzione"
@@ -182,6 +245,11 @@ msgstr "Retribuzione"
 #, python-format
 msgid "Payroll "
 msgstr "Retribuzione "
+
+#. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_hr_employee__payroll_count
+msgid "Payroll Count"
+msgstr ""
 
 #. module: hr_payroll_document
 #: model:mail.template,name:hr_payroll_document.payroll_employee_email_template
@@ -204,7 +272,12 @@ msgid "Payroll {{ctx.get('subject')}}"
 msgstr "Retribuzione {{ctx.get('subject')}}"
 
 #. module: hr_payroll_document
+#: model:ir.actions.act_window,name:hr_payroll_document.payrolls_view_action
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__payrolls
+#: model:ir.ui.menu,name:hr_payroll_document.payrolls_menu_action
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.hr_employee_view_tree_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Payrolls"
 msgstr "Retribuzioni"
 
@@ -217,10 +290,6 @@ msgstr "Gestione retribuzioni"
 #. module: hr_payroll_document
 #. odoo-python
 #: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
-#: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
-#: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
-#: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
-#: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #, python-format
 msgid "Payrolls sent"
@@ -242,6 +311,7 @@ msgstr "Invia"
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__subject
 #: model:ir.model.fields,field_description:hr_payroll_document.field_payroll_management_wizard__subject
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Subject"
 msgstr "Oggetto"
 
@@ -253,8 +323,16 @@ msgid "The field identification ID is not valid"
 msgstr "L'ID identificazione file non è corretto"
 
 #. module: hr_payroll_document
+#: model:ir.model,name:hr_payroll_document.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: hr_payroll_document
 #. odoo-python
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #, python-format
 msgid "You must to filled country field of company"
 msgstr "Serve compilare il campo nazione dell'azienda"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
