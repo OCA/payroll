@@ -1,0 +1,26 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_payroll_document_pymupdf
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_payroll_document_pymupdf
+#: model:ir.model,name:hr_payroll_document_pymupdf.model_payroll_management_wizard
+msgid "Payroll Management"
+msgstr ""
+
+#. module: hr_payroll_document_pymupdf
+#. odoo-python
+#: code:addons/hr_payroll_document_pymupdf/tests/test_payroll_management.py:0
+#, python-format
+msgid "Payrolls sent"
+msgstr ""
