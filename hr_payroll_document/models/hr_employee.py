@@ -5,6 +5,14 @@ from odoo.exceptions import ValidationError
 class Employee(models.Model):
     _inherit = "hr.employee"
 
+    no_payroll_encryption = fields.Boolean(
+        string="Disable payrolls encryption",
+        help="If this is disabled (default), "
+        "the PDF payrolls are encrypted using the Identification No.\n"
+        "Only future payrolls are affected by this change, "
+        "existing payrolls will not change their encryption status.",
+    )
+
     payroll_count = fields.Integer(
         compute="_compute_payroll_count",
     )

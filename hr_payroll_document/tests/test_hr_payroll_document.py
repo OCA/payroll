@@ -1,4 +1,7 @@
 import base64
+import io
+
+import pypdf
 
 from odoo import _
 from odoo.exceptions import UserError, ValidationError
@@ -107,3 +110,35 @@ class TestHRPayrollDocument(common.TransactionCase):
             self.wizard.send_payrolls()["params"]["message"],
             _("Payrolls sent to employees correctly"),
         )
+
+    def test_optional_encryption(self):
+        """The employee's payroll can be not encrypted."""
+        # Arrange
+        self.fill_company_id()
+        employee = self.employee_emp
+        employee.update(
+            {
+                "identification_id": "51000278D",
+                "no_payroll_encryption": True,
+            }
+        )
+        # pre-condition
+        self.assertTrue(employee.no_payroll_encryption)
+
+        # Act
+        self.wizard.send_payrolls()
+
+        # Assert
+        payroll = (
+            self.env["ir.attachment.payroll.custom"]
+            .search(
+                [
+                    ("identification_id", "=", employee.identification_id),
+                ]
+            )
+            .attachment_id
+        )
+        self.assertTrue(payroll)
+        payroll_content = base64.b64decode(payroll.datas)
+        payroll_pdf = pypdf.PdfReader(io.BytesIO(payroll_content))
+        self.assertFalse(payroll_pdf.is_encrypted)
