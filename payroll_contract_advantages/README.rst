@@ -70,6 +70,7 @@ Contributors
 ------------
 
 - Nimarosa (Nicolas Rodriguez) <nicolasrsande@gmail.com>
+- Cristiano Mafra Junior <cristiano.mafra@escodoo.com.br>
 
 Maintainers
 -----------
