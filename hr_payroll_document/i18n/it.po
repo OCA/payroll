@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-04 15:34+0000\n"
+"PO-Revision-Date: 2026-01-05 20:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: hr_payroll_document
 #: model:mail.template,body_html:hr_payroll_document.payroll_employee_email_template
@@ -130,13 +130,13 @@ msgstr "Creato il"
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_employee_form
 msgid "Disable encryption"
-msgstr ""
+msgstr "Disabilita criptazione"
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_hr_employee__no_payroll_encryption
 #: model:ir.model.fields,field_description:hr_payroll_document.field_res_users__no_payroll_encryption
 msgid "Disable payrolls encryption"
-msgstr ""
+msgstr "Disabilita criptazione buste paga"
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__display_name
@@ -148,12 +148,12 @@ msgstr "Nome visualizzato"
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment__document_type
 #: model:ir.model.fields,field_description:hr_payroll_document.field_product_document__document_type
 msgid "Document Type"
-msgstr ""
+msgstr "Tipo documento"
 
 #. module: hr_payroll_document
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_tree
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 #. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_hr_employee
@@ -179,7 +179,7 @@ msgstr ""
 #. module: hr_payroll_document
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__id
@@ -210,6 +210,11 @@ msgid ""
 "Only future payrolls are affected by this change, existing payrolls will not "
 "change their encryption status."
 msgstr ""
+"Se questa opzione è disabilitata (impostazione predefinita), le buste paga "
+"in formato PDF vengono crittografate utilizzando il numero di "
+"identificazione.\n"
+"Questa modifica interesserà solo le buste paga future, mentre quelle "
+"esistenti non modificheranno il loro stato di crittografia."
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__write_uid
@@ -249,7 +254,7 @@ msgstr "Retribuzione "
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_hr_employee__payroll_count
 msgid "Payroll Count"
-msgstr ""
+msgstr "Conteggio buste paga"
 
 #. module: hr_payroll_document
 #: model:mail.template,name:hr_payroll_document.payroll_employee_email_template
@@ -325,7 +330,7 @@ msgstr "L'ID identificazione file non è corretto"
 #. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_res_users
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 #. module: hr_payroll_document
 #. odoo-python
