@@ -11,6 +11,7 @@ class Employee(models.Model):
         "the PDF payrolls are encrypted using the Identification No.\n"
         "Only future payrolls are affected by this change, "
         "existing payrolls will not change their encryption status.",
+        groups="hr.group_hr_user",
     )
 
     payroll_count = fields.Integer(
