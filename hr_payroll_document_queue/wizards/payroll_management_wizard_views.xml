@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    ~ Copyright 2026 Simone Rubino - PyTech
+    ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="payrolls_management_wizard_form" model="ir.ui.view">
+        <field
+            name="name"
+        >Add Async buttons and fields Payroll Management form view</field>
+        <field name="model">payroll.management.wizard</field>
+        <field
+            name="inherit_id"
+            ref="hr_payroll_document.payrolls_management_wizard_form"
+        />
+        <field name="arch" type="xml">
+            <field name="payrolls" position="after">
+                <field name="is_payroll_being_processed" invisible="True" />
+                <div
+                    class="alert alert-warning text-center"
+                    role="alert"
+                    attrs="{
+                        'invisible': [
+                            ('is_payroll_being_processed', '=', False),
+                        ],
+                    }"
+                >
+                    <i class="fa fa-warning" title="Warning" />
+                    <div>
+                        One of the selected payrolls is already being processed
+                    </div>
+                </div>
+            </field>
+            <button name="send_payrolls" position="before">
+                <field name="is_send_visible" invisible="True" />
+            </button>
+            <button name="send_payrolls" position="attributes">
+                <attribute name="attrs">{
+                    'invisible': [
+                        ('is_send_visible', '=', False),
+                    ],
+                }</attribute>
+            </button>
+            <button name="send_payrolls" position="after">
+                <button
+                    string="Send Async"
+                    name="send_payrolls_async"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{
+                        'invisible': [
+                            ('is_send_visible', '=', False),
+                        ],
+                    }"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>
