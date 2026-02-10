@@ -1,4 +1,5 @@
 import base64
+import pathlib
 from base64 import b64decode
 
 from pypdf import PdfReader, PdfWriter, errors
@@ -10,6 +11,7 @@ from odoo.exceptions import UserError, ValidationError
 class PayrollManagamentWizard(models.TransientModel):
     _name = "payroll.management.wizard"
     _description = "Payroll Management"
+    _rec_name = "subject"
 
     subject = fields.Char(
         help="Enter the title of the payroll whether it is the month, week, day, etc.",
@@ -22,6 +24,12 @@ class PayrollManagamentWizard(models.TransientModel):
     def _get_fallback_reader(self, pdf_reader):
         # Override to use another reader
         pass
+
+    def _get_temp_path(self):
+        self.ensure_one()
+        path = f"/tmp/{self._table}_{self.id}/"
+        pathlib.Path(path).mkdir(exist_ok=True)
+        return path
 
     def _read_page_content(self, pdf_reader, page, fallback_reader=None):
         try:
@@ -68,7 +76,7 @@ class PayrollManagamentWizard(models.TransientModel):
         for page in pdf_pages:
             pdfWriter.add_page(page)
 
-        path = "/tmp/" + file_name
+        path = self._get_temp_path() / file_name
 
         if encryption_key:
             pdfWriter.encrypt(encryption_key, algorithm="AES-256")
@@ -92,7 +100,7 @@ class PayrollManagamentWizard(models.TransientModel):
         if not self.env.company.country_id:
             raise UserError(self.env._("You must to filled country field of company"))
 
-        reader = PdfReader("/tmp/merged-pdf.pdf")
+        reader = PdfReader(f"{self._get_temp_path()}merged-pdf.pdf")
 
         try:
             employee_to_pages, not_found = self._extract_employees(reader)
@@ -151,13 +159,14 @@ class PayrollManagamentWizard(models.TransientModel):
 
     def merge_pdfs(self):
         # Merge the pdfs together
+        temp_path = self._get_temp_path()
         pdfs = []
         for file in self.payrolls:
             b64 = file.datas
             btes = b64decode(b64, validate=True)
             if btes[0:4] != b"%PDF":
                 raise ValidationError(self.env._("Missing pdf file signature"))
-            f = open("/tmp/" + file.name, "wb")
+            f = open(self._get_temp_path() + file.name, "wb")
             f.write(btes)
             f.close()
             pdfs.append(f.name)
@@ -167,7 +176,7 @@ class PayrollManagamentWizard(models.TransientModel):
         for pdf in pdfs:
             merger.append(pdf)
 
-        merger.write("/tmp/merged-pdf.pdf")
+        merger.write(f"{temp_path}merged-pdf.pdf")
         merger.close()
 
     def send_mail(self, employee, path):
