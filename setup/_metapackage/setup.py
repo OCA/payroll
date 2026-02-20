@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo-addon-payroll>=16.0dev,<16.1dev',
         'odoo-addon-payroll_account>=16.0dev,<16.1dev',
         'odoo-addon-payroll_contract_advantages>=16.0dev,<16.1dev',
+        'odoo-addon-payroll_payslip_due_date>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',

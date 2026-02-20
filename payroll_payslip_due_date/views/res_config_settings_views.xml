@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="res_config_settings_view_form_inherit_payroll_payslip_due_date"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.payroll.payslip.due.date</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="payroll.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@data-key='payroll']//div[@id='prevent_compute_on_confirm']"
+                position="after"
+            >
+                <div
+                    class="row mt16 o_settings_container"
+                    id="payroll_payslip_due_workdays"
+                >
+                    <div class="col-lg-6 col-12 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="payroll_payslip_due_workdays" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="payroll_payslip_due_workdays" />
+                            <div class="text-muted">
+                                Number of workdays after the payslip period end date to compute the due date.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
