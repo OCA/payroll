@@ -114,7 +114,7 @@
         <field name="name">hr.fiscalyear.search</field>
         <field name="model">hr.fiscalyear</field>
         <field name="arch" type="xml">
-            <search string="Search Fiscalyear">
+            <search string="Search Fiscal Year">
                 <field
                     name="name"
                     filter_domain="[('name', 'ilike', self)]"
