@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,14 +26,12 @@ msgstr ""
 #. module: payroll_contract_advantages
 #. odoo-python
 #: code:addons/payroll_contract_advantages/models/hr_contract_advantage.py:0
-#, python-format
 msgid "Advantage amount can't be greater than upper bound limit."
 msgstr ""
 
 #. module: payroll_contract_advantages
 #. odoo-python
 #: code:addons/payroll_contract_advantages/models/hr_contract_advantage.py:0
-#, python-format
 msgid "Advantage amount can't be less than lower bound limit."
 msgstr ""
 
