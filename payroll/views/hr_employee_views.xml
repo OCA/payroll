@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Employee View -->
+    <record id="hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.payroll</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="%(hr_payslip_action_employee)d"
+                    class="oe_stat_button"
+                    icon="fa-money"
+                    type="action"
+                    groups="payroll.group_payroll_user"
+                >
+                    <field name="payslip_count" widget="statinfo" string="Payslips" />
+                </button>
+            </xpath>
+            <xpath
+                expr="//page[@name='payroll_information']//group[@name='contract']//field[@name='structure_type_id']"
+                position="after"
+            >
+                <field
+                    name="struct_id"
+                    required="contract_date_start"
+                    domain="[('company_id', '=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
