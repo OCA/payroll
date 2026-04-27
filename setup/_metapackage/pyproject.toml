@@ -1,0 +1,11 @@
+[project]
+name = "odoo-addons-oca-payroll"
+version = "19.0.20260427.0"
+dependencies = [
+    "odoo-addon-payroll==19.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 19.0",
+]
