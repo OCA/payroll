@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =======
 Payroll
 =======
@@ -17,7 +13,7 @@ Payroll
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -37,6 +33,16 @@ Manage your employee payroll records.
 This module is a backport from Odoo SA and as such, it is not included
 in the OCA CLA. That means we do not have a copy of the copyright on it
 like all other OCA modules.
+
+Opening Values
+--------------
+
+Each contract exposes an **Opening Values** tab to carry over reference
+data when migrating from another payroll system: seniority date, opening
+date, opening paid leave base and opening paid leave days balance. These
+fields are created for use by each country's localization modules; in
+this module alone they are only informational and drive no computation.
+They become read-only once a payslip exists for the contract.
 
 **Table of contents**
 
@@ -70,6 +76,7 @@ Contributors
 - Nimarosa (Nicolas Rodriguez) <nicolarsande@gmail.com>
 - Henrik Norlin (@appstogrow)
 - Régis Pirard <regis.pirard@tincid.com>
+- Cyril VINH-TUNG <cyril@invitu.com>
 
 Maintainers
 -----------
