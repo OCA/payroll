@@ -10,8 +10,7 @@
     "license": "LGPL-3",
     "author": "Odoo SA, Odoo Community Association (OCA)",
     "depends": [
-        "hr_contract",
-        "hr_holidays",
+        "hr_work_entry_holidays",
         "mail",
     ],
     "data": [

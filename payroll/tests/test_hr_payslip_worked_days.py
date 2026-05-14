@@ -14,11 +14,22 @@ class TestWorkedDays(TestPayslipBase):
 
         self.LeaveRequest = self.env["hr.leave"]
         self.LeaveType = self.env["hr.leave.type"]
+        self.WorkEntryType = self.env["hr.work.entry.type"]
+
+        # create work_entry_type
+        self.work_entry_type_id = self.WorkEntryType.create(
+            {
+                "name": "Generic Time Off",
+                "code": "LEAVE999",
+                "is_leave": True,
+            }
+        )
 
         # create holiday type
         self.holiday_type = self.LeaveType.create(
             {
                 "name": "TestLeaveType",
+                "work_entry_type_id": self.work_entry_type_id.id,
                 "allocation_validation_type": "no_validation",
                 "leave_validation_type": "no_validation",
             }
@@ -99,10 +110,10 @@ class TestWorkedDays(TestPayslipBase):
 
         worked_days_codes = richard_payslip.worked_days_line_ids.mapped("code")
         self.assertIn(
-            "GLOBAL", worked_days_codes, "The leave is in the 'Worked Days' list"
+            "LEAVE999", worked_days_codes, "The leave is in the 'Worked Days' list"
         )
         wdl_ids = richard_payslip.worked_days_line_ids.filtered(
-            lambda x: x.code == "GLOBAL"
+            lambda x: x.code == "LEAVE999"
         )
         self.assertEqual(len(wdl_ids), 1, "There is only one line matching the leave")
         self.assertEqual(
@@ -131,10 +142,10 @@ class TestWorkedDays(TestPayslipBase):
 
         worked_days_codes = richard_payslip.worked_days_line_ids.mapped("code")
         self.assertIn(
-            "GLOBAL", worked_days_codes, "The leave is in the 'Worked Days' list"
+            "LEAVE999", worked_days_codes, "The leave is in the 'Worked Days' list"
         )
         wdl_ids = richard_payslip.worked_days_line_ids.filtered(
-            lambda x: x.code == "GLOBAL"
+            lambda x: x.code == "LEAVE999"
         )
         self.assertEqual(len(wdl_ids), 1, "There is only one line matching the leave")
         self.assertEqual(
