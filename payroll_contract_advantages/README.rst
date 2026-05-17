@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===========================
 Payroll Contract Advantages
 ===========================
@@ -17,7 +13,7 @@ Payroll Contract Advantages
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -32,10 +28,14 @@ Payroll Contract Advantages
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds support for advantages templates and advantages to be
-set in contract form. The advantages can be set in the contract form as
-a list of advantages templates. Then it can be used in the calculation
-of the salary rules.
+This module lets you define advantage templates and set advantages on
+the contract form, for use in salary rule computation.
+
+Each advantage has a computation mode (fixed value, percentage of a
+contract field, or Python expression) and a quantity mode (fixed or
+Python); the amount is quantity x unit value, re-evaluated per payslip.
+The default fixed mode reproduces the historical behaviour. Template
+bounds are enforced on the final amount.
 
 **Table of contents**
 
@@ -45,12 +45,20 @@ of the salary rules.
 Usage
 =====
 
-- Set the advantages templates in the payroll module with lower and
-  upper bounds and default value.
-- Go to the employee contract and add the advantages that you want for
-  this contract, default value will be populated but you can change it.
-- Then in the salary rules, access this value using
-  current_contract.advantages.[ADVANTAGE_CODE] (without brackets)
+- Create advantage templates with lower/upper bounds, a computation mode
+  (fixed value, percentage of a contract field, or Python code) and a
+  quantity mode (fixed or Python code).
+- Add advantages on the employee contract. The definition is copied from
+  the template and can be tuned per contract.
+- The amount is **quantity x unit value**, re-evaluated for each
+  payslip. Python formulas expose ``advantage``, ``contract``,
+  ``employee``, ``payslip`` and must set ``result``. The ``Quantity``
+  field is also a free parameter readable via
+  ``advantage.quantity_fixed_value``.
+- Bounds are enforced on the final amount; a non-numeric formula result
+  raises an error.
+- In salary rules, read the value with
+  ``current_contract.advantages.[ADVANTAGE_CODE]``.
 
 Bug Tracker
 ===========

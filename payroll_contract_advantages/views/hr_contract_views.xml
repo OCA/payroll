@@ -16,6 +16,14 @@
                         <field name="advantage_template_code" />
                         <field name="advantage_lower_bound" />
                         <field name="advantage_upper_bound" />
+                        <field name="computation_mode" />
+                        <field name="fixed_value" column_invisible="False" />
+                        <field name="percentage" column_invisible="False" />
+                        <field name="percentage_base" column_invisible="False" />
+                        <field name="python_code" column_invisible="False" />
+                        <field name="quantity_mode" />
+                        <field name="quantity_fixed_value" column_invisible="False" />
+                        <field name="quantity_python_code" column_invisible="False" />
                         <field name="amount" />
                     </list>
                 </field>

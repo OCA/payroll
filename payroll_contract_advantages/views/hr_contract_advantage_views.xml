@@ -17,10 +17,47 @@
                         </group>
                     </group>
                     <group>
-                        <group>
-                            <field name="default_value" />
+                        <group string="Bounds">
                             <field name="lower_bound" />
                             <field name="upper_bound" />
+                        </group>
+                        <group string="Computation">
+                            <field name="computation_mode" />
+                            <field
+                                name="default_value"
+                                invisible="computation_mode != 'fixed'"
+                            />
+                            <field
+                                name="percentage"
+                                invisible="computation_mode != 'percentage'"
+                            />
+                            <field
+                                name="percentage_base"
+                                invisible="computation_mode != 'percentage'"
+                            />
+                            <field
+                                name="python_code"
+                                invisible="computation_mode != 'python'"
+                                placeholder="result = contract.wage * 0.05"
+                            />
+                        </group>
+                        <group string="Quantity">
+                            <field name="quantity_mode" />
+                            <field
+                                name="quantity_fixed_value"
+                                invisible="quantity_mode != 'fixed'"
+                            />
+                            <field
+                                name="quantity_fixed_value"
+                                string="Quantity parameter"
+                                invisible="quantity_mode != 'python'"
+                                help="Free parameter usable by the quantity formula via advantage.quantity_fixed_value"
+                            />
+                            <field
+                                name="quantity_python_code"
+                                invisible="quantity_mode != 'python'"
+                                placeholder="result = 22"
+                            />
                         </group>
                     </group>
                 </sheet>
@@ -34,6 +71,7 @@
             <list>
                 <field name="name" />
                 <field name="code" />
+                <field name="computation_mode" />
                 <field name="lower_bound" />
                 <field name="upper_bound" />
                 <field name="default_value" />
