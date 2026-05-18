@@ -10,7 +10,9 @@ class HrContractAdvantage(models.Model):
 
     contract_id = fields.Many2one("hr.contract")
     advantage_template_id = fields.Many2one(
-        "hr.contract.advantage.template", string="Advantage Template"
+        "hr.contract.advantage.template",
+        string="Advantage Template",
+        ondelete="restrict",
     )
     advantage_template_code = fields.Char(
         string="Code", related="advantage_template_id.code", readonly=True
