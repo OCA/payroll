@@ -375,9 +375,11 @@ set in contract form. The advantages can be set in the contract form as
 a list of advantages templates. Then it can be used in the calculation
 of the salary rules.</p>
 <p>Each advantage has a computation mode (fixed value, percentage of a
-contract field, or Python expression); the amount is re-evaluated per
-payslip. The default fixed mode reproduces the historical behaviour.
-Template bounds are enforced on the amount.</p>
+contract field, or Python expression) giving a unit value, and a
+quantity mode (fixed or Python). The final amount is the unit value
+times the quantity, re-evaluated per payslip. The default fixed mode and
+quantity 1.0 reproduce the historical behaviour. Template bounds are
+enforced on the final amount.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -401,13 +403,15 @@ this contract, default value will be populated but you can change it.</li>
 <li>Then in the salary rules, access this value using
 current_contract.advantages.[ADVANTAGE_CODE] (without brackets)</li>
 <li>On the template, choose a computation mode (fixed value, percentage of
-a contract field, or Python code). The definition is copied onto the
-advantage and can be tuned per contract.</li>
-<li>The amount is re-evaluated for each payslip. Python formulas expose
-<tt class="docutils literal">advantage</tt>, <tt class="docutils literal">contract</tt>, <tt class="docutils literal">employee</tt>, <tt class="docutils literal">payslip</tt> and must set
-<tt class="docutils literal">result</tt>.</li>
-<li>Bounds are enforced on the amount; a non-numeric formula result raises
-an error.</li>
+a contract field, or Python code) and a quantity mode (fixed or Python
+code). The definition is copied onto the advantage and can be tuned
+per contract.</li>
+<li><tt class="docutils literal">amount</tt> holds the unit value; the final amount is the unit value
+times the quantity, re-evaluated for each payslip. Python formulas
+expose <tt class="docutils literal">advantage</tt>, <tt class="docutils literal">contract</tt>, <tt class="docutils literal">employee</tt>, <tt class="docutils literal">payslip</tt> and must
+set <tt class="docutils literal">result</tt>.</li>
+<li>Bounds are enforced on the final amount; a non-numeric formula result
+raises an error.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">

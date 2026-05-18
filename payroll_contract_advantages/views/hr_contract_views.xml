@@ -18,6 +18,7 @@
                         <field name="advantage_lower_bound" optional="hide" />
                         <field name="advantage_upper_bound" optional="hide" />
                         <field name="amount" />
+                        <field name="quantity_final" />
                     </list>
                     <form>
                         <group>
@@ -47,6 +48,21 @@
                                     placeholder="result = contract.wage * 0.05"
                                 />
                                 <field name="amount" />
+                            </group>
+                            <group string="Quantity">
+                                <field name="quantity_mode" />
+                                <field
+                                    name="quantity_fixed_value"
+                                    invisible="quantity_mode != 'fixed'"
+                                />
+                                <field
+                                    name="quantity_python_code"
+                                    invisible="quantity_mode != 'python'"
+                                />
+                                <field
+                                    name="quantity_final"
+                                    invisible="quantity_mode != 'python'"
+                                />
                             </group>
                         </group>
                     </form>

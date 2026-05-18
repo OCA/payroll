@@ -26,6 +26,17 @@
         <field name="computation_mode">python</field>
         <field name="python_code">result = contract.wage * 0.02</field>
     </record>
+    <!-- Quantity-driven template: km mileage (unit rate x monthly km) -->
+    <record id="advantage_template_mileage" model="hr.contract.advantage.template">
+        <field name="name">Mileage Allowance</field>
+        <field name="code">KM</field>
+        <field name="lower_bound">0.0</field>
+        <field name="upper_bound">2000.0</field>
+        <field name="computation_mode">fixed</field>
+        <field name="default_value">0.5</field>
+        <field name="quantity_mode">fixed</field>
+        <field name="quantity_fixed_value">300.0</field>
+    </record>
     <!-- Advantages on Mitchell Admin's contract, one per mode -->
     <record id="advantage_meal_admin" model="hr.contract.advantage">
         <field name="contract_id" ref="hr_contract.hr_contract_admin_new" />
@@ -45,5 +56,13 @@
         <field name="advantage_template_id" ref="advantage_template_phone" />
         <field name="computation_mode">python</field>
         <field name="python_code">result = contract.wage * 0.02</field>
+    </record>
+    <record id="advantage_mileage_admin" model="hr.contract.advantage">
+        <field name="contract_id" ref="hr_contract.hr_contract_admin_new" />
+        <field name="advantage_template_id" ref="advantage_template_mileage" />
+        <field name="computation_mode">fixed</field>
+        <field name="amount">0.5</field>
+        <field name="quantity_mode">fixed</field>
+        <field name="quantity_fixed_value">300.0</field>
     </record>
 </odoo>

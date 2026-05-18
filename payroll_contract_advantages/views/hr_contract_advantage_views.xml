@@ -42,6 +42,17 @@
                                 placeholder="result = contract.wage * 0.05"
                             />
                         </group>
+                        <group string="Quantity">
+                            <field name="quantity_mode" />
+                            <field
+                                name="quantity_fixed_value"
+                                invisible="quantity_mode != 'fixed'"
+                            />
+                            <field
+                                name="quantity_python_code"
+                                invisible="quantity_mode != 'python'"
+                            />
+                        </group>
                     </group>
                 </sheet>
             </form>
@@ -55,6 +66,7 @@
                 <field name="name" />
                 <field name="code" />
                 <field name="computation_mode" />
+                <field name="quantity_mode" />
                 <field name="lower_bound" />
                 <field name="upper_bound" />
                 <field name="default_value" />

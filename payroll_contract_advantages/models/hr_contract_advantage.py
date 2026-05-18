@@ -45,8 +45,33 @@ class HrContractAdvantage(models.Model):
         help="Python code; assign the amount to 'result'. "
         "Available variables are listed in the field.",
     )
+    quantity_mode = fields.Selection(
+        selection=[
+            ("fixed", "Fixed quantity"),
+            ("python", "Python code"),
+        ],
+        default="fixed",
+        required=True,
+    )
+    quantity_fixed_value = fields.Float(
+        string="Quantity",
+        default=1.0,
+        help="Quantity used in 'Fixed quantity' mode.",
+    )
+    quantity_python_code = fields.Text(
+        help="Python code; assign the quantity to 'result'. "
+        "Available variables are listed in the field.",
+    )
     amount = fields.Float(
-        help="Latest evaluated amount, " "recomputed per payslip for non-fixed modes."
+        string="Unit amount",
+        help="Unit value. Recomputed per payslip for non-fixed modes; "
+        "the final amount is this value times the quantity.",
+    )
+    quantity_final = fields.Float(
+        string="Quantity",
+        compute="_compute_quantity_final",
+        help="Quantity actually applied (preview; recomputed on the "
+        "payslip for period-sensitive formulas).",
     )
 
     @api.onchange("advantage_template_id")
@@ -67,6 +92,9 @@ class HrContractAdvantage(models.Model):
             record.percentage = template.percentage
             record.percentage_base = template.percentage_base
             record.python_code = template.python_code
+            record.quantity_mode = template.quantity_mode
+            record.quantity_fixed_value = template.quantity_fixed_value
+            record.quantity_python_code = template.quantity_python_code
             if record.computation_mode == "fixed":
                 record.amount = template.default_value
             else:
@@ -120,14 +148,18 @@ class HrContractAdvantage(models.Model):
             return 0.0, warning
 
     def _compute_advantage_amount(self, payslip=None):
-        """Return the computed amount, bounded. Evaluated per payslip.
+        """Return the final amount (unit value x quantity), bounded.
+
+        Evaluated per payslip. Bounds are enforced on the final amount.
 
         :param payslip: optional hr.payslip, exposed to python formulas.
         """
         self.ensure_one()
-        value = self._compute_unit_value(payslip=payslip)
-        self._check_bounds(value)
-        return value
+        unit_value = self._compute_unit_value(payslip=payslip)
+        quantity = self._compute_quantity(payslip=payslip)
+        amount = unit_value * quantity
+        self._check_bounds(amount)
+        return amount
 
     def _compute_unit_value(self, payslip=None):
         """Unit value per the computation mode."""
@@ -151,6 +183,38 @@ class HrContractAdvantage(models.Model):
             value = 0.0
 
         return self._coerce_float(value, _("unit value"))
+
+    def _compute_quantity(self, payslip=None):
+        """Quantity per the quantity mode. Default fixed 1.0."""
+        self.ensure_one()
+        mode = self.quantity_mode or "fixed"
+        if mode == "python":
+            value = self._eval_code(self.quantity_python_code, payslip=payslip)
+        else:
+            # An explicit 0 quantity is valid (amount 0).
+            value = (
+                self.quantity_fixed_value
+                if self.quantity_fixed_value is not False
+                else 1.0
+            )
+        return self._coerce_float(value, _("quantity"))
+
+    @api.depends(
+        "quantity_mode",
+        "quantity_fixed_value",
+        "quantity_python_code",
+    )
+    def _compute_quantity_final(self):
+        """Tolerant quantity preview for lists/forms.
+
+        Never raises so the list always renders; the payslip recomputes
+        it strictly with the period context.
+        """
+        for record in self:
+            try:
+                record.quantity_final = record._compute_quantity()
+            except Exception:
+                record.quantity_final = 0.0
 
     def _coerce_float(self, value, label):
         """Float guarantee, mirroring hr.salary.rule._compute_rule."""
@@ -188,7 +252,7 @@ class HrContractAdvantage(models.Model):
         return localdict.get("result", 0.0) or 0.0
 
     def _check_bounds(self, value):
-        """Enforce template lower/upper bounds on a candidate amount."""
+        """Enforce template bounds on the final amount (unit x qty)."""
         self.ensure_one()
         if value and value != 0.00:
             if self.advantage_upper_bound and value > self.advantage_upper_bound:
@@ -199,8 +263,3 @@ class HrContractAdvantage(models.Model):
                 raise ValidationError(
                     _("Advantage amount can't be less than lower bound limit.")
                 )
-
-    @api.constrains("amount")
-    def _check_bound_limits(self):
-        for record in self:
-            record._check_bounds(record.amount)

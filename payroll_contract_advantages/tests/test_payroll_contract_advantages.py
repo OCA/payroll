@@ -60,30 +60,32 @@ class TestPayrollContractAdvantages(TestPayslipBase):
         self.assertEqual(advantage.amount, 50.0)
 
     def test_constraint_raises_if_above_upper_bound(self):
-        """Constraint should raise when amount is above upper bound."""
+        """Bounds are enforced on the final amount."""
         template = self._create_template(lower=0.0, upper=100.0)
 
+        advantage = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "amount": 150.0,
+            }
+        )
         with self.assertRaises(ValidationError):
-            self.Advantage.create(
-                {
-                    "contract_id": self.richard_contract.id,
-                    "advantage_template_id": template.id,
-                    "amount": 150.0,
-                }
-            )
+            advantage._compute_advantage_amount()
 
     def test_constraint_raises_if_below_lower_bound(self):
-        """Constraint should raise when amount is below lower bound."""
+        """Bounds are enforced on the final amount."""
         template = self._create_template(lower=10.0, upper=100.0)
 
+        advantage = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "amount": 5.0,
+            }
+        )
         with self.assertRaises(ValidationError):
-            self.Advantage.create(
-                {
-                    "contract_id": self.richard_contract.id,
-                    "advantage_template_id": template.id,
-                    "amount": 5.0,
-                }
-            )
+            advantage._compute_advantage_amount()
 
     def test_get_current_contract_dict_contains_advantages(self):
         """get_current_contract_dict should expose advantages by code."""
@@ -295,3 +297,168 @@ class TestPayrollContractAdvantages(TestPayslipBase):
         amount = advantage._compute_advantage_amount()
         self.assertEqual(amount, 1500.0)
         self.assertIsInstance(amount, float)
+
+    # ------------------------------------------------------------------
+    # Quantity (final amount = quantity x unit value)
+    # ------------------------------------------------------------------
+
+    def test_quantity_defaults_keep_backward_compat(self):
+        """Default quantity mode 'fixed' / value 1.0 -> amount equals
+        the unit value (historical behaviour)."""
+        template = self._create_template(default=200.0, upper=1000000.0)
+        adv = self.Advantage.new(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+            }
+        )
+        adv._onchange_advantage_template_id()
+        self.assertEqual(adv.quantity_mode, "fixed")
+        self.assertEqual(adv.quantity_fixed_value, 1.0)
+        self.assertEqual(adv._compute_advantage_amount(), 200.0)
+
+    def test_fixed_quantity_multiplies_unit_value(self):
+        template = self._create_template(
+            lower=0.0, upper=1000000.0, code="QF", name="QtyFixed"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "fixed",
+                "amount": 410.0,
+                "quantity_mode": "fixed",
+                "quantity_fixed_value": 22.0,
+            }
+        )
+        self.assertAlmostEqual(adv._compute_advantage_amount(), 22.0 * 410.0)
+
+    def test_python_quantity_times_python_unit_value(self):
+        """Both quantity and unit value computed by python."""
+        template = self._create_template(
+            lower=0.0, upper=1000000.0, code="QP", name="QtyPy"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "python",
+                "python_code": "result = 1000.0",
+                "quantity_mode": "python",
+                "quantity_python_code": "result = 3",
+            }
+        )
+        self.assertAlmostEqual(adv._compute_advantage_amount(), 3 * 1000.0)
+
+    def test_quantity_final_is_tolerant(self):
+        """quantity_final never raises (list rendering safety); a bad
+        quantity formula previews 0."""
+        template = self._create_template(
+            lower=0.0, upper=1000000.0, code="QBAD", name="QtyBad"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "fixed",
+                "amount": 100.0,
+                "quantity_mode": "python",
+                "quantity_python_code": "result = undefined_name",
+            }
+        )
+        self.assertEqual(adv.quantity_final, 0.0)
+
+    def test_amount_not_overwritten_by_payslip(self):
+        """A-1: amount stays the unit value; the payslip exposes
+        unit x quantity without overwriting amount."""
+        template = self._create_template(
+            lower=0.0, upper=1000000.0, code="QSTAB", name="QtyStable"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "fixed",
+                "amount": 50.0,
+                "quantity_mode": "fixed",
+                "quantity_fixed_value": 4.0,
+            }
+        )
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        contracts = payslip._get_employee_contracts()
+        res = payslip.get_current_contract_dict(self.richard_contract, contracts)
+        self.assertAlmostEqual(res.get("advantages").QSTAB, 4.0 * 50.0)
+        # amount must remain the unit value (no feedback corruption).
+        self.assertEqual(adv.amount, 50.0)
+
+    def test_bounds_apply_to_product_not_unit_value(self):
+        """Choix 1: bounds are enforced on the final amount
+        (unit value x quantity), not on the unit value alone."""
+        template = self._create_template(
+            lower=0.0, upper=100.0, code="QCAP", name="QtyCapped"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "fixed",
+                "amount": 30.0,  # unit value inside [0, 100]
+                "quantity_mode": "fixed",
+                "quantity_fixed_value": 1.0,
+            }
+        )
+        # Unit value alone is within bounds -> no error.
+        self.assertEqual(adv._compute_advantage_amount(), 30.0)
+
+        # Same unit value but quantity pushes the product over the
+        # upper bound -> must raise (bounds are on the product).
+        adv.quantity_fixed_value = 5.0  # 30 x 5 = 150 > 100
+        with self.assertRaises(ValidationError):
+            adv._compute_advantage_amount()
+
+    def test_quantity_final_nominal_value(self):
+        """quantity_final exposes the computed quantity (success path)
+        for both fixed and python quantity modes."""
+        template = self._create_template(
+            lower=0.0, upper=1000000.0, code="QFIN", name="QtyFinal"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "fixed",
+                "amount": 100.0,
+                "quantity_mode": "fixed",
+                "quantity_fixed_value": 7.0,
+            }
+        )
+        self.assertEqual(adv.quantity_final, 7.0)
+
+        adv.quantity_mode = "python"
+        adv.quantity_python_code = "result = 9"
+        adv.invalidate_recordset(["quantity_final"])
+        self.assertEqual(adv.quantity_final, 9.0)
+
+    def test_python_quantity_receives_payslip_in_localdict(self):
+        """The quantity python localdict must expose payslip (needed by
+        period-sensitive formulas), mirrored from the unit value side."""
+        template = self._create_template(
+            lower=0.0, upper=1000000.0, code="QPS", name="QtyPayslip"
+        )
+        adv = self.Advantage.create(
+            {
+                "contract_id": self.richard_contract.id,
+                "advantage_template_id": template.id,
+                "computation_mode": "fixed",
+                "amount": 50.0,
+                "quantity_mode": "python",
+                "quantity_python_code": ("result = 4 if payslip is not None else 0"),
+            }
+        )
+        self.apply_contract_cron()
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        amount = adv._compute_advantage_amount(payslip=payslip)
+        self.assertAlmostEqual(amount, 4 * 50.0)
