@@ -12,13 +12,13 @@ class HrSalaryRule(models.Model):
     account_debit = fields.Many2one(
         "account.account",
         "Debit Account",
-        domain=[("deprecated", "=", False)],
+        domain=[("active", "=", True)],
         company_dependent=True,
     )
     account_credit = fields.Many2one(
         "account.account",
         "Credit Account",
-        domain=[("deprecated", "=", False)],
+        domain=[("active", "=", True)],
         company_dependent=True,
     )
     tax_base_id = fields.Many2one("hr.salary.rule", "Base")
