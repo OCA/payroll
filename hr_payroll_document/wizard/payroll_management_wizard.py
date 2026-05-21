@@ -122,7 +122,7 @@ class PayrollManagamentWizard(models.TransientModel):
 
         # Attach file to email
         ir_values = {
-            "name": _("Payroll") + "_" + self.subject + "_" + employee.name,
+            "name": _("Payroll") + "_" + self.subject + "_" + employee.name + ".pdf",
             "type": "binary",
             "datas": encoded_string,
             "store_fname": encoded_string,
