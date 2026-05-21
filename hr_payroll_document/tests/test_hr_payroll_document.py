@@ -143,6 +143,24 @@ class TestHRPayrollDocument(common.TransactionCase):
         payroll_pdf = pypdf.PdfReader(io.BytesIO(payroll_content))
         self.assertFalse(payroll_pdf.is_encrypted)
 
+    def test_attachment_name_has_pdf_extension(self):
+        """Payroll attachments must be sent with a .pdf extension."""
+        # Arrange
+        self.fill_company_id()
+        employee = self.employee_emp
+        employee.identification_id = "51000278D"
+
+        # Act
+        self.wizard.send_payrolls()
+
+        # Assert
+        payroll = (
+            self.env["ir.attachment.payroll.custom"]
+            .search([("identification_id", "=", employee.identification_id)])
+            .attachment_id
+        )
+        self.assertTrue(payroll.name.endswith(".pdf"))
+
     def test_optional_encryption_fetch(self):
         """If the user can't access the employees,
         the optional encryption field is not fetched."""

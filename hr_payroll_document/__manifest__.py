@@ -5,7 +5,7 @@
     "website": "https://github.com/OCA/payroll",
     "license": "AGPL-3",
     "category": "Payrolls",
-    "version": "17.0.1.1.1",
+    "version": "17.0.1.1.2",
     "depends": ["hr", "base_vat"],
     "maintainers": ["peluko00"],
     "external_dependencies": {"python": ["pypdf"]},

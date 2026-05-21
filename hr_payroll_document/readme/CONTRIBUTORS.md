@@ -3,3 +3,5 @@
   - Miquel Alzanillas \<<malzanillas@apsl.net>\>
 - [PyTech](https://www.pytech.it):
   - Simone Rubino \<<simone.rubino@pytech.it>\>
+- [Tessera](https://www.tesseratech.es):
+  - Paco Montés \<<pmontes@tesseratech.es>\>
