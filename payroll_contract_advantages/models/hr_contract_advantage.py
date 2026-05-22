@@ -68,7 +68,7 @@ class HrContractAdvantage(models.Model):
         "the final amount is this value times the quantity.",
     )
     quantity_final = fields.Float(
-        string="Quantity",
+        string="Computed Quantity",
         compute="_compute_quantity_final",
         help="Quantity actually applied (preview; recomputed on the "
         "payslip for period-sensitive formulas).",
