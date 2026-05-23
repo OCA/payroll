@@ -6,72 +6,74 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 09:47+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "%(name)s Period #%(number)s"
-msgstr ""
+msgstr "%(name)s Período #%(number)s"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "%s day of the current period"
-msgstr ""
+msgstr "%s día do período actual"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "%s day of the next period"
-msgstr ""
+msgstr "%s día do seguinte período"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__active
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__active
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Annually (1)"
-msgstr ""
+msgstr "Anualmente (1)"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_hr_employee_base
 msgid "Basic Employee"
-msgstr ""
+msgstr "Empregados"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Bi-monthly (6)"
-msgstr ""
+msgstr "Bi-mensual (6)"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Bi-weekly (26)"
-msgstr ""
+msgstr "Bi-semanal (26)"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_form
 msgid "Close Period"
-msgstr ""
+msgstr "Pechar Período"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__state__done
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_period__state__done
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_search
 msgid "Closed"
-msgstr ""
+msgstr "Pechado"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__company_id
@@ -80,18 +82,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__company_id
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_filter
 msgid "Company"
-msgstr ""
+msgstr "Compañia"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_base__contract_id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee_public__contract_id
 msgid "Contract"
-msgstr ""
+msgstr "Contrato"
 
 #. module: hr_payroll_period
 #: model:ir.actions.server,name:hr_payroll_period.ir_cron_hr_payroll_period_ir_actions_server
@@ -103,47 +105,47 @@ msgstr ""
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 msgid "Create Periods"
-msgstr ""
+msgstr "Crear períodos"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__create_uid
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__create_date
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_employee__contract_id
 msgid "Current Contract"
-msgstr ""
+msgstr "Contrato actual"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,help:hr_payroll_period.field_hr_employee__contract_id
 msgid "Current contract of the employee"
-msgstr ""
+msgstr "Contrato actual do empregado"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Daily (365)"
-msgstr ""
+msgstr "Diario (365)"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_date_range_type
 msgid "Date Range Type"
-msgstr ""
+msgstr "Tipo de rango de data"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip__date_payment
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__date_payment
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__date_payment
 msgid "Date of Payment"
-msgstr ""
+msgstr "Data de pago"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
@@ -152,239 +154,241 @@ msgid ""
 "Date stop cannot be sooner than the date start\n"
 "                                "
 msgstr ""
+"A data ata non pode ser anterior á data de inicio\n"
+"                                "
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_date_range_type_hr_form_view
 msgid "Daterange Type"
-msgstr ""
+msgstr "Tipo de rango de data"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__payment_day
 msgid "Day of Payment"
-msgstr ""
+msgstr "Dia de pago"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,help:hr_payroll_period.field_hr_contract__schedule_pay
 msgid "Defines the frequency of the wage payment."
-msgstr ""
+msgstr "Define a frecuencia do pago do salario."
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__display_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome para mostrar"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__state__draft
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_period__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_form
 msgid "Duration"
-msgstr ""
+msgstr "Duracion"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_hr_contract
 msgid "Employee Contract"
-msgstr ""
+msgstr "Contrato do empregado"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__date_end
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__date_end
 msgid "End date"
-msgstr ""
+msgstr "Data Ata"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Fifth"
-msgstr ""
+msgstr "Quinto"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "First"
-msgstr ""
+msgstr "Primeiro"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__fiscalyear_id
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_search
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Ano Fiscal"
 
 #. module: hr_payroll_period
 #: model:ir.ui.menu,name:hr_payroll_period.hr_period_configure
 msgid "Fiscal Years and Periods"
-msgstr ""
+msgstr "Anos fiscais e períodos"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 msgid "Fiscal year..."
-msgstr ""
+msgstr "Ano fiscal..."
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_week__1
 msgid "Following Week"
-msgstr ""
+msgstr "Seguinte semana"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Fourth"
-msgstr ""
+msgstr "Cuarto"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__5
 msgid "Friday"
-msgstr ""
+msgstr "Venres"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip_run.py:0
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_form
 #, python-format
 msgid "Generate Payslips"
-msgstr ""
+msgstr "Xerar liquidacións"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_hr_payslip_employees
 msgid "Generate payslips for all selected employees"
-msgstr ""
+msgstr "Xerar liquidacións para todos os empregados seleccionados"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_filter
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_search
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_search
 msgid "Group By..."
-msgstr ""
+msgstr "Agrupar por..."
 
 #. module: hr_payroll_period
 #: model:date.range.type,name:hr_payroll_period.date_range_hr_fiscal_year
 #: model:ir.model,name:hr_payroll_period.model_hr_fiscalyear
 msgid "HR Fiscal Year"
-msgstr ""
+msgstr "Ano Fiscal"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_hr_period
 msgid "HR Payroll Period"
-msgstr ""
+msgstr "Período de liquidacion"
 
 #. module: hr_payroll_period
 #: model:date.range.type,name:hr_payroll_period.date_range_hr_period
 msgid "HR Period"
-msgstr ""
+msgstr "Período"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type__hr_fiscal_year
 msgid "Is HR Fiscal Year?"
-msgstr ""
+msgstr "É ano fiscal?"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_date_range_type__hr_period
 msgid "Is HR period?"
-msgstr ""
+msgstr "É período de liquidacion?"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Last"
-msgstr ""
+msgstr "Ultimo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear____last_update
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__write_uid
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__write_date
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización en"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__1
 msgid "Monday"
-msgstr ""
+msgstr "Luns"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Monthly (12)"
-msgstr ""
+msgstr "Mensual (12)"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__number
 msgid "Number"
-msgstr ""
+msgstr "Numero"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__state__open
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_period__state__open
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_search
 msgid "Open"
-msgstr ""
+msgstr "Aberto"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_form
 msgid "Open Period"
-msgstr ""
+msgstr "Abrir período"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_filter
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_payslip_filter
 msgid "Payment Date"
-msgstr ""
+msgstr "Data de pago"
 
 #. module: hr_payroll_period
 #: model:ir.actions.act_window,name:hr_payroll_period.action_hr_fiscalyear
 #: model:ir.ui.menu,name:hr_payroll_period.menu_action_hr_fiscalyear
 msgid "Payroll Fiscal Years"
-msgstr ""
+msgstr "Anos fiscais"
 
 #. module: hr_payroll_period
 #: model:ir.actions.act_window,name:hr_payroll_period.action_hr_period
 #: model:ir.ui.menu,name:hr_payroll_period.menu_action_hr_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_form
 msgid "Payroll Periods"
-msgstr ""
+msgstr "Períodos de liquidación"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_hr_payslip
 msgid "Payslip"
-msgstr ""
+msgstr "Liquidacion"
 
 #. module: hr_payroll_period
 #: model:ir.model,name:hr_payroll_period.model_hr_payslip_run
 msgid "Payslip Batches"
-msgstr ""
+msgstr "Liquidacións en lote"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__payslip_ids
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_form
 msgid "Payslips"
-msgstr ""
+msgstr "Liquidacións"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip__hr_period_id
@@ -392,39 +396,39 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_search
 msgid "Period"
-msgstr ""
+msgstr "Período"
 
 #. module: hr_payroll_period
 #: model:ir.actions.act_window,name:hr_payroll_period.date_range_type_hr_action
 #: model:ir.ui.menu,name:hr_payroll_period.menu_date_range_type_action
 msgid "Period Types"
-msgstr ""
+msgstr "Tipo de período"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__period_ids
 msgid "Periods"
-msgstr ""
+msgstr "Períodos"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Quarterly (4)"
-msgstr ""
+msgstr "Cuadrimestral (4)"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_form
 msgid "Re-Open Period"
-msgstr ""
+msgstr "Re-abrir período"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_week__0
 msgid "Same Week"
-msgstr ""
+msgstr "Mesma semana"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__6
 msgid "Saturday"
-msgstr ""
+msgstr "Sabado"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__schedule_pay
@@ -432,68 +436,68 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_payslip_run__schedule_pay
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__schedule_pay
 msgid "Schedule Pay"
-msgstr ""
+msgstr "Pago Planificado"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_contract__schedule_pay
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.hr_payslip_run_filter
 msgid "Scheduled Pay"
-msgstr ""
+msgstr "Pago planificado"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_search
 msgid "Search Fiscalyear"
-msgstr ""
+msgstr "Buscar ano fiscal"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_search
 msgid "Search Period"
-msgstr ""
+msgstr "Buscar período"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Second"
-msgstr ""
+msgstr "Segundo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_week__2
 msgid "Second Following Week"
-msgstr ""
+msgstr "Segunda proxima semana"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Semi-annually (2)"
-msgstr ""
+msgstr "Semestral (2)"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Semi-monthly (24)"
-msgstr ""
+msgstr "Quincenal (24)"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_fiscalyear_form
 msgid "Set To Draft"
-msgstr ""
+msgstr "Volver a borrador"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__date_start
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__date_start
 msgid "Start date"
-msgstr ""
+msgstr "Data de inicio"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__state
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__state
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__0
 msgid "Sunday"
-msgstr ""
+msgstr "Domingo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,help:hr_payroll_period.field_hr_fiscalyear__active
@@ -501,6 +505,8 @@ msgstr ""
 msgid ""
 "The active field allows you to hide the date range without removing it."
 msgstr ""
+"O campo activo permíteche ocultar o tipo de rango sen necesidade de "
+"eliminalo."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip_run.py:0
@@ -508,7 +514,7 @@ msgstr ""
 msgid ""
 "The company on the selected period must be the same as the company on the "
 "payslip batch."
-msgstr ""
+msgstr "A compañía seleccionada debe ser a mesma que na liquidación por lotes."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip.py:0
@@ -516,13 +522,13 @@ msgstr ""
 msgid ""
 "The company on the selected period must be the same as the company on the "
 "payslip."
-msgstr ""
+msgstr "A compañía seleccionada no período debe ser a mesma que na liquidación."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip_run.py:0
 #, python-format
 msgid "The payslip batch %s still has unconfirmed payslips."
-msgstr ""
+msgstr "O lote de liquidacións %s aínda contén liquidacións non confirmadas."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_payslip_run.py:0
@@ -532,69 +538,73 @@ msgid ""
 "                        must be the same as the schedule on the\n"
 "                        payslip batch."
 msgstr ""
+"O calendario seleccionado no período\n"
+"                        debe ser o mesmo que o seleccionado\n"
+"                        no lote de liquidacións."
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Third"
-msgstr ""
+msgstr "Terceiro"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__4
 msgid "Thursday"
-msgstr ""
+msgstr "Xoves"
 
 #. module: hr_payroll_period
 #: model_terms:ir.ui.view,arch_db:hr_payroll_period.view_hr_period_search
 msgid "To Close"
-msgstr ""
+msgstr "Pendente de peche"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__2
 msgid "Tuesday"
-msgstr ""
+msgstr "Martes"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__type_id
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__type_id
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__type_name
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_period__type_name
 msgid "Type Name"
-msgstr ""
+msgstr "Nome do tipo"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields.selection,name:hr_payroll_period.selection__hr_fiscalyear__payment_weekday__3
 msgid "Wednesday"
-msgstr ""
+msgstr "Miercoles"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__payment_week
 msgid "Week of Payment"
-msgstr ""
+msgstr "Semana de pago"
 
 #. module: hr_payroll_period
 #: model:ir.model.fields,field_description:hr_payroll_period.field_hr_fiscalyear__payment_weekday
 msgid "Weekday of Payment"
-msgstr ""
+msgstr "Dia semanal de pago"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "Weekly (52)"
-msgstr ""
+msgstr "Semanal (52)"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_period.py:0
 #, python-format
 msgid "You can not set to draft a period that already has payslips computed"
 msgstr ""
+"Non podes volver a borrador un período que xa ten liquidacións computadas"
 
 #. module: hr_payroll_period
 #: code:addons/hr_payroll_period/models/hr_fiscal_year.py:0
 #, python-format
 msgid "You must create periods before confirming the fiscal year."
-msgstr ""
+msgstr "Debes crear os períodos antes de confirmar o ano fiscal."
