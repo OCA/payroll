@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =======================
 Payroll Public Holidays
 =======================
@@ -17,7 +13,7 @@ Payroll Public Holidays
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -47,9 +43,16 @@ holidays data.
 Usage
 =====
 
-- Set public holidays in holidays module
-- Create a payslip
-- Public holidays will be fetched automatically to the worked days table
+- Set public holidays via the **Public Holidays** menu provided by
+  ``calendar_public_holiday`` (model ``calendar.public.holiday``). This
+  is the source read by this module to produce the ``PHOL`` line on
+  payslips.
+- Do not use the **Public Holidays** menu provided by Odoo standard
+  ``hr_holidays``: it stores entries on ``resource.calendar.leaves``
+  which are not picked up here and produce a generic line on the payslip
+  instead of a ``PHOL`` line.
+- Create a payslip: public holidays from ``calendar.public.holiday`` are
+  fetched automatically into the worked days table with code ``PHOL``.
 
 Bug Tracker
 ===========
