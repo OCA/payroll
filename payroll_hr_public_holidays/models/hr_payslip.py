@@ -29,7 +29,8 @@ class HrPayslip(models.Model):
             year=date_from.year,
             start_dt=date_from,
             end_dt=date_to,
-            partner_id=contract.employee_id.message_partner_ids.id,
+            partner_id=contract.employee_id.user_id.partner_id.id
+            or contract.employee_id.work_contact_id.id,
         )
         ph_days = len(public_holidays)
         ph_hours = (
