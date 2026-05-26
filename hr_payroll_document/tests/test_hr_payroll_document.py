@@ -3,7 +3,6 @@ import io
 
 import pypdf
 
-from odoo import _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import common
 from odoo.tools.misc import file_path
@@ -93,22 +92,23 @@ class TestHRPayrollDocument(common.TransactionCase):
         self.fill_company_id()
         self.env["hr.employee"].search([("id", "=", 1)]).identification_id = "37936636E"
         self.assertEqual(
-            self.wizard.send_payrolls()["params"]["title"], _("Employees not found")
+            self.wizard.send_payrolls()["params"]["title"],
+            self.env._("Employees not found"),
         )
         self.assertEqual(
             self.wizard.send_payrolls()["params"]["message"],
-            _("IDs whose employee has not been found: ") + "51000278D",
+            self.env._("IDs whose employee has not been found: ") + "51000278D",
         )
 
     def test_send_payrolls_correctly(self):
         self.fill_company_id()
         self.env["hr.employee"].search([("id", "=", 1)]).identification_id = "51000278D"
         self.assertEqual(
-            self.wizard.send_payrolls()["params"]["title"], _("Payrolls sent")
+            self.wizard.send_payrolls()["params"]["title"], self.env._("Payrolls sent")
         )
         self.assertEqual(
             self.wizard.send_payrolls()["params"]["message"],
-            _("Payrolls sent to employees correctly"),
+            self.env._("Payrolls sent to employees correctly"),
         )
 
     def test_optional_encryption(self):
@@ -168,9 +168,7 @@ class TestHRPayrollDocument(common.TransactionCase):
         employee = self.employee_emp
         employee_with_self = employee.with_user(employee.user_id)
         # pre-condition
-        self.assertFalse(
-            employee_with_self.check_access_rights("read", raise_exception=False)
-        )
+        self.assertFalse(employee_with_self.has_access("read"))
 
         # Assert: reading a field triggers fetching all the accessible fields
         employee_with_self.invalidate_recordset()

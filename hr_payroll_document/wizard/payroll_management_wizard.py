@@ -3,7 +3,7 @@ from base64 import b64decode
 
 from pypdf import PdfReader, PdfWriter
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -27,7 +27,7 @@ class PayrollManagamentWizard(models.TransientModel):
 
         # Validate if company have country
         if not self.env.company.country_id:
-            raise UserError(_("You must to filled country field of company"))
+            raise UserError(self.env._("You must to filled country field of company"))
 
         # Find all IDs of the employees
         for page in reader.pages:
@@ -48,7 +48,7 @@ class PayrollManagamentWizard(models.TransientModel):
                     # Save pdf with payrolls of employee
                     pdfWriter.add_page(page)
 
-            path = "/tmp/" + _("Payroll ") + employee.name + ".pdf"
+            path = "/tmp/" + self.env._("Payroll ") + employee.name + ".pdf"
 
             if not employee.no_payroll_encryption:
                 # Encrypt the payroll file
@@ -73,8 +73,8 @@ class PayrollManagamentWizard(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Employees not found"),
-                    "message": _("IDs whose employee has not been found: ")
+                    "title": self.env._("Employees not found"),
+                    "message": self.env._("IDs whose employee has not been found: ")
                     + ", ".join(list(not_found)),
                     "sticky": True,
                     "type": "warning",
@@ -86,8 +86,8 @@ class PayrollManagamentWizard(models.TransientModel):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Payrolls sent"),
-                "message": _("Payrolls sent to employees correctly"),
+                "title": self.env._("Payrolls sent"),
+                "message": self.env._("Payrolls sent to employees correctly"),
                 "sticky": False,
                 "type": "success",
                 "next": action,
@@ -101,7 +101,7 @@ class PayrollManagamentWizard(models.TransientModel):
             b64 = file.datas
             btes = b64decode(b64, validate=True)
             if btes[0:4] != b"%PDF":
-                raise ValidationError(_("Missing pdf file signature"))
+                raise ValidationError(self.env._("Missing pdf file signature"))
             f = open("/tmp/" + file.name, "wb")
             f.write(btes)
             f.close()
@@ -122,7 +122,12 @@ class PayrollManagamentWizard(models.TransientModel):
 
         # Attach file to email
         ir_values = {
-            "name": _("Payroll") + "_" + self.subject + "_" + employee.name + ".pdf",
+            "name": self.env._("Payroll")
+            + "_"
+            + self.subject
+            + "_"
+            + employee.name
+            + ".pdf",
             "type": "binary",
             "datas": encoded_string,
             "store_fname": encoded_string,
