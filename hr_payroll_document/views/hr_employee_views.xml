@@ -66,7 +66,6 @@
         parent="hr.menu_hr_root"
     />
 
-
     <record id="hr_employee_view_tree_payroll" model="ir.ui.view">
         <field name="name">inherit_view.hr_employee</field>
         <field name="model">hr.employee</field>
