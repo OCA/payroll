@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2026-06-07 11:46+0000\n"
+"PO-Revision-Date: 2026-06-13 09:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/odoo/teams/41243/sl/)\n"
 "Language: sl\n"
@@ -1214,13 +1214,13 @@ msgstr "Vnosi"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__note
 msgid "Internal Note"
-msgstr "Interni Zaznamek"
+msgstr "Interna opomba"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_is_follower
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Je sledilec"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
@@ -1743,7 +1743,7 @@ msgstr ""
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.view_payslip_lines_contribution_register
 msgid "Print"
-msgstr "Tiskanje"
+msgstr "Natisni"
 
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_professionaltax1
