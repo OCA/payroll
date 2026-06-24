@@ -12,15 +12,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-10 10:10+0000\n"
-"PO-Revision-Date: 2018-08-24 09:19+0000\n"
-"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>, 2020\n"
+"PO-Revision-Date: 2026-06-24 06:48+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/odoo/teams/41243/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: payroll_account
 #: model_terms:ir.ui.view,arch_db:payroll_account.hr_contract_view_form
@@ -51,13 +52,13 @@ msgstr "Analitični konto"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_base_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_base_id
 msgid "Base"
-msgstr ""
+msgstr "Osnova"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__company_id
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__company_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_credit
@@ -84,7 +85,7 @@ msgstr "Pogodba zaposlenega"
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_employees
 msgid "Generate payslips for all selected employees"
-msgstr "Generiranje plačilnih list za vse zaposlene, ki so izbrani."
+msgstr "Ustvari plačilne liste za vse izbrane zaposlene"
 
 #. module: payroll_account
 #: model:ir.model.fields,help:payroll_account.field_hr_payslip__date
@@ -95,17 +96,17 @@ msgstr ""
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip
 msgid "Payslip"
-msgstr ""
+msgstr "Plačilni list"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_run
 msgid "Payslip Batches"
-msgstr "Payslip Batches"
+msgstr "Serije plačilnih list"
 
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_payslip_line
 msgid "Payslip Line"
-msgstr "Payslip Line"
+msgstr "Postavka plačilne liste"
 
 #. module: payroll_account
 #. odoo-python
@@ -124,7 +125,7 @@ msgstr "Dnevnik prodaje"
 #. module: payroll_account
 #: model:ir.model,name:payroll_account.model_hr_salary_rule
 msgid "Salary Rule"
-msgstr ""
+msgstr "Pravilo obračuna plače"
 
 #. module: payroll_account
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__account_tax_id
@@ -136,7 +137,7 @@ msgstr "Davek"
 #: model:ir.model.fields,field_description:payroll_account.field_hr_payslip_line__tax_line_ids
 #: model:ir.model.fields,field_description:payroll_account.field_hr_salary_rule__tax_line_ids
 msgid "Tax lines"
-msgstr ""
+msgstr "Davčne postavke"
 
 #. module: payroll_account
 #. odoo-python
