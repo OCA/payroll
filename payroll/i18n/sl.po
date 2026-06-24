@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2026-02-01 10:09+0000\n"
+"PO-Revision-Date: 2026-06-24 08:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/odoo/teams/41243/sl/)\n"
 "Language: sl\n"
@@ -1075,7 +1075,7 @@ msgstr "Struktura plače"
 #: model:ir.actions.report,name:payroll.action_report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip"
-msgstr "Plačilna kuverta"
+msgstr "Plačilni list"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payslip.py:0
@@ -1095,7 +1095,7 @@ msgstr "Payslip Batches"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__payslip_count
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Computation Details"
-msgstr "Pordrobnosti izračuna plačilne kuverte"
+msgstr "Podrobnosti izračuna plačilne liste"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__payslip_count
