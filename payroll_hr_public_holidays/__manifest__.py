@@ -3,7 +3,7 @@
 
 {
     "name": "Payroll Public Holidays",
-    "version": "18.0.1.0.1",
+    "version": "18.0.1.0.2",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "summary": "Integration between payroll and hr_public_holidays",
