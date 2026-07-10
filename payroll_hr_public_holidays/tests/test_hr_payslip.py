@@ -19,16 +19,17 @@ class TestPublicHolidays(TransactionCase):
             }
         )
 
-        # Create a contract for the employee
-        self.contract = self.env["hr.contract"].create(
+        # In Odoo 19, hr.contract is replaced by hr.version.
+        # Each employee gets an auto-created version; update it instead of creating.
+        self.employee.version_id.write(
             {
                 "name": "Test Contract",
-                "employee_id": self.employee.id,
                 "resource_calendar_id": self.calendar.id,
                 "date_start": date(2024, 1, 1),
                 "wage": 1,
             }
         )
+        self.contract = self.employee.version_id
 
         # Create a public holiday
         self.public_holiday = self.env["calendar.public.holiday"].create(
@@ -67,7 +68,7 @@ class TestPublicHolidays(TransactionCase):
 
     def test_get_worked_day_lines(self):
         """Test worked day lines including public holidays."""
-        date_from = date(2024, 1, 1)
+        date_from = date(2023, 12, 1)
         date_to = date(2024, 1, 3)
 
         worked_day_lines = self.env["hr.payslip"].get_worked_day_lines(

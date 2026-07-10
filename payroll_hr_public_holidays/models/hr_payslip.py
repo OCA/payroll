@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, models
+from odoo import api, models
 
 
 class HrPayslip(models.Model):
@@ -39,7 +39,7 @@ class HrPayslip(models.Model):
         if contract.employee_id.resource_calendar_id:
             ph_hours = ph_days * contract.employee_id.resource_calendar_id.hours_per_day
         return {
-            "name": _("Public Holidays Leaves"),
+            "name": self.env._("Public Holidays Leaves"),
             "sequence": 10,
             "code": "PHOL",
             "number_of_days": ph_days,
