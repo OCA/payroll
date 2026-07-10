@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <!-- Inject advantages into the contract template form view (standalone templates) -->
     <record id="advantages_hr_contract_view_form" model="ir.ui.view">
-        <field name="name">hr.contract.view.form.inherit.advantages</field>
-        <field name="model">hr.contract</field>
-        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="name">hr.version.view.form.inherit.advantages</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_contract_template_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='yearly_benefits']" position="inside">
+            <xpath expr="//group[@name='salary_info']" position="inside">
+                <group name="yearly_benefits">
+                    <separator string="Contract Advantages" />
+                    <field name="advantages_ids">
+                        <list editable="bottom">
+                            <field
+                                name="advantage_template_id"
+                                options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"
+                            />
+                            <field name="advantage_template_code" />
+                            <field name="advantage_lower_bound" />
+                            <field name="advantage_upper_bound" />
+                            <field name="amount" />
+                        </list>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inject advantages into the employee form Payroll tab (employee contracts in v19) -->
+    <record id="advantages_hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.advantages</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='payroll_information']//group[@name='contract']//separator[@name='schedule']"
+                position="after"
+            >
                 <separator string="Contract Advantages" />
-                <field name="advantages_ids">
+                <field name="advantages_ids" nolabel="1" colspan="2">
                     <list editable="bottom">
                         <field
                             name="advantage_template_id"

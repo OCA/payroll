@@ -4,7 +4,7 @@ from odoo import fields, models
 
 
 class HrContract(models.Model):
-    _inherit = "hr.contract"
+    _inherit = "hr.version"
 
     advantages_ids = fields.One2many(
         "hr.contract.advantage", "contract_id", string="Contract Advantages"

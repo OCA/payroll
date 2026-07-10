@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -8,7 +8,7 @@ class HrContractAdvantage(models.Model):
     _name = "hr.contract.advantage"
     _description = "Employee's Advantages on Contract"
 
-    contract_id = fields.Many2one("hr.contract")
+    contract_id = fields.Many2one("hr.version")
     advantage_template_id = fields.Many2one(
         "hr.contract.advantage.template", string="Advantage Template"
     )
@@ -34,9 +34,13 @@ class HrContractAdvantage(models.Model):
             if record.amount and record.amount != 0.00:
                 if record.amount > record.advantage_upper_bound:
                     raise ValidationError(
-                        _("Advantage amount can't be greater than upper bound limit.")
+                        self.env._(
+                            "Advantage amount can't be greater than upper bound limit."
+                        )
                     )
                 elif record.amount < record.advantage_lower_bound:
                     raise ValidationError(
-                        _("Advantage amount can't be less than lower bound limit.")
+                        self.env._(
+                            "Advantage amount can't be less than lower bound limit."
+                        )
                     )

@@ -2,13 +2,13 @@
 
 {
     "name": "Payroll Contract Advantages",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "summary": "Allow to define contract advantages for employees.",
     "license": "LGPL-3",
     "author": "Nimarosa, Odoo Community Association (OCA)",
-    "depends": ["hr_contract", "payroll"],
+    "depends": ["hr", "payroll"],
     "data": [
         "security/ir.model.access.csv",
         "views/hr_contract_advantage_views.xml",

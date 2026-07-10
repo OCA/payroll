@@ -2,7 +2,7 @@
 
 from odoo import models
 
-from odoo.addons.payroll.models.hr_payslip import BrowsableObject
+from odoo.addons.payroll.models.base_browsable import BrowsableObject
 
 
 class HrPayslip(models.Model):
