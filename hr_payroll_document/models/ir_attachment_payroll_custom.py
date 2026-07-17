@@ -19,5 +19,5 @@ class IRAttachmentPayrollCustom(models.Model):
     def download(self):
         return {
             "type": "ir.actions.act_url",
-            "url": "web/content/" + str(self.attachment_id.id) + "/?download=True",
+            "url": f"web/content/{self.attachment_id.id}/?download=True",
         }

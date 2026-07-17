@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
+from odoo.fields import Domain
 
 from odoo.addons.hr.models.res_users import HR_WRITABLE_FIELDS
 
@@ -18,16 +19,16 @@ class ResUsers(models.Model):
     )
 
     def action_get_attachment_tree_view(self):
-        action = self.env.ref("base.action_attachment").sudo().read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id("base.action_attachment")
         action["context"] = {
             "default_res_model": self._name,
             "default_res_id": self.employee_id.id,
         }
-        action["domain"] = str(
+        action["domain"] = Domain(
             [
                 ("document_type", "=", "payroll"),
                 ("res_model", "=", self.employee_id._name),
-                ("res_id", "in", [self.employee_id.id]),
+                ("res_id", "in", self.employee_id.ids),
             ]
         )
         return action

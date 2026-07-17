@@ -1,5 +1,6 @@
 from odoo import fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 
 class Employee(models.Model):
@@ -30,12 +31,12 @@ class Employee(models.Model):
         )
 
     def action_get_payroll_tree_view(self):
-        action = self.env.ref("base.action_attachment").sudo().read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id("base.action_attachment")
         action["context"] = {
             "default_res_model": self._name,
             "default_res_id": self.ids[0],
         }
-        action["domain"] = str(
+        action["domain"] = Domain(
             [
                 ("document_type", "=", "payroll"),
                 ("res_model", "=", self._name),
@@ -46,7 +47,9 @@ class Employee(models.Model):
 
     def write(self, vals):
         res = super().write(vals)
-        if "identification_id" in vals and not self.env["res.partner"].simple_vat_check(
+        if "identification_id" in vals and not self.env[
+            "res.partner"
+        ]._check_vat_number(
             self.env.company.country_id.code, vals["identification_id"]
         ):
             raise ValidationError(

@@ -27,7 +27,7 @@
                 <field name="identification_id" />
                 <field name="employee" />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_employee"
                         string="Employee"
@@ -53,6 +53,7 @@
 
     <record id="payrolls_view_action" model="ir.actions.act_window">
         <field name="name">Payrolls</field>
+        <field name="path">payrolls</field>
         <field name="res_model">ir.attachment.payroll.custom</field>
         <field name="view_mode">list</field>
         <field name="view_id" ref="view_payroll_tree" />
@@ -84,31 +85,27 @@
         </field>
     </record>
 
-    <record id="res_users_view_form_profile_inherit" model="ir.ui.view">
+    <record id="res_users_view_form_preferences_inherit" model="ir.ui.view">
         <field name="name">hr.res_user.view.form.inherit.document</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="hr.res_users_view_form_profile" />
+        <field name="inherit_id" ref="hr.res_users_view_form_preferences" />
         <field name="arch" type="xml">
-            <div name="button_box" position="inside">
-                <button
-                    class="oe_stat_button"
-                    icon="fa-money"
-                    name="action_get_attachment_tree_view"
-                    type="object"
-                    groups="hr.group_hr_user"
-                >
-                    Payrolls
-                </button>
-            </div>
-            <div id="o_work_employee_main" position="inside">
-                <group name="payroll" string="Payroll">
-                    <field
-                        name="no_payroll_encryption"
-                        string="Disable encryption"
-                        readonly="not can_edit"
-                    />
-                </group>
-            </div>
+            <widget name="notification_alert" position="before">
+                <div name="button_box" class="oe_button_box">
+                    <button
+                        class="oe_stat_button"
+                        icon="fa-money"
+                        name="action_get_attachment_tree_view"
+                        type="object"
+                        groups="hr.group_hr_user"
+                    >
+                        Payrolls
+                    </button>
+                </div>
+            </widget>
+            <group name="other_calendar_preferences" position="inside">
+                <field name="no_payroll_encryption" string="Disable encryption" />
+            </group>
         </field>
     </record>
 
