@@ -5,6 +5,7 @@ from pypdf import PdfReader, PdfWriter
 
 from odoo import fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.fields import Command
 
 
 class PayrollManagamentWizard(models.TransientModel):
@@ -150,13 +151,13 @@ class PayrollManagamentWizard(models.TransientModel):
         mail_template = self.env.ref(
             "hr_payroll_document.payroll_employee_email_template"
         )
-        data_id = [(6, 0, [self.env["ir.attachment"].create(ir_values).id])]
+        data_id = [Command.set(self.env["ir.attachment"].create(ir_values).ids)]
         mail_template.attachment_ids = data_id
         mail_template.with_context(**{"subject": self.subject}).send_mail(
             employee.id, force_send=True
         )
 
     def validate_id(self, number):
-        return self.env["res.partner"].simple_vat_check(
+        return self.env["res.partner"]._check_vat_number(
             self.env.company.country_id.code, number
         )
