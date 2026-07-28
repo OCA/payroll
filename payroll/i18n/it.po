@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2025-11-24 13:42+0000\n"
+"PO-Revision-Date: 2026-07-28 08:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
 "Language: it\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: payroll
 #: code:addons/payroll/models/hr_payroll_structure.py:0
@@ -196,7 +196,7 @@ msgstr "Aggiungi una nota interna…"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contract_advantage_template_view_form
 msgid "Advantage Name"
-msgstr "Nome beneficio"
+msgstr "Nome benefit"
 
 #. module: payroll
 #: model:ir.actions.act_window,name:payroll.act_children_salary_rules
@@ -416,7 +416,7 @@ msgstr "Contratto"
 #: model:ir.actions.act_window,name:payroll.hr_contract_advantage_template_action
 #: model:ir.ui.menu,name:payroll.hr_contract_advantage_template_menu_action
 msgid "Contract Advantage Templates"
-msgstr "Modelli beneficio contratto"
+msgstr "Modelli benefit contratto"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_contribution_register_view_form
@@ -516,7 +516,7 @@ msgstr "Detrazione"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contract_advantage_template__default_value
 msgid "Default value for this advantage"
-msgstr "Valore predefinito per questo beneficio"
+msgstr "Valore predefinito per questo benefit"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
@@ -644,7 +644,7 @@ msgstr "Buste paga dipendente"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_contract_advantage_template
 msgid "Employee's Advantage on Contract"
-msgstr "Beneficio nel contratto dipendente"
+msgstr "Benefit nel contratto dipendente"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
@@ -899,7 +899,7 @@ msgstr "Limite inferiore"
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__lower_bound
 msgid "Lower bound authorized by the employer for this advantage"
-msgstr "Limite inferiore autorizzato dal datore di lavoro per questo beneficio"
+msgstr "Limite inferiore autorizzato dal datore di lavoro per questo benefit"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__paid
@@ -1524,7 +1524,7 @@ msgstr "Limite superiore"
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_contract_advantage_template__upper_bound
 msgid "Upper bound authorized by the employer for this advantage"
-msgstr "Limite superiore autorizzato dal datore di lavoro per questo beneficio"
+msgstr "Limite superiore autorizzato dal datore di lavoro per questo benefit"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_line__sequence
