@@ -8,7 +8,11 @@ class HrEmployee(models.Model):
     _description = "Employee"
 
     slip_ids = fields.One2many(
-        "hr.payslip", "employee_id", string="Payslips", readonly=True
+        "hr.payslip",
+        "employee_id",
+        string="Payslips",
+        readonly=True,
+        groups="payroll.group_payroll_user",
     )
     payslip_count = fields.Integer(
         compute="_compute_payslip_count",

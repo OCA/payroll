@@ -12,7 +12,11 @@ class HrContract(models.Model):
     _inherit = "hr.version"
     _description = "Employee Contract / Version"
 
-    struct_id = fields.Many2one("hr.payroll.structure", string="Salary Structure")
+    struct_id = fields.Many2one(
+        "hr.payroll.structure",
+        string="Salary Structure",
+        groups="payroll.group_payroll_user",
+    )
     schedule_pay = fields.Selection(
         [
             ("monthly", "Monthly"),
@@ -27,6 +31,7 @@ class HrContract(models.Model):
         index=True,
         default="monthly",
         help="Defines the frequency of the wage payment.",
+        groups="payroll.group_payroll_user",
     )
     resource_calendar_id = fields.Many2one(help="Employee's working schedule.")
 
