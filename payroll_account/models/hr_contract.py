@@ -5,8 +5,9 @@ from odoo import fields, models
 
 
 class HrContract(models.Model):
-    _inherit = "hr.contract"
-    _description = "Employee Contract"
+    # In Odoo 19 the `hr_contract` addon is gone: contracts live on `hr.version`.
+    _inherit = "hr.version"
+    _description = "Employee Contract / Version"
 
     analytic_account_id = fields.Many2one(
         "account.analytic.account", "Analytic Account"

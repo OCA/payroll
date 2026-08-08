@@ -17,26 +17,33 @@ class TestPayrollAccount(common.TransactionCase):
 
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
+        # Build our own fixtures instead of relying on demo records: the OCA CI
+        # runs the test suite on a database without demo data.
+        self.partner = self.env["res.partner"].create({"name": "John's Partner"})
+        self.bank = self.env["res.bank"].create({"name": "Test Bank"})
+        self.department = self.env["hr.department"].create({"name": "Research"})
+
         self.res_partner_bank = self.env["res.partner.bank"].create(
             {
                 "acc_number": "001-9876543-21",
-                "partner_id": self.ref("base.res_partner_12"),
+                "partner_id": self.partner.id,
                 "acc_type": "bank",
-                "bank_id": self.ref("base.res_bank_1"),
+                "bank_id": self.bank.id,
             }
         )
 
         self.hr_employee_john = self.env["hr.employee"].create(
             {
-                "address_id": self.ref("base.res_partner_address_27"),
                 "birthday": "1984-05-01",
                 "children": 0.0,
-                "country_id": self.ref("base.in"),
-                "department_id": self.ref("hr.dep_rd"),
-                "gender": "male",
+                "department_id": self.department.id,
+                # Odoo 19 renamed hr.employee.gender to sex.
+                "sex": "male",
                 "marital": "single",
                 "name": "John",
-                "bank_account_id": self.res_partner_bank.bank_id.id,
+                # Odoo 19 replaced the single hr.employee.bank_account_id with
+                # bank_account_ids (+ primary_bank_account_id).
+                "bank_account_ids": [(4, self.res_partner_bank.id)],
             }
         )
 
@@ -67,34 +74,57 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        rules = [
-            self.ref("payroll.hr_salary_rule_houserentallowance1"),
-            self.ref("payroll.hr_salary_rule_providentfund1"),
-        ]
+        self.categ_alw = self.env["hr.salary.rule.category"].create(
+            {"name": "Allowance", "code": "ALW"}
+        )
+        self.rule_hra = self.env["hr.salary.rule"].create(
+            {
+                "name": "House Rent Allowance",
+                "code": "HRA",
+                "sequence": 5,
+                "category_id": self.categ_alw.id,
+                "condition_select": "none",
+                "amount_select": "percentage",
+                "amount_percentage": 40.0,
+                "amount_percentage_base": "contract.wage",
+            }
+        )
+        self.rule_pf = self.env["hr.salary.rule"].create(
+            {
+                "name": "Provident Fund",
+                "code": "PF",
+                "sequence": 120,
+                "category_id": self.categ_alw.id,
+                "condition_select": "none",
+                "amount_select": "percentage",
+                "amount_percentage": -12.5,
+                "amount_percentage_base": "contract.wage",
+            }
+        )
         self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
             {
                 "name": "Salary Structure for Software Developer",
                 "code": "SD",
-                "parent_id": self.ref("payroll.structure_base"),
-                "rule_ids": [(6, 0, rules)],
+                "rule_ids": [(6, 0, [self.rule_hra.id, self.rule_pf.id])],
             }
         )
 
-        self.hr_contract_john = self.env["hr.contract"].create(
+        # Odoo 19: the `hr_contract` addon is gone. Every employee already owns a
+        # `hr.version` record, which is what carries the contract data now.
+        self.hr_employee_john.version_id.write(
             {
                 "date_end": fields.Date.to_string(datetime.now() + timedelta(days=365)),
-                "date_start": fields.Date.today(),
+                "contract_date_start": fields.Date.today(),
                 "name": "Contract for John",
                 "wage": 5000.0,
-                "employee_id": self.hr_employee_john.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
                 "journal_id": self.account_journal.id,
             }
         )
+        self.hr_contract_john = self.hr_employee_john.version_id
 
     def _update_account_in_rule(self, debit, credit):
-        rule_HRA = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
-        rule_HRA.write({"account_debit": debit, "account_credit": credit})
+        self.rule_hra.write({"account_debit": debit, "account_credit": credit})
 
     def _prepare_payslip(self, employee):
         date_from = datetime.now()
@@ -196,7 +226,7 @@ class TestPayrollAccount(common.TransactionCase):
         )
 
         # Create rule and payslip line
-        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule = self.rule_hra
         rule.register_id = register
         payslip = self._prepare_payslip(self.hr_employee_john)
         line = self.env["hr.payslip.line"].create(
