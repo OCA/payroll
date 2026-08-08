@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_rule_parameter_view_list" model="ir.ui.view">
+        <field name="name">hr.rule.parameter.list</field>
+        <field name="model">hr.rule.parameter</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code" />
+                <field name="name" />
+                <field name="country_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="hr_rule_parameter_view_form" model="ir.ui.view">
+        <field name="name">hr.rule.parameter.form</field>
+        <field name="model">hr.rule.parameter</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code" />
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="country_id" />
+                            <field name="active" widget="boolean_toggle" />
+                        </group>
+                    </group>
+                    <field
+                        name="description"
+                        placeholder="What this parameter is for..."
+                    />
+                    <notebook>
+                        <page string="Values" name="values">
+                            <field name="parameter_value_ids">
+                                <list editable="bottom">
+                                    <field name="date_from" />
+                                    <field name="parameter_value" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_rule_parameter_view_search" model="ir.ui.view">
+        <field name="name">hr.rule.parameter.search</field>
+        <field name="model">hr.rule.parameter</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code" />
+                <field name="name" />
+                <field name="country_id" />
+                <group>
+                    <filter
+                        name="group_by_country"
+                        string="Country"
+                        domain="[]"
+                        context="{'group_by': 'country_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_rule_parameter_action" model="ir.actions.act_window">
+        <field name="name">Rule Parameters</field>
+        <field name="res_model">hr.rule.parameter</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a salary rule parameter</p>
+            <p>
+                Keep tax brackets, contribution rates and legal thresholds here,
+                versioned by the date they come into force, instead of hard-coding
+                them inside salary rules.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="hr_rule_parameter_menu"
+        name="Rule Parameters"
+        parent="payroll.payroll_menu_configuration"
+        action="hr_rule_parameter_action"
+        sequence="30"
+    />
+</odoo>

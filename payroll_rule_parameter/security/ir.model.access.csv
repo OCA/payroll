@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_rule_parameter_user,hr.rule.parameter user,model_hr_rule_parameter,payroll.group_payroll_user,1,0,0,0
+access_hr_rule_parameter_manager,hr.rule.parameter manager,model_hr_rule_parameter,payroll.group_payroll_manager,1,1,1,1
+access_hr_rule_parameter_value_user,hr.rule.parameter.value user,model_hr_rule_parameter_value,payroll.group_payroll_user,1,0,0,0
+access_hr_rule_parameter_value_manager,hr.rule.parameter.value manager,model_hr_rule_parameter_value,payroll.group_payroll_manager,1,1,1,1
