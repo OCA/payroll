@@ -17,6 +17,11 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__active
+msgid "Active"
+msgstr ""
+
+#. module: payroll_contract_advantages
 #: model_terms:ir.ui.view,arch_db:payroll_contract_advantages.hr_contract_advantage_template_view_form
 msgid "Advantage Name"
 msgstr "Nombre de la ventaja"
@@ -42,6 +47,11 @@ msgstr "El importe de la ventaja no puede ser mayor que el límite inferior."
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__amount
 msgid "Amount"
 msgstr "Valor"
+
+#. module: payroll_contract_advantages
+#: model_terms:ir.ui.view,arch_db:payroll_contract_advantages.hr_contract_advantage_template_view_form
+msgid "Archived"
+msgstr ""
 
 #. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__advantage_template_code
@@ -79,9 +89,15 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__currency_id
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
-msgstr "Valor por defecto para esta ventaja"
+msgid "Default Value"
+msgstr ""
 
 #. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract__display_name
@@ -167,6 +183,9 @@ msgstr "Limite superior"
 #: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage_template__upper_bound
 msgid "Upper bound authorized by the employer for this advantage"
 msgstr "Límite superior autorizado por el empleador para esta ventaja"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "Valor por defecto para esta ventaja"
 
 #~ msgid "Pay Slip"
 #~ msgstr "Liquidacion"

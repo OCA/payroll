@@ -15,6 +15,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 
 #. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__active
+msgid "Active"
+msgstr ""
+
+#. module: payroll_contract_advantages
 #: model_terms:ir.ui.view,arch_db:payroll_contract_advantages.hr_contract_advantage_template_view_form
 msgid "Advantage Name"
 msgstr ""
@@ -39,6 +44,11 @@ msgstr ""
 #. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__amount
 msgid "Amount"
+msgstr ""
+
+#. module: payroll_contract_advantages
+#: model_terms:ir.ui.view,arch_db:payroll_contract_advantages.hr_contract_advantage_template_view_form
+msgid "Archived"
 msgstr ""
 
 #. module: payroll_contract_advantages
@@ -77,8 +87,14 @@ msgid "Created on"
 msgstr ""
 
 #. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__currency_id
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: payroll_contract_advantages
 #: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__default_value
-msgid "Default value for this advantage"
+msgid "Default Value"
 msgstr ""
 
 #. module: payroll_contract_advantages
