@@ -7,12 +7,21 @@ class HrContractAdvandageTemplate(models.Model):
     _name = "hr.contract.advantage.template"
     _description = "Employee's Advantage on Contract"
 
-    name = fields.Char("Name", required=True)
-    code = fields.Char("Code", required=True)
-    lower_bound = fields.Float(
-        "Lower Bound", help="Lower bound authorized by the employer for this advantage"
+    name = fields.Char(required=True)
+    code = fields.Char(required=True)
+    active = fields.Boolean(default=True)
+    currency_id = fields.Many2one(
+        "res.currency",
+        required=True,
+        default=lambda self: self.env.company.currency_id,
     )
-    upper_bound = fields.Float(
-        "Upper Bound", help="Upper bound authorized by the employer for this advantage"
+
+    lower_bound = fields.Monetary(
+        currency_field="currency_id",
+        help="Lower bound authorized by the employer for this advantage",
     )
-    default_value = fields.Float("Default value for this advantage")
+    upper_bound = fields.Monetary(
+        currency_field="currency_id",
+        help="Upper bound authorized by the employer for this advantage",
+    )
+    default_value = fields.Monetary(currency_field="currency_id")

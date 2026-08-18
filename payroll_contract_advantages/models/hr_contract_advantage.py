@@ -15,13 +15,16 @@ class HrContractAdvantage(models.Model):
     advantage_template_code = fields.Char(
         string="Code", related="advantage_template_id.code", readonly=True
     )
-    advantage_lower_bound = fields.Float(
+    currency_id = fields.Many2one(
+        related="contract_id.currency_id", store=True, readonly=True
+    )
+    advantage_lower_bound = fields.Monetary(
         string="Lower Bound", related="advantage_template_id.lower_bound", readonly=True
     )
-    advantage_upper_bound = fields.Float(
+    advantage_upper_bound = fields.Monetary(
         string="Upper Bound", related="advantage_template_id.upper_bound", readonly=True
     )
-    amount = fields.Float(string="Amount")
+    amount = fields.Monetary(currency_field="currency_id")
 
     @api.onchange("advantage_template_id")
     def _onchange_advantage_template_id(self):
