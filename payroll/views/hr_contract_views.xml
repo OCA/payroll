@@ -11,6 +11,27 @@
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="currency_id" invisible="1" />
             </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Opening Values" name="opening_values">
+                    <field name="payslip_count" invisible="1" />
+                    <group>
+                        <field name="seniority_date" readonly="payslip_count &gt; 0" />
+                        <field name="opening_date" readonly="payslip_count &gt; 0" />
+                        <field
+                            name="opening_leave_base"
+                            readonly="payslip_count &gt; 0"
+                        />
+                        <field
+                            name="opening_leave_days"
+                            readonly="payslip_count &gt; 0"
+                        />
+                    </group>
+                    <p class="text-muted" invisible="payslip_count == 0">
+                        Opening values are locked once payslips exist for this
+                        contract.
+                    </p>
+                </page>
+            </xpath>
         </field>
     </record>
 </odoo>
