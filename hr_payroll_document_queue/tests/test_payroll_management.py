@@ -3,12 +3,14 @@
 
 from odoo import exceptions
 
-from odoo.addons.hr_payroll_document.tests.common import TestHrPayrollDocument
+from odoo.addons.hr_payroll_document.tests.test_hr_payroll_document import (
+    TestHRPayrollDocument,
+)
 from odoo.addons.mail.tests.common import MailCase
 from odoo.addons.queue_job.tests.common import trap_jobs
 
 
-class TestPayrollManagement(MailCase, TestHrPayrollDocument):
+class TestPayrollManagement(MailCase, TestHRPayrollDocument):
     def test_job_creation(self):
         """The job is created."""
         # Arrange

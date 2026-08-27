@@ -19,11 +19,7 @@
                 <div
                     class="alert alert-warning text-center"
                     role="alert"
-                    attrs="{
-                        'invisible': [
-                            ('is_payroll_being_processed', '=', False),
-                        ],
-                    }"
+                    invisible="not is_payroll_being_processed"
                 >
                     <i class="fa fa-warning" title="Warning" />
                     <div>
@@ -35,11 +31,7 @@
                 <field name="is_send_visible" invisible="True" />
             </button>
             <button name="send_payrolls" position="attributes">
-                <attribute name="attrs">{
-                    'invisible': [
-                        ('is_send_visible', '=', False),
-                    ],
-                }</attribute>
+                <attribute name="invisible">not is_send_visible</attribute>
             </button>
             <button name="send_payrolls" position="after">
                 <button
@@ -47,11 +39,7 @@
                     name="send_payrolls_async"
                     type="object"
                     class="oe_highlight"
-                    attrs="{
-                        'invisible': [
-                            ('is_send_visible', '=', False),
-                        ],
-                    }"
+                    invisible="not is_send_visible"
                 />
             </button>
         </field>
