@@ -1,9 +1,9 @@
 # Copyright 2026 Simone Rubino - PyTech
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from itertools import chain
 
-from odoo import _, api, exceptions, fields, models
-from odoo.tools.misc import flatten
+from odoo import api, exceptions, fields, models
 
 from odoo.addons.queue_job.job import CANCELLED, DONE, FAILED
 
@@ -25,22 +25,27 @@ class PayrollManagamentWizard(models.TransientModel):
     def _notify_async_processed(self, send_result):
         """Notify the result to the user that processed the payrolls."""
         self.ensure_one()
-        odoobot = self.env.ref("base.partner_root")
+        odoobot = self.env.ref("base.user_root")
         user = self.env.user
-        return self.env["mail.thread"].message_notify(
-            author_id=odoobot.id,
-            partner_ids=user.partner_id.ids,
-            subject=send_result["params"]["title"],
-            body=send_result["params"]["message"],
-            model=self._name,
-            res_id=self.id,
+        return (
+            self.env["mail.thread"]
+            .with_user(odoobot)
+            .message_notify(
+                partner_ids=user.partner_id.ids,
+                subject=send_result["params"]["title"],
+                body=send_result["params"]["message"],
+                model=self._name,
+                res_id=self.id,
+            )
         )
 
     def send_payrolls(self):
         if not self.is_send_visible:
             # We are already hiding the buttons in the UI,
             # but this public method can still be executed.
-            raise exceptions.UserError(_("The selected payrolls cannot be processed."))
+            raise exceptions.UserError(
+                self.env._("The selected payrolls cannot be processed.")
+            )
 
         result = super().send_payrolls()
 
@@ -60,9 +65,9 @@ class PayrollManagamentWizard(models.TransientModel):
             ]
         )
         jobs_records_ids = [
-            wizard_id
-            for wizard_id in flatten(jobs.mapped("record_ids"))
-            if wizard_id not in self.ids
+            wizard.id
+            for wizard in chain.from_iterable(jobs.mapped("records"))
+            if wizard not in self
         ]
         jobs_records = self.browse(jobs_records_ids).exists()
         return jobs_records.payrolls
