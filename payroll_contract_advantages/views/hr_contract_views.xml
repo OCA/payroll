@@ -8,16 +8,64 @@
             <xpath expr="//group[@name='yearly_benefits']" position="inside">
                 <separator string="Contract Advantages" />
                 <field name="advantages_ids">
-                    <list editable="bottom">
+                    <list>
                         <field
                             name="advantage_template_id"
                             options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"
                         />
                         <field name="advantage_template_code" />
-                        <field name="advantage_lower_bound" />
-                        <field name="advantage_upper_bound" />
+                        <field name="computation_mode" />
+                        <field name="advantage_lower_bound" optional="hide" />
+                        <field name="advantage_upper_bound" optional="hide" />
                         <field name="amount" />
+                        <field name="quantity_final" />
                     </list>
+                    <form>
+                        <group>
+                            <group>
+                                <field
+                                    name="advantage_template_id"
+                                    options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"
+                                />
+                                <field name="advantage_template_code" />
+                                <field name="advantage_lower_bound" />
+                                <field name="advantage_upper_bound" />
+                            </group>
+                            <group string="Computation">
+                                <field name="computation_mode" />
+                                <field
+                                    name="percentage"
+                                    invisible="computation_mode != 'percentage'"
+                                />
+                                <field
+                                    name="percentage_base"
+                                    invisible="computation_mode != 'percentage'"
+                                    placeholder="wage"
+                                />
+                                <field
+                                    name="python_code"
+                                    invisible="computation_mode != 'python'"
+                                    placeholder="result = contract.wage * 0.05"
+                                />
+                                <field name="amount" />
+                            </group>
+                            <group string="Quantity">
+                                <field name="quantity_mode" />
+                                <field
+                                    name="quantity_fixed_value"
+                                    invisible="quantity_mode != 'fixed'"
+                                />
+                                <field
+                                    name="quantity_python_code"
+                                    invisible="quantity_mode != 'python'"
+                                />
+                                <field
+                                    name="quantity_final"
+                                    invisible="quantity_mode != 'python'"
+                                />
+                            </group>
+                        </group>
+                    </form>
                 </field>
             </xpath>
         </field>
