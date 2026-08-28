@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 INVITU (<https://www.invitu.com>)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html). -->
+<odoo>
+    <record id="hr_payroll_structure_view_form" model="ir.ui.view">
+        <field name="name">
+            hr.payroll.structure.form.inherit.advantage_templates
+        </field>
+        <field name="model">hr.payroll.structure</field>
+        <field name="inherit_id" ref="payroll.hr_payroll_structure_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Advantage Templates">
+                    <field name="advantage_template_ids">
+                        <list>
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="computation_mode" />
+                            <field name="quantity_mode" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

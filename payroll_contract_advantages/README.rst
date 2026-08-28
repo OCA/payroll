@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===========================
 Payroll Contract Advantages
 ===========================
@@ -17,7 +13,7 @@ Payroll Contract Advantages
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -37,6 +33,13 @@ set in contract form. The advantages can be set in the contract form as
 a list of advantages templates. Then it can be used in the calculation
 of the salary rules.
 
+Each advantage has a computation mode (fixed value, percentage of a
+contract field, or Python expression) giving a unit value, and a
+quantity mode (fixed or Python). The final amount is the unit value
+times the quantity, re-evaluated per payslip. The default fixed mode and
+quantity 1.0 reproduce the historical behaviour. Template bounds are
+enforced on the final amount.
+
 **Table of contents**
 
 .. contents::
@@ -51,6 +54,16 @@ Usage
   this contract, default value will be populated but you can change it.
 - Then in the salary rules, access this value using
   current_contract.advantages.[ADVANTAGE_CODE] (without brackets)
+- On the template, choose a computation mode (fixed value, percentage of
+  a contract field, or Python code) and a quantity mode (fixed or Python
+  code). The definition is copied onto the advantage and can be tuned
+  per contract.
+- ``amount`` holds the unit value; the final amount is the unit value
+  times the quantity, re-evaluated for each payslip. Python formulas
+  expose ``advantage``, ``contract``, ``employee``, ``payslip`` and must
+  set ``result``.
+- Bounds are enforced on the final amount; a non-numeric formula result
+  raises an error.
 
 Bug Tracker
 ===========
@@ -75,6 +88,7 @@ Contributors
 
 - Nimarosa (Nicolas Rodriguez) <nicolasrsande@gmail.com>
 - Cristiano Mafra Junior <cristiano.mafra@escodoo.com.br>
+- Cyril VINH-TUNG <cyril@invitu.com>
 
 Maintainers
 -----------
