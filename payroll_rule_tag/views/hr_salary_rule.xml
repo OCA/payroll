@@ -1,0 +1,11 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_salary_rule_view_form">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
+        <field name="arch" type="xml">
+            <field name="amount_python_compute" position="after">
+                <field name="tag_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+</odoo>
