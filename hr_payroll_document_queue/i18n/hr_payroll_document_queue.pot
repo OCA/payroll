@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_payroll_document_queue
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_payroll_document_queue
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document_queue.payrolls_management_wizard_form
+msgid "<i class=\"fa fa-warning\" title=\"Warning\"/>"
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#: model:ir.model.fields,field_description:hr_payroll_document_queue.field_payroll_management_wizard__is_payroll_being_processed
+msgid "Is being processed"
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document_queue.payrolls_management_wizard_form
+msgid "One of the selected payrolls is already being processed"
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#: model:ir.model.fields,help:hr_payroll_document_queue.field_payroll_management_wizard__is_payroll_being_processed
+msgid "One of the selected payrolls is being processed."
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#: model:ir.model,name:hr_payroll_document_queue.model_payroll_management_wizard
+msgid "Payroll Management"
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#: model_terms:ir.ui.view,arch_db:hr_payroll_document_queue.payrolls_management_wizard_form
+msgid "Send Async"
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#: model:ir.model.fields,field_description:hr_payroll_document_queue.field_payroll_management_wizard__is_send_visible
+msgid "Send button is visible"
+msgstr ""
+
+#. module: hr_payroll_document_queue
+#. odoo-python
+#: code:addons/hr_payroll_document_queue/wizards/payroll_management_wizard.py:0
+#, python-format
+msgid "The selected payrolls cannot be processed."
+msgstr ""
