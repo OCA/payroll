@@ -15,7 +15,7 @@ class HrPayslipLine(models.Model):
         relationships:
         - asset_receivable: Employee loans, salary advances, overpayments to recover
                            → Partner source: Employee (work_contact_id or
-                             bank_account_id.partner_id)
+                             primary_bank_account_id.partner_id)
         - liability_payable: Third-party payables (tax authorities, insurance
                             companies) typically managed through contribution
                             registers
@@ -24,7 +24,7 @@ class HrPayslipLine(models.Model):
         - liability_current: Current liabilities to pay employee salaries, net pay
                             accruals
                            → Partner source: Employee (work_contact_id or
-                             bank_account_id.partner_id)
+                             primary_bank_account_id.partner_id)
 
         For other account types (expense, income, asset_current, etc.), no partner
         is assigned as these represent internal accounting entries without external
@@ -43,8 +43,8 @@ class HrPayslipLine(models.Model):
                 self.slip_id.employee_id.work_contact_id.id
                 if self.slip_id.employee_id.work_contact_id
                 else (
-                    self.slip_id.employee_id.bank_account_id.partner_id.id
-                    if self.slip_id.employee_id.bank_account_id
+                    self.slip_id.employee_id.primary_bank_account_id.partner_id.id
+                    if self.slip_id.employee_id.primary_bank_account_id
                     else False
                 )
             )

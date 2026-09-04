@@ -38,20 +38,38 @@
             </page>
         </field>
     </record>
-    <!-- Contract View -->
+    <!-- Contract Template View -->
     <record id="hr_contract_view_form" model="ir.ui.view">
-        <field name="name">hr.contract.view.form.inherit</field>
-        <field name="model">hr.contract</field>
-        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="name">hr.version.view.form.inherit</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="payroll.hr_contract_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='top_info_right']" position="after">
-                <group string="Accounting">
+            <xpath expr="//group[@name='contract']" position="after">
+                <group name="accounting" string="Accounting">
                     <field
                         name="analytic_account_id"
                         groups="analytic.group_analytic_accounting"
                     />
                     <field name="journal_id" />
                 </group>
+            </xpath>
+        </field>
+    </record>
+    <!-- Employee View -->
+    <record id="hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="payroll.hr_employee_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='payroll_information']//group[@name='contract']//field[@name='struct_id']"
+                position="after"
+            >
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field name="journal_id" />
             </xpath>
         </field>
     </record>

@@ -5,10 +5,12 @@ from datetime import datetime, timedelta
 from dateutil import relativedelta
 
 from odoo import fields
-from odoo.tests import common
+from odoo.exceptions import UserError
+
+from odoo.addons.payroll.tests.common import TestPayslipBase
 
 
-class TestPayrollAccount(common.TransactionCase):
+class TestPayrollAccount(TestPayslipBase):
     def setUp(self):
         super().setUp()
 
@@ -17,28 +19,34 @@ class TestPayrollAccount(common.TransactionCase):
 
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
 
-        self.res_partner_bank = self.env["res.partner.bank"].create(
+        self.work_address = self.env["res.partner"].create(
+            {"name": "John's Work Address"}
+        )
+        self.hr_employee_john = self.env["hr.employee"].create(
             {
-                "acc_number": "001-9876543-21",
-                "partner_id": self.ref("base.res_partner_12"),
-                "acc_type": "bank",
-                "bank_id": self.ref("base.res_bank_1"),
+                "address_id": self.work_address.id,
+                "birthday": "1984-05-01",
+                "children": 0,
+                "country_id": self.ref("base.in"),
+                "department_id": self.dept_rd.id,
+                "sex": "male",
+                "marital": "single",
+                "name": "John",
             }
         )
 
-        self.hr_employee_john = self.env["hr.employee"].create(
+        # The work contact is created together with the employee, and is the
+        # only partner a bank account may be attached to.
+        self.res_bank = self.env["res.bank"].create({"name": "Test Bank"})
+        self.res_partner_bank = self.env["res.partner.bank"].create(
             {
-                "address_id": self.ref("base.res_partner_address_27"),
-                "birthday": "1984-05-01",
-                "children": 0.0,
-                "country_id": self.ref("base.in"),
-                "department_id": self.ref("hr.dep_rd"),
-                "gender": "male",
-                "marital": "single",
-                "name": "John",
-                "bank_account_id": self.res_partner_bank.bank_id.id,
+                "acc_number": "001-9876543-21",
+                "partner_id": self.hr_employee_john.work_contact_id.id,
+                "acc_type": "bank",
+                "bank_id": self.res_bank.id,
             }
         )
+        self.hr_employee_john.bank_account_ids = [(4, self.res_partner_bank.id)]
 
         self.account_debit = self.env["account.account"].create(
             {
@@ -67,34 +75,36 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        rules = [
-            self.ref("payroll.hr_salary_rule_houserentallowance1"),
-            self.ref("payroll.hr_salary_rule_providentfund1"),
-        ]
-        self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
-            {
-                "name": "Salary Structure for Software Developer",
-                "code": "SD",
-                "parent_id": self.ref("payroll.structure_base"),
-                "rule_ids": [(6, 0, rules)],
-            }
+        self.analytic_plan = self.env["account.analytic.plan"].create(
+            {"name": "Payroll Plan"}
+        )
+        self.analytic_account = self.env["account.analytic.account"].create(
+            {"name": "Payroll Analytic", "plan_id": self.analytic_plan.id}
         )
 
-        self.hr_contract_john = self.env["hr.contract"].create(
+        # Salary rules and structure come from payroll's test fixtures: since
+        # 19.0 databases are initialized without demo data, the payroll demo
+        # records are not available.
+        self.hr_structure_softwaredeveloper = self.developer_pay_structure
+
+        # Since 19.0 contracts are versions of the employee: complete the
+        # version created along with the employee instead of creating one.
+        self.hr_contract_john = self.hr_employee_john.version_id
+        self.hr_contract_john.write(
             {
-                "date_end": fields.Date.to_string(datetime.now() + timedelta(days=365)),
-                "date_start": fields.Date.today(),
+                "contract_date_start": fields.Date.today(),
+                "contract_date_end": fields.Date.to_string(
+                    datetime.now() + timedelta(days=365)
+                ),
                 "name": "Contract for John",
                 "wage": 5000.0,
-                "employee_id": self.hr_employee_john.id,
                 "struct_id": self.hr_structure_softwaredeveloper.id,
                 "journal_id": self.account_journal.id,
             }
         )
 
     def _update_account_in_rule(self, debit, credit):
-        rule_HRA = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
-        rule_HRA.write({"account_debit": debit, "account_credit": credit})
+        self.rule_hra.write({"account_debit": debit, "account_credit": credit})
 
     def _prepare_payslip(self, employee):
         date_from = datetime.now()
@@ -196,7 +206,7 @@ class TestPayrollAccount(common.TransactionCase):
         )
 
         # Create rule and payslip line
-        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule = self.rule_hra
         rule.register_id = register
         payslip = self._prepare_payslip(self.hr_employee_john)
         line = self.env["hr.payslip.line"].create(
@@ -219,3 +229,150 @@ class TestPayrollAccount(common.TransactionCase):
         # Test other account types -> no partner
         self.account_credit.account_type = "expense"
         self.assertFalse(line._get_partner_id(True))
+
+    def test_partner_logic_bank_account_fallback(self):
+        """Without a work contact, the primary bank account partner is used."""
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        rule = self.rule_hra
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+        bank_partner = self.res_partner_bank.partner_id
+        self.hr_employee_john.work_contact_id = False
+
+        self.account_credit.account_type = "asset_receivable"
+        rule.account_credit = self.account_credit
+        self.assertEqual(
+            self.hr_employee_john.primary_bank_account_id, self.res_partner_bank
+        )
+        self.assertEqual(line._get_partner_id(True), bank_partner.id)
+
+    def _confirm_payslip(self):
+        """Compute and confirm the payslip of John, return its account move."""
+        self._prepare_payslip(self.hr_employee_john)
+        self.hr_payslip.compute_sheet()
+        self.hr_payslip.action_payslip_done()
+        return self.hr_payslip.move_id
+
+    def _journal_without_default_account(self):
+        journal = self.env["account.journal"].create(
+            {"name": "No Default Account", "code": "NODEF", "type": "general"}
+        )
+        journal.default_account_id = False
+        self.hr_contract_john.journal_id = journal
+        return journal
+
+    def test_contract_template_whitelist(self):
+        """Accounting fields are propagated from a contract template."""
+        whitelist = self.env["hr.version"]._get_whitelist_fields_from_template()
+        self.assertIn("analytic_account_id", whitelist)
+        self.assertIn("journal_id", whitelist)
+
+        # a contract template is a version without employee
+        template = self.env["hr.version"].create(
+            {
+                "name": "Template with accounting",
+                "wage": 1000.0,
+                "journal_id": self.account_journal.id,
+                "analytic_account_id": self.analytic_account.id,
+            }
+        )
+        values = self.env["hr.version"].get_values_from_contract_template(template)
+        self.assertEqual(values["journal_id"], self.account_journal.id)
+        self.assertEqual(values["analytic_account_id"], self.analytic_account.id)
+
+    def test_onchange_contract_keeps_journal(self):
+        """The journal follows the contract of the payslip."""
+        self._prepare_payslip(self.hr_employee_john)
+        self.hr_payslip.onchange_contract()
+        self.assertEqual(self.hr_payslip.journal_id, self.account_journal)
+
+    def test_payslip_run_wizard_uses_run_journal(self):
+        """Payslips generated from a batch are created with its journal."""
+        payslip_run = self.env["hr.payslip.run"].create(
+            {"name": "Payslip Run", "journal_id": self.account_journal.id}
+        )
+        wizard = (
+            self.env["hr.payslip.employees"]
+            .with_context(active_id=payslip_run.id, active_model="hr.payslip.run")
+            .create({"employee_ids": [(6, 0, self.hr_employee_john.ids)]})
+        )
+        wizard.compute_sheet()
+        payslips = self.env["hr.payslip"].search(
+            [("payslip_run_id", "=", payslip_run.id)]
+        )
+        self.assertEqual(payslips.employee_id, self.hr_employee_john)
+        self.assertEqual(payslips.journal_id, self.account_journal)
+
+    def test_analytic_distribution_from_contract(self):
+        """The contract analytic account is set on the move lines."""
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        self.hr_contract_john.analytic_account_id = self.analytic_account
+        move = self._confirm_payslip()
+        self.assertTrue(move.line_ids)
+        for line in move.line_ids:
+            self.assertEqual(
+                line.analytic_distribution, {str(self.analytic_account.id): 100}
+            )
+
+    def test_analytic_distribution_from_salary_rule(self):
+        """Without one on the contract, the rule analytic account is used."""
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        self.assertFalse(self.hr_contract_john.analytic_account_id)
+        self.rule_hra.analytic_account_id = self.analytic_account
+        move = self._confirm_payslip()
+        self.assertTrue(move.line_ids)
+        for line in move.line_ids:
+            self.assertEqual(
+                line.analytic_distribution, {str(self.analytic_account.id): 100}
+            )
+
+    def test_adjustment_credit_line(self):
+        """Debit only lines are balanced with an adjustment credit line."""
+        self.rule_hra.write(
+            {"account_debit": self.account_debit.id, "account_credit": False}
+        )
+        move = self._confirm_payslip()
+        adjustment = move.line_ids.filtered(
+            lambda line: line.name == "Adjustment Entry"
+        )
+        self.assertTrue(adjustment)
+        self.assertTrue(adjustment.credit)
+        self.assertFalse(adjustment.debit)
+        self.assertEqual(adjustment.account_id, self.account_journal.default_account_id)
+
+    def test_adjustment_debit_line(self):
+        """Credit only lines are balanced with an adjustment debit line."""
+        self.rule_hra.write(
+            {"account_debit": False, "account_credit": self.account_credit.id}
+        )
+        move = self._confirm_payslip()
+        adjustment = move.line_ids.filtered(
+            lambda line: line.name == "Adjustment Entry"
+        )
+        self.assertTrue(adjustment)
+        self.assertTrue(adjustment.debit)
+        self.assertFalse(adjustment.credit)
+        self.assertEqual(adjustment.account_id, self.account_journal.default_account_id)
+
+    def test_adjustment_credit_without_journal_account(self):
+        """A credit adjustment needs a default account on the journal."""
+        self._journal_without_default_account()
+        self.rule_hra.write(
+            {"account_debit": self.account_debit.id, "account_credit": False}
+        )
+        self._prepare_payslip(self.hr_employee_john)
+        self.hr_payslip.compute_sheet()
+        with self.assertRaises(UserError):
+            self.hr_payslip.action_payslip_done()
+
+    def test_adjustment_debit_without_journal_account(self):
+        """A debit adjustment needs a default account on the journal."""
+        self._journal_without_default_account()
+        self.rule_hra.write(
+            {"account_debit": False, "account_credit": self.account_credit.id}
+        )
+        self._prepare_payslip(self.hr_employee_john)
+        self.hr_payslip.compute_sheet()
+        with self.assertRaises(UserError):
+            self.hr_payslip.action_payslip_done()

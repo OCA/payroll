@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 logger = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ class HrPayslip(models.Model):
                 slip.company_id.currency_id or slip.journal_id.company_id.currency_id
             )
 
-            name = _("Payslip of %s") % (slip.employee_id.name)
+            name = self.env._("Payslip of %(employee)s", employee=slip.employee_id.name)
             move_dict = {
                 "narration": name,
                 "ref": slip.number,
@@ -101,11 +101,11 @@ class HrPayslip(models.Model):
                 acc_id = slip.journal_id.default_account_id.id
                 if not acc_id:
                     raise UserError(
-                        _(
-                            'The Expense Journal "%s" has not properly '
-                            "configured the Credit Account!"
+                        self.env._(
+                            'The Expense Journal "%(journal)s" has not properly '
+                            "configured the Credit Account!",
+                            journal=slip.journal_id.name,
                         )
-                        % (slip.journal_id.name)
                     )
                 adjust_credit = self._prepare_adjust_credit_line(
                     currency, credit_sum, debit_sum, slip.journal_id, date
@@ -116,11 +116,11 @@ class HrPayslip(models.Model):
                 acc_id = slip.journal_id.default_account_id.id
                 if not acc_id:
                     raise UserError(
-                        _(
-                            'The Expense Journal "%s" has not properly '
-                            "configured the Debit Account!"
+                        self.env._(
+                            'The Expense Journal "%(journal)s" has not properly '
+                            "configured the Debit Account!",
+                            journal=slip.journal_id.name,
                         )
-                        % (slip.journal_id.name)
                     )
                 adjust_debit = self._prepare_adjust_debit_line(
                     currency, credit_sum, debit_sum, slip.journal_id, date
@@ -181,7 +181,7 @@ class HrPayslip(models.Model):
     ):
         acc_id = journal.default_account_id.id
         return {
-            "name": _("Adjustment Entry"),
+            "name": self.env._("Adjustment Entry"),
             "partner_id": False,
             "account_id": acc_id,
             "journal_id": journal.id,
@@ -195,7 +195,7 @@ class HrPayslip(models.Model):
     ):
         acc_id = journal.default_account_id.id
         return {
-            "name": _("Adjustment Entry"),
+            "name": self.env._("Adjustment Entry"),
             "partner_id": False,
             "account_id": acc_id,
             "journal_id": journal.id,
