@@ -108,7 +108,7 @@
                     <button
                         name="close_payslip_run"
                         type="object"
-                        string="Close"
+                        string="Close Batch"
                         invisible="state != 'draft'"
                         class="oe_highlight"
                     />
