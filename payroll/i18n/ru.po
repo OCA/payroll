@@ -242,6 +242,13 @@ msgid ""
 "                        on Payslips Run.\n"
 "                    </span>"
 msgstr ""
+"<span colspan=\"4\" nolabel=\"1\">\n"
+"                        Этот мастер сгенерирует расчётные листки для всех "
+"выбранных\n"
+"                        сотрудников на основе периода и признака «Возврат», "
+"указанных\n"
+"                        в Зарплатной ведомости.\n"
+"                    </span>"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -636,8 +643,12 @@ msgstr "Дочернее определение"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_run__state__close
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Close"
+msgstr "Закрыта"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
+msgid "Close Batch"
 msgstr "Закрыть"
 
 #. module: payroll
