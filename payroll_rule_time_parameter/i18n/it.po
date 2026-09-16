@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-14 15:06+0000\n"
+"PO-Revision-Date: 2026-09-16 09:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: payroll_rule_time_parameter
 #: model:ir.model.fields,field_description:payroll_rule_time_parameter.field_hr_payslip__display_name
@@ -24,24 +24,24 @@ msgstr "Nome visualizzato"
 #. module: payroll_rule_time_parameter
 #: model:ir.model.fields,field_description:payroll_rule_time_parameter.field_hr_payslip__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: payroll_rule_time_parameter
 #: model:ir.model.fields,field_description:payroll_rule_time_parameter.field_hr_payslip____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: payroll_rule_time_parameter
 #: model:ir.model,name:payroll_rule_time_parameter.model_hr_payslip
 msgid "Payslip"
-msgstr ""
+msgstr "Busta paga"
 
 #. module: payroll_rule_time_parameter
 #: model:ir.actions.act_window,name:payroll_rule_time_parameter.base_time_parameter_action
 msgid "Rule Parameters"
-msgstr ""
+msgstr "Parametri regola"
 
 #. module: payroll_rule_time_parameter
 #: model:ir.ui.menu,name:payroll_rule_time_parameter.menu_action_base_time_parameter
 msgid "Time Parameters"
-msgstr ""
+msgstr "Parametri orario"
