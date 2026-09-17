@@ -341,6 +341,13 @@
                 <field name="date_from" />
                 <field name="contract_id" />
                 <field name="payslip_run_id" />
+                <field name="struct_id" />
+                <filter
+                    string="My Payslips"
+                    name="my_payslips"
+                    domain="[('employee_id.user_id', '=', uid)]"
+                />
+                <separator />
                 <filter
                     string="Draft"
                     name="draft"
@@ -371,6 +378,22 @@
                     domain="[('credit_note', '=', True)]"
                 />
                 <separator />
+                <filter
+                    string="Late Activities"
+                    name="activities_overdue"
+                    domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    string="Today Activities"
+                    name="activities_today"
+                    domain="[('my_activity_date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    string="Future Activities"
+                    name="activities_upcoming_all"
+                    domain="[('my_activity_date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <separator />
                 <group expand="0" string="Group By">
                     <filter
                         string="Employees"
@@ -392,6 +415,11 @@
                         string="States"
                         name="state"
                         context="{'group_by':'state'}"
+                    />
+                    <filter
+                        string="Salary Structure"
+                        name="struct_id"
+                        context="{'group_by':'struct_id'}"
                     />
                 </group>
             </search>
