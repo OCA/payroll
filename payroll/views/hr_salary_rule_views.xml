@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_salary_rule_view_tree_children" model="ir.ui.view">
-        <field name="name">hr.salary.rule.list</field>
+        <field name="name">hr.salary.rule.list.children</field>
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <list>
