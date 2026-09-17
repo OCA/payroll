@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from dateutil import relativedelta
 
 from odoo import fields
+from odoo.exceptions import UserError
 from odoo.tests import common
 
 
@@ -219,3 +220,79 @@ class TestPayrollAccount(common.TransactionCase):
         # Test other account types -> no partner
         self.account_credit.account_type = "expense"
         self.assertFalse(line._get_partner_id(True))
+
+    # ------------------------------------------------------------------
+    # Accounting entry life cycle
+    # ------------------------------------------------------------------
+    def _allow_cancelling_payslips(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "payroll.allow_cancel_payslips", True
+        )
+
+    def _confirmed_payslip(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.action_payslip_done()
+        self.assertTrue(payslip.move_id)
+        return payslip
+
+    def test_cancel_reverses_the_entry_instead_of_deleting_it(self):
+        self._allow_cancelling_payslips()
+        payslip = self._confirmed_payslip()
+        move = payslip.move_id
+
+        payslip.action_payslip_cancel()
+
+        self.assertEqual(payslip.state, "cancel")
+        self.assertTrue(move.exists(), "The posted entry must not be deleted")
+        self.assertEqual(move.state, "posted")
+        reversal = move.reversal_move_ids
+        self.assertEqual(len(reversal), 1, "The entry must have been reversed")
+        self.assertEqual(reversal.reversed_entry_id, move)
+        self.assertEqual(
+            sum(reversal.line_ids.mapped("balance")),
+            -sum(move.line_ids.mapped("balance")),
+        )
+        self.assertIn(move, payslip.cancelled_move_ids)
+        self.assertIn(reversal, payslip.cancelled_move_ids)
+        self.assertFalse(payslip.move_id)
+
+    def test_confirming_twice_does_not_create_a_second_entry(self):
+        payslip = self._confirmed_payslip()
+        move = payslip.move_id
+        move_count = self.env["account.move"].search_count([])
+
+        payslip.action_payslip_done()
+
+        self.assertEqual(payslip.move_id, move)
+        self.assertEqual(self.env["account.move"].search_count([]), move_count)
+
+    def test_cancel_then_confirm_again_creates_a_new_entry(self):
+        self._allow_cancelling_payslips()
+        payslip = self._confirmed_payslip()
+        first_move = payslip.move_id
+        payslip.action_payslip_cancel()
+        payslip.action_payslip_draft()
+
+        payslip.action_payslip_done()
+
+        self.assertTrue(payslip.move_id)
+        self.assertNotEqual(payslip.move_id, first_move)
+
+    def test_cannot_delete_a_payslip_with_a_posted_entry(self):
+        payslip = self._confirmed_payslip()
+        payslip.action_payslip_draft()
+
+        with self.assertRaises(UserError):
+            payslip.unlink()
+
+    def test_cancel_deletes_an_entry_that_was_never_posted(self):
+        self._allow_cancelling_payslips()
+        payslip = self._confirmed_payslip()
+        move = payslip.move_id
+        move.button_draft()
+
+        payslip.action_payslip_cancel()
+
+        self.assertFalse(move.exists())
+        self.assertFalse(payslip.move_id)
