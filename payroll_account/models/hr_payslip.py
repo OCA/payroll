@@ -188,8 +188,9 @@ class HrPayslip(models.Model):
                 if not acc_id:
                     raise UserError(
                         _(
-                            'The Expense Journal "%s" has not properly '
-                            "configured the Credit Account!"
+                            'The salary journal "%s" needs a default account: '
+                            "the payslip debits more than it credits, and the "
+                            "difference is balanced on that account."
                         )
                         % (slip.journal_id.name)
                     )
@@ -203,8 +204,9 @@ class HrPayslip(models.Model):
                 if not acc_id:
                     raise UserError(
                         _(
-                            'The Expense Journal "%s" has not properly '
-                            "configured the Debit Account!"
+                            'The salary journal "%s" needs a default account: '
+                            "the payslip credits more than it debits, and the "
+                            "difference is balanced on that account."
                         )
                         % (slip.journal_id.name)
                     )
@@ -220,7 +222,8 @@ class HrPayslip(models.Model):
                 move.action_post()
             else:
                 logger.info(
-                    f"Payslip {slip.number} did not generate any account move lines"
+                    "Payslip %s did not generate any account move lines",
+                    slip.number,
                 )
         return res
 
@@ -228,6 +231,16 @@ class HrPayslip(models.Model):
         """Company the accounting entry of this payslip belongs to."""
         self.ensure_one()
         return self.company_id or self.journal_id.company_id or self.env.company
+
+    def action_open_accounting_entry(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Journal Entry"),
+            "res_model": "account.move",
+            "view_mode": "form",
+            "res_id": self.move_id.id,
+        }
 
     def _prepare_debit_line(
         self, line, amount, date, debit_account_id, move_line_analytic_ids

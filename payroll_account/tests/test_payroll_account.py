@@ -37,7 +37,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "gender": "male",
                 "marital": "single",
                 "name": "John",
-                "bank_account_id": self.res_partner_bank.bank_id.id,
+                "bank_account_id": self.res_partner_bank.id,
             }
         )
 
@@ -220,6 +220,26 @@ class TestPayrollAccount(common.TransactionCase):
         # Test other account types -> no partner
         self.account_credit.account_type = "expense"
         self.assertFalse(line._get_partner_id(True))
+
+    def test_partner_falls_back_to_the_bank_account_partner(self):
+        """Without a work contact, the employee's bank account names the partner."""
+        register_partner = self.env["res.partner"].create({"name": "Tax Authority"})
+        register = self.env["hr.contribution.register"].create(
+            {"name": "Tax Register", "partner_id": register_partner.id}
+        )
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule.register_id = register
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+        self.hr_employee_john.work_contact_id = False
+        self.account_credit.account_type = "asset_receivable"
+        rule.account_credit = self.account_credit
+
+        self.assertEqual(
+            line._get_partner_id(True), self.res_partner_bank.partner_id.id
+        )
 
     # ------------------------------------------------------------------
     # Company consistency
@@ -516,3 +536,13 @@ class TestPayrollAccount(common.TransactionCase):
         )
 
         self.assertEqual(payslip.journal_id, other_journal)
+
+    def test_accounting_entry_button_opens_the_move(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.action_payslip_done()
+
+        action = payslip.action_open_accounting_entry()
+
+        self.assertEqual(action["res_model"], "account.move")
+        self.assertEqual(action["res_id"], payslip.move_id.id)
