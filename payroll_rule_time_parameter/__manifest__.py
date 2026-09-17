@@ -1,6 +1,6 @@
 {
     "name": "Payroll Rule Time Parameter",
-    "summary": "",
+    "summary": "Date dependent parameters for salary rules",
     "author": "nimarosa, appstogrow, Odoo Community Association (OCA)",
     "category": "Payroll",
     "data": [
