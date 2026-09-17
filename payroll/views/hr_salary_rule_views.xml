@@ -5,11 +5,10 @@
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <list>
-                <field name="sequence" optional="hide" />
+                <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="code" decoration-bf="1" />
                 <field name="category_id" widget="badge" />
-                <field name="sequence" column_invisible="1" />
                 <field name="register_id" />
             </list>
         </field>

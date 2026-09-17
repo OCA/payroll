@@ -77,7 +77,7 @@
         <field name="name">hr.payroll.structure.form</field>
         <field name="model">hr.payroll.structure</field>
         <field name="arch" type="xml">
-            <form string="Employee Function">
+            <form string="Salary Structure">
                 <sheet>
                     <field name="require_code" invisible="1" />
                     <group col="2">

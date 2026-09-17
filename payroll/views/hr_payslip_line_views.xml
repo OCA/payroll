@@ -18,7 +18,7 @@
                 <field name="amount_select" column_invisible="1" />
                 <field name="register_id" column_invisible="1" />
                 <field name="payslip_run_id" optional="hide" />
-                <field name="currency_id" invisible="1" />
+                <field name="currency_id" column_invisible="True" />
             </list>
         </field>
     </record>
@@ -84,7 +84,7 @@
                                         decoration-success="total > 0 and parent_line_id == False"
                                         sum="total_net"
                                     />
-                                    <field name="currency_id" invisible="1" />
+                                    <field name="currency_id" column_invisible="True" />
                                 </list>
                             </field>
                         </group>
@@ -150,7 +150,7 @@
         <field name="context">
             {'default_register_id': active_id, 'search_default_register_id': 1}
         </field>
-        <field name="binding_model_id" ref="model_hr_payslip" />
+        <field name="binding_model_id" ref="model_hr_contribution_register" />
     </record>
     <record
         id="hr_payslip_line_action_computation_details"
