@@ -22,6 +22,30 @@
                     domain="[('state','=','close')]"
                     help="Done Payslip Batches"
                 />
+                <separator />
+                <filter
+                    string="Start Date"
+                    name="date_start_filter"
+                    date="date_start"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Status"
+                        name="group_state"
+                        context="{'group_by':'state'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="group_company"
+                        groups="base.group_multi_company"
+                        context="{'group_by':'company_id'}"
+                    />
+                    <filter
+                        string="Start Date"
+                        name="group_date_start"
+                        context="{'group_by':'date_start'}"
+                    />
+                </group>
             </search>
         </field>
     </record>
