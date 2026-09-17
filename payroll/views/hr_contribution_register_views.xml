@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
+                <field name="partner_id" optional="show" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
@@ -50,22 +51,24 @@
         <field name="model">hr.contribution.register</field>
         <field name="arch" type="xml">
             <form string="Contribution">
-                <group>
-                    <field name="name" />
-                    <field name="partner_id" />
-                    <field
-                        name="company_id"
-                        groups="base.group_multi_company"
-                        options="{'no_create': True}"
-                        class="oe_inline"
-                    />
-                </group>
-                <newline />
-                <group>
-                    <separator string="Description" />
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="partner_id" />
+                        <field
+                            name="company_id"
+                            groups="base.group_multi_company"
+                            options="{'no_create': True}"
+                            class="oe_inline"
+                        />
+                    </group>
                     <newline />
-                    <field name="note" nolabel="1" colspan="2" />
-                </group>
+                    <group>
+                        <separator string="Description" />
+                        <newline />
+                        <field name="note" nolabel="1" colspan="2" />
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>

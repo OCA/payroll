@@ -120,6 +120,27 @@
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_open_payslips"
+                            class="oe_stat_button"
+                            icon="fa-list-alt"
+                            type="object"
+                        >
+                            <field
+                                name="slip_count"
+                                widget="statinfo"
+                                string="Payslips"
+                            />
+                        </button>
+                        <button
+                            name="%(action_get_batch_payslip_lines)d"
+                            class="oe_stat_button"
+                            icon="fa-money"
+                            type="action"
+                            string="Payslip Lines"
+                        />
+                    </div>
                     <label for="name" class="oe_edit_only" />
                     <h1>
                         <field name="name" readonly="state != 'draft'" />
@@ -149,6 +170,7 @@
                     <separator string="Payslips" />
                     <field name="slip_ids" readonly="state != 'draft'" />
                 </sheet>
+                <chatter />
             </form>
         </field>
     </record>
@@ -157,6 +179,13 @@
         <field name="res_model">hr.payslip.run</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="hr_payslip_run_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a payslip batch</p>
+            <p>
+                A batch groups the payslips of a period so they can be generated,
+                computed and closed together.
+            </p>
+        </field>
     </record>
     <menuitem
         action="hr_payslip_run_action"

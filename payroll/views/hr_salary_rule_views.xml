@@ -367,6 +367,13 @@
         <field name="view_mode">list,kanban,form</field>
         <field name="domain">[('parent_rule_id','=',False)]</field>
         <field name="search_view_id" ref="hr_salary_rule_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a salary rule</p>
+            <p>
+                A salary rule computes one line of a payslip, either from a fixed
+                amount, a percentage or Python code.
+            </p>
+        </field>
     </record>
     <menuitem
         id="menu_action_hr_salary_rule_form"
