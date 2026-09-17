@@ -29,12 +29,7 @@
         <field name="name">hr.payslip.run.list</field>
         <field name="model">hr.payslip.run</field>
         <field name="arch" type="xml">
-            <list
-                decoration-info="state in ('confirm','hr_check','accont_check')"
-                decoration-muted="state == 'cancel'"
-                multi_edit="1"
-                sample="1"
-            >
+            <list decoration-muted="state == 'close'" multi_edit="1" sample="1">
                 <field name="name" />
                 <field name="date_start" decoration-bf="1" />
                 <field name="date_end" decoration-bf="1" />
@@ -85,10 +80,7 @@
                                         -
                                         <field name="date_end" />
                                     </span>
-                                    <span
-                                        class="float-right"
-                                        title="Is a Blocking Reason?"
-                                    >
+                                    <span class="float-right" title="Refund">
                                         <field name="credit_note" widget="boolean" />
                                     </span>
                                 </div>
