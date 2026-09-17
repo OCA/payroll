@@ -288,6 +288,7 @@
                                         decoration-danger="0 > total and parent_rule_id == False"
                                         decoration-success="total > 0 and parent_rule_id == False"
                                         readonly="1"
+                                        sum="Total"
                                     />
                                     <field name="currency_id" invisible="1" />
                                 </list>

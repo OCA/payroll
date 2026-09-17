@@ -14,7 +14,7 @@
                 <field name="quantity" readonly="not allow_edit_payslip_lines" />
                 <field name="rate" readonly="not allow_edit_payslip_lines" />
                 <field name="amount" readonly="not allow_edit_payslip_lines" />
-                <field name="total" />
+                <field name="total" sum="Total" />
                 <field name="amount_select" column_invisible="1" />
                 <field name="register_id" column_invisible="1" />
                 <field name="payslip_run_id" optional="hide" />
@@ -82,7 +82,7 @@
                                         name="total"
                                         decoration-danger="0 > total and parent_line_id == False"
                                         decoration-success="total > 0 and parent_line_id == False"
-                                        sum="total_net"
+                                        sum="Total"
                                     />
                                     <field name="currency_id" invisible="1" />
                                 </list>
@@ -100,7 +100,9 @@
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
             <pivot>
+                <field name="category_id" type="row" />
                 <field name="salary_rule_id" type="row" />
+                <field name="employee_id" type="col" />
                 <field name="total" type="measure" />
             </pivot>
         </field>
@@ -160,6 +162,7 @@
         <field name="res_model">hr.payslip.line</field>
         <field name="view_mode">list,pivot,form</field>
         <field name="domain">[('slip_id', 'in', active_ids)]</field>
+        <field name="context">{'search_default_category_id': 1}</field>
         <field name="binding_model_id" ref="model_hr_payslip" />
     </record>
     <record id="action_get_batch_payslip_lines" model="ir.actions.act_window">
