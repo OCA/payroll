@@ -7,7 +7,7 @@
             <list decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
                 <field name="number" readonly="1" decoration-bf="1" />
                 <field name="employee_id" readonly="1" />
-                <field name="name" />
+                <field name="name" readonly="state != 'draft'" />
                 <field name="date_from" optional="show" decoration-bf="1" />
                 <field name="date_to" optional="show" decoration-bf="1" />
                 <field name="activity_ids" widget="list_activity" optional="show" />
@@ -401,6 +401,13 @@
         <field name="res_model">hr.payslip</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="hr_payslip_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a payslip</p>
+            <p>
+                A payslip applies the salary rules of the employee's structure to
+                a period. Payslips are usually generated from a payslip batch.
+            </p>
+        </field>
     </record>
     <record id="hr_payslip_action_employee" model="ir.actions.act_window">
         <field name="res_model">hr.payslip</field>
