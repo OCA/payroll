@@ -11,4 +11,9 @@ class HrContract(models.Model):
     analytic_account_id = fields.Many2one(
         "account.analytic.account", "Analytic Account"
     )
-    journal_id = fields.Many2one("account.journal", "Salary Journal")
+    journal_id = fields.Many2one(
+        "account.journal",
+        "Salary Journal",
+        check_company=True,
+        domain="[('company_id', '=', company_id)]",
+    )

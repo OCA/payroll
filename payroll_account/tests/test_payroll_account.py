@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests import common
 
 
@@ -219,3 +219,143 @@ class TestPayrollAccount(common.TransactionCase):
         # Test other account types -> no partner
         self.account_credit.account_type = "expense"
         self.assertFalse(line._get_partner_id(True))
+
+    # ------------------------------------------------------------------
+    # Company consistency
+    # ------------------------------------------------------------------
+    def _other_company(self):
+        company = self.env["res.company"].create({"name": "Payroll Other Company"})
+        self.env.user.company_ids = [Command.link(company.id)]
+        return company
+
+    def test_accounts_are_read_in_the_payslip_company(self):
+        """Debit/credit accounts are company-dependent.
+
+        They must be resolved in the payslip's company, not in whatever
+        company the confirming user happens to be working in.
+        """
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        other_company = self._other_company()
+
+        payslip.with_company(other_company).action_payslip_done()
+
+        self.assertTrue(
+            payslip.move_id,
+            "The accounting entry must be generated with the accounts configured "
+            "for the payslip's company",
+        )
+        accounts = payslip.move_id.line_ids.account_id
+        self.assertIn(self.account_debit, accounts)
+        self.assertIn(self.account_credit, accounts)
+
+    def test_move_belongs_to_the_payslip_company(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        other_company = self._other_company()
+
+        payslip.with_company(other_company).action_payslip_done()
+
+        move = payslip.move_id
+        self.assertEqual(move.company_id, payslip.company_id)
+        self.assertEqual(move.journal_id, payslip.journal_id)
+
+    def test_move_is_balanced_posted_and_dated(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+
+        payslip.action_payslip_done()
+
+        move = payslip.move_id
+        self.assertEqual(move.state, "posted")
+        self.assertEqual(move.ref, payslip.number)
+        self.assertEqual(move.date, payslip.date)
+        self.assertEqual(
+            sum(move.line_ids.mapped("debit")),
+            sum(move.line_ids.mapped("credit")),
+            "The generated entry must be balanced",
+        )
+
+    def test_batch_default_journal_belongs_to_the_active_company(self):
+        other_company = self._other_company()
+        other_journal = self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+
+        defaults = (
+            self.env["hr.payslip.run"]
+            .with_company(other_company)
+            .default_get(["journal_id"])
+        )
+
+        self.assertEqual(defaults.get("journal_id"), other_journal.id)
+
+    def test_tax_details_with_several_matching_repartition_lines(self):
+        """A tax may spread over several repartition lines on the same account.
+
+        Reading ``.id`` off that recordset raises, so the lookup has to be
+        limited to one record.
+        """
+        tax = self.env["account.tax"].create(
+            {
+                "name": "Payroll Tax",
+                "amount_type": "fixed",
+                "amount": 0.0,
+                "type_tax_use": "purchase",
+                "invoice_repartition_line_ids": [
+                    Command.create({"repartition_type": "base"}),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                ],
+                "refund_repartition_line_ids": [
+                    Command.create({"repartition_type": "base"}),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                ],
+            }
+        )
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        rule.account_tax_id = tax
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+
+        _tax_ids, tax_tag_ids, tax_repartition_line_id = payslip._get_tax_details(line)
+
+        self.assertIn(
+            tax_repartition_line_id,
+            tax.invoice_repartition_line_ids.ids,
+            "A single invoice repartition line of the tax must be selected",
+        )
+        self.assertTrue(tax_tag_ids is False or isinstance(tax_tag_ids, list))

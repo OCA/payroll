@@ -2,7 +2,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
 logger = logging.getLogger(__name__)
@@ -51,32 +51,36 @@ class HrPayslip(models.Model):
             debit_sum = 0.0
             credit_sum = 0.0
             date = slip.date or slip.date_to
-            currency = (
-                slip.company_id.currency_id or slip.journal_id.company_id.currency_id
-            )
+            company = slip._get_accounting_company()
+            currency = company.currency_id or slip.journal_id.company_id.currency_id
 
             name = _("Payslip of %s") % (slip.employee_id.name)
             move_dict = {
                 "narration": name,
                 "ref": slip.number,
                 "journal_id": slip.journal_id.id,
+                "company_id": company.id,
                 "date": date,
             }
             for line in slip.line_ids:
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
                     continue
-                debit_account_id = line.salary_rule_id.account_debit.id
-                credit_account_id = line.salary_rule_id.account_credit.id
+                # ``account_debit``/``account_credit`` are company-dependent, so
+                # they must be read in the payslip's company and not in whatever
+                # company the user happens to be working in.
+                salary_rule = line.salary_rule_id.with_company(company)
+                debit_account_id = salary_rule.account_debit.id
+                credit_account_id = salary_rule.account_credit.id
 
                 move_line_analytic_ids = {}
                 if slip.contract_id.analytic_account_id:
                     move_line_analytic_ids.update(
                         {line.slip_id.contract_id.analytic_account_id.id: 100}
                     )
-                elif line.salary_rule_id.analytic_account_id:
+                elif salary_rule.analytic_account_id:
                     move_line_analytic_ids.update(
-                        {line.salary_rule_id.analytic_account_id.id: 100}
+                        {salary_rule.analytic_account_id.id: 100}
                     )
 
                 if debit_account_id:
@@ -129,7 +133,7 @@ class HrPayslip(models.Model):
 
             if len(line_ids) > 0:
                 move_dict["line_ids"] = line_ids
-                move = self.env["account.move"].create(move_dict)
+                move = self.env["account.move"].with_company(company).create(move_dict)
                 slip.write({"move_id": move.id, "date": date})
                 move.action_post()
             else:
@@ -138,9 +142,17 @@ class HrPayslip(models.Model):
                 )
         return res
 
+    def _get_accounting_company(self):
+        """Company the accounting entry of this payslip belongs to."""
+        self.ensure_one()
+        return self.company_id or self.journal_id.company_id or self.env.company
+
     def _prepare_debit_line(
         self, line, amount, date, debit_account_id, move_line_analytic_ids
     ):
+        salary_rule = line.salary_rule_id.with_company(
+            line.slip_id._get_accounting_company()
+        )
         tax_ids, tax_tag_ids, tax_repartition_line_id = self._get_tax_details(line)
         return {
             "name": line.name,
@@ -151,7 +163,7 @@ class HrPayslip(models.Model):
             "debit": amount > 0.0 and amount or 0.0,
             "credit": amount < 0.0 and -amount or 0.0,
             "analytic_distribution": move_line_analytic_ids,
-            "tax_line_id": line.salary_rule_id.account_tax_id.id,
+            "tax_line_id": salary_rule.account_tax_id.id,
             "tax_ids": tax_ids,
             "tax_repartition_line_id": tax_repartition_line_id,
             "tax_tag_ids": tax_tag_ids,
@@ -160,6 +172,9 @@ class HrPayslip(models.Model):
     def _prepare_credit_line(
         self, line, amount, date, credit_account_id, move_line_analytic_ids
     ):
+        salary_rule = line.salary_rule_id.with_company(
+            line.slip_id._get_accounting_company()
+        )
         tax_ids, tax_tag_ids, tax_repartition_line_id = self._get_tax_details(line)
         return {
             "name": line.name,
@@ -170,7 +185,7 @@ class HrPayslip(models.Model):
             "debit": amount < 0.0 and -amount or 0.0,
             "credit": amount > 0.0 and amount or 0.0,
             "analytic_distribution": move_line_analytic_ids,
-            "tax_line_id": line.salary_rule_id.account_tax_id.id,
+            "tax_line_id": salary_rule.account_tax_id.id,
             "tax_ids": tax_ids,
             "tax_repartition_line_id": tax_repartition_line_id,
             "tax_tag_ids": tax_tag_ids,
@@ -205,48 +220,44 @@ class HrPayslip(models.Model):
         }
 
     def _get_tax_details(self, line):
+        company = line.slip_id._get_accounting_company()
+        salary_rule = line.salary_rule_id.with_company(company)
+        TaxRepLine = self.env["account.tax.repartition.line"]
+        company_domain = TaxRepLine._check_company_domain(company)
+
         tax_ids = False
-        tax_tag_ids = []
-        salary_rule = line.salary_rule_id
+        tax_tag_ids = self.env["account.account.tag"]
         if salary_rule.tax_line_ids:
-            account_tax_ids = [
-                salary_rule_id.account_tax_id.id
-                for salary_rule_id in salary_rule.tax_line_ids
-            ]
-            tax_ids = [(4, account_tax_id, 0) for account_tax_id in account_tax_ids]
-            TaxRepLine = self.env["account.tax.repartition.line"]
-            tax_tag_ids = TaxRepLine.search(
-                [
-                    ("tax_id", "in", account_tax_ids),
+            account_taxes = salary_rule.tax_line_ids.account_tax_id
+            tax_ids = [Command.set(account_taxes.ids)]
+            tax_tag_ids |= TaxRepLine.search(
+                company_domain
+                + [
+                    ("tax_id", "in", account_taxes.ids),
                     ("repartition_type", "=", "base"),
                 ]
             ).tag_ids
 
         tax_repartition_line_id = False
         if salary_rule.account_tax_id:
-            TaxRepLine = self.env["account.tax.repartition.line"]
-            tax_repartition_line_id = TaxRepLine.search(
-                [
-                    ("document_type", "=", "invoice"),
-                    ("tax_id", "=", salary_rule.account_tax_id.id),
-                    (
-                        "account_id",
-                        "=",
-                        salary_rule.account_debit.id or salary_rule.account_credit.id,
-                    ),
-                ]
-            ).id
-            tax_tag_ids += TaxRepLine.search(
-                [
-                    ("document_type", "=", "invoice"),
-                    ("tax_id", "=", salary_rule.account_tax_id.id),
-                    ("repartition_type", "=", "tax"),
-                    (
-                        "account_id",
-                        "=",
-                        salary_rule.account_debit.id or salary_rule.account_credit.id,
-                    ),
-                ]
+            tax_domain = company_domain + [
+                ("document_type", "=", "invoice"),
+                ("tax_id", "=", salary_rule.account_tax_id.id),
+                (
+                    "account_id",
+                    "=",
+                    salary_rule.account_debit.id or salary_rule.account_credit.id,
+                ),
+            ]
+            # ``limit=1``: several repartition lines can share the same account,
+            # and reading ``.id`` off a multi-record recordset raises.
+            tax_repartition_line_id = TaxRepLine.search(tax_domain, limit=1).id
+            tax_tag_ids |= TaxRepLine.search(
+                tax_domain + [("repartition_type", "=", "tax")]
             ).tag_ids
 
-        return tax_ids, tax_tag_ids or False, tax_repartition_line_id
+        return (
+            tax_ids,
+            [Command.set(tax_tag_ids.ids)] if tax_tag_ids else False,
+            tax_repartition_line_id,
+        )
