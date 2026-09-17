@@ -4,43 +4,44 @@ from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests import common
 
 
 class TestPayrollAccount(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
         # Activate company currency
-        self.env.user.company_id.currency_id.active = True
+        cls.env.user.company_id.currency_id.active = True
 
-        self.payslip_action_id = self.ref("payroll.hr_payslip_menu")
+        cls.payslip_action_id = cls.env.ref("payroll.hr_payslip_menu").id
 
-        self.res_partner_bank = self.env["res.partner.bank"].create(
+        cls.res_partner_bank = cls.env["res.partner.bank"].create(
             {
                 "acc_number": "001-9876543-21",
-                "partner_id": self.ref("base.res_partner_12"),
+                "partner_id": cls.env.ref("base.res_partner_12").id,
                 "acc_type": "bank",
-                "bank_id": self.ref("base.res_bank_1"),
+                "bank_id": cls.env.ref("base.res_bank_1").id,
             }
         )
 
-        self.hr_employee_john = self.env["hr.employee"].create(
+        cls.hr_employee_john = cls.env["hr.employee"].create(
             {
-                "address_id": self.ref("base.res_partner_address_27"),
+                "address_id": cls.env.ref("base.res_partner_address_27").id,
                 "birthday": "1984-05-01",
                 "children": 0.0,
-                "country_id": self.ref("base.in"),
-                "department_id": self.ref("hr.dep_rd"),
+                "country_id": cls.env.ref("base.in").id,
+                "department_id": cls.env.ref("hr.dep_rd").id,
                 "gender": "male",
                 "marital": "single",
                 "name": "John",
-                "bank_account_id": self.res_partner_bank.bank_id.id,
+                "bank_account_id": cls.res_partner_bank.id,
             }
         )
 
-        self.account_debit = self.env["account.account"].create(
+        cls.account_debit = cls.env["account.account"].create(
             {
                 "name": "Debit Account",
                 "code": "334411",
@@ -48,7 +49,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "reconcile": True,
             }
         )
-        self.account_credit = self.env["account.account"].create(
+        cls.account_credit = cls.env["account.account"].create(
             {
                 "name": "Credit Account",
                 "code": "114433",
@@ -57,38 +58,38 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
 
-        self.account_journal = self.env["account.journal"].create(
+        cls.account_journal = cls.env["account.journal"].create(
             {
                 "name": "Vendor Bills - Test",
                 "code": "TEXJ",
                 "type": "purchase",
-                "default_account_id": self.account_debit.id,
+                "default_account_id": cls.account_debit.id,
                 "refund_sequence": True,
             }
         )
 
         rules = [
-            self.ref("payroll.hr_salary_rule_houserentallowance1"),
-            self.ref("payroll.hr_salary_rule_providentfund1"),
+            cls.env.ref("payroll.hr_salary_rule_houserentallowance1").id,
+            cls.env.ref("payroll.hr_salary_rule_providentfund1").id,
         ]
-        self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
+        cls.hr_structure_softwaredeveloper = cls.env["hr.payroll.structure"].create(
             {
                 "name": "Salary Structure for Software Developer",
                 "code": "SD",
-                "parent_id": self.ref("payroll.structure_base"),
-                "rule_ids": [(6, 0, rules)],
+                "parent_id": cls.env.ref("payroll.structure_base").id,
+                "rule_ids": [Command.set(rules)],
             }
         )
 
-        self.hr_contract_john = self.env["hr.contract"].create(
+        cls.hr_contract_john = cls.env["hr.contract"].create(
             {
                 "date_end": fields.Date.to_string(datetime.now() + timedelta(days=365)),
                 "date_start": fields.Date.today(),
                 "name": "Contract for John",
                 "wage": 5000.0,
-                "employee_id": self.hr_employee_john.id,
-                "struct_id": self.hr_structure_softwaredeveloper.id,
-                "journal_id": self.account_journal.id,
+                "employee_id": cls.hr_employee_john.id,
+                "struct_id": cls.hr_structure_softwaredeveloper.id,
+                "journal_id": cls.account_journal.id,
             }
         )
 
@@ -115,9 +116,11 @@ class TestPayrollAccount(common.TransactionCase):
             "name": res["value"]["name"],
         }
         vals["worked_days_line_ids"] = [
-            (0, 0, i) for i in res["value"]["worked_days_line_ids"]
+            Command.create(i) for i in res["value"]["worked_days_line_ids"]
         ]
-        vals["input_line_ids"] = [(0, 0, i) for i in res["value"]["input_line_ids"]]
+        vals["input_line_ids"] = [
+            Command.create(i) for i in res["value"]["input_line_ids"]
+        ]
         vals.update({"contract_id": self.hr_contract_john.id})
         self.hr_payslip.write(vals)
         return self.hr_payslip
@@ -219,3 +222,33 @@ class TestPayrollAccount(common.TransactionCase):
         # Test other account types -> no partner
         self.account_credit.account_type = "expense"
         self.assertFalse(line._get_partner_id(True))
+
+    def test_partner_falls_back_to_the_bank_account_partner(self):
+        """Without a work contact, the employee's bank account names the partner."""
+        register_partner = self.env["res.partner"].create({"name": "Tax Authority"})
+        register = self.env["hr.contribution.register"].create(
+            {"name": "Tax Register", "partner_id": register_partner.id}
+        )
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule.register_id = register
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+        self.hr_employee_john.work_contact_id = False
+        self.account_credit.account_type = "asset_receivable"
+        rule.account_credit = self.account_credit
+
+        self.assertEqual(
+            line._get_partner_id(True), self.res_partner_bank.partner_id.id
+        )
+
+    def test_accounting_entry_button_opens_the_move(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.action_payslip_done()
+
+        action = payslip.action_open_accounting_entry()
+
+        self.assertEqual(action["res_model"], "account.move")
+        self.assertEqual(action["res_id"], payslip.move_id.id)
