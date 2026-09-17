@@ -11,7 +11,16 @@ logger = logging.getLogger(__name__)
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
 
-    journal_id = fields.Many2one(related="contract_id.journal_id", store=True)
+    journal_id = fields.Many2one(
+        "account.journal",
+        "Salary Journal",
+        compute="_compute_journal_id",
+        store=True,
+        readonly=False,
+        precompute=True,
+        check_company=True,
+        domain="[('company_id', '=', company_id)]",
+    )
     date = fields.Date(
         "Date Account",
         help="Keep empty to use the period of the validation(Payslip) date.",
@@ -31,18 +40,30 @@ class HrPayslip(models.Model):
         "it was cancelled, kept for the audit trail.",
     )
 
-    @api.onchange("contract_id")
-    def onchange_contract(self):
-        res = super().onchange_contract()
-        self.journal_id = (
-            self.contract_id.journal_id.id
-            or (
-                not self.contract_id
-                and self.default_get(["journal_id"]).get("journal_id")
+    @api.depends("payslip_run_id", "contract_id")
+    def _compute_journal_id(self):
+        """Propose a journal for the payslip, once.
+
+        ``journal_id`` used to be a stored *related* field on the contract.
+        Being related, it was readonly -- the form shows it as required, but
+        nothing could be typed into it -- and it was recomputed from the
+        contract, so a value chosen for one payslip (by the batch wizard's
+        ``default_journal_id``, or by hand) was thrown away, and editing the
+        contract's journal silently rewrote the journal of payslips that were
+        already confirmed.
+
+        It is a plain computed field now: it depends on the contract and the
+        batch themselves, not on their journal, so it proposes a value when
+        either changes and never overwrites the payslip afterwards. The
+        batch's journal wins over the contract's -- that is what the batch
+        wizard means when it passes ``default_journal_id``.
+        """
+        for payslip in self:
+            payslip.journal_id = (
+                payslip.payslip_run_id.journal_id
+                or payslip.contract_id.journal_id
+                or payslip.journal_id
             )
-            or self.journal_id
-        )
-        return res
 
     def action_payslip_cancel(self):
         # Cancel the payslip FIRST: ``super()`` still refuses the cancellation

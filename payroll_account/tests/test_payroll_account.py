@@ -436,3 +436,83 @@ class TestPayrollAccount(common.TransactionCase):
 
         self.assertFalse(move.exists())
         self.assertFalse(payslip.move_id)
+
+    # ------------------------------------------------------------------
+    # Journal
+    # ------------------------------------------------------------------
+    def _new_journal(self, code="SALT2"):
+        return self.env["account.journal"].create(
+            {"name": f"Salaries {code}", "code": code, "type": "general"}
+        )
+
+    def _new_payslip(self, **vals):
+        values = {
+            "employee_id": self.hr_employee_john.id,
+            "contract_id": self.hr_contract_john.id,
+            "struct_id": self.hr_structure_softwaredeveloper.id,
+            "name": "Payslip for John",
+        }
+        values.update(vals)
+        return self.env["hr.payslip"].create(values)
+
+    def test_journal_defaults_to_the_contract_journal(self):
+        payslip = self._new_payslip()
+
+        self.assertEqual(payslip.journal_id, self.account_journal)
+
+    def test_journal_is_editable_on_a_single_payslip(self):
+        self.assertFalse(
+            self.env["hr.payslip"]._fields["journal_id"].readonly,
+            "The form marks the journal as required, so it has to be editable",
+        )
+        payslip = self._new_payslip()
+        other_journal = self._new_journal()
+
+        payslip.journal_id = other_journal
+
+        self.assertEqual(payslip.journal_id, other_journal)
+        self.assertEqual(
+            self.hr_contract_john.journal_id,
+            self.account_journal,
+            "Choosing a journal on one payslip must not touch the contract",
+        )
+
+    def test_changing_the_contract_journal_leaves_existing_payslips_alone(self):
+        payslip = self._new_payslip()
+        other_journal = self._new_journal(code="SALT3")
+
+        self.hr_contract_john.journal_id = other_journal
+
+        self.assertEqual(
+            payslip.journal_id,
+            self.account_journal,
+            "An existing payslip must keep the journal it was created with",
+        )
+
+    def test_batch_journal_wins_over_the_contract_journal(self):
+        batch_journal = self._new_journal(code="SALT4")
+        payslip_run = self.env["hr.payslip.run"].create(
+            {"name": "Batch", "journal_id": batch_journal.id}
+        )
+
+        payslip = self._new_payslip(payslip_run_id=payslip_run.id)
+
+        self.assertEqual(payslip.journal_id, batch_journal)
+
+    def test_default_journal_id_from_the_context_is_honoured(self):
+        other_journal = self._new_journal(code="SALT5")
+
+        payslip = (
+            self.env["hr.payslip"]
+            .with_context(default_journal_id=other_journal.id)
+            .create(
+                {
+                    "employee_id": self.hr_employee_john.id,
+                    "contract_id": self.hr_contract_john.id,
+                    "struct_id": self.hr_structure_softwaredeveloper.id,
+                    "name": "Payslip for John",
+                }
+            )
+        )
+
+        self.assertEqual(payslip.journal_id, other_journal)
