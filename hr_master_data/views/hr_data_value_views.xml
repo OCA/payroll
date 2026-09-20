@@ -1,0 +1,93 @@
+<odoo>
+    <!-- Data Group Views -->
+    <record id="view_hr_data_group_list" model="ir.ui.view">
+        <field name="model">hr.data.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="code" />
+                <field name="active" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Data Type Views -->
+    <record id="view_hr_data_type_list" model="ir.ui.view">
+        <field name="model">hr.data.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="code" />
+                <field name="value_type" />
+                <field name="group_id" />
+            </list>
+        </field>
+    </record>
+    <record id="view_hr_data_type_form" model="ir.ui.view">
+        <field name="model">hr.data.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="left">
+                            <field name="group_id" />
+                            <field name="value_type" />
+                        </group>
+                        <group name="right">
+                            <field name="code" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page
+                            string="Values"
+                            name="values"
+                            invisible="not value_type == 'id'"
+                        >
+                            <field name="values_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Data Type Values -->
+    <record id="view_hr_data_type_value_list" model="ir.ui.view">
+        <field name="model">hr.data.type.value</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle" />
+                <field name="code" />
+                <field name="name" />
+                <field name="type_id" optional="hide" />
+                <field name="active" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <record id="action_hr_data_type" model="ir.actions.act_window">
+        <field name="name">Master Data Types</field>
+        <field name="res_model">hr.data.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_human_resources_configuration_data_type"
+        name="Master Data Types"
+        parent="hr_contract.menu_human_resources_configuration_contract"
+        action="action_hr_data_type"
+        sequence="50"
+    />
+</odoo>
