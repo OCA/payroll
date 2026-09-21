@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- # Copyright 2025 - TODAY, Cristiano Mafra Junior <cristiano.mafra@escodoo.com.br>
+        # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+  <template
+        id="report_hr_payroll_attendance_report"
+        inherit_id="payroll.report_payslip"
+    >
+    <xpath expr="//div[hasclass('page')]" position="inside">
+      <t t-set="emp_tz" t-value="o.employee_id.tz or user.tz" />
+      <t t-if="o.attendance_ids">
+        <h3 style="margin-top: 12px;">Worked Hours</h3>
+        <table
+                    class="table table-sm o_main_table"
+                    style="font-size:14px; line-height:1.65;"
+                >
+          <thead>
+            <tr>
+              <th style="padding:2px 4px;">Date</th>
+              <th style="padding:2px 4px;">Check In</th>
+              <th style="padding:2px 4px;">Check Out</th>
+              <th style="padding:2px 4px;" class="text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-foreach="o.attendance_ids" t-as="att">
+              <tr>
+                <td style="padding:2px 4px;">
+                  <span
+                                        t-if="att.check_in"
+                                        t-field="att.check_in"
+                                        t-options="{'widget': 'date', 'tz': emp_tz}"
+                                    />
+                </td>
+                <td style="padding:2px 4px;">
+                  <span
+                                        t-if="att.check_in"
+                                        t-field="att.check_in"
+                                        t-options="{'widget': 'datetime', 'tz': emp_tz}"
+                                    />
+                </td>
+                <td style="padding:2px 4px;">
+                  <span
+                                        t-if="att.check_out"
+                                        t-field="att.check_out"
+                                        t-options="{'widget': 'datetime', 'tz': emp_tz}"
+                                    />
+                </td>
+                <td style="padding:2px 4px;" class="text-right">
+                  <span
+                                        t-field="att.worked_hours"
+                                        t-options="{'widget': 'float_time'}"
+                                    />
+                </td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+        <div style="margin-top:6px; text-align:right; font-size:18px;">
+          <strong>Total in Period:</strong>
+          <span t-field="o.total_worked_hours" t-options="{'widget': 'float_time'}" />
+        </div>
+      </t>
+    </xpath>
+  </template>
+</odoo>
