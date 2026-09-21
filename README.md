@@ -22,6 +22,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[hr_payroll_attendance_report](hr_payroll_attendance_report/) | 16.0.1.0.0 |  | Payslip Attendance on Report
 [hr_payroll_document](hr_payroll_document/) | 16.0.1.3.2 | <a href='https://github.com/peluko00'><img src='https://github.com/peluko00.png' width='32' height='32' style='border-radius:50%;' alt='peluko00'/></a> | Manage payroll for each employee
 [hr_payroll_document_pymupdf](hr_payroll_document_pymupdf/) | 16.0.1.0.1 | <a href='https://github.com/SirPyTech'><img src='https://github.com/SirPyTech.png' width='32' height='32' style='border-radius:50%;' alt='SirPyTech'/></a> | Try harder to read a PDF payslip with PyMuPDF.
 [hr_payroll_period](hr_payroll_period/) | 16.0.1.1.0 | <a href='https://github.com/nimarosa'><img src='https://github.com/nimarosa.png' width='32' height='32' style='border-radius:50%;' alt='nimarosa'/></a> | Add payroll periods
