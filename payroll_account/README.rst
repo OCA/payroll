@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==================
 Payroll Accounting
 ==================
@@ -17,7 +13,7 @@ Payroll Accounting
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -46,9 +42,57 @@ like all other OCA modules.
 Configuration
 =============
 
-# Go to *Payroll > Configuration > Salary Rules* # Select rule that you
-want in accounting # Go to *Accounting Tab* and select Debit, Credit
-Account
+Each salary rule carries its own accounting configuration, under
+*Payroll > Configuration > Salary Rules*, tab *Accounting*:
+
+- **Debit Account** and **Credit Account**. A rule with neither
+  generates no journal item at all; a rule with only one generates a
+  single item, and the difference is balanced on the journal's default
+  account (see below). Both accounts are **company-dependent**: in a
+  multi-company database, configure them once per company.
+- **Analytic Account**, when analytic accounting is enabled. The
+  contract's analytic account takes precedence over the rule's.
+- **Tax** and **Base**, to let the generated items carry the tax, its
+  repartition line and its tax grids.
+
+The journal the entry lands in is taken from, in order of precedence:
+
+1. the **payslip's own journal**, which can be changed on the payslip;
+2. the **batch's journal** (*Salary Journal* on the payslip batch),
+   which is what the payslips of a batch are created with;
+3. the **contract's journal** (*Accounting* group of the contract form).
+
+Give that journal a **default account** (*Accounting > Configuration >
+Journals*): it is the account the payslip's rounding/adjustment item is
+booked on whenever the rules alone do not balance. Without it,
+confirming such a payslip raises an error.
+
+Usage
+=====
+
+Confirming a payslip generates **one** accounting entry, posted in the
+payslip's journal, and links it to the payslip -- the *Journal Entry*
+button on the payslip form opens it. Every salary rule with a debit
+and/or a credit account contributes an item; the entry is dated with the
+payslip's *Date Account*, falling back to the end of the period.
+
+Partners are set only on the items whose account tracks an external
+relationship: the employee on receivable and current-liability accounts,
+the contribution register's partner on payable ones. Expense and income
+items carry no partner.
+
+Confirming an already-confirmed payslip does nothing: the payslip keeps
+the entry it already has, instead of booking every amount twice.
+
+**Cancelling** a payslip does not delete its entry. A posted entry is
+reversed, and both the entry and its reversal stay attached to the
+payslip for the audit trail; an entry that was never posted is simply
+dropped. Confirming the payslip again generates a new entry. A payslip
+that still carries a posted entry cannot be deleted -- cancel it first.
+
+A **refund** (*Refund* on a confirmed payslip) is an ordinary payslip
+with inverted amounts, so it generates its own entry, with debits and
+credits the other way round.
 
 Bug Tracker
 ===========
@@ -74,6 +118,7 @@ Contributors
 - Odoo SA <info@odoo.com>
 - Saran Lim. <saranl@ecosoft.co.th>
 - Daniel Reis <dreis@opensourceintegrators.com>
+- Nimarosa <https://github.com/nimarosa>
 
 Maintainers
 -----------
