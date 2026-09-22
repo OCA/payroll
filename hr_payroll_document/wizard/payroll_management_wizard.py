@@ -1,4 +1,5 @@
 import base64
+import pathlib
 from base64 import b64decode
 
 from pypdf import PdfReader, PdfWriter
@@ -10,6 +11,7 @@ from odoo.exceptions import UserError, ValidationError
 class PayrollManagamentWizard(models.TransientModel):
     _name = "payroll.management.wizard"
     _description = "Payroll Management"
+    _rec_name = "subject"
 
     subject = fields.Char(
         help="Enter the title of the payroll whether it is the month, week, day, etc.",
@@ -19,10 +21,16 @@ class PayrollManagamentWizard(models.TransientModel):
         "ir.attachment", "payrol_rel", "doc_id", "attach_id3", copy=False, required=True
     )
 
+    def _get_temp_path(self):
+        self.ensure_one()
+        path = f"/tmp/{self._table}_{self.id}/"
+        pathlib.Path(path).mkdir(exist_ok=True)
+        return path
+
     def send_payrolls(self):
         not_found = set()
         self.merge_pdfs()
-        reader = PdfReader("/tmp/merged-pdf.pdf")
+        reader = PdfReader(f"{self._get_temp_path()}merged-pdf.pdf")
         employees = set()
 
         # Validate if company have country
@@ -48,7 +56,9 @@ class PayrollManagamentWizard(models.TransientModel):
                     # Save pdf with payrolls of employee
                     pdfWriter.add_page(page)
 
-            path = "/tmp/" + self.env._("Payroll ") + employee.name + ".pdf"
+            path = (
+                self._get_temp_path() + self.env._("Payroll ") + employee.name + ".pdf"
+            )
 
             if not employee.no_payroll_encryption:
                 # Encrypt the payroll file
@@ -96,13 +106,14 @@ class PayrollManagamentWizard(models.TransientModel):
 
     def merge_pdfs(self):
         # Merge the pdfs together
+        temp_path = self._get_temp_path()
         pdfs = []
         for file in self.payrolls:
             b64 = file.datas
             btes = b64decode(b64, validate=True)
             if btes[0:4] != b"%PDF":
                 raise ValidationError(self.env._("Missing pdf file signature"))
-            f = open("/tmp/" + file.name, "wb")
+            f = open(self._get_temp_path() + file.name, "wb")
             f.write(btes)
             f.close()
             pdfs.append(f.name)
@@ -112,7 +123,7 @@ class PayrollManagamentWizard(models.TransientModel):
         for pdf in pdfs:
             merger.append(pdf)
 
-        merger.write("/tmp/merged-pdf.pdf")
+        merger.write(f"{temp_path}merged-pdf.pdf")
         merger.close()
 
     def send_mail(self, employee, path):
