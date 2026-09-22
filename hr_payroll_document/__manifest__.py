@@ -5,10 +5,10 @@
     "website": "https://github.com/OCA/payroll",
     "license": "AGPL-3",
     "category": "Payrolls",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "depends": ["hr", "base_vat"],
     "maintainers": ["peluko00"],
-    "external_dependencies": {"python": ["pypdf"]},
+    "external_dependencies": {"python": ["pypdf", "fonttools"]},
     "data": [
         "wizard/payroll_management_wizard.xml",
         "security/ir.model.access.csv",
