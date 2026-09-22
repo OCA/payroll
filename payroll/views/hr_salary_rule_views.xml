@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_salary_rule_view_tree_children" model="ir.ui.view">
-        <field name="name">hr.salary.rule.list</field>
+        <field name="name">hr.salary.rule.list.children</field>
         <field name="model">hr.salary.rule</field>
         <field name="arch" type="xml">
             <list>
-                <field name="sequence" optional="hide" />
+                <field name="sequence" widget="handle" />
                 <field name="name" />
-                <field name="code" decoration-bf="1" />
-                <field name="category_id" widget="badge" />
-                <field name="sequence" column_invisible="1" />
-                <field name="register_id" />
+                <field name="code" decoration-bf="1" width="110px" />
+                <field name="category_id" widget="badge" width="140px" />
+                <field name="register_id" optional="hide" />
             </list>
         </field>
     </record>
@@ -56,7 +55,7 @@
             <list>
                 <field name="name" />
                 <field name="code" />
-                <field name="category_id" column_invisible="True" />
+                <field name="category_id" widget="badge" optional="show" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
@@ -368,6 +367,13 @@
         <field name="view_mode">list,kanban,form</field>
         <field name="domain">[('parent_rule_id','=',False)]</field>
         <field name="search_view_id" ref="hr_salary_rule_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a salary rule</p>
+            <p>
+                A salary rule computes one line of a payslip, either from a fixed
+                amount, a percentage or Python code.
+            </p>
+        </field>
     </record>
     <menuitem
         id="menu_action_hr_salary_rule_form"

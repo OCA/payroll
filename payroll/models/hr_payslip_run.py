@@ -2,7 +2,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class HrPayslipRun(models.Model):
@@ -52,6 +52,9 @@ class HrPayslipRun(models.Model):
         help="If its checked, indicates that all payslips generated from here "
         "are refund payslips.",
     )
+    slip_count = fields.Integer(
+        compute="_compute_slip_count", string="Number of Payslips"
+    )
     struct_id = fields.Many2one(
         "hr.payroll.structure",
         string="Structure",
@@ -62,6 +65,18 @@ class HrPayslipRun(models.Model):
         "applied will be all the rules set on the structure of all contracts "
         "of the employee valid for the chosen period",
     )
+
+    @api.depends("slip_ids")
+    def _compute_slip_count(self):
+        for payslip_run in self:
+            payslip_run.slip_count = len(payslip_run.slip_ids)
+
+    def action_open_payslips(self):
+        self.ensure_one()
+        action = self.env["ir.actions.actions"]._for_xml_id("payroll.hr_payslip_action")
+        action["domain"] = [("payslip_run_id", "=", self.id)]
+        action["context"] = {"default_payslip_run_id": self.id}
+        return action
 
     def draft_payslip_run(self):
         return self.write({"state": "draft"})
