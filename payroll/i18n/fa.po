@@ -52,8 +52,8 @@ msgstr ""
 #: code:addons/payroll/models/hr_salary_rule.py:0
 msgid ""
 "\n"
-"Wrong python code defined for salary rule %(nm)s (%(code)s) for employee "
-"%(ee)s.\n"
+"Wrong python code defined for salary rule %(nm)s (%(code)s) for employee %"
+"(ee)s.\n"
 "Here is the error received:\n"
 "\n"
 "%(err)s\n"
@@ -86,8 +86,8 @@ msgstr ""
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
-msgid "%s (copy)"
-msgstr "%s (کپی)"
+msgid "%(code)s (copy)"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__state
@@ -127,8 +127,8 @@ msgstr ""
 msgid ""
 "<code>\n"
 "                                            result = contract.wage\n"
-"                                            result_qty = worked_days.WORK100."
-"number_of_days\n"
+"                                            result_qty = "
+"worked_days.WORK100.number_of_days\n"
 "                                        </code>"
 msgstr ""
 
@@ -265,8 +265,8 @@ msgid ""
 "\">\n"
 "            Dear <t t-out=\"object.employee_id.name\"/>,\n"
 "            <br/><br/>\n"
-"            Please find attached the payslip for <t t-out=\"object."
-"payslip_run_id.name\"/>.\n"
+"            Please find attached the payslip for <t t-"
+"out=\"object.payslip_run_id.name\"/>.\n"
 "            <br/><br/>\n"
 "            Do not hesitate to contact us if you have any questions.\n"
 "            <br/><br/>\n"
@@ -510,11 +510,6 @@ msgstr ""
 "کنند"
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.ALW
-msgid "Allowance"
-msgstr "کمک هزینه"
-
-#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__condition_select__none
 #: model:ir.model.fields.selection,name:payroll.selection__hr_salary_rule__condition_select__none
 msgid "Always True"
@@ -542,7 +537,7 @@ msgid "Amount Type"
 msgstr "نوع مقدار"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__annually
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__annually
 msgid "Annually"
 msgstr "سالانه"
 
@@ -574,27 +569,17 @@ msgid "Attachment Count"
 msgstr "تعداد پیوست"
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.BASIC
-msgid "Basic"
-msgstr "پایه"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_basic
-msgid "Basic Salary"
-msgstr "حقوق پایه"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_get_batch_payslip_lines
 msgid "Batch Payslip Lines"
 msgstr "موارد فیش حقوقی دسته ای"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-monthly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__bi-monthly
 msgid "Bi-monthly"
 msgstr "دو ماهانه"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-weekly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__bi-weekly
 msgid "Bi-weekly"
 msgstr "دو هفته ای"
 
@@ -703,9 +688,13 @@ msgstr "تعریف کودکان"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_run__state__close
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Close"
 msgstr "بستن"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
+msgid "Close Batch"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
@@ -741,11 +730,6 @@ msgstr "شرکت‌ها"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
 msgid "Company"
 msgstr "شرکت"
-
-#. module: payroll
-#: model:hr.salary.rule.category,name:payroll.COMP
-msgid "Company Contribution"
-msgstr "مشارکت شرکت"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -835,16 +819,6 @@ msgid "Contribution Registers"
 msgstr "ثبت مشارکت"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_convanceallowance1
-msgid "Conveyance Allowance"
-msgstr "کمک هزینه حمل و نقل"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
-msgid "Conveyance Allowance For Marc Demo"
-msgstr "کمک هزینه حمل و نقل برای Marc Demo"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -910,12 +884,8 @@ msgid "Days"
 msgstr "روزها"
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.DED
-msgid "Deduction"
-msgstr "کسر"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
+#: model:ir.model.fields,help:payroll.field_hr_employee__schedule_pay
+#: model:ir.model.fields,help:payroll.field_hr_version__schedule_pay
 msgid "Defines the frequency of the wage payment."
 msgstr "تعداد دفعات پرداخت دستمزد را مشخص می کند."
 
@@ -965,6 +935,7 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__display_name
@@ -976,7 +947,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_version__display_name
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__display_name
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__display_name
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "نام نمایشی"
 
@@ -1023,9 +998,9 @@ msgid "Employee"
 msgstr "کارمند"
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract
-msgid "Employee Contract"
-msgstr "قرارداد کارمند"
+#: model:ir.model,name:payroll.model_hr_version
+msgid "Employee Contract / Version"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -1039,7 +1014,8 @@ msgid "Employee Payslips"
 msgstr "فیش حقوقی کارکنان"
 
 #. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
+#: model:ir.model.fields,help:payroll.field_hr_employee__resource_calendar_id
+#: model:ir.model.fields,help:payroll.field_hr_version__resource_calendar_id
 msgid "Employee's working schedule."
 msgstr "برنامه کاری کارمند."
 
@@ -1137,28 +1113,10 @@ msgid "Generate payslips for all selected employees"
 msgstr "برای همه کارمندان منتخب فیش حقوقی ایجاد کنید"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_sales_commission
-msgid "Get 1% of sales"
-msgstr "1% از فروش را بدست آورید"
-
-#. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid "Global Leaves"
 msgstr "برگ های عمومی"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_taxable
-#: model:hr.salary.rule.category,name:payroll.GROSS
-msgid "Gross"
-msgstr "ناخالص"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-msgid "Group By"
-msgstr "گروه‌بندی برمبنای"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__has_message
@@ -1182,12 +1140,8 @@ msgid "Hours"
 msgstr "ساعت ها"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
-msgid "House Rent Allowance"
-msgstr "کمک هزینه اجاره خانه"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__id
@@ -1199,7 +1153,11 @@ msgstr "کمک هزینه اجاره خانه"
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__id
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__id
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__id
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__id
 msgid "ID"
 msgstr "شناسه"
 
@@ -1320,8 +1278,8 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount
 msgid ""
 "It is used in computation. For e.g. A rule for sales having 1% commission of "
-"basic salary for per product can defined in expression like result = inputs."
-"SALEURO.amount * contract.wage*0.01."
+"basic salary for per product can defined in expression like result = "
+"inputs.SALEURO.amount * contract.wage*0.01."
 msgstr ""
 "در محاسبات استفاده می شود. برای مثال قاعده ای برای فروش دارای 1% کارمزد حقوق "
 "پایه برای هر محصول می تواند به صورت result = inputs.SALEURO.amount * "
@@ -1398,11 +1356,6 @@ msgid "Maximum Range"
 msgstr "حداکثر برد"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_meal_voucher
-msgid "Meal Voucher"
-msgstr "کوپن غذا"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error
 msgid "Message Delivery error"
@@ -1426,7 +1379,7 @@ msgid "Miscellaneous"
 msgstr "متفرقه"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__monthly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__monthly
 msgid "Monthly"
 msgstr "ماهانه"
 
@@ -1448,16 +1401,6 @@ msgstr "مهلت فعالیت من"
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Name"
 msgstr "نام"
-
-#. module: payroll
-#: model:hr.salary.rule.category,name:payroll.NET
-msgid "Net"
-msgstr "خالص"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_net
-msgid "Net Salary"
-msgstr "حقوق خالص"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_calendar_event_id
@@ -1538,10 +1481,8 @@ msgstr "مسئول"
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 msgid ""
-"Only draft payslips can be verified,the payslip %(nm)s is in %(st)s state"
+"Only draft payslips can be verified, the payslip %(nm)s is in %(st)s state"
 msgstr ""
-"فقط پیش‌نویس فیش‌های حقوق را می‌توان تأیید کرد، فیش حقوقی %(nm)s در وضعیت "
-"%(st)s است"
 
 #. module: payroll
 #. odoo-python
@@ -1550,18 +1491,18 @@ msgid ""
 "Only payslips in states verify or draft can be confirmed, the payslip %(nm)s "
 "is in %(st)s state"
 msgstr ""
-"فقط فیش‌های حقوق در ایالت‌های تأیید یا پیش‌نویس قابل تأیید است، فیش حقوقی "
-"%(nm)s در وضعیت %(st)s است."
+"فقط فیش‌های حقوق در ایالت‌های تأیید یا پیش‌نویس قابل تأیید است، فیش حقوقی %"
+"(nm)s در وضعیت %(st)s است."
 
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 msgid ""
-"Only rejected payslips can be reset to draft, the payslip %(nm)s is in "
-"%(st)s state"
+"Only rejected payslips can be reset to draft, the payslip %(nm)s is in %"
+"(st)s state"
 msgstr ""
-"فقط فیش های حقوقی رد شده را می توان به پیش نویس بازنشانی کرد، فیش حقوقی "
-"%(nm)s در وضعیت %(st)s است"
+"فقط فیش های حقوقی رد شده را می توان به پیش نویس بازنشانی کرد، فیش حقوقی %"
+"(nm)s در وضعیت %(st)s است"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -1633,6 +1574,7 @@ msgstr "نام فیش حقوق"
 #: model:ir.actions.act_window,name:payroll.open_payroll_modules
 #: model:ir.module.category,name:payroll.module_category_payroll
 #: model:ir.ui.menu,name:payroll.payroll_menu_root
+#: model:res.groups.privilege,name:payroll.res_groups_privilege_payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll"
 msgstr "حقوق و دستمزد"
@@ -1829,16 +1771,6 @@ msgid "Print"
 msgstr "چاپ"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_professionaltax1
-msgid "Professional Tax"
-msgstr "مالیات حرفه ای"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_providentfund1
-msgid "Provident Fund"
-msgstr "صندوق"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_python_compute
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__amount_python_compute
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__amount_select__code
@@ -1876,7 +1808,7 @@ msgid "Quantity/rate"
 msgstr "مقدار/نرخ"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__quarterly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__quarterly
 msgid "Quarterly"
 msgstr "سه ماه یکبار"
 
@@ -1900,8 +1832,8 @@ msgstr "امتیاز (%)"
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
-msgid "Recursion error. Only one line should be parent of %s"
-msgstr "خطای بازگشتی فقط یک خط باید والد %s باشد"
+msgid "Recursion error. Only one line should be parent of %(rule)s"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
@@ -1928,8 +1860,8 @@ msgstr "بازپرداخت فیش حقوقی"
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
-msgid "Refund: %s"
-msgstr "بازپرداخت: %s"
+msgid "Refund: %(name)s"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -2052,7 +1984,8 @@ msgstr "فیش حقوق %(name)s برای %(dt)s"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__struct_id
 msgid "Salary Structure"
 msgstr "ساختار حقوق و دستمزد"
 
@@ -2063,7 +1996,8 @@ msgid "Salary Structures"
 msgstr "ساختارهای حقوق و دستمزد"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__schedule_pay
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__schedule_pay
+#: model:ir.model.fields,field_description:payroll.field_hr_version__schedule_pay
 msgid "Scheduled Pay"
 msgstr "پرداخت برنامه ریزی شده"
 
@@ -2088,7 +2022,7 @@ msgid "Search Salary Rule"
 msgstr "قانون حقوق و دستمزد جستجو کنید"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__semi-annually
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__semi-annually
 msgid "Semi-annually"
 msgstr "نیمه سالانه"
 
@@ -2291,7 +2225,7 @@ msgid "Website communication history"
 msgstr "تاریخچه ارتباطات وب سایت"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__weekly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__weekly
 msgid "Weekly"
 msgstr "هفتگی"
 
@@ -2311,9 +2245,10 @@ msgid "Worked Days & Inputs"
 msgstr "روزهای کاری و ورودی ها"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__resource_calendar_id
-msgid "Working Schedule"
-msgstr "برنامه کاری"
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__resource_calendar_id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__resource_calendar_id
+msgid "Working Hours"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -2327,8 +2262,8 @@ msgid ""
 "Wrong percentage base or quantity defined for salary rule %(nm)s (%(code)s) "
 "for employee %(ee)s."
 msgstr ""
-"پایه درصد یا مقدار اشتباه تعریف شده برای قانون حقوق %(nm)s (%(code)s) برای "
-"%(ee)s کارمند."
+"پایه درصد یا مقدار اشتباه تعریف شده برای قانون حقوق %(nm)s (%(code)s) برای %"
+"(ee)s کارمند."
 
 #. module: payroll
 #. odoo-python
@@ -2387,6 +2322,75 @@ msgstr "نتیجه بر یک متغیر تأثیر می گذارد"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "%s (copy)"
+#~ msgstr "%s (کپی)"
+
+#~ msgid "Allowance"
+#~ msgstr "کمک هزینه"
+
+#~ msgid "Basic"
+#~ msgstr "پایه"
+
+#~ msgid "Basic Salary"
+#~ msgstr "حقوق پایه"
+
+#~ msgid "Company Contribution"
+#~ msgstr "مشارکت شرکت"
+
+#~ msgid "Conveyance Allowance"
+#~ msgstr "کمک هزینه حمل و نقل"
+
+#~ msgid "Conveyance Allowance For Marc Demo"
+#~ msgstr "کمک هزینه حمل و نقل برای Marc Demo"
+
+#~ msgid "Deduction"
+#~ msgstr "کسر"
+
+#~ msgid "Employee Contract"
+#~ msgstr "قرارداد کارمند"
+
+#~ msgid "Get 1% of sales"
+#~ msgstr "1% از فروش را بدست آورید"
+
+#~ msgid "Gross"
+#~ msgstr "ناخالص"
+
+#~ msgid "Group By"
+#~ msgstr "گروه‌بندی برمبنای"
+
+#~ msgid "House Rent Allowance"
+#~ msgstr "کمک هزینه اجاره خانه"
+
+#~ msgid "Meal Voucher"
+#~ msgstr "کوپن غذا"
+
+#~ msgid "Net"
+#~ msgstr "خالص"
+
+#~ msgid "Net Salary"
+#~ msgstr "حقوق خالص"
+
+#~ msgid ""
+#~ "Only draft payslips can be verified,the payslip %(nm)s is in %(st)s state"
+#~ msgstr ""
+#~ "فقط پیش‌نویس فیش‌های حقوق را می‌توان تأیید کرد، فیش حقوقی %(nm)s در وضعیت %"
+#~ "(st)s است"
+
+#~ msgid "Professional Tax"
+#~ msgstr "مالیات حرفه ای"
+
+#~ msgid "Provident Fund"
+#~ msgstr "صندوق"
+
+#~ msgid "Recursion error. Only one line should be parent of %s"
+#~ msgstr "خطای بازگشتی فقط یک خط باید والد %s باشد"
+
+#~ msgid "Refund: %s"
+#~ msgstr "بازپرداخت: %s"
+
+#~ msgid "Working Schedule"
+#~ msgstr "برنامه کاری"
 
 #~ msgid "SMS Delivery error"
 #~ msgstr "خطای تحویل پیامک"

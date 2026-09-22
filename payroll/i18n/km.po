@@ -45,8 +45,8 @@ msgstr ""
 #: code:addons/payroll/models/hr_salary_rule.py:0
 msgid ""
 "\n"
-"Wrong python code defined for salary rule %(nm)s (%(code)s) for employee "
-"%(ee)s.\n"
+"Wrong python code defined for salary rule %(nm)s (%(code)s) for employee %"
+"(ee)s.\n"
 "Here is the error received:\n"
 "\n"
 "%(err)s\n"
@@ -67,8 +67,8 @@ msgstr ""
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
-msgid "%s (copy)"
-msgstr "%s (ចម្លង)"
+msgid "%(code)s (copy)"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__state
@@ -97,8 +97,8 @@ msgstr ""
 msgid ""
 "<code>\n"
 "                                            result = contract.wage\n"
-"                                            result_qty = worked_days.WORK100."
-"number_of_days\n"
+"                                            result_qty = "
+"worked_days.WORK100.number_of_days\n"
 "                                        </code>"
 msgstr ""
 
@@ -221,8 +221,8 @@ msgid ""
 "\">\n"
 "            Dear <t t-out=\"object.employee_id.name\"/>,\n"
 "            <br/><br/>\n"
-"            Please find attached the payslip for <t t-out=\"object."
-"payslip_run_id.name\"/>.\n"
+"            Please find attached the payslip for <t t-"
+"out=\"object.payslip_run_id.name\"/>.\n"
 "            <br/><br/>\n"
 "            Do not hesitate to contact us if you have any questions.\n"
 "            <br/><br/>\n"
@@ -454,11 +454,6 @@ msgid "Allow users to edit some payslip line fields manually"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.ALW
-msgid "Allowance"
-msgstr "ទឹកប្រាក់បន្ថែម"
-
-#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__condition_select__none
 #: model:ir.model.fields.selection,name:payroll.selection__hr_salary_rule__condition_select__none
 msgid "Always True"
@@ -486,7 +481,7 @@ msgid "Amount Type"
 msgstr "ប្រភេទទឹកប្រាក់"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__annually
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__annually
 msgid "Annually"
 msgstr "ប្រចាំឆ្នាំ។"
 
@@ -517,27 +512,17 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.BASIC
-msgid "Basic"
-msgstr "មូលដ្ឋាន"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_basic
-msgid "Basic Salary"
-msgstr "ប្រាក់ខែគោល"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_get_batch_payslip_lines
 msgid "Batch Payslip Lines"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-monthly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__bi-monthly
 msgid "Bi-monthly"
 msgstr "គិតជាខែ"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-weekly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__bi-weekly
 msgid "Bi-weekly"
 msgstr "សប្តាហ៌"
 
@@ -636,9 +621,13 @@ msgstr "និយមន័យកុមារ"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_run__state__close
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Close"
 msgstr "បិទ"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
+msgid "Close Batch"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
@@ -674,11 +663,6 @@ msgstr "ក្រុមហ៊ុន"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
 msgid "Company"
 msgstr "ក្រុមហ៊ុន"
-
-#. module: payroll
-#: model:hr.salary.rule.category,name:payroll.COMP
-msgid "Company Contribution"
-msgstr "ការចូលរួមពីក្រុមហ៊ុន"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -768,16 +752,6 @@ msgid "Contribution Registers"
 msgstr "បញ្ជរការចូលរួមចំណែក។"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_convanceallowance1
-msgid "Conveyance Allowance"
-msgstr "ប្រាក់ឧបត្ថម្ភសម្រាប់ការធ្វើដំណើរ"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
-msgid "Conveyance Allowance For Marc Demo"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -843,12 +817,8 @@ msgid "Days"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.DED
-msgid "Deduction"
-msgstr "ការកាត់ថ្លៃ។"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
+#: model:ir.model.fields,help:payroll.field_hr_employee__schedule_pay
+#: model:ir.model.fields,help:payroll.field_hr_version__schedule_pay
 msgid "Defines the frequency of the wage payment."
 msgstr "កំណត់ភាពញឹកញាប់នៃការទូទាត់ប្រាក់ឈ្នួល។"
 
@@ -892,6 +862,7 @@ msgstr "ការរៀបរាប់ពីចំណាប់ថ្នាក់
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__display_name
@@ -903,7 +874,11 @@ msgstr "ការរៀបរាប់ពីចំណាប់ថ្នាក់
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_version__display_name
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__display_name
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__display_name
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "ឈ្មោះសំរាប់បង្ហាញ"
 
@@ -950,9 +925,9 @@ msgid "Employee"
 msgstr "បុគ្គលិក"
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract
-msgid "Employee Contract"
-msgstr "កិច្ចសន្យាការងារ"
+#: model:ir.model,name:payroll.model_hr_version
+msgid "Employee Contract / Version"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -966,7 +941,8 @@ msgid "Employee Payslips"
 msgstr "សន្លឹកប្រាក់ខែរបស់និយោជិក។"
 
 #. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
+#: model:ir.model.fields,help:payroll.field_hr_employee__resource_calendar_id
+#: model:ir.model.fields,help:payroll.field_hr_version__resource_calendar_id
 msgid "Employee's working schedule."
 msgstr "កាលវិភាគការងាររបស់និយោជិក។"
 
@@ -1061,28 +1037,10 @@ msgid "Generate payslips for all selected employees"
 msgstr "បង្កើតក្រដាសប្រាក់សម្រាប់បុគ្គលិកដែលបានជ្រើសរើសទាំងអស់។"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_sales_commission
-msgid "Get 1% of sales"
-msgstr "ទទួលបាន1% នៃការលក់"
-
-#. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid "Global Leaves"
 msgstr "ស្លឹកសកល។"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_taxable
-#: model:hr.salary.rule.category,name:payroll.GROSS
-msgid "Gross"
-msgstr "ដុល"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-msgid "Group By"
-msgstr "ជា​ក្រុម​តាម"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__has_message
@@ -1106,12 +1064,8 @@ msgid "Hours"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
-msgid "House Rent Allowance"
-msgstr "ប្រាក់ឧបត្ថម្ភជួលផ្ទះ"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__id
@@ -1123,7 +1077,11 @@ msgstr "ប្រាក់ឧបត្ថម្ភជួលផ្ទះ"
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__id
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__id
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__id
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
 
@@ -1233,15 +1191,15 @@ msgid ""
 "quantity defined in expression like worked_days.WORK100.number_of_days."
 msgstr ""
 "វាត្រូវបានប្រើក្នុងការគណនាសម្រាប់ភាគរយនិងចំនួនថេរ។ សម្រាប់ឧ។ ច្បាប់សម្រាប់ Meal Voucher "
-"ដែលមានចំនួនថេរ ១ €ក្នុង ១ ថ្ងៃធ្វើការអាចកំណត់បរិមាណរបស់វាតាមការបញ្ចេញមតិដូចជា work_days."
-"WORK100.number_of_days ។"
+"ដែលមានចំនួនថេរ ១ €ក្នុង ១ ថ្ងៃធ្វើការអាចកំណត់បរិមាណរបស់វាតាមការបញ្ចេញមតិដូចជា "
+"work_days.WORK100.number_of_days ។"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount
 msgid ""
 "It is used in computation. For e.g. A rule for sales having 1% commission of "
-"basic salary for per product can defined in expression like result = inputs."
-"SALEURO.amount * contract.wage*0.01."
+"basic salary for per product can defined in expression like result = "
+"inputs.SALEURO.amount * contract.wage*0.01."
 msgstr ""
 "វាត្រូវបានប្រើក្នុងការគណនា។ សម្រាប់ឧ។ ច្បាប់សម្រាប់ការលក់ដែលមានកម្រៃជើងសារ ១ "
 "ភាគរយនៃប្រាក់ខែគោលសម្រាប់ផលិតផលនីមួយៗអាចត្រូវបានកំណត់ជាការបញ្ចេញមតិដូចជាលទ្ធផល = ធាតុចូល ។"
@@ -1316,11 +1274,6 @@ msgid "Maximum Range"
 msgstr "ជួរអតិបរមា។"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_meal_voucher
-msgid "Meal Voucher"
-msgstr "ប័ណ្ណអាហារ Meal"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error
 msgid "Message Delivery error"
@@ -1344,7 +1297,7 @@ msgid "Miscellaneous"
 msgstr "ផ្សេងៗ"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__monthly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__monthly
 msgid "Monthly"
 msgstr "ប្រចំាខែ"
 
@@ -1366,16 +1319,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Name"
 msgstr "ឈ្មោះ"
-
-#. module: payroll
-#: model:hr.salary.rule.category,name:payroll.NET
-msgid "Net"
-msgstr "សុទ្ធ។"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_net
-msgid "Net Salary"
-msgstr "ប្រាក់ខែ"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_calendar_event_id
@@ -1456,7 +1399,7 @@ msgstr "មន្រ្តី"
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 msgid ""
-"Only draft payslips can be verified,the payslip %(nm)s is in %(st)s state"
+"Only draft payslips can be verified, the payslip %(nm)s is in %(st)s state"
 msgstr ""
 
 #. module: payroll
@@ -1471,8 +1414,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 msgid ""
-"Only rejected payslips can be reset to draft, the payslip %(nm)s is in "
-"%(st)s state"
+"Only rejected payslips can be reset to draft, the payslip %(nm)s is in %"
+"(st)s state"
 msgstr ""
 
 #. module: payroll
@@ -1545,6 +1488,7 @@ msgstr "ឈ្មោះ PaySlip ។"
 #: model:ir.actions.act_window,name:payroll.open_payroll_modules
 #: model:ir.module.category,name:payroll.module_category_payroll
 #: model:ir.ui.menu,name:payroll.payroll_menu_root
+#: model:res.groups.privilege,name:payroll.res_groups_privilege_payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll"
 msgstr "ប្រាក់ខែ"
@@ -1740,16 +1684,6 @@ msgid "Print"
 msgstr "បោះពុម្ព"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_professionaltax1
-msgid "Professional Tax"
-msgstr "ពន្ធវិជ្ជាជីវៈ"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_providentfund1
-msgid "Provident Fund"
-msgstr "មូលនិធិអ្នកផ្តល់សេវា"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_python_compute
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__amount_python_compute
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__amount_select__code
@@ -1787,7 +1721,7 @@ msgid "Quantity/rate"
 msgstr "គុណភាព និងអត្រា"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__quarterly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__quarterly
 msgid "Quarterly"
 msgstr "ប្រចាំត្រីមាស"
 
@@ -1811,7 +1745,7 @@ msgstr "ភាគរយ (%)"
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
-msgid "Recursion error. Only one line should be parent of %s"
+msgid "Recursion error. Only one line should be parent of %(rule)s"
 msgstr ""
 
 #. module: payroll
@@ -1842,7 +1776,7 @@ msgstr ""
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
-msgid "Refund: %s"
+msgid "Refund: %(name)s"
 msgstr ""
 
 #. module: payroll
@@ -1965,7 +1899,8 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__struct_id
 msgid "Salary Structure"
 msgstr "រចនាសម្ព័ន្ធប្រាក់ខែ"
 
@@ -1976,7 +1911,8 @@ msgid "Salary Structures"
 msgstr "រចនាសម្ព័ន្ធប្រាក់ខែ"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__schedule_pay
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__schedule_pay
+#: model:ir.model.fields,field_description:payroll.field_hr_version__schedule_pay
 msgid "Scheduled Pay"
 msgstr "កំណត់ពេលបង់។"
 
@@ -2001,7 +1937,7 @@ msgid "Search Salary Rule"
 msgstr "ស្វែងរកវិធានប្រាក់ខែ"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__semi-annually
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__semi-annually
 msgid "Semi-annually"
 msgstr "ពាក់​ក​ណ្តា​ល​ឆ្នាំ"
 
@@ -2195,7 +2131,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__weekly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__weekly
 msgid "Weekly"
 msgstr "ប្រចំាសប្តាហ៏"
 
@@ -2215,9 +2151,10 @@ msgid "Worked Days & Inputs"
 msgstr "ថ្ងៃធ្វើការនិងធាតុចូល។"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__resource_calendar_id
-msgid "Working Schedule"
-msgstr "កាលវិភាគការងារ"
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__resource_calendar_id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__resource_calendar_id
+msgid "Working Hours"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -2286,3 +2223,57 @@ msgstr "លទ្ធផលនឹងត្រូវបានប៉ះពាល់
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "%s (copy)"
+#~ msgstr "%s (ចម្លង)"
+
+#~ msgid "Allowance"
+#~ msgstr "ទឹកប្រាក់បន្ថែម"
+
+#~ msgid "Basic"
+#~ msgstr "មូលដ្ឋាន"
+
+#~ msgid "Basic Salary"
+#~ msgstr "ប្រាក់ខែគោល"
+
+#~ msgid "Company Contribution"
+#~ msgstr "ការចូលរួមពីក្រុមហ៊ុន"
+
+#~ msgid "Conveyance Allowance"
+#~ msgstr "ប្រាក់ឧបត្ថម្ភសម្រាប់ការធ្វើដំណើរ"
+
+#~ msgid "Deduction"
+#~ msgstr "ការកាត់ថ្លៃ។"
+
+#~ msgid "Employee Contract"
+#~ msgstr "កិច្ចសន្យាការងារ"
+
+#~ msgid "Get 1% of sales"
+#~ msgstr "ទទួលបាន1% នៃការលក់"
+
+#~ msgid "Gross"
+#~ msgstr "ដុល"
+
+#~ msgid "Group By"
+#~ msgstr "ជា​ក្រុម​តាម"
+
+#~ msgid "House Rent Allowance"
+#~ msgstr "ប្រាក់ឧបត្ថម្ភជួលផ្ទះ"
+
+#~ msgid "Meal Voucher"
+#~ msgstr "ប័ណ្ណអាហារ Meal"
+
+#~ msgid "Net"
+#~ msgstr "សុទ្ធ។"
+
+#~ msgid "Net Salary"
+#~ msgstr "ប្រាក់ខែ"
+
+#~ msgid "Professional Tax"
+#~ msgstr "ពន្ធវិជ្ជាជីវៈ"
+
+#~ msgid "Provident Fund"
+#~ msgstr "មូលនិធិអ្នកផ្តល់សេវា"
+
+#~ msgid "Working Schedule"
+#~ msgstr "កាលវិភាគការងារ"
