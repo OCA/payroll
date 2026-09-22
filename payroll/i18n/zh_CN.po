@@ -49,8 +49,8 @@ msgstr ""
 #: code:addons/payroll/models/hr_salary_rule.py:0
 msgid ""
 "\n"
-"Wrong python code defined for salary rule %(nm)s (%(code)s) for employee "
-"%(ee)s.\n"
+"Wrong python code defined for salary rule %(nm)s (%(code)s) for employee %"
+"(ee)s.\n"
 "Here is the error received:\n"
 "\n"
 "%(err)s\n"
@@ -71,8 +71,8 @@ msgstr ""
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
-msgid "%s (copy)"
-msgstr "%s (副本)"
+msgid "%(code)s (copy)"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__state
@@ -101,8 +101,8 @@ msgstr ""
 msgid ""
 "<code>\n"
 "                                            result = contract.wage\n"
-"                                            result_qty = worked_days.WORK100."
-"number_of_days\n"
+"                                            result_qty = "
+"worked_days.WORK100.number_of_days\n"
 "                                        </code>"
 msgstr ""
 
@@ -225,8 +225,8 @@ msgid ""
 "\">\n"
 "            Dear <t t-out=\"object.employee_id.name\"/>,\n"
 "            <br/><br/>\n"
-"            Please find attached the payslip for <t t-out=\"object."
-"payslip_run_id.name\"/>.\n"
+"            Please find attached the payslip for <t t-"
+"out=\"object.payslip_run_id.name\"/>.\n"
 "            <br/><br/>\n"
 "            Do not hesitate to contact us if you have any questions.\n"
 "            <br/><br/>\n"
@@ -458,11 +458,6 @@ msgid "Allow users to edit some payslip line fields manually"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.ALW
-msgid "Allowance"
-msgstr "补助"
-
-#. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__condition_select__none
 #: model:ir.model.fields.selection,name:payroll.selection__hr_salary_rule__condition_select__none
 msgid "Always True"
@@ -490,7 +485,7 @@ msgid "Amount Type"
 msgstr "金额类型"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__annually
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__annually
 msgid "Annually"
 msgstr "每年"
 
@@ -520,27 +515,17 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.BASIC
-msgid "Basic"
-msgstr "基本"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_basic
-msgid "Basic Salary"
-msgstr "基本工资"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.action_get_batch_payslip_lines
 msgid "Batch Payslip Lines"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-monthly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__bi-monthly
 msgid "Bi-monthly"
 msgstr "每两个月"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__bi-weekly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__bi-weekly
 msgid "Bi-weekly"
 msgstr "每两周"
 
@@ -639,9 +624,13 @@ msgstr "下级定义"
 
 #. module: payroll
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_run__state__close
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Close"
 msgstr "关闭"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
+msgid "Close Batch"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
@@ -677,11 +666,6 @@ msgstr "公司"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
 msgid "Company"
 msgstr "公司"
-
-#. module: payroll
-#: model:hr.salary.rule.category,name:payroll.COMP
-msgid "Company Contribution"
-msgstr "公司缴款"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -771,16 +755,6 @@ msgid "Contribution Registers"
 msgstr "缴款名册"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_convanceallowance1
-msgid "Conveyance Allowance"
-msgstr "交通补贴"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
-msgid "Conveyance Allowance For Marc Demo"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__create_uid
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__create_uid
@@ -846,12 +820,8 @@ msgid "Days"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule.category,name:payroll.DED
-msgid "Deduction"
-msgstr "扣除"
-
-#. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract__schedule_pay
+#: model:ir.model.fields,help:payroll.field_hr_employee__schedule_pay
+#: model:ir.model.fields,help:payroll.field_hr_version__schedule_pay
 msgid "Defines the frequency of the wage payment."
 msgstr "定义工资支付的频率。"
 
@@ -895,6 +865,7 @@ msgstr "详情按工资规则类别"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__display_name
@@ -906,7 +877,11 @@ msgstr "详情按工资规则类别"
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__display_name
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__display_name
+#: model:ir.model.fields,field_description:payroll.field_hr_version__display_name
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__display_name
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__display_name
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__display_name
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "显示名称"
 
@@ -953,9 +928,9 @@ msgid "Employee"
 msgstr "员工"
 
 #. module: payroll
-#: model:ir.model,name:payroll.model_hr_contract
-msgid "Employee Contract"
-msgstr "员工合同"
+#: model:ir.model,name:payroll.model_hr_version
+msgid "Employee Contract / Version"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -969,7 +944,8 @@ msgid "Employee Payslips"
 msgstr "员工工资单"
 
 #. module: payroll
-#: model:ir.model.fields,help:payroll.field_hr_contract__resource_calendar_id
+#: model:ir.model.fields,help:payroll.field_hr_employee__resource_calendar_id
+#: model:ir.model.fields,help:payroll.field_hr_version__resource_calendar_id
 msgid "Employee's working schedule."
 msgstr "员工的工作时间表"
 
@@ -1064,28 +1040,10 @@ msgid "Generate payslips for all selected employees"
 msgstr "为已选的所有员工生成工资单"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_sales_commission
-msgid "Get 1% of sales"
-msgstr "获得销售额的1％"
-
-#. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid "Global Leaves"
 msgstr "全员休假"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_taxable
-#: model:hr.salary.rule.category,name:payroll.GROSS
-msgid "Gross"
-msgstr "总额"
-
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
-#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
-msgid "Group By"
-msgstr "分组"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__has_message
@@ -1109,12 +1067,8 @@ msgid "Hours"
 msgstr ""
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_houserentallowance1
-msgid "House Rent Allowance"
-msgstr "住房补贴"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__id
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_change_state__id
@@ -1126,7 +1080,11 @@ msgstr "住房补贴"
 #: model:ir.model.fields,field_description:payroll.field_hr_rule_input__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__id
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__id
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_contributionregister__id
+#: model:ir.model.fields,field_description:payroll.field_report_payroll_report_payslipdetails__id
+#: model:ir.model.fields,field_description:payroll.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
 
@@ -1238,8 +1196,8 @@ msgstr ""
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount
 msgid ""
 "It is used in computation. For e.g. A rule for sales having 1% commission of "
-"basic salary for per product can defined in expression like result = inputs."
-"SALEURO.amount * contract.wage*0.01."
+"basic salary for per product can defined in expression like result = "
+"inputs.SALEURO.amount * contract.wage*0.01."
 msgstr ""
 "用于计算。例如，某个规则是销售员每卖一件产品得到1%的提成，表达式是：result = "
 "inputs.SALEURO.amount * contract.wage*0.01."
@@ -1313,11 +1271,6 @@ msgid "Maximum Range"
 msgstr "最大范围"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_meal_voucher
-msgid "Meal Voucher"
-msgstr "餐券"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error
 msgid "Message Delivery error"
@@ -1341,7 +1294,7 @@ msgid "Miscellaneous"
 msgstr "杂项"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__monthly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__monthly
 msgid "Monthly"
 msgstr "每月"
 
@@ -1363,16 +1316,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
 msgid "Name"
 msgstr "名称"
-
-#. module: payroll
-#: model:hr.salary.rule.category,name:payroll.NET
-msgid "Net"
-msgstr "净"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_rule_net
-msgid "Net Salary"
-msgstr "工资净额"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__activity_calendar_event_id
@@ -1453,7 +1396,7 @@ msgstr "主管"
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 msgid ""
-"Only draft payslips can be verified,the payslip %(nm)s is in %(st)s state"
+"Only draft payslips can be verified, the payslip %(nm)s is in %(st)s state"
 msgstr ""
 
 #. module: payroll
@@ -1468,8 +1411,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/payroll/wizard/hr_payslip_change_state.py:0
 msgid ""
-"Only rejected payslips can be reset to draft, the payslip %(nm)s is in "
-"%(st)s state"
+"Only rejected payslips can be reset to draft, the payslip %(nm)s is in %"
+"(st)s state"
 msgstr ""
 
 #. module: payroll
@@ -1542,6 +1485,7 @@ msgstr "工资单名称"
 #: model:ir.actions.act_window,name:payroll.open_payroll_modules
 #: model:ir.module.category,name:payroll.module_category_payroll
 #: model:ir.ui.menu,name:payroll.payroll_menu_root
+#: model:res.groups.privilege,name:payroll.res_groups_privilege_payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid "Payroll"
 msgstr "工资表"
@@ -1737,16 +1681,6 @@ msgid "Print"
 msgstr "打印"
 
 #. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_professionaltax1
-msgid "Professional Tax"
-msgstr "个人所得税"
-
-#. module: payroll
-#: model:hr.salary.rule,name:payroll.hr_salary_rule_providentfund1
-msgid "Provident Fund"
-msgstr "公积金"
-
-#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__amount_python_compute
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__amount_python_compute
 #: model:ir.model.fields.selection,name:payroll.selection__hr_payslip_line__amount_select__code
@@ -1784,7 +1718,7 @@ msgid "Quantity/rate"
 msgstr "数量 / 费率"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__quarterly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__quarterly
 msgid "Quarterly"
 msgstr "每季度"
 
@@ -1808,7 +1742,7 @@ msgstr "比率(%)"
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
-msgid "Recursion error. Only one line should be parent of %s"
+msgid "Recursion error. Only one line should be parent of %(rule)s"
 msgstr ""
 
 #. module: payroll
@@ -1836,7 +1770,7 @@ msgstr ""
 #. module: payroll
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
-msgid "Refund: %s"
+msgid "Refund: %(name)s"
 msgstr ""
 
 #. module: payroll
@@ -1959,7 +1893,8 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__struct_id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__struct_id
 msgid "Salary Structure"
 msgstr "薪资结构"
 
@@ -1970,7 +1905,8 @@ msgid "Salary Structures"
 msgstr "薪资结构"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__schedule_pay
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__schedule_pay
+#: model:ir.model.fields,field_description:payroll.field_hr_version__schedule_pay
 msgid "Scheduled Pay"
 msgstr "已安排的付款"
 
@@ -1995,7 +1931,7 @@ msgid "Search Salary Rule"
 msgstr "搜索薪资规则"
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__semi-annually
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__semi-annually
 msgid "Semi-annually"
 msgstr "半年"
 
@@ -2186,7 +2122,7 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: payroll
-#: model:ir.model.fields.selection,name:payroll.selection__hr_contract__schedule_pay__weekly
+#: model:ir.model.fields.selection,name:payroll.selection__hr_version__schedule_pay__weekly
 msgid "Weekly"
 msgstr "每周"
 
@@ -2206,9 +2142,10 @@ msgid "Worked Days & Inputs"
 msgstr "工作天数及输入"
 
 #. module: payroll
-#: model:ir.model.fields,field_description:payroll.field_hr_contract__resource_calendar_id
-msgid "Working Schedule"
-msgstr "工作安排"
+#: model:ir.model.fields,field_description:payroll.field_hr_employee__resource_calendar_id
+#: model:ir.model.fields,field_description:payroll.field_hr_version__resource_calendar_id
+msgid "Working Hours"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
@@ -2277,3 +2214,57 @@ msgstr "结果将影响一个变量"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
+
+#~ msgid "%s (copy)"
+#~ msgstr "%s (副本)"
+
+#~ msgid "Allowance"
+#~ msgstr "补助"
+
+#~ msgid "Basic"
+#~ msgstr "基本"
+
+#~ msgid "Basic Salary"
+#~ msgstr "基本工资"
+
+#~ msgid "Company Contribution"
+#~ msgstr "公司缴款"
+
+#~ msgid "Conveyance Allowance"
+#~ msgstr "交通补贴"
+
+#~ msgid "Deduction"
+#~ msgstr "扣除"
+
+#~ msgid "Employee Contract"
+#~ msgstr "员工合同"
+
+#~ msgid "Get 1% of sales"
+#~ msgstr "获得销售额的1％"
+
+#~ msgid "Gross"
+#~ msgstr "总额"
+
+#~ msgid "Group By"
+#~ msgstr "分组"
+
+#~ msgid "House Rent Allowance"
+#~ msgstr "住房补贴"
+
+#~ msgid "Meal Voucher"
+#~ msgstr "餐券"
+
+#~ msgid "Net"
+#~ msgstr "净"
+
+#~ msgid "Net Salary"
+#~ msgstr "工资净额"
+
+#~ msgid "Professional Tax"
+#~ msgstr "个人所得税"
+
+#~ msgid "Provident Fund"
+#~ msgstr "公积金"
+
+#~ msgid "Working Schedule"
+#~ msgstr "工作安排"
