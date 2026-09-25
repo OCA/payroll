@@ -1,0 +1,1 @@
+odoo-addon-payroll_contract_advantages @ git+https://github.com/OCA/payroll.git@refs/pull/266/head#subdirectory=payroll_contract_advantages
