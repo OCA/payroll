@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2025-06-21 13:27+0000\n"
+"PO-Revision-Date: 2026-09-25 20:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
 "Language: it\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -97,7 +97,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 msgid "%(code)s (copy)"
-msgstr ""
+msgstr "%(code)s (copia)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__state
@@ -743,7 +743,7 @@ msgstr "Chiudi"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Close Batch"
-msgstr ""
+msgstr "Chiudi lotto"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
@@ -1051,7 +1051,7 @@ msgstr "Dipendente"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
 msgid "Employee Contract / Version"
-msgstr ""
+msgstr "Contratto dipendente / Versione"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -1538,6 +1538,8 @@ msgstr "Direttore"
 msgid ""
 "Only draft payslips can be verified, the payslip %(nm)s is in %(st)s state"
 msgstr ""
+"Solo le buste paga in bozza possono essere verificate, la busta paga %(nm)s "
+"è in stato %(st)s"
 
 #. module: payroll
 #. odoo-python
@@ -1889,7 +1891,7 @@ msgstr "Tasso (%)"
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip_line.py:0
 msgid "Recursion error. Only one line should be parent of %(rule)s"
-msgstr ""
+msgstr "Errore di ricorsione. Solo una riga deve essere il genitore di %(rule)s"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
@@ -1917,7 +1919,7 @@ msgstr "Rimborso busta paga"
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid "Refund: %(name)s"
-msgstr ""
+msgstr "Rimborso: %(name)s"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -2308,7 +2310,7 @@ msgstr "Giorni lavorati e apporti"
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__resource_calendar_id
 #: model:ir.model.fields,field_description:payroll.field_hr_version__resource_calendar_id
 msgid "Working Hours"
-msgstr ""
+msgstr "Orario lavoro"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
