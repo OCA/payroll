@@ -55,15 +55,16 @@ Computation form area.
 Each tag has:
 
 - a **Name**, used as the tag label,
-- an optional **Code**, the identifier salary rules use to read the tag
-  total. When left empty, the code is the name in uppercase, with
-  anything that is not a letter, a number or an underscore replaced by
-  an underscore (so "Taxable Income" gives ``TAXABLE_INCOME``),
+- a **Code**, the identifier salary rules use to read the tag total
+  (``tags.<CODE>``). It is required, and proposed from the name while it
+  is empty: the name in uppercase, with anything that is not a letter, a
+  number or an underscore replaced by an underscore (so "Taxable Income"
+  gives ``TAXABLE_INCOME``). Renaming a tag keeps its code,
 - a **Company**, since tags are company specific,
 - a **Sequence** and a **Color**, used for ordering and display only.
 
-Two tags of the same company cannot resolve to the same code, otherwise
-salary rules would not be able to tell their totals apart.
+The code is unique per company, otherwise salary rules would not be able
+to tell the totals apart. The name is free text.
 
 Usage
 =====
@@ -94,10 +95,6 @@ the unit amount.
 Known issues / Roadmap
 ======================
 
-- The ``name_company_unique`` SQL constraint compares the whole
-  translated value of the name, so it only rejects tags that are
-  duplicated in every language. Uniqueness that actually matters for
-  computations is enforced by the effective code constraint.
 - ``hr.payslip.line`` inherits the Tags field from ``hr.salary.rule``,
   but no view exposes it on payslip lines yet. Reporting payslip lines
   grouped by tag would be a natural next step.

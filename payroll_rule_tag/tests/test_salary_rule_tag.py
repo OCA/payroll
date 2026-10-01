@@ -80,29 +80,38 @@ class TestSalaryRuleTag(TestSalaryRuleTagCommon):
         self.assertEqual(tag.sequence, 10)
         self.assertEqual(tag.company_id, self.env.company)
 
-    def test_code_defaults_to_normalized_name(self):
-        self.assertEqual(self.tag_taxable.get_tag_code(), "TAXABLE")
-        self.assertEqual(
-            self.Tag.create({"name": "Gross Pay"}).get_tag_code(), "GROSS_PAY"
-        )
-        self.assertEqual(
-            self.Tag.create({"name": "Health (50%)"}).get_tag_code(), "HEALTH__50__"
-        )
+    def test_code_is_proposed_from_the_name(self):
+        self.assertEqual(self.tag_taxable.code, "TAXABLE")
+        self.assertEqual(self.Tag.create({"name": "Gross Pay"}).code, "GROSS_PAY")
+        self.assertEqual(self.Tag.create({"name": "Health (50%)"}).code, "HEALTH__50__")
 
     def test_explicit_code_wins_over_name(self):
         tag = self.Tag.create({"name": "Taxable Base", "code": "TAXBASE"})
+        self.assertEqual(tag.code, "TAXBASE")
         self.assertEqual(tag.get_tag_code(), "TAXBASE")
 
-    def test_code_does_not_depend_on_user_language(self):
-        """A translated name must not change the code salary rules address."""
-        self.env["res.lang"]._activate_lang("fr_FR")
-        self.tag_taxable.with_context(lang="fr_FR").name = "Imposable"
-        self.assertEqual(self.tag_taxable.with_context(lang="fr_FR").name, "Imposable")
-        self.assertEqual(
-            self.tag_taxable.with_context(lang="fr_FR").get_tag_code(), "TAXABLE"
-        )
+    def test_renaming_a_tag_keeps_its_code(self):
+        """Rules read ``tags.<CODE>``: a rename must not break them."""
+        self.tag_taxable.name = "Taxable Income"
+        self.assertEqual(self.tag_taxable.code, "TAXABLE")
 
-    def test_name_not_convertible_to_identifier_is_rejected(self):
+    def test_code_does_not_depend_on_user_language(self):
+        """A tag created by a user in another language gets the same code."""
+        self.env["res.lang"]._activate_lang("fr_FR")
+        tag = self.Tag.with_context(lang="fr_FR").create({"name": "Imposable"})
+        self.assertEqual(tag.code, "IMPOSABLE")
+        tag.with_context(lang="fr_FR").name = "Base imposable"
+        self.assertEqual(tag.code, "IMPOSABLE")
+
+    def test_code_is_required(self):
+        with self.assertRaises(ValidationError):
+            self.tag_taxable.code = False
+
+    def test_name_is_free_text_when_a_code_is_given(self):
+        tag = self.Tag.create({"name": "1st Bracket (50%)", "code": "BRACKET_1"})
+        self.assertEqual(tag.code, "BRACKET_1")
+
+    def test_name_proposing_an_invalid_code_asks_for_one(self):
         with self.assertRaises(ValidationError):
             self.Tag.create({"name": "1st Bracket"})
 
@@ -110,30 +119,29 @@ class TestSalaryRuleTag(TestSalaryRuleTagCommon):
         with self.assertRaises(ValidationError):
             self.Tag.create({"name": "Union Fee", "code": "union-fee"})
 
-    def test_two_names_normalizing_to_one_code_are_rejected(self):
+    @mute_logger("odoo.sql_db")
+    def test_two_tags_proposing_one_code_are_rejected(self):
         self.Tag.create({"name": "Net Pay"})
-        with self.assertRaises(ValidationError):
-            self.Tag.create({"name": "Net-Pay"})
+        with self.assertRaises(IntegrityError):
+            with self.cr.savepoint():
+                self.Tag.create({"name": "Net-Pay"})
 
-    def test_code_colliding_with_another_name_is_rejected(self):
-        with self.assertRaises(ValidationError):
-            self.Tag.create({"name": "Income Tax", "code": "TAXABLE"})
-
+    @mute_logger("odoo.sql_db")
     def test_archived_tag_still_reserves_its_code(self):
         self.tag_taxable.active = False
-        with self.assertRaises(ValidationError):
-            self.Tag.create({"name": "Taxable Amount", "code": "TAXABLE"})
+        with self.assertRaises(IntegrityError):
+            with self.cr.savepoint():
+                self.Tag.create({"name": "Taxable Amount", "code": "TAXABLE"})
 
     def test_same_code_allowed_in_another_company(self):
         other_company = self.env["res.company"].create({"name": "Second Company"})
         tag = self.Tag.create({"name": "Taxable", "company_id": other_company.id})
-        self.assertEqual(tag.get_tag_code(), "TAXABLE")
+        self.assertEqual(tag.code, "TAXABLE")
 
-    @mute_logger("odoo.sql_db")
-    def test_duplicate_name_in_same_company_is_rejected(self):
-        with self.assertRaises(IntegrityError):
-            with self.cr.savepoint():
-                self.Tag.create({"name": "Taxable"})
+    def test_same_name_allowed_with_another_code(self):
+        """Uniqueness is on the code, which is what rules address."""
+        tag = self.Tag.create({"name": "Taxable", "code": "TAXABLE_2"})
+        self.assertEqual(tag.name, self.tag_taxable.name)
 
 
 class TestSalaryRuleTagRelation(TestSalaryRuleTagCommon):
