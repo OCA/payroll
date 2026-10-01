@@ -1,0 +1,194 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_hr_salary_rule_tag_list" model="ir.ui.view">
+        <field name="name">hr.salary.rule.tag.list</field>
+        <field name="model">hr.salary.rule.tag</field>
+        <field name="arch" type="xml">
+            <list string="Salary Rule Tags" editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="code" optional="show" />
+                <field name="description" optional="show" />
+                <field name="color" widget="color_picker" />
+                <field name="salary_rules_count" string="# Rules" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field name="active" widget="boolean_toggle" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hr_salary_rule_tag_form" model="ir.ui.view">
+        <field name="name">hr.salary.rule.tag.form</field>
+        <field name="model">hr.salary.rule.tag</field>
+        <field name="arch" type="xml">
+            <form string="Salary Rule Tag">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" string="Tag Name" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g. Taxable Income"
+                                required="1"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="e.g. TAXABLE" />
+                            <field name="sequence" />
+                            <field name="color" widget="color_picker" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="active" widget="boolean_toggle" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field
+                                name="description"
+                                placeholder="Describe the purpose of this tag and how it should be used in salary calculations..."
+                            />
+                        </page>
+                        <page string="Salary Rules" name="rules">
+                            <field name="salary_rules_ids">
+                                <list>
+                                    <field name="code" />
+                                    <field name="name" />
+                                    <field name="category_id" />
+                                    <field
+                                        name="company_id"
+                                        groups="base.group_multi_company"
+                                        optional="show"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_hr_salary_rule_tag_search" model="ir.ui.view">
+        <field name="name">hr.salary.rule.tag.search</field>
+        <field name="model">hr.salary.rule.tag</field>
+        <field name="arch" type="xml">
+            <search string="Search Salary Rule Tags">
+                <field
+                    name="name"
+                    string="Tag"
+                    filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"
+                />
+                <field name="description" />
+                <separator />
+                <filter
+                    string="Active"
+                    name="active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Company"
+                        name="company"
+                        domain="[]"
+                        context="{'group_by': 'company_id'}"
+                        groups="base.group_multi_company"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_hr_salary_rule_tag_kanban" model="ir.ui.view">
+        <field name="name">hr.salary.rule.tag.kanban</field>
+        <field name="model">hr.salary.rule.tag</field>
+        <field name="arch" type="xml">
+            <kanban highlight_color="color" class="o_kanban_mobile">
+                <templates>
+                    <t t-name="menu" t-if="!selection_mode">
+                        <div
+                            t-if="widget.editable"
+                            role="menuitem"
+                            aria-haspopup="true"
+                            class="o_kanban_card_manage_settings"
+                        >
+                            <field name="color" widget="kanban_color_picker" />
+                        </div>
+                    </t>
+                    <t t-name="card">
+                        <field name="name" class="fw-bold fs-5" />
+                        <span t-if="record.code.value" class="badge text-bg-info">
+                            <field name="code" />
+                        </span>
+                        <field
+                            name="description"
+                            class="text-muted"
+                            t-if="record.description.value"
+                        />
+                        <footer class="justify-content-between">
+                            <span class="text-muted">
+                                <field name="salary_rules_count" /> Rules
+                            </span>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                class="text-muted"
+                            />
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hr_salary_rule_tag" model="ir.actions.act_window">
+        <field name="name">Salary Rule Tags</field>
+        <field name="res_model">hr.salary.rule.tag</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_hr_salary_rule_tag_search" />
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new salary rule tag
+            </p>
+            <p>
+                Tags help you categorize salary rules for easier calculation and reporting.
+                You can use tags to group rules like "Taxable Income", "Benefits", or "Deductions"
+                and then reference these totals in other salary rule calculations.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem
+        id="menu_hr_salary_rule_tag"
+        name="Salary Rule Tags"
+        parent="payroll.payroll_menu_configuration"
+        action="action_hr_salary_rule_tag"
+        sequence="13"
+    />
+</odoo>

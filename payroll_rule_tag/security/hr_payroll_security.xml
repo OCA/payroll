@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Multi-company Record Rule for Salary Rule Tags -->
+    <record model="ir.rule" id="hr_salary_rule_tag_rule_company">
+        <field name="name">Salary Rule Tag: multi-company</field>
+        <field name="model_id" ref="model_hr_salary_rule_tag" />
+        <field name="global" eval="True" />
+        <field name="domain_force">
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+        </field>
+    </record>
+</odoo>
