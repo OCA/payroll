@@ -29,15 +29,13 @@ class HrPayslip(models.Model):
             year=date_from.year,
             start_dt=date_from,
             end_dt=date_to,
-            partner_id=contract.employee_id.user_id.partner_id.id
-            or contract.employee_id.work_contact_id.id,
+            partner_id=self._get_public_holidays_partner(contract).id,
         )
         ph_days = len(public_holidays)
-        ph_hours = (
-            ph_days * 8
-        )  # Use 8 as default value if employee has no resource_calendar
-        if contract.employee_id.resource_calendar_id:
-            ph_hours = ph_days * contract.employee_id.resource_calendar_id.hours_per_day
+        ph_hours = sum(
+            self._get_public_holiday_hours(contract, holiday.date)
+            for holiday in public_holidays
+        )
         return {
             "name": _("Public Holidays Leaves"),
             "sequence": 10,
@@ -46,3 +44,57 @@ class HrPayslip(models.Model):
             "number_of_hours": ph_hours,
             "contract_id": contract.id,
         }
+
+    def _get_public_holidays_partner(self, contract):
+        """The partner whose country and state decide the public holidays.
+
+        Public holidays belong to the place where the employee works, so the
+        employee's work address comes first. The employee's own contact or
+        user partner is only a fallback: it usually carries the personal
+        address, or no country at all, which made
+        ``calendar.public.holiday.get_holidays_list()`` skip every holiday
+        defined for a country.
+        """
+        employee = contract.employee_id
+        return (
+            employee.address_id
+            or employee.user_id.partner_id
+            or employee.work_contact_id
+        )
+
+    def _get_public_holiday_hours(self, contract, holiday_date):
+        """Hours a public holiday is worth for ``contract``.
+
+        The hours the contract's calendar schedules on that weekday (the
+        contract's, not the employee's: it is the one the payslip is computed
+        with). A holiday on a day the calendar does not schedule is worth an
+        average working day of that calendar, computed from its attendances so
+        it does not depend on ``hours_per_day`` having been filled. Without a
+        calendar, 8 hours.
+        """
+        calendar = (
+            contract.resource_calendar_id or contract.employee_id.resource_calendar_id
+        )
+        if not calendar:
+            return 8.0
+        attendances = calendar.attendance_ids.filtered(
+            lambda att: not att.display_type
+            and att.day_period != "lunch"
+            and (not att.date_from or att.date_from <= holiday_date)
+            and (not att.date_to or att.date_to >= holiday_date)
+        )
+        if calendar.two_weeks_calendar:
+            week_type = str(
+                self.env["resource.calendar.attendance"].get_week_type(holiday_date)
+            )
+            attendances = attendances.filtered(lambda att: att.week_type == week_type)
+        same_day = attendances.filtered(
+            lambda att: int(att.dayofweek) == holiday_date.weekday()
+        )
+        if same_day:
+            return sum(att.hour_to - att.hour_from for att in same_day)
+        working_days = set(attendances.mapped("dayofweek"))
+        if not working_days:
+            return calendar.hours_per_day or 8.0
+        total = sum(att.hour_to - att.hour_from for att in attendances)
+        return total / len(working_days)
