@@ -29,8 +29,7 @@ class HrPayslip(models.Model):
             year=date_from.year,
             start_dt=date_from,
             end_dt=date_to,
-            partner_id=contract.employee_id.user_id.partner_id.id
-            or contract.employee_id.work_contact_id.id,
+            partner_id=self._get_public_holidays_partner(contract).id,
         )
         ph_days = len(public_holidays)
         ph_hours = (
@@ -46,3 +45,20 @@ class HrPayslip(models.Model):
             "number_of_hours": ph_hours,
             "contract_id": contract.id,
         }
+
+    def _get_public_holidays_partner(self, contract):
+        """The partner whose country and state decide the public holidays.
+
+        Public holidays belong to the place where the employee works, so the
+        employee's work address comes first. The employee's own contact or
+        user partner is only a fallback: it usually carries the personal
+        address, or no country at all, which made
+        ``calendar.public.holiday.get_holidays_list()`` skip every holiday
+        defined for a country.
+        """
+        employee = contract.employee_id
+        return (
+            employee.address_id
+            or employee.user_id.partner_id
+            or employee.work_contact_id
+        )
