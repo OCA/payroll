@@ -189,3 +189,64 @@ class TestPublicHolidaysCountry(TransactionCase):
         self.employee.work_contact_id.country_id = self.country
         self._holiday(self.country, date(2024, 1, 2))
         self.assertEqual(self._days(), 1)
+
+
+class TestPublicHolidaysHours(TransactionCase):
+    """PHOL hours come from what the contract calendar schedules that day."""
+
+    def setUp(self):
+        super().setUp()
+        attendances = [
+            (
+                0,
+                0,
+                {
+                    "name": str(day),
+                    "dayofweek": str(day),
+                    "hour_from": 8,
+                    "hour_to": 17,
+                },
+            )
+            for day in range(5)
+        ] + [(0, 0, {"name": "Sat", "dayofweek": "5", "hour_from": 8, "hour_to": 12})]
+        self.calendar = self.env["resource.calendar"].create(
+            {"name": "9h weekdays, 4h Saturday", "attendance_ids": attendances}
+        )
+        # An employee calendar that must NOT be used: the contract's decides.
+        other = self.env["resource.calendar"].create(
+            {"name": "Employee calendar", "hours_per_day": 1}
+        )
+        self.employee = self.env["hr.employee"].create(
+            {"name": "Hourly Employee", "resource_calendar_id": other.id}
+        )
+        self.contract = self.env["hr.contract"].create(
+            {
+                "name": "Contract",
+                "employee_id": self.employee.id,
+                "resource_calendar_id": self.calendar.id,
+                "date_start": date(2024, 1, 1),
+                "wage": 1,
+            }
+        )
+
+    def _hours(self, day):
+        self.env["calendar.public.holiday"].create(
+            {"year": 2024, "line_ids": [(0, 0, {"date": day, "name": "Holiday"})]}
+        )
+        return self.env["hr.payslip"]._compute_public_holidays_days(
+            self.contract, date(2024, 1, 1), date(2024, 1, 31)
+        )["number_of_hours"]
+
+    def test_a_weekday_holiday_counts_that_day_s_hours(self):
+        self.assertEqual(self._hours(date(2024, 1, 2)), 9)  # Tuesday
+
+    def test_a_saturday_holiday_counts_the_saturday_hours(self):
+        self.assertEqual(self._hours(date(2024, 1, 6)), 4)
+
+    def test_a_holiday_on_a_day_off_counts_an_average_day(self):
+        # Sunday: nothing scheduled; the calendar's average day (49h / 6 days).
+        self.assertAlmostEqual(self._hours(date(2024, 1, 7)), 49 / 6, places=2)
+
+    def test_the_average_does_not_need_hours_per_day_to_be_filled(self):
+        self.calendar.hours_per_day = 0
+        self.assertAlmostEqual(self._hours(date(2024, 1, 7)), 49 / 6, places=2)
