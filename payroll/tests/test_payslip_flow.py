@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 
+from odoo.exceptions import UserError
 from odoo.fields import Date
 from odoo.tests import Form
 from odoo.tools import test_reports
@@ -279,6 +280,93 @@ class TestPayslipFlow(TestPayslipBase):
             len(payslip.line_ids),
             0,
             "There are no lines because there are no valid contracts",
+        )
+
+    def test_payslip_employees_clear_action(self):
+        payslip_run = self.env["hr.payslip.run"].create(
+            {
+                "date_end": "2011-09-30",
+                "date_start": "2011-09-01",
+                "name": "Payslip wizard clear employees",
+            }
+        )
+        payslip_employee = self.env["hr.payslip.employees"].create(
+            {"employee_ids": [(4, self.richard_emp.id)]}
+        )
+
+        self.assertTrue(
+            payslip_employee.employee_ids,
+            "Wizard must start with at least one employee selected",
+        )
+
+        action = payslip_employee.with_context(
+            active_id=payslip_run.id,
+            active_model="hr.payslip.run",
+        ).action_clear_employees()
+        self.assertFalse(
+            payslip_employee.employee_ids,
+            "Wizard employee selection should be empty after clear action",
+        )
+        self.assertTrue(
+            payslip_run.exists(),
+            "Payslip run must still exist after clear action on wizard",
+        )
+        self.assertEqual(
+            action.get("res_id"),
+            payslip_employee.id,
+            "Clear action should keep current wizard record opened",
+        )
+        self.assertEqual(
+            action.get("context", {}).get("active_id"),
+            payslip_run.id,
+            "Clear action should preserve active_id context for payslip run",
+        )
+
+        with self.assertRaises(UserError):
+            payslip_employee.with_context(active_id=payslip_run.id).compute_sheet()
+
+    def test_payslip_employees_apply_filter_action(self):
+        department = self.env["hr.department"].create(
+            {"name": "Payroll Filter Department"}
+        )
+        job = self.env["hr.job"].create({"name": "Payroll Filter Job"})
+        employee_match = self.env["hr.employee"].create(
+            {
+                "name": "Payroll Employee Match",
+                "department_id": department.id,
+                "job_id": job.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        employee_other = self.env["hr.employee"].create(
+            {
+                "name": "Payroll Employee Other",
+                "company_id": self.env.company.id,
+            }
+        )
+        payslip_employee = self.env["hr.payslip.employees"].create(
+            {
+                "company_id": self.env.company.id,
+                "department_id": department.id,
+                "job_id": job.id,
+                "employee_ids": [(4, employee_other.id)],
+            }
+        )
+
+        action = payslip_employee.with_context(
+            active_id=999,
+            active_model="hr.payslip.run",
+        ).action_apply_employee_filter()
+
+        self.assertEqual(
+            payslip_employee.employee_ids.ids,
+            employee_match.ids,
+            "Apply Filter must replace selected employees with domain results",
+        )
+        self.assertEqual(
+            action.get("context", {}).get("active_id"),
+            999,
+            "Apply Filter should preserve active_id context",
         )
 
     def _get_developer_rules(self):

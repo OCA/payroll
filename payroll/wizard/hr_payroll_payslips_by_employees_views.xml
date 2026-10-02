@@ -7,6 +7,20 @@
             <form string="Payslips by Employees">
                 <header>
                     <button
+                        string="Apply Filter"
+                        name="action_apply_employee_filter"
+                        type="object"
+                        icon="fa-filter"
+                        class="oe_highlight"
+                    />
+                    <button
+                        string="Clear Employees"
+                        name="action_clear_employees"
+                        type="object"
+                        icon="fa-cogs"
+                        class="oe_highlight"
+                    />
+                    <button
                         icon="fa-cogs"
                         string="Generate"
                         name="compute_sheet"
@@ -21,6 +35,16 @@
                             based on the dates and credit note
                             specified
                             on Payslips Run.
+                        </span>
+                    </group>
+                    <group string="Filter Employees">
+                        <field name="company_id" />
+                        <field name="department_id" />
+                        <field name="job_id" />
+                    </group>
+                    <group>
+                        <span colspan="2" nolabel="1">
+                            Apply Filter replaces the current employee selection.
                         </span>
                     </group>
                     <group string="Employees">
