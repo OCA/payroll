@@ -1,0 +1,140 @@
+<odoo>
+    <record id="view_hr_data_value_reason_list" model="ir.ui.view">
+        <field name="model">hr.data.value.reason</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="code" />
+                <field name="active" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_data_value_list" model="ir.ui.view">
+        <field name="model">hr.employee.data.value</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="contract_id" />
+                <field name="employee_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="type_id" />
+                <field name="value_float" invisible="not (value_type == 'float')" />
+                <field name="value_id" invisible="not (value_type == 'id')" />
+                <field name="value_bool" invisible="not (value_type == 'bool')" />
+                <field name="reason_id" optional="hide" />
+                <field name="value_type" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_data_value_search" model="ir.ui.view">
+        <field name="model">hr.employee.data.value</field>
+        <field name="arch" type="xml">
+            <search>
+                <group>
+                    <field name="employee_id" />
+                    <field name="type_id" />
+                    <field name="value_id" />
+                </group>
+                <filter
+                    name="group_employee"
+                    string="Employee"
+                    context="{'group_by': 'employee_id'}"
+                />
+                <filter
+                    name="group_contract"
+                    string="Contract"
+                    context="{'group_by': 'contract_id'}"
+                />
+                <filter
+                    name="group_group"
+                    string="Data Group"
+                    context="{'group_by': 'group_id'}"
+                />
+                <filter
+                    name="group_type"
+                    string="Data Type"
+                    context="{'group_by': 'type_id'}"
+                />
+                <filter
+                    name="group_value"
+                    string="Data Value"
+                    context="{'group_by': 'value_id'}"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hr_employee_data_value_form" model="ir.ui.view">
+        <field name="model">hr.employee.data.value</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="employee_id" />
+                        </h1>
+                        <h2>
+                            <field name="contract_id" placeholder="Contract" />
+                        </h2>
+                    </div>
+                    <group>
+                        <group name="left">
+                            <field name="date_start" />
+                            <field name="date_end" />
+                        </group>
+                        <group name="right">
+                            <field name="type_id" />
+                            <field name="value_type" invisible="True" />
+                            <field
+                                name="value_id"
+                                invisible="not (value_type == 'id')"
+                            />
+                            <field
+                                name="value_float"
+                                invisible="not (value_type == 'float')"
+                            />
+                            <field
+                                name="value_bool"
+                                invisible="not (value_type == 'bool')"
+                            />
+                            <field name="reason_id" />
+                        </group>
+                        <field name="note" placeholder="Notes" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Window Actions -->
+    <record id="action_hr_data_value_reason" model="ir.actions.act_window">
+        <field name="name">Master Data Change Reasons</field>
+        <field name="res_model">hr.data.value.reason</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="action_hr_employee_data_value" model="ir.actions.act_window">
+        <field name="name">Employee Master Data Values</field>
+        <field name="res_model">hr.employee.data.value</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem
+        id="menu_human_resources_configuration_data_reason"
+        name="Master Data Change Reasons"
+        parent="hr_contract.menu_human_resources_configuration_contract"
+        action="action_hr_data_value_reason"
+        sequence="60"
+    />
+
+    <menuitem
+        id="menu_hr_report_employee_data_value"
+        name="Employee Master Data Values"
+        parent="hr.hr_menu_hr_reports"
+        action="action_hr_employee_data_value"
+        sequence="20"
+    />
+</odoo>

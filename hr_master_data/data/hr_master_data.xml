@@ -1,0 +1,49 @@
+<odoo>
+    <!-- Master Data Groups -->
+    <record model="hr.data.group" id="data_group_professional">
+        <field name="name">Professional Data</field>
+    </record>
+    <record model="hr.data.group" id="data_group_taxes">
+        <field name="name">Tax Positions</field>
+    </record>
+    <record model="hr.data.group" id="data_salary">
+        <field name="name">Salary Data</field>
+    </record>
+
+    <!-- Master Data Types -->
+    <record model="hr.data.type" id="data_colcontr">
+        <field name="name">Collective Contract</field>
+        <field name="value_type">id</field>
+        <field name="group_id" ref="data_group_professional" />
+    </record>
+    <record model="hr.data.type" id="data_profcateg">
+        <field name="name">Professional Category</field>
+        <field name="value_type">id</field>
+        <field name="group_id" ref="data_group_professional" />
+    </record>
+    <record model="hr.data.type" id="data_paygrade">
+        <field name="name">Pay Grade</field>
+        <field name="value_type">id</field>
+        <field name="group_id" ref="data_group_professional" />
+    </record>
+    <record model="hr.data.type" id="data_sspos">
+        <field name="name">Social Security Position</field>
+        <field name="value_type">id</field>
+        <field name="group_id" ref="data_group_taxes" />
+    </record>
+    <record model="hr.data.type" id="data_taxpos">
+        <field name="name">Income Tax Position</field>
+        <field name="value_type">id</field>
+        <field name="group_id" ref="data_group_taxes" />
+    </record>
+    <record model="hr.data.type" id="data_base_salary">
+        <field name="name">Base Salary</field>
+        <field name="value_type">float</field>
+        <field name="group_id" ref="data_salary" />
+    </record>
+    <record model="hr.data.type" id="data_exempt">
+        <field name="name">Time Schedule Exempt</field>
+        <field name="value_type">bool</field>
+        <field name="group_id" ref="data_salary" />
+    </record>
+</odoo>

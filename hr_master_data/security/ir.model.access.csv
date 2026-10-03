@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_data_group,access_hr_data_group,hr_master_data.model_hr_data_group,hr.group_hr_user,1,1,1,1
+access_hr_data_type,access_hr_data_type,hr_master_data.model_hr_data_type,hr.group_hr_user,1,1,1,1
+access_hr_data_type_value,access_hr_data_type_value,hr_master_data.model_hr_data_type_value,hr.group_hr_user,1,1,1,1
+access_hr_data_value_reason,access_hr_data_value_reason,hr_master_data.model_hr_data_value_reason,hr.group_hr_user,1,1,1,1
+access_hr_employee_data_value,access_hr_employee_data_value,hr_master_data.model_hr_employee_data_value,hr.group_hr_user,1,1,1,1

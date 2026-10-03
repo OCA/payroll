@@ -1,0 +1,61 @@
+<odoo>
+    <!-- Salary Table Temlate List View -->
+    <record id="view_hr_salary_table_template_list" model="ir.ui.view">
+        <field name="name">hr.salary.table.template.list</field>
+        <field name="model">hr.salary.table.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="code" />
+                <field name="type_1_id" />
+                <field name="type_2_id" />
+                <field name="type_3_id" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Salary Table Template Form View -->
+    <record id="view_hr_salary_table_template_form" model="ir.ui.view">
+        <field name="name">hr.salary.table.form.template</field>
+        <field name="model">hr.salary.table.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <group name="top">
+                        <group name="left">
+                            <field name="type_1_id" />
+                            <field name="type_2_id" />
+                            <field name="type_3_id" />
+                        </group>
+                        <group name="right">
+                            <field name="code" placeholder="Code" />
+                            <field name="sequence" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Periods">
+                            <field name="line_ids">
+                                <list>
+                                    <field name="company_id" />
+                                    <field name="date_start" />
+                                    <field name="date_end" />
+                                    <field name="note" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

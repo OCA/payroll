@@ -1,0 +1,86 @@
+<odoo>
+    <!-- Salary Table List View -->
+    <record id="view_hr_salary_table_list" model="ir.ui.view">
+        <field name="name">hr.salary.table.list</field>
+        <field name="model">hr.salary.table</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="template_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="company_id" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Salary Table Form View -->
+    <record id="view_hr_salary_table_form" model="ir.ui.view">
+        <field name="name">hr.salary.table.form</field>
+        <field name="model">hr.salary.table</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="top">
+                        <group name="left">
+                            <field name="template_id" />
+                            <field name="date_start" />
+                            <field name="company_id" />
+                        </group>
+                        <group name="right">
+                            <field name="template_code" />
+                            <field name="date_end" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field
+                                        name="value_1_id"
+                                        column_invisible="not parent.type_1_id"
+                                    />
+                                    <field
+                                        name="value_2_id"
+                                        column_invisible="not parent.type_2_id"
+                                    />
+                                    <field
+                                        name="value_3_id"
+                                        column_invisible="not parent.type_3_id"
+                                    />
+                                    <field name="number_from" />
+                                    <field name="number_to" />
+                                    <field name="salary_rule_id" />
+                                    <field name="result" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Salary Table Line List View -->
+    <record id="view_hr_salary_table_line_list" model="ir.ui.view">
+        <field name="name">hr.salary.table.line.list</field>
+        <field name="model">hr.salary.table.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="template_id" />
+                <field name="table_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="salary_rule_id" />
+                <field name="value_1_id" />
+                <field name="value_2_id" />
+                <field name="value_3_id" />
+                <field name="number_from" />
+                <field name="number_to" />
+                <field name="result" />
+            </list>
+        </field>
+    </record>
+</odoo>
