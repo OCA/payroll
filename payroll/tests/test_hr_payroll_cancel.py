@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dateutil import relativedelta
 
@@ -25,7 +25,7 @@ class TestHrPayrollCancel(common.TransactionCase):
         # Update the default version created on employee to avoid duplicate date_version
         self.hr_employee_anita.version_id.write(
             {
-                "contract_date_start": datetime.now().date(),
+                "contract_date_start": datetime.now(timezone.utc).date(),
                 "name": "Contract for Anita",
                 "wage": 3000.0,
                 "struct_id": structure.id,
@@ -52,8 +52,8 @@ class TestHrPayrollCancel(common.TransactionCase):
         self.assertEqual(hr_payslip.state, "cancel")
 
     def _create_payslip(self):
-        date_from = datetime.now()
-        date_to = datetime.now() + relativedelta.relativedelta(
+        date_from = datetime.now(timezone.utc)
+        date_to = datetime.now(timezone.utc) + relativedelta.relativedelta(
             months=+2, day=1, days=-1
         )
         res = self.hr_payslip.get_payslip_vals(

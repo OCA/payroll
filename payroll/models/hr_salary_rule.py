@@ -27,7 +27,7 @@ class HrSalaryRule(models.Model):
         "1€ per worked day can have its quantity defined in expression "
         "like worked_days.WORK100.number_of_days.",
     )
-    category_id = fields.Many2one("hr.salary.rule.category", string="Category")
+    category_id = fields.Many2one("hr.salary.rule.category")
     active = fields.Boolean(
         default=True,
         help="If the active field is set to false, it will allow you to hide"
@@ -43,7 +43,6 @@ class HrSalaryRule(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         default=lambda self: self.env.company,
     )
     condition_select = fields.Selection(
@@ -85,7 +84,7 @@ class HrSalaryRule(models.Model):
 
 # Example:
 #-------------------------------
-# result = worked_days.WORK0 and worked_days.WORK0.number_of_days > 0""",  # noqa: E501
+# result = worked_days.WORK0 and worked_days.WORK0.number_of_days > 0""",
         help="Applied this rule for calculation if condition is true. You can "
         "specify condition like basic > 1000.",
     )
@@ -140,7 +139,7 @@ class HrSalaryRule(models.Model):
 
 # Example:
 #-------------------------------
-# result = contract.wage * 0.10""",  # noqa: E501
+# result = contract.wage * 0.10""",
     )
     amount_percentage_base = fields.Char(
         string="Percentage based on", help="result will be affected to a variable"

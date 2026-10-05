@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Mail template are declared in a NOUPDATE block
          so users can freely customize/delete them -->

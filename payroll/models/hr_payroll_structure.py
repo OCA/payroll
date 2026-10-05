@@ -23,7 +23,6 @@ class HrPayrollStructure(models.Model):
     code = fields.Char(string="Reference")
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=True,
         copy=False,
         default=lambda self: self.env.company,
@@ -31,12 +30,9 @@ class HrPayrollStructure(models.Model):
     note = fields.Text(string="Description")
     parent_id = fields.Many2one(
         "hr.payroll.structure",
-        string="Parent",
         default=lambda self: self._get_parent(),
     )
-    children_ids = fields.One2many(
-        "hr.payroll.structure", "parent_id", string="Children", copy=True
-    )
+    children_ids = fields.One2many("hr.payroll.structure", "parent_id", copy=True)
     rule_ids = fields.Many2many(
         "hr.salary.rule",
         "hr_structure_salary_rule_rel",

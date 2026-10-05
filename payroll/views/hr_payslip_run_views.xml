@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- payslip runs -->
     <record id="hr_payslip_run_view_search" model="ir.ui.view">
@@ -167,8 +167,8 @@
         <field name="search_view_id" ref="hr_payslip_run_view_search" />
     </record>
     <menuitem
-        action="hr_payslip_run_action"
         id="hr_payslip_run_menu"
+        action="hr_payslip_run_action"
         parent="payroll_menu_root"
     />
 </odoo>

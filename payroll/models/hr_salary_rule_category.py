@@ -12,20 +12,16 @@ class HrSalaryRuleCategory(models.Model):
     code = fields.Char()
     parent_id = fields.Many2one(
         "hr.salary.rule.category",
-        string="Parent",
         help="Linking a salary category to its parent is used only for the "
         "reporting purpose.",
     )
-    children_ids = fields.One2many(
-        "hr.salary.rule.category", "parent_id", string="Children"
-    )
+    children_ids = fields.One2many("hr.salary.rule.category", "parent_id")
     salary_rules_ids = fields.One2many(
         "hr.salary.rule", "category_id", string="Salary Rule Categories"
     )
     note = fields.Text(string="Description")
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         default=lambda self: self.env.company,
     )
     require_code = fields.Boolean(

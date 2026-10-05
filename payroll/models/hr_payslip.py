@@ -2,11 +2,11 @@
 
 import logging
 import math
-from datetime import date, datetime, time
+from datetime import datetime, time, timezone
+from zoneinfo import ZoneInfo
 
 import babel
 from dateutil.relativedelta import relativedelta
-from pytz import timezone
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -24,7 +24,7 @@ _logger = logging.getLogger(__name__)
 
 class HrPayslip(models.Model):
     _name = "hr.payslip"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ("mail.thread", "mail.activity.mixin")
     _description = "Payslip"
     _order = "id desc"
 
@@ -46,21 +46,24 @@ class HrPayslip(models.Model):
     )
     employee_id = fields.Many2one(
         "hr.employee",
-        string="Employee",
         required=True,
         readonly=True,
     )
     date_from = fields.Date(
         readonly=True,
         required=True,
-        default=lambda self: fields.Date.to_string(date.today().replace(day=1)),
+        default=lambda self: fields.Date.to_string(
+            datetime.now(timezone.utc).date().replace(day=1)
+        ),
         tracking=True,
     )
     date_to = fields.Date(
         readonly=True,
         required=True,
         default=lambda self: fields.Date.to_string(
-            (datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()
+            (
+                datetime.now(timezone.utc) + relativedelta(months=+1, day=1, days=-1)
+            ).date()
         ),
         tracking=True,
     )
@@ -90,7 +93,6 @@ class HrPayslip(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         readonly=True,
         copy=False,
         default=lambda self: self.env.company,
@@ -120,7 +122,6 @@ class HrPayslip(models.Model):
     )
     contract_id = fields.Many2one(
         "hr.version",
-        string="Contract",
         readonly=True,
         tracking=True,
     )
@@ -317,8 +318,7 @@ class HrPayslip(models.Model):
                 employee_id=self.employee_id.id, exclude_public_holidays=True
             )
             # only use payslip day_from if it's greather than contract start date
-            if day_from < day_contract_start:
-                day_from = day_contract_start
+            day_from = max(day_from, day_contract_start)
             # == compute leave days == #
             leaves = self._compute_leave_days(contract, day_from, day_to)
             res.extend(leaves)
@@ -338,7 +338,7 @@ class HrPayslip(models.Model):
         )
         leaves = {}
         calendar = contract.resource_calendar_id
-        tz = timezone(calendar.tz or contract.employee_id.tz or "UTC")
+        tz = ZoneInfo(calendar.tz or contract.employee_id.tz or "UTC")
         day_leave_intervals = contract.employee_id.list_leaves(
             day_from, day_to, calendar=contract.resource_calendar_id
         )
@@ -369,8 +369,8 @@ class HrPayslip(models.Model):
             else:
                 current_leave_struct["number_of_hours"] -= hours
             work_hours = calendar.get_work_hours_count(
-                tz.localize(datetime.combine(day, time.min)),
-                tz.localize(datetime.combine(day, time.max)),
+                datetime.combine(day, time.min, tzinfo=tz),
+                datetime.combine(day, time.max, tzinfo=tz),
                 compute_leaves=False,
             )
             if work_hours:
@@ -795,7 +795,6 @@ class HrPayslip(models.Model):
         if not self.contract_id:
             self.struct_id = False
         self.with_context(contract=True).onchange_employee()
-        return
 
     def get_salary_line_total(self, code):
         self.ensure_one()

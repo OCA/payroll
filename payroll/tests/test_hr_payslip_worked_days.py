@@ -1,7 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import time
-from datetime import date, datetime
+from datetime import datetime, timezone
 
 from odoo.tests import Form
 
@@ -78,8 +78,12 @@ class TestWorkedDays(TestPayslipBase):
                 "name": "Hol11",
                 "employee_id": self.richard_emp.id,
                 "holiday_status_id": self.holiday_type.id,
-                "date_from": datetime.combine(date.today(), datetime.min.time()),
-                "date_to": datetime.combine(date.today(), datetime.max.time()),
+                "date_from": datetime.combine(
+                    datetime.now(timezone.utc).date(), datetime.min.time()
+                ),
+                "date_to": datetime.combine(
+                    datetime.now(timezone.utc).date(), datetime.max.time()
+                ),
                 "number_of_days": 1,
             }
         )

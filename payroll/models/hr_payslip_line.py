@@ -27,10 +27,8 @@ class HrPayslipLine(models.Model):
         store=True,
     )
     salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
-    employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
-    contract_id = fields.Many2one(
-        "hr.version", string="Contract", required=True, index=True
-    )
+    employee_id = fields.Many2one("hr.employee", required=True)
+    contract_id = fields.Many2one("hr.version", required=True, index=True)
     rate = fields.Float(string="Rate (%)", digits="Payroll Rate", default=100.0)
     amount = fields.Float(digits="Payroll")
     quantity = fields.Float(digits="Payroll", default=1.0)
@@ -55,10 +53,11 @@ class HrPayslipLine(models.Model):
         for line in self:
             if line.parent_rule_id:
                 parent_line = line.slip_id.line_ids.filtered(
-                    lambda record, line=line: record.salary_rule_id
-                    == line.parent_rule_id
-                    and record.contract_id == line.contract_id
-                    and record.slip_id == line.slip_id
+                    lambda record, line=line: (
+                        record.salary_rule_id == line.parent_rule_id
+                        and record.contract_id == line.contract_id
+                        and record.slip_id == line.slip_id
+                    )
                 )
                 if parent_line and len(parent_line) > 1:
                     msg = self.env._(

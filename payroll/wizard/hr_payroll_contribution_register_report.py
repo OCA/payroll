@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dateutil import relativedelta
 
@@ -9,11 +9,14 @@ class PayslipLinesContributionRegister(models.TransientModel):
     _name = "payslip.lines.contribution.register"
     _description = "Payslip Lines by Contribution Registers"
 
-    date_from = fields.Date(required=True, default=datetime.now().strftime("%Y-%m-01"))
+    date_from = fields.Date(
+        required=True, default=datetime.now(timezone.utc).strftime("%Y-%m-01")
+    )
     date_to = fields.Date(
         required=True,
         default=str(
-            datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1)
+            datetime.now(timezone.utc)
+            + relativedelta.relativedelta(months=+1, day=1, days=-1)
         )[:10],
     )
 

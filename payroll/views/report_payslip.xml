@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_payslip">
         <t t-call="web.html_container">
@@ -105,13 +105,13 @@
                                     </td>
                                     <td>
                                         <span
-                                            t-esc="line.amount"
+                                            t-out="line.amount"
                                             t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                         />
                                     </td>
                                     <td>
                                         <span
-                                            t-esc="line.total"
+                                            t-out="line.total"
                                             t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                         />
                                     </td>

@@ -7,7 +7,7 @@ from odoo import fields, models
 
 class HrPayslipRun(models.Model):
     _name = "hr.payslip.run"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ("mail.thread", "mail.activity.mixin")
     _description = "Payslip Batches"
     _order = "id desc"
 
@@ -29,7 +29,6 @@ class HrPayslipRun(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=True,
         copy=False,
         default=lambda self: self.env.company,
@@ -44,8 +43,10 @@ class HrPayslipRun(models.Model):
         string="Date To",
         required=True,
         readonly=True,
-        default=lambda self: fields.Date.today().replace(day=1)
-        + relativedelta(months=+1, day=1, days=-1),
+        default=lambda self: (
+            fields.Date.today().replace(day=1)
+            + relativedelta(months=+1, day=1, days=-1)
+        ),
     )
     credit_note = fields.Boolean(
         readonly=True,

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_payslipdetails">
         <t t-call="web.html_container">
@@ -93,15 +93,15 @@
                                     t-as="h"
                                 >
                                     <td>
-                                        <span t-esc="h['code']" />
+                                        <span t-out="h['code']" />
                                     </td>
                                     <td>
-                                        <span t-esc="'..'*h['level']" />
-                                        <span t-esc="h['rule_category']" />
+                                        <span t-out="'..'*h['level']" />
+                                        <span t-out="h['rule_category']" />
                                     </td>
                                     <td class="text-right">
                                         <span
-                                            t-esc="h['total']"
+                                            t-out="h['total']"
                                             t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                         />
                                     </td>
@@ -125,20 +125,20 @@
                                     t-as="p"
                                 >
                                     <td>
-                                        <span t-esc="p.get('code', '')" />
+                                        <span t-out="p.get('code', '')" />
                                     </td>
                                     <td>
-                                        <span t-esc="p.get('name', '')" />
+                                        <span t-out="p.get('name', '')" />
                                     </td>
                                     <td>
-                                        <span t-esc="p.get('quantity', '')" />
+                                        <span t-out="p.get('quantity', '')" />
                                     </td>
                                     <td>
-                                        <span t-esc="p.get('amount', 0)" />
+                                        <span t-out="p.get('amount', 0)" />
                                     </td>
                                     <td class="text-right">
                                         <span
-                                            t-esc="p.get('total', 0)"
+                                            t-out="p.get('total', 0)"
                                             t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
                                         />
                                     </td>

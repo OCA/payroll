@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dateutil.relativedelta import relativedelta
 
@@ -42,7 +42,9 @@ class ContributionRegisterReport(models.AbstractModel):
         date_from = data["form"].get("date_from", fields.Date.today())
         date_to = data["form"].get(
             "date_to",
-            str(datetime.now() + relativedelta(months=+1, day=1, days=-1))[:10],
+            str(datetime.now(timezone.utc) + relativedelta(months=+1, day=1, days=-1))[
+                :10
+            ],
         )
         lines_data = self._get_payslip_lines(register_ids, date_from, date_to)
         lines_total = {}
