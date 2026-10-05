@@ -3,7 +3,7 @@
 
 {
     "name": "HR - Payroll Document - Queue",
-    "summary": "Process a PDF payslip aynchronously.",
+    "summary": "Process a PDF payslip asynchronously.",
     "author": "PyTech, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/payroll",
     "license": "AGPL-3",
