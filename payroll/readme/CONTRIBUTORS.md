@@ -1,0 +1,8 @@
+- Odoo SA \<<info@odoo.com>\>
+- David James \<<david@djdc.net.au>\>
+- Hilar AK \<<hilarak@gmail.com>\>
+- Nimarosa (Nicolas Rodriguez) \<<nicolarsande@gmail.com>\>
+- Henrik Norlin (@appstogrow)
+- Régis Pirard \<<regis.pirard@tincid.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
