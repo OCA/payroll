@@ -129,6 +129,7 @@ class HrPayslip(models.Model):
         compute="_compute_dynamic_filtered_payslip_lines",
     )
     credit_note = fields.Boolean(
+        default=False,
         readonly=True,
         help="Indicates this payslip has a refund of another",
     )
