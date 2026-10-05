@@ -2,7 +2,7 @@
 
 import logging
 import math
-from datetime import datetime, time, timezone
+from datetime import datetime, time
 from zoneinfo import ZoneInfo
 
 import babel
@@ -10,6 +10,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.date_utils import localized
 
 from .base_browsable import (
     BaseBrowsableObject,
@@ -52,18 +53,14 @@ class HrPayslip(models.Model):
     date_from = fields.Date(
         readonly=True,
         required=True,
-        default=lambda self: fields.Date.to_string(
-            datetime.now(timezone.utc).date().replace(day=1)
-        ),
+        default=lambda self: fields.Date.context_today(self).replace(day=1),
         tracking=True,
     )
     date_to = fields.Date(
         readonly=True,
         required=True,
-        default=lambda self: fields.Date.to_string(
-            (
-                datetime.now(timezone.utc) + relativedelta(months=+1, day=1, days=-1)
-            ).date()
+        default=lambda self: (
+            fields.Date.context_today(self) + relativedelta(months=+1, day=1, days=-1)
         ),
         tracking=True,
     )
@@ -162,14 +159,14 @@ class HrPayslip(models.Model):
         self.allow_cancel_payslips = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("payroll.allow_cancel_payslips")
+            .get_bool("payroll.allow_cancel_payslips")
         )
 
     def _compute_prevent_compute_on_confirm(self):
         self.prevent_compute_on_confirm = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("payroll.prevent_compute_on_confirm")
+            .get_bool("payroll.prevent_compute_on_confirm")
         )
 
     @api.depends("line_ids", "hide_child_lines", "hide_invisible_lines")
@@ -334,31 +331,20 @@ class HrPayslip(models.Model):
         of the payslip. One record per leave type.
         """
         leaves_positive = (
-            self.env["ir.config_parameter"].sudo().get_param("payroll.leaves_positive")
+            self.env["ir.config_parameter"].sudo().get_bool("payroll.leaves_positive")
         )
         leaves = {}
         calendar = contract.resource_calendar_id
-        tz = ZoneInfo(calendar.tz or contract.employee_id.tz or "UTC")
-        day_leave_intervals = contract.employee_id.list_leaves(
-            day_from, day_to, calendar=contract.resource_calendar_id
-        )
-        for day, hours, leave in day_leave_intervals:
+        tz = ZoneInfo(contract.employee_id.tz or "UTC")
+        for day, hours, leave in self._list_leaves(contract, day_from, day_to):
             holiday = leave[:1].holiday_id
+            work_entry_type = holiday.work_entry_type_id
             current_leave_struct = leaves.setdefault(
-                holiday.holiday_status_id,
+                work_entry_type,
                 {
-                    "name": holiday.holiday_status_id.name
-                    or self.env._("Global Leaves"),
-                    "sequence": getattr(
-                        getattr(holiday.holiday_status_id, "work_entry_type_id", None),
-                        "sequence",
-                        5,
-                    ),
-                    "code": getattr(
-                        getattr(holiday.holiday_status_id, "work_entry_type_id", None),
-                        "code",
-                        "GLOBAL",
-                    ),
+                    "name": work_entry_type.name or self.env._("Global Leaves"),
+                    "sequence": work_entry_type.sequence if work_entry_type else 5,
+                    "code": work_entry_type.code or "GLOBAL",
                     "number_of_days": 0.0,
                     "number_of_hours": 0.0,
                     "contract_id": contract.id,
@@ -379,6 +365,29 @@ class HrPayslip(models.Model):
                 else:
                     current_leave_struct["number_of_days"] -= hours / work_hours
         return leaves.values()
+
+    def _list_leaves(self, contract, day_from, day_to):
+        """Leave intervals within the working hours of the contract calendar.
+
+        Replaces ``resource.mixin.list_leaves()``, removed in Odoo 20.
+        @return: a list of tuples (day, hours, resource.calendar.leaves)
+        """
+        resource = contract.employee_id.resource_id
+        calendar = contract.resource_calendar_id
+        # naive datetimes are made explicit in UTC
+        day_from = localized(day_from)
+        day_to = localized(day_to)
+        resources_per_tz = resource._get_resources_per_tz()
+        attendances = calendar._attendance_intervals_batch(
+            day_from, day_to, resources_per_tz
+        )[resource.id]
+        leaves = calendar._leave_intervals_batch(day_from, day_to, resources_per_tz)[
+            resource.id
+        ]
+        return [
+            (start.date(), (stop - start).total_seconds() / 3600, leave)
+            for start, stop, leave in leaves & attendances
+        ]
 
     def _compute_worked_days(self, contract, day_from, day_to):
         """

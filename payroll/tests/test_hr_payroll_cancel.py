@@ -1,5 +1,3 @@
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
 from datetime import datetime, timezone
 
 from dateutil import relativedelta
@@ -12,7 +10,7 @@ class TestHrPayrollCancel(common.TransactionCase):
     def setUp(self):
         super().setUp()
         # Set system parameter
-        self.env["ir.config_parameter"].sudo().set_param(
+        self.env["ir.config_parameter"].sudo().set_bool(
             "payroll.allow_cancel_payslips", True
         )
         self.payslip_action_id = self.ref("payroll.hr_payslip_menu")

@@ -2,7 +2,9 @@
 
 import time
 from datetime import datetime, timezone
+from datetime import time as dt_time
 
+from odoo import Command
 from odoo.tests import Form
 
 from .common import TestPayslipBase
@@ -13,12 +15,14 @@ class TestWorkedDays(TestPayslipBase):
         super().setUp()
 
         self.LeaveRequest = self.env["hr.leave"]
-        self.LeaveType = self.env["hr.leave.type"]
+        self.LeaveType = self.env["hr.work.entry.type"]
 
         # create holiday type
         self.holiday_type = self.LeaveType.create(
             {
                 "name": "TestLeaveType",
+                "code": "TESTLEAVE",
+                "count_as": "absence",
                 "allocation_validation_type": "no_validation",
                 "leave_validation_type": "no_validation",
             }
@@ -27,7 +31,7 @@ class TestWorkedDays(TestPayslipBase):
         self.full_calendar = self.ResourceCalendar.create(
             {
                 "name": "56 Hrs a week",
-                "tz": "UTC",
+                "attendance_ids": [Command.clear()],
             }
         )
         # Create a full 7-day week sor our tests don't fail on Sat. and Sun.
@@ -36,7 +40,6 @@ class TestWorkedDays(TestPayslipBase):
                 {
                     "calendar_id": self.full_calendar.id,
                     "dayofweek": day,
-                    "name": "Morning",
                     "day_period": "morning",
                     "hour_from": 8,
                     "hour_to": 12,
@@ -46,7 +49,6 @@ class TestWorkedDays(TestPayslipBase):
                 {
                     "calendar_id": self.full_calendar.id,
                     "dayofweek": day,
-                    "name": "Afternoon",
                     "day_period": "afternoon",
                     "hour_from": 13,
                     "hour_to": 17,
@@ -54,6 +56,7 @@ class TestWorkedDays(TestPayslipBase):
             )
 
     def _common_contract_leave_setup(self):
+        self.richard_emp.tz = "UTC"
         self.richard_emp.resource_id.calendar_id = self.full_calendar
         self.richard_emp.version_ids.resource_calendar_id = self.full_calendar
 
@@ -64,7 +67,7 @@ class TestWorkedDays(TestPayslipBase):
             {
                 "name": "Annual Time Off",
                 "employee_id": self.richard_emp.id,
-                "holiday_status_id": self.holiday_type.id,
+                "work_entry_type_id": self.holiday_type.id,
                 "number_of_days": 20,
                 "state": "confirm",
                 "date_from": time.strftime("%Y-01-01"),
@@ -77,12 +80,12 @@ class TestWorkedDays(TestPayslipBase):
             {
                 "name": "Hol11",
                 "employee_id": self.richard_emp.id,
-                "holiday_status_id": self.holiday_type.id,
+                "work_entry_type_id": self.holiday_type.id,
                 "date_from": datetime.combine(
-                    datetime.now(timezone.utc).date(), datetime.min.time()
+                    datetime.now(timezone.utc).date(), dt_time.min
                 ),
                 "date_to": datetime.combine(
-                    datetime.now(timezone.utc).date(), datetime.max.time()
+                    datetime.now(timezone.utc).date(), dt_time.max
                 ),
                 "number_of_days": 1,
             }
@@ -92,7 +95,7 @@ class TestWorkedDays(TestPayslipBase):
         self._common_contract_leave_setup()
 
         # Set system parameter
-        self.env["ir.config_parameter"].sudo().set_param(
+        self.env["ir.config_parameter"].sudo().set_bool(
             "payroll.leaves_positive", False
         )
 
@@ -103,10 +106,10 @@ class TestWorkedDays(TestPayslipBase):
 
         worked_days_codes = richard_payslip.worked_days_line_ids.mapped("code")
         self.assertIn(
-            "GLOBAL", worked_days_codes, "The leave is in the 'Worked Days' list"
+            "TESTLEAVE", worked_days_codes, "The leave is in the 'Worked Days' list"
         )
         wdl_ids = richard_payslip.worked_days_line_ids.filtered(
-            lambda x: x.code == "GLOBAL"
+            lambda x: x.code == "TESTLEAVE"
         )
         self.assertEqual(len(wdl_ids), 1, "There is only one line matching the leave")
         self.assertEqual(
@@ -124,9 +127,7 @@ class TestWorkedDays(TestPayslipBase):
         self._common_contract_leave_setup()
 
         # Set system parameter
-        self.env["ir.config_parameter"].sudo().set_param(
-            "payroll.leaves_positive", True
-        )
+        self.env["ir.config_parameter"].sudo().set_bool("payroll.leaves_positive", True)
 
         # I create an employee Payslip
         frm = Form(self.Payslip)
@@ -135,10 +136,10 @@ class TestWorkedDays(TestPayslipBase):
 
         worked_days_codes = richard_payslip.worked_days_line_ids.mapped("code")
         self.assertIn(
-            "GLOBAL", worked_days_codes, "The leave is in the 'Worked Days' list"
+            "TESTLEAVE", worked_days_codes, "The leave is in the 'Worked Days' list"
         )
         wdl_ids = richard_payslip.worked_days_line_ids.filtered(
-            lambda x: x.code == "GLOBAL"
+            lambda x: x.code == "TESTLEAVE"
         )
         self.assertEqual(len(wdl_ids), 1, "There is only one line matching the leave")
         self.assertEqual(

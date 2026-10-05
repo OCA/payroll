@@ -45,7 +45,7 @@ class HrPayslipLine(models.Model):
         self.allow_edit_payslip_lines = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("payroll.allow_edit_payslip_lines")
+            .get_bool("payroll.allow_edit_payslip_lines")
         )
 
     @api.depends("parent_rule_id", "contract_id", "slip_id")

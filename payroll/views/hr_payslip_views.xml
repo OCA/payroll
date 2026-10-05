@@ -131,7 +131,7 @@
                         <button
                             name="%(hr_payslip_line_action_computation_details)d"
                             class="oe_stat_button"
-                            icon="fa-money"
+                            icon="payments"
                             type="action"
                         >
                             <field

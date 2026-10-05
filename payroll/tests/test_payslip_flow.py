@@ -4,7 +4,7 @@ from datetime import timedelta
 
 from odoo.fields import Date
 from odoo.tests import Form
-from odoo.tools import test_reports
+from odoo.tests import reports as test_reports
 
 from .common import TestPayslipBase
 
@@ -244,8 +244,8 @@ class TestPayslipFlow(TestPayslipBase):
     def test_get_contracts_multiple(self):
         # Prepare two sequential contracts within current month
         first_day = Date.today().strftime("%Y-%m-01")
-        mid_day = Date.today().strftime("%Y-%m-%d")
-        next_day = (Date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
+        mid_day = Date.today().strftime("%Y-%m-15")
+        next_day = Date.today().strftime("%Y-%m-16")
         self.sally.version_ids[0].write(
             {
                 "date_version": first_day,

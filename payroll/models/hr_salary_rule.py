@@ -195,7 +195,7 @@ class HrSalaryRule(models.Model):
         require = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("payroll.require_code_and_category")
+            .get_bool("payroll.require_code_and_category")
         )
         self.require_code_and_category = require
         return require

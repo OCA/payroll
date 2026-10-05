@@ -7,7 +7,7 @@
             <form string="Payslips by Employees">
                 <header>
                     <button
-                        icon="fa-cogs"
+                        icon="settings"
                         string="Generate"
                         name="compute_sheet"
                         type="object"

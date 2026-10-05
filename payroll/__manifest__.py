@@ -2,7 +2,7 @@
 
 {
     "name": "Payroll",
-    "version": "19.0.1.0.1",
+    "version": "20.0.1.0.0",
     "category": "Payroll",
     "website": "https://github.com/OCA/payroll",
     "sequence": 38,
@@ -15,7 +15,7 @@
     ],
     "data": [
         "security/hr_payroll_security.xml",
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/hr_payroll_sequence.xml",
         "data/hr_payroll_data.xml",
         "wizard/hr_payroll_contribution_register_report_views.xml",
