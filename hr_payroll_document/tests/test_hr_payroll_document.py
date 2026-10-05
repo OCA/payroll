@@ -13,6 +13,7 @@ class TestHRPayrollDocument(TestHrPayrollDocument):
         super().setUp(*args, **kwargs)
 
     def test_extension_error(self):
+        self.fill_company_id()
         self.wizard = self._create_wizard(
             "January", "hr_payroll_document/tests/test.docx"
         )
