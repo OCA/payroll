@@ -54,7 +54,19 @@ class PayrollManagamentWizard(models.TransientModel):
         return result
 
     def send_payrolls_async(self):
-        return self.with_delay().send_payrolls()
+        self.with_delay().send_payrolls()
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": self.env._("Payrolls queued"),
+                "message": self.env._(
+                    "You will be notified when the Payrolls have been sent."
+                ),
+                "type": "info",
+                "next": {"type": "ir.actions.act_window_close"},
+            },
+        }
 
     def _get_payrolls_being_processed(self):
         jobs = self.env["queue.job"].search(
