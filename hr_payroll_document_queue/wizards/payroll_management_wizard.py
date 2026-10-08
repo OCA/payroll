@@ -69,12 +69,20 @@ class PayrollManagamentWizard(models.TransientModel):
         }
 
     def _get_payrolls_being_processed(self):
-        jobs = self.env["queue.job"].search(
-            [
-                ("model_name", "=", self._name),
-                ("method_name", "=", "send_payrolls"),
-                ("state", "not in", [CANCELLED, DONE, FAILED]),
-            ]
+        # Search using `sudo` to find all the payrolls being processed,
+        # even if they are not accessible to the current user
+        # (like for multi-company rules)
+        # because the same file should never be processed twice at the same time.
+        jobs = (
+            self.env["queue.job"]
+            .sudo()
+            .search(
+                [
+                    ("model_name", "=", self._name),
+                    ("method_name", "=", "send_payrolls"),
+                    ("state", "not in", [CANCELLED, DONE, FAILED]),
+                ]
+            )
         )
         jobs_records_ids = [
             wizard.id
