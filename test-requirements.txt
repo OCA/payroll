@@ -1,0 +1,1 @@
+odoo-addon-payroll @ git+https://github.com/OCA/payroll@refs/pull/325/head#subdirectory=payroll
