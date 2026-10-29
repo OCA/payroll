@@ -191,12 +191,11 @@ class PayrollManagamentWizard(models.TransientModel):
         }
 
         # Save payroll attachment to all employee payrolls attachments
-        self.env["ir.attachment.payroll.custom"].create(
+        payroll_attachment = self.env["ir.attachment.payroll.custom"].create(
             {
                 "attachment_id": self.env["ir.attachment"].create(ir_values).id,
-                "employee": employee.name,
+                "employee_id": employee.id,
                 "subject": self.subject,
-                "identification_id": employee.identification_id,
             }
         )
 
@@ -204,11 +203,14 @@ class PayrollManagamentWizard(models.TransientModel):
         mail_template = self.env.ref(
             "hr_payroll_document.payroll_employee_email_template"
         )
-        mail_template.with_context(subject=self.subject).send_mail(
-            employee.id,
+        mail_template.send_mail(
+            payroll_attachment.id,
             force_send=True,
+            email_layout_xmlid="mail.mail_notification_light",
             email_values={
-                "attachment_ids": [fields.Command.create(ir_values)],
+                "attachment_ids": payroll_attachment.attachment_id.ids,
+                "model": employee._name,
+                "res_id": employee.id,
             },
         )
 
