@@ -177,16 +177,15 @@ class PayrollManagamentWizard(models.TransientModel):
 
         # Attach file to email
         ir_values = {
-            "name": self.env._("Payroll")
-            + "_"
-            + self.subject
-            + "_"
-            + employee.name
-            + ".pdf",
+            "name": self.env._(
+                "Payroll_%(subject)s_%(employee)s.pdf",
+                subject=self.subject,
+                employee=employee.name,
+            ),
             "type": "binary",
             "datas": encoded_string,
             "store_fname": encoded_string,
-            "res_model": "hr.employee",
+            "res_model": employee._name,
             "res_id": employee.id,
             "document_type": "payroll",
         }
@@ -205,10 +204,12 @@ class PayrollManagamentWizard(models.TransientModel):
         mail_template = self.env.ref(
             "hr_payroll_document.payroll_employee_email_template"
         )
-        data_id = [(6, 0, [self.env["ir.attachment"].create(ir_values).id])]
-        mail_template.attachment_ids = data_id
-        mail_template.with_context(**{"subject": self.subject}).send_mail(
-            employee.id, force_send=True
+        mail_template.with_context(subject=self.subject).send_mail(
+            employee.id,
+            force_send=True,
+            email_values={
+                "attachment_ids": [fields.Command.create(ir_values)],
+            },
         )
 
     def validate_id(self, code):
