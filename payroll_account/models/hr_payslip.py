@@ -40,7 +40,7 @@ class HrPayslip(models.Model):
         "it was cancelled, kept for the audit trail.",
     )
 
-    @api.depends("payslip_run_id", "contract_id")
+    @api.depends("payslip_run_id", "contract_id", "company_id")
     def _compute_journal_id(self):
         """Propose a journal for the payslip, once.
 
@@ -57,12 +57,26 @@ class HrPayslip(models.Model):
         either changes and never overwrites the payslip afterwards. The
         batch's journal wins over the contract's -- that is what the batch
         wizard means when it passes ``default_journal_id``.
+
+        When neither the batch nor the contract has a journal, the first
+        general journal of the payslip's own company is proposed, as the batch
+        does by default; a journal of another company is never kept.
         """
         for payslip in self:
+            current = payslip.journal_id.filtered(
+                lambda journal, slip=payslip: journal.company_id == slip.company_id
+            )
             payslip.journal_id = (
                 payslip.payslip_run_id.journal_id
                 or payslip.contract_id.journal_id
-                or payslip.journal_id
+                or current
+                or self.env["account.journal"].search(
+                    [
+                        ("type", "=", "general"),
+                        ("company_id", "=", payslip.company_id.id),
+                    ],
+                    limit=1,
+                )
             )
 
     def action_payslip_cancel(self):
@@ -129,6 +143,16 @@ class HrPayslip(models.Model):
                     slip.move_id.name,
                 )
                 continue
+            if not slip.journal_id:
+                raise UserError(
+                    _(
+                        'The payslip "%(payslip)s" has no salary journal: set one '
+                        "on the payslip, its batch or its contract, or create a "
+                        'general journal in the company "%(company)s".',
+                        payslip=slip.number or slip.name,
+                        company=slip.company_id.name,
+                    )
+                )
             line_ids = []
             debit_sum = 0.0
             credit_sum = 0.0

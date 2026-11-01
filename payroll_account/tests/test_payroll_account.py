@@ -537,6 +537,83 @@ class TestPayrollAccount(common.TransactionCase):
 
         self.assertEqual(payslip.journal_id, other_journal)
 
+    def _general_journal(self, company):
+        return self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", company.id)], limit=1
+        )
+
+    def test_journal_falls_back_to_the_company_general_journal(self):
+        """No batch and no journal on the contract: the company's general
+        journal is proposed, and the entry is generated in it."""
+        if not self._general_journal(self.env.company):
+            self._new_journal(code="SALT6")
+        self.hr_contract_john.journal_id = False
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+
+        payslip = self._prepare_payslip(self.hr_employee_john)
+
+        general_journal = self._general_journal(payslip.company_id)
+        self.assertTrue(general_journal)
+        self.assertEqual(payslip.journal_id, general_journal)
+        payslip.action_payslip_done()
+        self.assertEqual(payslip.move_id.journal_id, general_journal)
+
+    def test_journal_fallback_uses_the_payslip_company(self):
+        """The fallback journal belongs to the payslip's company, not to the
+        company the user happens to be working in."""
+        other_company = self._other_company()
+        other_journal = self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+        employee = self.env["hr.employee"].create(
+            {"name": "Jane", "company_id": other_company.id}
+        )
+        contract = self.env["hr.contract"].create(
+            {
+                "name": "Contract for Jane",
+                "date_start": fields.Date.today(),
+                "wage": 5000.0,
+                "employee_id": employee.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+            }
+        )
+        self.assertFalse(contract.journal_id)
+
+        payslip = self.env["hr.payslip"].create(
+            {
+                "employee_id": employee.id,
+                "contract_id": contract.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "name": "Payslip for Jane",
+            }
+        )
+
+        self.assertNotEqual(self.env.company, other_company)
+        self.assertEqual(payslip.journal_id, other_journal)
+
+    def test_confirming_without_any_journal_raises(self):
+        """A company without any general journal leaves the payslip without
+        a journal: confirming it must fail with a clear message."""
+        self.hr_contract_john.journal_id = False
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.journal_id = False
+        general_journals = self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", payslip.company_id.id)]
+        )
+        general_journals.write({"active": False})
+
+        with self.assertRaisesRegex(UserError, "no salary journal"):
+            payslip.action_payslip_done()
+        self.assertFalse(payslip.move_id)
+
     def test_accounting_entry_button_opens_the_move(self):
         self._update_account_in_rule(self.account_debit, self.account_credit)
         payslip = self._prepare_payslip(self.hr_employee_john)

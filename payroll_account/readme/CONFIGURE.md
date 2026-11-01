@@ -17,6 +17,8 @@ The journal the entry lands in is taken from, in order of precedence:
 2. the **batch's journal** (*Salary Journal* on the payslip batch), which is
    what the payslips of a batch are created with;
 3. the **contract's journal** (*Accounting* group of the contract form).
+4. the first **general journal** of the payslip's company, when none of the
+   above has one. A payslip still without a journal cannot be confirmed.
 
 Give that journal a **default account** (*Accounting > Configuration >
 Journals*): it is the account the payslip's rounding/adjustment item is booked
