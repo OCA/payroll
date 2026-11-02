@@ -143,16 +143,6 @@ class HrPayslip(models.Model):
                     slip.move_id.name,
                 )
                 continue
-            if not slip.journal_id:
-                raise UserError(
-                    _(
-                        'The payslip "%(payslip)s" has no salary journal: set one '
-                        "on the payslip, its batch or its contract, or create a "
-                        'general journal in the company "%(company)s".',
-                        payslip=slip.number or slip.name,
-                        company=slip.company_id.name,
-                    )
-                )
             line_ids = []
             debit_sum = 0.0
             credit_sum = 0.0
@@ -206,6 +196,21 @@ class HrPayslip(models.Model):
                     )
                     line_ids.append((0, 0, credit_line))
                     credit_sum += credit_line["credit"] - credit_line["debit"]
+
+            if line_ids and not slip.journal_id:
+                # Only an entry needs a journal: a payslip whose rules have no
+                # accounts (e.g. a company without accounting) confirms
+                # without one, and the adjustment lines below can only exist
+                # when there are accounted lines.
+                raise UserError(
+                    _(
+                        'The payslip "%(payslip)s" has no salary journal: set one '
+                        "on the payslip, its batch or its contract, or create a "
+                        'general journal in the company "%(company)s".',
+                        payslip=slip.number or slip.name,
+                        company=slip.company_id.name,
+                    )
+                )
 
             if currency.compare_amounts(credit_sum, debit_sum) == -1:
                 acc_id = slip.journal_id.default_account_id.id

@@ -614,6 +614,25 @@ class TestPayrollAccount(common.TransactionCase):
             payslip.action_payslip_done()
         self.assertFalse(payslip.move_id)
 
+    def test_confirming_without_journal_nor_accounts_succeeds(self):
+        """A company without accounting (no general journal) and salary rules
+        without accounts: there is nothing to post, so the payslip confirms
+        without a journal and without an entry."""
+        self.hr_contract_john.journal_id = False
+        self._update_account_in_rule(False, False)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.journal_id = False
+        general_journals = self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", payslip.company_id.id)]
+        )
+        general_journals.write({"active": False})
+
+        payslip.action_payslip_done()
+
+        self.assertEqual(payslip.state, "done")
+        self.assertFalse(payslip.journal_id)
+        self.assertFalse(payslip.move_id)
+
     def test_accounting_entry_button_opens_the_move(self):
         self._update_account_in_rule(self.account_debit, self.account_credit)
         payslip = self._prepare_payslip(self.hr_employee_john)
