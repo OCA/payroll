@@ -598,6 +598,19 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertNotEqual(self.env.company, other_company)
         self.assertEqual(payslip.journal_id, other_journal)
 
+    def test_default_salary_journal_is_the_company_general_journal(self):
+        """The fallback lives in its own method, so that submodules can
+        propose another journal; by default it is the first general journal
+        of the payslip's own company."""
+        if not self._general_journal(self.env.company):
+            self._new_journal(code="SALT7")
+        payslip = self._prepare_payslip(self.hr_employee_john)
+
+        self.assertEqual(
+            payslip._get_default_salary_journal(),
+            self._general_journal(payslip.company_id),
+        )
+
     def test_confirming_without_any_journal_raises(self):
         """A company without any general journal leaves the payslip without
         a journal: confirming it must fail with a clear message."""

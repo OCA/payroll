@@ -58,9 +58,9 @@ class HrPayslip(models.Model):
         batch's journal wins over the contract's -- that is what the batch
         wizard means when it passes ``default_journal_id``.
 
-        When neither the batch nor the contract has a journal, the first
-        general journal of the payslip's own company is proposed, as the batch
-        does by default; a journal of another company is never kept.
+        When neither the batch nor the contract has a journal, the journal
+        of ``_get_default_salary_journal`` is proposed; a journal of another
+        company is never kept.
         """
         for payslip in self:
             current = payslip.journal_id.filtered(
@@ -70,14 +70,24 @@ class HrPayslip(models.Model):
                 payslip.payslip_run_id.journal_id
                 or payslip.contract_id.journal_id
                 or current
-                or self.env["account.journal"].search(
-                    [
-                        ("type", "=", "general"),
-                        ("company_id", "=", payslip.company_id.id),
-                    ],
-                    limit=1,
-                )
+                or payslip._get_default_salary_journal()
             )
+
+    def _get_default_salary_journal(self):
+        """Journal proposed when neither the batch nor the contract has one.
+
+        By default, the first general journal of the payslip's own company, as
+        the batch does. Submodules may override it to propose a journal
+        configured on the company, and call ``super()`` when there is none.
+        """
+        self.ensure_one()
+        return self.env["account.journal"].search(
+            [
+                ("type", "=", "general"),
+                ("company_id", "=", self.company_id.id),
+            ],
+            limit=1,
+        )
 
     def action_payslip_cancel(self):
         # Cancel the payslip FIRST: ``super()`` still refuses the cancellation
