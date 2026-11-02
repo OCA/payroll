@@ -62,8 +62,9 @@ The journal the entry lands in is taken from, in order of precedence:
    which is what the payslips of a batch are created with;
 3. the **contract's journal** (*Accounting* group of the contract form).
 4. the first **general journal** of the payslip's company, when none of
-   the above has one. A payslip still without a journal cannot be
-   confirmed.
+   the above has one. A payslip still without a journal can only be
+   confirmed when its rules post nothing (no accounts), and then no
+   entry is created.
 
 Give that journal a **default account** (*Accounting > Configuration >
 Journals*): it is the account the payslip's rounding/adjustment item is
