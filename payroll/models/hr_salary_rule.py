@@ -78,6 +78,7 @@ class HrSalaryRule(models.Model):
 # current_contract: object with values calculated from the current contract
 # result_rules: object with a dict of qty, rate, amount an total of calculated rules
 # tools: object that contain libraries and tools that can be used in calculations
+# rule: hr.salary.rule object, the rule being computed
 
 # Available compute variables:
 #-------------------------------
@@ -130,6 +131,7 @@ class HrSalaryRule(models.Model):
 # current_contract: object with values calculated from the current contract
 # result_rules: object with a dict of qty, rate, amount an total of calculated rules
 # tools: object that contain libraries and tools that can be used in calculations
+# rule: hr.salary.rule object, the rule being computed
 
 # Available compute variables:
 #-------------------------------
@@ -184,6 +186,7 @@ class HrSalaryRule(models.Model):
             return self.child_ids._recursive_search_of_rules() | self
 
     def _reset_localdict_values(self, localdict):
+        localdict["rule"] = self
         localdict["result_name"] = None
         localdict["result_qty"] = 1.0
         localdict["result_rate"] = 100
@@ -299,7 +302,12 @@ Here is the error received:
         method = f"_satisfy_condition_{self.condition_select}"
         if self.parent_rule_id:
             current_result = api.call_kw(self, method, [self.ids, localdict], {})
-            parent_result = self.parent_rule_id._satisfy_condition(localdict)
+            # the condition of the parent sees the parent as `rule`
+            localdict["rule"] = self.parent_rule_id
+            try:
+                parent_result = self.parent_rule_id._satisfy_condition(localdict)
+            finally:
+                localdict["rule"] = self
             return current_result and parent_result
         return api.call_kw(self, method, [self.ids, localdict], {})
 
