@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =======================
 Payroll Public Holidays
 =======================
@@ -17,7 +13,7 @@ Payroll Public Holidays
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -57,6 +53,10 @@ Usage
   instead of a ``PHOL`` line.
 - Create a payslip: public holidays from ``calendar.public.holiday`` are
   fetched automatically into the worked days table with code ``PHOL``.
+- The holidays are the ones of the country (and state) of the employee's
+  **Work Address**. Without a work address, the employee's user partner
+  and then the work contact are used instead. A holiday year defined for
+  a country is skipped for an employee whose partner has no country.
 
 Bug Tracker
 ===========

@@ -7,3 +7,7 @@
   instead of a `PHOL` line.
 - Create a payslip: public holidays from `calendar.public.holiday` are
   fetched automatically into the worked days table with code `PHOL`.
+- The holidays are the ones of the country (and state) of the employee's
+  **Work Address**. Without a work address, the employee's user partner
+  and then the work contact are used instead. A holiday year defined for a
+  country is skipped for an employee whose partner has no country.
