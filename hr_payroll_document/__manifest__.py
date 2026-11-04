@@ -8,7 +8,12 @@
     "version": "18.0.1.0.2",
     "depends": ["hr", "base_vat"],
     "maintainers": ["peluko00"],
-    "external_dependencies": {"python": ["pypdf", "fonttools"]},
+    "external_dependencies": {
+        "python": [
+            "fonttools",
+            "pypdf",
+        ],
+    },
     "data": [
         "wizard/payroll_management_wizard.xml",
         "security/ir.model.access.csv",
