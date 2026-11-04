@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===========================
 Payroll Contract Advantages
 ===========================
@@ -17,7 +13,7 @@ Payroll Contract Advantages
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -89,13 +85,13 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-.. |maintainer-nimarosa| image:: https://github.com/nimarosa.png?size=40px
-    :target: https://github.com/nimarosa
-    :alt: nimarosa
+.. |maintainer-nimarosa, CristianoMafraJunior| image:: https://github.com/nimarosa, CristianoMafraJunior.png?size=40px
+    :target: https://github.com/nimarosa, CristianoMafraJunior
+    :alt: nimarosa, CristianoMafraJunior
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-nimarosa| 
+|maintainer-nimarosa, CristianoMafraJunior| 
 
 This module is part of the `OCA/payroll <https://github.com/OCA/payroll/tree/18.0/payroll_contract_advantages>`_ project on GitHub.
 

@@ -8,9 +8,17 @@ class HrContractAdvantage(models.Model):
     _name = "hr.contract.advantage"
     _description = "Employee's Advantages on Contract"
 
-    contract_id = fields.Many2one("hr.contract")
+    _sql_constraints = [
+        (
+            "contract_template_unique",
+            "unique(contract_id, advantage_template_id)",
+            "This advantage is already set on this contract.",
+        )
+    ]
+
+    contract_id = fields.Many2one("hr.contract", required=True, ondelete="cascade")
     advantage_template_id = fields.Many2one(
-        "hr.contract.advantage.template", string="Advantage Template"
+        "hr.contract.advantage.template", string="Advantage Template", required=True
     )
     advantage_template_code = fields.Char(
         string="Code", related="advantage_template_id.code", readonly=True
@@ -21,7 +29,7 @@ class HrContractAdvantage(models.Model):
     advantage_upper_bound = fields.Float(
         string="Upper Bound", related="advantage_template_id.upper_bound", readonly=True
     )
-    amount = fields.Float()
+    amount = fields.Float(digits="Payroll")
 
     @api.onchange("advantage_template_id")
     def _onchange_advantage_template_id(self):
@@ -31,12 +39,22 @@ class HrContractAdvantage(models.Model):
     @api.constrains("amount")
     def _check_bound_limits(self):
         for record in self:
-            if record.amount and record.amount != 0.00:
-                if record.amount > record.advantage_upper_bound:
-                    raise ValidationError(
-                        _("Advantage amount can't be greater than upper bound limit.")
-                    )
-                elif record.amount < record.advantage_lower_bound:
-                    raise ValidationError(
-                        _("Advantage amount can't be less than lower bound limit.")
-                    )
+            if not record.amount:
+                continue
+            # A bound left at 0.0 (the field default) means "no limit on that
+            # side", so a template without explicit bounds doesn't block
+            # every non-zero amount.
+            if (
+                record.advantage_upper_bound
+                and record.amount > record.advantage_upper_bound
+            ):
+                raise ValidationError(
+                    _("Advantage amount can't be greater than upper bound limit.")
+                )
+            if (
+                record.advantage_lower_bound
+                and record.amount < record.advantage_lower_bound
+            ):
+                raise ValidationError(
+                    _("Advantage amount can't be less than lower bound limit.")
+                )
