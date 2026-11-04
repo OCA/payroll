@@ -35,7 +35,7 @@ class TestPayslipFlow(TestPayslipBase):
         frm.employee_id = self.richard_emp
         richard_payslip = frm.save()
 
-        payslip_input = self.env["hr.payslip.input"].search(
+        payslip_input = self.env["payroll.payslip.input"].search(
             [("payslip_id", "=", richard_payslip.id), ("code", "=", "SALEURO")]
         )
         # I assign the amount to Input data
@@ -113,7 +113,7 @@ class TestPayslipFlow(TestPayslipBase):
         richard_payslip.refund_sheet()
 
         # I check on new payslip Credit Note is checked or not.
-        payslip_refund = self.env["hr.payslip"].search(
+        payslip_refund = self.env["payroll.payslip"].search(
             [
                 ("name", "like", "Refund: " + richard_payslip.name),
                 ("credit_note", "=", True),
@@ -122,7 +122,7 @@ class TestPayslipFlow(TestPayslipBase):
         self.assertTrue(bool(payslip_refund), "Payslip not refunded!")
 
         # I want to generate a payslip from Payslip run.
-        payslip_run = self.env["hr.payslip.run"].create(
+        payslip_run = self.env["payroll.payslip.run"].create(
             {
                 "date_end": "2011-09-30",
                 "date_start": "2011-09-01",
@@ -131,7 +131,7 @@ class TestPayslipFlow(TestPayslipBase):
         )
 
         # I create record for generating the payslip for this Payslip run.
-        payslip_employee = self.env["hr.payslip.employees"].create(
+        payslip_employee = self.env["payroll.payslip.employees"].create(
             {"employee_ids": [(4, self.richard_emp.id)]}
         )
 
@@ -139,7 +139,7 @@ class TestPayslipFlow(TestPayslipBase):
         payslip_employee.with_context(active_id=payslip_run.id).compute_sheet()
 
         # I open Contribution Register and from there I print the Payslip Lines report.
-        self.env["payslip.lines.contribution.register"].create(
+        self.env["payroll.lines.contribution.register"].create(
             {"date_from": "2011-09-30", "date_to": "2011-09-01"}
         )
 
@@ -155,7 +155,7 @@ class TestPayslipFlow(TestPayslipBase):
 
         # I print the contribution register report
         context = {
-            "model": "hr.contribution.register",
+            "model": "payroll.contribution.register",
             "active_ids": [self.register_hra.id],
             "discard_logo_check": True,
         }
@@ -232,7 +232,7 @@ class TestPayslipFlow(TestPayslipBase):
                 "employee_id": self.sally.id,
                 "date_version": next_month_start,
                 "contract_date_start": next_month_start,
-                "struct_id": self.sales_pay_structure.id,
+                "payroll_struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
             }
         )
@@ -259,7 +259,7 @@ class TestPayslipFlow(TestPayslipBase):
                 "employee_id": self.sally.id,
                 "date_version": next_day,
                 "contract_date_start": next_day,
-                "struct_id": self.sales_pay_structure.id,
+                "payroll_struct_id": self.sales_pay_structure.id,
                 "wage": 6500.00,
             }
         )
@@ -320,7 +320,7 @@ class TestPayslipFlow(TestPayslipBase):
         payslip.struct_id = self.developer_pay_structure
         self.assertNotEqual(
             payslip.struct_id,
-            self.sally.version_id.struct_id,
+            self.sally.version_id.payroll_struct_id,
             "The salary structure on the payslip is different from the contract",
         )
         rules = payslip._get_salary_rules()

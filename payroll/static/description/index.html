@@ -379,6 +379,12 @@ ul.auto-toc {
 <p>This module is a backport from Odoo SA and as such, it is not included
 in the OCA CLA. That means we do not have a copy of the copyright on it
 like all other OCA modules.</p>
+<p>Models live in the <tt class="docutils literal">payroll.*</tt> namespace (<tt class="docutils literal">payroll.payslip</tt>,
+<tt class="docutils literal">payroll.salary.rule</tt>, …), deliberately separate from the Enterprise
+<tt class="docutils literal">hr_payroll</tt> model names (<tt class="docutils literal">hr.payslip</tt>, <tt class="docutils literal">hr.salary.rule</tt>, …).
+This allows both payroll engines to be installed on the same database —
+for example, different companies using different engines — without the
+two modules merging into a single conflicting schema.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">

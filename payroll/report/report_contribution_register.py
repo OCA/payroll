@@ -15,8 +15,8 @@ class ContributionRegisterReport(models.AbstractModel):
         result = {}
         self.env.cr.execute(
             """
-            SELECT pl.id from hr_payslip_line as pl
-            LEFT JOIN hr_payslip AS hp on (pl.slip_id = hp.id)
+            SELECT pl.id from payroll_payslip_line as pl
+            LEFT JOIN payroll_payslip AS hp on (pl.slip_id = hp.id)
             WHERE (hp.date_from >= %s) AND (hp.date_to <= %s)
             AND pl.register_id in %s
             AND hp.state = 'done'
@@ -24,8 +24,8 @@ class ContributionRegisterReport(models.AbstractModel):
             (date_from, date_to, tuple(register_ids)),
         )
         line_ids = [x[0] for x in self.env.cr.fetchall()]
-        for line in self.env["hr.payslip.line"].browse(line_ids):
-            result.setdefault(line.register_id.id, self.env["hr.payslip.line"])
+        for line in self.env["payroll.payslip.line"].browse(line_ids):
+            result.setdefault(line.register_id.id, self.env["payroll.payslip.line"])
             result[line.register_id.id] += line
         return result
 
@@ -37,7 +37,9 @@ class ContributionRegisterReport(models.AbstractModel):
             )
 
         register_ids = self.env.context.get("active_ids", [])
-        contrib_registers = self.env["hr.contribution.register"].browse(register_ids)
+        contrib_registers = self.env["payroll.contribution.register"].browse(
+            register_ids
+        )
         date_from = data["form"].get("date_from", fields.Date.today())
         date_to = data["form"].get(
             "date_to",
@@ -50,7 +52,7 @@ class ContributionRegisterReport(models.AbstractModel):
             lines_total[register.id] = lines and sum(lines.mapped("total")) or 0.0
         return {
             "doc_ids": register_ids,
-            "doc_model": "hr.contribution.register",
+            "doc_model": "payroll.contribution.register",
             "docs": contrib_registers,
             "data": data,
             "lines_data": lines_data,

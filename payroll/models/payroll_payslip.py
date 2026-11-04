@@ -24,13 +24,13 @@ _logger = logging.getLogger(__name__)
 
 
 class HrPayslip(models.Model):
-    _name = "hr.payslip"
+    _name = "payroll.payslip"
     _inherit = ("mail.thread", "mail.activity.mixin")
     _description = "Payslip"
     _order = "id desc"
 
     struct_id = fields.Many2one(
-        "hr.payroll.structure",
+        "payroll.structure",
         string="Structure",
         readonly=True,
         help="Defines the rules that have to be applied to this payslip, "
@@ -83,7 +83,7 @@ class HrPayslip(models.Model):
         \n* When user cancel payslip the status is \'Rejected\'.""",
     )
     line_ids = fields.One2many(
-        "hr.payslip.line",
+        "payroll.payslip.line",
         "slip_id",
         string="Payslip Lines",
         readonly=True,
@@ -95,14 +95,14 @@ class HrPayslip(models.Model):
         default=lambda self: self.env.company,
     )
     worked_days_line_ids = fields.One2many(
-        "hr.payslip.worked_days",
+        "payroll.payslip.worked_days",
         "payslip_id",
         string="Payslip Worked Days",
         copy=True,
         readonly=True,
     )
     input_line_ids = fields.One2many(
-        "hr.payslip.input",
+        "payroll.payslip.input",
         "payslip_id",
         string="Payslip Inputs",
         readonly=True,
@@ -123,7 +123,7 @@ class HrPayslip(models.Model):
         tracking=True,
     )
     dynamic_filtered_payslip_lines = fields.One2many(
-        "hr.payslip.line",
+        "payroll.payslip.line",
         compute="_compute_dynamic_filtered_payslip_lines",
     )
     credit_note = fields.Boolean(
@@ -132,7 +132,7 @@ class HrPayslip(models.Model):
         help="Indicates this payslip has a refund of another",
     )
     payslip_run_id = fields.Many2one(
-        "hr.payslip.run",
+        "payroll.payslip.run",
         string="Payslip Batches",
         readonly=True,
         copy=False,
@@ -147,7 +147,7 @@ class HrPayslip(models.Model):
     )
     compute_date = fields.Date()
     refunded_id = fields.Many2one(
-        "hr.payslip", string="Refunded Payslip", readonly=True
+        "payroll.payslip", string="Refunded Payslip", readonly=True
     )
     allow_cancel_payslips = fields.Boolean(
         "Allow Canceling Payslips", compute="_compute_allow_cancel_payslips"
@@ -226,7 +226,7 @@ class HrPayslip(models.Model):
         return self.write({"state": "cancel"})
 
     def refund_sheet(self):
-        copied_payslips = self.env["hr.payslip"]
+        copied_payslips = self.env["payroll.payslip"]
         for payslip in self:
             # Create a refund slip
             copied_payslip = payslip.copy(
@@ -257,7 +257,7 @@ class HrPayslip(models.Model):
             "name": self.env._("Refund Payslip"),
             "view_mode": "list, form",
             "view_id": False,
-            "res_model": "hr.payslip",
+            "res_model": "payroll.payslip",
             "type": "ir.actions.act_window",
             "target": "current",
             "domain": [("id", "in", copied_payslips.ids)],
@@ -526,12 +526,12 @@ class HrPayslip(models.Model):
         # Only compute rules when there is at least one valid contract in the period
         contracts = self._get_employee_contracts()
         if not contracts:
-            return self.env["hr.salary.rule"]
+            return self.env["payroll.salary.rule"]
         current_structure = self.struct_id
         if current_structure:
             structures = current_structure.get_structure_with_parents()
         else:
-            structures = contracts.struct_id.get_structure_with_parents()
+            structures = contracts.payroll_struct_id.get_structure_with_parents()
         return structures.get_all_rules()
 
     def _compute_payslip_line(self, rule, localdict, lines_dict):
@@ -594,7 +594,7 @@ class HrPayslip(models.Model):
 
     def get_lines_dict(self):
         lines_dict = {}
-        blacklist = self.env["hr.salary.rule"]
+        blacklist = self.env["payroll.salary.rule"]
         for payslip in self:
             contracts = payslip._get_employee_contracts()
             baselocaldict = payslip._get_baselocaldict(contracts)
@@ -684,7 +684,7 @@ class HrPayslip(models.Model):
         if struct_id:
             res["value"].update({"struct_id": struct_id[0]})
         else:
-            struct = contract.struct_id
+            struct = contract.payroll_struct_id
             if not struct:
                 return res
             res["value"].update({"struct_id": struct.id})
@@ -775,9 +775,9 @@ class HrPayslip(models.Model):
                 payslip.contract_id = payslip.env["hr.version"].browse(contract_ids[0])
             # Assign struct_id automatically when the user don't selected one.
             if not payslip.struct_id and not payslip.env.context.get("struct_id"):
-                if not payslip.contract_id.struct_id:
+                if not payslip.contract_id.payroll_struct_id:
                     continue
-                payslip.struct_id = payslip.contract_id.struct_id
+                payslip.struct_id = payslip.contract_id.payroll_struct_id
             # Compute payslip name
             payslip._compute_name()
             # Call worked_days_lines computation when employee is changed.

@@ -11,14 +11,14 @@ class TestPayslipBase(TransactionCase):
 
         self.CalendarAttendance = self.env["resource.calendar.attendance"]
         self.Contract = self.env["hr.version"]
-        self.ContributionRegister = self.env["hr.contribution.register"]
+        self.ContributionRegister = self.env["payroll.contribution.register"]
         self.Department = self.env["hr.department"]
-        self.PayrollStructure = self.env["hr.payroll.structure"]
-        self.Payslip = self.env["hr.payslip"]
+        self.PayrollStructure = self.env["payroll.structure"]
+        self.Payslip = self.env["payroll.payslip"]
         self.ResourceCalendar = self.env["resource.calendar"]
-        self.RuleInput = self.env["hr.rule.input"]
-        self.SalaryRule = self.env["hr.salary.rule"]
-        self.SalaryRuleCateg = self.env["hr.salary.rule.category"]
+        self.RuleInput = self.env["payroll.rule.input"]
+        self.SalaryRule = self.env["payroll.salary.rule"]
+        self.SalaryRuleCateg = self.env["payroll.salary.rule.category"]
 
         # Departments
         #
@@ -220,7 +220,7 @@ class TestPayslipBase(TransactionCase):
                 "contract_date_start": Date.today(),
                 "name": "Contract for Richard",
                 "wage": 5000.0,
-                "struct_id": self.developer_pay_structure.id,
+                "payroll_struct_id": self.developer_pay_structure.id,
             }
         )
         self.richard_contract = self.richard_emp.version_id
@@ -260,7 +260,7 @@ class TestPayslipBase(TransactionCase):
                 "contract_date_start": next_month_start,
                 "name": "Contract for Sally",
                 "wage": 6500.0,
-                "struct_id": self.sales_pay_structure.id,
+                "payroll_struct_id": self.sales_pay_structure.id,
             }
         )
 

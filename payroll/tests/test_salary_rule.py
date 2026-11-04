@@ -7,8 +7,8 @@ class TestSalaryRule(TestPayslipBase):
     def setUp(self):
         super().setUp()
 
-        self.Payslip = self.env["hr.payslip"]
-        self.Rule = self.env["hr.salary.rule"]
+        self.Payslip = self.env["payroll.payslip"]
+        self.Rule = self.env["payroll.salary.rule"]
 
         self.test_rule = self.Rule.create(
             {

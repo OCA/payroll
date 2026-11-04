@@ -8,8 +8,8 @@ class PayslipDetailsReport(models.AbstractModel):
     _description = "Payslip Details Report"
 
     def get_details_by_rule_category(self, payslip_lines):
-        PayslipLine = self.env["hr.payslip.line"]
-        RuleCateg = self.env["hr.salary.rule.category"]
+        PayslipLine = self.env["payroll.payslip.line"]
+        RuleCateg = self.env["payroll.salary.rule.category"]
 
         def get_recursive_parent(current_rule_category, rule_categories=None):
             if rule_categories:
@@ -30,8 +30,8 @@ class PayslipDetailsReport(models.AbstractModel):
         if payslip_lines:
             self.env.cr.execute(
                 """
-                SELECT pl.id, pl.category_id, pl.slip_id FROM hr_payslip_line as pl
-                LEFT JOIN hr_salary_rule_category AS rc on (pl.category_id = rc.id)
+                SELECT pl.id, pl.category_id, pl.slip_id FROM payroll_payslip_line as pl
+                LEFT JOIN payroll_salary_rule_category AS rc on (pl.category_id = rc.id)
                 WHERE pl.id in %s
                 GROUP BY rc.parent_id, pl.sequence, pl.id, pl.category_id
                 ORDER BY pl.sequence, rc.parent_id""",
@@ -100,10 +100,10 @@ class PayslipDetailsReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        payslips = self.env["hr.payslip"].browse(docids)
+        payslips = self.env["payroll.payslip"].browse(docids)
         return {
             "doc_ids": docids,
-            "doc_model": "hr.payslip",
+            "doc_model": "payroll.payslip",
             "docs": payslips,
             "data": data,
             "get_details_by_rule_category": self.get_details_by_rule_category(

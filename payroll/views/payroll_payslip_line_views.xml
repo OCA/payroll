@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="hr_payslip_line_view_tree" model="ir.ui.view">
-        <field name="name">hr.payslip.line.list</field>
-        <field name="model">hr.payslip.line</field>
+        <field name="name">payroll.payslip.line.list</field>
+        <field name="model">payroll.payslip.line</field>
         <field name="arch" type="xml">
             <list editable="bottom" decoration-info="total == 0">
                 <field name="allow_edit_payslip_lines" column_invisible="1" />
@@ -22,8 +22,8 @@
         </field>
     </record>
     <record id="hr_payslip_line_view_form" model="ir.ui.view">
-        <field name="name">hr.payslip.line.form</field>
-        <field name="model">hr.payslip.line</field>
+        <field name="name">payroll.payslip.line.form</field>
+        <field name="model">payroll.payslip.line</field>
         <field name="arch" type="xml">
             <form string="Payslip Line">
                 <h2>
@@ -91,8 +91,8 @@
         </field>
     </record>
     <record id="hr_payslip_line_view_pivot" model="ir.ui.view">
-        <field name="name">hr.payslip.line.pivot</field>
-        <field name="model">hr.payslip.line</field>
+        <field name="name">payroll.payslip.line.pivot</field>
+        <field name="model">payroll.payslip.line</field>
         <field name="mode">primary</field>
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
@@ -103,8 +103,8 @@
         </field>
     </record>
     <record id="hr_payslip_line_view_search" model="ir.ui.view">
-        <field name="name">hr.payslip.line.select</field>
-        <field name="model">hr.payslip.line</field>
+        <field name="name">payroll.payslip.line.select</field>
+        <field name="model">payroll.payslip.line</field>
         <field name="arch" type="xml">
             <search string="Search Payslip Lines">
                 <field
@@ -142,28 +142,28 @@
     </record>
     <record id="hr_payslip_line_action" model="ir.actions.act_window">
         <field name="name">Payslip Lines</field>
-        <field name="res_model">hr.payslip.line</field>
+        <field name="res_model">payroll.payslip.line</field>
         <field name="domain">[('register_id', '=', active_id)]</field>
         <field name="context">
             {'default_register_id': active_id, 'search_default_register_id': 1}
         </field>
-        <field name="binding_model_id" ref="model_hr_payslip" />
+        <field name="binding_model_id" ref="model_payroll_payslip" />
     </record>
     <record
         id="hr_payslip_line_action_computation_details"
         model="ir.actions.act_window"
     >
         <field name="name">Payslip Computation Details</field>
-        <field name="res_model">hr.payslip.line</field>
+        <field name="res_model">payroll.payslip.line</field>
         <field name="view_mode">list,pivot,form</field>
         <field name="domain">[('slip_id', 'in', active_ids)]</field>
-        <field name="binding_model_id" ref="model_hr_payslip" />
+        <field name="binding_model_id" ref="model_payroll_payslip" />
     </record>
     <record id="action_get_batch_payslip_lines" model="ir.actions.act_window">
         <field name="name">Batch Payslip Lines</field>
-        <field name="res_model">hr.payslip.line</field>
+        <field name="res_model">payroll.payslip.line</field>
         <field name="view_mode">pivot,list,form</field>
         <field name="domain">[('payslip_run_id', 'in', active_ids)]</field>
-        <field name="binding_model_id" ref="model_hr_payslip_run" />
+        <field name="binding_model_id" ref="model_payroll_payslip_run" />
     </record>
 </odoo>

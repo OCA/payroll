@@ -4,13 +4,13 @@
 
 from odoo.exceptions import UserError
 
-from odoo.addons.payroll.tests.test_hr_payroll_cancel import TestHrPayrollCancel
+from odoo.addons.payroll.tests.test_payroll_cancel import TestHrPayrollCancel
 
 
 class TestHrPayslipChangeState(TestHrPayrollCancel):
     def setUp(self):
         super().setUp()
-        self.tested_model = self.env["hr.payslip.change.state"]
+        self.tested_model = self.env["payroll.payslip.change.state"]
 
     def test_change_state(self):
         hr_payslip = self._create_payslip()

@@ -4,7 +4,7 @@ from odoo import fields, models
 
 
 class HrRuleInput(models.Model):
-    _name = "hr.rule.input"
+    _name = "payroll.rule.input"
     _description = "Salary Rule Input"
 
     name = fields.Char(string="Description", required=True)
@@ -12,5 +12,5 @@ class HrRuleInput(models.Model):
         required=True, help="The code that can be used in the salary rules"
     )
     input_id = fields.Many2one(
-        "hr.salary.rule", string="Salary Rule Input", required=True
+        "payroll.salary.rule", string="Salary Rule Input", required=True
     )

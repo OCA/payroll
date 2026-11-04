@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 
 
 class HrPayslipEmployees(models.TransientModel):
-    _name = "hr.payslip.employees"
+    _name = "payroll.payslip.employees"
     _description = "Generate payslips for all selected employees"
 
     employee_ids = fields.Many2many(
@@ -11,12 +11,12 @@ class HrPayslipEmployees(models.TransientModel):
     )
 
     def compute_sheet(self):
-        payslips = self.env["hr.payslip"]
+        payslips = self.env["payroll.payslip"]
         [data] = self.read()
         active_id = self.env.context.get("active_id")
         if active_id:
             [run_data] = (
-                self.env["hr.payslip.run"]
+                self.env["payroll.payslip.run"]
                 .browse(active_id)
                 .read(["date_start", "date_end", "credit_note", "struct_id"])
             )
@@ -28,7 +28,7 @@ class HrPayslipEmployees(models.TransientModel):
                 self.env._("You must select employee(s) to generate payslip(s).")
             )
         for employee in self.env["hr.employee"].browse(data["employee_ids"]):
-            slip_data = self.env["hr.payslip"].get_payslip_vals(
+            slip_data = self.env["payroll.payslip"].get_payslip_vals(
                 from_date, to_date, employee.id, contract_id=False, struct_id=struct_id
             )
             res = {
@@ -48,7 +48,7 @@ class HrPayslipEmployees(models.TransientModel):
                 "credit_note": run_data.get("credit_note"),
                 "company_id": employee.company_id.id,
             }
-            payslips += self.env["hr.payslip"].create(res)
+            payslips += self.env["payroll.payslip"].create(res)
         payslips._compute_name()
         payslips.compute_sheet()
         return {"type": "ir.actions.act_window_close"}

@@ -8,7 +8,7 @@ from odoo.tools.safe_eval import safe_eval
 
 
 class HrSalaryRule(models.Model):
-    _name = "hr.salary.rule"
+    _name = "payroll.salary.rule"
     _order = "sequence, id"
     _description = "Salary Rule"
 
@@ -27,7 +27,7 @@ class HrSalaryRule(models.Model):
         "1€ per worked day can have its quantity defined in expression "
         "like worked_days.WORK100.number_of_days.",
     )
-    category_id = fields.Many2one("hr.salary.rule.category")
+    category_id = fields.Many2one("payroll.salary.rule.category")
     active = fields.Boolean(
         default=True,
         help="If the active field is set to false, it will allow you to hide"
@@ -39,7 +39,7 @@ class HrSalaryRule(models.Model):
         help="Used to display the salary rule on payslip.",
     )
     parent_rule_id = fields.Many2one(
-        comodel_name="hr.salary.rule", string="Parent Salary Rule", index=True
+        comodel_name="payroll.salary.rule", string="Parent Salary Rule", index=True
     )
     company_id = fields.Many2one(
         "res.company",
@@ -64,7 +64,7 @@ class HrSalaryRule(models.Model):
         required=True,
         default="""# Available variables:
 #-------------------------------
-# payslip: hr.payslip object
+# payslip: payroll.payslip object
 # payslips: object containing payslips (browsable)
 # employee: hr.employee object
 # contract: hr.contract object
@@ -116,7 +116,7 @@ class HrSalaryRule(models.Model):
         string="Python Code",
         default="""# Available variables:
 #-------------------------------
-# payslip: hr.payslip object
+# payslip: payroll.payslip object
 # payslips: object containing payslips (browsable)
 # employee: hr.employee object
 # contract: hr.contract object
@@ -145,14 +145,16 @@ class HrSalaryRule(models.Model):
         string="Percentage based on", help="result will be affected to a variable"
     )
     child_ids = fields.One2many(
-        "hr.salary.rule", "parent_rule_id", string="Child Salary Rule", copy=True
+        "payroll.salary.rule", "parent_rule_id", string="Child Salary Rule", copy=True
     )
     register_id = fields.Many2one(
-        "hr.contribution.register",
+        "payroll.contribution.register",
         string="Contribution Register",
         help="Eventual third party involved in the salary payment of the employees.",
     )
-    input_ids = fields.One2many("hr.rule.input", "input_id", string="Inputs", copy=True)
+    input_ids = fields.One2many(
+        "payroll.rule.input", "input_id", string="Inputs", copy=True
+    )
     note = fields.Text(string="Description")
     require_code_and_category = fields.Boolean(
         "Require code and category",
@@ -162,8 +164,8 @@ class HrSalaryRule(models.Model):
 
     @api.constrains("parent_rule_id")
     def _check_parent_rule_id(self):
-        if self.env.registry[self._name]._name != "hr.salary.rule":
-            # HrPayslipLine inherits from "hr.salary.rule" and we don't
+        if self.env.registry[self._name]._name != "payroll.salary.rule":
+            # HrPayslipLine inherits from "payroll.salary.rule" and we don't
             # want to do this check on a payslip line
             return
         for rule in self:
@@ -180,7 +182,7 @@ class HrSalaryRule(models.Model):
         @return: recordset of rules
         """
         if not self:
-            return self.env["hr.salary.rule"]
+            return self.env["payroll.salary.rule"]
         else:
             return self.child_ids._recursive_search_of_rules() | self
 

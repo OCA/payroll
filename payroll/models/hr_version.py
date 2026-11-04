@@ -12,8 +12,8 @@ class HrContract(models.Model):
     _inherit = "hr.version"
     _description = "Employee Contract / Version"
 
-    struct_id = fields.Many2one("hr.payroll.structure", string="Salary Structure")
-    schedule_pay = fields.Selection(
+    payroll_struct_id = fields.Many2one("payroll.structure", string="Salary Structure")
+    payroll_schedule_pay = fields.Selection(
         [
             ("monthly", "Monthly"),
             ("quarterly", "Quarterly"),
@@ -33,7 +33,7 @@ class HrContract(models.Model):
     @api.model
     def _get_whitelist_fields_from_template(self):
         whitelist = super()._get_whitelist_fields_from_template()
-        for field_name in ("schedule_pay", "struct_id"):
+        for field_name in ("payroll_schedule_pay", "payroll_struct_id"):
             if field_name not in whitelist:
                 whitelist.append(field_name)
         return whitelist
@@ -45,4 +45,4 @@ class HrContract(models.Model):
                  so on) and without duplicates
         """
         # TODO: remove, too simple and not used
-        return self.struct_id.get_structure_with_parents()
+        return self.payroll_struct_id.get_structure_with_parents()

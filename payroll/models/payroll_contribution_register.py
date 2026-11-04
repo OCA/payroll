@@ -4,7 +4,7 @@ from odoo import fields, models
 
 
 class HrContributionRegister(models.Model):
-    _name = "hr.contribution.register"
+    _name = "payroll.contribution.register"
     _description = "Contribution Register"
 
     company_id = fields.Many2one(
@@ -13,5 +13,7 @@ class HrContributionRegister(models.Model):
     )
     partner_id = fields.Many2one("res.partner")
     name = fields.Char(required=True)
-    register_line_ids = fields.One2many("hr.payslip.line", "register_id", readonly=True)
+    register_line_ids = fields.One2many(
+        "payroll.payslip.line", "register_id", readonly=True
+    )
     note = fields.Text(string="Description")

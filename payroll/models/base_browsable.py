@@ -44,7 +44,7 @@ class InputLine(BrowsableObject):
         self.env.cr.execute(
             """
             SELECT sum(amount) as sum
-            FROM hr_payslip as hp, hr_payslip_input as pi
+            FROM payroll_payslip as hp, payroll_payslip_input as pi
             WHERE hp.employee_id = %s AND hp.state = 'done'
             AND hp.date_from >= %s AND hp.date_to <= %s
             AND hp.id = pi.payslip_id AND pi.code = %s""",
@@ -64,7 +64,7 @@ class WorkedDays(BrowsableObject):
             """
             SELECT sum(number_of_days) as number_of_days,
              sum(number_of_hours) as number_of_hours
-            FROM hr_payslip as hp, hr_payslip_worked_days as pi
+            FROM payroll_payslip as hp, payroll_payslip_worked_days as pi
             WHERE hp.employee_id = %s AND hp.state = 'done'
             AND hp.date_from >= %s AND hp.date_to <= %s
             AND hp.id = pi.payslip_id AND pi.code = %s""",
@@ -91,7 +91,7 @@ class Payslips(BrowsableObject):
         self.env.cr.execute(
             """SELECT sum(case when hp.credit_note = False then
             (pl.total) else (-pl.total) end)
-                    FROM hr_payslip as hp, hr_payslip_line as pl
+                    FROM payroll_payslip as hp, payroll_payslip_line as pl
                     WHERE hp.employee_id = %s AND hp.state = 'done'
                     AND hp.date_from >= %s AND hp.date_to <= %s AND
                      hp.id = pl.slip_id AND pl.code = %s""",

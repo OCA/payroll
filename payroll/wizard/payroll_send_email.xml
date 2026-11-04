@@ -6,7 +6,7 @@
         <!-- Email template -->
         <record id="mail_template_hr_payslip" model="mail.template">
             <field name="name">Send payslip by email</field>
-            <field name="model_id" ref="payroll.model_hr_payslip" />
+            <field name="model_id" ref="payroll.model_payroll_payslip" />
             <field name="email_from">{{user.employee_id.work_email}}</field>
             <field name="email_to">{{object.employee_id.work_contact_id.email}}</field>
             <field name="reply_to">{{user.employee_id.work_email}}</field>
@@ -51,7 +51,7 @@
                 'default_template_id': ref('payroll.mail_template_hr_payslip'),
             }"
             />
-            <field name="binding_model_id" ref="payroll.model_hr_payslip" />
+            <field name="binding_model_id" ref="payroll.model_payroll_payslip" />
             <field name="binding_view_types">list</field>
         </record>
     </data>

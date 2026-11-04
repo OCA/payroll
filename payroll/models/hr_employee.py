@@ -7,14 +7,14 @@ class HrEmployee(models.Model):
     _inherit = "hr.employee"
     _description = "Employee"
 
-    slip_ids = fields.One2many(
-        "hr.payslip", "employee_id", string="Payslips", readonly=True
+    payroll_slip_ids = fields.One2many(
+        "payroll.payslip", "employee_id", string="Payslips", readonly=True
     )
-    payslip_count = fields.Integer(
-        compute="_compute_payslip_count",
+    payroll_slip_count = fields.Integer(
+        compute="_compute_payroll_slip_count",
         groups="payroll.group_payroll_user",
     )
 
-    def _compute_payslip_count(self):
+    def _compute_payroll_slip_count(self):
         for employee in self:
-            employee.payslip_count = len(employee.slip_ids)
+            employee.payroll_slip_count = len(employee.payroll_slip_ids)

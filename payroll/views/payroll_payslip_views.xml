@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="hr_payslip_view_tree" model="ir.ui.view">
-        <field name="name">hr.payslip.list</field>
-        <field name="model">hr.payslip</field>
+        <field name="name">payroll.payslip.list</field>
+        <field name="model">payroll.payslip</field>
         <field name="arch" type="xml">
             <list decoration-muted="state == 'cancel'" multi_edit="1" sample="1">
                 <field name="number" readonly="1" decoration-bf="1" />
@@ -31,8 +31,8 @@
         </field>
     </record>
     <record id="hr_payslip_view_kanban" model="ir.ui.view">
-        <field name="name">hr.payslip.kanban</field>
-        <field name="model">hr.payslip</field>
+        <field name="name">payroll.payslip.kanban</field>
+        <field name="model">payroll.payslip</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
                 <templates>
@@ -70,8 +70,8 @@
     </record>
 
     <record id="hr_payslip_view_form" model="ir.ui.view">
-        <field name="name">hr.payslip.form</field>
-        <field name="model">hr.payslip</field>
+        <field name="name">payroll.payslip.form</field>
+        <field name="model">payroll.payslip</field>
         <field name="arch" type="xml">
             <form string="Payslip">
                 <header>
@@ -326,8 +326,8 @@
     </record>
 
     <record id="hr_payslip_view_search" model="ir.ui.view">
-        <field name="name">hr.payslip.select</field>
-        <field name="model">hr.payslip</field>
+        <field name="name">payroll.payslip.select</field>
+        <field name="model">payroll.payslip</field>
         <field name="arch" type="xml">
             <search string="Search Payslips">
                 <field name="employee_id" />
@@ -397,12 +397,12 @@
     </record>
     <record id="hr_payslip_action" model="ir.actions.act_window">
         <field name="name">Employee Payslips</field>
-        <field name="res_model">hr.payslip</field>
+        <field name="res_model">payroll.payslip</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="hr_payslip_view_search" />
     </record>
     <record id="hr_payslip_action_employee" model="ir.actions.act_window">
-        <field name="res_model">hr.payslip</field>
+        <field name="res_model">payroll.payslip</field>
         <field name="name">Payslips</field>
         <field name="view_mode">list,form</field>
         <field name="context">

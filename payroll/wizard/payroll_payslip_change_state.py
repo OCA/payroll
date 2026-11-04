@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 
 
 class HrPayslipChangeState(models.TransientModel):
-    _name = "hr.payslip.change.state"
+    _name = "payroll.payslip.change.state"
     _description = "Change state of a payslip"
 
     state = fields.Selection(
@@ -26,7 +26,7 @@ class HrPayslipChangeState(models.TransientModel):
 
     def change_state_confirm(self):
         record_ids = self.env.context.get("active_ids", False)
-        payslip_obj = self.env["hr.payslip"]
+        payslip_obj = self.env["payroll.payslip"]
         new_state = self.state
         records = payslip_obj.browse(record_ids)
 
@@ -78,7 +78,7 @@ class HrPayslipChangeState(models.TransientModel):
             "domain": "[('id','in', [" + ",".join(map(str, record_ids)) + "])]",
             "name": self.env._("Payslips"),
             "view_mode": "list,form",
-            "res_model": "hr.payslip",
+            "res_model": "payroll.payslip",
             "view_id": False,
             "context": False,
             "type": "ir.actions.act_window",

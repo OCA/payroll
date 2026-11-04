@@ -12,7 +12,7 @@ class HrPayrollStructure(models.Model):
     - Deductions
     """
 
-    _name = "hr.payroll.structure"
+    _name = "payroll.structure"
     _description = "Salary Structure"
 
     @api.model
@@ -29,13 +29,13 @@ class HrPayrollStructure(models.Model):
     )
     note = fields.Text(string="Description")
     parent_id = fields.Many2one(
-        "hr.payroll.structure",
+        "payroll.structure",
         default=lambda self: self._get_parent(),
     )
-    children_ids = fields.One2many("hr.payroll.structure", "parent_id", copy=True)
+    children_ids = fields.One2many("payroll.structure", "parent_id", copy=True)
     rule_ids = fields.Many2many(
-        "hr.salary.rule",
-        "hr_structure_salary_rule_rel",
+        "payroll.salary.rule",
+        "payroll_structure_salary_rule_rel",
         "struct_id",
         "rule_id",
         string="Salary Rules",
@@ -78,6 +78,6 @@ class HrPayrollStructure(models.Model):
 
     def get_structure_with_parents(self):
         if not self:
-            return self.env["hr.payroll.structure"]
+            return self.env["payroll.structure"]
         else:
             return self.parent_id.get_structure_with_parents() + self

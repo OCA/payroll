@@ -4,13 +4,17 @@ from odoo import fields, models
 
 
 class HrPayslipInput(models.Model):
-    _name = "hr.payslip.input"
+    _name = "payroll.payslip.input"
     _description = "Payslip Input"
     _order = "payslip_id, sequence"
 
     name = fields.Char(string="Description", required=True)
     payslip_id = fields.Many2one(
-        "hr.payslip", string="Pay Slip", required=True, ondelete="cascade", index=True
+        "payroll.payslip",
+        string="Pay Slip",
+        required=True,
+        ondelete="cascade",
+        index=True,
     )
     sequence = fields.Integer(required=True, index=True, default=10)
     code = fields.Char(

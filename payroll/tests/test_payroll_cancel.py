@@ -17,7 +17,7 @@ class TestHrPayrollCancel(common.TransactionCase):
         # Create a basic employee and initialize its current contract (hr.version)
         self.hr_employee_anita = self.env["hr.employee"].create({"name": "Anita"})
         # minimal payroll structure to allow payslip computation
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {"name": "Test Structure", "code": "TST"}
         )
         # Update the default version created on employee to avoid duplicate date_version
@@ -26,11 +26,11 @@ class TestHrPayrollCancel(common.TransactionCase):
                 "contract_date_start": datetime.now(timezone.utc).date(),
                 "name": "Contract for Anita",
                 "wage": 3000.0,
-                "struct_id": structure.id,
+                "payroll_struct_id": structure.id,
             }
         )
         self.hr_contract_anita = self.hr_employee_anita.version_id
-        self.hr_payslip = self.env["hr.payslip"].create(
+        self.hr_payslip = self.env["payroll.payslip"].create(
             {
                 "employee_id": self.hr_employee_anita.id,
             }
@@ -68,7 +68,7 @@ class TestHrPayrollCancel(common.TransactionCase):
         vals["input_line_ids"] = [(0, 0, i) for i in res["value"]["input_line_ids"]]
         vals.update({"contract_id": self.hr_contract_anita.id})
         self.hr_payslip.write(vals)
-        payslip_input = self.env["hr.payslip.input"].search(
+        payslip_input = self.env["payroll.payslip.input"].search(
             [("payslip_id", "=", self.hr_payslip.id)]
         )
         payslip_input.write({"amount": 5.0})
@@ -76,7 +76,7 @@ class TestHrPayrollCancel(common.TransactionCase):
             {},
             lang="en_US",
             tz=False,
-            active_model="hr.payslip",
+            active_model="payroll.payslip",
             department_id=False,
             active_ids=[self.payslip_action_id],
             section_id=False,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="hr_salary_rule_category_view_form" model="ir.ui.view">
-        <field name="name">hr.salary.rule.category.form</field>
-        <field name="model">hr.salary.rule.category</field>
+        <field name="name">payroll.salary.rule.category.form</field>
+        <field name="model">payroll.salary.rule.category</field>
         <field name="arch" type="xml">
             <form string="Salary Categories">
                 <field name="require_code" invisible="1" />
@@ -41,8 +41,8 @@
         </field>
     </record>
     <record id="hr_salary_rule_category_view_tree" model="ir.ui.view">
-        <field name="name">hr.salary.rule.category.list</field>
-        <field name="model">hr.salary.rule.category</field>
+        <field name="name">payroll.salary.rule.category.list</field>
+        <field name="model">payroll.salary.rule.category</field>
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
@@ -52,8 +52,8 @@
         </field>
     </record>
     <record id="hr_salary_rule_category_view_search" model="ir.ui.view">
-        <field name="name">hr.salary.rule.category.select</field>
-        <field name="model">hr.salary.rule.category</field>
+        <field name="name">payroll.salary.rule.category.select</field>
+        <field name="model">payroll.salary.rule.category</field>
         <field name="arch" type="xml">
             <search string="Salary Rule Categories">
                 <field
@@ -66,7 +66,7 @@
     </record>
     <record id="hr_salary_rule_category_action" model="ir.actions.act_window">
         <field name="name">Salary Rule Categories</field>
-        <field name="res_model">hr.salary.rule.category</field>
+        <field name="res_model">payroll.salary.rule.category</field>
         <field name="view_id" ref="hr_salary_rule_category_view_tree" />
         <field name="search_view_id" ref="hr_salary_rule_category_view_search" />
     </record>

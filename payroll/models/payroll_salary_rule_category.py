@@ -5,19 +5,19 @@ from odoo.exceptions import ValidationError
 
 
 class HrSalaryRuleCategory(models.Model):
-    _name = "hr.salary.rule.category"
+    _name = "payroll.salary.rule.category"
     _description = "Salary Rule Category"
 
     name = fields.Char(required=True, translate=True)
     code = fields.Char()
     parent_id = fields.Many2one(
-        "hr.salary.rule.category",
+        "payroll.salary.rule.category",
         help="Linking a salary category to its parent is used only for the "
         "reporting purpose.",
     )
-    children_ids = fields.One2many("hr.salary.rule.category", "parent_id")
+    children_ids = fields.One2many("payroll.salary.rule.category", "parent_id")
     salary_rules_ids = fields.One2many(
-        "hr.salary.rule", "category_id", string="Salary Rule Categories"
+        "payroll.salary.rule", "category_id", string="Salary Rule Categories"
     )
     note = fields.Text(string="Description")
     company_id = fields.Many2one(

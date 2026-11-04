@@ -1,7 +1,10 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 
-from odoo.addons.payroll.models.hr_payslip import BaseBrowsableObject, BrowsableObject
+from odoo.addons.payroll.models.payroll_payslip import (
+    BaseBrowsableObject,
+    BrowsableObject,
+)
 
 from .common import TestPayslipBase
 

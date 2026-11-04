@@ -2,8 +2,8 @@
 <odoo>
     <!-- payslip runs -->
     <record id="hr_payslip_run_view_search" model="ir.ui.view">
-        <field name="name">hr.payslip.run.search</field>
-        <field name="model">hr.payslip.run</field>
+        <field name="name">payroll.payslip.run.search</field>
+        <field name="model">payroll.payslip.run</field>
         <field name="arch" type="xml">
             <search string="Search Payslip Batches">
                 <field name="name" string="Payslip Batches" />
@@ -26,8 +26,8 @@
         </field>
     </record>
     <record id="hr_payslip_run_view_tree" model="ir.ui.view">
-        <field name="name">hr.payslip.run.list</field>
-        <field name="model">hr.payslip.run</field>
+        <field name="name">payroll.payslip.run.list</field>
+        <field name="model">payroll.payslip.run</field>
         <field name="arch" type="xml">
             <list
                 decoration-info="state in ('confirm','hr_check','accont_check')"
@@ -57,8 +57,8 @@
         </field>
     </record>
     <record id="hr_payslip_run_view_kanban" model="ir.ui.view">
-        <field name="name">hr.payslip.run.kanban</field>
-        <field name="model">hr.payslip.run</field>
+        <field name="name">payroll.payslip.run.kanban</field>
+        <field name="model">payroll.payslip.run</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
                 <templates>
@@ -100,8 +100,8 @@
         </field>
     </record>
     <record id="hr_payslip_run_view_form" model="ir.ui.view">
-        <field name="name">hr.payslip.run.form</field>
-        <field name="model">hr.payslip.run</field>
+        <field name="name">payroll.payslip.run.form</field>
+        <field name="model">payroll.payslip.run</field>
         <field name="arch" type="xml">
             <form string="Payslips Batches">
                 <header>
@@ -162,7 +162,7 @@
     </record>
     <record id="hr_payslip_run_action" model="ir.actions.act_window">
         <field name="name">Payslips Batches</field>
-        <field name="res_model">hr.payslip.run</field>
+        <field name="res_model">payroll.payslip.run</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="hr_payslip_run_view_search" />
     </record>

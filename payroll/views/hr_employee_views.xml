@@ -14,7 +14,11 @@
                     type="action"
                     groups="payroll.group_payroll_user"
                 >
-                    <field name="payslip_count" widget="statinfo" string="Payslips" />
+                    <field
+                        name="payroll_slip_count"
+                        widget="statinfo"
+                        string="Payslips"
+                    />
                 </button>
             </xpath>
             <xpath
@@ -22,7 +26,7 @@
                 position="after"
             >
                 <field
-                    name="struct_id"
+                    name="payroll_struct_id"
                     required="contract_date_start"
                     domain="[('company_id', '=', company_id)]"
                 />

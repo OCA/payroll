@@ -5,28 +5,30 @@ from odoo.exceptions import UserError
 
 
 class HrPayslipLine(models.Model):
-    _name = "hr.payslip.line"
-    _inherit = "hr.salary.rule"
+    _name = "payroll.payslip.line"
+    _inherit = "payroll.salary.rule"
     _description = "Payslip Line"
     _order = "contract_id, sequence"
 
     slip_id = fields.Many2one(
-        "hr.payslip", string="Pay Slip", required=True, ondelete="cascade"
+        "payroll.payslip", string="Pay Slip", required=True, ondelete="cascade"
     )
     date_from = fields.Date("Date From", related="slip_id.date_from", store=True)
     payslip_run_id = fields.Many2one(
-        "hr.payslip.run", related="slip_id.payslip_run_id", string="Payslip Batch"
+        "payroll.payslip.run", related="slip_id.payslip_run_id", string="Payslip Batch"
     )
     child_ids = fields.One2many(
-        "hr.payslip.line", "parent_line_id", string="Child Payslip Lines"
+        "payroll.payslip.line", "parent_line_id", string="Child Payslip Lines"
     )
     parent_line_id = fields.Many2one(
-        "hr.payslip.line",
+        "payroll.payslip.line",
         string="Parent Payslip Line",
         compute="_compute_parent_line_id",
         store=True,
     )
-    salary_rule_id = fields.Many2one("hr.salary.rule", string="Rule", required=True)
+    salary_rule_id = fields.Many2one(
+        "payroll.salary.rule", string="Rule", required=True
+    )
     employee_id = fields.Many2one("hr.employee", required=True)
     contract_id = fields.Many2one("hr.version", required=True, index=True)
     rate = fields.Float(string="Rate (%)", digits="Payroll Rate", default=100.0)
@@ -80,7 +82,7 @@ class HrPayslipLine(models.Model):
     def create(self, vals_list):
         for values in vals_list:
             if "employee_id" not in values or "contract_id" not in values:
-                payslip = self.env["hr.payslip"].browse(values.get("slip_id"))
+                payslip = self.env["payroll.payslip"].browse(values.get("slip_id"))
                 values["employee_id"] = (
                     values.get("employee_id") or payslip.employee_id.id
                 )

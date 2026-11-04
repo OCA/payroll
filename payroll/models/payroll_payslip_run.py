@@ -6,14 +6,14 @@ from odoo import fields, models
 
 
 class HrPayslipRun(models.Model):
-    _name = "hr.payslip.run"
+    _name = "payroll.payslip.run"
     _inherit = ("mail.thread", "mail.activity.mixin")
     _description = "Payslip Batches"
     _order = "id desc"
 
     name = fields.Char(required=True, readonly=True)
     slip_ids = fields.One2many(
-        "hr.payslip",
+        "payroll.payslip",
         "payslip_run_id",
         string="Payslips",
         readonly=True,
@@ -54,7 +54,7 @@ class HrPayslipRun(models.Model):
         "are refund payslips.",
     )
     struct_id = fields.Many2one(
-        "hr.payroll.structure",
+        "payroll.structure",
         string="Structure",
         readonly=True,
         help="Defines the rules that have to be applied to this payslip batch, "
