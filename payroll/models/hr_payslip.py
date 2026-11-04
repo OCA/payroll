@@ -31,7 +31,6 @@ class HrPayslip(models.Model):
     struct_id = fields.Many2one(
         "hr.payroll.structure",
         string="Structure",
-        readonly=True,
         help="Defines the rules that have to be applied to this payslip, "
         "accordingly to the contract chosen. If you let empty the field "
         "contract, this field isn't mandatory anymore and thus the rules "

@@ -172,6 +172,7 @@
                             <field
                                 name="struct_id"
                                 required="contract_id"
+                                readonly="state != 'draft'"
                                 force_save="1"
                             />
                         </group>
