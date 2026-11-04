@@ -58,6 +58,7 @@ class TestHRPayrollDocument(common.TransactionCase):
         )
 
     def test_extension_error(self):
+        self.fill_company_id()
         with open(file_path("hr_payroll_document/tests/test.docx"), "rb") as pdf_file:
             encoded_string = base64.b64encode(pdf_file.read())
         ir_values = {
