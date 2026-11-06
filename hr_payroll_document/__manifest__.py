@@ -11,7 +11,7 @@
     "maintainers": ["peluko00"],
     "external_dependencies": {
         "python": [
-            "pypdf",
+            "pypdf<7",
         ],
     },
     "data": [
