@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_salary_table_template_user,hr.salary.table.template user,model_hr_salary_table_template,payroll.group_payroll_user,1,1,1,1
+access_hr_salary_table_user,hr.salary.table user,model_hr_salary_table,payroll.group_payroll_user,1,1,1,1
+access_hr_salary_table_line_user,hr.salary.table.line user,model_hr_salary_table_line,payroll.group_payroll_user,1,1,1,1

@@ -1,0 +1,21 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_contract_view">
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="action_open_master_data"
+                    class="oe_stat_button"
+                    icon="fa-book"
+                    type="object"
+                    groups="hr_contract.group_hr_contract_employee_manager"
+                >
+                    <div class="o_stat_info">
+                        Master Data
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
