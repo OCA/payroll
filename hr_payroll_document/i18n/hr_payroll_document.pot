@@ -168,7 +168,7 @@ msgstr ""
 #. module: hr_payroll_document
 #. odoo-python
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
-msgid "Payroll "
+msgid "Payroll %(subject)s %(employee)s.pdf"
 msgstr ""
 
 #. module: hr_payroll_document
