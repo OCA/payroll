@@ -1,0 +1,47 @@
+<odoo>
+    <record model="ir.ui.view" id="hr_salary_rule_view_form">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field
+                    name="tag_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color'}"
+                    placeholder="Select tags..."
+                    help="Tags to categorize this salary rule for reporting and calculations"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- Add tags to salary rule list view -->
+    <record model="ir.ui.view" id="hr_salary_rule_view_tree_add_tags">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_tree_children" />
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="tag_ids" widget="many2many_tags" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Add tags to salary rule search view -->
+    <record model="ir.ui.view" id="hr_salary_rule_view_search">
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_search" />
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="tag_ids" />
+            </field>
+            <filter name="head" position="after">
+                <filter
+                    string="Tags"
+                    name="group_by_tags"
+                    domain="[]"
+                    context="{'group_by': 'tag_ids'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
