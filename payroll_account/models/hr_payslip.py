@@ -59,17 +59,12 @@ class HrPayslip(models.Model):
         wizard means when it passes ``default_journal_id``.
 
         When neither the batch nor the contract has a journal, the journal
-        of ``_get_default_salary_journal`` is proposed; a journal of another
-        company is never kept.
+        of ``_get_default_salary_journal`` is proposed.
         """
         for payslip in self:
-            current = payslip.journal_id.filtered(
-                lambda journal, slip=payslip: journal.company_id == slip.company_id
-            )
             payslip.journal_id = (
                 payslip.payslip_run_id.journal_id
                 or payslip.contract_id.journal_id
-                or current
                 or payslip._get_default_salary_journal()
             )
 
