@@ -1,5 +1,8 @@
 import base64
+import pathlib
+import tempfile
 from base64 import b64decode
+from contextlib import contextmanager
 
 from pypdf import PdfReader, PdfWriter, errors
 
@@ -10,6 +13,7 @@ from odoo.exceptions import UserError, ValidationError
 class PayrollManagamentWizard(models.TransientModel):
     _name = "payroll.management.wizard"
     _description = "Payroll Management"
+    _rec_name = "subject"
 
     subject = fields.Char(
         help="Enter the title of the payroll whether it is the month, week, day, etc.",
@@ -22,6 +26,12 @@ class PayrollManagamentWizard(models.TransientModel):
     def _get_fallback_reader(self, pdf_reader):
         # Override to use another reader
         pass
+
+    @contextmanager
+    def _get_temp_path(self):
+        self.ensure_one()
+        with tempfile.TemporaryDirectory(prefix=f"{self._table}_{self.id}") as temp_dir:
+            yield pathlib.Path(temp_dir)
 
     def _read_page_content(self, pdf_reader, page, fallback_reader=None):
         try:
@@ -59,7 +69,7 @@ class PayrollManagamentWizard(models.TransientModel):
 
         return employee_to_pages, not_found_ids
 
-    def _build_employee_payroll(self, file_name, pdf_pages, encryption_key=None):
+    def _build_employee_payroll(self, file_path, pdf_pages, encryption_key=None):
         """Return the path to the created payroll.
 
         Optionally encrypt the payroll file with `encryption_key`.
@@ -68,14 +78,12 @@ class PayrollManagamentWizard(models.TransientModel):
         for page in pdf_pages:
             pdfWriter.add_page(page)
 
-        path = "/tmp/" + file_name
-
         if encryption_key:
             pdfWriter.encrypt(encryption_key, algorithm="AES-256")
 
-        with open(path, "wb") as f:
+        with file_path.open("wb") as f:
             pdfWriter.write(f)
-        return path
+        return file_path
 
     def _show_employees_action(self):
         action = self.env["ir.actions.actions"]._for_xml_id(
@@ -87,40 +95,44 @@ class PayrollManagamentWizard(models.TransientModel):
         return action
 
     def send_payrolls(self):
-        self.merge_pdfs()
         # Validate if company have country
         if not self.env.company.country_id:
             raise UserError(self.env._("You must to filled country field of company"))
 
-        reader = PdfReader("/tmp/merged-pdf.pdf")
+        with self._get_temp_path() as path:
+            merged_pdf_path = self.merge_pdfs(path)
+            reader = PdfReader(merged_pdf_path)
 
-        try:
-            employee_to_pages, not_found = self._extract_employees(reader)
-        except errors.PdfReadError:
-            # Couldn't read the file, try again with another reader
-            fallback_reader = self._get_fallback_reader(reader)
-            if fallback_reader:
-                employee_to_pages, not_found = self._extract_employees(
-                    reader, fallback_reader=fallback_reader
+            try:
+                employee_to_pages, not_found = self._extract_employees(reader)
+            except errors.PdfReadError:
+                # Couldn't read the file, try again with another reader
+                fallback_reader = self._get_fallback_reader(reader)
+                if fallback_reader:
+                    employee_to_pages, not_found = self._extract_employees(
+                        reader, fallback_reader=fallback_reader
+                    )
+                else:
+                    raise
+
+            for employee, pages in employee_to_pages.items():
+                encryption_key = (
+                    None
+                    if employee.no_payroll_encryption
+                    else employee.identification_id
                 )
-            else:
-                raise
-
-        for employee, pages in employee_to_pages.items():
-            encryption_key = (
-                None if employee.no_payroll_encryption else employee.identification_id
-            )
-            path = self._build_employee_payroll(
-                self.env._(
-                    "Payroll %(subject)s %(employee)s.pdf",
-                    employee=employee.name,
-                    subject=self.subject,
-                ),
-                pages,
-                encryption_key=encryption_key,
-            )
-            # Send payroll to the employee
-            self.send_mail(employee, path)
+                employee_path = self._build_employee_payroll(
+                    path
+                    / self.env._(
+                        "Payroll %(subject)s %(employee)s.pdf",
+                        employee=employee.name,
+                        subject=self.subject,
+                    ),
+                    pages,
+                    encryption_key=encryption_key,
+                )
+                # Send payroll to the employee
+                self.send_mail(employee, employee_path)
 
         action = self._show_employees_action()
         if not_found:
@@ -149,7 +161,7 @@ class PayrollManagamentWizard(models.TransientModel):
             },
         }
 
-    def merge_pdfs(self):
+    def merge_pdfs(self, temp_path):
         # Merge the pdfs together
         pdfs = []
         for file in self.payrolls:
@@ -157,7 +169,7 @@ class PayrollManagamentWizard(models.TransientModel):
             btes = b64decode(b64, validate=True)
             if btes[0:4] != b"%PDF":
                 raise ValidationError(self.env._("Missing pdf file signature"))
-            f = open("/tmp/" + file.name, "wb")
+            f = open(temp_path / file.name, "wb")
             f.write(btes)
             f.close()
             pdfs.append(f.name)
@@ -167,8 +179,10 @@ class PayrollManagamentWizard(models.TransientModel):
         for pdf in pdfs:
             merger.append(pdf)
 
-        merger.write("/tmp/merged-pdf.pdf")
+        merged_path = temp_path / "merged-pdf.pdf"
+        merger.write(merged_path)
         merger.close()
+        return merged_path
 
     def send_mail(self, employee, path):
         # Open Payrolls of employee and encode content
