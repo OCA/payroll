@@ -6,67 +6,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-11 11:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__salary_rules_count
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_list
 msgid "# Rules"
-msgstr ""
+msgstr "N° regole"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__active
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_search
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_search
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__code
 msgid "Code"
-msgstr ""
+msgstr "Codice"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__color
 msgid "Color Index"
-msgstr ""
+msgstr "Indice colore"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__company_id
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_search
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__company_id
 msgid "Company to which this tag belongs"
-msgstr ""
+msgstr "Azienda a cui appartiene questa etichetta"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.actions.act_window,help:payroll_rule_tag.action_hr_salary_rule_tag
 msgid "Create a new salary rule tag"
-msgstr ""
+msgstr "Crea una nuova etichetta per le regole salariali"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__description
@@ -74,6 +76,8 @@ msgid ""
 "Describe the purpose of this tag and how it should be used in salary "
 "calculations."
 msgstr ""
+"Descrive lo scopo di questa etichetta e come deve essere utilizzata nei "
+"calcoli salariali."
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
@@ -81,27 +85,29 @@ msgid ""
 "Describe the purpose of this tag and how it should be used in salary "
 "calculations..."
 msgstr ""
+"Descrive lo scopo di questa etichetta e come deve essere utilizzata nei "
+"calcoli salariali..."
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__description
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_search
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__code
@@ -110,91 +116,97 @@ msgid ""
 " the name when empty: uppercase, with anything that is not a letter, a "
 "number or an underscore replaced by an underscore."
 msgstr ""
+"Identificativo utilizzato dalle regole salariali per leggere il totale "
+"dell'etichetta (tags.CODE). Se vuoto, viene proposto a partire dal nome: in "
+"maiuscolo, sostituendo con un trattino basso qualsiasi carattere che non sia "
+"una lettera, un numero o un trattino basso."
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__active
 msgid ""
 "If unchecked, this tag will be hidden from most views without being deleted."
 msgstr ""
+"Se non selezionata, questa etichetta sarà nascosta nella maggior parte delle "
+"viste senza essere eliminata."
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima modifica di"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__salary_rules_count
 msgid "Number of salary rules using this tag"
-msgstr ""
+msgstr "Numero di regole salariali che utilizzano questa etichetta"
 
 #. module: payroll_rule_tag
 #: model:ir.model,name:payroll_rule_tag.model_hr_payslip
 msgid "Payslip"
-msgstr ""
+msgstr "Cedolino"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_kanban
 msgid "Rules"
-msgstr ""
+msgstr "Regole"
 
 #. module: payroll_rule_tag
 #: model:ir.model,name:payroll_rule_tag.model_hr_salary_rule
 msgid "Salary Rule"
-msgstr ""
+msgstr "Regola salariale"
 
 #. module: payroll_rule_tag
 #: model:ir.model,name:payroll_rule_tag.model_hr_salary_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 msgid "Salary Rule Tag"
-msgstr ""
+msgstr "Etichetta regola salariale"
 
 #. module: payroll_rule_tag
 #: model:ir.actions.act_window,name:payroll_rule_tag.action_hr_salary_rule_tag
 #: model:ir.ui.menu,name:payroll_rule_tag.menu_hr_salary_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_list
 msgid "Salary Rule Tags"
-msgstr ""
+msgstr "Etichette regole salariali"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__salary_rules_ids
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 msgid "Salary Rules"
-msgstr ""
+msgstr "Regole salariali"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__salary_rules_ids
 msgid "Salary rules that use this tag"
-msgstr ""
+msgstr "Regole salariali che utilizzano questa etichetta"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_search
 msgid "Search Salary Rule Tags"
-msgstr ""
+msgstr "Cerca etichette delle regole salariali"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.hr_salary_rule_view_form
 msgid "Select tags..."
-msgstr ""
+msgstr "Seleziona le etichette..."
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule_tag__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_search
 msgid "Tag"
-msgstr ""
+msgstr "Etichetta"
 
 #. module: payroll_rule_tag
 #. odoo-python
@@ -202,11 +214,13 @@ msgstr ""
 msgid ""
 "Tag '%(name)s' needs a code: salary rules read its total as tags.<CODE>."
 msgstr ""
+"L'etichetta '%(name)s' deve avere un codice: le regole salariali leggono il "
+"relativo totale come tags.<CODE>."
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 msgid "Tag Name"
-msgstr ""
+msgstr "Nome etichetta"
 
 #. module: payroll_rule_tag
 #. odoo-python
@@ -215,18 +229,21 @@ msgid ""
 "Tag code '%(code)s' must be a valid Python identifier. Please use only "
 "letters, numbers, and underscores, and don't start with a number."
 msgstr ""
+"Il codice dell'etichetta '%(code)s' deve essere un identificativo Python "
+"valido. Utilizza solo lettere, numeri e trattini bassi e non iniziare con un "
+"numero."
 
 #. module: payroll_rule_tag
 #: model:ir.model.constraint,message:payroll_rule_tag.constraint_hr_salary_rule_tag_code_company_unique
 msgid "Tag code must be unique per company!"
-msgstr ""
+msgstr "Il codice dell'etichetta deve essere univoco per azienda!"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_payslip_line__tag_ids
 #: model:ir.model.fields,field_description:payroll_rule_tag.field_hr_salary_rule__tag_ids
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.hr_salary_rule_view_search
 msgid "Tags"
-msgstr ""
+msgstr "Etichette"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.actions.act_window,help:payroll_rule_tag.action_hr_salary_rule_tag
@@ -235,6 +252,12 @@ msgid ""
 "                You can use tags to group rules like \"Taxable Income\", \"Benefits\", or \"Deductions\"\n"
 "                and then reference these totals in other salary rule calculations."
 msgstr ""
+"Le etichette consentono di classificare le regole salariali per semplificare "
+"i calcoli e i resoconti.\n"
+"                Puoi utilizzarle per raggruppare regole come \"Reddito "
+"imponibile\", \"Benefit\" o \"Trattenute\"\n"
+"                e richiamare successivamente questi totali nei calcoli di "
+"altre regole salariali."
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_payslip_line__tag_ids
@@ -242,18 +265,20 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.hr_salary_rule_view_form
 msgid "Tags to categorize this salary rule for reporting and calculations"
 msgstr ""
+"Etichette per classificare questa regola salariale ai fini dei resoconti e "
+"dei calcoli"
 
 #. module: payroll_rule_tag
 #: model:ir.model.fields,help:payroll_rule_tag.field_hr_salary_rule_tag__sequence
 msgid "Used to order tags in views"
-msgstr ""
+msgstr "Utilizzato per ordinare le etichette nelle viste"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 msgid "e.g. TAXABLE"
-msgstr ""
+msgstr "ad es. IMPONIBILE"
 
 #. module: payroll_rule_tag
 #: model_terms:ir.ui.view,arch_db:payroll_rule_tag.view_hr_salary_rule_tag_form
 msgid "e.g. Taxable Income"
-msgstr ""
+msgstr "ad es. Reddito imponibile"
