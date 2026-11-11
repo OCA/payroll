@@ -16,7 +16,7 @@
     <menuitem
         id="menu_action_base_time_parameter"
         action="base_time_parameter_action"
-        name="Time Parameters"
+        name="Rule Parameters"
         parent="payroll.payroll_menu_configuration"
         sequence="35"
     />
