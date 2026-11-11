@@ -725,3 +725,75 @@ class TestPayrollAccount(common.TransactionCase):
 
         self.assertEqual(action["res_model"], "account.move")
         self.assertEqual(action["res_id"], payslip.move_id.id)
+
+    def test_partners_follow_the_account_types_of_the_payslip_company(self):
+        """The partner of each item depends on the type of its account, and
+        the accounts are company-dependent: the types must be those of the
+        payslip's company, not of the company the user is working in."""
+        other_company = self._other_company()
+        self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+
+        def other_account(code, account_type):
+            return self.env["account.account"].create(
+                {
+                    "name": f"Other company {account_type}",
+                    "code": code,
+                    "account_type": account_type,
+                    "company_ids": [Command.set(other_company.ids)],
+                }
+            )
+
+        receivable = other_account("OC1101", "asset_receivable")
+        payable = other_account("OC2101", "liability_payable")
+        register_partner = self.env["res.partner"].create({"name": "Tax Authority"})
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule.register_id = self.env["hr.contribution.register"].create(
+            {"name": "Tax Register", "partner_id": register_partner.id}
+        )
+        # In the active company both accounts are expense accounts, which
+        # carry no partner at all.
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        rule.with_company(other_company).write(
+            {"account_debit": receivable.id, "account_credit": payable.id}
+        )
+        employee = self.env["hr.employee"].create(
+            {"name": "Jane", "company_id": other_company.id}
+        )
+        contract = self.env["hr.contract"].create(
+            {
+                "name": "Contract for Jane",
+                "date_start": fields.Date.today(),
+                "wage": 5000.0,
+                "employee_id": employee.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+            }
+        )
+        payslip = self.env["hr.payslip"].create(
+            {
+                "employee_id": employee.id,
+                "contract_id": contract.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "name": "Payslip for Jane",
+            }
+        )
+        self.assertNotEqual(self.env.company, other_company)
+
+        payslip.action_payslip_done()
+
+        items = payslip.move_id.line_ids
+        payable_items = items.filtered(lambda item: item.account_id == payable)
+        receivable_items = items.filtered(lambda item: item.account_id == receivable)
+        self.assertTrue(payable_items)
+        self.assertTrue(receivable_items)
+        self.assertEqual(payable_items.partner_id, register_partner)
+        self.assertTrue(employee.work_contact_id)
+        self.assertEqual(receivable_items.partner_id, employee.work_contact_id)
