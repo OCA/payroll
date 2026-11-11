@@ -227,9 +227,8 @@ class HrPayslip(models.Model):
                 if not acc_id:
                     raise UserError(
                         _(
-                            'The salary journal "%s" needs a default account: '
-                            "the payslip debits more than it credits, and the "
-                            "difference is balanced on that account."
+                            'The Expense Journal "%s" has not properly '
+                            "configured the Credit Account!"
                         )
                         % (slip.journal_id.name)
                     )
@@ -243,9 +242,8 @@ class HrPayslip(models.Model):
                 if not acc_id:
                     raise UserError(
                         _(
-                            'The salary journal "%s" needs a default account: '
-                            "the payslip credits more than it debits, and the "
-                            "difference is balanced on that account."
+                            'The Expense Journal "%s" has not properly '
+                            "configured the Debit Account!"
                         )
                         % (slip.journal_id.name)
                     )
