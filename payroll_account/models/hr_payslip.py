@@ -153,29 +153,25 @@ class HrPayslip(models.Model):
                     slip.move_id.name,
                 )
                 continue
+            company = slip._get_accounting_company()
+            # ``account_debit``/``account_credit`` are company-dependent, so
+            # they must be read in the payslip's company and not in whatever
+            # company the user happens to be working in. Switching the
+            # environment once here makes every record read below -- the
+            # payslip lines and their salary rules included -- use it.
+            slip = slip.with_company(company)
             line_ids = []
             debit_sum = 0.0
             credit_sum = 0.0
             date = slip.date or slip.date_to
-            company = slip._get_accounting_company()
             currency = company.currency_id or slip.journal_id.company_id.currency_id
 
-            name = _("Payslip of %s") % (slip.employee_id.name)
-            move_dict = {
-                "narration": name,
-                "ref": slip.number,
-                "journal_id": slip.journal_id.id,
-                "company_id": company.id,
-                "date": date,
-            }
+            move_dict = slip._prepare_account_move_vals(company, date)
             for line in slip.line_ids:
                 amount = currency.round(slip.credit_note and -line.total or line.total)
                 if currency.is_zero(amount):
                     continue
-                # ``account_debit``/``account_credit`` are company-dependent, so
-                # they must be read in the payslip's company and not in whatever
-                # company the user happens to be working in.
-                salary_rule = line.salary_rule_id.with_company(company)
+                salary_rule = line.salary_rule_id
                 debit_account_id = salary_rule.account_debit.id
                 credit_account_id = salary_rule.account_credit.id
 
@@ -190,14 +186,14 @@ class HrPayslip(models.Model):
                     )
 
                 if debit_account_id:
-                    debit_line = self._prepare_debit_line(
+                    debit_line = slip._prepare_debit_line(
                         line, amount, date, debit_account_id, move_line_analytic_ids
                     )
                     line_ids.append((0, 0, debit_line))
                     debit_sum += debit_line["debit"] - debit_line["credit"]
 
                 if credit_account_id:
-                    credit_line = self._prepare_credit_line(
+                    credit_line = slip._prepare_credit_line(
                         line,
                         amount,
                         date,
@@ -232,7 +228,7 @@ class HrPayslip(models.Model):
                         )
                         % (slip.journal_id.name)
                     )
-                adjust_credit = self._prepare_adjust_credit_line(
+                adjust_credit = slip._prepare_adjust_credit_line(
                     currency, credit_sum, debit_sum, slip.journal_id, date
                 )
                 line_ids.append([0, 0, adjust_credit])
@@ -247,14 +243,14 @@ class HrPayslip(models.Model):
                         )
                         % (slip.journal_id.name)
                     )
-                adjust_debit = self._prepare_adjust_debit_line(
+                adjust_debit = slip._prepare_adjust_debit_line(
                     currency, credit_sum, debit_sum, slip.journal_id, date
                 )
                 line_ids.append([0, 0, adjust_debit])
 
             if len(line_ids) > 0:
                 move_dict["line_ids"] = line_ids
-                move = self.env["account.move"].with_company(company).create(move_dict)
+                move = slip.env["account.move"].create(move_dict)
                 slip.write({"move_id": move.id, "date": date})
                 move.action_post()
             else:
@@ -263,6 +259,17 @@ class HrPayslip(models.Model):
                     slip.number,
                 )
         return res
+
+    def _prepare_account_move_vals(self, company, date):
+        """Values of the accounting entry of this payslip, without its lines."""
+        self.ensure_one()
+        return {
+            "narration": _("Payslip of %s") % (self.employee_id.name),
+            "ref": self.number,
+            "journal_id": self.journal_id.id,
+            "company_id": company.id,
+            "date": date,
+        }
 
     def _get_accounting_company(self):
         """Company the accounting entry of this payslip belongs to."""
@@ -282,9 +289,7 @@ class HrPayslip(models.Model):
     def _prepare_debit_line(
         self, line, amount, date, debit_account_id, move_line_analytic_ids
     ):
-        salary_rule = line.salary_rule_id.with_company(
-            line.slip_id._get_accounting_company()
-        )
+        salary_rule = line.salary_rule_id
         tax_ids, tax_tag_ids, tax_repartition_line_id = self._get_tax_details(line)
         return {
             "name": line.name,
@@ -304,9 +309,7 @@ class HrPayslip(models.Model):
     def _prepare_credit_line(
         self, line, amount, date, credit_account_id, move_line_analytic_ids
     ):
-        salary_rule = line.salary_rule_id.with_company(
-            line.slip_id._get_accounting_company()
-        )
+        salary_rule = line.salary_rule_id
         tax_ids, tax_tag_ids, tax_repartition_line_id = self._get_tax_details(line)
         return {
             "name": line.name,
@@ -353,7 +356,7 @@ class HrPayslip(models.Model):
 
     def _get_tax_details(self, line):
         company = line.slip_id._get_accounting_company()
-        salary_rule = line.salary_rule_id.with_company(company)
+        salary_rule = line.salary_rule_id
         TaxRepLine = self.env["account.tax.repartition.line"]
         company_domain = TaxRepLine._check_company_domain(company)
 
