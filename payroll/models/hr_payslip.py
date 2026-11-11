@@ -2,7 +2,7 @@
 
 import logging
 import math
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 
 import babel
 from dateutil.relativedelta import relativedelta
@@ -299,6 +299,27 @@ class HrPayslip(models.Model):
             )
         return True
 
+    def _get_worked_days_period(self, contract, date_from, date_to):
+        """Intersect payslip dates with the version's effective dates.
+
+        Odoo 19 stores employment and version boundaries in date_start/end.
+        Calendar APIs take datetimes: include the entire last local date by
+        ending at the next local midnight (an exclusive boundary). Localize
+        each endpoint separately so DST changes keep the calendar's hours.
+        Return False when the version does not overlap the payslip.
+        """
+        contract.check_access("read")
+        first_day = max(date_from, contract.date_start or date_from)
+        last_day = min(date_to, contract.date_end or date_to)
+        if first_day > last_day:
+            return False
+        calendar_tz = timezone(contract.resource_calendar_id.tz or "UTC")
+        start = calendar_tz.localize(datetime.combine(first_day, time.min))
+        end = calendar_tz.localize(
+            datetime.combine(last_day + timedelta(days=1), time.min)
+        )
+        return start, end
+
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
         """
@@ -310,16 +331,26 @@ class HrPayslip(models.Model):
         for contract in contracts.filtered(
             lambda contract: contract.resource_calendar_id
         ):
-            day_from = datetime.combine(date_from, time.min)
-            day_to = datetime.combine(date_to, time.max)
-            day_contract_start = datetime.combine(contract.date_start, time.min)
+            period = self._get_worked_days_period(contract, date_from, date_to)
+            if not period:
+                # Keep an explicit zero: some salary rules interpret a missing
+                # WORK100 as the default full wage, not as no paid work.
+                res.append(
+                    {
+                        "name": self.env._("Normal Working Days paid at 100%"),
+                        "sequence": 1,
+                        "code": "WORK100",
+                        "number_of_days": 0.0,
+                        "number_of_hours": 0.0,
+                        "contract_id": contract.id,
+                    }
+                )
+                continue
+            day_from, day_to = period
             # Support for the hr_public_holidays module.
             contract = contract.with_context(
                 employee_id=self.employee_id.id, exclude_public_holidays=True
             )
-            # only use payslip day_from if it's greather than contract start date
-            if day_from < day_contract_start:
-                day_from = day_contract_start
             # == compute leave days == #
             leaves = self._compute_leave_days(contract, day_from, day_to)
             res.extend(leaves)
