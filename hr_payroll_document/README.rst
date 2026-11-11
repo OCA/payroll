@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =====================
 HR - Payroll Document
 =====================
@@ -17,7 +13,7 @@ HR - Payroll Document
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -43,6 +39,15 @@ their profile or by HR in the employee's form.
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+You can customize the email template "Payroll Employee", used to send
+the Payslip to an Employee. Your edits will be kept despite module
+updates; if you accidentally break it, you can always restart from the
+module's version with the button "Reset template" from the template's
+form view.
 
 Bug Tracker
 ===========
