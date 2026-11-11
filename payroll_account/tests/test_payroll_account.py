@@ -427,6 +427,30 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertEqual(payslip.move_id, move)
         self.assertEqual(self.env["account.move"].search_count([]), move_count)
 
+    def test_cancel_accounting_entry_on_several_payslips(self):
+        """``_cancel_accounting_entry`` works on a recordset: it reverses the
+        posted entries, drops the draft ones, skips the payslips without an
+        entry and returns the reversals."""
+        posted_slip = self._confirmed_payslip()
+        posted_move = posted_slip.move_id
+        draft_slip = self._prepare_payslip(self.hr_employee_john)
+        draft_slip.action_payslip_done()
+        draft_move = draft_slip.move_id
+        draft_move.button_draft()
+        no_entry_slip = self._prepare_payslip(self.hr_employee_john)
+
+        reversals = (
+            posted_slip | draft_slip | no_entry_slip
+        )._cancel_accounting_entry()
+
+        self.assertEqual(reversals, posted_move.reversal_move_ids)
+        self.assertEqual(len(reversals), 1)
+        self.assertFalse(posted_slip.move_id)
+        self.assertFalse(draft_move.exists())
+        self.assertFalse(draft_slip.move_id)
+        self.assertFalse(no_entry_slip.move_id)
+        self.assertFalse(no_entry_slip.cancelled_move_ids)
+
     def test_cancel_then_confirm_again_creates_a_new_entry(self):
         self._allow_cancelling_payslips()
         payslip = self._confirmed_payslip()

@@ -96,37 +96,40 @@ class HrPayslip(models.Model):
         # cancelled yet), and touching the accounting entry before that would
         # undo an entry whose payslip stays confirmed.
         res = super().action_payslip_cancel()
-        for payslip in self.filtered("move_id"):
-            payslip._cancel_accounting_entry()
+        self._cancel_accounting_entry()
         return res
 
     def _cancel_accounting_entry(self):
-        """Undo the accounting entry of a cancelled payslip.
+        """Undo the accounting entries of cancelled payslips.
 
         A posted entry is never deleted: deleting it destroys the audit trail
         and leaves a hole in the journal's sequence. It is reversed instead,
         and the payslip keeps a reference to it in ``cancelled_move_ids`` so
         that confirming the payslip again generates a new entry rather than
-        reusing the reversed one.
+        reusing the reversed one. Payslips without an entry are left alone.
+
+        Returns the reversal entries that were created.
         """
-        self.ensure_one()
-        move = self.move_id
-        if move.state == "draft":
-            # Nothing ever reached the books, so there is nothing to reverse.
-            move.unlink()
-            return move.browse()
-        reversal_date = max(move.date, fields.Date.context_today(self))
-        reversal = move._reverse_moves([{"date": reversal_date}], cancel=True)
-        self.write(
-            {
-                "move_id": False,
-                "cancelled_move_ids": [
-                    Command.link(move.id),
-                    Command.link(reversal.id),
-                ],
-            }
-        )
-        return reversal
+        reversals = self.env["account.move"]
+        for payslip in self.filtered("move_id"):
+            move = payslip.move_id
+            if move.state == "draft":
+                # Nothing ever reached the books, so there is nothing to reverse.
+                move.unlink()
+                continue
+            reversal_date = max(move.date, fields.Date.context_today(payslip))
+            reversal = move._reverse_moves([{"date": reversal_date}], cancel=True)
+            payslip.write(
+                {
+                    "move_id": False,
+                    "cancelled_move_ids": [
+                        Command.link(move.id),
+                        Command.link(reversal.id),
+                    ],
+                }
+            )
+            reversals |= reversal
+        return reversals
 
     def unlink(self):
         if self.filtered(lambda payslip: payslip.move_id.state == "posted"):
