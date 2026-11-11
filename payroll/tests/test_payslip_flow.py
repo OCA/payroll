@@ -1,6 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import timedelta
+from unittest.mock import patch
 
 from odoo.fields import Date
 from odoo.tests import Form
@@ -10,6 +11,46 @@ from .common import TestPayslipBase
 
 
 class TestPayslipFlow(TestPayslipBase):
+    def test_refund_hook_prepares_copy_before_confirmation(self):
+        self.apply_contract_cron()
+        form = Form(self.Payslip)
+        form.employee_id = self.richard_emp
+        payslip = form.save()
+        payslip.compute_sheet()
+        payslip.action_payslip_done()
+        original_amounts = sorted((line.code, line.total) for line in payslip.line_ids)
+        payslip.contract_id.wage += 1000
+
+        payslip_class = type(payslip)
+        copy_refund = payslip_class._copy_refund_payslip
+        prepared_copies = []
+
+        def prepare_refund(source):
+            refund = copy_refund(source)
+            self.assertEqual(refund.state, "draft")
+            self.assertTrue(refund.credit_note)
+            # A localization can attach retained calculation evidence here,
+            # before action_payslip_done validates the copied payroll.
+            refund.name = "Prepared retained refund"
+            prepared_copies.append(refund.id)
+            return refund
+
+        with patch.object(payslip_class, "_copy_refund_payslip", prepare_refund):
+            payslip.refund_sheet()
+
+        refund = payslip.refunded_id
+        self.assertEqual(prepared_copies, refund.ids)
+        self.assertEqual(refund.name, "Prepared retained refund")
+        self.assertEqual(refund.state, "done")
+        self.assertEqual(
+            sorted((line.code, line.total) for line in refund.line_ids),
+            original_amounts,
+        )
+        self.assertEqual(refund.employee_id, payslip.employee_id)
+        self.assertEqual(
+            (refund.date_from, refund.date_to), (payslip.date_from, payslip.date_to)
+        )
+
     def setUp(self):
         super().setUp()
 

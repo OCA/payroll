@@ -227,16 +227,27 @@ class HrPayslip(models.Model):
                     raise UserError(self.env._("Cannot cancel a payslip that is done."))
         return self.write({"state": "cancel"})
 
+    def _copy_refund_payslip(self):
+        """Prepare the full refund copy before it is confirmed.
+
+        Localization modules may extend this step to retain a reference to
+        original calculation evidence that uses copy=False. The refund must
+        preserve the original salary amounts instead of recomputing them
+        from today's employment settings.
+        """
+        self.ensure_one()
+        return self.copy(
+            {
+                "credit_note": True,
+                "name": self.env._("Refund: %(name)s", name=self.name),
+            }
+        )
+
     def refund_sheet(self):
         copied_payslips = self.env["hr.payslip"]
         for payslip in self:
             # Create a refund slip
-            copied_payslip = payslip.copy(
-                {
-                    "credit_note": True,
-                    "name": self.env._("Refund: %(name)s", name=payslip.name),
-                }
-            )
+            copied_payslip = payslip._copy_refund_payslip()
             # Assign a number
             number = copied_payslip.number or self.env["ir.sequence"].next_by_code(
                 "salary.slip"
