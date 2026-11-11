@@ -99,3 +99,45 @@ class Payslips(BrowsableObject):
         )
         res = self.env.cr.fetchone()
         return res and res[0] or 0.0
+
+    def max_monthly(self, code, from_date, to_date=None):
+        """Return the largest monthly total of ``code`` between two dates.
+
+        What "the best month of the period" means in a thirteenth salary and
+        the like. The payslips are the ones ``sum()`` reads: the confirmed
+        payslips of the employee whose period lies entirely between
+        ``from_date`` and ``to_date`` (today when omitted), a credit note
+        counting negative.
+
+        The amounts are added up inside each month, and the largest month
+        wins: an employee paid twice a month has two payslips making up one
+        monthly remuneration, and a maximum taken per payslip would halve it.
+
+        A payslip belongs to the month its period *starts* in. One spanning
+        two months is not split: all of it counts in the first one.
+
+        Only the months with a confirmed payslip holding a ``code`` line take
+        part, so the result is 0.0 when there is none.
+        """
+        if to_date is None:
+            to_date = fields.Date.today()
+        # The query below does not see what is still pending in the cache,
+        # e.g. a payslip confirmed earlier in the same transaction.
+        self.env["hr.payslip"].flush_model(
+            ["employee_id", "state", "date_from", "date_to", "credit_note"]
+        )
+        self.env["hr.payslip.line"].flush_model(["slip_id", "code", "total"])
+        self.env.cr.execute(
+            """SELECT max(monthly) FROM (
+                SELECT sum(case when coalesce(hp.credit_note, False) then
+                (-pl.total) else (pl.total) end) AS monthly
+                    FROM hr_payslip as hp, hr_payslip_line as pl
+                    WHERE hp.employee_id = %s AND hp.state = 'done'
+                    AND hp.date_from >= %s AND hp.date_to <= %s AND
+                     hp.id = pl.slip_id AND pl.code = %s
+                    GROUP BY date_trunc('month', hp.date_from)
+            ) AS months""",
+            (self.employee_id, from_date, to_date, code),
+        )
+        res = self.env.cr.fetchone()
+        return res and res[0] or 0.0
