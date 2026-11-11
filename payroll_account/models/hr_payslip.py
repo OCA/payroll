@@ -143,19 +143,23 @@ class HrPayslip(models.Model):
         return super().unlink()
 
     def action_payslip_done(self):
+        for slip in self.filtered("move_id"):
+            # The payslip already has an entry, and it may not match what the
+            # payslip computes now: generating a second one would double every
+            # amount in the books, and keeping the old one would hide the
+            # difference. Someone has to look at it.
+            raise UserError(
+                _(
+                    'The payslip "%(payslip)s" already has the accounting entry '
+                    '"%(move)s". Cancel the payslip to reverse that entry, or '
+                    "correct it manually, before confirming the payslip again.",
+                    payslip=slip.number or slip.name,
+                    move=slip.move_id.name,
+                )
+            )
         res = super().action_payslip_done()
 
         for slip in self:
-            if slip.move_id:
-                # The payslip was already confirmed once. Generating a second
-                # entry would double every amount in the books.
-                logger.info(
-                    "Payslip %s already has the accounting entry %s; "
-                    "no new entry generated",
-                    slip.number,
-                    slip.move_id.name,
-                )
-                continue
             company = slip._get_accounting_company()
             # ``account_debit``/``account_credit`` are company-dependent, so
             # they must be read in the payslip's company and not in whatever

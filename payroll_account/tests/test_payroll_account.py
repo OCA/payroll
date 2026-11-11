@@ -417,12 +417,16 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertIn(reversal, payslip.cancelled_move_ids)
         self.assertFalse(payslip.move_id)
 
-    def test_confirming_twice_does_not_create_a_second_entry(self):
+    def test_confirming_a_payslip_that_has_an_entry_raises(self):
+        """The existing entry may not match the payslip any more: neither a
+        second entry nor silently keeping the old one is acceptable."""
         payslip = self._confirmed_payslip()
         move = payslip.move_id
+        payslip.action_payslip_draft()
         move_count = self.env["account.move"].search_count([])
 
-        payslip.action_payslip_done()
+        with self.assertRaisesRegex(UserError, "already has the accounting entry"):
+            payslip.action_payslip_done()
 
         self.assertEqual(payslip.move_id, move)
         self.assertEqual(self.env["account.move"].search_count([]), move_count)

@@ -9,8 +9,9 @@ relationship: the employee on receivable and current-liability accounts, the
 contribution register's partner on payable ones. Expense and income items carry
 no partner.
 
-Confirming an already-confirmed payslip does nothing: the payslip keeps the
-entry it already has, instead of booking every amount twice.
+Confirming a payslip that still carries an accounting entry raises an error:
+that entry may not match what the payslip computes now, so it has to be
+reversed (by cancelling the payslip) or corrected by hand first.
 
 **Cancelling** a payslip does not delete its entry. A posted entry is reversed,
 and both the entry and its reversal stay attached to the payslip for the audit
