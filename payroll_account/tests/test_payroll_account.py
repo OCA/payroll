@@ -537,6 +537,48 @@ class TestPayrollAccount(common.TransactionCase):
             "An existing payslip must keep the journal it was created with",
         )
 
+    def _contract_without_journal(self, **vals):
+        values = {
+            "name": "Contract for John without journal",
+            "date_start": fields.Date.today(),
+            "wage": 5000.0,
+            "employee_id": self.hr_employee_john.id,
+            "struct_id": self.hr_structure_softwaredeveloper.id,
+        }
+        values.update(vals)
+        return self.env["hr.contract"].create(values)
+
+    def test_hand_picked_journal_survives_a_contract_without_journal(self):
+        """A journal chosen by hand is not swapped for the fallback journal
+        when the payslip moves to a contract that has no journal."""
+        payslip = self._new_payslip()
+        picked_journal = self._new_journal(code="SALT8")
+        payslip.journal_id = picked_journal
+
+        payslip.contract_id = self._contract_without_journal()
+
+        self.assertEqual(payslip.journal_id, picked_journal)
+
+    def test_journal_of_another_company_is_not_kept(self):
+        """When the payslip moves to another company, its journal is not
+        kept: the fallback journal of the new company is proposed."""
+        payslip = self._new_payslip(contract_id=self._contract_without_journal().id)
+        picked_journal = self._new_journal(code="SALT9")
+        payslip.journal_id = picked_journal
+        other_company = self._other_company()
+        other_journal = self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+
+        payslip.company_id = other_company
+
+        self.assertEqual(payslip.journal_id, other_journal)
+
     def test_batch_journal_wins_over_the_contract_journal(self):
         batch_journal = self._new_journal(code="SALT4")
         payslip_run = self.env["hr.payslip.run"].create(

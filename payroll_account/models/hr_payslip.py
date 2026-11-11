@@ -58,13 +58,20 @@ class HrPayslip(models.Model):
         batch's journal wins over the contract's -- that is what the batch
         wizard means when it passes ``default_journal_id``.
 
-        When neither the batch nor the contract has a journal, the journal
-        of ``_get_default_salary_journal`` is proposed.
+        When neither the batch nor the contract has a journal, the payslip
+        keeps the journal it already has -- one chosen by hand must not be
+        swapped silently for another -- as long as it belongs to the
+        payslip's company; otherwise the journal of
+        ``_get_default_salary_journal`` is proposed.
         """
         for payslip in self:
+            current = payslip.journal_id.filtered(
+                lambda journal, slip=payslip: journal.company_id == slip.company_id
+            )
             payslip.journal_id = (
                 payslip.payslip_run_id.journal_id
                 or payslip.contract_id.journal_id
+                or current
                 or payslip._get_default_salary_journal()
             )
 
