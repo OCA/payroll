@@ -16,15 +16,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-08 23:24+0000\n"
-"PO-Revision-Date: 2025-04-23 19:23+0000\n"
-"Last-Translator: \"Leonardo J. Caballero G.\" <leonardocaballero@gmail.com>\n"
+"PO-Revision-Date: 2026-11-03 17:01+0000\n"
+"Last-Translator: Gerardo Alí Ferraro Schelijasch <gerferr83@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: payroll
 #: model:ir.actions.report,print_report_name:payroll.action_report_payslip
@@ -88,7 +88,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/payroll/models/hr_payroll_structure.py:0
 msgid "%(code)s (copy)"
-msgstr ""
+msgstr "%(code)s (copia)"
 
 #. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip__state
@@ -737,7 +737,7 @@ msgstr "Cerrar"
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 msgid "Close Batch"
-msgstr ""
+msgstr "Cerrar lote"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_input__code
@@ -1043,7 +1043,7 @@ msgstr "Empleado"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
 msgid "Employee Contract / Version"
-msgstr ""
+msgstr "Contrato de empleado"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -1529,6 +1529,8 @@ msgstr "Oficial"
 msgid ""
 "Only draft payslips can be verified, the payslip %(nm)s is in %(st)s state"
 msgstr ""
+"Solo se pueden verificar los borradores de nómina; la nómina %(nm)s se "
+"encuentra en estado %(st)s"
 
 #. module: payroll
 #. odoo-python
@@ -1881,6 +1883,7 @@ msgstr "Tasa (%)"
 #: code:addons/payroll/models/hr_payslip_line.py:0
 msgid "Recursion error. Only one line should be parent of %(rule)s"
 msgstr ""
+"Error de recursión. Solo una línea debe ser el elemento padre de %(rule)s"
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__code
@@ -1908,7 +1911,7 @@ msgstr "Reembolsar liquidación"
 #. odoo-python
 #: code:addons/payroll/models/hr_payslip.py:0
 msgid "Refund: %(name)s"
-msgstr ""
+msgstr "Reembolso: %(name)s"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
@@ -2299,7 +2302,7 @@ msgstr "Días trabajados y entradas"
 #: model:ir.model.fields,field_description:payroll.field_hr_employee__resource_calendar_id
 #: model:ir.model.fields,field_description:payroll.field_hr_version__resource_calendar_id
 msgid "Working Hours"
-msgstr ""
+msgstr "Horario laboral"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_form
