@@ -2,6 +2,8 @@
 
 from datetime import timedelta
 
+from freezegun import freeze_time
+
 from odoo.fields import Date
 from odoo.tests import Form
 from odoo.tools import test_reports
@@ -570,3 +572,11 @@ class TestPayslipFlow(TestPayslipBase):
             "Random name Bar",
             "Payslip name not changed because there is no contract",
         )
+
+    @freeze_time("2030-02-15")
+    def test_contribution_register_wizard_default_dates(self):
+        # The wizard proposes the current month, not the month the server was
+        # started
+        wizard = Form(self.env["payslip.lines.contribution.register"])
+        self.assertEqual(wizard.date_from, Date.to_date("2030-02-01"))
+        self.assertEqual(wizard.date_to, Date.to_date("2030-02-28"))
