@@ -184,21 +184,24 @@ class PayrollManagamentWizard(models.TransientModel):
 
         # Attach file to email
         ir_values = {
-            "name": _("Payroll") + "_" + self.subject + "_" + employee.name,
+            "name": _(
+                "Payroll_%(subject)s_%(employee)s.pdf",
+                subject=self.subject,
+                employee=employee.name,
+            ),
             "type": "binary",
             "datas": encoded_string,
             "store_fname": encoded_string,
-            "res_model": "hr.employee",
+            "res_model": employee._name,
             "res_id": employee.id,
         }
 
         # Save payroll attachment to all employee payrolls attachments
-        self.env["ir.attachment.payroll.custom"].create(
+        payroll_attachment = self.env["ir.attachment.payroll.custom"].create(
             {
                 "attachment_id": self.env["ir.attachment"].create(ir_values).id,
-                "employee": employee.name,
+                "employee_id": employee.id,
                 "subject": self.subject,
-                "identification_id": employee.identification_id,
             }
         )
 
@@ -206,10 +209,15 @@ class PayrollManagamentWizard(models.TransientModel):
         mail_template = self.env.ref(
             "hr_payroll_document.payroll_employee_email_template"
         )
-        data_id = [(6, 0, [self.env["ir.attachment"].create(ir_values).id])]
-        mail_template.attachment_ids = data_id
-        mail_template.with_context(**{"subject": self.subject}).send_mail(
-            employee.id, force_send=True
+        mail_template.send_mail(
+            payroll_attachment.id,
+            force_send=True,
+            email_layout_xmlid="mail.mail_notification_light",
+            email_values={
+                "attachment_ids": payroll_attachment.attachment_id.ids,
+                "model": employee._name,
+                "res_id": employee.id,
+            },
         )
 
     def validate_id(self, code):
