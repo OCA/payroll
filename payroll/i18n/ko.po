@@ -926,8 +926,8 @@ msgstr "직원"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "근로 계약서"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2239,9 +2239,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "공제금"
-
-#~ msgid "Employee Contract"
-#~ msgstr "근로 계약서"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "판매액의 1% 지급"

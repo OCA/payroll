@@ -1024,8 +1024,8 @@ msgstr "Anställd"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Anställningskontrakt"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2372,9 +2372,6 @@ msgstr "total_net"
 
 #~ msgid "Deduction"
 #~ msgstr "Avdrag"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Anställningskontrakt"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Få 1% av försäljningen"

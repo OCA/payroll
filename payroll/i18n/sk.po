@@ -931,8 +931,8 @@ msgstr "Zamestnanec"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Zmluva zamestnanca"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2239,9 +2239,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "Deduction "
-
-#~ msgid "Employee Contract"
-#~ msgstr "Zmluva zamestnanca"
 
 #~ msgid "Group By"
 #~ msgstr "Zoskupiť podľa"

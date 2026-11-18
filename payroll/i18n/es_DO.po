@@ -54,8 +54,8 @@ msgid ""
 "%(err)s\n"
 msgstr ""
 "\n"
-"Código de Python incorrecto definido para la regla salarial %(nm)s (%(code)"
-"s) para los empleados %(ee)s.\n"
+"Código de Python incorrecto definido para la regla salarial %(nm)s (%"
+"(code)s) para los empleados %(ee)s.\n"
 "Aquí está el error recibido:\n"
 "\n"
 "%(err)s\n"
@@ -292,8 +292,8 @@ msgid ""
 "            "
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
-"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">"
-"\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;"
+"\">\n"
 "            Estimado(a) <t t-out=\"object.employee_id.name\"/>,\n"
 "            <br/><br/>\n"
 "            Por favor, en el adjunto encontrará de la nómina de <t t-"
@@ -1036,8 +1036,8 @@ msgstr "Empleado"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr "Contrato del empleado"
+msgid "Employee Contract"
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2329,8 +2329,8 @@ msgid ""
 "Wrong range condition defined for salary rule %(nm)s (%(code)s) for employee "
 "%(ee)s."
 msgstr ""
-"Condición de rango incorrecta definida para la regla salarial %(nm)s (%(code)"
-"s) para el empleado %(ee)s."
+"Condición de rango incorrecta definida para la regla salarial %(nm)s (%"
+"(code)s) para el empleado %(ee)s."
 
 #. module: payroll
 #. odoo-python
@@ -2373,6 +2373,9 @@ msgstr "el resultado afectará a una variable"
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr "total_net"
+
+#~ msgid "Employee Contract / Version"
+#~ msgstr "Contrato del empleado"
 
 #~ msgid "Group By"
 #~ msgstr "Agrupar por"

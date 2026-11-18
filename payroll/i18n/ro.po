@@ -930,8 +930,8 @@ msgstr "Angajat"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Contract angajat"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2248,9 +2248,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "Deducere"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Contract angajat"
 
 #~ msgid "Gross"
 #~ msgstr "Brut"

@@ -1038,8 +1038,8 @@ msgstr "Personel"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Personel Sözleşmesi"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2394,9 +2394,6 @@ msgstr "total_net"
 
 #~ msgid "Deduction"
 #~ msgstr "Kesinti"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Personel Sözleşmesi"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Satışların %1'ini alın"

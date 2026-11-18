@@ -920,8 +920,8 @@ msgstr "Ansatt"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Ansattkontrakt"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2208,9 +2208,6 @@ msgstr ""
 
 #~ msgid "Company Contribution"
 #~ msgstr "Firmabidrag"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Ansattkontrakt"
 
 #~ msgid "Group By"
 #~ msgstr "Grupper etter"

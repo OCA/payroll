@@ -926,8 +926,8 @@ msgstr "បុគ្គលិក"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "កិច្ចសន្យាការងារ"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2244,9 +2244,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "ការកាត់ថ្លៃ។"
-
-#~ msgid "Employee Contract"
-#~ msgstr "កិច្ចសន្យាការងារ"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "ទទួលបាន1% នៃការលក់"

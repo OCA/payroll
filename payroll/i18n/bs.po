@@ -921,8 +921,8 @@ msgstr "Zaposleni"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Ugovor zaposlenog"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2224,9 +2224,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "Odbitak"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Ugovor zaposlenog"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Dobij 1% od prodaje"

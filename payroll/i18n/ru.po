@@ -942,8 +942,8 @@ msgstr "Сотрудник"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Договор с сотрудником"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2273,9 +2273,6 @@ msgstr "Итого к выплате"
 
 #~ msgid "Deduction"
 #~ msgstr "дедукция"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Договор с сотрудником"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Получите 1% от продаж"

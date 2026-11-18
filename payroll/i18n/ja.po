@@ -929,8 +929,8 @@ msgstr "従業員"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "従業員契約"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2229,9 +2229,6 @@ msgstr ""
 
 #~ msgid "Company Contribution"
 #~ msgstr "会社の拠出金"
-
-#~ msgid "Employee Contract"
-#~ msgstr "従業員契約"
 
 #~ msgid "Group By"
 #~ msgstr "グループ化"

@@ -932,8 +932,8 @@ msgstr "Funcionário"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Contrato do Funcionário"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2238,9 +2238,6 @@ msgstr ""
 
 #~ msgid "Company Contribution"
 #~ msgstr "Contribuição da Empresa"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Contrato do Funcionário"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Obtenha 1% das vendas"

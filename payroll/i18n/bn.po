@@ -920,8 +920,8 @@ msgstr ""
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "কর্মচারী চুক্তি"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2202,9 +2202,6 @@ msgstr ""
 
 #~ msgid "%s (copy)"
 #~ msgstr "%s(প্রতিলিপি)"
-
-#~ msgid "Employee Contract"
-#~ msgstr "কর্মচারী চুক্তি"
 
 #~ msgid "Group By"
 #~ msgstr "গ্রুপ দ্বারা"

@@ -927,8 +927,8 @@ msgstr "Ansat"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Ansættelseskontrakt"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2212,9 +2212,6 @@ msgstr ""
 
 #~ msgid "Basic"
 #~ msgstr "Basis"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Ansættelseskontrakt"
 
 #~ msgid "Gross"
 #~ msgstr "Brutto"

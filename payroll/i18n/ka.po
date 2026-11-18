@@ -923,7 +923,7 @@ msgstr "თანამშრომელი"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
+msgid "Employee Contract"
 msgstr ""
 
 #. module: payroll

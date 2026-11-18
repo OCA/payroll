@@ -923,8 +923,8 @@ msgstr "員工"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "員工合同"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2228,9 +2228,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "扣除"
-
-#~ msgid "Employee Contract"
-#~ msgstr "員工合同"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "獲得銷售額的1%"

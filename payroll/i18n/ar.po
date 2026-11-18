@@ -937,8 +937,8 @@ msgstr "الموظف"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "عقد الموظف"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2251,9 +2251,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "الاستقطاعات"
-
-#~ msgid "Employee Contract"
-#~ msgstr "عقد الموظف"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "احصل على 1% من المبيعات"

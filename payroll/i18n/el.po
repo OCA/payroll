@@ -921,8 +921,8 @@ msgstr "Υπάλληλος"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Συμβόλαιο Εργαζομένου"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2206,9 +2206,6 @@ msgstr ""
 
 #~ msgid "Basic"
 #~ msgstr "Βασικό"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Συμβόλαιο Εργαζομένου"
 
 #~ msgid "Group By"
 #~ msgstr "Ομαδοποίηση κατά"

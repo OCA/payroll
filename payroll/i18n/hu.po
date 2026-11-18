@@ -930,8 +930,8 @@ msgstr "Alkalmazott"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Munkavállalói szerződés"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2248,9 +2248,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "Levonás"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Munkavállalói szerződés"
 
 #~ msgid "Gross"
 #~ msgstr "Bruttó"

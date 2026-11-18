@@ -935,8 +935,8 @@ msgstr "Karyawan"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Kontrak Karyawan"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2252,9 +2252,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "Potongan"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Kontrak Karyawan"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Dapatkan 1% dari penjualan"

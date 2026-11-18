@@ -917,8 +917,9 @@ msgstr "Employé"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+#, fuzzy
+msgid "Employee Contract"
+msgstr "Employé"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2196,10 +2197,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
 msgid "total_net"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Employee Contract"
-#~ msgstr "Employé"
 
 #~ msgid "Group By"
 #~ msgstr "Grouper par"

@@ -930,8 +930,8 @@ msgstr "Служител"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Договор на служителя"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2238,9 +2238,6 @@ msgstr ""
 
 #~ msgid "Company Contribution"
 #~ msgstr "Принос на компанията"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Договор на служителя"
 
 #~ msgid "Group By"
 #~ msgstr "Групирайте по"

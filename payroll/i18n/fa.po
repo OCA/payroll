@@ -999,8 +999,8 @@ msgstr "کارمند"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "قرارداد کارمند"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2346,9 +2346,6 @@ msgstr "total_net"
 
 #~ msgid "Deduction"
 #~ msgstr "کسر"
-
-#~ msgid "Employee Contract"
-#~ msgstr "قرارداد کارمند"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "1% از فروش را بدست آورید"

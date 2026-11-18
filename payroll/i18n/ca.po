@@ -958,8 +958,8 @@ msgstr "Empleat"
 
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_version
-msgid "Employee Contract / Version"
-msgstr ""
+msgid "Employee Contract"
+msgstr "Contracte d'empleat"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
@@ -2289,9 +2289,6 @@ msgstr ""
 
 #~ msgid "Deduction"
 #~ msgstr "Deducció"
-
-#~ msgid "Employee Contract"
-#~ msgstr "Contracte d'empleat"
 
 #~ msgid "Get 1% of sales"
 #~ msgstr "Aconsegueix l'1% de les vendes"
