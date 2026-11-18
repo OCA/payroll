@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-payroll"
-version = "19.0.20260427.0"
+version = "19.0.20261118.0"
 dependencies = [
     "odoo-addon-payroll==19.0.*",
+    "odoo-addon-payroll_account==19.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
