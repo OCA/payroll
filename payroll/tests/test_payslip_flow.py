@@ -11,7 +11,7 @@ from .common import TestPayslipBase
 
 
 class TestPayslipFlow(TestPayslipBase):
-    def test_refund_hook_prepares_copy_before_confirmation(self):
+    def test_refund_hook_prepares_defaults_before_confirmation(self):
         self.apply_contract_cron()
         form = Form(self.Payslip)
         form.employee_id = self.richard_emp
@@ -22,24 +22,22 @@ class TestPayslipFlow(TestPayslipBase):
         payslip.contract_id.wage += 1000
 
         payslip_class = type(payslip)
-        copy_refund = payslip_class._copy_refund_payslip
-        prepared_copies = []
+        prepare_defaults = payslip_class._prepare_refund_payslip
+        prepared_sources = []
 
         def prepare_refund(source):
-            refund = copy_refund(source)
-            self.assertEqual(refund.state, "draft")
-            self.assertTrue(refund.credit_note)
-            # A localization can attach retained calculation evidence here,
-            # before action_payslip_done validates the copied payroll.
-            refund.name = "Prepared retained refund"
-            prepared_copies.append(refund.id)
-            return refund
+            values = prepare_defaults(source)
+            self.assertTrue(values["credit_note"])
+            values["name"] = "Prepared retained refund"
+            prepared_sources.append(source.id)
+            return values
 
-        with patch.object(payslip_class, "_copy_refund_payslip", prepare_refund):
+        with patch.object(payslip_class, "_prepare_refund_payslip", prepare_refund):
             payslip.refund_sheet()
 
         refund = payslip.refunded_id
-        self.assertEqual(prepared_copies, refund.ids)
+        self.assertEqual(prepared_sources, payslip.ids)
+        self.assertTrue(refund.credit_note)
         self.assertEqual(refund.name, "Prepared retained refund")
         self.assertEqual(refund.state, "done")
         self.assertEqual(
