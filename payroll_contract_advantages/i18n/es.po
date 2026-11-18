@@ -1,0 +1,171 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payroll_contract_advantages
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-09-20 02:07+0000\n"
+"Last-Translator: Nicolas Rodriguez Sande <nicolasrsande@gmail.com>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: payroll_contract_advantages
+#: model_terms:ir.ui.view,arch_db:payroll_contract_advantages.hr_contract_advantage_template_view_form
+msgid "Advantage Name"
+msgstr "Nombre de la ventaja"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__advantage_template_id
+msgid "Advantage Template"
+msgstr "Plantilla de ventaja"
+
+#. module: payroll_contract_advantages
+#. odoo-python
+#: code:addons/payroll_contract_advantages/models/hr_contract_advantage.py:0
+#, python-format
+msgid "Advantage amount can't be greater than upper bound limit."
+msgstr "El importe de la ventaja no puede ser mayor al límite superior."
+
+#. module: payroll_contract_advantages
+#. odoo-python
+#: code:addons/payroll_contract_advantages/models/hr_contract_advantage.py:0
+#, python-format
+msgid "Advantage amount can't be less than lower bound limit."
+msgstr "El importe de la ventaja no puede ser mayor al límite inferior."
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__amount
+msgid "Amount"
+msgstr "Importe"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__advantage_template_code
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__code
+msgid "Code"
+msgstr "Codigo"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__contract_id
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: payroll_contract_advantages
+#: model:ir.actions.act_window,name:payroll_contract_advantages.hr_contract_advantage_template_action
+#: model:ir.ui.menu,name:payroll_contract_advantages.hr_contract_advantage_template_menu_action
+msgid "Contract Advantage Templates"
+msgstr "Plantillas de ventaja de contrato"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract__advantages_ids
+#: model_terms:ir.ui.view,arch_db:payroll_contract_advantages.advantages_hr_contract_view_form
+msgid "Contract Advantages"
+msgstr "Ventajas de contrato"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__create_uid
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__create_date
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__default_value
+msgid "Default Value"
+msgstr ""
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__display_name
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: payroll_contract_advantages
+#: model:ir.model,name:payroll_contract_advantages.model_hr_contract
+msgid "Employee Contract"
+msgstr "Contrato del empleado"
+
+#. module: payroll_contract_advantages
+#: model:ir.model,name:payroll_contract_advantages.model_hr_contract_advantage_template
+msgid "Employee's Advantage on Contract"
+msgstr "Ventajas de empleados en contrato"
+
+#. module: payroll_contract_advantages
+#: model:ir.model,name:payroll_contract_advantages.model_hr_contract_advantage
+msgid "Employee's Advantages on Contract"
+msgstr "Ventajas de empleados en contrato"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__id
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage____last_update
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__write_uid
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__write_date
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__advantage_lower_bound
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__lower_bound
+msgid "Lower Bound"
+msgstr "Limite inferior"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage__advantage_lower_bound
+#: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage_template__lower_bound
+msgid "Lower bound authorized by the employer for this advantage"
+msgstr "Límite inferior autorizado por el empleador para esta ventaja"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: payroll_contract_advantages
+#: model:ir.model,name:payroll_contract_advantages.model_hr_payslip
+msgid "Payslip"
+msgstr "Liquidacion"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage__advantage_upper_bound
+#: model:ir.model.fields,field_description:payroll_contract_advantages.field_hr_contract_advantage_template__upper_bound
+msgid "Upper Bound"
+msgstr "Limite superior"
+
+#. module: payroll_contract_advantages
+#: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage__advantage_upper_bound
+#: model:ir.model.fields,help:payroll_contract_advantages.field_hr_contract_advantage_template__upper_bound
+msgid "Upper bound authorized by the employer for this advantage"
+msgstr "Límite superior autorizado por el empleador para esta ventaja"
+
+#~ msgid "Default value for this advantage"
+#~ msgstr "Importe por defecto para esta ventaja"
+
+#~ msgid "Pay Slip"
+#~ msgstr "Liquidacion"
