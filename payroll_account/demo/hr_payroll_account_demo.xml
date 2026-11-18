@@ -1,0 +1,5 @@
+<odoo>
+    <record id="payroll.hr_employee_payroll" model="hr.employee">
+        <field name="private_street">Abbey Road</field>
+    </record>
+</odoo>
