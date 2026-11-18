@@ -6,3 +6,4 @@ from . import test_hr_salary_rule
 from . import test_payslip_flow
 from . import test_hr_payroll_cancel
 from . import test_hr_payslip_change_state
+from . import test_payslip_send_email
