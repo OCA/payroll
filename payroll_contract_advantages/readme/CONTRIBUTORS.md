@@ -1,2 +1,3 @@
-- Nimarosa (Nicolas Rodriguez) \<nicolasrsande@gmail.com\>
-- Cristiano Mafra Junior \<cristiano.mafra@escodoo.com.br\>
+- Nimarosa (Nicolas Rodriguez) \<<nicolasrsande@gmail.com>\>
+- Cristiano Mafra Junior \<<cristiano.mafra@escodoo.com.br>\>
+- Cyril VINH-TUNG \<<cyril@invitu.com>\>

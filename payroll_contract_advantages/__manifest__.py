@@ -14,6 +14,7 @@
         "views/hr_contract_advantage_views.xml",
         "views/hr_contract_views.xml",
     ],
+    "demo": ["demo/payroll_contract_advantages_demo.xml"],
     "application": True,
     "maintainers": ["nimarosa"],
 }
