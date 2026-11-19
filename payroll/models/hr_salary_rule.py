@@ -2,6 +2,8 @@
 
 import traceback
 
+from markupsafe import Markup, escape
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
@@ -160,6 +162,133 @@ class HrSalaryRule(models.Model):
         compute="_compute_require_code_and_category",
         default=lambda self: self._compute_require_code_and_category(),
     )
+    formula_help = fields.Html(
+        compute="_compute_formula_help",
+        sanitize=False,
+        help="What a salary rule formula may use, including what other "
+        "modules add to it.",
+    )
+
+    def _get_formula_help_sections(self):
+        """Return what the "Help" page of the form view documents.
+
+        A section is a tuple ``(title, entries)``, and an entry is a tuple
+        ``(identifier, description)``; an entry with an empty description is
+        rendered as code alone, which is what the examples are.
+
+        A module that puts its own objects in the local dict the formulas are
+        evaluated with -- through ``hr.payslip._get_baselocaldict()``,
+        ``get_payroll_dict()``, ``get_current_contract_dict()`` or
+        ``_get_tools_dict()`` -- should extend this method and append its own
+        section, so that what it adds is documented where the formula is
+        written instead of nowhere. Everything returned here is escaped when
+        rendered, so a description is plain text, not markup.
+        """
+        return [
+            (
+                _("Objects and variables available in a formula"),
+                [
+                    ("payslip", _("current payslip object data (hr.payslip)")),
+                    ("payslips", _("payslips data (Payslips - Browsable Object)")),
+                    ("employee", _("current employee object data (hr.employee)")),
+                    ("contract", _("current contract object data (hr.contract)")),
+                    ("rules", _("the rules code (previously computed)")),
+                    (
+                        "categories",
+                        _(
+                            "the sum of amount of all rules belonging to that "
+                            "category"
+                        ),
+                    ),
+                    ("worked_days", _("the computed worked days data")),
+                    ("inputs", _("the computed input data")),
+                    ("payroll", _("miscellaneous values related to payroll")),
+                    (
+                        "current_contract",
+                        _("values related/calculated for the current contract"),
+                    ),
+                    (
+                        "result_rules",
+                        _(
+                            "the values of previously computed lines (qty, rate, "
+                            "amount, total)"
+                        ),
+                    ),
+                    (
+                        "tools",
+                        _(
+                            "tools and libraries which help with mathematical "
+                            "operations"
+                        ),
+                    ),
+                ],
+            ),
+            (
+                _("Compute variables"),
+                [
+                    (
+                        "result",
+                        _(
+                            "the returned value should be in this variable. It "
+                            'matches with the "amount" column'
+                        ),
+                    ),
+                    ("result_rate", _('the rate that should be applied to "result"')),
+                    (
+                        "result_qty",
+                        _(
+                            "the quantity of units that will be multiplied to "
+                            '"result"'
+                        ),
+                    ),
+                    (
+                        "result_name",
+                        _(
+                            "overrides the current name of the rule and allows to "
+                            "make dynamic names"
+                        ),
+                    ),
+                ],
+            ),
+            (
+                _("Examples"),
+                [
+                    ("result = contract.wage * 0.10", ""),
+                    (
+                        "result = contract.wage\n"
+                        "result_qty = worked_days.WORK100.number_of_days",
+                        "",
+                    ),
+                    ("result = contract.wage\nresult_rate = 10.0", ""),
+                ],
+            ),
+        ]
+
+    def _render_formula_help(self):
+        """Render `_get_formula_help_sections()` as HTML, escaping everything."""
+        sections = []
+        for title, entries in self._get_formula_help_sections():
+            items = []
+            for identifier, description in entries:
+                code = Markup("<br/>").join(
+                    escape(line) for line in identifier.split("\n")
+                )
+                if description:
+                    items.append(
+                        Markup("<li><code>%s</code>: %s</li>") % (code, description)
+                    )
+                else:
+                    items.append(Markup("<li><code>%s</code></li>") % code)
+            sections.append(
+                Markup("<h3>%s</h3><ul>%s</ul>") % (title, Markup("").join(items))
+            )
+        return Markup("").join(sections)
+
+    @api.depends_context("lang")
+    def _compute_formula_help(self):
+        formula_help = self._render_formula_help()
+        for rule in self:
+            rule.formula_help = formula_help
 
     @api.constrains("parent_rule_id")
     def _check_parent_rule_id(self):

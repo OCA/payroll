@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===========================
 Payroll Rule Time Parameter
 ===========================
@@ -17,7 +13,7 @@ Payroll Rule Time Parameter
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fpayroll-lightgray.png?logo=github
@@ -32,13 +28,20 @@ Payroll Rule Time Parameter
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds Rule Parameters to payroll configuration menu.
+This module adds Rule Parameters to the payroll configuration menu:
+values that depend on a date, looked up from the salary rule that needs
+them.
 
 Use in salary rule python code like this:
 
 .. code:: python
 
-   myvalue = payslip.time_parameter("mycode")
+   # Value of the parameter at the start date of the payslip
+   myvalue = payslip.rule_parameter("mycode")
+   # Value at another date
+   myvalue = payslip.rule_parameter("mycode", date=payslip.date_to)
+   # Start date of the version the value comes from
+   mydate = payslip.rule_parameter("mycode", get="date")
 
 **Table of contents**
 
