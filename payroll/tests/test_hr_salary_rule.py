@@ -200,3 +200,55 @@ class TestSalaryRule(TestPayslipBase):
             lambda record: record.name == "rule without category"
         )
         self.assertEqual(len(line), 1, "Line found: rule without category")
+
+    def _compute_richard_payslip(self):
+        cc = self.env["hr.contract"].search([("employee_id", "=", self.richard_emp.id)])
+        cc.kanban_state = "done"
+        self.env.ref(
+            "hr_contract.ir_cron_data_contract_update_state"
+        ).method_direct_trigger()
+        payslip = self.Payslip.create({"employee_id": self.richard_emp.id})
+        payslip.onchange_employee()
+        payslip.compute_sheet()
+        return payslip
+
+    def test_rule_is_available_in_the_computation(self):
+        self.test_rule.amount_python_compute = "result = rule.sequence * 10"
+        self.parent_test_rule.amount_python_compute = "result = rule.sequence"
+
+        payslip = self._compute_richard_payslip()
+
+        lines = {line.code: line.amount for line in payslip.line_ids}
+        self.assertEqual(lines["TEST"], 60.0)
+        # each rule sees itself, not the rule computed before it
+        self.assertEqual(lines["PARENT_TEST"], 6.0)
+
+    def test_rule_is_available_in_the_condition(self):
+        condition = {
+            "condition_select": "python",
+            "condition_python": "result = rule.code == 'TEST'",
+        }
+        self.test_rule.write(condition)
+        self.parent_test_rule.write(condition)
+
+        payslip = self._compute_richard_payslip()
+
+        codes = payslip.line_ids.mapped("code")
+        self.assertIn("TEST", codes)
+        self.assertNotIn("PARENT_TEST", codes)
+
+    def test_parent_condition_sees_the_parent_rule(self):
+        self.test_rule.write(
+            {
+                "condition_select": "python",
+                "condition_python": "result = rule.code == 'TEST'",
+            }
+        )
+        self.parent_test_rule.amount_python_compute = "result = rule.sequence"
+
+        payslip = self._compute_richard_payslip()
+
+        # the child passes the condition of its parent, and is still itself
+        # when its own amount is computed afterwards
+        lines = {line.code: line.amount for line in payslip.line_ids}
+        self.assertEqual(lines["PARENT_TEST"], 6.0)
