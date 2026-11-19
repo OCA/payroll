@@ -7,7 +7,7 @@
             <list>
                 <field name="name" />
                 <field name="code" />
-                <field name="rule_ids" />
+                <field name="rule_ids" widget="many2many_tags" optional="hide" />
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
@@ -17,7 +17,7 @@
         </field>
     </record>
     <record id="hr_payroll_structure_view_tree_children" model="ir.ui.view">
-        <field name="name">hr.payroll.structure.list</field>
+        <field name="name">hr.payroll.structure.list.children</field>
         <field name="model">hr.payroll.structure</field>
         <field name="arch" type="xml">
             <list>
@@ -77,11 +77,16 @@
         <field name="name">hr.payroll.structure.form</field>
         <field name="model">hr.payroll.structure</field>
         <field name="arch" type="xml">
-            <form string="Employee Function">
+            <form string="Salary Structure">
                 <sheet>
                     <field name="require_code" invisible="1" />
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
                     <group col="2">
-                        <field name="name" />
                         <field name="code" required="require_code" />
                         <field name="parent_id" />
                         <field
@@ -97,11 +102,15 @@
                                 domain="[('parent_rule_id','=',False)]"
                             >
                                 <list>
+                                    <field name="sequence" widget="handle" />
                                     <field name="name" />
-                                    <field name="code" />
-                                    <field name="category_id" />
-                                    <field name="sequence" column_invisible="1" />
-                                    <field name="register_id" />
+                                    <field name="code" width="110px" />
+                                    <field
+                                        name="category_id"
+                                        widget="badge"
+                                        width="140px"
+                                    />
+                                    <field name="register_id" optional="hide" />
                                 </list>
                             </field>
                         </page>
@@ -114,6 +123,13 @@
         <field name="name">Salary Structures</field>
         <field name="res_model">hr.payroll.structure</field>
         <field name="view_mode">list,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a salary structure</p>
+            <p>
+                A salary structure is the set of salary rules applied to the
+                contracts that refer to it.
+            </p>
+        </field>
     </record>
     <menuitem
         id="hr_payroll_structure_menu"
