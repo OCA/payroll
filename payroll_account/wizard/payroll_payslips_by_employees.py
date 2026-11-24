@@ -4,13 +4,13 @@ from odoo import models
 
 
 class HrPayslipEmployees(models.TransientModel):
-    _inherit = "hr.payslip.employees"
+    _inherit = "payroll.payslip.employees"
 
     def compute_sheet(self):
         journal_id = False
         if self.env.context.get("active_id"):
             journal_id = (
-                self.env["hr.payslip.run"]
+                self.env["payroll.payslip.run"]
                 .browse(self.env.context.get("active_id"))
                 .journal_id.id
             )

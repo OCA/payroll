@@ -86,7 +86,7 @@ class TestPayrollAccount(common.TransactionCase):
         )
 
         # Create minimal salary rules locally (avoid demo xmlids)
-        self.hra_rule = self.env["hr.salary.rule"].create(
+        self.hra_rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "House Rent Allowance",
                 "code": "HRA",
@@ -96,7 +96,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "amount_percentage_base": "contract.wage",
             }
         )
-        self.pf_rule = self.env["hr.salary.rule"].create(
+        self.pf_rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Provident Fund",
                 "code": "PF",
@@ -106,7 +106,7 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
         rules = [self.hra_rule.id, self.pf_rule.id]
-        self.hr_structure_softwaredeveloper = self.env["hr.payroll.structure"].create(
+        self.hr_structure_softwaredeveloper = self.env["payroll.structure"].create(
             {
                 "name": "Salary Structure for Software Developer",
                 "code": "SD",
@@ -121,7 +121,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "contract_date_start": fields.Date.today(),
                 "name": "Contract for John",
                 "wage": 5000.0,
-                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "payroll_struct_id": self.hr_structure_softwaredeveloper.id,
                 "journal_id": self.account_journal.id,
             }
         )
@@ -136,7 +136,7 @@ class TestPayrollAccount(common.TransactionCase):
         date_to = datetime.now(tz=timezone.utc) + relativedelta.relativedelta(
             months=+1, day=1, days=-1
         )
-        self.hr_payslip = self.env["hr.payslip"].create(
+        self.hr_payslip = self.env["payroll.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
                 "contract_id": self.hr_contract_john.id,
@@ -165,7 +165,7 @@ class TestPayrollAccount(common.TransactionCase):
         self._prepare_payslip(self.hr_employee_john)
 
         # I assign the amount to Input data.
-        payslip_input = self.env["hr.payslip.input"].search(
+        payslip_input = self.env["payroll.payslip.input"].search(
             [("payslip_id", "=", self.hr_payslip.id)]
         )
         payslip_input.write({"amount": 5.0})
@@ -178,7 +178,7 @@ class TestPayrollAccount(common.TransactionCase):
             {},
             lang="en_US",
             tz=False,
-            active_model="hr.payslip",
+            active_model="payroll.payslip",
             department_id=False,
             active_ids=[self.payslip_action_id],
             section_id=False,
@@ -207,7 +207,7 @@ class TestPayrollAccount(common.TransactionCase):
             {},
             lang="en_US",
             tz=False,
-            active_model="hr.payslip",
+            active_model="payroll.payslip",
             department_id=False,
             active_ids=[self.payslip_action_id],
             section_id=False,
@@ -228,7 +228,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "contract_date_start": fields.Date.today(),
                 "name": f"Contract for {name}",
                 "wage": 1000.0,
-                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "payroll_struct_id": self.hr_structure_softwaredeveloper.id,
             }
         )
         return employee
@@ -249,7 +249,7 @@ class TestPayrollAccount(common.TransactionCase):
             {"name": "Run Journal", "code": "RUNJ1", "type": "general"}
         )
         payslip = (
-            self.env["hr.payslip"]
+            self.env["payroll.payslip"]
             .with_context(journal_id=run_journal.id)
             .create(
                 {
@@ -269,7 +269,7 @@ class TestPayrollAccount(common.TransactionCase):
             {"name": "Run Journal 2", "code": "RUNJ2", "type": "general"}
         )
         payslip = (
-            self.env["hr.payslip"]
+            self.env["payroll.payslip"]
             .with_context(journal_id=run_journal.id)
             .create(
                 {
@@ -286,7 +286,7 @@ class TestPayrollAccount(common.TransactionCase):
         run_journal = self.env["account.journal"].create(
             {"name": "Run Journal 3", "code": "RUNJ3", "type": "general"}
         )
-        run = self.env["hr.payslip.run"].create(
+        run = self.env["payroll.payslip.run"].create(
             {
                 "name": "Test Run Fallback",
                 "journal_id": run_journal.id,
@@ -294,12 +294,12 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
         wizard = (
-            self.env["hr.payslip.employees"]
+            self.env["payroll.payslip.employees"]
             .with_context(active_id=run.id)
             .create({"employee_ids": [Command.set(employee.ids)]})
         )
         wizard.compute_sheet()
-        slip = self.env["hr.payslip"].search(
+        slip = self.env["payroll.payslip"].search(
             [("employee_id", "=", employee.id), ("payslip_run_id", "=", run.id)]
         )
         self.assertEqual(slip.journal_id, run_journal)
@@ -308,7 +308,7 @@ class TestPayrollAccount(common.TransactionCase):
         run_journal = self.env["account.journal"].create(
             {"name": "Run Journal 4", "code": "RUNJ4", "type": "general"}
         )
-        run = self.env["hr.payslip.run"].create(
+        run = self.env["payroll.payslip.run"].create(
             {
                 "name": "Test Run Priority",
                 "journal_id": run_journal.id,
@@ -316,12 +316,12 @@ class TestPayrollAccount(common.TransactionCase):
             }
         )
         wizard = (
-            self.env["hr.payslip.employees"]
+            self.env["payroll.payslip.employees"]
             .with_context(active_id=run.id)
             .create({"employee_ids": [Command.set(self.hr_employee_john.ids)]})
         )
         wizard.compute_sheet()
-        slip = self.env["hr.payslip"].search(
+        slip = self.env["payroll.payslip"].search(
             [
                 ("employee_id", "=", self.hr_employee_john.id),
                 ("payslip_run_id", "=", run.id),
@@ -330,13 +330,13 @@ class TestPayrollAccount(common.TransactionCase):
         self.assertEqual(slip.journal_id, self.account_journal)
 
     def test_onchange_contract_sets_journal_from_contract(self):
-        with Form(self.env["hr.payslip"]) as form:
+        with Form(self.env["payroll.payslip"]) as form:
             form.employee_id = self.hr_employee_john
             form.contract_id = self.hr_contract_john
         self.assertEqual(form.journal_id, self.account_journal)
 
     def _create_payslip_with_structure(self, structure):
-        payslip = self.env["hr.payslip"].create(
+        payslip = self.env["payroll.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
                 "contract_id": self.hr_contract_john.id,
@@ -352,7 +352,7 @@ class TestPayrollAccount(common.TransactionCase):
     def test_action_payslip_done_creates_credit_adjustment_when_unbalanced(self):
         # Only a debit account configured: debit_sum > credit_sum, so an
         # automatic credit adjustment line must be added to balance the move.
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Debit Only",
                 "code": "DEBONLY",
@@ -362,14 +362,14 @@ class TestPayrollAccount(common.TransactionCase):
                 "account_debit": self.account_debit.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Debit Only Structure",
                 "code": "DOS",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
+        self.hr_contract_john.payroll_struct_id = structure.id
         payslip = self._create_payslip_with_structure(structure)
         payslip.action_payslip_done()
         self.assertTrue(payslip.move_id)
@@ -385,7 +385,7 @@ class TestPayrollAccount(common.TransactionCase):
     def test_action_payslip_done_creates_debit_adjustment_when_unbalanced(self):
         # Only a credit account configured: credit_sum > debit_sum, so an
         # automatic debit adjustment line must be added to balance the move.
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Credit Only",
                 "code": "CREDONLY",
@@ -395,14 +395,14 @@ class TestPayrollAccount(common.TransactionCase):
                 "account_credit": self.account_credit.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Credit Only Structure",
                 "code": "COS",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
+        self.hr_contract_john.payroll_struct_id = structure.id
         payslip = self._create_payslip_with_structure(structure)
         payslip.action_payslip_done()
         self.assertTrue(payslip.move_id)
@@ -421,7 +421,7 @@ class TestPayrollAccount(common.TransactionCase):
         bad_journal = self.env["account.journal"].create(
             {"name": "No Default Account Journal", "code": "NODEF", "type": "general"}
         )
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Debit Only 2",
                 "code": "DEBONLY2",
@@ -431,15 +431,15 @@ class TestPayrollAccount(common.TransactionCase):
                 "account_debit": self.account_debit.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Debit Only Structure 2",
                 "code": "DOS2",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
-        payslip = self.env["hr.payslip"].create(
+        self.hr_contract_john.payroll_struct_id = structure.id
+        payslip = self.env["payroll.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
                 "contract_id": self.hr_contract_john.id,
@@ -462,7 +462,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "type": "general",
             }
         )
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Credit Only 2",
                 "code": "CREDONLY2",
@@ -472,15 +472,15 @@ class TestPayrollAccount(common.TransactionCase):
                 "account_credit": self.account_credit.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Credit Only Structure 2",
                 "code": "COS2",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
-        payslip = self.env["hr.payslip"].create(
+        self.hr_contract_john.payroll_struct_id = structure.id
+        payslip = self.env["payroll.payslip"].create(
             {
                 "employee_id": self.hr_employee_john.id,
                 "contract_id": self.hr_contract_john.id,
@@ -496,7 +496,7 @@ class TestPayrollAccount(common.TransactionCase):
 
     def test_action_payslip_done_skips_zero_amount_lines(self):
         # A rule computing to a zero amount must not generate any move line.
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Zero Amount",
                 "code": "ZERO",
@@ -507,14 +507,14 @@ class TestPayrollAccount(common.TransactionCase):
                 "account_credit": self.account_credit.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Zero Amount Structure",
                 "code": "ZAS",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
+        self.hr_contract_john.payroll_struct_id = structure.id
         payslip = self._create_payslip_with_structure(structure)
         payslip.action_payslip_done()
         self.assertFalse(payslip.move_id)
@@ -527,7 +527,7 @@ class TestPayrollAccount(common.TransactionCase):
             {"name": "Contract Analytic", "plan_id": analytic_plan.id}
         )
         self.hr_contract_john.analytic_account_id = contract_analytic.id
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Analytic Rule",
                 "code": "ANALYTIC",
@@ -538,14 +538,14 @@ class TestPayrollAccount(common.TransactionCase):
                 "account_credit": self.account_credit.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Analytic Structure",
                 "code": "ANS",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
+        self.hr_contract_john.payroll_struct_id = structure.id
         payslip = self._create_payslip_with_structure(structure)
         payslip.action_payslip_done()
         distributions = payslip.move_id.line_ids.mapped("analytic_distribution")
@@ -563,7 +563,7 @@ class TestPayrollAccount(common.TransactionCase):
         rule_analytic = self.env["account.analytic.account"].create(
             {"name": "Rule Analytic", "plan_id": analytic_plan.id}
         )
-        rule = self.env["hr.salary.rule"].create(
+        rule = self.env["payroll.salary.rule"].create(
             {
                 "name": "Analytic Rule 2",
                 "code": "ANALYTIC2",
@@ -575,14 +575,14 @@ class TestPayrollAccount(common.TransactionCase):
                 "analytic_account_id": rule_analytic.id,
             }
         )
-        structure = self.env["hr.payroll.structure"].create(
+        structure = self.env["payroll.structure"].create(
             {
                 "name": "Analytic Structure 2",
                 "code": "ANS2",
                 "rule_ids": [Command.set([rule.id])],
             }
         )
-        self.hr_contract_john.struct_id = structure.id
+        self.hr_contract_john.payroll_struct_id = structure.id
         payslip = self._create_payslip_with_structure(structure)
         payslip.action_payslip_done()
         distributions = payslip.move_id.line_ids.mapped("analytic_distribution")

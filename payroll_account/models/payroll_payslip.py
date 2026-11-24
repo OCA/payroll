@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 class HrPayslip(models.Model):
-    _inherit = "hr.payslip"
+    _inherit = "payroll.payslip"
 
     journal_id = fields.Many2one(
         "account.journal",

@@ -5,7 +5,7 @@ from odoo import models
 
 
 class HrPayslipLine(models.Model):
-    _inherit = "hr.payslip.line"
+    _inherit = "payroll.payslip.line"
 
     def _get_partner_id(self, credit_account):
         """

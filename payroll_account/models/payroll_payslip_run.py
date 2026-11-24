@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class HrPayslipRun(models.Model):
-    _inherit = "hr.payslip.run"
+    _inherit = "payroll.payslip.run"
 
     journal_id = fields.Many2one(
         "account.journal",
