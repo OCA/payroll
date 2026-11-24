@@ -1,0 +1,5 @@
+- Odoo SA \<<info@odoo.com>\>
+- Saran Lim. \<<saranl@ecosoft.co.th>\>
+- Daniel Reis \<<dreis@opensourceintegrators.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
