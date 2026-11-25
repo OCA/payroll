@@ -381,6 +381,44 @@ class TestPayslipFlow(TestPayslipBase):
             "There are no duplicates in returned rules",
         )
 
+    def test_payslip_run_slip_count_and_open_payslips_action(self):
+        self.apply_contract_cron()
+        payslip_run = self.env["hr.payslip.run"].create(
+            {
+                "date_end": "2011-09-30",
+                "date_start": "2011-09-01",
+                "name": "Payslip Run for Slip Count",
+            }
+        )
+        payslip_employees = self.env["hr.payslip.employees"].create(
+            {"employee_ids": [(4, self.richard_emp.id), (4, self.sally.id)]}
+        )
+        payslip_employees.with_context(active_id=payslip_run.id).compute_sheet()
+
+        self.assertEqual(
+            payslip_run.slip_count,
+            2,
+            "slip_count reflects the number of payslips generated for the batch",
+        )
+
+        action = payslip_run.action_open_payslips()
+        self.assertEqual(action["res_model"], "hr.payslip", "The action opens payslips")
+        self.assertEqual(
+            action["domain"],
+            [("payslip_run_id", "=", payslip_run.id)],
+            "The action is restricted to this batch's payslips",
+        )
+        self.assertEqual(
+            action["context"].get("default_payslip_run_id"),
+            payslip_run.id,
+            "A payslip created from the action defaults to this batch",
+        )
+        self.assertEqual(
+            self.env["hr.payslip"].search(action["domain"]),
+            payslip_run.slip_ids,
+            "The action's domain resolves to exactly the batch's payslips",
+        )
+
     def test_get_payslip_line_singleton(self):
         self.apply_contract_cron()
         payslip = self.Payslip.create({"employee_id": self.sally.id})
