@@ -11,7 +11,10 @@ class HrPayslipRun(models.Model):
         "account.journal",
         "Salary Journal",
         required=True,
+        check_company=True,
+        domain="[('company_id', '=', company_id)]",
         default=lambda self: self.env["account.journal"].search(
-            [("type", "=", "general")], limit=1
+            [("type", "=", "general"), ("company_id", "=", self.env.company.id)],
+            limit=1,
         ),
     )

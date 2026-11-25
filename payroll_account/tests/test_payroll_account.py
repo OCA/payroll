@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 
 from dateutil import relativedelta
 
-from odoo import fields
+from odoo import Command, fields
+from odoo.exceptions import UserError
 from odoo.tests import common
 
 
@@ -36,7 +37,7 @@ class TestPayrollAccount(common.TransactionCase):
                 "gender": "male",
                 "marital": "single",
                 "name": "John",
-                "bank_account_id": self.res_partner_bank.bank_id.id,
+                "bank_account_id": self.res_partner_bank.id,
             }
         )
 
@@ -219,3 +220,580 @@ class TestPayrollAccount(common.TransactionCase):
         # Test other account types -> no partner
         self.account_credit.account_type = "expense"
         self.assertFalse(line._get_partner_id(True))
+
+    def test_partner_falls_back_to_the_bank_account_partner(self):
+        """Without a work contact, the employee's bank account names the partner."""
+        register_partner = self.env["res.partner"].create({"name": "Tax Authority"})
+        register = self.env["hr.contribution.register"].create(
+            {"name": "Tax Register", "partner_id": register_partner.id}
+        )
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule.register_id = register
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+        self.hr_employee_john.work_contact_id = False
+        self.account_credit.account_type = "asset_receivable"
+        rule.account_credit = self.account_credit
+
+        self.assertEqual(
+            line._get_partner_id(True), self.res_partner_bank.partner_id.id
+        )
+
+    # ------------------------------------------------------------------
+    # Company consistency
+    # ------------------------------------------------------------------
+    def _other_company(self):
+        company = self.env["res.company"].create({"name": "Payroll Other Company"})
+        self.env.user.company_ids = [Command.link(company.id)]
+        return company
+
+    def test_accounts_are_read_in_the_payslip_company(self):
+        """Debit/credit accounts are company-dependent.
+
+        They must be resolved in the payslip's company, not in whatever
+        company the confirming user happens to be working in.
+        """
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        other_company = self._other_company()
+
+        payslip.with_company(other_company).action_payslip_done()
+
+        self.assertTrue(
+            payslip.move_id,
+            "The accounting entry must be generated with the accounts configured "
+            "for the payslip's company",
+        )
+        accounts = payslip.move_id.line_ids.account_id
+        self.assertIn(self.account_debit, accounts)
+        self.assertIn(self.account_credit, accounts)
+
+    def test_move_belongs_to_the_payslip_company(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        other_company = self._other_company()
+
+        payslip.with_company(other_company).action_payslip_done()
+
+        move = payslip.move_id
+        self.assertEqual(move.company_id, payslip.company_id)
+        self.assertEqual(move.journal_id, payslip.journal_id)
+
+    def test_move_is_balanced_posted_and_dated(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+
+        payslip.action_payslip_done()
+
+        move = payslip.move_id
+        self.assertEqual(move.state, "posted")
+        self.assertEqual(move.ref, payslip.number)
+        self.assertEqual(move.date, payslip.date)
+        self.assertEqual(
+            sum(move.line_ids.mapped("debit")),
+            sum(move.line_ids.mapped("credit")),
+            "The generated entry must be balanced",
+        )
+
+    def test_batch_default_journal_belongs_to_the_active_company(self):
+        other_company = self._other_company()
+        other_journal = self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+
+        defaults = (
+            self.env["hr.payslip.run"]
+            .with_company(other_company)
+            .default_get(["journal_id"])
+        )
+
+        self.assertEqual(defaults.get("journal_id"), other_journal.id)
+
+    def test_tax_details_with_several_matching_repartition_lines(self):
+        """A tax may spread over several repartition lines on the same account.
+
+        Reading ``.id`` off that recordset raises, so the lookup has to be
+        limited to one record.
+        """
+        tax = self.env["account.tax"].create(
+            {
+                "name": "Payroll Tax",
+                "amount_type": "fixed",
+                "amount": 0.0,
+                "type_tax_use": "purchase",
+                "invoice_repartition_line_ids": [
+                    Command.create({"repartition_type": "base"}),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                ],
+                "refund_repartition_line_ids": [
+                    Command.create({"repartition_type": "base"}),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "repartition_type": "tax",
+                            "factor_percent": 50.0,
+                            "account_id": self.account_debit.id,
+                        }
+                    ),
+                ],
+            }
+        )
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        rule.account_tax_id = tax
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        line = self.env["hr.payslip.line"].create(
+            {"slip_id": payslip.id, "salary_rule_id": rule.id, "name": "Test"}
+        )
+
+        _tax_ids, tax_tag_ids, tax_repartition_line_id = payslip._get_tax_details(line)
+
+        self.assertIn(
+            tax_repartition_line_id,
+            tax.invoice_repartition_line_ids.ids,
+            "A single invoice repartition line of the tax must be selected",
+        )
+        self.assertTrue(tax_tag_ids is False or isinstance(tax_tag_ids, list))
+
+    # ------------------------------------------------------------------
+    # Accounting entry life cycle
+    # ------------------------------------------------------------------
+    def _allow_cancelling_payslips(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "payroll.allow_cancel_payslips", True
+        )
+
+    def _confirmed_payslip(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.action_payslip_done()
+        self.assertTrue(payslip.move_id)
+        return payslip
+
+    def test_cancel_reverses_the_entry_instead_of_deleting_it(self):
+        self._allow_cancelling_payslips()
+        payslip = self._confirmed_payslip()
+        move = payslip.move_id
+
+        payslip.action_payslip_cancel()
+
+        self.assertEqual(payslip.state, "cancel")
+        self.assertTrue(move.exists(), "The posted entry must not be deleted")
+        self.assertEqual(move.state, "posted")
+        reversal = move.reversal_move_ids
+        self.assertEqual(len(reversal), 1, "The entry must have been reversed")
+        self.assertEqual(reversal.reversed_entry_id, move)
+        self.assertEqual(
+            sum(reversal.line_ids.mapped("balance")),
+            -sum(move.line_ids.mapped("balance")),
+        )
+        self.assertIn(move, payslip.cancelled_move_ids)
+        self.assertIn(reversal, payslip.cancelled_move_ids)
+        self.assertFalse(payslip.move_id)
+
+    def test_confirming_a_payslip_that_has_an_entry_raises(self):
+        """The existing entry may not match the payslip any more: neither a
+        second entry nor silently keeping the old one is acceptable."""
+        payslip = self._confirmed_payslip()
+        move = payslip.move_id
+        payslip.action_payslip_draft()
+        move_count = self.env["account.move"].search_count([])
+
+        with self.assertRaisesRegex(UserError, "already has the accounting entry"):
+            payslip.action_payslip_done()
+
+        self.assertEqual(payslip.move_id, move)
+        self.assertEqual(self.env["account.move"].search_count([]), move_count)
+
+    def test_cancel_accounting_entry_on_several_payslips(self):
+        """``_cancel_accounting_entry`` works on a recordset: it reverses the
+        posted entries, drops the draft ones, skips the payslips without an
+        entry and returns the reversals."""
+        posted_slip = self._confirmed_payslip()
+        posted_move = posted_slip.move_id
+        draft_slip = self._prepare_payslip(self.hr_employee_john)
+        draft_slip.action_payslip_done()
+        draft_move = draft_slip.move_id
+        draft_move.button_draft()
+        no_entry_slip = self._prepare_payslip(self.hr_employee_john)
+
+        reversals = (
+            posted_slip | draft_slip | no_entry_slip
+        )._cancel_accounting_entry()
+
+        self.assertEqual(reversals, posted_move.reversal_move_ids)
+        self.assertEqual(len(reversals), 1)
+        self.assertFalse(posted_slip.move_id)
+        self.assertFalse(draft_move.exists())
+        self.assertFalse(draft_slip.move_id)
+        self.assertFalse(no_entry_slip.move_id)
+        self.assertFalse(no_entry_slip.cancelled_move_ids)
+
+    def test_cancel_then_confirm_again_creates_a_new_entry(self):
+        self._allow_cancelling_payslips()
+        payslip = self._confirmed_payslip()
+        first_move = payslip.move_id
+        payslip.action_payslip_cancel()
+        payslip.action_payslip_draft()
+
+        payslip.action_payslip_done()
+
+        self.assertTrue(payslip.move_id)
+        self.assertNotEqual(payslip.move_id, first_move)
+
+    def test_cannot_delete_a_payslip_with_a_posted_entry(self):
+        payslip = self._confirmed_payslip()
+        payslip.action_payslip_draft()
+
+        with self.assertRaises(UserError):
+            payslip.unlink()
+
+    def test_cancel_deletes_an_entry_that_was_never_posted(self):
+        self._allow_cancelling_payslips()
+        payslip = self._confirmed_payslip()
+        move = payslip.move_id
+        move.button_draft()
+
+        payslip.action_payslip_cancel()
+
+        self.assertFalse(move.exists())
+        self.assertFalse(payslip.move_id)
+
+    # ------------------------------------------------------------------
+    # Journal
+    # ------------------------------------------------------------------
+    def _new_journal(self, code="SALT2"):
+        return self.env["account.journal"].create(
+            {"name": f"Salaries {code}", "code": code, "type": "general"}
+        )
+
+    def _new_payslip(self, **vals):
+        values = {
+            "employee_id": self.hr_employee_john.id,
+            "contract_id": self.hr_contract_john.id,
+            "struct_id": self.hr_structure_softwaredeveloper.id,
+            "name": "Payslip for John",
+        }
+        values.update(vals)
+        return self.env["hr.payslip"].create(values)
+
+    def test_journal_defaults_to_the_contract_journal(self):
+        payslip = self._new_payslip()
+
+        self.assertEqual(payslip.journal_id, self.account_journal)
+
+    def test_journal_is_editable_on_a_single_payslip(self):
+        self.assertFalse(
+            self.env["hr.payslip"]._fields["journal_id"].readonly,
+            "The form marks the journal as required, so it has to be editable",
+        )
+        payslip = self._new_payslip()
+        other_journal = self._new_journal()
+
+        payslip.journal_id = other_journal
+
+        self.assertEqual(payslip.journal_id, other_journal)
+        self.assertEqual(
+            self.hr_contract_john.journal_id,
+            self.account_journal,
+            "Choosing a journal on one payslip must not touch the contract",
+        )
+
+    def test_changing_the_contract_journal_leaves_existing_payslips_alone(self):
+        payslip = self._new_payslip()
+        other_journal = self._new_journal(code="SALT3")
+
+        self.hr_contract_john.journal_id = other_journal
+
+        self.assertEqual(
+            payslip.journal_id,
+            self.account_journal,
+            "An existing payslip must keep the journal it was created with",
+        )
+
+    def _contract_without_journal(self, **vals):
+        values = {
+            "name": "Contract for John without journal",
+            "date_start": fields.Date.today(),
+            "wage": 5000.0,
+            "employee_id": self.hr_employee_john.id,
+            "struct_id": self.hr_structure_softwaredeveloper.id,
+        }
+        values.update(vals)
+        return self.env["hr.contract"].create(values)
+
+    def test_hand_picked_journal_survives_a_contract_without_journal(self):
+        """A journal chosen by hand is not swapped for the fallback journal
+        when the payslip moves to a contract that has no journal."""
+        payslip = self._new_payslip()
+        picked_journal = self._new_journal(code="SALT8")
+        payslip.journal_id = picked_journal
+
+        payslip.contract_id = self._contract_without_journal()
+
+        self.assertEqual(payslip.journal_id, picked_journal)
+
+    def test_journal_of_another_company_is_not_kept(self):
+        """When the payslip moves to another company, its journal is not
+        kept: the fallback journal of the new company is proposed."""
+        payslip = self._new_payslip(contract_id=self._contract_without_journal().id)
+        picked_journal = self._new_journal(code="SALT9")
+        payslip.journal_id = picked_journal
+        other_company = self._other_company()
+        other_journal = self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+
+        payslip.company_id = other_company
+
+        self.assertEqual(payslip.journal_id, other_journal)
+
+    def test_batch_journal_wins_over_the_contract_journal(self):
+        batch_journal = self._new_journal(code="SALT4")
+        payslip_run = self.env["hr.payslip.run"].create(
+            {"name": "Batch", "journal_id": batch_journal.id}
+        )
+
+        payslip = self._new_payslip(payslip_run_id=payslip_run.id)
+
+        self.assertEqual(payslip.journal_id, batch_journal)
+
+    def test_default_journal_id_from_the_context_is_honoured(self):
+        other_journal = self._new_journal(code="SALT5")
+
+        payslip = (
+            self.env["hr.payslip"]
+            .with_context(default_journal_id=other_journal.id)
+            .create(
+                {
+                    "employee_id": self.hr_employee_john.id,
+                    "contract_id": self.hr_contract_john.id,
+                    "struct_id": self.hr_structure_softwaredeveloper.id,
+                    "name": "Payslip for John",
+                }
+            )
+        )
+
+        self.assertEqual(payslip.journal_id, other_journal)
+
+    def _general_journal(self, company):
+        return self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", company.id)], limit=1
+        )
+
+    def test_journal_falls_back_to_the_company_general_journal(self):
+        """No batch and no journal on the contract: the company's general
+        journal is proposed, and the entry is generated in it."""
+        if not self._general_journal(self.env.company):
+            self._new_journal(code="SALT6")
+        self.hr_contract_john.journal_id = False
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+
+        payslip = self._prepare_payslip(self.hr_employee_john)
+
+        general_journal = self._general_journal(payslip.company_id)
+        self.assertTrue(general_journal)
+        self.assertEqual(payslip.journal_id, general_journal)
+        payslip.action_payslip_done()
+        self.assertEqual(payslip.move_id.journal_id, general_journal)
+
+    def test_journal_fallback_uses_the_payslip_company(self):
+        """The fallback journal belongs to the payslip's company, not to the
+        company the user happens to be working in."""
+        other_company = self._other_company()
+        other_journal = self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+        employee = self.env["hr.employee"].create(
+            {"name": "Jane", "company_id": other_company.id}
+        )
+        contract = self.env["hr.contract"].create(
+            {
+                "name": "Contract for Jane",
+                "date_start": fields.Date.today(),
+                "wage": 5000.0,
+                "employee_id": employee.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+            }
+        )
+        self.assertFalse(contract.journal_id)
+
+        payslip = self.env["hr.payslip"].create(
+            {
+                "employee_id": employee.id,
+                "contract_id": contract.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "name": "Payslip for Jane",
+            }
+        )
+
+        self.assertNotEqual(self.env.company, other_company)
+        self.assertEqual(payslip.journal_id, other_journal)
+
+    def test_default_salary_journal_is_the_company_general_journal(self):
+        """The fallback lives in its own method, so that submodules can
+        propose another journal; by default it is the first general journal
+        of the payslip's own company."""
+        if not self._general_journal(self.env.company):
+            self._new_journal(code="SALT7")
+        payslip = self._prepare_payslip(self.hr_employee_john)
+
+        self.assertEqual(
+            payslip._get_default_salary_journal(),
+            self._general_journal(payslip.company_id),
+        )
+
+    def test_confirming_without_any_journal_raises(self):
+        """A company without any general journal leaves the payslip without
+        a journal: confirming it must fail with a clear message."""
+        self.hr_contract_john.journal_id = False
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.journal_id = False
+        general_journals = self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", payslip.company_id.id)]
+        )
+        general_journals.write({"active": False})
+
+        with self.assertRaisesRegex(UserError, "no salary journal"):
+            payslip.action_payslip_done()
+        self.assertFalse(payslip.move_id)
+
+    def test_confirming_without_journal_nor_accounts_succeeds(self):
+        """A company without accounting (no general journal) and salary rules
+        without accounts: there is nothing to post, so the payslip confirms
+        without a journal and without an entry."""
+        self.hr_contract_john.journal_id = False
+        self._update_account_in_rule(False, False)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.journal_id = False
+        general_journals = self.env["account.journal"].search(
+            [("type", "=", "general"), ("company_id", "=", payslip.company_id.id)]
+        )
+        general_journals.write({"active": False})
+
+        payslip.action_payslip_done()
+
+        self.assertEqual(payslip.state, "done")
+        self.assertFalse(payslip.journal_id)
+        self.assertFalse(payslip.move_id)
+
+    def test_accounting_entry_button_opens_the_move(self):
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        payslip = self._prepare_payslip(self.hr_employee_john)
+        payslip.action_payslip_done()
+
+        action = payslip.action_open_accounting_entry()
+
+        self.assertEqual(action["res_model"], "account.move")
+        self.assertEqual(action["res_id"], payslip.move_id.id)
+
+    def test_partners_follow_the_account_types_of_the_payslip_company(self):
+        """The partner of each item depends on the type of its account, and
+        the accounts are company-dependent: the types must be those of the
+        payslip's company, not of the company the user is working in."""
+        other_company = self._other_company()
+        self.env["account.journal"].create(
+            {
+                "name": "Salaries - Other Company",
+                "code": "SALOC",
+                "type": "general",
+                "company_id": other_company.id,
+            }
+        )
+
+        def other_account(code, account_type):
+            return self.env["account.account"].create(
+                {
+                    "name": f"Other company {account_type}",
+                    "code": code,
+                    "account_type": account_type,
+                    "company_ids": [Command.set(other_company.ids)],
+                }
+            )
+
+        receivable = other_account("OC1101", "asset_receivable")
+        payable = other_account("OC2101", "liability_payable")
+        register_partner = self.env["res.partner"].create({"name": "Tax Authority"})
+        rule = self.env.ref("payroll.hr_salary_rule_houserentallowance1")
+        rule.register_id = self.env["hr.contribution.register"].create(
+            {"name": "Tax Register", "partner_id": register_partner.id}
+        )
+        # In the active company both accounts are expense accounts, which
+        # carry no partner at all.
+        self._update_account_in_rule(self.account_debit, self.account_credit)
+        rule.with_company(other_company).write(
+            {"account_debit": receivable.id, "account_credit": payable.id}
+        )
+        employee = self.env["hr.employee"].create(
+            {"name": "Jane", "company_id": other_company.id}
+        )
+        contract = self.env["hr.contract"].create(
+            {
+                "name": "Contract for Jane",
+                "date_start": fields.Date.today(),
+                "wage": 5000.0,
+                "employee_id": employee.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+            }
+        )
+        payslip = self.env["hr.payslip"].create(
+            {
+                "employee_id": employee.id,
+                "contract_id": contract.id,
+                "company_id": other_company.id,
+                "struct_id": self.hr_structure_softwaredeveloper.id,
+                "name": "Payslip for Jane",
+            }
+        )
+        self.assertNotEqual(self.env.company, other_company)
+
+        payslip.action_payslip_done()
+
+        items = payslip.move_id.line_ids
+        payable_items = items.filtered(lambda item: item.account_id == payable)
+        receivable_items = items.filtered(lambda item: item.account_id == receivable)
+        self.assertTrue(payable_items)
+        self.assertTrue(receivable_items)
+        self.assertEqual(payable_items.partner_id, register_partner)
+        self.assertTrue(employee.work_contact_id)
+        self.assertEqual(receivable_items.partner_id, employee.work_contact_id)
