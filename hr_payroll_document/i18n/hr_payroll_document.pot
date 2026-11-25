@@ -16,12 +16,17 @@ msgstr ""
 #. module: hr_payroll_document
 #: model:mail.template,body_html:hr_payroll_document.payroll_employee_email_template
 msgid ""
-"\n"
-"                  \n"
-"                  <body style=\"margin: 0; padding: 0;\">\n"
-"                    <table style=\"padding:20px;background-color:#ededed; border-collapse:separate\" width=\"100%\" cellpadding=\"0\" border=\"0\"><tbody><!-- HEADER --><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px;background-color:#fff; padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody><tr><td style=\"text-align:right\" valign=\"middle\"><img src=\"/logo.png\" style=\"padding:0px;margin:0px; height:auto; width:80px\" alt=\"{{object.company_id.name}}\"/></td></tr><tr><td style=\"text-align:left\" valign=\"middle\"><h2 style=\"color:rgb(28, 130, 156)\"><font style=\"color:rgb(107, 175, 103);\">Payroll <t t-out=\"ctx.get('subject')\" contenteditable=\"false\" data-oe-t-inline=\"true\"/></font></h2></td></tr></tbody></table></td></tr><!-- CONTENT --><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px;background-color:rgb(255, 255, 255); padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\"><p> </p><p>Hello <t t-out=\"object.name\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>,</p><br/><p>We send you the payroll with the subject <t t-out=\"ctx.get('subject')\" contenteditable=\"false\" data-oe-t-inline=\"true\"/>.<br/></p></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\"><br/></td></tr><tr><td style=\"font-family:Arial,Helvetica,sans-serif;color:#555; font-size:14px\" valign=\"top\"><br/><p/></td></tr></tbody></table></td></tr><!-- FOOTER --><tr><td style=\"min-width:590px\" align=\"center\"><table style=\"min-width:590px;background-color:#95ce3f; padding:20px; border-collapse:separate\" width=\"590\" cellpadding=\"0\" border=\"0\"><tbody> </tbody></table></td></tr></tbody></table>\n"
-"                    <p/>\n"
-"                  </body>"
+"<p>\n"
+"    Dear <t t-out=\"object.employee_id.name or ''\">employee</t>,<br/>\n"
+"    Please find attached your payslip for <t t-out=\"object.subject\"/>.<br/>\n"
+"    <br/>\n"
+"    For any questions or clarifications regarding the contents of your payslip,\n"
+"    please contact the HR Department.<br/>\n"
+"    <br/>\n"
+"    If you experience any technical issues viewing or downloading the file,\n"
+"    please reach out to the Quality support team.\n"
+"</p>\n"
+"        "
 msgstr ""
 
 #. module: hr_payroll_document
@@ -88,9 +93,14 @@ msgstr ""
 
 #. module: hr_payroll_document
 #: model:ir.model,name:hr_payroll_document.model_hr_employee
-#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__employee
+#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__employee_id
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Employee"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__employee
+msgid "Employee Name"
 msgstr ""
 
 #. module: hr_payroll_document
@@ -126,6 +136,10 @@ msgstr ""
 
 #. module: hr_payroll_document
 #: model:ir.model.fields,field_description:hr_payroll_document.field_ir_attachment_payroll_custom__identification_id
+msgid "Identification"
+msgstr ""
+
+#. module: hr_payroll_document
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_payroll_filter
 msgid "Identification ID"
 msgstr ""
@@ -157,8 +171,6 @@ msgid "Missing pdf file signature"
 msgstr ""
 
 #. module: hr_payroll_document
-#. odoo-python
-#: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 #: model:ir.model.fields.selection,name:hr_payroll_document.selection__ir_attachment__document_type__payroll
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.res_users_view_form_profile_inherit
 #: model_terms:ir.ui.view,arch_db:hr_payroll_document.view_employee_form
@@ -192,8 +204,9 @@ msgid "Payroll attachment"
 msgstr ""
 
 #. module: hr_payroll_document
-#: model:mail.template,subject:hr_payroll_document.payroll_employee_email_template
-msgid "Payroll {{ctx.get('subject')}}"
+#. odoo-python
+#: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
+msgid "Payroll_%(subject)s_%(employee)s.pdf"
 msgstr ""
 
 #. module: hr_payroll_document
@@ -224,6 +237,11 @@ msgstr ""
 #: code:addons/hr_payroll_document/tests/test_hr_payroll_document.py:0
 #: code:addons/hr_payroll_document/wizard/payroll_management_wizard.py:0
 msgid "Payrolls sent to employees correctly"
+msgstr ""
+
+#. module: hr_payroll_document
+#: model:mail.template,subject:hr_payroll_document.payroll_employee_email_template
+msgid "Payslip for {{object.subject}}"
 msgstr ""
 
 #. module: hr_payroll_document
