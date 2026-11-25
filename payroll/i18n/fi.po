@@ -343,12 +343,41 @@ msgid "<strong>Total</strong>"
 msgstr "<strong>Yhteensä</strong>"
 
 #. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_run_action
+msgid ""
+"A batch groups the payslips of a period so they can be generated,\n"
+"                computed and closed together."
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
 msgid ""
 "A contribution register is a third party involved in the salary\n"
 "                payment of the employees. It can be the social security, "
 "the\n"
 "                state or anyone that collect or inject money on payslips."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_action
+msgid ""
+"A payslip applies the salary rules of the employee's structure to\n"
+"                a period. Payslips are usually generated from a payslip "
+"batch."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.action_salary_rule_form
+msgid ""
+"A salary rule computes one line of a payslip, either from a fixed\n"
+"                amount, a percentage or Python code."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payroll_structure_action
+msgid ""
+"A salary structure is the set of salary rules applied to the\n"
+"                contracts that refer to it."
 msgstr ""
 
 #. module: payroll
@@ -683,6 +712,7 @@ msgstr "Yritykset"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Company"
 msgstr "Yritys"
 
@@ -796,6 +826,26 @@ msgstr ""
 #. module: payroll
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
 msgid "Conveyance Allowance For Marc Demo"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_action
+msgid "Create a payslip"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_run_action
+msgid "Create a payslip batch"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.action_salary_rule_form
+msgid "Create a salary rule"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payroll_structure_action
+msgid "Create a salary structure"
 msgstr ""
 
 #. module: payroll
@@ -987,11 +1037,6 @@ msgid "Employee Contract"
 msgstr "Työsopimus"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-msgid "Employee Function"
-msgstr "Työtekijän toimenkuva"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
@@ -1077,6 +1122,11 @@ msgid "Form content is missing, this report cannot be printed."
 msgstr "Lomakkeen sisältö puuttuu, tätä raporttia ei voi tulostaa."
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Future Activities"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid ""
 "General default structure for new contracts, used unless the employee has a "
@@ -1118,7 +1168,9 @@ msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
 msgid "Group By"
 msgstr "Ryhmittely"
@@ -1253,11 +1305,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
-msgid "Is a Blocking Reason?"
-msgstr ""
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount_qty
 msgid "It can be used in computation for other inputs"
 msgstr ""
@@ -1311,6 +1358,11 @@ msgstr "Viimeksi päivittänyt"
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__write_date
 msgid "Last Updated on"
 msgstr "Viimeksi päivitetty"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Late Activities"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
@@ -1383,6 +1435,11 @@ msgstr "Kuukausittain"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__my_activity_date_deadline
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__my_activity_date_deadline
 msgid "My Activity Deadline"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "My Payslips"
 msgstr ""
 
 #. module: payroll
@@ -1461,6 +1518,11 @@ msgid "Number of Hours"
 msgstr "Tuntimäärä"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__slip_count
+msgid "Number of Payslips"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of errors"
@@ -1516,6 +1578,11 @@ msgstr "Muut syötteet"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__parent_id
 msgid "Parent"
 msgstr "Ylätaso"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
+msgid "Parent Category"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
@@ -1670,6 +1737,7 @@ msgstr ""
 #: model:ir.actions.report,name:payroll.action_contribution_register
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__line_ids
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Lines"
 msgstr "Palkkalaskelman rivit"
@@ -1858,6 +1926,7 @@ msgid "Refetch Payslip Data"
 msgstr ""
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "Hyvitys"
@@ -2001,6 +2070,8 @@ msgstr ""
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Salary Structure"
 msgstr "Palkkarakenne"
 
@@ -2092,6 +2163,11 @@ msgid "Show only lines that appear on payslip"
 msgstr ""
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
+msgid "Start Date"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "States"
 msgstr "Tilat"
@@ -2099,6 +2175,7 @@ msgstr "Tilat"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__state
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__state
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Status"
 msgstr "Tila"
 
@@ -2197,7 +2274,15 @@ msgid ""
 msgstr ""
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Today Activities"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__total
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
@@ -2333,7 +2418,5 @@ msgstr ""
 msgid "result will be affected to a variable"
 msgstr ""
 
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "total_net"
-msgstr ""
+#~ msgid "Employee Function"
+#~ msgstr "Työtekijän toimenkuva"

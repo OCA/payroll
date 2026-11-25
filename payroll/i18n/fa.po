@@ -386,6 +386,13 @@ msgid "<strong>Total</strong>"
 msgstr "<strong>کل</strong>"
 
 #. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_run_action
+msgid ""
+"A batch groups the payslips of a period so they can be generated,\n"
+"                computed and closed together."
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
 msgid ""
 "A contribution register is a third party involved in the salary\n"
@@ -396,6 +403,28 @@ msgstr ""
 "ثبت مشارکت شخص ثالثی است که در پرداخت حقوق کارکنان\n"
 "                 شرکت دارد. این می تواند تامین اجتماعی، دولت یا هر کسی\n"
 "                 باشد که در فیش حقوقی پول جمع آوری یا تزریق می کند."
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_action
+msgid ""
+"A payslip applies the salary rules of the employee's structure to\n"
+"                a period. Payslips are usually generated from a payslip "
+"batch."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.action_salary_rule_form
+msgid ""
+"A salary rule computes one line of a payslip, either from a fixed\n"
+"                amount, a percentage or Python code."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payroll_structure_action
+msgid ""
+"A salary structure is the set of salary rules applied to the\n"
+"                contracts that refer to it."
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -741,6 +770,7 @@ msgstr "شرکت‌ها"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Company"
 msgstr "شرکت"
 
@@ -855,6 +885,26 @@ msgstr "کمک هزینه حمل و نقل"
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
 msgid "Conveyance Allowance For Marc Demo"
 msgstr "کمک هزینه حمل و نقل برای Marc Demo"
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_action
+msgid "Create a payslip"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_run_action
+msgid "Create a payslip batch"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.action_salary_rule_form
+msgid "Create a salary rule"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payroll_structure_action
+msgid "Create a salary structure"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
@@ -1053,11 +1103,6 @@ msgid "Employee Contract"
 msgstr "قرارداد کارمند"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-msgid "Employee Function"
-msgstr "عملکرد کارمند"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
@@ -1146,6 +1191,11 @@ msgid "Form content is missing, this report cannot be printed."
 msgstr "محتوای فرم وجود ندارد، این گزارش قابل چاپ نیست."
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Future Activities"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid ""
 "General default structure for new contracts, used unless the employee has a "
@@ -1187,7 +1237,9 @@ msgstr "ناخالص"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
 msgid "Group By"
 msgstr "گروه‌بندی برمبنای"
@@ -1328,11 +1380,6 @@ msgid "Is Follower"
 msgstr "دنبال کننده است"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
-msgid "Is a Blocking Reason?"
-msgstr "آیا دلیل مسدود کردن است؟"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount_qty
 msgid "It can be used in computation for other inputs"
 msgstr "می توان از آن در محاسبات برای ورودی های دیگر استفاده کرد"
@@ -1392,6 +1439,11 @@ msgstr "آخرین تغییر توسط"
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__write_date
 msgid "Last Updated on"
 msgstr "آخرین به روز رسانی در"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Late Activities"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
@@ -1469,6 +1521,11 @@ msgid "My Activity Deadline"
 msgstr "مهلت فعالیت من"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "My Payslips"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1544,6 +1601,11 @@ msgid "Number of Hours"
 msgstr "تعداد ساعت ها"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__slip_count
+msgid "Number of Payslips"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of errors"
@@ -1605,6 +1667,11 @@ msgstr "سایر ورودی ها"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__parent_id
 msgid "Parent"
 msgstr "مادر"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
+msgid "Parent Category"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
@@ -1759,6 +1826,7 @@ msgstr "جزئیات موارد فیش حقوقی"
 #: model:ir.actions.report,name:payroll.action_contribution_register
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__line_ids
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Lines"
 msgstr "موارد فیش حقوق"
@@ -1948,6 +2016,7 @@ msgid "Refetch Payslip Data"
 msgstr "بازیابی داده های فیش حقوقی"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "بازپرداخت"
@@ -2092,6 +2161,8 @@ msgstr "فیش حقوق %(name)s برای %(dt)s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Salary Structure"
 msgstr "ساختار حقوق و دستمزد"
 
@@ -2183,6 +2254,11 @@ msgid "Show only lines that appear on payslip"
 msgstr "فقط خطوطی را نشان دهید که در فیش حقوقی ظاهر می شوند"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
+msgid "Start Date"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "States"
 msgstr "وضعیت ها"
@@ -2190,6 +2266,7 @@ msgstr "وضعیت ها"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__state
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__state
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Status"
 msgstr "وضعیت"
 
@@ -2302,7 +2379,15 @@ msgid ""
 msgstr "برای لغو فیش حقوقی اصلی، ابتدا باید فیش حقوقی بازپرداخت شده لغو شود!"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Today Activities"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__total
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
@@ -2443,10 +2528,14 @@ msgstr ""
 msgid "result will be affected to a variable"
 msgstr "نتیجه بر یک متغیر تأثیر می گذارد"
 
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "total_net"
-msgstr "total_net"
+#~ msgid "Employee Function"
+#~ msgstr "عملکرد کارمند"
+
+#~ msgid "Is a Blocking Reason?"
+#~ msgstr "آیا دلیل مسدود کردن است؟"
+
+#~ msgid "total_net"
+#~ msgstr "total_net"
 
 #~ msgid "SMS Delivery error"
 #~ msgstr "خطای تحویل پیامک"

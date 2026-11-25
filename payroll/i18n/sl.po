@@ -424,6 +424,13 @@ msgid "<strong>Total</strong>"
 msgstr "<strong>Skupaj</strong>"
 
 #. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_run_action
+msgid ""
+"A batch groups the payslips of a period so they can be generated,\n"
+"                computed and closed together."
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.actions.act_window,help:payroll.hr_contribution_register_action
 msgid ""
 "A contribution register is a third party involved in the salary\n"
@@ -435,6 +442,28 @@ msgstr ""
 "                zaposlenih.Lahko je to socialna varnost, država ali "
 "kdorkoli, ki pobira\n"
 "                ali vplačuje sredstva na plačilne liste."
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_action
+msgid ""
+"A payslip applies the salary rules of the employee's structure to\n"
+"                a period. Payslips are usually generated from a payslip "
+"batch."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.action_salary_rule_form
+msgid ""
+"A salary rule computes one line of a payslip, either from a fixed\n"
+"                amount, a percentage or Python code."
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payroll_structure_action
+msgid ""
+"A salary structure is the set of salary rules applied to the\n"
+"                contracts that refer to it."
+msgstr ""
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
@@ -781,6 +810,7 @@ msgstr "Družbe"
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule__company_id
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__company_id
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Company"
 msgstr "Družba"
 
@@ -895,6 +925,26 @@ msgstr "Dodatek za prevoz"
 #: model:hr.salary.rule,name:payroll.hr_salary_rule_ca_demo
 msgid "Conveyance Allowance For Marc Demo"
 msgstr "Dodatek za prevoz za Marc Demo"
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_action
+msgid "Create a payslip"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payslip_run_action
+msgid "Create a payslip batch"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.action_salary_rule_form
+msgid "Create a salary rule"
+msgstr ""
+
+#. module: payroll
+#: model_terms:ir.actions.act_window,help:payroll.hr_payroll_structure_action
+msgid "Create a salary structure"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__create_uid
@@ -1091,11 +1141,6 @@ msgid "Employee Contract"
 msgstr "Pogodba o zaposlitvi"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
-msgid "Employee Function"
-msgstr "Funkcija delojemalca"
-
-#. module: payroll
 #: model:ir.actions.act_window,name:payroll.hr_payslip_action
 #: model:ir.ui.menu,name:payroll.hr_payslip_menu
 msgid "Employee Payslips"
@@ -1182,6 +1227,11 @@ msgid "Form content is missing, this report cannot be printed."
 msgstr "Vsebina obrazca manjka, tega poročila ni mogoče natisniti."
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Future Activities"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.res_config_settings_view_form
 msgid ""
 "General default structure for new contracts, used unless the employee has a "
@@ -1225,7 +1275,9 @@ msgstr "Bruto"
 
 #. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
 #: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_view_search
 msgid "Group By"
 msgstr "Združi po"
@@ -1371,11 +1423,6 @@ msgid "Is Follower"
 msgstr "Je sledilec"
 
 #. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
-msgid "Is a Blocking Reason?"
-msgstr "Je razlog za blokado?"
-
-#. module: payroll
 #: model:ir.model.fields,help:payroll.field_hr_payslip_input__amount_qty
 msgid "It can be used in computation for other inputs"
 msgstr "Lahko se uporabi pri izračunu za druge vnose"
@@ -1435,6 +1482,11 @@ msgstr "Zadnji posodobil"
 #: model:ir.model.fields,field_description:payroll.field_payslip_lines_contribution_register__write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Late Activities"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_res_config_settings__leaves_positive
@@ -1512,6 +1564,11 @@ msgid "My Activity Deadline"
 msgstr "Rok mojih aktivnosti"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "My Payslips"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_contribution_register__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payroll_structure__name
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__name
@@ -1587,6 +1644,11 @@ msgid "Number of Hours"
 msgstr "Število ur"
 
 #. module: payroll
+#: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__slip_count
+msgid "Number of Payslips"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__message_has_error_counter
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__message_has_error_counter
 msgid "Number of errors"
@@ -1648,6 +1710,11 @@ msgstr "Drugi vnosi"
 #: model:ir.model.fields,field_description:payroll.field_hr_salary_rule_category__parent_id
 msgid "Parent"
 msgstr "Nadrejeni"
+
+#. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_salary_rule_category_view_search
+msgid "Parent Category"
+msgstr ""
 
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__parent_line_id
@@ -1802,6 +1869,7 @@ msgstr "Podrobnosti postavke plačilne liste"
 #: model:ir.actions.report,name:payroll.action_contribution_register
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__line_ids
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_search
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Payslip Lines"
 msgstr "Postavke plačilne liste"
@@ -1992,6 +2060,7 @@ msgid "Refetch Payslip Data"
 msgstr "Ponovno pridobi podatke plačilne liste"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_kanban
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 msgid "Refund"
 msgstr "Dobropis"
@@ -2135,6 +2204,8 @@ msgstr "Plačilna lista %(name)s za %(dt)s"
 #. module: payroll
 #: model:ir.model,name:payroll.model_hr_payroll_structure
 #: model:ir.model.fields,field_description:payroll.field_hr_contract__struct_id
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payroll_structure_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "Salary Structure"
 msgstr "Struktura plače"
 
@@ -2226,6 +2297,11 @@ msgid "Show only lines that appear on payslip"
 msgstr "Prikaži samo postavke, ki se pojavijo na plačilni listi"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
+msgid "Start Date"
+msgstr ""
+
+#. module: payroll
 #: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
 msgid "States"
 msgstr "Pokrajine"
@@ -2233,6 +2309,7 @@ msgstr "Pokrajine"
 #. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip__state
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_run__state
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_run_view_search
 msgid "Status"
 msgstr "Status"
 
@@ -2348,7 +2425,15 @@ msgstr ""
 "                        stornirano plačilno listo!"
 
 #. module: payroll
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_search
+msgid "Today Activities"
+msgstr ""
+
+#. module: payroll
 #: model:ir.model.fields,field_description:payroll.field_hr_payslip_line__total
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_tree
+#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_view_form
 #: model_terms:ir.ui.view,arch_db:payroll.report_contributionregister
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslip
 #: model_terms:ir.ui.view,arch_db:payroll.report_payslipdetails
@@ -2490,7 +2575,11 @@ msgstr "obdobje"
 msgid "result will be affected to a variable"
 msgstr "koeficient vpliva na rezultat"
 
-#. module: payroll
-#: model_terms:ir.ui.view,arch_db:payroll.hr_payslip_line_view_form
-msgid "total_net"
-msgstr "total_net"
+#~ msgid "Employee Function"
+#~ msgstr "Funkcija delojemalca"
+
+#~ msgid "Is a Blocking Reason?"
+#~ msgstr "Je razlog za blokado?"
+
+#~ msgid "total_net"
+#~ msgstr "total_net"
