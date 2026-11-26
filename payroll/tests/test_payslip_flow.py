@@ -247,9 +247,9 @@ class TestPayslipFlow(TestPayslipBase):
 
     def test_get_contracts_multiple(self):
         # Prepare two sequential contracts within current month
-        first_day = Date.today().strftime("%Y-%m-01")
-        mid_day = Date.today().strftime("%Y-%m-%d")
-        next_day = (Date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
+        first_day = Date.today().replace(day=1)
+        mid_day = first_day + timedelta(days=14)
+        next_day = mid_day + timedelta(days=1)
         self.sally.version_ids[0].write(
             {
                 "date_version": first_day,
