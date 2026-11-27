@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from dateutil import relativedelta
 
 from odoo import fields, models
@@ -9,12 +7,14 @@ class PayslipLinesContributionRegister(models.TransientModel):
     _name = "payslip.lines.contribution.register"
     _description = "Payslip Lines by Contribution Registers"
 
-    date_from = fields.Date(required=True, default=datetime.now().strftime("%Y-%m-01"))
+    date_from = fields.Date(
+        required=True,
+        default=lambda self: fields.Date.context_today(self).replace(day=1),
+    )
     date_to = fields.Date(
         required=True,
-        default=str(
-            datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1)
-        )[:10],
+        default=lambda self: fields.Date.context_today(self)
+        + relativedelta.relativedelta(months=+1, day=1, days=-1),
     )
 
     def print_report(self):
