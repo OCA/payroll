@@ -1,6 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import timedelta
+from unittest.mock import patch
 
 from odoo.fields import Date
 from odoo.tests import Form
@@ -10,6 +11,44 @@ from .common import TestPayslipBase
 
 
 class TestPayslipFlow(TestPayslipBase):
+    def test_refund_hook_prepares_defaults_before_confirmation(self):
+        self.apply_contract_cron()
+        form = Form(self.Payslip)
+        form.employee_id = self.richard_emp
+        payslip = form.save()
+        payslip.compute_sheet()
+        payslip.action_payslip_done()
+        original_amounts = sorted((line.code, line.total) for line in payslip.line_ids)
+        payslip.contract_id.wage += 1000
+
+        payslip_class = type(payslip)
+        prepare_defaults = payslip_class._prepare_refund_payslip
+        prepared_sources = []
+
+        def prepare_refund(source):
+            values = prepare_defaults(source)
+            self.assertTrue(values["credit_note"])
+            values["name"] = "Prepared retained refund"
+            prepared_sources.append(source.id)
+            return values
+
+        with patch.object(payslip_class, "_prepare_refund_payslip", prepare_refund):
+            payslip.refund_sheet()
+
+        refund = payslip.refunded_id
+        self.assertEqual(prepared_sources, payslip.ids)
+        self.assertTrue(refund.credit_note)
+        self.assertEqual(refund.name, "Prepared retained refund")
+        self.assertEqual(refund.state, "done")
+        self.assertEqual(
+            sorted((line.code, line.total) for line in refund.line_ids),
+            original_amounts,
+        )
+        self.assertEqual(refund.employee_id, payslip.employee_id)
+        self.assertEqual(
+            (refund.date_from, refund.date_to), (payslip.date_from, payslip.date_to)
+        )
+
     def setUp(self):
         super().setUp()
 
