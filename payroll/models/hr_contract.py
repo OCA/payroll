@@ -13,6 +13,8 @@ class HrContract(models.Model):
     _description = "Employee Contract"
 
     struct_id = fields.Many2one("hr.payroll.structure", string="Salary Structure")
+    # bi-weekly: every two weeks (26 payslips a year); semi-monthly: twice a
+    # month (24 payslips a year); bi-monthly: every two months.
     schedule_pay = fields.Selection(
         [
             ("monthly", "Monthly"),
@@ -21,6 +23,7 @@ class HrContract(models.Model):
             ("annually", "Annually"),
             ("weekly", "Weekly"),
             ("bi-weekly", "Bi-weekly"),
+            ("semi-monthly", "Semi-monthly"),
             ("bi-monthly", "Bi-monthly"),
         ],
         string="Scheduled Pay",
