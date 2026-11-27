@@ -1,0 +1,3 @@
+- Set public holidays in holidays module
+- Create a payslip
+- Public holidays will be fetched automatically to the worked days table
