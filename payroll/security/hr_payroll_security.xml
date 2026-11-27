@@ -82,4 +82,20 @@
             ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
         </field>
     </record>
+    <record model="ir.rule" id="hr_payslip_run_rule_company">
+        <field name="name">Payslip Run: multi-company</field>
+        <field name="model_id" ref="model_hr_payslip_run" />
+        <field name="global" eval="True" />
+        <field name="domain_force">
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+        </field>
+    </record>
+    <record model="ir.rule" id="hr_payslip_input_rule_company">
+        <field name="name">Payslip Input: multi-company</field>
+        <field name="model_id" ref="model_hr_payslip_input" />
+        <field name="global" eval="True" />
+        <field name="domain_force">
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
+        </field>
+    </record>
 </odoo>

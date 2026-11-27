@@ -10,6 +10,7 @@ class HrPayslipRun(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Payslip Batches"
     _order = "id desc"
+    _check_company_auto = True
 
     name = fields.Char(required=True, readonly=True)
     slip_ids = fields.One2many(
