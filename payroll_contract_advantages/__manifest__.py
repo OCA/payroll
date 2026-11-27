@@ -15,5 +15,5 @@
         "views/hr_contract_views.xml",
     ],
     "application": True,
-    "maintainers": ["nimarosa"],
+    "maintainers": ["nimarosa, CristianoMafraJunior"],
 }
