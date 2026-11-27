@@ -4,3 +4,11 @@
   this contract, default value will be populated but you can change it.
 - Then in the salary rules, access this value using
   current_contract.advantages.\[ADVANTAGE_CODE\] (without brackets)
+- On the template, choose a computation mode (fixed value, percentage
+  of a contract field, or Python code). The definition is copied onto
+  the advantage and can be tuned per contract.
+- The amount is re-evaluated for each payslip. Python formulas expose
+  ``advantage``, ``contract``, ``employee``, ``payslip`` and must set
+  ``result``.
+- Bounds are enforced on the amount; a non-numeric formula result
+  raises an error.

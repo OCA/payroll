@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Advantage Templates: one per computation mode -->
+    <record id="advantage_template_meal" model="hr.contract.advantage.template">
+        <field name="name">Meal Voucher</field>
+        <field name="code">MEAL</field>
+        <field name="lower_bound">0.0</field>
+        <field name="upper_bound">500.0</field>
+        <field name="default_value">10.0</field>
+        <field name="computation_mode">fixed</field>
+    </record>
+    <record id="advantage_template_housing" model="hr.contract.advantage.template">
+        <field name="name">Housing Allowance</field>
+        <field name="code">HOUS</field>
+        <field name="lower_bound">0.0</field>
+        <field name="upper_bound">5000.0</field>
+        <field name="computation_mode">percentage</field>
+        <field name="percentage">5.0</field>
+        <field name="percentage_base">wage</field>
+    </record>
+    <record id="advantage_template_phone" model="hr.contract.advantage.template">
+        <field name="name">Phone Allowance</field>
+        <field name="code">PHONE</field>
+        <field name="lower_bound">0.0</field>
+        <field name="upper_bound">1000.0</field>
+        <field name="computation_mode">python</field>
+        <field name="python_code">result = contract.wage * 0.02</field>
+    </record>
+    <!-- Advantages on Mitchell Admin's contract, one per mode -->
+    <record id="advantage_meal_admin" model="hr.contract.advantage">
+        <field name="contract_id" ref="hr_contract.hr_contract_admin_new" />
+        <field name="advantage_template_id" ref="advantage_template_meal" />
+        <field name="computation_mode">fixed</field>
+        <field name="amount">10.0</field>
+    </record>
+    <record id="advantage_housing_admin" model="hr.contract.advantage">
+        <field name="contract_id" ref="hr_contract.hr_contract_admin_new" />
+        <field name="advantage_template_id" ref="advantage_template_housing" />
+        <field name="computation_mode">percentage</field>
+        <field name="percentage">5.0</field>
+        <field name="percentage_base">wage</field>
+    </record>
+    <record id="advantage_phone_admin" model="hr.contract.advantage">
+        <field name="contract_id" ref="hr_contract.hr_contract_admin_new" />
+        <field name="advantage_template_id" ref="advantage_template_phone" />
+        <field name="computation_mode">python</field>
+        <field name="python_code">result = contract.wage * 0.02</field>
+    </record>
+</odoo>
