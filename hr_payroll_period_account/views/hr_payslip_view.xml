@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Tree view: Payment Status column -->
+    <record id="view_hr_payslip_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.period.account.tree</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field
+                    name="payment_status"
+                    widget="badge"
+                    decoration-success="payment_status == 'paid'"
+                    decoration-danger="payment_status == 'not_paid'"
+                />
+            </field>
+        </field>
+    </record>
+    <!-- Form view: Payment Status badge after Accounting Entry -->
+    <record id="view_hr_payslip_form" model="ir.ui.view">
+        <field name="name">hr.payslip.period.account.form</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+        <field name="arch" type="xml">
+            <field name="move_id" position="after">
+                <field
+                    name="payment_status"
+                    widget="badge"
+                    decoration-success="payment_status == 'paid'"
+                    decoration-danger="payment_status == 'not_paid'"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
